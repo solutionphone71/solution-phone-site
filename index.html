@@ -565,6 +565,41 @@ footer .foot-links a:hover{color:var(--red);}
                    linear-gradient(90deg,rgba(255,0,51,.04)1px,transparent 1px);
   background-size:28px 28px;
 }
+
+/* ── HERO VIDEO ── */
+.hero-video-wrap{
+  position:relative;width:100%;
+  border:1px solid var(--border);
+  clip-path:polygon(18px 0,100% 0,100% calc(100%-18px),calc(100%-18px) 100%,0 100%,0 18px);
+  box-shadow:0 0 60px rgba(255,0,51,.25),inset 0 0 40px rgba(255,0,51,.04);
+  overflow:hidden;background:var(--dark);
+}
+.hv-video{
+  width:100%;display:block;
+  aspect-ratio:16/9;object-fit:cover;
+  filter:saturate(1.15) contrast(1.05);
+}
+.hv-scanline{
+  position:absolute;left:0;right:0;height:2px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,0,51,.5),transparent);
+  animation:scan 4s linear infinite;z-index:3;
+}
+.hv-overlay{
+  position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.06) 3px,rgba(0,0,0,0.06) 4px);
+}
+.hv-label{
+  position:absolute;top:0;left:0;right:0;z-index:4;
+  background:var(--red);
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:.65rem;
+  letter-spacing:3px;text-align:center;padding:7px;
+  text-transform:uppercase;
+}
+.hv-corner{position:absolute;width:16px;height:16px;z-index:5;}
+.hv-tl{top:28px;left:8px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.hv-tr{top:28px;right:8px;border-top:2px solid var(--red);border-right:2px solid var(--red);}
+.hv-bl{bottom:8px;left:8px;border-bottom:2px solid var(--red);border-left:2px solid var(--red);}
+.hv-br{bottom:8px;right:8px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
 </style>
 </head>
 <body>
