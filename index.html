@@ -628,7 +628,7 @@ footer .foot-links a:hover{color:var(--red);}
   </div>
   <div class="nav-right">
     <div class="nav-phone">03 85 33 06 89</div>
-    <a href="https://wa.me/33783921884" class="nav-cta">Devis Gratuit</a>
+    <a href="#devis" class="nav-cta">Devis Gratuit</a>
   </div>
 </nav>
 
@@ -678,6 +678,75 @@ footer .foot-links a:hover{color:var(--red);}
     </div>
   </div>
 </section>
+
+
+<!-- DEVIS SECTION -->
+<section id="devis" style="padding:80px 48px;background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="max-width:700px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;">// Devis gratuit</div>
+      <h2 style="font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(1.6rem,3vw,2.4rem);text-transform:uppercase;line-height:1.1;margin-bottom:12px;">DEMANDEZ VOTRE <em style="color:var(--red);font-style:normal;">DEVIS</em></h2>
+      <p style="color:var(--gray);font-size:1rem;">Réponse rapide — Gratuit — Sans engagement</p>
+    </div>
+
+    <div style="background:var(--dark3);border:1px solid var(--border);padding:40px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--red),var(--cyan),var(--red));"></div>
+
+      <!-- Form fields -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label style="font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray2);display:block;margin-bottom:8px;">Nom *</label>
+          <input id="dv-nom" type="text" placeholder="Votre nom" style="width:100%;padding:12px 14px;background:var(--dark);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;outline:none;transition:border-color .3s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+        </div>
+        <div>
+          <label style="font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray2);display:block;margin-bottom:8px;">Téléphone *</label>
+          <input id="dv-tel" type="tel" placeholder="06 12 34 56 78" style="width:100%;padding:12px 14px;background:var(--dark);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;outline:none;transition:border-color .3s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray2);display:block;margin-bottom:8px;">Appareil / Modèle</label>
+        <input id="dv-modele" type="text" placeholder="iPhone 14 Pro, Samsung S23, PC..." style="width:100%;padding:12px 14px;background:var(--dark);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;outline:none;transition:border-color .3s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+      </div>
+      <div style="margin-bottom:28px;">
+        <label style="font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray2);display:block;margin-bottom:8px;">Décrivez la panne *</label>
+        <textarea id="dv-panne" rows="3" placeholder="Écran cassé, batterie qui tient plus, ne s'allume plus..." style="width:100%;padding:12px 14px;background:var(--dark);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;outline:none;resize:vertical;transition:border-color .3s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></textarea>
+      </div>
+
+      <!-- 2 buttons side by side -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <button onclick="sendDevisWA()" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#fff;border:none;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:2px;padding:15px 20px;text-transform:uppercase;clip-path:polygon(8px 0,100% 0,100% calc(100%-8px),calc(100%-8px) 100%,0 100%,0 8px);transition:all .3s;">
+          💬 ENVOYER PAR WHATSAPP
+        </button>
+        <button onclick="sendDevisMail()" style="display:flex;align-items:center;justify-content:center;gap:10px;background:var(--red);color:#fff;border:none;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:2px;padding:15px 20px;text-transform:uppercase;clip-path:polygon(8px 0,100% 0,100% calc(100%-8px),calc(100%-8px) 100%,0 100%,0 8px);transition:all .3s;">
+          ✉️ ENVOYER PAR EMAIL
+        </button>
+      </div>
+      <p style="text-align:center;margin-top:14px;font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--gray);">Réponse garantie sous 2h · Devis 100% gratuit</p>
+    </div>
+  </div>
+</section>
+
+<script>
+function getDevisData() {
+  var nom = document.getElementById('dv-nom').value.trim();
+  var tel = document.getElementById('dv-tel').value.trim();
+  var modele = document.getElementById('dv-modele').value.trim();
+  var panne = document.getElementById('dv-panne').value.trim();
+  if(!nom || !tel || !panne) { alert('Merci de remplir les champs obligatoires (*)'); return null; }
+  return {nom, tel, modele, panne};
+}
+function sendDevisWA() {
+  var d = getDevisData(); if(!d) return;
+  var msg = 'Bonjour Solution Phone !%0A%0AJe souhaite un devis :%0ANom : '+d.nom+'%0ATél : '+d.tel+(d.modele?'%0AAppareil : '+d.modele:'')+'%0APanne : '+d.panne;
+  window.open('https://wa.me/33783921884?text='+msg, '_blank');
+}
+function sendDevisMail() {
+  var d = getDevisData(); if(!d) return;
+  var sub = 'Demande de devis - '+d.nom;
+  var body = 'Bonjour Solution Phone,%0A%0ANom : '+d.nom+'%0ATél : '+d.tel+(d.modele?'%0AAppareil : '+d.modele:'')+'%0APanne : '+d.panne+'%0A%0ACordialement';
+  window.open('mailto:solution.phone71@gmail.com?subject='+sub+'&body='+body);
+}
+</script>
 
 <!-- REVIEWS CAROUSEL -->
 <section class="reviews">
