@@ -481,8 +481,11 @@ footer .foot-links a:hover{color:var(--red);}
 
 /* ── REVEAL ANIMATIONS ── */
 .rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.hero .rev,.hero-left,.hero-right{opacity:1;transform:none;}
 .rev-l{opacity:0;transform:translateX(-28px);transition:opacity .7s ease,transform .7s ease;}
+.hero .rev-l{opacity:1;transform:none;}
 .rev-r{opacity:0;transform:translateX(28px);transition:opacity .7s ease,transform .7s ease;}
+.hero .rev-r{opacity:1;transform:none;}
 .rev.on,.rev-l.on,.rev-r.on{opacity:1;transform:none;}
 
 /* ── RESPONSIVE ── */
@@ -535,7 +538,7 @@ footer .foot-links a:hover{color:var(--red);}
   <div class="hero-grid"></div>
   <div class="scanline-anim"></div>
   <div class="hero-inner">
-    <div class="hero-left rev">
+    <div class="hero-left">
       <div class="hero-google">4.9/5 sur Google | <strong>+4000 réparations/an</strong></div>
       <h1 class="hero-title">
         ON RÉPARE<br>VOTRE APPAREIL<br>
@@ -552,7 +555,7 @@ footer .foot-links a:hover{color:var(--red);}
         <a href="tel:0385330689" class="btn-s">📞 03 85 33 06 89</a>
       </div>
     </div>
-    <div class="hero-right rev-r">
+    <div class="hero-right">
       <div class="hero-img-frame">
         <div class="hero-frame-label">✦ SOLUTION PHONE — CERTIFIÉ QUALIRÉPAR — MÂCON · 10 ANS D'EXPÉRIENCE ✦</div>
         <div style="padding:40px 30px;background:var(--dark2);text-align:center;">
@@ -961,9 +964,14 @@ footer .foot-links a:hover{color:var(--red);}
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── SCROLL REVEAL ──
 const revEls = document.querySelectorAll('.rev,.rev-l,.rev-r');
+// Trigger immediately for elements already in view (hero, above-fold)
+revEls.forEach(el => {
+  const rect = el.getBoundingClientRect();
+  if(rect.top < window.innerHeight + 100) el.classList.add('on');
+});
 const revObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
-}, {threshold: 0.08, rootMargin: '0px 0px -50px 0px'});
+}, {threshold: 0.01, rootMargin: '100px 0px 0px 0px'});
 revEls.forEach(el => revObs.observe(el));
 
 // ── NAV OFFSET FOR PROMO BAR ──
