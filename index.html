@@ -603,6 +603,54 @@ footer .foot-links a:hover{color:var(--red);}
 .hv-tr{top:28px;right:8px;border-top:2px solid var(--red);border-right:2px solid var(--red);}
 .hv-bl{bottom:8px;left:8px;border-bottom:2px solid var(--red);border-left:2px solid var(--red);}
 .hv-br{bottom:8px;right:8px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+
+/* ── HAMBURGER MOBILE MENU ── */
+.burger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:8px;background:none;border:none;
+}
+.burger span{
+  display:block;width:24px;height:2px;background:#fff;
+  transition:all .3s;transform-origin:center;
+}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile drawer */
+.mobile-nav{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(5,5,8,0.98);z-index:998;
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:32px;backdrop-filter:blur(20px);
+}
+.mobile-nav.open{display:flex;}
+.mobile-nav a{
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.1rem;
+  letter-spacing:3px;text-transform:uppercase;color:#fff;text-decoration:none;
+  padding:12px 32px;border:1px solid rgba(255,255,255,.1);
+  transition:all .3s;text-align:center;
+}
+.mobile-nav a:hover{border-color:var(--red);color:var(--red);}
+.mobile-nav a.mobile-iphone{color:var(--red);border-color:var(--red);}
+.mobile-nav a.mobile-wa{
+  background:#25D366;color:#fff;border-color:#25D366;
+  clip-path:polygon(8px 0,100% 0,100% calc(100%-8px),calc(100%-8px) 100%,0 100%,0 8px);
+}
+.mobile-nav a.mobile-boutique{color:var(--cyan);border-color:var(--cyan);}
+.mobile-nav-phone{
+  font-family:'Share Tech Mono',monospace;font-size:1rem;
+  color:var(--cyan);letter-spacing:2px;margin-top:8px;
+}
+.mobile-nav-close{
+  position:absolute;top:20px;right:20px;
+  background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;
+}
+
+@media(max-width:768px){
+  .burger{display:flex;}
+  .nav-cta{display:none;}
+}
 </style>
 </head>
 <body>
@@ -687,15 +735,40 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeQR();})
   <div class="nav-links">
     <a href="#accueil">Accueil</a>
     <a href="#equipe">L'Équipe</a>
-    <a href="https://solution-phone.myshopify.com" target="_blank" style="color:var(--cyan);">🛒 Boutique</a>
+    <a href="https://solution-phone.myshopify.com" target="_blank" style="color:var(--cyan);display:inline-flex;align-items:center;gap:5px;"><span>🛒</span>Boutique</a>
     <a href="#contact">Contact</a>
-    <a href="reparation-iphone.html" style="color:var(--red);">Réparation iPhone</a>
+    <a href="reparation-iphone.html" style="color:var(--red);">Réparation iPhone Mâcon</a>
   </div>
   <div class="nav-right">
     <div class="nav-phone">03 85 33 06 89</div>
     <a href="#devis" class="nav-cta">Devis Gratuit</a>
+    <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="toggleMenu()">✕</button>
+  <a href="#accueil" onclick="toggleMenu()">Accueil</a>
+  <a href="#equipe" onclick="toggleMenu()">L'Équipe</a>
+  <a href="reparation-iphone.html" class="mobile-iphone">📱 Réparation iPhone</a>
+  <a href="https://solution-phone.myshopify.com" target="_blank" class="mobile-boutique">🛒 Boutique</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="#devis" onclick="toggleMenu()" class="mobile-wa">💬 Devis Gratuit</a>
+  <div class="mobile-nav-phone">📞 03 85 33 06 89</div>
+</div>
+
+<script>
+function toggleMenu(){
+  var b=document.getElementById('burger');
+  var m=document.getElementById('mobileNav');
+  b.classList.toggle('open');
+  m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+</script>
 
 <!-- HERO -->
 <section class="hero" id="accueil" style="padding-top:calc(68px + 36px + 40px);">
@@ -1202,9 +1275,9 @@ function sendDevisMail() {
           <div class="ccard-icon">📞</div>
           <div><div class="ccard-label">Téléphone</div><div class="ccard-val">03 85 33 06 89</div></div>
         </a>
-        <a href="mailto:solution.phone71@gmail.com" class="ccard em rev" style="transition-delay:.16s">
+        <a href="/cdn-cgi/l/email-protection#b0c3dfdcc5c4d9dfde9ec0d8dfded58781f0d7ddd1d9dc9ed3dfdd" class="ccard em rev" style="transition-delay:.16s">
           <div class="ccard-icon">✉️</div>
-          <div><div class="ccard-label">Email</div><div class="ccard-val">solution.phone71@gmail.com</div></div>
+          <div><div class="ccard-label">Email</div><div class="ccard-val"><span class="__cf_email__" data-cfemail="42312d2e37362b2d2c6c322a2d2c27757302252f232b2e6c212d2f">[email&#160;protected]</span></div></div>
         </a>
         <a href="https://maps.google.com/?q=21+Rue+Gambetta+71000" target="_blank" class="ccard ad rev" style="transition-delay:.24s">
           <div class="ccard-icon">📍</div>
@@ -1235,7 +1308,7 @@ function sendDevisMail() {
     <div class="foot-links">
       <a href="https://wa.me/33783921884">WhatsApp</a>
       <a href="tel:0385330689">03 85 33 06 89</a>
-      <a href="mailto:solution.phone71@gmail.com">Email</a>
+      <a href="/cdn-cgi/l/email-protection#addec2c1d8d9c4c2c383ddc5c2c3c89a9cedcac0ccc4c183cec2c0">Email</a>
       <a href="https://solution-phone.myshopify.com" target="_blank">Boutique</a>
     </div>
   </div>
@@ -1244,7 +1317,7 @@ function sendDevisMail() {
 <!-- WA FLOAT -->
 <a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation." class="wa-float">💬 DEVIS IMMÉDIAT</a>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── SCROLL REVEAL ──
 const revEls = document.querySelectorAll('.rev,.rev-l,.rev-r');
 // Trigger immediately for elements already in view (hero, above-fold)
@@ -1307,10 +1380,4 @@ function animCount() {
     }, 25);
   });
 }
-// Trigger counter when stats section enters viewport
-const statsObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) { animCount(); statsObs.disconnect(); } });
-}, {threshold: 0.3});
-const statsEl = document.querySelector('.stats');
-if(statsEl) statsObs.observe(statsEl);
-else
+// Trigg
