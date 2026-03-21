@@ -680,6 +680,131 @@ footer .foot-links a:hover{color:var(--red);}
 </section>
 
 
+
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-wrap">
+    <span>Réparation iPhone</span><span>Samsung</span><span>Xiaomi</span><span>Écran</span><span>Batterie</span><span>Connecteur</span><span>QualiRépar -25€</span><span>Diagnostic Gratuit</span><span>Garantie 3 mois</span><span>PC & Mac</span><span>Tablette</span><span>Réparation iPhone</span><span>Samsung</span><span>Xiaomi</span><span>Écran</span><span>Batterie</span><span>Connecteur</span><span>QualiRépar -25€</span><span>Diagnostic Gratuit</span><span>Garantie 3 mois</span><span>PC & Mac</span><span>Tablette</span>
+  </div>
+</div>
+
+
+<!-- BRANDS TICKER -->
+<style>
+.brands-ticker{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0;overflow:hidden;position:relative;}
+.brands-ticker::before,.brands-ticker::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.brands-ticker::before{left:0;background:linear-gradient(90deg,var(--dark),transparent);}
+.brands-ticker::after{right:0;background:linear-gradient(-90deg,var(--dark),transparent);}
+.brands-track{display:flex;align-items:center;gap:0;animation:brandScroll 22s linear infinite;width:max-content;}
+.brands-track:hover{animation-play-state:paused;}
+@keyframes brandScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.brand-item{display:flex;align-items:center;gap:12px;padding:18px 40px;border-right:1px solid rgba(255,255,255,.05);white-space:nowrap;transition:all .3s;}
+.brand-item:hover{background:rgba(255,255,255,.03);}
+.brand-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1rem;letter-spacing:2px;}
+.brand-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;flex-shrink:0;}
+</style>
+
+<div class="brands-ticker">
+  <div class="brands-track" id="brandTrack">
+    <!-- Apple -->
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#1d1d1f;">
+        <svg width="20" height="24" viewBox="0 0 814 1000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-36.8-161.1-100.7C112.1 740 27.2 581.5 27.2 430.3c0-226.2 147.4-345.4 284.1-345.4 73.8 0 135.2 48.4 181.2 48.4 43.5 0 111.7-51.4 193.9-51.4 31 0 113.1 2.9 172.5 82.6zm-160.9-161.3c-7.7 36.1-29 72.2-56.9 95.9-27.3 23.3-58.5 40.9-91.6 40.9-4.2 0-8.5-.3-12.7-.8 0-36.1 23.2-74.4 50.4-98.8 29-26.7 77.1-47.5 110.8-47.5z" fill="#ffffff"/></svg>
+      </div>
+      <span class="brand-logo" style="color:#ffffff;">APPLE</span>
+    </div>
+    <!-- Samsung -->
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#1428a0;">
+        <svg width="28" height="14" viewBox="0 0 200 100"><text x="0" y="75" font-family="Arial" font-weight="bold" font-size="72" fill="white">S</text></svg>
+      </div>
+      <span class="brand-logo" style="color:#1428a0;text-shadow:0 0 10px rgba(20,40,160,.5);">SAMSUNG</span>
+    </div>
+    <!-- Xiaomi -->
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#ff6900;">
+        <svg width="26" height="26" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" rx="20" fill="none" stroke="white" stroke-width="10"/><rect x="30" y="30" width="40" height="40" rx="10" fill="white"/></svg>
+      </div>
+      <span class="brand-logo" style="color:#ff6900;text-shadow:0 0 10px rgba(255,105,0,.4);">XIAOMI</span>
+    </div>
+    <!-- Google -->
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#fff;">
+        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      </div>
+      <span class="brand-logo" style="background:linear-gradient(90deg,#4285F4,#34A853,#FBBC05,#EA4335);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">GOOGLE</span>
+    </div>
+    <!-- Motorola -->
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#e1000f;">
+        <svg width="26" height="26" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#e1000f"/><text x="50" y="67" font-family="Arial" font-weight="bold" font-size="52" fill="white" text-anchor="middle">M</text></svg>
+      </div>
+      <span class="brand-logo" style="color:#e1000f;text-shadow:0 0 10px rgba(225,0,15,.4);">MOTOROLA</span>
+    </div>
+    <!-- Honor -->
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#c8102e;">
+        <svg width="26" height="26" viewBox="0 0 100 100"><text x="50" y="70" font-family="Arial" font-weight="bold" font-size="48" fill="white" text-anchor="middle">H</text></svg>
+      </div>
+      <span class="brand-logo" style="color:#c8102e;text-shadow:0 0 10px rgba(200,16,46,.4);">HONOR</span>
+    </div>
+    <!-- Huawei -->
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#cf0a2c;">
+        <svg width="26" height="26" viewBox="0 0 100 100"><path d="M50 10 L80 40 L80 70 L50 90 L20 70 L20 40 Z" fill="none" stroke="white" stroke-width="8"/><circle cx="50" cy="50" r="12" fill="white"/></svg>
+      </div>
+      <span class="brand-logo" style="color:#cf0a2c;text-shadow:0 0 10px rgba(207,10,44,.4);">HUAWEI</span>
+    </div>
+
+    <!-- DUPLICATE for seamless loop -->
+    <!-- Apple -->
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#1d1d1f;">
+        <svg width="20" height="24" viewBox="0 0 814 1000"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-36.8-161.1-100.7C112.1 740 27.2 581.5 27.2 430.3c0-226.2 147.4-345.4 284.1-345.4 73.8 0 135.2 48.4 181.2 48.4 43.5 0 111.7-51.4 193.9-51.4 31 0 113.1 2.9 172.5 82.6zm-160.9-161.3c-7.7 36.1-29 72.2-56.9 95.9-27.3 23.3-58.5 40.9-91.6 40.9-4.2 0-8.5-.3-12.7-.8 0-36.1 23.2-74.4 50.4-98.8 29-26.7 77.1-47.5 110.8-47.5z" fill="#ffffff"/></svg>
+      </div>
+      <span class="brand-logo" style="color:#ffffff;">APPLE</span>
+    </div>
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#1428a0;">
+        <svg width="28" height="14" viewBox="0 0 200 100"><text x="0" y="75" font-family="Arial" font-weight="bold" font-size="72" fill="white">S</text></svg>
+      </div>
+      <span class="brand-logo" style="color:#1428a0;text-shadow:0 0 10px rgba(20,40,160,.5);">SAMSUNG</span>
+    </div>
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#ff6900;">
+        <svg width="26" height="26" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="80" rx="20" fill="none" stroke="white" stroke-width="10"/><rect x="30" y="30" width="40" height="40" rx="10" fill="white"/></svg>
+      </div>
+      <span class="brand-logo" style="color:#ff6900;text-shadow:0 0 10px rgba(255,105,0,.4);">XIAOMI</span>
+    </div>
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#fff;">
+        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      </div>
+      <span class="brand-logo" style="background:linear-gradient(90deg,#4285F4,#34A853,#FBBC05,#EA4335);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">GOOGLE</span>
+    </div>
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#e1000f;">
+        <svg width="26" height="26" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#e1000f"/><text x="50" y="67" font-family="Arial" font-weight="bold" font-size="52" fill="white" text-anchor="middle">M</text></svg>
+      </div>
+      <span class="brand-logo" style="color:#e1000f;text-shadow:0 0 10px rgba(225,0,15,.4);">MOTOROLA</span>
+    </div>
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#c8102e;">
+        <svg width="26" height="26" viewBox="0 0 100 100"><text x="50" y="70" font-family="Arial" font-weight="bold" font-size="48" fill="white" text-anchor="middle">H</text></svg>
+      </div>
+      <span class="brand-logo" style="color:#c8102e;text-shadow:0 0 10px rgba(200,16,46,.4);">HONOR</span>
+    </div>
+    <div class="brand-item">
+      <div class="brand-icon" style="background:#cf0a2c;">
+        <svg width="26" height="26" viewBox="0 0 100 100"><path d="M50 10 L80 40 L80 70 L50 90 L20 70 L20 40 Z" fill="none" stroke="white" stroke-width="8"/><circle cx="50" cy="50" r="12" fill="white"/></svg>
+      </div>
+      <span class="brand-logo" style="color:#cf0a2c;text-shadow:0 0 10px rgba(207,10,44,.4);">HUAWEI</span>
+    </div>
+  </div>
+</div>
+
+
 <!-- DEVIS SECTION -->
 <section id="devis" style="padding:80px 48px;background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
   <div style="max-width:700px;margin:0 auto;">
@@ -748,6 +873,7 @@ function sendDevisMail() {
 }
 </script>
 
+
 <!-- REVIEWS CAROUSEL -->
 <section class="reviews">
   <div class="reviews-inner">
@@ -794,12 +920,11 @@ function sendDevisMail() {
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-wrap">
-    <span>Réparation iPhone</span><span>Samsung</span><span>Xiaomi</span><span>Écran</span><span>Batterie</span><span>Connecteur</span><span>QualiRépar -25€</span><span>Diagnostic Gratuit</span><span>Garantie 3 mois</span><span>PC & Mac</span><span>Tablette</span><span>Réparation iPhone</span><span>Samsung</span><span>Xiaomi</span><span>Écran</span><span>Batterie</span><span>Connecteur</span><span>QualiRépar -25€</span><span>Diagnostic Gratuit</span><span>Garantie 3 mois</span><span>PC & Mac</span><span>Tablette</span>
-  </div>
-</div>
+
+
+
+
+
 
 <!-- WHY US -->
 <section class="why">
@@ -1049,9 +1174,9 @@ function sendDevisMail() {
           <div class="ccard-icon">📞</div>
           <div><div class="ccard-label">Téléphone</div><div class="ccard-val">03 85 33 06 89</div></div>
         </a>
-        <a href="mailto:solution.phone71@gmail.com" class="ccard em rev" style="transition-delay:.16s">
+        <a href="/cdn-cgi/l/email-protection#b9cad6d5cccdd0d6d797c9d1d6d7dc8e88f9ded4d8d0d597dad6d4" class="ccard em rev" style="transition-delay:.16s">
           <div class="ccard-icon">✉️</div>
-          <div><div class="ccard-label">Email</div><div class="ccard-val">solution.phone71@gmail.com</div></div>
+          <div><div class="ccard-label">Email</div><div class="ccard-val"><span class="__cf_email__" data-cfemail="4a3925263f3e232524643a2225242f7d7b0a2d272b232664292527">[email&#160;protected]</span></div></div>
         </a>
         <a href="https://maps.google.com/?q=21+Rue+Gambetta+71000" target="_blank" class="ccard ad rev" style="transition-delay:.24s">
           <div class="ccard-icon">📍</div>
@@ -1082,7 +1207,7 @@ function sendDevisMail() {
     <div class="foot-links">
       <a href="https://wa.me/33783921884">WhatsApp</a>
       <a href="tel:0385330689">03 85 33 06 89</a>
-      <a href="mailto:solution.phone71@gmail.com">Email</a>
+      <a href="/cdn-cgi/l/email-protection#2c5f43405958454342025c444342491b1d6c4b414d4540024f4341">Email</a>
       <a href="https://solution-phone.myshopify.com" target="_blank">Boutique</a>
     </div>
   </div>
@@ -1091,7 +1216,7 @@ function sendDevisMail() {
 <!-- WA FLOAT -->
 <a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation." class="wa-float">💬 DEVIS IMMÉDIAT</a>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── SCROLL REVEAL ──
 const revEls = document.querySelectorAll('.rev,.rev-l,.rev-r');
 // Trigger immediately for elements already in view (hero, above-fold)
@@ -1160,16 +1285,4 @@ const statsObs = new IntersectionObserver(entries => {
 }, {threshold: 0.3});
 const statsEl = document.querySelector('.stats');
 if(statsEl) statsObs.observe(statsEl);
-else animCount();
-
-// ── FALLBACK REVEAL: force tout visible après 400ms ──
-setTimeout(function() {
-  document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(function(el) {
-    el.classList.add('on');
-  });
-}, 400);
-
-// Trigger counter animation on load
-setTimeout(function(){ animCount(); }, 800);
-
-a
+else
