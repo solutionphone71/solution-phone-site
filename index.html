@@ -31,7 +31,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
 
 /* ── PROMO BAR ── */
 .promo-bar{
-  background:var(--red);text-align:center;padding:9px 20px;
+  background:#1a56db;text-align:center;padding:9px 20px;cursor:pointer;
   font-family:'Orbitron',sans-serif;font-weight:700;font-size:.7rem;
   letter-spacing:3px;text-transform:uppercase;position:relative;overflow:hidden;
 }
@@ -608,9 +608,75 @@ footer .foot-links a:hover{color:var(--red);}
 <body>
 
 <!-- PROMO BAR -->
-<div class="promo-bar">
-  ⚡ Offre QualiRépar — <a href="reparation-iphone.html">-25€ déduits automatiquement sur votre réparation →</a>
+<div class="promo-bar" onclick="openQR()">
+  🏆 Certifié QualiRépar — <strong>-25€ déduits automatiquement</strong> sur votre réparation · Cliquez pour en savoir plus →
 </div>
+
+<!-- QUALIREPAR POPUP -->
+<div id="qrOverlay" onclick="closeQR()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div onclick="event.stopPropagation()" style="background:#0d0d1a;border:1px solid #1a56db;max-width:600px;width:100%;position:relative;padding:48px 40px;box-shadow:0 0 60px rgba(26,86,219,0.4);">
+    
+    <!-- Close button -->
+    <button onclick="closeQR()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#7a7a99;font-size:1.4rem;cursor:pointer;line-height:1;">✕</button>
+    
+    <!-- Blue top bar -->
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#1a56db,#00F5FF);"></div>
+    
+    <!-- Badge -->
+    <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(26,86,219,0.15);border:1px solid rgba(26,86,219,0.4);padding:8px 18px;margin-bottom:24px;">
+      <span style="font-size:1.2rem;">🏆</span>
+      <span style="font-family:Orbitron,sans-serif;font-weight:700;font-size:.7rem;letter-spacing:2px;color:#60a5fa;text-transform:uppercase;">Label National QualiRépar</span>
+    </div>
+
+    <h2 style="font-family:Orbitron,sans-serif;font-weight:900;font-size:1.6rem;text-transform:uppercase;margin-bottom:16px;color:#fff;">C'est quoi <span style="color:#1a56db;">QualiRépar ?</span></h2>
+    
+    <p style="color:#aaaacc;font-size:1rem;line-height:1.7;margin-bottom:20px;">
+      Le label <strong style="color:#fff;">QualiRépar</strong> est un programme du gouvernement français qui encourage la réparation des appareils électroniques plutôt que leur remplacement.
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;">
+      <div style="padding:18px;background:rgba(26,86,219,0.08);border:1px solid rgba(26,86,219,0.25);">
+        <div style="font-size:1.8rem;margin-bottom:8px;">💶</div>
+        <div style="font-family:Orbitron,sans-serif;font-weight:700;font-size:.8rem;color:#60a5fa;margin-bottom:4px;">-25€ DIRECTS</div>
+        <div style="font-size:.85rem;color:#aaaacc;">Déduits automatiquement sur votre facture. Pas de remboursement, pas d'attente.</div>
+      </div>
+      <div style="padding:18px;background:rgba(26,86,219,0.08);border:1px solid rgba(26,86,219,0.25);">
+        <div style="font-size:1.8rem;margin-bottom:8px;">✅</div>
+        <div style="font-family:Orbitron,sans-serif;font-weight:700;font-size:.8rem;color:#60a5fa;margin-bottom:4px;">CERTIFIÉ ÉTAT</div>
+        <div style="font-size:.85rem;color:#aaaacc;">Solution Phone est un réparateur agréé et audité par l'État français.</div>
+      </div>
+      <div style="padding:18px;background:rgba(26,86,219,0.08);border:1px solid rgba(26,86,219,0.25);">
+        <div style="font-size:1.8rem;margin-bottom:8px;">♻️</div>
+        <div style="font-family:Orbitron,sans-serif;font-weight:700;font-size:.8rem;color:#60a5fa;margin-bottom:4px;">ANTI-GASPILLAGE</div>
+        <div style="font-size:.85rem;color:#aaaacc;">Réparer plutôt que jeter : une démarche écologique soutenue par l'ADEME.</div>
+      </div>
+      <div style="padding:18px;background:rgba(26,86,219,0.08);border:1px solid rgba(26,86,219,0.25);">
+        <div style="font-size:1.8rem;margin-bottom:8px;">📱</div>
+        <div style="font-family:Orbitron,sans-serif;font-weight:700;font-size:.8rem;color:#60a5fa;margin-bottom:4px;">TOUS APPAREILS</div>
+        <div style="font-size:.85rem;color:#aaaacc;">Smartphones, tablettes — le bonus s'applique sur toutes les réparations éligibles.</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="#devis" onclick="closeQR()" style="display:inline-flex;align-items:center;gap:10px;background:#1a56db;color:#fff;font-family:Orbitron,sans-serif;font-weight:700;font-size:.75rem;letter-spacing:2px;padding:14px 32px;text-transform:uppercase;text-decoration:none;clip-path:polygon(8px 0,100% 0,100% calc(100%-8px),calc(100%-8px) 100%,0 100%,0 8px);">
+        ⚡ Profiter du -25€ maintenant
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+function openQR(){
+  var o=document.getElementById('qrOverlay');
+  o.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeQR(){
+  document.getElementById('qrOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeQR();});
+</script>
 
 <!-- NAV (offset for promo bar) -->
 <nav style="top:36px;">
