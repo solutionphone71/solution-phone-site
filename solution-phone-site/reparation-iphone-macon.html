@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Réparation iPhone Mâcon | Solution Phone — QualiRépar -25€</title>
+<meta name="description" content="Réparation iPhone à Mâcon : écran, batterie, connecteur. Certifié QualiRépar -25€. Devis gratuit, 30min. 21 Rue Gambetta.">
+<link rel="canonical" href="https://www.solution-phone.fr/reparation-iphone-macon">
+<meta property="og:title" content="Réparation iPhone Mâcon | Solution Phone">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Solution Phone Mâcon","telephone":"+33385330689","address":{"@type":"PostalAddress","streetAddress":"21 Rue Gambetta","addressLocality":"Mâcon","postalCode":"71000","addressCountry":"FR"},"openingHours":["Mo-Sa 09:15-12:15","Mo-Sa 14:00-19:00"]}</script>
+<style>
+:root{
+  --red:#FF0033;--red2:#cc0028;--red3:rgba(255,0,51,0.12);
+  --cyan:#00F5FF;--cyan2:#00bfcc;
+  --gold:#FFD700;--green:#25D366;
+  --dark:#050508;--dark2:#0a0a12;--dark3:#111118;--dark4:#1a1a26;
+  --white:#ffffff;--gray:#7a7a99;--gray2:#aaaacc;
+  --border:rgba(255,0,51,0.25);--borderc:rgba(0,245,255,0.15);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Rajdhani',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden;line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+/* SCANLINES */
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08)2px,rgba(0,0,0,0.08)4px);
+  pointer-events:none;z-index:9998;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--dark2);}
+::-webkit-scrollbar-thumb{background:var(--red);}
+
+/* STATUS BADGE */
+.avb{position:fixed;top:80px;right:18px;z-index:999;display:flex;align-items:center;gap:8px;
+  padding:7px 16px;backdrop-filter:blur(8px);
+  font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:1px;font-weight:600;
+  clip-path:polygon(6px 0,100% 0,100% calc(100%-6px),calc(100%-6px) 100%,0 100%,0 6px);}
+.avb.op{background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.4);color:var(--green)}
+.avb.cl{background:rgba(255,0,51,.12);border:1px solid var(--border);color:var(--red)}
+.avb .d{width:8px;height:8px;border-radius:50%}
+.avb.op .d{background:var(--green);animation:pulse 2s infinite}
+.avb.cl .d{background:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* PROMO BAR */
+.promo-bar{
+  background:var(--red);text-align:center;padding:9px 20px;
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:.7rem;
+  letter-spacing:3px;text-transform:uppercase;position:relative;overflow:hidden;
+}
+.promo-bar::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+  animation:shimmer 3s infinite;}
+@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+
+/* NAV */
+nav{
+  position:fixed;top:36px;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:68px;
+  background:rgba(5,5,8,0.95);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(16px);transition:top .3s;
+}
+.nav-logo{display:flex;align-items:center;gap:12px;color:#fff;}
+.nav-badge{width:36px;height:36px;background:var(--red);display:flex;align-items:center;justify-content:center;
+  font-family:'Orbitron',sans-serif;font-weight:900;font-size:.8rem;
+  clip-path:polygon(6px 0,100% 0,100% calc(100%-6px),calc(100%-6px) 100%,0 100%,0 6px);}
+.nav-logo-text{font-family:'Orbitron',sans-serif;font-weight:900;font-size:.95rem;letter-spacing:2px;}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.88rem;
+  letter-spacing:2px;text-transform:uppercase;color:var(--gray2);position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--red);transition:width .3s;}
+.nav-links a:hover{color:#fff}.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--red)}.nav-links a.active::after{width:100%}
+.nav-phone{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--cyan);}
+.nav-cta{background:var(--red);color:#fff;font-family:'Orbitron',sans-serif;font-weight:700;
+  font-size:.7rem;letter-spacing:2px;padding:9px 20px;text-transform:uppercase;
+  clip-path:polygon(7px 0,100% 0,100% calc(100%-7px),calc(100%-7px) 100%,0 100%,0 7px);transition:all .2s;}
+.nav-cta:hover{background:var(--red2);box-shadow:0 0 20px rgba(255,0,51,.5);}
+
+/* HERO */
+.hero{position:relative;min-height:90vh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;padding-top:calc(36px + 68px);}
+.hero-bg-img{position:absolute;inset:0;}
+
+.hero-bg-img::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(5,5,8,.6),rgba(5,5,8,.85),var(--dark));}
+.hero-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,0,51,.04)1px,transparent 1px),linear-gradient(90deg,rgba(255,0,51,.04)1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 20%,transparent 100%);}
+.scanline-anim{position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,0,51,.4),transparent);
+  animation:scan 5s linear infinite;pointer-events:none;}
+@keyframes scan{0%{top:-5%}100%{top:105%}}
+.hero-content{position:relative;z-index:5;text-align:center;padding:20px;max-width:860px;}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;padding:9px 18px;
+  border:1px solid var(--border);background:rgba(255,0,51,.08);backdrop-filter:blur(8px);
+  font-family:'Orbitron',sans-serif;font-size:.7rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:2px;margin-bottom:28px;
+  clip-path:polygon(6px 0,100% 0,100% calc(100%-6px),calc(100%-6px) 100%,0 100%,0 6px);}
+.hero-badge .badge-dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite;}
+h1.hero-title{font-family:'Orbitron',sans-serif;font-weight:900;
+  font-size:clamp(2.2rem,7vw,4.5rem);text-transform:uppercase;line-height:1.1;margin-bottom:22px;}
+h1.hero-title .accent{color:var(--red);text-shadow:0 0 40px rgba(255,0,51,.6);animation:flicker 8s infinite;}
+@keyframes flicker{0%,89%,91%,93%,95%,100%{opacity:1}90%{opacity:.4}92%{opacity:1}94%{opacity:.6}96%{opacity:1}}
+.hero-sub{font-size:1.05rem;color:var(--gray2);margin-bottom:36px;font-weight:500;letter-spacing:1px;}
+.hero-sub .dot{color:var(--red);margin:0 9px;}
+.hero-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+.btn-p{display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;
+  letter-spacing:2px;padding:13px 26px;text-transform:uppercase;
+  clip-path:polygon(9px 0,100% 0,100% calc(100%-9px),calc(100%-9px) 100%,0 100%,0 9px);transition:all .3s;}
+.btn-p:hover{background:var(--red2);box-shadow:0 0 28px rgba(255,0,51,.6);}
+.btn-s{display:inline-flex;align-items:center;gap:9px;
+  border:1px solid rgba(255,255,255,.2);color:#fff;
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;
+  letter-spacing:2px;padding:13px 26px;text-transform:uppercase;transition:all .3s;}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 16px rgba(0,245,255,.15);}
+.btn-wa{background:var(--green)}
+.btn-wa:hover{background:#1ea855;box-shadow:0 0 28px rgba(37,211,102,.5);}
+.scroll-hint{margin-top:40px;color:var(--gray);display:flex;justify-content:center;animation:bounce 2s infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* STATS */
+.stats{padding:56px 48px;background:linear-gradient(90deg,rgba(255,0,51,.08),transparent,rgba(255,0,51,.08));
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;max-width:960px;margin:0 auto;}
+.stat{text-align:center;}
+.stat-icon{width:56px;height:56px;display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(255,0,51,.08);border:1px solid var(--border);margin-bottom:14px;
+  clip-path:polygon(8px 0,100% 0,100% calc(100%-8px),calc(100%-8px) 100%,0 100%,0 8px);}
+.stat-val{font-family:'Orbitron',sans-serif;font-weight:900;font-size:2rem;color:var(--red);
+  text-shadow:0 0 20px rgba(255,0,51,.4);margin-bottom:6px;}
+.stat-lbl{font-size:.9rem;color:var(--gray2);font-weight:600;letter-spacing:1px;}
+
+/* SECTION BASE */
+.section{padding:90px 48px;}
+.container{max-width:1100px;margin:0 auto;}
+.section-tag{font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--red);
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;text-align:center;}
+.section-h{font-family:'Orbitron',sans-serif;font-weight:900;
+  font-size:clamp(1.6rem,3.5vw,2.8rem);text-transform:uppercase;text-align:center;margin-bottom:14px;line-height:1.1;}
+.section-h .accent{color:var(--red);}
+.section-sub{text-align:center;color:var(--gray);margin-bottom:44px;font-size:1rem;}
+.bg2{background:var(--dark2);}
+
+/* INSTANT QUOTE */
+.quote-box{background:var(--dark3);border:1px solid var(--border);max-width:860px;margin:0 auto;
+  padding:40px;position:relative;overflow:hidden;}
+.quote-box::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:linear-gradient(180deg,var(--red),var(--cyan));}
+.quote-step{margin-bottom:28px;}
+.quote-step label{display:flex;align-items:center;gap:12px;font-family:'Orbitron',sans-serif;
+  font-weight:700;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+.quote-step label .step-n{width:28px;height:28px;background:var(--red);display:flex;align-items:center;
+  justify-content:center;font-size:.8rem;font-weight:900;flex-shrink:0;
+  clip-path:polygon(4px 0,100% 0,100% calc(100%-4px),calc(100%-4px) 100%,0 100%,0 4px);}
+.quote-select{width:100%;padding:14px;background:var(--dark);border:1px solid rgba(255,255,255,.1);
+  color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;
+  transition:border-color .3s;}
+.quote-select:focus{border-color:var(--red);outline:none;}
+.repair-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.ropt{padding:20px;border:2px solid rgba(255,255,255,.08);background:var(--dark);
+  cursor:pointer;transition:all .3s;text-align:left;}
+.ropt:hover{border-color:rgba(255,0,51,.4);background:rgba(255,0,51,.04);}
+.ropt.ac{border-color:var(--red);background:rgba(255,0,51,.08);}
+.ropt .ic{color:var(--gray);margin-bottom:10px;font-size:1.3rem;}
+.ropt.ac .ic{color:var(--red);}
+.ropt .nm{font-weight:700;color:var(--gray);font-family:'Orbitron',sans-serif;font-size:.75rem;letter-spacing:1px;}
+.ropt.ac .nm{color:#fff;}
+
+/* PRICE RESULT */
+.qr{padding:22px;margin-top:28px;display:none;border:1px solid var(--border);}
+.qr.sh{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;}
+.qr.pm{background:linear-gradient(90deg,rgba(255,0,51,.1),transparent);border-color:var(--border);}
+.qr.cm{background:linear-gradient(90deg,rgba(0,245,255,.07),transparent);border-color:var(--borderc);}
+.qr .pl{color:var(--gray);font-size:.8rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px;margin-bottom:4px;}
+.qr .p{font-family:'Orbitron',sans-serif;font-weight:900;font-size:2.8rem;color:var(--red);}
+.qr .pp{font-size:1rem;color:var(--gray);font-weight:normal;margin-right:7px;}
+.qr .pn{font-size:.75rem;color:var(--gray);font-family:'Share Tech Mono',monospace;margin-top:4px;}
+.ci .tip{display:inline-block;padding:3px 10px;background:rgba(0,245,255,.1);color:var(--cyan);
+  font-family:'Orbitron',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:1px;margin-bottom:10px;}
+.ci h4{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:7px;}
+.ci .cp{color:var(--cyan);font-weight:700;font-size:1rem;margin-bottom:7px;}
+.ci .cp span{font-size:1.8rem;}
+.ci .rn{color:var(--gray);font-size:.82rem;}
+.ci .rn strong{color:#fff;}
+
+/* REPAIR OPTIONS GRID */
+.rg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.rc{padding:22px;background:var(--dark3);border:1px solid rgba(255,255,255,.06);transition:all .3s;position:relative;}
+.rc:hover{border-color:var(--border);transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,0,51,.1);}
+.rc.ft{grid-column:span 2;grid-row:span 2;background:rgba(255,0,51,.06);border-color:var(--border);}
+.rc .ic{color:var(--gray);margin-bottom:14px;}
+.rc:hover .ic,.rc.ft .ic{color:var(--red);}
+.rc h3{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;}
+.rc.ft h3{font-size:1rem;}
+.rc p{color:var(--gray);font-size:.85rem;font-weight:500;}
+.rc .tg{position:absolute;top:14px;right:14px;padding:3px 10px;background:var(--red);
+  font-family:'Orbitron',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.hb{margin-top:36px;padding:22px;background:var(--dark3);border:1px solid rgba(255,255,255,.06);text-align:center;}
+.hb p{color:var(--gray);margin-bottom:10px;font-size:.9rem;}
+.hb a{color:var(--cyan);font-weight:700;}
+
+/* QUALITY TABLE */
+.ql2{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:9px;margin-bottom:28px;}
+.qc2{padding:12px 9px;background:var(--dark3);border:1px solid rgba(255,255,255,.06);text-align:center;}
+.qc2 .qs2{color:var(--red);margin-bottom:3px;font-size:.8rem;}
+.qc2 .qn2{font-weight:700;font-size:.8rem;margin-bottom:3px;font-family:'Orbitron',sans-serif;letter-spacing:.5px;}
+.qc2 .qd2{color:var(--gray);font-size:.65rem;font-family:'Share Tech Mono',monospace;}
+.ptw{overflow-x:auto;border:1px solid var(--border);}
+.pt{width:100%;border-collapse:collapse;font-size:.78rem;}
+.pt thead tr{background:linear-gradient(90deg,var(--red),#990020);}
+.pt th{padding:12px 8px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.6rem;
+  letter-spacing:2px;text-transform:uppercase;text-align:center;color:#fff;}
+.pt th:first-child{text-align:left;padding-left:14px;}
+.pt tbody tr{background:var(--dark3);}
+.pt tbody tr:nth-child(even){background:rgba(255,255,255,.02);}
+.pt tbody tr:hover{background:rgba(255,0,51,.07);}
+.pt td{padding:10px 8px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04);color:var(--gray2);font-weight:600;}
+.pt td:first-child{font-weight:700;text-align:left;padding-left:14px;color:#fff;font-family:'Orbitron',sans-serif;font-size:.72rem;letter-spacing:.5px;}
+.pt .pv{font-weight:900;color:var(--red);font-family:'Orbitron',sans-serif;}
+.pt .pn2{color:rgba(255,255,255,.2);}
+
+/* PHOTO CAROUSEL */
+.pc-wrap{position:relative;max-width:860px;margin:0 auto;border:1px solid var(--border);}
+.pc-track{overflow:hidden;}
+.pc-slides{display:flex;transition:transform .5s ease;}
+.pc-slide{flex:0 0 100%;position:relative;}
+.pc-slide img{width:100%;height:420px;object-fit:cover;display:block;filter:saturate(1.1);}
+.pc-caption{position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(5,5,8,.9));padding:20px 24px;}
+.pc-caption .cap-tag{font-family:'Orbitron',sans-serif;font-size:.65rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:4px;}
+.pc-caption .cap-title{font-weight:700;font-size:1rem;}
+.pc-btn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;
+  background:rgba(5,5,8,.85);border:1px solid var(--border);color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:18px;transition:border-color .3s;
+  clip-path:polygon(4px 0,100% 0,100% calc(100%-4px),calc(100%-4px) 100%,0 100%,0 4px);}
+.pc-btn:hover{border-color:var(--red);}
+.pc-prev{left:-18px}.pc-next{right:-18px}
+.pc-dots{display:flex;justify-content:center;gap:8px;margin-top:20px;}
+.pc-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;}
+.pc-dot.ac{background:var(--red);width:28px;border-radius:3px;}
+
+/* REVIEWS */
+.rv-wrap{display:inline-flex;align-items:center;gap:9px;padding:7px 14px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  font-family:'Share Tech Mono',monospace;font-size:.8rem;margin-bottom:22px;}
+.rv-wrap .stars{color:var(--gold);}
+.rvc{position:relative;max-width:760px;margin:0 auto;}
+.rvt{overflow:hidden;}
+.rvs{display:flex;transition:transform .5s;}
+.rvsl{flex:0 0 100%;padding:0 14px;}
+.rvcard{background:var(--dark3);border:1px solid rgba(255,255,255,.06);border-left:2px solid var(--red);padding:28px;position:relative;}
+.rvcard .qi{position:absolute;top:20px;right:20px;color:rgba(255,0,51,.15);}
+.rvrh{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.rvav{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--red),#ff6b6b);
+  display:flex;align-items:center;justify-content:center;font-weight:700;}
+.rvnm{font-weight:700;font-family:'Orbitron',sans-serif;font-size:.85rem;letter-spacing:.5px;}
+.rvmt{display:flex;align-items:center;gap:7px;}
+.rvmt .st2{color:var(--gold);font-size:.85rem;}
+.rvmt .dt{color:var(--gray);font-size:.8rem;font-family:'Share Tech Mono',monospace;}
+.rvtx{font-size:1rem;line-height:1.65;color:var(--gray2);font-weight:500;}
+.rvnv{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;
+  background:var(--dark3);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;
+  clip-path:polygon(4px 0,100% 0,100% calc(100%-4px),calc(100%-4px) 100%,0 100%,0 4px);}
+.rvnv:hover{border-color:var(--red);}
+.rvnv.pv2{left:-22px}.rvnv.nx{right:-22px}
+.rvds{display:flex;justify-content:center;gap:7px;margin-top:28px;}
+.rvd{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;}
+.rvd.ac{background:var(--red);width:28px;border-radius:3px;}
+
+/* FAQ */
+.fl{max-width:760px;margin:0 auto;}
+.fi{border:1px solid rgba(255,255,255,.06);margin-bottom:8px;background:var(--dark3);overflow:hidden;transition:border-color .3s;}
+.fi:hover{border-color:var(--border);}
+.fi.op{border-color:var(--border);}
+.fq{width:100%;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;
+  background:none;border:none;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;
+  font-size:1rem;text-align:left;cursor:pointer;letter-spacing:.5px;}
+.fq:hover{color:var(--red);}
+.fq svg{transition:transform .3s;flex-shrink:0;}
+.fi.op .fq svg{transform:rotate(180deg);}
+.fa{max-height:0;overflow:hidden;transition:max-height .35s;}
+.fi.op .fa{max-height:400px;}
+.fai{padding:0 22px 18px;color:var(--gray2);line-height:1.65;font-weight:500;}
+
+/* CONTACT */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.cfw{padding:32px;background:var(--dark3);border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;}
+.cfw::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(180deg,var(--red),var(--cyan));}
+.cfw h3{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.8rem;color:var(--gray);font-family:'Share Tech Mono',monospace;letter-spacing:1px;margin-bottom:7px;}
+.fg input,.fg textarea{width:100%;padding:13px 14px;background:var(--dark);
+  border:1px solid rgba(255,255,255,.08);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;transition:border-color .3s;}
+.fg input:focus,.fg textarea:focus{outline:none;border-color:var(--red);}
+.fg textarea{resize:none;}
+.fn{text-align:center;font-size:.8rem;color:var(--gray);font-family:'Share Tech Mono',monospace;margin-top:14px;}
+.mw{overflow:hidden;border:1px solid rgba(255,255,255,.06);height:260px;}
+.mw iframe{width:100%;height:100%;border:none;filter:grayscale(1) invert(.85) hue-rotate(180deg);}
+.cc{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+.ccard{display:flex;align-items:center;gap:14px;padding:16px;
+  border:1px solid rgba(255,255,255,.06);text-decoration:none;transition:all .3s;}
+.ccard.wa{background:rgba(37,211,102,.07);border-color:rgba(37,211,102,.2);}
+.ccard.wa:hover{border-color:var(--green);}
+.ccard.ph{background:rgba(255,0,51,.07);border-color:var(--border);}
+.ccard.ph:hover{border-color:var(--red);box-shadow:0 0 12px rgba(255,0,51,.15);}
+.ccard.em{background:rgba(0,245,255,.05);border-color:var(--borderc);}
+.ccard.ad{background:rgba(255,255,255,.03);}
+.ccard .iw2{width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  clip-path:polygon(5px 0,100% 0,100% calc(100%-5px),calc(100%-5px) 100%,0 100%,0 5px);}
+.ccard.wa .iw2{background:rgba(37,211,102,.12);}
+.ccard.ph .iw2{background:rgba(255,0,51,.12);}
+.ccard.em .iw2{background:rgba(0,245,255,.08);}
+.ccard.ad .iw2{background:rgba(255,255,255,.06);}
+.ccard .ti{font-weight:700;font-size:.95rem;}
+.ccard .vl{font-size:.8rem;color:var(--gray);font-family:'Share Tech Mono',monospace;}
+.hb2{margin-top:18px;padding:18px;background:var(--dark3);border:1px solid rgba(255,255,255,.06);}
+.hb2 .hd{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;}
+.hb2 .rw{display:flex;justify-content:space-between;font-size:.9rem;font-weight:600;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.hb2 .rw:last-child{border-bottom:none;}
+.hb2 .dy{color:var(--gray);}
+.hb2 .cl{color:var(--red);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:2px;}
+
+/* CTA FINAL */
+.fc{position:relative;padding:90px 48px;overflow:hidden;}
+.fc::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,0,51,.15),var(--dark),var(--dark));}
+.fc-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,0,51,.04)1px,transparent 1px),linear-gradient(90deg,rgba(255,0,51,.04)1px,transparent 1px);
+  background-size:40px 40px;opacity:.5;}
+.fc-inner{position:relative;z-index:5;text-align:center;max-width:760px;margin:0 auto;}
+.fc-inner h2{font-family:'Orbitron',sans-serif;font-weight:900;
+  font-size:clamp(1.8rem,5vw,3rem);text-transform:uppercase;margin-bottom:14px;}
+.fc-inner p{font-size:1.05rem;color:var(--gray2);margin-bottom:36px;font-weight:500;}
+.fc-inner .addr{margin-top:36px;display:inline-flex;align-items:center;gap:7px;
+  color:var(--gray);font-family:'Share Tech Mono',monospace;font-size:.8rem;}
+
+/* FOOTER */
+footer{padding:32px 48px;background:var(--dark);border-top:1px solid var(--border);}
+footer .foot-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;}
+footer .foot-copy{font-size:.82rem;color:var(--gray);font-family:'Share Tech Mono',monospace;}
+footer .foot-links{display:flex;gap:20px;}
+footer .foot-links a{color:var(--gray);font-size:.82rem;font-family:'Share Tech Mono',monospace;transition:color .2s;}
+footer .foot-links a:hover{color:var(--red);}
+.back-link{display:inline-flex;align-items:center;gap:7px;color:var(--cyan);
+  font-family:'Share Tech Mono',monospace;font-size:.8rem;letter-spacing:1px;}
+.back-link:hover{color:#fff;}
+
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:26px;right:26px;z-index:999;
+  display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:1px;
+  padding:12px 20px;text-transform:uppercase;
+  clip-path:polygon(9px 0,100% 0,100% calc(100%-9px),calc(100%-9px) 100%,0 100%,0 9px);
+  box-shadow:0 4px 20px rgba(37,211,102,.35);animation:wap 3s ease-in-out infinite;}
+@keyframes wap{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.35)}50%{box-shadow:0 4px 40px rgba(37,211,102,.65)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .rg{grid-template-columns:repeat(2,1fr)}.rc.ft{grid-column:span 2;grid-row:span 1}
+  .cg{grid-template-columns:1fr}.cc{grid-template-columns:1fr}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .repair-opts{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav,.section,.fc,footer{padding-left:20px;padding-right:20px}
+  nav{padding:0 20px}.nav-links,.nav-phone{display:none}
+  .fr2{grid-template-columns:1fr}
+  .stats{padding:40px 20px}
+  .rvnv.pv2{left:0}.rvnv.nx{right:0}
+}
+</style>
+</head>
+<body>
+
+<!-- STATUS BADGE -->
+<div class="avb cl" id="avb"><span class="d"></span><span id="avt">Chargement...</span></div>
+
+<!-- PROMO BAR -->
+<div class="promo-bar">⚡ Certifié QualiRépar — <a href="#devis" style="color:#fff;text-decoration:underline">-25€ déduits automatiquement sur votre réparation →</a></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-badge">SP</div>
+    <span class="nav-logo-text">SOLUTION PHONE</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">← Accueil</a>
+    <a href="#devis" class="active">Réparation iPhone</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:20px;">
+    <div class="nav-phone">03 85 33 06 89</div>
+    <a href="https://wa.me/33783921884" class="nav-cta">Devis Gratuit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-img" style="background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(255,0,51,0.15),transparent 60%),var(--dark2)"></div>
+  <div class="hero-grid"></div>
+  <div class="scanline-anim"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span>QualiRépar · -25€ déduits automatiquement</div>
+    <h1 class="hero-title">Réparation iPhone<br><span class="accent">Mâcon</span></h1>
+    <p class="hero-sub">Ultra-Rapide <span class="dot">·</span> Ultra-Fiable <span class="dot">·</span> Certifié</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/33783921884?text=Bonjour, devis réparation iPhone." class="btn-p btn-wa">💬 Devis WhatsApp</a>
+      <a href="tel:+33385330689" class="btn-s">📞 03 85 33 06 89</a>
+    </div>
+    <div class="scroll-hint">↓</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-icon"><span style="width:26px;height:26px;color:var(--red);display:inline-block;font-style:normal">🔧</span></div>
+      <div class="stat-val">2 500+</div><div class="stat-lbl">iPhones réparés</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><span style="width:26px;height:26px;color:var(--red);display:inline-block;font-style:normal">⏱</span></div>
+      <div class="stat-val">30 min</div><div class="stat-lbl">Temps moyen</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><span style="width:26px;height:26px;color:var(--red);display:inline-block;font-style:normal">👍</span></div>
+      <div class="stat-val">98%</div><div class="stat-lbl">Clients satisfaits</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><span style="width:26px;height:26px;color:var(--red);display:inline-block;font-style:normal">🛡️</span></div>
+      <div class="stat-val">3 mois</div><div class="stat-lbl">Garantie pièce & MO</div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTANT QUOTE -->
+<section class="section" id="devis">
+  <div class="container">
+    <div class="section-tag">// Devis instantané</div>
+    <h2 class="section-h">Votre prix en <span class="accent">10 secondes</span></h2>
+    <p class="section-sub">Sélectionnez votre modèle et la panne</p>
+    <div class="quote-box">
+      <div class="quote-step">
+        <label><span class="step-n">1</span>Quel est votre modèle ?</label>
+        <select class="quote-select" id="qm">
+          <option value="">— Sélectionnez votre iPhone —</option>
+          <optgroup label="iPhone 16">
+            <option>iPhone 16 Pro Max</option><option>iPhone 16 Pro</option><option>iPhone 16</option>
+          </optgroup>
+          <optgroup label="iPhone 15">
+            <option>iPhone 15 Pro Max</option><option>iPhone 15 Pro</option><option>iPhone 15</option>
+          </optgroup>
+          <optgroup label="iPhone 14">
+            <option>iPhone 14 Pro Max</option><option>iPhone 14 Pro</option><option>iPhone 14</option>
+          </optgroup>
+          <optgroup label="iPhone 13">
+            <option>iPhone 13 Pro Max</option><option>iPhone 13 Pro</option><option>iPhone 13</option><option>iPhone 13 mini</option>
+          </optgroup>
+          <optgroup label="iPhone 12">
+            <option>iPhone 12 Pro Max</option><option>iPhone 12/12 Pro</option><option>iPhone 12 mini</option>
+          </optgroup>
+          <optgroup label="Anciens modèles">
+            <option>iPhone 11</option><option>iPhone XR</option><option>iPhone X/XS</option>
+            <option>iPhone 8/8+</option><option>iPhone 7/7+</option><option>iPhone 6/6S</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="quote-step">
+        <label><span class="step-n">2</span>Quelle est la panne ?</label>
+        <div class="repair-opts">
+          <div class="ropt" data-r="ecran"><div class="ic">📱</div><div class="nm">Écran cassé / LCD</div></div>
+          <div class="ropt" data-r="batterie"><div class="ic">🔋</div><div class="nm">Batterie HS</div></div>
+          <div class="ropt" data-r="connecteur"><div class="ic">⚡</div><div class="nm">Ne charge plus</div></div>
+        </div>
+      </div>
+      <!-- Price Result - standard -->
+      <div class="qr pm" id="qrp">
+        <div>
+          <div class="pl">// Prix à partir de (QualiRépar -25€ déjà déduit)</div>
+          <div class="p"><span class="pp">dès</span><span id="qpr">0</span><span style="font-size:1.2rem">€</span></div>
+          <div class="pn">Devis précis gratuit en boutique · Garantie 3 mois</div>
+        </div>
+        <a class="btn-p" id="qwa" href="#">💬 Réserver sur WhatsApp</a>
+      </div>
+      <!-- Price Result - contact us -->
+      <div class="qr cm" id="qrc">
+        <div class="ci">
+          <div class="tip">DIAGNOSTIC GRATUIT</div>
+          <h4>Problème de charge</h4>
+          <div class="cp"><span>80%</span> des cas → simple nettoyage</div>
+          <div class="rn">Venez en boutique, diagnostic <strong>gratuit</strong> en 5 min.<br>Si remplacement nécessaire : connecteur à partir de <strong>29€</strong></div>
+        </div>
+        <a class="btn-p btn-wa" id="qwac" href="#">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPAIR OPTIONS -->
+<section class="section bg2">
+  <div class="container">
+    <div class="section-tag">// Ce qu'on répare</div>
+    <h2 class="section-h">Toutes les <span class="accent">pannes iPhone</span></h2>
+    <p class="section-sub">De l'écran cassé à la micro-soudure, on s'en occupe</p>
+    <div class="rg">
+      <div class="rc ft"><span class="tg">⭐ Le plus demandé</span>
+        <div class="ic"><span style="width:36px;height:36px;display:inline-block;font-style:normal">📱</span></div>
+        <h3>Remplacement Écran</h3>
+        <p>LCD, OLED, LTPS, Original — 5 niveaux de qualité disponibles. Résultat parfait, couleurs fidèles. En 30 min.</p>
+      </div>
+      <div class="rc">
+        <div class="ic"><span style="width:28px;height:28px;display:inline-block;font-style:normal">🔋</span></div>
+        <h3>Batterie</h3>
+        <p>iPhone qui tient 2h ? Batterie compatible ou TI reconnue. Dès 25€.</p>
+      </div>
+      <div class="rc">
+        <div class="ic"><span style="width:28px;height:28px;display:inline-block;font-style:normal">⚡</span></div>
+        <h3>Connecteur de charge</h3>
+        <p>Ne charge plus ? Souvent un nettoyage suffit. Diagnostic gratuit.</p>
+      </div>
+      <div class="rc">
+        <div class="ic"><span style="width:28px;height:28px;display:inline-block;font-style:normal">📷</span></div>
+        <h3>Caméra</h3>
+        <p>Photos floues, module HS. Avant ou arrière, on intervient.</p>
+      </div>
+      <div class="rc">
+        <div class="ic"><span style="width:28px;height:28px;display:inline-block;font-style:normal">🔊</span></div>
+        <h3>Son & Micro</h3>
+        <p>Écouteur, haut-parleur, micro. Votre interlocuteur ne vous entend plus ?</p>
+      </div>
+      <div class="rc">
+        <div class="ic"><span style="width:28px;height:28px;display:inline-block;font-style:normal">💧</span></div>
+        <h3>Dégât des eaux</h3>
+        <p>Désoxydation, nettoyage carte mère. Tentez le sauvetage avant de le changer !</p>
+      </div>
+    </div>
+    <div class="hb">
+      <p>Votre panne n'est pas listée ici ?</p>
+      <a href="https://wa.me/33783921884?text=Bonjour, j'ai une question sur la réparation de mon iPhone.">→ Contactez-nous sur WhatsApp, réponse en quelques minutes</a>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN QUALITY TABLE -->
+<section class="section" id="tarifs">
+  <div class="container">
+    <div class="section-tag">// Qualités d'écrans</div>
+    <h2 class="section-h">5 niveaux de <span class="accent">qualité d'écran</span></h2>
+    <p class="section-sub">Tous les budgets, toutes les exigences</p>
+    <div class="ql2">
+      <div class="qc2"><div class="qs2">★★</div><div class="qn2">HD ECO+</div><div class="qd2">LCD basique</div></div>
+      <div class="qc2"><div class="qs2">★★★</div><div class="qn2">LTPS</div><div class="qd2">Bonnes couleurs</div></div>
+      <div class="qc2"><div class="qs2">★★★★</div><div class="qn2">LTPS Prime</div><div class="qd2">Luminosité sup.</div></div>
+      <div class="qc2"><div class="qs2">★★★★★</div><div class="qn2">Soft OLED</div><div class="qd2">Proche Apple</div></div>
+      <div class="qc2"><div class="qs2" style="color:var(--gold)">★★★★★★</div><div class="qn2">Original</div><div class="qd2">Pièce Apple</div></div>
+    </div>
+    <div class="ptw"><div id="pe"><div class="ld" style="padding:36px;text-align:center;color:var(--gray);font-family:Share Tech Mono,monospace;">// Chargement des tarifs...</div></div></div>
+    <div style="margin-top:36px">
+      <div class="section-tag">// Batteries</div>
+      <h2 class="section-h" style="font-size:1.8rem;margin-bottom:28px;">Tarifs <span class="accent">batterie</span></h2>
+      <div class="ptw"><div id="pb"><div class="ld" style="padding:36px;text-align:center;color:var(--gray);font-family:Share Tech Mono,monospace;">// Chargement des tarifs...</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO CAROUSEL -->
+<section class="section bg2">
+  <div class="container">
+    <div class="section-tag">// Notre atelier</div>
+    <h2 class="section-h">Le travail <span class="accent">en images</span></h2>
+    <p class="section-sub">Des réparations réalisées dans notre boutique Mâcon</p>
+    <div class="pc-wrap">
+      <div class="pc-track"><div class="pc-slides" id="pcs">
+        <div class="pc-slide">
+          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624c6e9bae3e3a5e83b4_IMG_1014.jpeg" alt="Réparation écran iPhone Mâcon">
+          <div class="pc-caption"><div class="cap-tag">📱 Écran</div><div class="cap-title">Remplacement écran — résultat parfait</div></div>
+        </div>
+        <div class="pc-slide">
+          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624cb9137cfe5948a985_F0D81CEE-68ED-489A-A88A-FFA2524893DF.png" alt="Remplacement batterie iPhone">
+          <div class="pc-caption"><div class="cap-tag">🔋 Batterie</div><div class="cap-title">Batterie Apple originale reconditionnée</div></div>
+        </div>
+        <div class="pc-slide">
+          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624b0902909f8657d144_IMG_1012.jpeg" alt="Remplacement caméra iPhone">
+          <div class="pc-caption"><div class="cap-tag">📷 Caméra</div><div class="cap-title">Remplacement module caméra iPhone</div></div>
+        </div>
+        <div class="pc-slide">
+          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624b7671aecbf41de8f4_IMG_1013.png" alt="Expertise iPhone Mâcon">
+          <div class="pc-caption"><div class="cap-tag">🔧 Expertise</div><div class="cap-title">Maîtrise de toutes les pièces iPhone</div></div>
+        </div>
+        <div class="pc-slide">
+          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624b005ec15deb60ecfd_IMG_1011.jpeg" alt="Remplacement écran iPhone XR">
+          <div class="pc-caption"><div class="cap-tag">📱 Écran</div><div class="cap-title">Résultat impeccable sur iPhone XR</div></div>
+        </div>
+      </div></div>
+      <button class="pc-btn pc-prev" onclick="chPc(-1)">‹</button>
+      <button class="pc-btn pc-next" onclick="chPc(1)">›</button>
+      <div class="pc-dots" id="pcd"></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="rv-wrap"><span>Google Avis</span><span class="stars"> ★★★★★</span><strong>&nbsp;4.9/5</strong><span style="color:var(--gray);font-size:.75rem">&nbsp;· +150 avis</span></div>
+      <h2 class="section-h">Ils nous font <span class="accent">confiance</span></h2>
+      <p class="section-sub">Avis vérifiés Google — Clients Mâcon et alentours</p>
+    </div>
+    <div class="rvc">
+      <div class="rvt"><div class="rvs" id="rvs">
+        <div class="rvsl"><div class="rvcard">
+          <div class="rvcard .qi" style="position:absolute;top:20px;right:20px;color:rgba(255,0,51,.15);font-size:2.5rem">"</div>
+          <div class="rvrh"><div class="rvav">ML</div><div><div class="rvnm">Marie L.</div><div class="rvmt"><span class="st2">★★★★★</span><span class="dt">&nbsp; Il y a 2 sem.</span></div></div></div>
+          <p class="rvtx">Écran iPhone 13 réparé en 45 minutes ! Prix correct, travail impeccable. Je recommande vivement.</p>
+        </div></div>
+        <div class="rvsl"><div class="rvcard">
+          <div class="rvrh"><div class="rvav">TD</div><div><div class="rvnm">Thomas D.</div><div class="rvmt"><span class="st2">★★★★★</span><span class="dt">&nbsp; Il y a 1 mois</span></div></div></div>
+          <p class="rvtx">Batterie iPhone 11 changée rapidement. Le téléphone tient toute la journée. Très satisfait !</p>
+        </div></div>
+        <div class="rvsl"><div class="rvcard">
+          <div class="rvrh"><div class="rvav">SM</div><div><div class="rvnm">Sophie M.</div><div class="rvmt"><span class="st2">★★★★★</span><span class="dt">&nbsp; Il y a 3 sem.</span></div></div></div>
+          <p class="rvtx">iPhone ne chargeait plus, diagnostic gratuit et réparé dans l'heure. Service au top !</p>
+        </div></div>
+      </div></div>
+      <button class="rvnv pv2" onclick="chRv(-1)">‹</button>
+      <button class="rvnv nx" onclick="chRv(1)">›</button>
+      <div class="rvds" id="rvds"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section bg2">
+  <div class="container">
+    <div class="section-tag">// FAQ</div>
+    <h2 class="section-h">Questions <span class="accent">fréquentes</span></h2>
+    <p class="section-sub">Tout ce que vous devez savoir</p>
+    <div class="fl">
+      <div class="fi"><button class="fq">Différence entre les qualités d'écrans ?<span style="width:18px;height:18px;margin-left:auto;display:inline-block;font-style:normal">▼</span></button><div class="fa"><div class="fai">HD ECO+ = LCD basique. LTPS = meilleures couleurs. LTPS Prime = luminosité supérieure. Soft OLED = très proche Apple. Original = pièce Apple reconditionnée.</div></div></div>
+      <div class="fi"><button class="fq">Mon iPhone ne charge plus — c'est le connecteur ?<span style="width:18px;height:18px;margin-left:auto;display:inline-block;font-style:normal">▼</span></button><div class="fa"><div class="fai">Pas forcément. 80% des cas : nettoyage (10€) suffit. Sinon batterie ou problème logiciel. Diagnostic gratuit.</div></div></div>
+      <div class="fi"><button class="fq">Qu'est-ce que le label QualiRépar ?<span style="width:18px;height:18px;margin-left:auto;display:inline-block;font-style:normal">▼</span></button><div class="fa"><div class="fai">Programme d'État : -25€ automatiquement sur votre réparation. Solution Phone est certifié — déduit directement, aucune démarche de votre part.</div></div></div>
+      <div class="fi"><button class="fq">Combien de temps dure une réparation ?<span style="width:18px;height:18px;margin-left:auto;display:inline-block;font-style:normal">▼</span></button><div class="fa"><div class="fai">30 min à 1h pour écran ou batterie. Cela dépend du modèle et de la pièce commandée. Plus complexe selon la panne.</div></div></div>
+      <div class="fi"><button class="fq">Vous réparez tous les modèles iPhone ?<span style="width:18px;height:18px;margin-left:auto;display:inline-block;font-style:normal">▼</span></button><div class="fa"><div class="fai">Oui, du iPhone 5S au iPhone 16 Pro Max. Consultez nos tableaux de prix ci-dessus.</div></div></div>
+      <div class="fi"><button class="fq">Où êtes-vous situés à Mâcon ?<span style="width:18px;height:18px;margin-left:auto;display:inline-block;font-style:normal">▼</span></button><div class="fa"><div class="fai">21 Rue Gambetta, 71000 Mâcon. Lun-Sam 9h15-12h15 / 14h-19h. Pas besoin de rendez-vous.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-tag">// Contact</div>
+    <h2 class="section-h">Nous <span class="accent">contacter</span></h2>
+    <p class="section-sub">Devis gratuit — Réponse rapide</p>
+    <div class="cg">
+      <div class="cfw">
+        <h3>Demande de devis</h3>
+        <form id="cf">
+          <div class="fr2">
+            <div class="fg"><label>Nom *</label><input type="text" name="name" placeholder="Votre nom" required></div>
+            <div class="fg"><label>Téléphone *</label><input type="tel" name="phone" placeholder="06 12 34 56 78" required></div>
+          </div>
+          <div class="fg"><label>Modèle iPhone</label><input type="text" name="model" placeholder="iPhone 14 Pro..."></div>
+          <div class="fg"><label>Décrivez la panne *</label><textarea name="message" rows="4" placeholder="Écran cassé, batterie..." required></textarea></div>
+          <button type="submit" class="btn-p" style="width:100%">⚡ Envoyer la demande</button>
+          <p class="fn">Message envoyé via WhatsApp pour réponse rapide.</p>
+        </form>
+      </div>
+      <div>
+        <div class="mw"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2742.8!2d4.8337!3d46.3067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f2f0d5e7c7c7c7%3A0x1!2s21+Rue+Gambetta+71000+Mâcon!5e0!3m2!1sfr!2sfr" allowfullscreen loading="lazy"></iframe></div>
+        <div class="cc">
+          <a href="https://wa.me/33783921884" class="ccard wa"><div class="iw2" style="background:rgba(37,211,102,.12)"><span style="width:22px;height:22px;color:#25D366;display:inline-block;font-style:normal">💬</span></div><div><div class="ti">WhatsApp</div><div class="vl">07 83 92 18 84</div></div></a>
+          <a href="tel:+33385330689" class="ccard ph"><div class="iw2" style="background:rgba(255,0,51,.12)"><span style="width:22px;height:22px;color:var(--red);display:inline-block;font-style:normal">📞</span></div><div><div class="ti">Téléphone</div><div class="vl">03 85 33 06 89</div></div></a>
+          <a href="mailto:contact@solution-phone.fr" class="ccard em"><div class="iw2" style="background:rgba(0,245,255,.08)"><span style="width:22px;height:22px;color:var(--cyan);display:inline-block;font-style:normal">✉️</span></div><div><div class="ti">Email</div><div class="vl">contact@solution-phone.fr</div></div></a>
+          <a href="https://maps.google.com/?q=21+Rue+Gambetta+71000" target="_blank" class="ccard ad"><div class="iw2" style="background:rgba(255,255,255,.06)"><span style="width:22px;height:22px;color:#fff;display:inline-block;font-style:normal">📍</span></div><div><div class="ti">Adresse</div><div class="vl">21 Rue Gambetta, Mâcon</div></div></a>
+        </div>
+        <div class="hb2">
+          <div class="hd"><span style="width:16px;height:16px;color:var(--red);display:inline-block;font-style:normal">🕐</span>&nbsp;Horaires</div>
+          <div class="rw"><span class="dy">Lun → Sam</span><span>9h15-12h15 / 14h-19h</span></div>
+          <div class="rw"><span class="dy">Dimanche</span><span class="cl">FERMÉ</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="fc">
+  <div class="fc-grid"></div>
+  <div class="fc-inner">
+    <h2>Votre iPhone a besoin<br>d'une <span style="color:var(--red)">réparation</span> ?</h2>
+    <p>Devis gratuit — réparation le jour même</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/33783921884?text=Bonjour, devis réparation iPhone." class="btn-p btn-wa">💬 WhatsApp</a>
+      <a href="tel:+33385330689" class="btn-s">📞 03 85 33 06 89</a>
+    </div>
+    <div class="fc-inner .addr"><span style="margin-top:36px;display:inline-flex;align-items:center;gap:7px;color:var(--gray);font-family:Share Tech Mono,monospace;font-size:.8rem;">📍 21 Rue Gambetta · 71000 Mâcon · Lun-Sam 9h15-19h</span></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-copy">© 2025 Solution Phone — Réparation iPhone Mâcon — QualiRépar</div>
+    <div class="foot-links">
+      <a href="index.html">← Accueil</a>
+      <a href="https://wa.me/33783921884">WhatsApp</a>
+      <a href="tel:0385330689">03 85 33 06 89</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation iPhone." class="wa-float">💬 DEVIS IMMÉDIAT</a>
+
+<script>
+
+// NAV offset for promo bar
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav');
+  if(window.scrollY>36){nav.style.top='0';}else{nav.style.top=(36-window.scrollY)+'px';}
+});
+
+// Status badge
+function ua(){
+  var n=new Date(),p=new Date(n.toLocaleString('en-US',{timeZone:'Europe/Paris'}));
+  var d=p.getDay(),h=p.getHours(),m=p.getMinutes(),t=h+m/60;
+  var b=document.getElementById('avb'),tx=document.getElementById('avt');
+  var o=false,msg='';
+  if(d===0){msg='Fermé — Réouverture lundi 9h15';}
+  else if(t<9.25){msg='Fermé — Réouverture à 9h15';}
+  else if(t<12.25){o=true;msg='Ouvert — Réparation possible';}
+  else if(t<14){msg='Pause déjeuner — Réouverture 14h';}
+  else if(t<19){o=true;msg='Ouvert — Réparation possible';}
+  else{msg=d===6?'Fermé — Réouverture lundi':'Fermé — Réouverture demain 9h15';}
+  b.className='avb '+(o?'op':'cl');tx.textContent=msg;
+}
+ua();setInterval(ua,60000);
+
+// Quote calculator
+var PR={'iPhone 16 Pro Max':{ecran:70,batterie:65},'iPhone 16 Pro':{ecran:70,batterie:65},'iPhone 16':{ecran:70,batterie:65},'iPhone 15 Pro Max':{ecran:70,batterie:65},'iPhone 15 Pro':{ecran:50,batterie:65},'iPhone 15':{ecran:50,batterie:65},'iPhone 14 Pro Max':{ecran:45,batterie:55},'iPhone 14 Pro':{ecran:45,batterie:55},'iPhone 14':{ecran:45,batterie:55},'iPhone 13 Pro Max':{ecran:45,batterie:55},'iPhone 13 Pro':{ecran:45,batterie:55},'iPhone 13':{ecran:45,batterie:55},'iPhone 13 mini':{ecran:40,batterie:55},'iPhone 12 Pro Max':{ecran:40,batterie:45},'iPhone 12/12 Pro':{ecran:40,batterie:45},'iPhone 12 mini':{ecran:40,batterie:45},'iPhone 11':{ecran:30,batterie:35},'iPhone XR':{ecran:30,batterie:35},'iPhone X/XS':{ecran:30,batterie:35},'iPhone 8/8+':{ecran:40,batterie:35},'iPhone 7/7+':{ecran:40,batterie:35},'iPhone 6/6S':{ecran:40,batterie:25}};
+var sm='',sr='';
+var rp=document.getElementById('qrp'),rc=document.getElementById('qrc');
+document.getElementById('qm').addEventListener('change',function(){sm=this.value;uq();});
+document.querySelectorAll('.ropt').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.ropt').forEach(function(x){x.classList.remove('ac');});
+    this.classList.add('ac');sr=this.dataset.r;uq();
+  });
+});
+function uq(){
+  rp.classList.remove('sh');rc.classList.remove('sh');
+  if(!sm||!sr)return;
+  if(sr==='connecteur'){rc.classList.add('sh');document.getElementById('qwac').href='https://wa.me/33783921884?text=Bonjour, mon '+sm+' ne charge plus.';}
+  else if(PR[sm]&&PR[sm][sr]){
+    var p=PR[sm][sr];document.getElementById('qpr').textContent=p;rp.classList.add('sh');
+    document.getElementById('qwa').href='https://wa.me/33783921884?text=Bonjour, devis '+sm+' '+sr+' à partir de '+p+'€';
+  }
+}
+
+// Reviews carousel
+var cr=0,ts=3,rvs=document.getElementById('rvs'),rds=document.getElementById('rvds');
+for(var i=0;i<ts;i++){var d=document.createElement('div');d.className='rvd'+(i===0?' ac':'');(function(idx){d.onclick=function(){cr=idx;upRv();};})(i);rds.appendChild(d);}
+function chRv(dir){cr=(cr+dir+ts)%ts;upRv();}
+function upRv(){rvs.style.transform='translateX(-'+(cr*100)+'%)';document.querySelectorAll('.rvd').forEach(function(d,i){d.classList.toggle('ac',i===cr);});}
+setInterval(function(){cr=(cr+1)%ts;upRv();},5000);
+
+// Photo carousel
+var cpci=0,tpc=5;
+function initCarousel(){
+  var pcsl=document.getElementById('pcs'),pcd=document.getElementById('pcd');
+  if(!pcsl||!pcd)return;
+  for(var i=0;i<tpc;i++){
+    var dot=document.createElement('div');
+    dot.className='pc-dot'+(i===0?' ac':'');
+    (function(idx){dot.onclick=function(){cpci=idx;upPc();};})(i);
+    pcd.appendChild(dot);
+  }
+  setInterval(function(){cpci=(cpci+1)%tpc;upPc();},4000);
+}
+function chPc(dir){cpci=(cpci+dir+tpc)%tpc;upPc();}
+function upPc(){
+  var pcsl=document.getElementById('pcs'),pcd=document.getElementById('pcd');
+  if(!pcsl||!pcd)return;
+  pcsl.style.transform='translateX(-'+cpci*100+'%)';
+  Array.from(pcd.children).forEach(function(d,i){d.classList.toggle('ac',i===cpci);});
+}
+
+// FAQ
+document.querySelectorAll('.fq').forEach(function(b){
+  b.addEventListener('click',function(){b.parentElement.classList.toggle('op');});
+});
+
+// Contact form → WhatsApp
+var _cf=document.getElementById('cf');
+if(_cf)_cf.addEventListener('submit',function(e){
+  e.preventDefault();
+  var fd=new FormData(this);
+  window.open('https://wa.me/33783921884?text=Bonjour je suis '+fd.get('name')+'. Modèle: '+(fd.get('model')||'?')+'. '+fd.get('message')+'. Tél: '+fd.get('phone'),'_blank');
+  this.innerHTML='<div style="text-align:center;padding:36px"><div style="font-size:2.5rem;margin-bottom:14px">✅</div><h3 style="font-family:Orbitron,sans-serif;letter-spacing:2px">ENVOYÉ !</h3><p style="color:var(--gray);margin-top:10px">Réponse WhatsApp rapide.</p></div>';
+});
+
+// Pricing tables from Supabase
+var SU='https://kdvxcnjfrmvlnrymfyug.supabase.co',SK='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+var ORD=['5S/SE/5C/6/6S/6S+','7/7+/8/8+','X/XS/XS MAX','XR','11','11 Pro Max','12 mini','12/12 PRO','12 Pro Max','13 mini','13','13 Pro','13 Pro Max','14','14 Pro','14 Pro Max','15','15 Pro','15 Pro Max','16','16 Pro','16 Pro Max'];
+function srt(a){return a.slice().sort(function(x,y){var ix=ORD.indexOf(x.modele),iy=ORD.indexOf(y.modele);return(ix<0?999:ix)-(iy<0?999:iy);});}
+function rs(n){return'<span style="color:#FF0033">'+'★'.repeat(n)+'</span>';}
+
+function bET(d){
+  var H=['HD ECO+','LTPS','LTPS Prime','Soft OLED','Original'],S=[2,3,4,5,6];
+  var h='<table class="pt"><thead><tr><th>Modèle</th>';
+  H.forEach(function(x,i){h+='<th>'+rs(S[i])+'<br>'+x+'</th>';});
+  h+='</tr></thead><tbody>';
+  srt(d).forEach(function(r){h+='<tr><td>iPhone '+r.modele+'</td>';r.prix.forEach(function(p){h+=p?'<td class="pv">'+p+' €</td>':'<td class="pn2">—</td>';});h+='</tr>';});
+  h+='</tbody></table>';
+  document.getElementById('pe').innerHTML=h;
+}
+function bBT(d){
+  var H=['Compatible','TI Reconnue','Originale'],S=[3,4,5];
+  var h='<table class="pt"><thead><tr><th>Modèle</th>';
+  H.forEach(function(x,i){h+='<th>'+rs(S[i])+'<br>'+x+'</th>';});
+  h+='</tr></thead><tbody>';
+  srt(d).forEach(function(r){h+='<tr><td>iPhone '+r.modele+'</td>';r.prix.forEach(function(p){h+=(p&&p>0)?'<td class="pv">'+p+' €</td>':'<td class="pn2">—</td>';});h+='</tr>';});
+  h+='</tbody></table>';
+  document.getElementById('pb').innerHTML=h;
+}
+
+var DE=[{modele:'5S/SE/5C/6/6S/6S+',prix:[null,40,null,null,60]},{modele:'7/7+/8/8+',prix:[null,40,null,50,60]},{modele:'X/XS/XS MAX',prix:[30,40,55,70,85]},{modele:'XR',prix:[30,40,55,null,70]},{modele:'11',prix:[30,40,55,null,70]},{modele:'11 Pro Max',prix:[30,40,55,70,85]},{modele:'12 mini',prix:[null,40,null,null,60]},{modele:'12/12 PRO',prix:[40,50,65,90,115]},{modele:'12 Pro Max',prix:[40,50,65,90,115]},{modele:'13 mini',prix:[null,40,null,50,60]},{modele:'13',prix:[45,50,65,90,115]},{modele:'13 Pro',prix:[45,50,65,90,115]},{modele:'13 Pro Max',prix:[45,50,65,90,115]},{modele:'14',prix:[45,50,65,90,115]},{modele:'14 Pro',prix:[45,50,65,90,115]},{modele:'14 Pro Max',prix:[45,50,65,90,115]},{modele:'15',prix:[50,60,null,140,185]},{modele:'15 Pro',prix:[50,60,null,155,185]},{modele:'15 Pro Max',prix:[null,70,null,165,215]},{modele:'16',prix:[null,70,null,165,215]},{modele:'16 Pro',prix:[null,70,null,165,215]},{modele:'16 Pro Max',prix:[null,70,null,165,215]}];
+var DB=[{modele:'5S/SE/5C/6/6S/6S+',prix:[25,0,0]},{modele:'7/7+/8/8+',prix:[35,0,0]},{modele:'X/XS/XS MAX',prix:[35,0,0]},{modele:'XR',prix:[35,0,0]},{modele:'11',prix:[35,0,0]},{modele:'11 Pro Max',prix:[35,0,0]},{modele:'12 mini',prix:[45,0,0]},{modele:'12/12 PRO',prix:[45,0,0]},{modele:'12 Pro Max',prix:[45,0,0]},{modele:'13 mini',prix:[55,0,0]},{modele:'13',prix:[55,0,0]},{modele:'13 Pro',prix:[55,0,0]},{modele:'13 Pro Max',prix:[55,0,0]},{modele:'14',prix:[55,0,0]},{modele:'14 Pro',prix:[55,0,0]},{modele:'14 Pro Max',prix:[55,0,0]},{modele:'15',prix:[65,0,0]},{modele:'15 Pro',prix:[65,0,0]},{modele:'15 Pro Max',prix:[65,0,0]},{modele:'16',prix:[65,0,0]},{modele:'16 Pro',prix:[65,0,0]},{modele:'16 Pro Max',prix:[65,0,0]}];
+
+async function sg(p){var r=await fetch(SU+p,{headers:{apikey:SK,Authorization:'Bearer '+SK}});return r.json();}
+
+document.addEventListener('DOMContentLoaded', function(){
+  initCarousel();
+  sg('/rest/v1/settings?key=eq.ecrans_prix_json&select=value').then(r=>{
+    if(r&&r.length&&r[0].value){var d=JSON.parse(r[0].value),l=(d.t1||[]).concat(d.t2||[]);if(l.length){bET(l);return;}}
+    return sg('/rest/v1/ecrans_prix?select=*').then(function(r2){
+      if(r2&&r2.length){bET(r2.map(function(x){return{modele:x.modele,prix:[x.p0,x.p1,x.p2,x.p3,x.p4]};}));}
+      else{bET(DE);}
+    });
+  }).catch(function(){bET(DE);});
+  sg('/rest/v1/settings?key=eq.batteries_prix_json&select=value').then(r=>{
+    if(r&&r.length&&r[0].value){var d=JSON.parse(r[0].value),l=(d.t1||[]).concat(d.t2||[]);if(l.length){bBT(l);return;}}
+
+    return sg('/rest/v1/batteries_prix?select=*').then(function(r2){
+      if(r2&&r2.length){bBT(r2.map(function(x){return{modele:x.modele,prix:[x.p0,x.p1,x.p2]};}));}
+      else{bBT(DB);}
+    });
+  }).catch(function(){bBT(DB);});
+});
+</script>
+</body>
+</html>
