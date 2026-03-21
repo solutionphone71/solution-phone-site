@@ -487,6 +487,9 @@ footer .foot-links a:hover{color:var(--red);}
 .rev-r{opacity:0;transform:translateX(28px);transition:opacity .7s ease,transform .7s ease;}
 .hero .rev-r{opacity:1;transform:none;}
 .rev.on,.rev-l.on,.rev-r.on{opacity:1;transform:none;}
+/* Hero toujours visible */
+.hero .rev,.hero .rev-l,.hero .rev-r{opacity:1 !important;transform:none !important;}
+.hero-left,.hero-right,.hero-inner>*{opacity:1 !important;transform:none !important;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
@@ -502,6 +505,15 @@ footer .foot-links a:hover{color:var(--red);}
   .services-grid{grid-template-columns:1fr;}
   .stats-inner{grid-template-columns:repeat(2,1fr);}
   .devices-grid{grid-template-columns:1fr 1fr;}
+}
+
+/* ── HERO TOUJOURS VISIBLE ── */
+.hero .rev,.hero .rev-l,.hero .rev-r,
+.hero-left,.hero-right,.hero-content,
+.hero-inner,.hero-title,.hero-checks,
+.hero-btns,.hero-google{
+  opacity:1 !important;
+  transform:none !important;
 }
 </style>
 </head>
@@ -961,7 +973,7 @@ footer .foot-links a:hover{color:var(--red);}
 <!-- WA FLOAT -->
 <a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation." class="wa-float">💬 DEVIS IMMÉDIAT</a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── SCROLL REVEAL ──
 const revEls = document.querySelectorAll('.rev,.rev-l,.rev-r');
 // Trigger immediately for elements already in view (hero, above-fold)
@@ -1025,4 +1037,12 @@ function animCount() {
   });
 }
 // Trigger counter when stats section enters viewport
-const sta
+const st
+// ── FALLBACK REVEAL: force tout visible après 400ms ──
+setTimeout(function() {
+  document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(function(el) {
+    el.classList.add('on');
+  });
+}, 400);
+
+a
