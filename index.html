@@ -515,6 +515,56 @@ footer .foot-links a:hover{color:var(--red);}
   opacity:1 !important;
   transform:none !important;
 }
+
+/* ── VIDEO PLACEHOLDER ── */
+.video-placeholder{
+  position:relative;width:100%;aspect-ratio:9/16;
+  background:linear-gradient(160deg,#0a0014 0%,#18000a 50%,#00080f 100%);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;cursor:pointer;
+}
+.video-placeholder:hover .vp-play-btn{transform:scale(1.1);box-shadow:0 0 50px rgba(255,0,51,.7);}
+.vp-scanline{
+  position:absolute;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,rgba(255,0,51,.5),transparent);
+  animation:scan 3s linear infinite;pointer-events:none;opacity:.6;
+}
+.vp-content{position:relative;z-index:2;text-align:center;}
+.vp-play-btn{
+  width:80px;height:80px;margin:0 auto 20px;
+  background:rgba(255,0,51,.15);border:2px solid var(--red);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 30px rgba(255,0,51,.3);
+  transition:all .3s;animation:vpPulse 2s ease-in-out infinite;
+}
+@keyframes vpPulse{
+  0%,100%{box-shadow:0 0 20px rgba(255,0,51,.3),0 0 0 0 rgba(255,0,51,.2);}
+  50%{box-shadow:0 0 40px rgba(255,0,51,.6),0 0 0 15px rgba(255,0,51,0);}
+}
+.vp-play-icon{font-size:1.8rem;color:var(--red);margin-left:6px;}
+.vp-label{
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:.85rem;
+  letter-spacing:3px;text-transform:uppercase;color:#fff;margin-bottom:8px;
+}
+.vp-sub{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--gray);letter-spacing:1px;}
+.vp-corner{position:absolute;width:16px;height:16px;}
+.vp-tl{top:12px;left:12px;border-top:2px solid var(--red);border-left:2px solid var(--red);}
+.vp-tr{top:12px;right:12px;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+.vp-bl{bottom:12px;left:12px;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan);}
+.vp-br{bottom:12px;right:12px;border-bottom:2px solid var(--red);border-right:2px solid var(--red);}
+.vp-timer{
+  position:absolute;bottom:18px;right:18px;
+  font-family:'Share Tech Mono',monospace;font-size:.75rem;
+  color:rgba(255,255,255,.5);letter-spacing:2px;
+  background:rgba(0,0,0,.4);padding:3px 8px;
+}
+/* Grille de fond vidéo */
+.video-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,0,51,.04)1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,0,51,.04)1px,transparent 1px);
+  background-size:28px 28px;
+}
 </style>
 </head>
 <body>
@@ -551,10 +601,10 @@ footer .foot-links a:hover{color:var(--red);}
   <div class="scanline-anim"></div>
   <div class="hero-inner">
     <div class="hero-left">
-      <div class="hero-google">4.9/5 sur Google | <strong>+4000 réparations/an</strong></div>
+      <div class="hero-google">4.7/5 sur Google | <strong>+4000 réparations/an</strong></div>
       <h1 class="hero-title">
-        ON RÉPARE<br>VOTRE APPAREIL<br>
-        EN <span class="accent">30 MINUTES.</span>
+        ON RÉPARE<br>VOTRE SMARTPHONE<br>
+        EN <span class="accent">MOINS D'1H.</span>
       </h1>
       <div class="hero-checks">
         <div class="hero-check"><div class="ck">✓</div> 10+ ans d'expérience</div>
@@ -598,7 +648,7 @@ footer .foot-links a:hover{color:var(--red);}
       <div class="reviews-score">
         <div class="reviews-stars">★★★★★</div>
         <div>
-          <div class="reviews-score-num">4.9<span style="font-size:1rem;color:var(--gray)">/5</span></div>
+          <div class="reviews-score-num">4.7<span style="font-size:1rem;color:var(--gray)">/5</span></div>
           <div class="reviews-score-sub">+150 avis clients</div>
         </div>
       </div>
@@ -833,8 +883,8 @@ footer .foot-links a:hover{color:var(--red);}
 <div class="stats">
   <div class="stats-inner">
     <div class="stat rev"><div class="stat-num" data-target="4000">0</div><div class="stat-label">Réparations/an</div></div>
-    <div class="stat rev" style="transition-delay:.1s"><div class="stat-num" data-target="4.9" data-decimal="1">0</div><div class="stat-label">/ 5 sur Google</div></div>
-    <div class="stat rev" style="transition-delay:.2s"><div class="stat-num" data-target="30">0</div><div class="stat-label">Minutes en moyenne</div></div>
+    <div class="stat rev" style="transition-delay:.1s"><div class="stat-num" data-target="4.7" data-decimal="1">0</div><div class="stat-label">/ 5 sur Google</div></div>
+    <div class="stat rev" style="transition-delay:.2s"><div class="stat-num" data-target="60">0</div><div class="stat-label">Minutes en moyenne</div></div>
     <div class="stat rev" style="transition-delay:.3s"><div class="stat-num" data-target="10">0</div><div class="stat-label">Ans d'expérience</div></div>
   </div>
 </div>
