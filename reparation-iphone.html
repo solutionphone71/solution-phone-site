@@ -757,10 +757,160 @@ footer .foot-links a:hover{color:var(--red);}
 <!-- WA FLOAT -->
 
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
 
 <a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation." class="wa-float">💬 DEVIS IMMÉDIAT</a>
+<script>
+// ── STATUS BADGE ──
+function ua(){
+  var n=new Date(),p=new Date(n.toLocaleString('en-US',{timeZone:'Europe/Paris'}));
+  var d=p.getDay(),h=p.getHours(),m=p.getMinutes(),t=h+m/60;
+  var b=document.getElementById('avb'),tx=document.getElementById('avt');
+  var o=false,msg='';
+  if(d===0){msg='Fermé — Réouverture lundi 9h15';}
+  else if(t<9.25){msg='Fermé — Réouverture à 9h15';}
+  else if(t<12.25){o=true;msg='Ouvert — Réparation possible';}
+  else if(t<14){msg='Pause déjeuner — Réouverture 14h';}
+  else if(t<19){o=true;msg='Ouvert — Réparation possible';}
+  else{msg=d===6?'Fermé — Réouverture lundi':'Fermé — Réouverture demain 9h15';}
+  if(b){b.className='avb '+(o?'op':'cl');}
+  if(tx){tx.textContent=msg;}
+}
+ua(); setInterval(ua,60000);
 
+// ── QUOTE CALCULATOR ──
+var PR={'iPhone 16 Pro Max':{ecran:70,batterie:65},'iPhone 16 Pro':{ecran:70,batterie:65},'iPhone 16':{ecran:70,batterie:65},'iPhone 15 Pro Max':{ecran:70,batterie:65},'iPhone 15 Pro':{ecran:50,batterie:65},'iPhone 15':{ecran:50,batterie:65},'iPhone 14 Pro Max':{ecran:45,batterie:55},'iPhone 14 Pro':{ecran:45,batterie:55},'iPhone 14':{ecran:45,batterie:55},'iPhone 13 Pro Max':{ecran:45,batterie:55},'iPhone 13 Pro':{ecran:45,batterie:55},'iPhone 13':{ecran:45,batterie:55},'iPhone 13 mini':{ecran:40,batterie:55},'iPhone 12 Pro Max':{ecran:40,batterie:45},'iPhone 12/12 Pro':{ecran:40,batterie:45},'iPhone 12 mini':{ecran:40,batterie:45},'iPhone 11':{ecran:30,batterie:35},'iPhone XR':{ecran:30,batterie:35},'iPhone X/XS':{ecran:30,batterie:35},'iPhone 8/8+':{ecran:40,batterie:35},'iPhone 7/7+':{ecran:40,batterie:35},'iPhone 6/6S':{ecran:40,batterie:25}};
+var sm='',sr='';
+var rp=document.getElementById('qrp'),rc=document.getElementById('qrc');
+var qmEl=document.getElementById('qm');
+if(qmEl)qmEl.addEventListener('change',function(){sm=this.value;uq();});
+document.querySelectorAll('.ropt').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.ropt').forEach(function(x){x.classList.remove('ac');});
+    this.classList.add('ac');sr=this.dataset.r;uq();
+  });
+});
+function uq(){
+  if(rp)rp.classList.remove('sh');
+  if(rc)rc.classList.remove('sh');
+  if(!sm||!sr)return;
+  if(sr==='connecteur'){
+    if(rc)rc.classList.add('sh');
+    var qwacEl=document.getElementById('qwac');
+    if(qwacEl)qwacEl.href='https://wa.me/33783921884?text=Bonjour, mon '+sm+' ne charge plus.';
+  } else if(PR[sm]&&PR[sm][sr]){
+    var p=PR[sm][sr];
+    var qprEl=document.getElementById('qpr');
+    if(qprEl)qprEl.textContent=p;
+    if(rp)rp.classList.add('sh');
+    var qwaEl=document.getElementById('qwa');
+    if(qwaEl)qwaEl.href='https://wa.me/33783921884?text=Bonjour, devis '+sm+' '+sr+' à partir de '+p+'€';
+  }
+}
+
+// ── REVIEWS CAROUSEL ──
+var cr=0,ts=3;
+var rvs=document.getElementById('rvs'),rds=document.getElementById('rvds');
+if(rds){
+  for(var i=0;i<ts;i++){
+    var dot=document.createElement('div');
+    dot.className='rvd'+(i===0?' ac':'');
+    (function(idx){dot.onclick=function(){cr=idx;upRv();};})(i);
+    rds.appendChild(dot);
+  }
+}
+function chRv(dir){cr=(cr+dir+ts)%ts;upRv();}
+function upRv(){
+  if(rvs)rvs.style.transform='translateX(-'+(cr*100)+'%)';
+  document.querySelectorAll('.rvd').forEach(function(d,i){d.classList.toggle('ac',i===cr);});
+}
+setInterval(function(){cr=(cr+1)%ts;upRv();},5000);
+
+// ── FAQ ──
+document.querySelectorAll('.fq').forEach(function(b){
+  b.addEventListener('click',function(){b.parentElement.classList.toggle('op');});
+});
+
+// ── DEVIS FORM ──
+function getDevisData(){
+  var nom=document.getElementById('dv-nom'),tel=document.getElementById('dv-tel');
+  var modele=document.getElementById('dv-modele'),panne=document.getElementById('dv-panne');
+  var n=nom?nom.value.trim():'',t=tel?tel.value.trim():'';
+  var mo=modele?modele.value.trim():'',pa=panne?panne.value.trim():'';
+  if(!n||!t||!pa){alert('Merci de remplir les champs obligatoires (*)');return null;}
+  return{nom:n,tel:t,modele:mo,panne:pa};
+}
+function sendDevisWA(){
+  var d=getDevisData();if(!d)return;
+  var msg='Bonjour Solution Phone !%0AJe souhaite un devis iPhone :%0ANom : '+d.nom+'%0ATél : '+d.tel+(d.modele?'%0AModèle : '+d.modele:'')+'%0APanne : '+d.panne;
+  window.open('https://wa.me/33783921884?text='+msg,'_blank');
+}
+function sendDevisMail(){
+  var d=getDevisData();if(!d)return;
+  var sub=encodeURIComponent('Devis iPhone - '+d.nom);
+  var body=encodeURIComponent('Bonjour,\nNom : '+d.nom+'\nTél : '+d.tel+(d.modele?'\nModèle : '+d.modele:'')+'\nPanne : '+d.panne);
+  window.open('mailto:solution.phone71@gmail.com?subject='+sub+'&body='+body);
+}
+
+// ── PRICING TABLES ──
+var ORD=['5S/SE/5C/6/6S/6S+','7/7+/8/8+','X/XS/XS MAX','XR','11','11 Pro Max','12 mini','12/12 PRO','12 Pro Max','13 mini','13','13 Pro','13 Pro Max','14','14 Pro','14 Pro Max','15','15 Pro','15 Pro Max','16','16 Pro','16 Pro Max'];
+function srt(a){return a.slice().sort(function(x,y){var ix=ORD.indexOf(x.modele),iy=ORD.indexOf(y.modele);return(ix<0?999:ix)-(iy<0?999:iy);});}
+function rs(n){return'<span style="color:#FF0033">'+'★'.repeat(n)+'</span>';}
+
+function bET(d){
+  var H=['HD ECO+','LTPS','LTPS Prime','Soft OLED','Original'],S=[2,3,4,5,6];
+  var h='<table class="pt"><thead><tr><th>Modèle</th>';
+  H.forEach(function(x,i){h+='<th>'+rs(S[i])+'<br>'+x+'</th>';});
+  h+='</tr></thead><tbody>';
+  srt(d).forEach(function(r){
+    h+='<tr><td>iPhone '+r.modele+'</td>';
+    r.prix.forEach(function(p){h+=p?'<td class="pv">'+p+' €</td>':'<td class="pn2">—</td>';});
+    h+='</tr>';
+  });
+  h+='</tbody></table>';
+  var pe=document.getElementById('pe');
+  if(pe)pe.innerHTML=h;
+}
+
+function bBT(d){
+  var H=['Compatible','TI Reconnue','Originale'],S=[3,4,5];
+  var h='<table class="pt"><thead><tr><th>Modèle</th>';
+  H.forEach(function(x,i){h+='<th>'+rs(S[i])+'<br>'+x+'</th>';});
+  h+='</tr></thead><tbody>';
+  srt(d).forEach(function(r){
+    h+='<tr><td>iPhone '+r.modele+'</td>';
+    r.prix.forEach(function(p){h+=(p&&p>0)?'<td class="pv">'+p+' €</td>':'<td class="pn2">—</td>';});
+    h+='</tr>';
+  });
+  h+='</tbody></table>';
+  var pb=document.getElementById('pb');
+  if(pb)pb.innerHTML=h;
+}
+
+var DE=[{modele:'5S/SE/5C/6/6S/6S+',prix:[null,40,null,null,60]},{modele:'7/7+/8/8+',prix:[null,40,null,50,60]},{modele:'X/XS/XS MAX',prix:[30,40,55,70,85]},{modele:'XR',prix:[30,40,55,null,70]},{modele:'11',prix:[30,40,55,null,70]},{modele:'11 Pro Max',prix:[30,40,55,70,85]},{modele:'12 mini',prix:[null,40,null,null,60]},{modele:'12/12 PRO',prix:[40,50,65,90,115]},{modele:'12 Pro Max',prix:[40,50,65,90,115]},{modele:'13 mini',prix:[null,40,null,50,60]},{modele:'13',prix:[45,50,65,90,115]},{modele:'13 Pro',prix:[45,50,65,90,115]},{modele:'13 Pro Max',prix:[45,50,65,90,115]},{modele:'14',prix:[45,50,65,90,115]},{modele:'14 Pro',prix:[45,50,65,90,115]},{modele:'14 Pro Max',prix:[45,50,65,90,115]},{modele:'15',prix:[50,60,null,140,185]},{modele:'15 Pro',prix:[50,60,null,155,185]},{modele:'15 Pro Max',prix:[null,70,null,165,215]},{modele:'16',prix:[null,70,null,165,215]},{modele:'16 Pro',prix:[null,70,null,165,215]},{modele:'16 Pro Max',prix:[null,70,null,165,215]}];
+var DB=[{modele:'5S/SE/5C/6/6S/6S+',prix:[25,0,0]},{modele:'7/7+/8/8+',prix:[35,0,0]},{modele:'X/XS/XS MAX',prix:[35,0,0]},{modele:'XR',prix:[35,0,0]},{modele:'11',prix:[35,0,0]},{modele:'11 Pro Max',prix:[35,0,0]},{modele:'12 mini',prix:[45,0,0]},{modele:'12/12 PRO',prix:[45,0,0]},{modele:'12 Pro Max',prix:[45,0,0]},{modele:'13 mini',prix:[55,0,0]},{modele:'13',prix:[55,0,0]},{modele:'13 Pro',prix:[55,0,0]},{modele:'13 Pro Max',prix:[55,0,0]},{modele:'14',prix:[55,0,0]},{modele:'14 Pro',prix:[55,0,0]},{modele:'14 Pro Max',prix:[55,0,0]},{modele:'15',prix:[65,0,0]},{modele:'15 Pro',prix:[65,0,0]},{modele:'15 Pro Max',prix:[65,0,0]},{modele:'16',prix:[65,0,0]},{modele:'16 Pro',prix:[65,0,0]},{modele:'16 Pro Max',prix:[65,0,0]}];
+
+// Show local data IMMEDIATELY
+bET(DE);
+bBT(DB);
+
+// Try Supabase in background
+var SU='https://kdvxcnjfrmvlnrymfyug.supabase.co';
+var SK='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+function sg(p){return fetch(SU+p,{headers:{apikey:SK,Authorization:'Bearer '+SK}}).then(function(r){return r.json();});}
+
+sg('/rest/v1/settings?key=eq.ecrans_prix_json&select=value').then(function(r){
+  if(r&&r.length&&r[0].value){var d=JSON.parse(r[0].value),l=(d.t1||[]).concat(d.t2||[]);if(l.length){bET(l);return;}}
+  return sg('/rest/v1/ecrans_prix?select=*').then(function(r2){
+    if(r2&&r2.length){bET(r2.map(function(x){return{modele:x.modele,prix:[x.p0,x.p1,x.p2,x.p3,x.p4]};}));}
+  });
+}).catch(function(){});
+
+sg('/rest/v1/batteries_prix?select=*').then(function(r){
+  if(r&&r.length){bBT(r.map(function(x){return{modele:x.modele,prix:[x.p0,x.p1,x.p2]};}));}
+}).catch(function(){});
+
+</script>
 <!-- EVAN CHAT WIDGET — Solution Phone -->
 <style>
 
