@@ -573,38 +573,33 @@ footer .foot-links a:hover{color:var(--red);}
   </div>
 </section>
 
-<!-- PHOTO CAROUSEL -->
+<!-- STATS SECTION (replaced photo carousel) -->
 <section class="section bg2">
   <div class="container">
-    <div class="section-tag">// Notre atelier</div>
-    <h2 class="section-h">Le travail <span class="accent">en images</span></h2>
-    <p class="section-sub">Des réparations réalisées dans notre boutique Mâcon</p>
-    <div class="pc-wrap">
-      <div class="pc-track"><div class="pc-slides" id="pcs">
-        <div class="pc-slide">
-          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624c6e9bae3e3a5e83b4_IMG_1014.jpeg" alt="Réparation écran iPhone Mâcon">
-          <div class="pc-caption"><div class="cap-tag">📱 Écran</div><div class="cap-title">Remplacement écran — résultat parfait</div></div>
-        </div>
-        <div class="pc-slide">
-          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624cb9137cfe5948a985_F0D81CEE-68ED-489A-A88A-FFA2524893DF.png" alt="Remplacement batterie iPhone">
-          <div class="pc-caption"><div class="cap-tag">🔋 Batterie</div><div class="cap-title">Batterie Apple originale reconditionnée</div></div>
-        </div>
-        <div class="pc-slide">
-          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624b0902909f8657d144_IMG_1012.jpeg" alt="Remplacement caméra iPhone">
-          <div class="pc-caption"><div class="cap-tag">📷 Caméra</div><div class="cap-title">Remplacement module caméra iPhone</div></div>
-        </div>
-        <div class="pc-slide">
-          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624b7671aecbf41de8f4_IMG_1013.png" alt="Expertise iPhone Mâcon">
-          <div class="pc-caption"><div class="cap-tag">🔧 Expertise</div><div class="cap-title">Maîtrise de toutes les pièces iPhone</div></div>
-        </div>
-        <div class="pc-slide">
-          <img src="https://cdn.prod.website-files.com/6872fe6fe1c1fed2370508c3/69bd624b005ec15deb60ecfd_IMG_1011.jpeg" alt="Remplacement écran iPhone XR">
-          <div class="pc-caption"><div class="cap-tag">📱 Écran</div><div class="cap-title">Résultat impeccable sur iPhone XR</div></div>
-        </div>
-      </div></div>
-      <button class="pc-btn pc-prev" onclick="chPc(-1)">‹</button>
-      <button class="pc-btn pc-next" onclick="chPc(1)">›</button>
-      <div class="pc-dots" id="pcd"></div>
+    <div class="section-tag">// Notre expertise</div>
+    <h2 class="section-h">Solution Phone en <span class="accent">chiffres</span></h2>
+    <p class="section-sub">Des résultats concrets, chaque jour à Mâcon</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px;">
+      <div style="padding:32px 20px;background:var(--dark3);border:1px solid var(--border);text-align:center;position:relative;overflow:hidden;">
+        <div style="font-size:2.8rem;margin-bottom:10px;">📱</div>
+        <div style="font-family:Orbitron,sans-serif;font-weight:900;font-size:2.2rem;color:var(--red);text-shadow:0 0 20px rgba(255,0,51,.4);line-height:1;">2500+</div>
+        <div style="font-size:.88rem;color:var(--gray2);font-weight:600;letter-spacing:1px;margin-top:8px;">iPhones réparés</div>
+      </div>
+      <div style="padding:32px 20px;background:var(--dark3);border:1px solid var(--border);text-align:center;">
+        <div style="font-size:2.8rem;margin-bottom:10px;">⏱</div>
+        <div style="font-family:Orbitron,sans-serif;font-weight:900;font-size:2.2rem;color:var(--red);text-shadow:0 0 20px rgba(255,0,51,.4);line-height:1;">&lt;1h</div>
+        <div style="font-size:.88rem;color:var(--gray2);font-weight:600;letter-spacing:1px;margin-top:8px;">Temps moyen</div>
+      </div>
+      <div style="padding:32px 20px;background:var(--dark3);border:1px solid var(--border);text-align:center;">
+        <div style="font-size:2.8rem;margin-bottom:10px;">⭐</div>
+        <div style="font-family:Orbitron,sans-serif;font-weight:900;font-size:2.2rem;color:var(--red);text-shadow:0 0 20px rgba(255,0,51,.4);line-height:1;">4.7/5</div>
+        <div style="font-size:.88rem;color:var(--gray2);font-weight:600;letter-spacing:1px;margin-top:8px;">Google</div>
+      </div>
+      <div style="padding:32px 20px;background:var(--dark3);border:1px solid var(--border);text-align:center;">
+        <div style="font-size:2.8rem;margin-bottom:10px;">🛡️</div>
+        <div style="font-family:Orbitron,sans-serif;font-weight:900;font-size:2.2rem;color:var(--red);text-shadow:0 0 20px rgba(255,0,51,.4);line-height:1;">3 mois</div>
+        <div style="font-size:.88rem;color:var(--gray2);font-weight:600;letter-spacing:1px;margin-top:8px;">Garantie</div>
+      </div>
     </div>
   </div>
 </section>
@@ -841,6 +836,13 @@ var DB=[{modele:'5S/SE/5C/6/6S/6S+',prix:[25,0,0]},{modele:'7/7+/8/8+',prix:[35,
 
 async function sg(p){var r=await fetch(SU+p,{headers:{apikey:SK,Authorization:'Bearer '+SK}});return r.json();}
 
+// Timeout fallback: if Supabase fails after 3s, use local data
+setTimeout(function(){
+  var pe=document.getElementById('pe'), pb=document.getElementById('pb');
+  if(pe && pe.innerHTML.indexOf('Chargement')>-1){ bET(DE); }
+  if(pb && pb.innerHTML.indexOf('Chargement')>-1){ bBT(DB); }
+}, 3000);
+
 document.addEventListener('DOMContentLoaded', function(){
   initCarousel();
   sg('/rest/v1/settings?key=eq.ecrans_prix_json&select=value').then(r=>{
@@ -852,5 +854,12 @@ document.addEventListener('DOMContentLoaded', function(){
   }).catch(function(){bET(DE);});
   sg('/rest/v1/settings?key=eq.batteries_prix_json&select=value').then(r=>{
     if(r&&r.length&&r[0].value){var d=JSON.parse(r[0].value),l=(d.t1||[]).concat(d.t2||[]);if(l.length){bBT(l);return;}}
-
-    r
+    return sg('/rest/v1/batteries_prix?select=*').then(function(r2){
+      if(r2&&r2.length){bBT(r2.map(function(x){return{modele:x.modele,prix:[x.p0,x.p1,x.p2]};}));}
+      else{bBT(DB);}
+    });
+  }).catch(function(){bBT(DB);});
+});
+</script>
+</body>
+</html>
