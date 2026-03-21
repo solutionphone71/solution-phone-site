@@ -682,7 +682,7 @@ footer .foot-links a:hover{color:var(--red);}
         <div class="cc">
           <a href="https://wa.me/33783921884" class="ccard wa"><div class="iw2" style="background:rgba(37,211,102,.12)"><span style="width:22px;height:22px;color:#25D366;display:inline-block;font-style:normal">💬</span></div><div><div class="ti">WhatsApp</div><div class="vl">07 83 92 18 84</div></div></a>
           <a href="tel:+33385330689" class="ccard ph"><div class="iw2" style="background:rgba(255,0,51,.12)"><span style="width:22px;height:22px;color:var(--red);display:inline-block;font-style:normal">📞</span></div><div><div class="ti">Téléphone</div><div class="vl">03 85 33 06 89</div></div></a>
-          <a href="mailto:contact@solution-phone.fr" class="ccard em"><div class="iw2" style="background:rgba(0,245,255,.08)"><span style="width:22px;height:22px;color:var(--cyan);display:inline-block;font-style:normal">✉️</span></div><div><div class="ti">Email</div><div class="vl">contact@solution-phone.fr</div></div></a>
+          <a href="/cdn-cgi/l/email-protection#97f4f8f9e3f6f4e3d7e4f8fbe2e3fef8f9bae7fff8f9f2b9f1e5" class="ccard em"><div class="iw2" style="background:rgba(0,245,255,.08)"><span style="width:22px;height:22px;color:var(--cyan);display:inline-block;font-style:normal">✉️</span></div><div><div class="ti">Email</div><div class="vl"><span class="__cf_email__" data-cfemail="a6c5c9c8d2c7c5d2e6d5c9cad3d2cfc9c88bd6cec9c8c388c0d4">[email&#160;protected]</span></div></div></a>
           <a href="https://maps.google.com/?q=21+Rue+Gambetta+71000" target="_blank" class="ccard ad"><div class="iw2" style="background:rgba(255,255,255,.06)"><span style="width:22px;height:22px;color:#fff;display:inline-block;font-style:normal">📍</span></div><div><div class="ti">Adresse</div><div class="vl">21 Rue Gambetta, Mâcon</div></div></a>
         </div>
         <div class="hb2">
@@ -724,7 +724,7 @@ footer .foot-links a:hover{color:var(--red);}
 <!-- WA FLOAT -->
 <a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation iPhone." class="wa-float">💬 DEVIS IMMÉDIAT</a>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
 // NAV offset for promo bar
 window.addEventListener('scroll',()=>{
@@ -853,12 +853,4 @@ document.addEventListener('DOMContentLoaded', function(){
   sg('/rest/v1/settings?key=eq.batteries_prix_json&select=value').then(r=>{
     if(r&&r.length&&r[0].value){var d=JSON.parse(r[0].value),l=(d.t1||[]).concat(d.t2||[]);if(l.length){bBT(l);return;}}
 
-    return sg('/rest/v1/batteries_prix?select=*').then(function(r2){
-      if(r2&&r2.length){bBT(r2.map(function(x){return{modele:x.modele,prix:[x.p0,x.p1,x.p2]};}));}
-      else{bBT(DB);}
-    });
-  }).catch(function(){bBT(DB);});
-});
-</script>
-</body>
-</html>
+    r
