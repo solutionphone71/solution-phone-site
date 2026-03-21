@@ -494,7 +494,8 @@ footer .foot-links a:hover{color:var(--red);}
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
   .hero-inner,.why-inner,.contact-grid{grid-template-columns:1fr;}
-  .hero-right{display:none;}
+  .hero-right{display:flex;justify-content:center;margin-top:32px;}
+  .hero-video-wrap{max-width:100% !important;}
   .team-grid,.devices-grid{grid-template-columns:repeat(2,1fr);}
   .pricing-table th,.pricing-table td{padding:10px 12px;font-size:.8rem;}
 }
@@ -568,16 +569,18 @@ footer .foot-links a:hover{color:var(--red);}
 
 /* ── HERO VIDEO ── */
 .hero-video-wrap{
-  position:relative;width:100%;
+  position:relative;width:100%;max-width:440px;
   border:1px solid var(--border);
   clip-path:polygon(18px 0,100% 0,100% calc(100%-18px),calc(100%-18px) 100%,0 100%,0 18px);
   box-shadow:0 0 60px rgba(255,0,51,.25),inset 0 0 40px rgba(255,0,51,.04);
   overflow:hidden;background:var(--dark);
+  display:block;
 }
 .hv-video{
-  width:100%;display:block;
+  width:100%;display:block !important;
   aspect-ratio:16/9;object-fit:cover;
   filter:saturate(1.15) contrast(1.05);
+  min-height:200px;
 }
 .hv-scanline{
   position:absolute;left:0;right:0;height:2px;pointer-events:none;
@@ -653,23 +656,24 @@ footer .foot-links a:hover{color:var(--red);}
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-img-frame">
-        <div class="hero-frame-label">✦ SOLUTION PHONE — CERTIFIÉ QUALIRÉPAR — MÂCON · 10 ANS D'EXPÉRIENCE ✦</div>
-        <div style="padding:40px 30px;background:var(--dark2);text-align:center;">
-          <div style="font-family:Orbitron,sans-serif;font-weight:900;font-size:3.5rem;color:var(--red);text-shadow:0 0 40px rgba(255,0,51,.7);line-height:1;">SP</div>
-          <div style="font-family:Orbitron,sans-serif;font-weight:700;font-size:.85rem;letter-spacing:3px;margin-top:8px;color:rgba(255,255,255,.8);">SOLUTION PHONE</div>
-          <div style="width:40px;height:2px;background:linear-gradient(90deg,var(--red),var(--cyan));margin:12px auto 0;"></div>
-        </div>
-        <div class="hero-qualirépar">
-          <div class="qr-badge">
-            <div class="qr-minus">-25€</div>
-            <div class="qr-label">QualiRépar</div>
-          </div>
-          <div class="qr-text">
-            <div class="qr-title">Label QualiRépar</div>
-            <div class="qr-sub">Déduits automatiquement<br>sur votre réparation</div>
-          </div>
-        </div>
+      <div class="hero-video-wrap">
+        <div class="hv-corner hv-tl"></div>
+        <div class="hv-corner hv-tr"></div>
+        <div class="hv-corner hv-bl"></div>
+        <div class="hv-corner hv-br"></div>
+        <div class="hv-label">▶ SOLUTION PHONE — MÂCON</div>
+        <video
+          id="heroVideo"
+          src="solution-phone-cyberpunk.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          class="hv-video"
+          style="width:100%;display:block;max-height:500px;object-fit:cover;"
+        ></video>
+        <div class="hv-scanline"></div>
+        <div class="hv-overlay"></div>
       </div>
     </div>
   </div>
