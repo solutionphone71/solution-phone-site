@@ -70,7 +70,7 @@ solution-phone-site/
 | **Adresse** | 21 Rue Gambetta, 71000 Mâcon |
 | **Tel** | 03 85 33 06 89 |
 | **WhatsApp** | 07 83 92 18 84 |
-| **Email** | contact@solution-phone.fr |
+| **Email** | solution.phone71@gmail.com |
 | **Horaires** | Lun–Sam 9h15–12h15 / 14h–19h |
 
 ## 🛠️ Évolutions prévues
