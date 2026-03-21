@@ -455,8 +455,8 @@ h1.hero-title .accent{
 .hours-day{color:var(--gray);}
 .hours-time{font-family:'Share Tech Mono',monospace;font-size:.85rem;}
 .hours-closed{color:var(--red);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:2px;}
-.contact-map{margin-top:24px;height:160px;border:1px solid rgba(255,255,255,.06);overflow:hidden;}
-.contact-map iframe{width:100%;height:100%;border:none;filter:grayscale(1) invert(.85) hue-rotate(180deg);}
+.contact-map{margin-top:24px;height:220px;border:1px solid var(--border);overflow:hidden;border-radius:2px;}
+.contact-map iframe{width:100%;height:100%;border:none;}
 
 /* ── FOOTER ── */
 footer{padding:36px 48px;background:var(--dark);border-top:1px solid var(--border);}
@@ -1136,9 +1136,9 @@ function sendDevisMail() {
           <div class="ccard-icon">📞</div>
           <div><div class="ccard-label">Téléphone</div><div class="ccard-val">03 85 33 06 89</div></div>
         </a>
-        <a href="/cdn-cgi/l/email-protection#b9cad6d5cccdd0d6d797c9d1d6d7dc8e88f9ded4d8d0d597dad6d4" class="ccard em rev" style="transition-delay:.16s">
+        <a href="mailto:solution.phone71@gmail.com" class="ccard em rev" style="transition-delay:.16s">
           <div class="ccard-icon">✉️</div>
-          <div><div class="ccard-label">Email</div><div class="ccard-val"><span class="__cf_email__" data-cfemail="4a3925263f3e232524643a2225242f7d7b0a2d272b232664292527">[email&#160;protected]</span></div></div>
+          <div><div class="ccard-label">Email</div><div class="ccard-val">solution.phone71@gmail.com</div></div>
         </a>
         <a href="https://maps.google.com/?q=21+Rue+Gambetta+71000" target="_blank" class="ccard ad rev" style="transition-delay:.24s">
           <div class="ccard-icon">📍</div>
@@ -1155,7 +1155,7 @@ function sendDevisMail() {
           <div style="font-size:.88rem;color:var(--gray2);">Passez directement en boutique, nous vous accueillons immédiatement. Devis gratuit sur place.</div>
         </div>
         <div class="contact-map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2742.8!2d4.8337!3d46.3067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f2a8b39e1f7d45%3A0x1234567890abcdef!2s21+Rue+Gambetta%2C+71000+M%C3%A2con!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr" allowfullscreen loading="lazy"></iframe>
+          <iframe src="https://maps.google.com/maps?q=21+Rue+Gambetta+71000+Macon+France&output=embed&z=17" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -1169,7 +1169,7 @@ function sendDevisMail() {
     <div class="foot-links">
       <a href="https://wa.me/33783921884">WhatsApp</a>
       <a href="tel:0385330689">03 85 33 06 89</a>
-      <a href="/cdn-cgi/l/email-protection#2c5f43405958454342025c444342491b1d6c4b414d4540024f4341">Email</a>
+      <a href="mailto:solution.phone71@gmail.com">Email</a>
       <a href="https://solution-phone.myshopify.com" target="_blank">Boutique</a>
     </div>
   </div>
@@ -1178,7 +1178,7 @@ function sendDevisMail() {
 <!-- WA FLOAT -->
 <a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation." class="wa-float">💬 DEVIS IMMÉDIAT</a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── SCROLL REVEAL ──
 const revEls = document.querySelectorAll('.rev,.rev-l,.rev-r');
 // Trigger immediately for elements already in view (hero, above-fold)
