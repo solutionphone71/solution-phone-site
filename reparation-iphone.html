@@ -303,7 +303,7 @@ h1.hero-title .accent{color:var(--red);text-shadow:0 0 40px rgba(255,0,51,.6);an
 .fg textarea{resize:none;}
 .fn{text-align:center;font-size:.8rem;color:var(--gray);font-family:'Share Tech Mono',monospace;margin-top:14px;}
 .mw{overflow:hidden;border:1px solid rgba(255,255,255,.06);height:260px;}
-.mw iframe{width:100%;height:100%;border:none;filter:grayscale(1) invert(.85) hue-rotate(180deg);}
+.mw iframe{width:100%;height:100%;border:none;}
 .cc{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
 .ccard{display:flex;align-items:center;gap:14px;padding:16px;
   border:1px solid rgba(255,255,255,.06);text-decoration:none;transition:all .3s;}
@@ -400,7 +400,7 @@ footer .foot-links a:hover{color:var(--red);}
   </div>
   <div style="display:flex;align-items:center;gap:20px;">
     <div class="nav-phone">03 85 33 06 89</div>
-    <a href="https://wa.me/33783921884" class="nav-cta">Devis Gratuit</a>
+    <a href="#devis" class="nav-cta">Devis Gratuit</a>
   </div>
 </nav>
 
@@ -659,31 +659,55 @@ footer .foot-links a:hover{color:var(--red);}
     <h2 class="section-h">Nous <span class="accent">contacter</span></h2>
     <p class="section-sub">Devis gratuit — Réponse rapide</p>
     <div class="cg">
-      <div class="cfw">
-        <h3>Demande de devis</h3>
-        <form id="cf">
-          <div class="fr2">
-            <div class="fg"><label>Nom *</label><input type="text" name="name" placeholder="Votre nom" required></div>
-            <div class="fg"><label>Téléphone *</label><input type="tel" name="phone" placeholder="06 12 34 56 78" required></div>
+      <div class="cfw" id="devis">
+        <h3 style="font-family:'Orbitron',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;">Demande de devis</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray2);display:block;margin-bottom:7px;">Nom *</label>
+            <input id="dv-nom" type="text" placeholder="Votre nom" style="width:100%;padding:11px 13px;background:var(--dark);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;outline:none;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
           </div>
-          <div class="fg"><label>Modèle iPhone</label><input type="text" name="model" placeholder="iPhone 14 Pro..."></div>
-          <div class="fg"><label>Décrivez la panne *</label><textarea name="message" rows="4" placeholder="Écran cassé, batterie..." required></textarea></div>
-          <button type="submit" class="btn-p" style="width:100%">⚡ Envoyer la demande</button>
-          <p class="fn">Message envoyé via WhatsApp pour réponse rapide.</p>
-        </form>
-      </div>
-      <div>
-        <div class="mw"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2742.8!2d4.8337!3d46.3067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f2f0d5e7c7c7c7%3A0x1!2s21+Rue+Gambetta+71000+Mâcon!5e0!3m2!1sfr!2sfr" allowfullscreen loading="lazy"></iframe></div>
-        <div class="cc">
-          <a href="https://wa.me/33783921884" class="ccard wa"><div class="iw2" style="background:rgba(37,211,102,.12)"><span style="width:22px;height:22px;color:#25D366;display:inline-block;font-style:normal">💬</span></div><div><div class="ti">WhatsApp</div><div class="vl">07 83 92 18 84</div></div></a>
-          <a href="tel:+33385330689" class="ccard ph"><div class="iw2" style="background:rgba(255,0,51,.12)"><span style="width:22px;height:22px;color:var(--red);display:inline-block;font-style:normal">📞</span></div><div><div class="ti">Téléphone</div><div class="vl">03 85 33 06 89</div></div></a>
-          <a href="/cdn-cgi/l/email-protection#71021e1d0405181e1f5f01191e1f14464031161c10181d5f121e1c" class="ccard em"><div class="iw2" style="background:rgba(0,245,255,.08)"><span style="width:22px;height:22px;color:var(--cyan);display:inline-block;font-style:normal">✉️</span></div><div><div class="ti">Email</div><div class="vl"><span class="__cf_email__" data-cfemail="3e4d51524b4a575150104e5651505b090f7e59535f5752105d5153">[email&#160;protected]</span></div></div></a>
-          <a href="https://maps.google.com/?q=21+Rue+Gambetta+71000" target="_blank" class="ccard ad"><div class="iw2" style="background:rgba(255,255,255,.06)"><span style="width:22px;height:22px;color:#fff;display:inline-block;font-style:normal">📍</span></div><div><div class="ti">Adresse</div><div class="vl">21 Rue Gambetta, Mâcon</div></div></a>
+          <div>
+            <label style="font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray2);display:block;margin-bottom:7px;">Téléphone *</label>
+            <input id="dv-tel" type="tel" placeholder="06 12 34 56 78" style="width:100%;padding:11px 13px;background:var(--dark);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;outline:none;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+          </div>
         </div>
-        <div class="hb2">
-          <div class="hd"><span style="width:16px;height:16px;color:var(--red);display:inline-block;font-style:normal">🕐</span>&nbsp;Horaires</div>
-          <div class="rw"><span class="dy">Lun → Sam</span><span>9h15-12h15 / 14h-19h</span></div>
-          <div class="rw"><span class="dy">Dimanche</span><span class="cl">FERMÉ</span></div>
+        <div style="margin-bottom:14px;">
+          <label style="font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray2);display:block;margin-bottom:7px;">Modèle iPhone</label>
+          <input id="dv-modele" type="text" placeholder="iPhone 14 Pro, iPhone 13..." style="width:100%;padding:11px 13px;background:var(--dark);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;outline:none;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
+        </div>
+        <div style="margin-bottom:22px;">
+          <label style="font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray2);display:block;margin-bottom:7px;">Décrivez la panne *</label>
+          <textarea id="dv-panne" rows="3" placeholder="Écran cassé, batterie, ne charge plus..." style="width:100%;padding:11px 13px;background:var(--dark);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;outline:none;resize:vertical;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></textarea>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <button onclick="sendDevisWA()" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;border:none;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:2px;padding:13px;text-transform:uppercase;clip-path:polygon(7px 0,100% 0,100% calc(100%-7px),calc(100%-7px) 100%,0 100%,0 7px);">💬 WhatsApp</button>
+          <button onclick="sendDevisMail()" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--red);color:#fff;border:none;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:2px;padding:13px;text-transform:uppercase;clip-path:polygon(7px 0,100% 0,100% calc(100%-7px),calc(100%-7px) 100%,0 100%,0 7px);">✉️ Email</button>
+        </div>
+        <p style="text-align:center;margin-top:12px;font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--gray);">Réponse garantie sous 2h · Gratuit</p>
+      </div>
+
+      <!-- RIGHT COLUMN: map + contact cards -->
+      <div>
+        <div style="height:220px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px;">
+          <iframe src="https://maps.google.com/maps?q=21+Rue+Gambetta+71000+Macon+France&output=embed&z=17" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy" style="border:none;"></iframe>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="https://wa.me/33783921884" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--dark3);border:1px solid rgba(255,255,255,.06);text-decoration:none;transition:all .3s;" onmouseover="this.style.borderColor='rgba(37,211,102,.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)'">
+            <div style="width:40px;height:40px;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.25);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">💬</div>
+            <div><div style="font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:2px;">WhatsApp</div><div style="font-weight:700;color:#25D366;">07 83 92 18 84</div></div>
+          </a>
+          <a href="tel:0385330689" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--dark3);border:1px solid rgba(255,255,255,.06);text-decoration:none;transition:all .3s;" onmouseover="this.style.borderColor='rgba(255,0,51,.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)'">
+            <div style="width:40px;height:40px;background:rgba(255,0,51,.12);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📞</div>
+            <div><div style="font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:2px;">Téléphone</div><div style="font-weight:700;color:var(--red);">03 85 33 06 89</div></div>
+          </a>
+          <a href="mailto:solution.phone71@gmail.com" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--dark3);border:1px solid rgba(255,255,255,.06);text-decoration:none;transition:all .3s;" onmouseover="this.style.borderColor='rgba(0,245,255,.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)'">
+            <div style="width:40px;height:40px;background:rgba(0,245,255,.08);border:1px solid var(--borderc);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">✉️</div>
+            <div><div style="font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:2px;">Email</div><div style="font-weight:700;color:var(--cyan);font-size:.9rem;">solution.phone71@gmail.com</div></div>
+          </a>
+          <a href="https://maps.google.com/?q=21+Rue+Gambetta+71000" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--dark3);border:1px solid rgba(255,255,255,.06);text-decoration:none;transition:all .3s;" onmouseover="this.style.borderColor='rgba(255,255,255,.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)'">
+            <div style="width:40px;height:40px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📍</div>
+            <div><div style="font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:2px;">Adresse</div><div style="font-weight:700;color:#fff;">21 Rue Gambetta, 71000 Mâcon</div></div>
+          </a>
         </div>
       </div>
     </div>
@@ -719,7 +743,7 @@ footer .foot-links a:hover{color:var(--red);}
 <!-- WA FLOAT -->
 <a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation iPhone." class="wa-float">💬 DEVIS IMMÉDIAT</a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 
 // NAV offset for promo bar
 window.addEventListener('scroll',()=>{
@@ -852,6 +876,9 @@ document.addEventListener('DOMContentLoaded', function(){
       else{bET(DE);}
     });
   }).catch(function(){bET(DE);});
-  sg('/rest/v1/settings?key=eq.batteries_prix_json&select=value').then(r=>{
-    if(r&&r.length&&r[0].value){var d=JSON.parse(r[0].value),l=(d.t1||[]).concat(d.t2||[]);if(l.length){bBT(l);return;}}
-   
+function getDevisData(){var nom=document.getElementById('dv-nom').value.trim();var tel=document.getElementById('dv-tel').value.trim();var modele=document.getElementById('dv-modele').value.trim();var panne=document.getElementById('dv-panne').value.trim();if(!nom||!tel||!panne){alert('Merci de remplir les champs obligatoires (*)');return null;}return{nom:nom,tel:tel,modele:modele,panne:panne};}
+function sendDevisWA(){var d=getDevisData();if(!d)return;var msg='Bonjour Solution Phone !%0AJe souhaite un devis iPhone :%0ANom : '+d.nom+'%0ATél : '+d.tel+(d.modele?'%0AModèle : '+d.modele:'')+'%0APanne : '+d.panne;window.open('https://wa.me/33783921884?text='+msg,'_blank');}
+function sendDevisMail(){var d=getDevisData();if(!d)return;var sub='Devis iPhone - '+d.nom;var body='Bonjour,%0ANom : '+d.nom+'%0ATél : '+d.tel+(d.modele?'%0AModèle : '+d.modele:'')+'%0APanne : '+d.panne;window.open('mailto:solution.phone71@gmail.com?subject='+encodeURIComponent(sub)+'&body='+body);}
+</script>
+</body>
+</html>
