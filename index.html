@@ -1941,20 +1941,8 @@ Réponds en français, de façon claire et concise (max 4 phrases). Pas de markd
 (function(){
   var ROULETTE_URL = 'https://solutionphone71.github.io/solution-phone-site/roulette.html';
   window.openRoulette = function(){
-    var overlay = document.getElementById('roulette-overlay');
-    var iframe  = document.getElementById('roulette-iframe');
-    if(!iframe.src || iframe.src === 'about:blank') iframe.src = ROULETTE_URL;
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    window.open(ROULETTE_URL, '_blank');
   };
-  window.closeRoulette = function(){
-    document.getElementById('roulette-overlay').classList.remove('open');
-    document.body.style.overflow = '';
-  };
-  window.closeRouletteIfOutside = function(e){
-    if(e.target === document.getElementById('roulette-overlay')) closeRoulette();
-  };
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeRoulette(); });
 })();
 </script>
 <!-- ═══════════════ FIN BOUTON ROUE CADEAUX ═══════════════ -->
