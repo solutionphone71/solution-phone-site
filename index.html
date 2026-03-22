@@ -1360,9 +1360,156 @@ function sendDevisMail() {
       <a href="tel:0385330689">03 85 33 06 89</a>
       <a href="/cdn-cgi/l/email-protection#addec2c1d8d9c4c2c383ddc5c2c3c89a9cedcac0ccc4c183cec2c0">Email</a>
       <a href="https://solution-phone.myshopify.com" target="_blank">Boutique</a>
+      <a href="#" onclick="openModal('cgv');return false;">CGV</a>
+      <a href="#" onclick="openModal('cgj');return false;">Règlement du jeu</a>
     </div>
   </div>
 </footer>
+
+<!-- ══════════════ MODAL CGV ══════════════ -->
+<div id="modal-cgv" class="legal-overlay" onclick="if(event.target===this)closeModal('cgv')">
+  <div class="legal-modal">
+    <div class="legal-header">
+      <h2>Conditions Générales de Vente</h2>
+      <button onclick="closeModal('cgv')" class="legal-close">✕</button>
+    </div>
+    <div class="legal-body">
+      <p><strong>EURL SOLUTION PHONE</strong> — 21 Rue Gambetta, 71000 Mâcon — SIRET 80104478500021 — TVA FR80104478500021 — Tél. 03 85 33 06 89</p>
+
+      <h3>Article 1 — Champ d'application</h3>
+      <p>Les présentes CGV s'appliquent aux prestations de remise en état de smartphones et, plus largement, aux services proposés par SOLUTION PHONE : réparation de smartphones, vente d'accessoires, vente de smartphones reconditionnés. Toute commande implique l'acceptation sans réserve des CGV. Les factures sont émises en fin de travaux et payables à réception.</p>
+
+      <h3>Article 2 — Prix</h3>
+      <p>Les prix sont TTC en euros. Ils sont fermes sur la période de validité ; hors période, le Prestataire peut les modifier. Les frais de livraison, le cas échéant, sont facturés en sus. Une facture peut être envoyée sur simple demande. En cas de non-paiement, SOLUTION PHONE peut retenir le matériel jusqu'au règlement (max. 60 jours), puis recycler/revendre le matériel pour couvrir les sommes dues.</p>
+
+      <h3>Article 3 bis — Services et prestations</h3>
+      <p>Prestations destinées à réparer une panne/casse matérielle ou logicielle. La liste peut évoluer pour s'adapter au marché et garantir la qualité de service.</p>
+
+      <h3>Article 4 — Conditions de paiement</h3>
+      <p>Règlement comptant à l'enlèvement : chèque, virement immédiat ou espèces. Certaines interventions nécessitant des pièces spécifiques peuvent exiger un acompte de 30 %. En cas d'annulation par le client, l'acompte n'est pas remboursé. La délivrance du produit réparé est conditionnée au paiement intégral.</p>
+
+      <h3>Article 5 — Obligations du Prestataire</h3>
+      <p>SOLUTION PHONE est soumis à une obligation de moyens, pas de résultat. L'intervention peut rompre la garantie constructeur/distributeur, sans que celle-ci soit remplacée par une garantie SOLUTION PHONE. Le Prestataire ne saurait être tenu pour responsable des dommages indirects.</p>
+
+      <h3>Article 6 — Obligations du Client</h3>
+      <p>Le Client maintient ses équipements selon les spécifications constructeur, respecte les normes de sécurité et fournit, si nécessaire, licences/mots de passe utiles à l'intervention. Il décrit la panne et laisse le temps nécessaire à la réalisation des travaux.</p>
+
+      <h3>Article 7 — Limites de responsabilités</h3>
+      <p>La responsabilité du Prestataire est plafonnée au montant des honoraires versés pour la prestation concernée. Le Client reste responsable de ses données et doit effectuer les sauvegardes préalables. En cas de micro-soudure / intervention carte mère, le Client accepte les risques pouvant aller jusqu'à la détérioration définitive de l'appareil, sans indemnisation.</p>
+
+      <h3>Article 8 — Délais & types de réparations</h3>
+      <p>Aucun délai garanti. Les réparations standard iPhone (écran, batterie, bouton, nappe) sont généralement effectuées le jour même, sous réserve de disponibilité des pièces. Les micro-soudures peuvent nécessiter 10 à 45 jours. Aucun dédommagement en cas de délai.</p>
+
+      <h3>Article 9 — Garanties des interventions</h3>
+      <p>Réparations standard : 3 mois — Micro-soudures : 3 mois — Smartphones reconditionnés : 6 mois. Sont exclus : dégâts liquides, chutes/casse, oxydation, modifications logicielles/matérielles post-intervention, démontage ultérieur, étiquette de garantie altérée.</p>
+
+      <h3>Article 10 — Garantie du matériel vendu</h3>
+      <p>Accessoires électriques garantis 1 an en cas de dysfonctionnement (hors casse, oxydation, destruction volontaire).</p>
+
+      <h3>Article 11 — Annulation</h3>
+      <p>Le Client peut annuler uniquement si l'intervention n'a pas débuté.</p>
+
+      <h3>Article 12 — Remboursement</h3>
+      <p>Possible uniquement si, après plusieurs tentatives, la réparation ne fonctionne toujours pas.</p>
+
+      <h3>Article 13 — Information & confidentialité</h3>
+      <p>Secret professionnel. Accès éventuel aux fichiers personnels dans le cadre de l'intervention, sans collecte de données. Aucune copie hors demande expresse. En présence de contenus illicites, SOLUTION PHONE peut informer les autorités.</p>
+
+      <h3>Article 14 — Réclamations</h3>
+      <p>Toute réclamation doit être faite par LRAR dans les 10 jours ouvrés suivant la fin de la prestation.</p>
+
+      <h3>Article 15 — Règlement des litiges</h3>
+      <p>Droit français applicable. Tentative préalable amiable, à défaut Tribunal de commerce du siège social de SOLUTION PHONE.</p>
+
+      <h3>Article 16 — Clauses diverses</h3>
+      <p>Le Client atteste être majeur et propriétaire de l'appareil. Les pièces remplacées deviennent propriété du Prestataire. En cas de perte irréversible, SOLUTION PHONE remplacera par un appareil reconditionné équivalent.</p>
+
+      <p style="margin-top:20px;color:#888;font-size:12px;">Dernière mise à jour : 22 septembre 2025</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ MODAL RÈGLEMENT JEU ══════════════ -->
+<div id="modal-cgj" class="legal-overlay" onclick="if(event.target===this)closeModal('cgj')">
+  <div class="legal-modal">
+    <div class="legal-header">
+      <h2>Règlement de la Roue des Cadeaux</h2>
+      <button onclick="closeModal('cgj')" class="legal-close">✕</button>
+    </div>
+    <div class="legal-body">
+      <p><strong>Organisateur :</strong> EURL SOLUTION PHONE — 21 Rue Gambetta, 71000 Mâcon — SIRET 80104478500021</p>
+
+      <h3>Article 1 — Nature du jeu</h3>
+      <p>La "Roue des Cadeaux" est un jeu promotionnel gratuit, sans obligation d'achat, organisé par SOLUTION PHONE. Ce jeu ne constitue pas un jeu d'argent au sens de l'article L. 322-1 du Code de la sécurité intérieure.</p>
+
+      <h3>Article 2 — Conditions de participation</h3>
+      <p>La participation est ouverte à toute personne physique majeure (18 ans ou plus) ayant effectué une réparation ou un achat dans la boutique Solution Phone et ayant laissé un avis Google sur la fiche officielle de l'établissement. La participation est strictement personnelle, non cessible et non transmissible. Toute participation frauduleuse entraîne la nullité du lot.</p>
+
+      <h3>Article 3 — Modalités de participation</h3>
+      <p>1. Le participant se rend sur la page du jeu via le QR code ou le lien fourni en boutique.<br>
+      2. Il clique sur "Laisser un avis Google" et dépose un avis honnête sur la fiche Google de Solution Phone.<br>
+      3. Il revient sur la page du jeu et clique sur "J'ai laissé mon avis → Jouer".<br>
+      4. Il tourne la roue virtuellement et découvre son lot.<br>
+      Chaque participant ne peut participer qu'une seule fois par visite en boutique.</p>
+
+      <h3>Article 4 — Lots</h3>
+      <p>Les lots disponibles sont définis par Solution Phone et peuvent inclure, sans être limitatif : protection d'écran offerte, nettoyant écran offert, housse de protection offerte, câble de charge offert, réduction sur prochaine réparation. Les lots sont remis en boutique uniquement, sur présentation de l'écran de gain ou sur contact par email. Les lots sont personnels, non cessibles, non remboursables et sans équivalent en espèces. Solution Phone se réserve le droit de remplacer un lot par un lot de valeur équivalente en cas d'indisponibilité.</p>
+
+      <h3>Article 5 — Attribution des lots</h3>
+      <p>L'attribution des lots est aléatoire et pondérée par un algorithme de tirage au sort. Solution Phone ne garantit pas l'obtention d'un lot précis. La probabilité d'obtenir chaque lot est proportionnelle à son poids configuré dans le système.</p>
+
+      <h3>Article 6 — Retrait des lots</h3>
+      <p>Les lots doivent être retirés en boutique dans un délai de 30 jours à compter de la date de participation, sur présentation d'un justificatif d'identité et de l'écran de gain ou de l'email de confirmation. Passé ce délai, le lot est définitivement perdu.</p>
+
+      <h3>Article 7 — Données personnelles</h3>
+      <p>L'adresse email fournie lors de la participation est utilisée uniquement pour l'envoi de la confirmation du lot et ne sera pas transmise à des tiers. Conformément au RGPD, le participant dispose d'un droit d'accès, de rectification et de suppression de ses données en contactant : solution.phone71@gmail.com</p>
+
+      <h3>Article 8 — Responsabilité</h3>
+      <p>Solution Phone ne pourra être tenu responsable en cas de problème technique indépendant de sa volonté empêchant le bon déroulement du jeu. Solution Phone se réserve le droit d'interrompre, modifier ou annuler le jeu à tout moment, notamment en cas de force majeure, sans que cela puisse ouvrir droit à une quelconque indemnisation.</p>
+
+      <h3>Article 9 — Droit applicable</h3>
+      <p>Le présent règlement est soumis au droit français. Tout litige relatif à son interprétation ou à son exécution sera soumis aux tribunaux compétents du ressort de Mâcon. Le règlement est déposé auprès de la société et peut être consulté à tout moment sur le site internet de Solution Phone.</p>
+
+      <h3>Article 10 — Abus et fraude</h3>
+      <p>Toute tentative de manipulation du jeu, notamment par la création de faux avis Google ou par une participation multiple frauduleuse, entraîne l'annulation de la participation et du lot associé. Solution Phone se réserve le droit de poursuivre en justice toute personne ayant fraudé.</p>
+
+      <p style="margin-top:20px;color:#888;font-size:12px;">Règlement en vigueur à compter du 22 mars 2026 — EURL Solution Phone</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.legal-overlay{display:none;position:fixed;inset:0;z-index:99000;background:rgba(0,0,0,0.85);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;}
+.legal-overlay.open{display:flex;}
+.legal-modal{background:#1a1a1a;border:1px solid #333;border-radius:16px;width:100%;max-width:720px;margin:auto;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.8);}
+.legal-header{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #333;background:#222;}
+.legal-header h2{font-size:18px;font-weight:800;color:#f0f0f0;margin:0;}
+.legal-close{background:rgba(255,255,255,0.08);border:1px solid #444;color:#ccc;width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;}
+.legal-close:hover{background:rgba(229,62,62,0.3);color:#fff;}
+.legal-body{padding:24px;max-height:70vh;overflow-y:auto;font-size:14px;line-height:1.8;color:#ccc;}
+.legal-body h3{font-size:14px;font-weight:700;color:#f0f0f0;margin:20px 0 6px;text-transform:uppercase;letter-spacing:0.5px;}
+.legal-body p{margin-bottom:12px;}
+.legal-body strong{color:#f0f0f0;}
+.legal-body::-webkit-scrollbar{width:5px;}
+.legal-body::-webkit-scrollbar-track{background:#111;}
+.legal-body::-webkit-scrollbar-thumb{background:#444;border-radius:3px;}
+</style>
+
+<script>
+function openModal(id) {
+  document.getElementById('modal-' + id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById('modal-' + id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    ['cgv','cgj'].forEach(closeModal);
+  }
+});
+</script>
 
 <!-- WA FLOAT -->
 
