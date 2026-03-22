@@ -929,15 +929,15 @@ sg('/rest/v1/settings?key=eq.ecrans_prix_json&select=value').then(function(r){
   });
 }).catch(function(){});
 
-sg('/rest/v1/batteries_prix?select=*').then(function(r){
-  if(r&&r.length){
-    var data=r.map(function(x){return{modele:x.modele,prix:[x.p0,x.p1,x.p2]};});
-    if(data.length>0)bBT(data);
+sg('/rest/v1/settings?key=eq.batteries_prix_json&select=value').then(function(r){
+  if(r&&r.length&&r[0].value){
+    var lignes=JSON.parse(r[0].value);
+    if(Array.isArray(lignes)&&lignes.length>0){
+      var hasRealPrices=lignes.some(function(d){return d.prix&&d.prix.some(function(p){return p&&p>0;});});
+      if(hasRealPrices)bBT(lignes);
+    }
   }
-  // Si vide ou erreur → garder les données locales DB déjà affichées
-}).catch(function(){
-  // Garder les données locales DB déjà affichées
-});
+}).catch(function(){});
 
 </script>
 <!-- EVAN CHAT WIDGET — Solution Phone -->
