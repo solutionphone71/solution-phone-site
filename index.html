@@ -1903,5 +1903,61 @@ Réponds en français, de façon claire et concise (max 4 phrases). Pas de markd
 
 </script>
 
+<!-- ═══════════════ BOUTON FLOTTANT ROUE CADEAUX ═══════════════ -->
+<button id="roulette-fab" onclick="openRoulette()" aria-label="Jouer et gagner">
+  <span class="fab-icon">🎡</span>
+  <span class="fab-label">Jouez &amp; Gagnez !</span>
+  <span class="fab-badge">GRATUIT</span>
+</button>
+
+<div id="roulette-overlay" onclick="closeRouletteIfOutside(event)">
+  <div id="roulette-modal">
+    <button id="roulette-close" onclick="closeRoulette()" aria-label="Fermer">✕</button>
+    <iframe id="roulette-iframe" src="" title="Roue des cadeaux Solution Phone" allow="autoplay"></iframe>
+  </div>
+</div>
+
+<style>
+#roulette-fab{position:fixed;bottom:96px;right:20px;z-index:9998;display:flex;align-items:center;gap:8px;background:#e53e3e;color:#fff;border:none;border-radius:50px;padding:14px 22px 14px 16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 24px rgba(229,62,62,0.5);animation:fab-pulse 2.5s ease-in-out infinite;transition:transform .15s,box-shadow .15s;}
+#roulette-fab:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 8px 32px rgba(229,62,62,0.6);animation:none;}
+#roulette-fab:active{transform:scale(0.96);animation:none;}
+@keyframes fab-pulse{0%,100%{box-shadow:0 4px 24px rgba(229,62,62,0.5),0 0 0 0 rgba(229,62,62,0.3);}60%{box-shadow:0 4px 24px rgba(229,62,62,0.5),0 0 0 12px rgba(229,62,62,0);}}
+.fab-icon{font-size:22px;animation:spin-icon 4s linear infinite;display:inline-block;}
+@keyframes spin-icon{0%{transform:rotate(0deg);}10%{transform:rotate(30deg);}20%{transform:rotate(-20deg);}30%,100%{transform:rotate(0deg);}}
+.fab-label{font-size:15px;}
+.fab-badge{background:#f6c90e;color:#333;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:20px;margin-left:2px;}
+#roulette-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;animation:fade-in .25s ease;}
+#roulette-overlay.open{display:flex;}
+@keyframes fade-in{from{opacity:0;}to{opacity:1;}}
+#roulette-modal{position:relative;width:min(430px,96vw);height:min(820px,94vh);border-radius:24px;overflow:hidden;box-shadow:0 0 0 1px rgba(229,62,62,0.3),0 32px 80px rgba(0,0,0,0.7);animation:modal-up .35s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes modal-up{from{transform:translateY(40px) scale(0.96);opacity:0;}to{transform:translateY(0) scale(1);opacity:1;}}
+#roulette-iframe{width:100%;height:100%;border:none;display:block;}
+#roulette-close{position:absolute;top:14px;right:14px;z-index:10;width:36px;height:36px;background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.12);border-radius:50%;color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s;backdrop-filter:blur(4px);}
+#roulette-close:hover{background:rgba(229,62,62,0.7);transform:scale(1.1);}
+@media(max-width:500px){#roulette-modal{width:100vw;height:100dvh;border-radius:0;}#roulette-fab{bottom:80px;right:12px;padding:12px 18px 12px 14px;font-size:14px;}}
+</style>
+
+<script>
+(function(){
+  var ROULETTE_URL = 'https://solutionphone71.github.io/solution-phone-site/roulette.html';
+  window.openRoulette = function(){
+    var overlay = document.getElementById('roulette-overlay');
+    var iframe  = document.getElementById('roulette-iframe');
+    if(!iframe.src || iframe.src === 'about:blank') iframe.src = ROULETTE_URL;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeRoulette = function(){
+    document.getElementById('roulette-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  window.closeRouletteIfOutside = function(e){
+    if(e.target === document.getElementById('roulette-overlay')) closeRoulette();
+  };
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeRoulette(); });
+})();
+</script>
+<!-- ═══════════════ FIN BOUTON ROUE CADEAUX ═══════════════ -->
+
 </body>
 </html>
