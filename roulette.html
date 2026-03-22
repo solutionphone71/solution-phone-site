@@ -452,8 +452,11 @@ h1 .acc { color: var(--red); }
 
 <script>
 // ────────────────────────────────────────────────────────────────
-// CONFIG — modifiable depuis l'app admin (localStorage)
+// CONFIG — chargée depuis Supabase
 // ────────────────────────────────────────────────────────────────
+const SUPA_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co';
+const SUPA_KEY = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+
 const DEFAULT_CONFIG = {
   googleUrl: 'https://g.page/r/CbyQ_wiFpddjEBM/review',
   prizes: [
@@ -466,50 +469,53 @@ const DEFAULT_CONFIG = {
   ]
 };
 
-function getConfig() {
-  let cfg = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
-
-  // 1. localStorage (même domaine)
+async function loadConfig() {
   try {
-    const raw = localStorage.getItem('sp_roulette_config');
-    if (raw) cfg = Object.assign(cfg, JSON.parse(raw));
+    const res = await fetch(SUPA_URL + '/rest/v1/roulette_config?id=eq.1', {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    const data = await res.json();
+    if (data && data[0]) {
+      return {
+        googleUrl: data[0].google_url || DEFAULT_CONFIG.googleUrl,
+        prizes:    data[0].prizes     || DEFAULT_CONFIG.prizes
+      };
+    }
   } catch(e) {}
-
-  // 2. Paramètres URL (cross-domaine depuis l'app admin) — priorité maximale
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const g = params.get('g');
-    const p = params.get('p');
-    if (g) cfg.googleUrl = decodeURIComponent(g);
-    if (p) cfg.prizes = JSON.parse(decodeURIComponent(p));
-  } catch(e) {}
-
-  return cfg;
+  return DEFAULT_CONFIG;
 }
 
-const CFG    = getConfig();
-const PRIZES = CFG.prizes;
-const TOTAL  = PRIZES.reduce((s, p) => s + p.weight, 0);
+// Initialisation asynchrone
+let CFG = DEFAULT_CONFIG;
+let PRIZES = CFG.prizes;
+let TOTAL  = PRIZES.reduce((s, p) => s + p.weight, 0);
 
-// ────────────────────────────────────────────────────────────────
-// INIT
-// ────────────────────────────────────────────────────────────────
-// Ouvrir Google Avis dans un nouvel onglet
-const btnGoogle = document.getElementById('btn-google');
-btnGoogle.href = CFG.googleUrl;
-btnGoogle.target = '_blank';
-btnGoogle.rel = 'noopener';
+async function initRoulette() {
+  CFG    = await loadConfig();
+  PRIZES = CFG.prizes;
+  TOTAL  = PRIZES.reduce((s, p) => s + p.weight, 0);
 
-// Build prizes preview chips
-(function() {
+  // Lien Google
+  const btnGoogle = document.getElementById('btn-google');
+  btnGoogle.href   = CFG.googleUrl;
+  btnGoogle.target = '_blank';
+  btnGoogle.rel    = 'noopener';
+
+  // Chips de preview
   const wrap = document.getElementById('prizes-preview');
+  wrap.innerHTML = '';
   PRIZES.forEach(p => {
     const chip = document.createElement('div');
     chip.className = 'prize-chip';
     chip.innerHTML = `${p.emoji} ${p.label}`;
     wrap.appendChild(chip);
   });
-})();
+
+  // Dessiner la roue
+  drawWheel(rotation);
+}
+
+initRoulette();
 
 // ────────────────────────────────────────────────────────────────
 // WHEEL DRAWING
