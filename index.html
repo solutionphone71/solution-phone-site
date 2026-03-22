@@ -1706,15 +1706,15 @@ var SPchat = (function(){
 
   function start(){
     delay(function(){ bot('👋 Bonjour ! Je suis <b>Evan</b>, technicien chez Solution Phone Mâcon.'); }, 300);
-    delay(function(){ bot('Que puis-je faire pour vous ?'); }, 900);
+    delay(function(){ bot('Comment puis-je vous aider ?'); }, 900);
     delay(function(){
       btns([
         {l:'🔧 Réparation smartphone', v:'rep'},
         {l:'📱 Achat téléphone reconditionné', v:'achat'},
         {l:'🎁 Accessoire', v:'acces'},
         {l:'💻 Informatique', v:'info'},
-        {l:'💡 Services & Conseils', v:'services'},
         {l:'🏆 C\'est quoi QualiRépar ?', v:'quali'},
+        {l:'💬 Posez n\'importe quelle question...', v:'services'},
       ]);
     }, 1400);
   }
@@ -1902,14 +1902,8 @@ var SPchat = (function(){
 
     } else if(v==='services'){
       typing(); delay(function(){
-        rmTyping(); bot('Quel service vous intéresse ?');
-        btns([
-          {l:'❓ Aide sur votre smartphone', v:'aide'},
-          {l:'📲 Transfert de données', v:'transfert'},
-          {l:'🔒 Écran cassé — récupérer mes données', v:'recup'},
-          {l:'⚙️ Configuration / Paramétrage', v:'config'},
-          {l:'🔋 Téléphone lent ou batterie faible', v:'perfo'},
-        ]);
+        rmTyping(); bot('Posez-moi n\'importe quelle question sur votre smartphone, une réparation, un prix... Je vous réponds grâce à l\'IA 👇');
+        showInput(true);
       }, 600);
 
     } else if(v==='aide'){
