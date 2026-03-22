@@ -417,11 +417,24 @@ const DEFAULT_CONFIG = {
 };
 
 function getConfig() {
+  let cfg = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+
+  // 1. localStorage (même domaine)
   try {
     const raw = localStorage.getItem('sp_roulette_config');
-    if (raw) return Object.assign({}, DEFAULT_CONFIG, JSON.parse(raw));
+    if (raw) cfg = Object.assign(cfg, JSON.parse(raw));
   } catch(e) {}
-  return DEFAULT_CONFIG;
+
+  // 2. Paramètres URL (cross-domaine depuis l'app admin) — priorité maximale
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const g = params.get('g');
+    const p = params.get('p');
+    if (g) cfg.googleUrl = decodeURIComponent(g);
+    if (p) cfg.prizes = JSON.parse(decodeURIComponent(p));
+  } catch(e) {}
+
+  return cfg;
 }
 
 const CFG    = getConfig();
@@ -431,7 +444,11 @@ const TOTAL  = PRIZES.reduce((s, p) => s + p.weight, 0);
 // ────────────────────────────────────────────────────────────────
 // INIT
 // ────────────────────────────────────────────────────────────────
-document.getElementById('btn-google').href = CFG.googleUrl;
+// Ouvrir Google Avis dans un nouvel onglet
+const btnGoogle = document.getElementById('btn-google');
+btnGoogle.href = CFG.googleUrl;
+btnGoogle.target = '_blank';
+btnGoogle.rel = 'noopener';
 
 // Build prizes preview chips
 (function() {
