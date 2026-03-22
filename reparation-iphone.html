@@ -221,7 +221,7 @@ h1.hero-title .accent{color:var(--red);text-shadow:0 0 40px rgba(255,0,51,.6);an
 .pt tbody tr:hover{background:rgba(255,0,51,.07);}
 .pt td{padding:10px 8px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04);color:var(--gray2);font-weight:600;}
 .pt td:first-child{font-weight:700;text-align:left;padding-left:14px;color:#fff;font-family:'Orbitron',sans-serif;font-size:.72rem;letter-spacing:.5px;}
-.pt .pv{font-weight:900;color:var(--red);font-family:'Orbitron',sans-serif;}
+.pt .pv{font-weight:900;color:#ffffff;font-family:'Orbitron',sans-serif;}
 .pt .pn2{color:rgba(255,255,255,.2);}
 
 /* PHOTO CAROUSEL */
@@ -888,7 +888,30 @@ function bBT(d){
 }
 
 var DE=[{modele:'5S/SE/5C/6/6S/6S+',prix:[null,40,null,null,60]},{modele:'7/7+/8/8+',prix:[null,40,null,50,60]},{modele:'X/XS/XS MAX',prix:[30,40,55,70,85]},{modele:'XR',prix:[30,40,55,null,70]},{modele:'11',prix:[30,40,55,null,70]},{modele:'11 Pro Max',prix:[30,40,55,70,85]},{modele:'12 mini',prix:[null,40,null,null,60]},{modele:'12/12 PRO',prix:[40,50,65,90,115]},{modele:'12 Pro Max',prix:[40,50,65,90,115]},{modele:'13 mini',prix:[null,40,null,50,60]},{modele:'13',prix:[45,50,65,90,115]},{modele:'13 Pro',prix:[45,50,65,90,115]},{modele:'13 Pro Max',prix:[45,50,65,90,115]},{modele:'14',prix:[45,50,65,90,115]},{modele:'14 Pro',prix:[45,50,65,90,115]},{modele:'14 Pro Max',prix:[45,50,65,90,115]},{modele:'15',prix:[50,60,null,140,185]},{modele:'15 Pro',prix:[50,60,null,155,185]},{modele:'15 Pro Max',prix:[null,70,null,165,215]},{modele:'16',prix:[null,70,null,165,215]},{modele:'16 Pro',prix:[null,70,null,165,215]},{modele:'16 Pro Max',prix:[null,70,null,165,215]}];
-var DB=[{modele:'5S/SE/5C/6/6S/6S+',prix:[25,0,0]},{modele:'7/7+/8/8+',prix:[35,0,0]},{modele:'X/XS/XS MAX',prix:[35,0,0]},{modele:'XR',prix:[35,0,0]},{modele:'11',prix:[35,0,0]},{modele:'11 Pro Max',prix:[35,0,0]},{modele:'12 mini',prix:[45,0,0]},{modele:'12/12 PRO',prix:[45,0,0]},{modele:'12 Pro Max',prix:[45,0,0]},{modele:'13 mini',prix:[55,0,0]},{modele:'13',prix:[55,0,0]},{modele:'13 Pro',prix:[55,0,0]},{modele:'13 Pro Max',prix:[55,0,0]},{modele:'14',prix:[55,0,0]},{modele:'14 Pro',prix:[55,0,0]},{modele:'14 Pro Max',prix:[55,0,0]},{modele:'15',prix:[65,0,0]},{modele:'15 Pro',prix:[65,0,0]},{modele:'15 Pro Max',prix:[65,0,0]},{modele:'16',prix:[65,0,0]},{modele:'16 Pro',prix:[65,0,0]},{modele:'16 Pro Max',prix:[65,0,0]}];
+var DB=[
+  {modele:'5S/SE/5C/6/6S/6S+', prix:[25,35,null]},
+  {modele:'7/7+/8/8+',          prix:[35,45,null]},
+  {modele:'X/XS/XS MAX',        prix:[35,45,null]},
+  {modele:'XR',                  prix:[35,45,null]},
+  {modele:'11',                  prix:[35,45,null]},
+  {modele:'11 Pro Max',          prix:[35,45,null]},
+  {modele:'12 mini',             prix:[45,55,null]},
+  {modele:'12/12 PRO',           prix:[45,55,null]},
+  {modele:'12 Pro Max',          prix:[45,55,null]},
+  {modele:'13 mini',             prix:[55,65,null]},
+  {modele:'13',                  prix:[55,65,null]},
+  {modele:'13 Pro',              prix:[55,65,null]},
+  {modele:'13 Pro Max',          prix:[55,65,null]},
+  {modele:'14',                  prix:[55,65,null]},
+  {modele:'14 Pro',              prix:[55,65,null]},
+  {modele:'14 Pro Max',          prix:[55,65,null]},
+  {modele:'15',                  prix:[65,75,null]},
+  {modele:'15 Pro',              prix:[65,75,null]},
+  {modele:'15 Pro Max',          prix:[65,75,null]},
+  {modele:'16',                  prix:[65,75,null]},
+  {modele:'16 Pro',              prix:[65,75,null]},
+  {modele:'16 Pro Max',          prix:[65,75,null]}
+];
 
 // Show local data IMMEDIATELY
 bET(DE);
@@ -907,8 +930,14 @@ sg('/rest/v1/settings?key=eq.ecrans_prix_json&select=value').then(function(r){
 }).catch(function(){});
 
 sg('/rest/v1/batteries_prix?select=*').then(function(r){
-  if(r&&r.length){bBT(r.map(function(x){return{modele:x.modele,prix:[x.p0,x.p1,x.p2]};}));}
-}).catch(function(){});
+  if(r&&r.length){
+    var data=r.map(function(x){return{modele:x.modele,prix:[x.p0,x.p1,x.p2]};});
+    if(data.length>0)bBT(data);
+  }
+  // Si vide ou erreur → garder les données locales DB déjà affichées
+}).catch(function(){
+  // Garder les données locales DB déjà affichées
+});
 
 </script>
 <!-- EVAN CHAT WIDGET — Solution Phone -->
