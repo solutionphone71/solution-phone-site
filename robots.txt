@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /roulette.html
 
 Sitemap: https://solution-phone.fr/sitemap.xml
