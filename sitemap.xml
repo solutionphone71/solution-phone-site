@@ -19,11 +19,25 @@
     <loc>https://www.solution-phone.fr/actualites.html</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.solution-phone.fr/#devis</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.solution-phone.fr/roulette.html</loc>
+    <loc>https://www.solution-phone.fr/#equipe</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.solution-phone.fr/#contact</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
