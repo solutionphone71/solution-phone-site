@@ -356,6 +356,31 @@ h1 .acc { color: var(--red); }
   font-size: 13px; color: var(--muted); line-height: 1.6;
   max-width: 340px;
 }
+
+/* ── SCREEN TÉLÉPHONE ── */
+.phone-icon { font-size: 56px; margin-bottom: 16px; }
+.phone-title { font-size: 26px; font-weight: 900; font-family: 'Syne', sans-serif; text-align: center; margin-bottom: 8px; }
+.phone-sub { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 28px; line-height: 1.7; max-width: 300px; }
+.phone-input-wrap { position: relative; width: 100%; max-width: 320px; margin-bottom: 14px; }
+.phone-input {
+  width: 100%; padding: 16px 18px; font-size: 24px; font-weight: 700;
+  background: var(--dark3); border: 2px solid var(--border); border-radius: 14px;
+  color: var(--text); text-align: center; letter-spacing: 3px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color .2s;
+}
+.phone-input:focus { outline: none; border-color: var(--red); }
+.phone-input::placeholder { color: var(--muted); letter-spacing: 1px; font-size: 16px; font-weight: 400; }
+.phone-already {
+  background: rgba(229,62,62,0.08); border: 1.5px solid var(--red);
+  border-radius: 14px; padding: 18px 20px; text-align: center;
+  display: none; margin-bottom: 14px; max-width: 320px;
+}
+.phone-already-emoji { font-size: 36px; margin-bottom: 8px; }
+.phone-already-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.phone-already-sub { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
 </style>
 </head>
 <body>
@@ -365,7 +390,34 @@ h1 .acc { color: var(--red); }
 <canvas id="confetti-canvas"></canvas>
 
 <!-- ╔════════════════════ SCREEN 1 : INTRO ════════════════════╗ -->
-<div class="screen active" id="s-intro">
+<!-- ╔════════════════════ SCREEN 0 : TÉLÉPHONE ════════════════════╗ -->
+<div class="screen active" id="s-phone">
+  <div class="logo-sp">Solution Phone — Mâcon</div>
+  <div class="phone-icon">📱</div>
+  <div class="phone-title">Entrez votre<br>numéro de téléphone</div>
+  <div class="phone-sub">1 participation par personne.<br>Votre numéro reste confidentiel.</div>
+
+  <div class="phone-input-wrap">
+    <input type="tel" id="phone-input" class="phone-input"
+      placeholder="06 XX XX XX XX" maxlength="14"
+      inputmode="numeric" autocomplete="tel"
+      oninput="formatPhoneInput(this)" onkeypress="if(event.key==='Enter') checkPhone()">
+  </div>
+
+  <!-- Message déjà participé -->
+  <div class="phone-already" id="phone-already-msg">
+    <div class="phone-already-emoji">🎡</div>
+    <div class="phone-already-title">Vous avez déjà participé !</div>
+    <div class="phone-already-sub">Une seule participation par personne.<br>Merci d'avoir joué à la roue Solution Phone !</div>
+  </div>
+
+  <button class="btn-main" id="btn-check-phone" onclick="checkPhone()" style="width:100%;max-width:320px;font-size:17px;padding:16px;" disabled>
+    Continuer →
+  </button>
+  <div id="phone-loading" style="display:none;margin-top:14px;font-size:13px;color:var(--muted);">⏳ Vérification...</div>
+</div>
+
+<div class="screen" id="s-intro">
   <div class="logo-sp">Solution Phone — Mâcon</div>
   <div class="intro-emoji">🎡</div>
   <h1>Tentez votre<br><span class="acc">chance !</span></h1>
@@ -665,6 +717,8 @@ function spinWheel() {
 // WIN SCREEN
 // ────────────────────────────────────────────────────────────────
 function showWin(prize) {
+  // Sauvegarder la participation en Supabase
+  saveParticipation(prize.label);
   document.getElementById('win-emoji').textContent = prize.emoji;
   document.getElementById('win-name').textContent  = prize.label;
   winPrizeName = prize.label;
@@ -788,6 +842,92 @@ function sendPrizeEmail() {
     document.getElementById('email-sent-msg').style.display = 'block';
     btn.textContent = '✅ Email préparé !';
   }, 500);
+}
+
+
+// ────────────────────────────────────────────────────────────────
+// TÉLÉPHONE & BLOCAGE — 1 participation par numéro
+// ────────────────────────────────────────────────────────────────
+var _phoneVerifie = '';
+
+function formatPhoneInput(input) {
+  // Garder uniquement les chiffres
+  var digits = input.value.replace(/\D/g, '').substring(0, 10);
+  // Formater XX XX XX XX XX
+  var formatted = '';
+  for (var i = 0; i < digits.length; i++) {
+    if (i > 0 && i % 2 === 0) formatted += ' ';
+    formatted += digits[i];
+  }
+  input.value = formatted;
+  // Activer le bouton si 10 chiffres
+  var btn = document.getElementById('btn-check-phone');
+  if (btn) btn.disabled = digits.length < 10;
+  // Cacher le message déjà participé si l'user retape
+  var msg = document.getElementById('phone-already-msg');
+  if (msg) msg.style.display = 'none';
+}
+
+async function checkPhone() {
+  var input = document.getElementById('phone-input');
+  var digits = input.value.replace(/\D/g, '');
+  if (digits.length < 10) { showToast('Numéro de téléphone incomplet 😊'); return; }
+
+  var btn = document.getElementById('btn-check-phone');
+  var loading = document.getElementById('phone-loading');
+  btn.disabled = true;
+  if (loading) loading.style.display = 'block';
+
+  try {
+    // Vérifier si le numéro a déjà participé dans Supabase
+    var res = await fetch(SUPA_URL + '/rest/v1/roulette_participations?telephone=eq.' + digits + '&select=id', {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    var data = await res.json();
+
+    if (loading) loading.style.display = 'none';
+
+    if (data && data.length > 0) {
+      // Déjà participé → bloquer
+      var msg = document.getElementById('phone-already-msg');
+      if (msg) msg.style.display = 'block';
+      btn.disabled = false;
+      input.style.borderColor = 'var(--red)';
+    } else {
+      // Nouveau → autoriser
+      _phoneVerifie = digits;
+      goTo('s-intro');
+    }
+  } catch(e) {
+    // En cas d'erreur réseau → laisser jouer (fail open)
+    if (loading) loading.style.display = 'none';
+    _phoneVerifie = digits;
+    goTo('s-intro');
+    console.warn('Supabase check failed, allowing play:', e);
+  }
+}
+
+async function saveParticipation(prizeName) {
+  if (!_phoneVerifie) return;
+  try {
+    await fetch(SUPA_URL + '/rest/v1/roulette_participations', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        telephone: _phoneVerifie,
+        lot_gagne: prizeName,
+        date_participation: new Date().toISOString()
+      })
+    });
+    console.log('Participation sauvegardée :', _phoneVerifie, prizeName);
+  } catch(e) {
+    console.warn('Erreur sauvegarde participation:', e);
+  }
 }
 
 let toastTimer;
