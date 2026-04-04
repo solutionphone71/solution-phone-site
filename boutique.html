@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Boutique Accessoires Téléphone Mâcon – Solution Phone</title>
+<meta name="description" content="Boutique accessoires téléphone Mâcon. Coques FairPlay & CoverMe pour iPhone, Samsung, Xiaomi. Chargeurs Belkin. Solution Phone 21 Rue Gambetta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#FF0033;--red2:#cc0028;--red3:rgba(255,0,51,0.12);--cyan:#00F5FF;--dark:#050508;--card:#0d0d14;--bdr:rgba(255,0,51,0.25);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--dark);color:#fff;font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
+.banner{background:linear-gradient(90deg,#1a0080,#0033cc,#1a0080);background-size:200%;animation:bs 4s linear infinite;text-align:center;padding:10px;font-family:'Orbitron',sans-serif;font-size:.68rem;letter-spacing:2px;}
+.banner a{color:#fff;text-decoration:none;}
+@keyframes bs{0%{background-position:0%}100%{background-position:200%}}
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;background:rgba(5,5,8,.97);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-icon{background:var(--red);color:#fff;font-family:'Orbitron',sans-serif;font-weight:900;font-size:1rem;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:4px;}
+.logo-text{font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:#fff;line-height:1.2;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:#aaa;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:1px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan);}
+.nav-links a.active{border-bottom:2px solid var(--cyan);}
+.nav-links a.red{color:var(--red);}
+
+/* FUN BANNER */
+.fun-banner{position:relative;background:linear-gradient(135deg,#0a0014,#05001a,#0a0014);border-top:2px solid var(--red);border-bottom:2px solid var(--cyan);padding:40px;overflow:hidden;text-align:center;}
+.fun-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(255,0,51,.15),transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(0,245,255,.1),transparent 60%);}
+.fun-banner-content{position:relative;z-index:1;}
+.fun-emoji-row{font-size:2.5rem;margin-bottom:16px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.fun-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.2rem,3vw,2rem);font-weight:900;text-transform:uppercase;margin-bottom:10px;line-height:1.2;}
+.fun-title .r{color:var(--red);}
+.fun-title .c{color:var(--cyan);}
+.fun-subtitle{font-size:1.1rem;color:#ccc;margin-bottom:20px;font-style:italic;}
+.fun-items{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:24px;}
+.fun-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:8px 16px;font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:6px;}
+.fun-cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-p{background:var(--red);color:#fff;padding:13px 28px;font-family:'Orbitron',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:2px;text-decoration:none;text-transform:uppercase;transition:all .2s;display:inline-block;}
+.btn-p:hover{background:var(--red2);transform:translateY(-2px);}
+.btn-s{background:transparent;color:var(--cyan);padding:13px 28px;font-family:'Orbitron',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:2px;text-decoration:none;text-transform:uppercase;border:1px solid var(--cyan);transition:all .2s;display:inline-block;}
+.btn-s:hover{background:rgba(0,245,255,.08);}
+.fun-address{margin-top:16px;color:#666;font-size:.9rem;font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;}
+
+/* HERO */
+.hero{position:relative;padding:56px 40px 44px;background:radial-gradient(ellipse at 0% 50%,rgba(255,0,51,.08),transparent 60%),radial-gradient(ellipse at 100%,rgba(0,245,255,.05),transparent 60%),var(--dark);overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,0,51,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,0,51,.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;}
+.hero-badge{display:inline-block;background:var(--red3);border:1px solid var(--red);color:var(--red);font-family:'Orbitron',sans-serif;font-size:.63rem;letter-spacing:3px;padding:5px 14px;margin-bottom:18px;text-transform:uppercase;}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.7rem,4vw,2.8rem);font-weight:900;line-height:1.1;text-transform:uppercase;margin-bottom:14px;}
+.hero h1 span{color:var(--red);}
+.hero p{font-size:1.05rem;color:#aaa;max-width:520px;line-height:1.6;}
+.brands-strip{display:flex;border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);overflow-x:auto;}
+.brand-b{flex:1;min-width:120px;padding:14px 20px;border-right:1px solid var(--bdr);display:flex;align-items:center;gap:10px;font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#666;}
+.brand-b:last-child{border-right:none;}
+.brand-b .bi{font-size:1.4rem;}
+.selector{background:var(--card);border-top:2px solid var(--red);padding:28px 40px;}
+.sel-title{font-family:'Orbitron',sans-serif;font-size:.68rem;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;margin-bottom:18px;}
+.sel-row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;}
+.sel-group{display:flex;flex-direction:column;gap:7px;flex:1;min-width:180px;}
+.sel-label{font-family:'Orbitron',sans-serif;font-size:.6rem;letter-spacing:3px;color:#555;text-transform:uppercase;}
+select{background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:#fff;padding:11px 38px 11px 14px;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;width:100%;cursor:pointer;outline:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 4 5-4' stroke='%2300F5FF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;transition:border-color .2s;}
+select:hover,select:focus{border-color:var(--cyan);}
+select option{background:#0d0d14;}
+.btn-find{background:var(--red);color:#fff;padding:11px 28px;font-family:'Orbitron',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s;height:46px;white-space:nowrap;}
+.btn-find:hover{background:var(--red2);transform:translateY(-2px);}
+.main{padding:36px 40px;}
+.welcome{text-align:center;padding:70px 20px;}
+.welcome .icon{font-size:4.5rem;display:block;margin-bottom:20px;}
+.welcome h2{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;text-transform:uppercase;margin-bottom:10px;}
+.welcome h2 span{color:var(--red);}
+.welcome p{color:#666;font-size:.95rem;}
+#productsZone{display:none;}
+.phone-hdr{display:flex;align-items:center;gap:18px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--bdr);}
+.ph-icon{font-size:2.8rem;}
+.ph-ttl{font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:900;text-transform:uppercase;}
+.ph-ttl span{color:var(--red);}
+.ph-sub{color:#555;font-size:.88rem;margin-top:3px;}
+.cat-tabs{display:flex;border:1px solid var(--bdr);margin-bottom:28px;overflow-x:auto;}
+.ctab{flex:1;padding:12px 10px;background:transparent;border:none;color:#555;font-family:'Orbitron',sans-serif;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;border-right:1px solid var(--bdr);white-space:nowrap;min-width:100px;text-align:center;}
+.ctab:last-child{border-right:none;}
+.ctab:hover{color:#fff;background:rgba(255,255,255,.03);}
+.ctab.active{background:var(--red3);color:#fff;border-bottom:2px solid var(--red);}
+.ctab .ci{display:block;font-size:1.1rem;margin-bottom:3px;}
+.fbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;align-items:center;}
+.fchip{background:var(--card);border:1px solid var(--bdr);color:#888;padding:6px 14px;font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.fchip:hover,.fchip.active{background:var(--red3);border-color:var(--red);color:#fff;}
+.rcount{color:#555;font-size:.82rem;margin-left:auto;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:13px;}
+.pcard{background:var(--card);border:1px solid var(--bdr);overflow:hidden;transition:all .3s;}
+.pcard:hover{border-color:var(--red);transform:translateY(-3px);box-shadow:0 6px 24px rgba(255,0,51,.15);}
+.pcard.hidden{display:none;}
+.pimg{width:100%;height:150px;background:#0a0a12;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:10px;}
+.pimg img{max-width:100%;max-height:100%;object-fit:contain;transition:transform .3s;}
+.pcard:hover .pimg img{transform:scale(1.06);}
+.pinfo{padding:10px 11px;}
+.pname{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.8rem;color:#ddd;line-height:1.35;margin-bottom:6px;}
+.pbadge{display:inline-block;background:var(--red3);border:1px solid var(--red);color:var(--red);font-size:.55rem;font-family:'Orbitron',sans-serif;letter-spacing:2px;padding:2px 7px;}
+.more-note{grid-column:1/-1;padding:18px;text-align:center;background:rgba(0,245,255,.03);border:1px dashed rgba(0,245,255,.2);color:#555;font-family:'Rajdhani',sans-serif;font-size:.88rem;}
+.more-note a{color:var(--cyan);text-decoration:none;}
+.contact-cta{display:none;text-align:center;padding:56px 20px;}
+.contact-cta.show{display:block;}
+.contact-cta h3{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;text-transform:uppercase;margin-bottom:10px;}
+.contact-cta h3 span{color:var(--red);}
+.contact-cta p{color:#888;margin-bottom:24px;}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cta-sec{background:linear-gradient(135deg,rgba(255,0,51,.08),rgba(0,245,255,.04));border-top:1px solid var(--bdr);padding:48px 40px;text-align:center;}
+.cta-sec h2{font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,3vw,1.7rem);font-weight:900;text-transform:uppercase;margin-bottom:10px;}
+.cta-sec h2 span{color:var(--red);}
+.cta-sec p{color:#888;margin-bottom:24px;}
+.cta-info{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:22px;}
+.cinfo{display:flex;align-items:center;gap:7px;color:#666;font-size:.88rem;}
+.dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;}
+footer{background:#020204;border-top:1px solid var(--bdr);padding:32px 40px 18px;}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:36px;margin-bottom:26px;}
+.fb p{color:#555;font-size:.88rem;margin-top:10px;line-height:1.6;max-width:260px;}
+.fc h4{font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:13px;}
+.fc ul{list-style:none;}
+.fc ul li{margin-bottom:7px;}
+.fc ul li a{color:#555;text-decoration:none;font-size:.88rem;transition:color .2s;}
+.fc ul li a:hover{color:#fff;}
+.fbot{border-top:1px solid rgba(255,255,255,.05);padding-top:16px;display:flex;justify-content:space-between;align-items:center;color:#333;font-size:.76rem;}
+.fbot a{color:var(--red);text-decoration:none;}
+.wa{position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s;}
+.wa:hover{transform:scale(1.1);}
+@media(max-width:768px){nav{padding:12px 20px;}.nav-links{display:none;}.hero,.main,.selector{padding-left:20px;padding-right:20px;}.fg{grid-template-columns:1fr;}.cta-sec{padding:36px 20px;}.fun-banner{padding:28px 20px;}}
+</style>
+</head>
+<body>
+<div class="banner"><a href="https://solution-phone.fr">🏆 CERTIFIÉ QUALIRÉPAR — -25€ DÉDUITS AUTOMATIQUEMENT SUR VOTRE RÉPARATION → CLIQUEZ ICI</a></div>
+<nav>
+  <a href="https://solution-phone.fr" class="logo"><div class="logo-icon">SP</div><div class="logo-text">SOLUTION<br>PHONE</div></a>
+  <ul class="nav-links">
+    <li><a href="https://solution-phone.fr">Accueil</a></li>
+    <li><a href="https://solution-phone.fr/accessoires.html">Accessoires</a></li>
+    <li><a href="#" class="active">🛒 Boutique</a></li>
+    <li><a href="https://solution-phone.fr/#contact">Contact</a></li>
+    <li><a href="https://solution-phone.fr/reparation-iphone.html" class="red">Réparation iPhone</a></li>
+  </ul>
+</nav>
+
+<!-- 🎉 BANNIÈRE MARRANTE -->
+<div class="fun-banner">
+  <div class="fun-banner-content">
+    <div class="fun-emoji-row">🛡️🔋🎧🔌🚗📱⚡💬🎮🎒</div>
+    <div class="fun-title">
+      VOTRE TÉLÉPHONE EST <span class="r">NU</span> ?<br>
+      On a de quoi <span class="c">l'habiller</span> !
+    </div>
+    <div class="fun-subtitle">"Ma coque est cassée, mon câble refuse de charger, et mon écran ressemble à une mosaïque... Il est temps de venir nous voir !"</div>
+    <div class="fun-items">
+      <div class="fun-item">🛡️ Coques</div>
+      <div class="fun-item">📱 Verres trempés</div>
+      <div class="fun-item">⚡ Chargeurs rapides</div>
+      <div class="fun-item">🪫 Batteries externes</div>
+      <div class="fun-item">🔌 Câbles</div>
+      <div class="fun-item">🎧 Écouteurs</div>
+      <div class="fun-item">🚗 Supports voiture</div>
+      <div class="fun-item">👜 Sacoches</div>
+      <div class="fun-item">⌚ Accessoires connectés</div>
+      <div class="fun-item">🔗 Chaînes téléphone</div>
+    </div>
+    <div class="fun-cta-row">
+      <a href="tel:+33385330689" class="btn-p">📞 03 85 33 06 89</a>
+      <a href="https://wa.me/33385330689" class="btn-s">💬 WhatsApp</a>
+    </div>
+    <div class="fun-address">📍 21 Rue Gambetta, 71000 Mâcon · Lun–Sam 9h15–19h</div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-badge">🛒 Boutique Accessoires · Solution Phone Mâcon</div>
+  <h1>CHOISISSEZ VOTRE<br>TÉLÉPHONE ET<br><span>TROUVEZ VOS ACCESSOIRES</span></h1>
+  <p>FairPlay, CoverMe, Belkin, RhinoShield — disponibles en magasin au 21 Rue Gambetta, Mâcon.</p>
+</div>
+<div class="brands-strip">
+  <div class="brand-b"><span class="bi">🎮</span>FairPlay</div>
+  <div class="brand-b"><span class="bi">🛡️</span>CoverMe</div>
+  <div class="brand-b"><span class="bi">⚡</span>Belkin</div>
+  <div class="brand-b"><span class="bi">🔬</span>RhinoShield</div>
+</div>
+<div class="selector">
+  <div class="sel-title">// Sélectionnez votre appareil</div>
+  <div class="sel-row">
+    <div class="sel-group"><label class="sel-label">Marque</label>
+      <select id="sBrand" onchange="loadModels()">
+        <option value="">— Choisir une marque —</option>
+        <option value="apple">🍎 Apple iPhone</option>
+        <option value="samsung">📱 Samsung Galaxy</option>
+        <option value="xiaomi">📱 Xiaomi / Redmi</option>
+        <option value="oppo">📱 Oppo</option>
+        <option value="google">📱 Google Pixel</option>
+        <option value="oneplus">📱 OnePlus</option>
+        <option value="motorola">📱 Motorola</option>
+        <option value="honor">📱 Honor / Huawei</option>
+        <option value="other">📱 Autre marque</option>
+      </select>
+    </div>
+    <div class="sel-group"><label class="sel-label">Modèle</label>
+      <select id="sModel" onchange="showProducts()"><option value="">— Choisir un modèle —</option></select>
+    </div>
+    <button class="btn-find" onclick="showProducts()">🔍 Voir les accessoires</button>
+  </div>
+</div>
+<div class="main" id="main">
+  <div class="welcome" id="wState">
+    <span class="icon">📱</span>
+    <h2>SÉLECTIONNEZ VOTRE <span>TÉLÉPHONE</span></h2>
+    <p>Choisissez votre marque et votre modèle pour voir tous les accessoires disponibles en boutique.</p>
+  </div>
+  <div id="productsZone">
+    <div class="phone-hdr"><span class="ph-icon" id="pIcon">📱</span>
+      <div><div class="ph-ttl" id="pTitle">Modèle</div><div class="ph-sub" id="pSub">Accessoires disponibles · 21 Rue Gambetta, Mâcon</div></div>
+    </div>
+    <div class="cat-tabs">
+      <button class="ctab active" onclick="showCat('coques',this)"><span class="ci">🛡️</span>Coques</button>
+      <button class="ctab" onclick="showCat('verre',this)"><span class="ci">🛡️</span>Protection écran</button>
+      <button class="ctab" onclick="showCat('chargeurs',this)"><span class="ci">⚡</span>Chargeurs Secteur</button>
+      <button class="ctab" onclick="showCat('batteries',this)"><span class="ci">🪫</span>Batteries</button>
+      <button class="ctab" onclick="showCat('cables',this)"><span class="ci">🔌</span>Câbles</button>
+      <button class="ctab" onclick="showCat('audio',this)"><span class="ci">🎧</span>Audio & TWS</button>
+      <button class="ctab" onclick="showCat('supports',this)"><span class="ci">🚗</span>Supports</button>
+      <button class="ctab" onclick="showCat('accessoires',this)"><span class="ci">👜</span>Accessoires</button>
+    </div>
+    <div class="fbar" id="fbar"></div>
+    <div class="grid" id="grid"></div>
+    <div class="contact-cta" id="ctaCta">
+      <h3>DISPONIBLE <span>EN BOUTIQUE</span></h3>
+      <p>Nous avons des accessoires compatibles pour votre modèle.<br>Venez en magasin ou contactez-nous !</p>
+      <div class="btns">
+        <a href="https://wa.me/33385330689" class="btn-p">💬 WhatsApp</a>
+        <a href="tel:+33385330689" class="btn-s">📞 03 85 33 06 89</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cta-sec">
+  <h2>VENEZ NOUS RENDRE VISITE <span>À MÂCON</span></h2>
+  <p>Boutique ouverte du lundi au samedi · 21 Rue Gambetta, 71000 Mâcon</p>
+  <div class="btns">
+    <a href="https://wa.me/33385330689" class="btn-p">💬 WhatsApp</a>
+    <a href="tel:+33385330689" class="btn-s">📞 03 85 33 06 89</a>
+  </div>
+  <div class="cta-info">
+    <div class="cinfo"><span class="dot"></span>21 Rue Gambetta, Mâcon</div>
+    <div class="cinfo"><span class="dot"></span>Lun–Sam · 9h15–19h</div>
+    <div class="cinfo"><span class="dot"></span>4.6★ Google (557 avis)</div>
+  </div>
+</div>
+<footer>
+  <div class="fg">
+    <div class="fb"><div class="logo"><div class="logo-icon">SP</div><div class="logo-text">SOLUTION<br>PHONE</div></div><p>Boutique d'accessoires et atelier de réparation de smartphones à Mâcon depuis plus de 10 ans.</p></div>
+    <div class="fc"><h4>Navigation</h4><ul><li><a href="https://solution-phone.fr">Accueil</a></li><li><a href="https://solution-phone.fr/accessoires.html">Accessoires iPhone 16</a></li><li><a href="#">Boutique</a></li><li><a href="https://solution-phone.fr/reparation-iphone.html">Réparation iPhone</a></li></ul></div>
+    <div class="fc"><h4>Contact</h4><ul><li><a href="tel:+33385330689">03 85 33 06 89</a></li><li><a href="#">21 Rue Gambetta, Mâcon</a></li><li><a href="https://solution-phone.fr">solution-phone.fr</a></li></ul></div>
+  </div>
+  <div class="fbot"><span>© 2025 Solution Phone SARL · SIRET 801 044 785 00021</span><a href="https://solution-phone.fr">Retour au site →</a></div>
+</footer>
+<a href="https://wa.me/33385330689" class="wa">💬</a>
+<script>
+var U='https://www.utopya.fr/media/catalog/product/cache/662ea76faaa51bafdb496e43b67d620b/';
+
+// ===== ACCESSOIRES UNIVERSELS (mêmes pour tous les modèles) =====
+var CHARGEURS=[
+  // FAIRPLAY
+  {img:U+'9/5/958--monzachar_1.jpg',name:'FAIRPLAY Chargeur 20W USB-C',brand:'FAIRPLAY'},
+  {img:U+'9/5/958--monzachar.jpg',name:'FAIRPLAY Chargeur 20W USB-C (Bulk)',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--chargeur30wusbc.jpg',name:'FAIRPLAY Chargeur 30W USB-C',brand:'FAIRPLAY'},
+  {img:U+'0/4/04-0y7a0268.jpg',name:'FAIRPLAY Chargeur GaN USB-C 30W',brand:'FAIRPLAY'},
+  {img:U+'6/4/641--67w.jpg',name:'FAIRPLAY Chargeur USB-C GaN 67W',brand:'FAIRPLAY'},
+  {img:U+'6/3/636--100w.jpg',name:'FAIRPLAY Chargeur USB-C GaN 100W',brand:'FAIRPLAY'},
+  {img:U+'6/2/626--65w.jpg',name:'FAIRPLAY Chargeur 65W 3 ports (USB-A + 2 USB-C)',brand:'FAIRPLAY'},
+  {img:U+'9/1/917--new749-air--1zk0019k0445072612-_com-prevue_.jpg',name:'FAIRPLAY Chargeur 45W (USB-A + USB-C) — Blanc',brand:'FAIRPLAY'},
+  {img:U+'9/2/921--chargeurfp45wblack.jpg',name:'FAIRPLAY Chargeur 45W (USB-A + USB-C) — Noir',brand:'FAIRPLAY'},
+  {img:U+'3/8/387--charuniv90.jpg',name:'FAIRPLAY Chargeur Laptop Universel 90W',brand:'FAIRPLAY'},
+  // BELKIN
+  {img:U+'b/e/belkk13.jpeg',name:'BELKIN Chargeur Secteur 20W — Blanc',brand:'BELKIN'},
+  {img:U+'b/e/belkk11.jpeg',name:'BELKIN Chargeur Secteur 25W — Blanc',brand:'BELKIN'},
+  {img:U+'b/e/belkk12.jpeg',name:'BELKIN Chargeur Secteur 25W — Noir',brand:'BELKIN'},
+  {img:U+'8/4/848--wca008kq1mwh-b6_1.jpg',name:'BELKIN Chargeur Secteur USB-C 30W',brand:'BELKIN'},
+  {img:U+'b/e/belkk.jpeg',name:'BELKIN Chargeur Secteur USB-C 30W + Câble USB-C',brand:'BELKIN'},
+  {img:U+'w/c/wca008kq1mwh-b6_1.jpeg',name:'BELKIN Chargeur 30W + Câble USB-C/Lightning 1m — Blanc',brand:'BELKIN'},
+  {img:U+'0/1/01-wch019kqwh.jpg',name:'BELKIN Chargeur GaN 2x USB-C 50W — Blanc',brand:'BELKIN'},
+  {img:U+'0/1/01-wch019kqbk.jpg',name:'BELKIN Chargeur GaN 2x USB-C 50W — Noir',brand:'BELKIN'},
+  {img:U+'0/1/01-wca013kqwh_front.jpg',name:'BELKIN Chargeur Secteur USB-C 45W — Blanc',brand:'BELKIN'},
+  {img:U+'4/6/462--wca013kqbk.jpg',name:'BELKIN Chargeur Secteur USB-C 45W — Noir',brand:'BELKIN'},
+  {img:U+'w/c/wca011kqwh.png',name:'BELKIN Chargeur Secteur USB-C 65W — Blanc',brand:'BELKIN'},
+  {img:U+'0/1/01-wch020kqbk.jpg',name:'BELKIN Chargeur GaN 2x USB-C 67W — Noir',brand:'BELKIN'},
+  {img:U+'0/1/01-wch020kqwh.jpg',name:'BELKIN Chargeur GaN 2x USB-C 67W — Blanc',brand:'BELKIN'},
+  {img:U+'1/3/132--dftgyhj_1.jpg',name:'BELKIN Chargeur Secteur 3x USB-C 67W',brand:'BELKIN'},
+  {img:U+'5/6/563--inc016glbk.jpg',name:'BELKIN Chargeur USB-C 100W PC/Laptop',brand:'BELKIN'},
+  {img:U+'8/1/814--belkin.jpg',name:'BELKIN Chargeur 42W (USB-A + USB-C)',brand:'BELKIN'},
+  {img:U+'w/c/wcb010vfwh1.jpg',name:'BELKIN Chargeur 60W (2x USB-C)',brand:'BELKIN'},
+  {img:U+'w/c/wce001_eu_1mwh_wht_usb-c_usb-a_fpk_web.jpg',name:'BELKIN Chargeur 24W + Câble USB-C (2x USB-A) — Blanc',brand:'BELKIN'},
+  {img:U+'7/7/77853476_9920279787-1100x1100.jpg',name:'BELKIN Chargeur 24W + Câble Lightning (2x USB-A) — Blanc',brand:'BELKIN'},
+  {img:U+'b/e/belkin221587-01.jpg',name:'BELKIN Chargeur GaN 200W 4 ports USB-C',brand:'BELKIN'},
+  {img:U+'1/_/1_40_2.jpg',name:'BELKIN Chargeur Hybride USB-C 25W + PowerBank 5K — Noir',brand:'BELKIN'},
+  {img:U+'s/f/sfgdfghdbfgn_ghjhygukyu.png',name:'BELKIN Chargeur GaN 3 ports 100W + Adaptateur Voyage — Blanc',brand:'BELKIN'},
+  {img:U+'j/n/jnhgfhfyj.png',name:'BELKIN Chargeur GaN 3 ports 70W + Adaptateurs Voyage — Blanc',brand:'BELKIN'},
+];
+var BATTERIES=[
+  {img:U+'0/0/001-bpb011btbk.jpg',name:'BELKIN PowerBank 10 000mAh 15W — Noir',brand:'BELKIN'},
+  {img:U+'0/0/000-bpb011btbl.jpg',name:'BELKIN PowerBank 10 000mAh 15W — Bleu',brand:'BELKIN'},
+  {img:U+'0/0/000-bpb012btbk.jpg',name:'BELKIN PowerBank 20 000mAh 15W — Noir',brand:'BELKIN'},
+  {img:U+'0/0/001-bpb012btbl00.jpg',name:'BELKIN PowerBank 20 000mAh 15W — Bleu',brand:'BELKIN'},
+  {img:U+'5/4/548--bpb016btbk.jpg',name:'BELKIN PowerBank 26 000mAh 32W — Noir',brand:'BELKIN'},
+  {img:U+'0/0/001-bpb021hqbl.jpg',name:'BELKIN PowerBank 10 000mAh 20W — Bleu',brand:'BELKIN'},
+  {img:U+'0/0/001-bpb021hqpk.jpg',name:'BELKIN PowerBank 10 000mAh 20W — Rose',brand:'BELKIN'},
+  {img:U+'5/4/546--bpb021hqbk.jpg',name:'BELKIN PowerBank 10 000mAh 20W — Noir',brand:'BELKIN'},
+  {img:U+'0/0/001-bpb024hqbl0.jpg',name:'BELKIN PowerBank 20 000mAh 30W — Bleu',brand:'BELKIN'},
+  {img:U+'9/1/919--bpb024hqpk.jpg',name:'BELKIN PowerBank 20 000mAh 30W — Rose',brand:'BELKIN'},
+];
+var CABLES=[
+  {img:U+'c/a/caa001bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web.jpg',name:'BELKIN Câble Lightning 2m — Blanc',brand:'BELKIN'},
+  {img:U+'l/d/ld0005699966_1.jpeg',name:'BELKIN Câble Lightning 1m — Noir',brand:'BELKIN'},
+  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_5.jpg',name:'BELKIN Câble Tressé Lightning 1m — Noir',brand:'BELKIN'},
+  {img:U+'c/a/caa002bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_3.jpg',name:'BELKIN Câble Tressé Lightning 1m — Blanc',brand:'BELKIN'},
+  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_1.jpg',name:'BELKIN Câble Tressé Lightning 2m — Noir',brand:'BELKIN'},
+  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web_2.jpg',name:'BELKIN Câble USB-C 1m — Noir',brand:'BELKIN'},
+  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web.jpg',name:'BELKIN Câble USB-C 2m — Noir',brand:'BELKIN'},
+  {img:U+'h/d/hdmi0018g-1m.jpeg',name:'BELKIN Câble HDMI 4K 1m',brand:'BELKIN'},
+  {img:U+'9/2/926--inz002bt2mbk.jpg',name:'BELKIN Câble Thunderbolt 4 2m',brand:'BELKIN'},
+  {img:U+'b/b/bblk1.jpeg',name:'BELKIN Câble DisplayPort 1,8m',brand:'BELKIN'},
+  {img:U+'5/4/547--caa002bt0mwh.jpg',name:'BELKIN Câble Lightning 0,15m — Blanc',brand:'BELKIN'},
+];
+var AUDIO=[
+  {img:U+'9/0/902--twscaliforniablanc.jpg',name:'FAIRPLAY CALIFORNIA Écouteurs Bluetooth TWS ANC — Blanc',brand:'FAIRPLAY'},
+  {img:U+'8/9/896--twscalifornianoir.jpg',name:'FAIRPLAY CALIFORNIA Écouteurs Bluetooth TWS ANC — Noir',brand:'FAIRPLAY'},
+  {img:U+'8/5/856--112403.jpg',name:'FAIRPLAY OREGON Écouteurs Bluetooth TWS ENC — Blanc',brand:'FAIRPLAY'},
+  {img:U+'8/6/861--112403_1.jpg',name:'FAIRPLAY OREGON Écouteurs Bluetooth TWS ENC — Noir',brand:'FAIRPLAY'},
+  {img:U+'_/5/_54a7842.jpg',name:'FAIRPLAY ALASKA Écouteurs Bluetooth TWS — Noir',brand:'FAIRPLAY'},
+  {img:U+'h/e/he-0441-9.jpg',name:'FAIRPLAY ALASKA Écouteurs Bluetooth TWS — Blanc',brand:'FAIRPLAY'},
+  {img:U+'_/5/_54a1923.jpg',name:'FAIRPLAY Écouteurs Jack 3.5mm',brand:'FAIRPLAY'},
+  {img:U+'_/5/_54a.jpg',name:'FAIRPLAY Écouteurs Lightning',brand:'FAIRPLAY'},
+  {img:U+'9/2/920--test.jpg',name:'FAIRPLAY Écouteurs USB-C',brand:'FAIRPLAY'},
+  {img:U+'_/5/_54a1923_1.jpg',name:'FAIRPLAY Écouteurs Jack (Bulk)',brand:'FAIRPLAY'},
+  {img:U+'1/3/133--f8z274bt.jpg',name:'BELKIN Répartiteur Audio X5 Jack',brand:'BELKIN'},
+];
+var SUPPORTS=[
+  {img:U+'1/3/135--556536.jpg',name:'FAIRPLAY Support Voiture Magnétique',brand:'FAIRPLAY'},
+  {img:U+'2/8/286--support-ordi.jpg',name:'FAIRPLAY Support Ordinateur',brand:'FAIRPLAY'},
+  {img:U+'0/1/01-f7u017bt_.jpg',name:'BELKIN Support Voiture',brand:'BELKIN'},
+  {img:U+'1/-/1-avc024hqbk.jpg',name:'BELKIN Adaptateur HDMI sans Fil',brand:'BELKIN'},
+  {img:U+'3/7/372--bsv400ca2m.jpg',name:'BELKIN Multiprise Parafoudre 4 prises',brand:'BELKIN'},
+  {img:U+'b/s/bsv603ca2m_angled_3.jpg',name:'BELKIN Multiprise Parafoudre 6 prises',brand:'BELKIN'},
+];
+var ACCESSOIRES=[
+  {img:U+'6/1/617--perla.jpg',name:'FAIRPLAY Chaîne 120cm PERLA',brand:'FAIRPLAY'},
+  {img:U+'6/2/623--arla.jpg',name:'FAIRPLAY Chaîne 120cm ARLA',brand:'FAIRPLAY'},
+  {img:U+'6/2/629--ciala.jpg',name:'FAIRPLAY Chaîne 120cm CIALA',brand:'FAIRPLAY'},
+  {img:U+'6/3/635--flavia.jpg',name:'FAIRPLAY Chaîne 120cm FLAVIA',brand:'FAIRPLAY'},
+  {img:U+'1/0/100--luana_1.jpg',name:'FAIRPLAY Chaîne 120cm LUANA',brand:'FAIRPLAY'},
+  {img:U+'9/4/94-rer_22-aura.jpg',name:'FAIRPLAY Chaîne 120cm OLIVIA',brand:'FAIRPLAY'},
+  {img:U+'8/9/894--sac-fp.jpg',name:'FAIRPLAY Sac Multimédia',brand:'FAIRPLAY'},
+  {img:U+'2/m/2mma013hqbk.jpeg',name:'BELKIN Sacoche de Voyage',brand:'BELKIN'},
+  {img:U+'h/o/housse_belkin_ordinateur.jpg',name:'BELKIN Sacoche Laptop 13"',brand:'BELKIN'},
+  {img:U+'h/o/housse_belkin_ordinateur_1.jpg',name:'BELKIN Sacoche Laptop 14"',brand:'BELKIN'},
+  {img:U+'h/o/housse_belkin_ordinateur_2.jpg',name:'BELKIN Sacoche Laptop 11"',brand:'BELKIN'},
+];
+
+// ===== COQUES PAR TYPE =====
+// CoverMe (universelles adaptées à chaque modèle)
+var CM=[
+  {img:U+'0/1/01-gravity_magsafeviolet_3.jpg',name:'COVERME GRAVITY MagSafe — Violet',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafenoir_3.jpg',name:'COVERME GRAVITY MagSafe — Noir',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafebleu_3.jpg',name:'COVERME GRAVITY MagSafe — Bleu',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafeblanc_3.jpg',name:'COVERME GRAVITY MagSafe — Blanc',brand:'COVERME'},
+  {img:U+'o/n/onyxgris4_6.jpeg',name:'COVERME ONYX MagSafe — Gris Titane',brand:'COVERME'},
+  {img:U+'o/n/onyxgold4_9.jpeg',name:'COVERME ONYX MagSafe — Gold',brand:'COVERME'},
+  {img:U+'c/o/copie_de_2phantom_3.jpeg',name:'COVERME PHANTOM — Violet',brand:'COVERME'},
+  {img:U+'c/o/copie_de_5phantom_6.jpeg',name:'COVERME PHANTOM — Bleu Roi',brand:'COVERME'},
+  {img:U+'c/o/copie_de_phantom_6.jpeg',name:'COVERME PHANTOM — Noir',brand:'COVERME'},
+  {img:U+'1/-/1--walletbleu_10_1.jpg',name:'COVERME Étui Wallet — Bleu',brand:'COVERME'},
+  {img:U+'1/-/1--walletmarron_1_4_1.jpg',name:'COVERME Étui Wallet — Marron',brand:'COVERME'},
+  {img:U+'1/-/1--walletrouge_1_4_1.jpg',name:'COVERME Étui Wallet — Rouge',brand:'COVERME'},
+  {img:U+'1/-/1--walletnoir_8_1.jpg',name:'COVERME Étui Wallet — Noir',brand:'COVERME'},
+  {img:U+'0/1/01-cskinmagbleu00_1.jpg',name:'COVERME Skin MagSafe — Bleu',brand:'COVERME'},
+  {img:U+'0/1/01-ckinmagpastel_5.jpg',name:'COVERME Skin MagSafe — Rose Pastel',brand:'COVERME'},
+  {img:U+'0/1/01-ckinmaglilas_1_3.jpg',name:'COVERME Skin MagSafe — Lilas',brand:'COVERME'},
+  {img:U+'0/1/01-cskinmagnoir00_3.jpg',name:'COVERME Skin MagSafe — Noir',brand:'COVERME'},
+  {img:U+'0/0/001-chazebleu001-0000_5.jpg',name:'COVERME HAZE MagSafe — Bleu',brand:'COVERME'},
+  {img:U+'0/0/0001-hazeviolet000_5.jpeg',name:'COVERME HAZE MagSafe — Violet',brand:'COVERME'},
+  {img:U+'0/0/001-hazenoir00_5.jpeg',name:'COVERME HAZE MagSafe — Noir',brand:'COVERME'},
+  {img:U+'9/0/908--coverme_10.jpg',name:'COVERME Coque Anneaux — Clear',brand:'COVERME'},
+  {img:U+'_/5/_54a3748_2_5.jpg',name:'COVERME Coque TPU — Clear',brand:'COVERME'},
+];
+
+// Samsung Samsung-specific coques (from A15 page)
+var CM_SS=[
+  {img:U+'1/-/1--walletbleu_3_4.jpg',name:'COVERME Étui Wallet Galaxy — Bleu',brand:'COVERME'},
+  {img:U+'1/-/1--walletrouge_5_2.jpg',name:'COVERME Étui Wallet Galaxy — Rouge',brand:'COVERME'},
+  {img:U+'1/-/1--walletnoir_12.jpg',name:'COVERME Étui Wallet Galaxy — Noir',brand:'COVERME'},
+  {img:U+'9/0/908--coverme_10.jpg',name:'COVERME Coque Anneaux — Clear',brand:'COVERME'},
+  {img:U+'_/5/_54a3748_2_5.jpg',name:'COVERME Coque TPU — Clear',brand:'COVERME'},
+  {img:U+'o/n/onyxgris4_6.jpeg',name:'COVERME ONYX MagSafe — Gris Titane',brand:'COVERME'},
+  {img:U+'o/n/onyxgold4_9.jpeg',name:'COVERME ONYX MagSafe — Gold',brand:'COVERME'},
+  {img:U+'c/o/copie_de_2phantom_3.jpeg',name:'COVERME PHANTOM — Violet',brand:'COVERME'},
+  {img:U+'c/o/copie_de_phantom_6.jpeg',name:'COVERME PHANTOM — Noir',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafeviolet_3.jpg',name:'COVERME GRAVITY — Violet',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafenoir_3.jpg',name:'COVERME GRAVITY — Noir',brand:'COVERME'},
+];
+
+// FairPlay PAVONE (Samsung)
+var FP_PAVONE_SS=[
+  {img:U+'p/a/pavone_1_noir_14_28.jpg',name:'FAIRPLAY PAVONE Galaxy — Noir',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_pavone_rouge_mars_11_1.jpg',name:'FAIRPLAY PAVONE Galaxy — Rouge de Mars',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--pavone_rose_pastel_25.jpg',name:'FAIRPLAY PAVONE Galaxy — Rose Pastel',brand:'FAIRPLAY'},
+  {img:U+'p/a/pavone_1_noir_15_27.jpg',name:'FAIRPLAY PAVONE Galaxy — Noir (Bulk)',brand:'FAIRPLAY'},
+  {img:U+'p/a/pavone_1_noir_17_25.jpg',name:'FAIRPLAY PAVONE Galaxy S24+ — Noir',brand:'FAIRPLAY'},
+];
+
+// FairPlay CAPELLA (Samsung)
+var FP_CAPELLA_SS=[
+  {img:U+'2/_/2_39_32.jpg',name:'FAIRPLAY CAPELLA Galaxy A15',brand:'FAIRPLAY'},
+  {img:U+'1/-/1-2_39_22_27.jpg',name:'FAIRPLAY CAPELLA Galaxy S24+',brand:'FAIRPLAY'},
+  {img:U+'2/_/2_39_38.jpg',name:'FAIRPLAY CAPELLA Galaxy A54 5G',brand:'FAIRPLAY'},
+  {img:U+'2/_/2_39_22.jpg',name:'FAIRPLAY CAPELLA Galaxy S23 FE',brand:'FAIRPLAY'},
+];
+
+// Circle MagSafe Samsung
+var CIRCLE_SS=[
+  {img:U+'9/6/963--tc-circle-blanc_17.jpg',name:'Coque Circle MagSafe Galaxy — Blanc',brand:'Autres'},
+  {img:U+'9/6/964--tc-circle-violet_12.jpg',name:'Coque Circle MagSafe Galaxy — Violet',brand:'Autres'},
+  {img:U+'9/6/965--tc-circle-rose_17.jpg',name:'Coque Circle MagSafe Galaxy — Rose',brand:'Autres'},
+  {img:U+'9/6/966--tc-circle-noir_17.jpg',name:'Coque Circle MagSafe Galaxy — Noir',brand:'Autres'},
+  {img:U+'9/6/966--tc-circle-gris-graphite_17.jpg',name:'Coque Circle MagSafe Galaxy — Gris',brand:'Autres'},
+];
+
+// Silicone Samsung
+var SILI_SS=[
+  {img:U+'1/-/1--tycoonsiliconered_13_2_2_6.jpg',name:'Coque Silicone Galaxy — Rouge',brand:'Autres'},
+  {img:U+'1/-/1--tycoonsiliconebleu_25.jpg',name:'Coque Silicone Galaxy — Bleu Nuit',brand:'Autres'},
+  {img:U+'1/-/1--tycoonsiliconevert_24.jpg',name:'Coque Silicone Galaxy — Vert',brand:'Autres'},
+  {img:U+'1/-/1--tycoonsiliconerose_25.jpg',name:'Coque Silicone Galaxy — Rose',brand:'Autres'},
+  {img:U+'8/0/806--a55_3.jpg',name:'Coque Clear Galaxy — Transparent',brand:'Autres'},
+];
+
+// Verre Samsung
+var VERRE_SS=[
+  // Hydrogel Ocadia sur mesure
+  {img:U+'8/1/811--774871_2_1.jpg',name:'OCADIA Hydrogel Transparent CRYSTAL (sur mesure en boutique)',brand:'OCADIA'},
+  {img:U+'8/1/810--779811_1_1.jpg',name:'OCADIA Hydrogel Privacy OBSIDIAN (sur mesure en boutique)',brand:'OCADIA'},
+  // Verre trempé FairPlay Samsung
+  {img:U+'f/a/fairplay_1_1.jpg',name:'FAIRPLAY IMPACT Verre Trempé Galaxy S25',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_48.jpg',name:'FAIRPLAY IMPACT Verre Trempé Galaxy S25+',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_47.jpg',name:'FAIRPLAY IMPACT Verre Trempé Galaxy S25 Ultra',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_impact.jpg',name:'FAIRPLAY IMPACT Verre Trempé Galaxy S25 Edge',brand:'FAIRPLAY'},
+  {img:U+'3/6/3667075118817-1.jpg',name:'FAIRPLAY INTEGRAL Verre Trempé Galaxy S25+',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_39.jpg',name:'FAIRPLAY IMPACT Verre Trempé Galaxy S23+',brand:'FAIRPLAY'},
+  {img:U+'v/2/v2integral_2_4_2_2_5.jpg',name:'FAIRPLAY INTEGRAL Verre Trempé Galaxy S23 FE',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_36.jpg',name:'FAIRPLAY IMPACT Verre Trempé Galaxy A54 5G',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_40.jpg',name:'FAIRPLAY IMPACT Verre Trempé Galaxy A35',brand:'FAIRPLAY'},
+  {img:U+'v/2/v2integral_2_4_2_2_3.jpg',name:'FAIRPLAY INTEGRAL Verre Trempé Galaxy A25 5G',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_35.jpg',name:'FAIRPLAY IMPACT Verre Trempé Galaxy A25 5G',brand:'FAIRPLAY'},
+  // Verre Samsung standard
+  {img:U+'7/9/793--mobeen_10.jpg',name:'Verre Trempé Galaxy — Full Cover',brand:'Autres'},
+  {img:U+'5/8/587--privacy_3.jpg',name:'Verre Trempé Galaxy — Privacy Anti-espion',brand:'Autres'},
+  {img:U+'5/8/586--antichoc-full-3d_3.jpg',name:'Verre Trempé Galaxy — Full Cover 3D',brand:'Autres'},
+  {img:U+'3/3/332--28962_1_4_29.jpg',name:'Verre Trempé Caméra Galaxy',brand:'Autres'},
+];
+
+// RhinoShield + Circle iPhone
+var RS=[
+  {img:U+'v/1/v16mar013254f.jpeg',name:'RHINOSHIELD AirX MagSafe — Gris',brand:'RHINOSHIELD'},
+  {img:U+'1/6/16mar013254e.jpeg',name:'RHINOSHIELD AirX MagSafe — Noir',brand:'RHINOSHIELD'},
+  {img:U+'7/0/704--clearcasemag-ip16.jpg',name:'RHINOSHIELD Clear Case MagSafe',brand:'RHINOSHIELD'},
+  {img:U+'o/u/outremer_3.jpeg',name:'RHINOSHIELD SolidX MagSafe — Bleu',brand:'RHINOSHIELD'},
+  {img:U+'0/-/0--solmagblanc_4.jpeg',name:'RHINOSHIELD SolidX MagSafe — Blanc',brand:'RHINOSHIELD'},
+  {img:U+'0/-/0--solmagnoir_4.jpeg',name:'RHINOSHIELD SolidX MagSafe — Noir',brand:'RHINOSHIELD'},
+  {img:U+'0/-/0--solmagveal_2_10.jpeg',name:'RHINOSHIELD SolidX MagSafe — Vert',brand:'RHINOSHIELD'},
+  {img:U+'0/-/0--solmagbleugla_5.jpeg',name:'RHINOSHIELD SolidX MagSafe — Glacier',brand:'RHINOSHIELD'},
+  {img:U+'6/9/697--4711502653248.jpg',name:'RHINOSHIELD SolidSuit — Rose Sorbet',brand:'RHINOSHIELD'},
+  {img:U+'6/9/698--4711502653217.jpg',name:'RHINOSHIELD SolidSuit — Bleu Océan',brand:'RHINOSHIELD'},
+  {img:U+'6/9/699--4711502653187.jpg',name:'RHINOSHIELD SolidSuit — Gris',brand:'RHINOSHIELD'},
+  {img:U+'9/6/963--tc-circle-blanc_13.jpg',name:'Coque Circle MagSafe — Blanc',brand:'Autres'},
+  {img:U+'9/6/964--tc-circle-violet_16.jpg',name:'Coque Circle MagSafe — Violet',brand:'Autres'},
+  {img:U+'9/6/965--tc-circle-rose_13.jpg',name:'Coque Circle MagSafe — Rose',brand:'Autres'},
+  {img:U+'9/6/966--tc-circle-noir_13.jpg',name:'Coque Circle MagSafe — Noir',brand:'Autres'},
+];
+
+var FP_VERRE=[
+  // Hydrogel Ocadia sur mesure
+  {img:U+'8/1/811--774871_2_1.jpg',name:'OCADIA Hydrogel Transparent CRYSTAL (sur mesure en boutique)',brand:'OCADIA'},
+  {img:U+'8/1/810--779811_1_1.jpg',name:'OCADIA Hydrogel Privacy OBSIDIAN (sur mesure en boutique)',brand:'OCADIA'},
+  // Verre trempé FairPlay iPhone
+  {img:U+'f/a/fairplay_14.jpg',name:'FAIRPLAY IMPACT Verre Trempé iPhone 15/16',brand:'FAIRPLAY'},
+  {img:U+'v/2/v2integral_2_4_1_1.jpg',name:'FAIRPLAY INTEGRAL Verre Trempé iPhone 15/16',brand:'FAIRPLAY'},
+  {img:U+'3/4/347--fairplay-privacy-_5_3.jpg',name:'FAIRPLAY PRIVACY Verre Trempé iPhone 15/16 — Anti-espion',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_16.jpg',name:'FAIRPLAY IMPACT Verre Trempé iPhone 15 Pro',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_12.jpg',name:'FAIRPLAY IMPACT Verre Trempé iPhone 14 Pro',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay.jpg',name:'FAIRPLAY IMPACT Verre Trempé iPhone XR/11',brand:'FAIRPLAY'},
+  {img:U+'v/2/v2integral_2_4.jpg',name:'FAIRPLAY INTEGRAL Verre Trempé iPhone XR/11',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_5.jpg',name:'FAIRPLAY IMPACT Verre Trempé iPhone 12/12 Pro',brand:'FAIRPLAY'},
+  {img:U+'v/2/v2integral_2_4_1_1_1_1.jpg',name:'FAIRPLAY INTEGRAL Verre Trempé iPhone 17 Pro',brand:'FAIRPLAY'},
+  // Protection caméra
+  {img:U+'c/h/chatgpt_image_6_ao_t_2025_10_37_13.png',name:'BELKIN Protection Caméra iPhone (x2)',brand:'BELKIN'},
+  {img:U+'0/1/01-lpa01363m8-000.jpg',name:'RHINOSHIELD Protection Caméra — Gris',brand:'RHINOSHIELD'},
+  {img:U+'0/1/01-lpa013634w-000.jpg',name:'RHINOSHIELD Protection Caméra — Violet',brand:'RHINOSHIELD'},
+  {img:U+'0/1/01-lpa013634v-000.jpg',name:'RHINOSHIELD Protection Caméra — Bleu',brand:'RHINOSHIELD'},
+];
+
+// FairPlay iPhone coques
+var FP_IP=[
+  {img:U+'3/2/326--rigel_3.jpg',name:'FAIRPLAY RIGEL Folio MagSafe',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--polarisv2mag_16.jpg',name:'FAIRPLAY POLARIS 2M MagSafe',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--polarisv2_3_2.jpg',name:'FAIRPLAY POLARIS 2M',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--gamma_4_1.jpg',name:'FAIRPLAY GAMMA Folio',brand:'FAIRPLAY'},
+  {img:U+'6/3/639--pavonemag_15_17.jpg',name:'FAIRPLAY PAVONE MagSafe — Noir',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_11_2.jpg',name:'FAIRPLAY PAVONE — Rose Pastel',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_7_5.jpg',name:'FAIRPLAY PAVONE — Rouge',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_-pavone_1_noir_16_25.jpg',name:'FAIRPLAY PAVONE — Noir',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--pavone_rose_fushia_6_1.jpg',name:'FAIRPLAY PAVONE — Rose Fuschia',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_pavone_bleu_givre_6_1.jpg',name:'FAIRPLAY PAVONE — Bleu Givré',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_pavone_plum_2_1_1.jpg',name:'FAIRPLAY PAVONE — Plum',brand:'FAIRPLAY'},
+  {img:U+'2/_/2_10_1_2_3.jpg',name:'FAIRPLAY CAPELLA iPhone 16',brand:'FAIRPLAY'},
+  {img:U+'2/_/2_10_1_2_4.jpg',name:'FAIRPLAY CAPELLA iPhone 16 Plus',brand:'FAIRPLAY'},
+  {img:U+'2/_/2_10_1_2_5.jpg',name:'FAIRPLAY CAPELLA iPhone 16 Pro',brand:'FAIRPLAY'},
+];
+
+// Coques iPhone complètes = FP_IP + CM + RS
+var COQUES_IP=FP_IP.concat(CM).concat(RS);
+// Coques Samsung = FP_PAVONE_SS + FP_CAPELLA_SS + CM_SS + CIRCLE_SS + SILI_SS
+var COQUES_SS=FP_PAVONE_SS.concat(FP_CAPELLA_SS).concat(CM_SS).concat(CIRCLE_SS).concat(SILI_SS);
+
+// ===== MODELS =====
+var MODELS={
+  apple:[
+    {v:'ip16',l:'iPhone 16'},{v:'ip16pro',l:'iPhone 16 Pro'},{v:'ip16plus',l:'iPhone 16 Plus'},
+    {v:'ip15',l:'iPhone 15'},{v:'ip15pro',l:'iPhone 15 Pro'},{v:'ip15plus',l:'iPhone 15 Plus'},
+    {v:'ip14',l:'iPhone 14'},{v:'ip14pro',l:'iPhone 14 Pro'},
+    {v:'ip13',l:'iPhone 13'},{v:'ip13mini',l:'iPhone 13 Mini'},
+    {v:'ip12',l:'iPhone 12'},{v:'ip11',l:'iPhone 11'},
+  ],
+  samsung:[
+    {v:'ss25',l:'Galaxy S25'},{v:'ss25p',l:'Galaxy S25+'},{v:'ss25u',l:'Galaxy S25 Ultra'},
+    {v:'ss24',l:'Galaxy S24'},{v:'ss24p',l:'Galaxy S24+'},{v:'ss24u',l:'Galaxy S24 Ultra'},{v:'ss24fe',l:'Galaxy S24 FE'},
+    {v:'ss23',l:'Galaxy S23'},{v:'ss23p',l:'Galaxy S23+'},{v:'ss23fe',l:'Galaxy S23 FE'},
+    {v:'sa56',l:'Galaxy A56 5G'},{v:'sa55',l:'Galaxy A55 5G'},{v:'sa54',l:'Galaxy A54 5G'},{v:'sa53',l:'Galaxy A53 5G'},
+    {v:'sa36',l:'Galaxy A36 5G'},{v:'sa35',l:'Galaxy A35 5G'},{v:'sa34',l:'Galaxy A34 5G'},
+    {v:'sa26',l:'Galaxy A26 5G'},{v:'sa25',l:'Galaxy A25 5G'},{v:'sa24',l:'Galaxy A24'},
+    {v:'sa16',l:'Galaxy A16 5G'},{v:'sa15',l:'Galaxy A15 5G'},{v:'sa14',l:'Galaxy A14 5G'},
+    {v:'sm15',l:'Galaxy M15 5G'},{v:'sm14',l:'Galaxy M14 5G'},
+  ],
+  xiaomi:[
+    {v:'xi15',l:'Xiaomi 15'},{v:'xi14',l:'Xiaomi 14'},
+    {v:'xiredmi13',l:'Redmi 13C'},{v:'xiredmi12',l:'Redmi 12C'},
+    {v:'xiredmia3',l:'Redmi A3'},{v:'xinote13',l:'Redmi Note 13'},
+  ],
+  honor:[{v:'honor90',l:'Honor 90 Smart'},{v:'other',l:'Autre Honor'}],
+  oppo:[{v:'other',l:'Reno 12'},{v:'other2',l:'A98 5G'}],
+  google:[{v:'other',l:'Pixel 9'},{v:'other2',l:'Pixel 8a'}],
+  oneplus:[{v:'other',l:'OnePlus 12'},{v:'other2',l:'OnePlus 12R'}],
+  motorola:[{v:'other',l:'Edge 50'},{v:'other2',l:'Moto G85'}],
+  other:[{v:'other',l:'Autre modèle'}],
+};
+
+// ===== CATALOG — même accessoires pour tous, coques spécifiques =====
+function makeModel(name,brand,icon,coques,verre){
+  return {name:name,brand:brand,icon:icon,coques:coques,verre:verre||FP_VERRE,chargeurs:CHARGEURS,batteries:BATTERIES,cables:CABLES,audio:AUDIO,supports:SUPPORTS,accessoires:ACCESSOIRES};
+}
+
+var DATA={
+  // iPhone
+  ip16:makeModel('iPhone 16','Apple','🍎',COQUES_IP),
+  ip16pro:makeModel('iPhone 16 Pro','Apple','🍎',COQUES_IP),
+  ip16plus:makeModel('iPhone 16 Plus','Apple','🍎',COQUES_IP),
+  ip15:makeModel('iPhone 15','Apple','🍎',COQUES_IP),
+  ip15pro:makeModel('iPhone 15 Pro','Apple','🍎',COQUES_IP),
+  ip15plus:makeModel('iPhone 15 Plus','Apple','🍎',COQUES_IP),
+  ip14:makeModel('iPhone 14','Apple','🍎',COQUES_IP),
+  ip14pro:makeModel('iPhone 14 Pro','Apple','🍎',COQUES_IP),
+  ip13:makeModel('iPhone 13','Apple','🍎',COQUES_IP),
+  ip13mini:makeModel('iPhone 13 Mini','Apple','🍎',COQUES_IP),
+  ip12:makeModel('iPhone 12','Apple','🍎',COQUES_IP),
+  ip11:makeModel('iPhone 11','Apple','🍎',COQUES_IP),
+  // Samsung
+  ss25:makeModel('Galaxy S25','Samsung','📱',COQUES_SS,VERRE_SS),
+  ss25p:makeModel('Galaxy S25+','Samsung','📱',COQUES_SS,VERRE_SS),
+  ss25u:makeModel('Galaxy S25 Ultra','Samsung','📱',COQUES_SS,VERRE_SS),
+  ss24:makeModel('Galaxy S24','Samsung','📱',COQUES_SS,VERRE_SS),
+  ss24p:makeModel('Galaxy S24+','Samsung','📱',COQUES_SS,VERRE_SS),
+  ss24u:makeModel('Galaxy S24 Ultra','Samsung','📱',COQUES_SS,VERRE_SS),
+  ss24fe:makeModel('Galaxy S24 FE','Samsung','📱',COQUES_SS,VERRE_SS),
+  ss23:makeModel('Galaxy S23','Samsung','📱',COQUES_SS,VERRE_SS),
+  ss23p:makeModel('Galaxy S23+','Samsung','📱',COQUES_SS,VERRE_SS),
+  ss23fe:makeModel('Galaxy S23 FE','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa56:makeModel('Galaxy A56 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa55:makeModel('Galaxy A55 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa54:makeModel('Galaxy A54 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa53:makeModel('Galaxy A53 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa36:makeModel('Galaxy A36 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa35:makeModel('Galaxy A35 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa34:makeModel('Galaxy A34 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa26:makeModel('Galaxy A26 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa25:makeModel('Galaxy A25 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa24:makeModel('Galaxy A24','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa16:makeModel('Galaxy A16 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa15:makeModel('Galaxy A15 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sa14:makeModel('Galaxy A14 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sm15:makeModel('Galaxy M15 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  sm14:makeModel('Galaxy M14 5G','Samsung','📱',COQUES_SS,VERRE_SS),
+  // Xiaomi
+  xi15:makeModel('Xiaomi 15','Xiaomi','📱',COQUES_SS,VERRE_SS),
+  xi14:makeModel('Xiaomi 14','Xiaomi','📱',COQUES_SS,VERRE_SS),
+  xiredmi13:makeModel('Redmi 13C','Xiaomi','📱',COQUES_SS,VERRE_SS),
+  xiredmi12:makeModel('Redmi 12C','Xiaomi','📱',COQUES_SS,VERRE_SS),
+  xiredmia3:makeModel('Redmi A3','Xiaomi','📱',COQUES_SS,VERRE_SS),
+  xinote13:makeModel('Redmi Note 13','Xiaomi','📱',COQUES_SS,VERRE_SS),
+  // Autres
+  honor90:makeModel('Honor 90 Smart','Honor','📱',COQUES_SS,VERRE_SS),
+  other:makeModel('Votre modèle','Votre marque','📱',COQUES_SS,VERRE_SS),
+  other2:makeModel('Votre modèle','Votre marque','📱',COQUES_SS,VERRE_SS),
+};
+
+var curModel=null,curCat='coques';
+
+function loadModels(){
+  var brand=document.getElementById('sBrand').value;
+  var sel=document.getElementById('sModel');
+  sel.innerHTML='<option value="">— Choisir un modèle —</option>';
+  if(!brand||!MODELS[brand])return;
+  MODELS[brand].forEach(function(m){sel.innerHTML+='<option value="'+m.v+'">'+m.l+'</option>';});
+}
+
+function showProducts(){
+  var v=document.getElementById('sModel').value;
+  if(!v)return;
+  curModel=v; curCat='coques';
+  var d=DATA[v]||DATA.other;
+  document.getElementById('wState').style.display='none';
+  document.getElementById('productsZone').style.display='block';
+  document.getElementById('pIcon').textContent=d.icon||'📱';
+  document.getElementById('pTitle').innerHTML='<span>'+d.brand+'</span> '+d.name;
+  document.getElementById('pSub').textContent='FairPlay · CoverMe · Belkin · RhinoShield — 21 Rue Gambetta, Mâcon';
+  document.querySelectorAll('.ctab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.ctab')[0].classList.add('active');
+  render(d,'coques');
+  document.getElementById('productsZone').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showCat(cat,btn){
+  curCat=cat;
+  document.querySelectorAll('.ctab').forEach(function(t){t.classList.remove('active');});
+  btn.classList.add('active');
+  if(!curModel)return;
+  render(DATA[curModel]||DATA.other,cat);
+}
+
+function render(d,cat){
+  var grid=document.getElementById('grid');
+  var fbar=document.getElementById('fbar');
+  var cta=document.getElementById('ctaCta');
+  grid.innerHTML=''; fbar.innerHTML=''; cta.classList.remove('show');
+  var items=d[cat];
+  if(!items||items.length===0){cta.classList.add('show');return;}
+
+  if(items.length>6){
+    var brands=[];
+    items.forEach(function(p){if(p.brand&&brands.indexOf(p.brand)<0)brands.push(p.brand);});
+    fbar.innerHTML='<button class="fchip active" onclick="filt(\'all\',this)">Tous ('+items.length+')</button>';
+    brands.forEach(function(b){
+      var cnt=items.filter(function(p){return p.brand===b;}).length;
+      fbar.innerHTML+='<button class="fchip" onclick="filt(\''+b+'\',this)">'+b+' ('+cnt+')</button>';
+    });
+    fbar.innerHTML+='<span class="rcount" id="rc">'+items.length+' produits</span>';
+  }
+  items.forEach(function(p){
+    grid.innerHTML+='<div class="pcard" data-b="'+(p.brand||'')+'"><div class="pimg"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></div><div class="pinfo"><div class="pname">'+p.name+'</div><span class="pbadge">EN MAGASIN</span></div></div>';
+  });
+  if(['chargeurs','batteries','cables','audio','supports','accessoires'].indexOf(cat)>=0){
+    grid.innerHTML+='<div class="more-note">+ D\'autres références disponibles · <a href="https://wa.me/33385330689">Demander sur WhatsApp</a></div>';
+  }
+}
+
+function filt(brand,btn){
+  document.querySelectorAll('.fchip').forEach(function(c){c.classList.remove('active');});
+  btn.classList.add('active');
+  var cnt=0;
+  document.querySelectorAll('.pcard').forEach(function(c){
+    if(brand==='all'||c.dataset.b===brand){c.style.display='';cnt++;}
+    else c.style.display='none';
+  });
+  var rc=document.getElementById('rc');
+  if(rc)rc.textContent=cnt+' produits';
+}
+</script>
+</body></html>
