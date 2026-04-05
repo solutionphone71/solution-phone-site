@@ -851,7 +851,7 @@ function sendDevisMail(){
   var d=getDevisData();if(!d)return;
   var sub=encodeURIComponent('Devis iPhone - '+d.nom);
   var body=encodeURIComponent('Bonjour,\nNom : '+d.nom+'\nTél : '+d.tel+(d.modele?'\nModèle : '+d.modele:'')+'\nPanne : '+d.panne);
-  window.open('mailto:solution.phone71@gmail.com?subject='+sub+'&body='+body);
+  window.open('mailto:contact@solution-phone.fr?subject='+sub+'&body='+body);
 }
 
 // ── PRICING TABLES ──
