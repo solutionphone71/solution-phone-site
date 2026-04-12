@@ -57,38 +57,52 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
 nav{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 48px;height:68px;
-  background:rgba(5,5,8,0.95);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(16px);
+  padding:0 40px;height:60px;
+  background:rgba(5,5,8,0.92);
+  border-bottom:1px solid rgba(255,0,51,0.15);
+  backdrop-filter:blur(20px);
   transition:top .3s;
 }
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;}
+nav::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--red),var(--cyan),transparent);
+  opacity:.4;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex-shrink:0;}
 .nav-badge{
-  width:36px;height:36px;background:var(--red);
+  width:34px;height:34px;background:var(--red);
   display:flex;align-items:center;justify-content:center;
-  font-family:'Orbitron',sans-serif;font-weight:900;font-size:.8rem;
-  clip-path:polygon(6px 0,100% 0,100% calc(100%-6px),calc(100%-6px) 100%,0 100%,0 6px);
+  font-family:'Orbitron',sans-serif;font-weight:900;font-size:.75rem;
+  clip-path:polygon(5px 0,100% 0,100% calc(100%-5px),calc(100%-5px) 100%,0 100%,0 5px);
 }
-.nav-logo-text{font-family:'Orbitron',sans-serif;font-weight:900;font-size:.95rem;letter-spacing:2px;}
-.nav-links{display:flex;gap:32px;}
+.nav-logo-text{font-family:'Orbitron',sans-serif;font-weight:900;font-size:.85rem;letter-spacing:2px;white-space:nowrap;}
+.nav-links{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;}
 .nav-links a{
-  font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.9rem;
-  letter-spacing:2px;text-transform:uppercase;color:var(--gray2);
-  text-decoration:none;transition:color .2s;position:relative;
+  font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.78rem;
+  letter-spacing:1px;text-transform:uppercase;color:var(--gray2);
+  text-decoration:none;transition:all .25s;position:relative;
+  padding:6px 10px;border-radius:4px;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:4px;
 }
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--red);transition:width .3s;}
-.nav-links a:hover{color:#fff;}.nav-links a:hover::after{width:100%;}
-.nav-right{display:flex;align-items:center;gap:20px;}
-.nav-phone{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--cyan);letter-spacing:1px;}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:10px;right:10px;height:1px;background:var(--red);transform:scaleX(0);transition:transform .3s;}
+.nav-links a:hover{color:#fff;background:rgba(255,0,51,.06);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-links a .shopify-icon{opacity:.6;transition:opacity .25s;}
+.nav-links a:hover .shopify-icon{opacity:1;}
+.nav-right{display:flex;align-items:center;gap:16px;flex-shrink:0;}
+.nav-phone{
+  font-family:'Share Tech Mono',monospace;font-size:.8rem;color:var(--cyan);letter-spacing:1px;
+  padding:5px 12px;border:1px solid rgba(0,245,255,0.15);border-radius:4px;
+  background:rgba(0,245,255,0.04);white-space:nowrap;
+}
 .nav-cta{
   background:var(--red);color:#fff;text-decoration:none;
-  font-family:'Orbitron',sans-serif;font-weight:700;font-size:.7rem;
-  letter-spacing:2px;padding:9px 20px;text-transform:uppercase;
-  clip-path:polygon(7px 0,100% 0,100% calc(100%-7px),calc(100%-7px) 100%,0 100%,0 7px);
-  transition:all .2s;
+  font-family:'Orbitron',sans-serif;font-weight:700;font-size:.65rem;
+  letter-spacing:2px;padding:9px 18px;text-transform:uppercase;
+  clip-path:polygon(6px 0,100% 0,100% calc(100%-6px),calc(100%-6px) 100%,0 100%,0 6px);
+  transition:all .25s;white-space:nowrap;
 }
-.nav-cta:hover{background:var(--red2);box-shadow:0 0 20px rgba(255,0,51,.5);}
+.nav-cta:hover{background:var(--red2);box-shadow:0 0 24px rgba(255,0,51,.5);}
 
 /* ── HERO ── */
 .hero{
@@ -508,6 +522,11 @@ footer .foot-links a:hover{color:var(--red);}
   .team-grid,.devices-grid{grid-template-columns:repeat(2,1fr);}
   .pricing-table th,.pricing-table td{padding:10px 12px;font-size:.8rem;}
 }
+@media(max-width:1200px){
+  .nav-links a{font-size:.72rem;padding:6px 7px;letter-spacing:.5px;}
+  .nav-links{gap:2px;}
+  .nav-phone{font-size:.75rem;padding:4px 10px;}
+}
 @media(max-width:768px){
   nav,.hero,.why,.devices,.team,.services,.stats,.pricing,.how,.contact,footer{padding-left:20px;padding-right:20px;}
   .nav-links,.nav-phone{display:none;}
@@ -758,12 +777,12 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeQR();})
   <div class="nav-links">
     <a href="#accueil">Accueil</a>
     <a href="#equipe">L'Équipe</a>
-    <a href="boutique.html" style="color:var(--cyan);display:inline-flex;align-items:center;gap:5px;"><span>🛒</span> Accessoires</a>
+    <a href="boutique.html" style="color:var(--cyan);">🛒 Accessoires</a>
     <a href="hydrogel.html">💧 Protection Écran</a>
-    <a href="https://www.solution-accessoires.fr" target="_blank" style="display:inline-flex;align-items:center;gap:5px;">📱 Tél. Reconditionnés <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 256 292" style="vertical-align:middle;"><path fill="#95BF47" d="M223.8 57.5c-.1-1-.9-1.5-1.5-1.6-1.3-.1-11.4-.8-11.4-.8s-7.6-7.5-8.4-8.3c-.8-.8-2.4-.6-3-.4-.1 0-4.3 1.3-10.9 3.4-6.5-18.7-17.9-35.8-38-35.8h-1.8c-4.5-5.8-10-8.6-14.8-8.6C94 5.4 73.8 54 67.1 81c-14.9 4.6-25.4 7.9-26.7 8.3-8.3 2.6-8.6 2.9-9.7 10.7C29.5 110 .4 251.5.4 251.5l175.7 32.9 95.3-23.6S224 58.5 223.8 57.5zM162.4 47.8l-14.7 4.6c0-9-.5-21.6-3.3-32.4 12.4 2.4 18.3 16.3 18 27.8zM138 52.1l-29.7 9.2c2.9-11 8.4-22 15.2-29.2 2.5-2.7 6-5.6 10.1-7.3 4 8.3 4.5 20.1 4.4 27.3zM124.5 8.2c3.3 0 6 .7 8.3 2.1-3.8 1.8-7.4 4.9-10.7 8.5-9 9.5-15.8 24.3-18.6 38.6l-24 7.4C84.9 42.3 99.7 8.2 124.5 8.2z"/><path fill="#5E8E3E" d="M222.3 55.9c-1.3-.1-11.4-.8-11.4-.8s-7.6-7.5-8.4-8.3c-.3-.3-.7-.5-1.1-.5L176.2 284.4l95.3-23.6S224 58.5 223.8 57.5c-.2-1-.9-1.5-1.5-1.6z"/><path fill="#fff" d="M150.3 99.4l-5.4 16c-5.8-2-12.1-4.2-19.2-3.5-11.3.7-11.5 7.8-11.4 9.6.6 10.1 27.1 12.3 28.6 36 1.2 18.6-9.9 31.3-25.8 32.3-19.1 1.2-29.6-10.1-29.6-10.1l4.1-17.2s10.6 8 19.1 7.4c5.6-.4 7.6-4.9 7.4-8.1-.8-13.2-22.4-12.4-23.8-34.1-1.2-18.3 10.8-36.8 37.3-38.5 10.3-.5 15.5 2 15.5 2l.2 8.2z"/></svg></a>
+    <a href="https://www.solution-accessoires.fr" target="_blank">📱 Tél. Reconditionnés <svg class="shopify-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 256 292"><path fill="#95BF47" d="M223.8 57.5c-.1-1-.9-1.5-1.5-1.6-1.3-.1-11.4-.8-11.4-.8s-7.6-7.5-8.4-8.3c-.8-.8-2.4-.6-3-.4-.1 0-4.3 1.3-10.9 3.4-6.5-18.7-17.9-35.8-38-35.8h-1.8c-4.5-5.8-10-8.6-14.8-8.6C94 5.4 73.8 54 67.1 81c-14.9 4.6-25.4 7.9-26.7 8.3-8.3 2.6-8.6 2.9-9.7 10.7C29.5 110 .4 251.5.4 251.5l175.7 32.9 95.3-23.6S224 58.5 223.8 57.5zM162.4 47.8l-14.7 4.6c0-9-.5-21.6-3.3-32.4 12.4 2.4 18.3 16.3 18 27.8zM138 52.1l-29.7 9.2c2.9-11 8.4-22 15.2-29.2 2.5-2.7 6-5.6 10.1-7.3 4 8.3 4.5 20.1 4.4 27.3zM124.5 8.2c3.3 0 6 .7 8.3 2.1-3.8 1.8-7.4 4.9-10.7 8.5-9 9.5-15.8 24.3-18.6 38.6l-24 7.4C84.9 42.3 99.7 8.2 124.5 8.2z"/><path fill="#5E8E3E" d="M222.3 55.9c-1.3-.1-11.4-.8-11.4-.8s-7.6-7.5-8.4-8.3c-.3-.3-.7-.5-1.1-.5L176.2 284.4l95.3-23.6S224 58.5 223.8 57.5c-.2-1-.9-1.5-1.5-1.6z"/><path fill="#fff" d="M150.3 99.4l-5.4 16c-5.8-2-12.1-4.2-19.2-3.5-11.3.7-11.5 7.8-11.4 9.6.6 10.1 27.1 12.3 28.6 36 1.2 18.6-9.9 31.3-25.8 32.3-19.1 1.2-29.6-10.1-29.6-10.1l4.1-17.2s10.6 8 19.1 7.4c5.6-.4 7.6-4.9 7.4-8.1-.8-13.2-22.4-12.4-23.8-34.1-1.2-18.3 10.8-36.8 37.3-38.5 10.3-.5 15.5 2 15.5 2l.2 8.2z"/></svg></a>
     <a href="#contact">Contact</a>
     <a href="actualites.html">Actualités</a>
-    <a href="reparation-iphone.html" style="color:var(--red);">Réparation iPhone Mâcon</a>
+    <a href="reparation-iphone.html" style="color:var(--red);">Réparation iPhone</a>
   </div>
   <div class="nav-right">
     <div class="nav-phone">03 85 33 06 89</div>
@@ -782,7 +801,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeQR();})
   <a href="reparation-iphone.html" class="mobile-iphone">📱 Réparation iPhone</a>
   <a href="boutique.html" onclick="toggleMenu()" class="mobile-boutique">🛒 Accessoires</a>
   <a href="hydrogel.html">💧 Protection Écran</a>
-  <a href="https://www.solution-accessoires.fr" target="_blank" style="display:inline-flex;align-items:center;gap:5px;">📱 Tél. Reconditionnés <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 256 292" style="vertical-align:middle;"><path fill="#95BF47" d="M223.8 57.5c-.1-1-.9-1.5-1.5-1.6-1.3-.1-11.4-.8-11.4-.8s-7.6-7.5-8.4-8.3c-.8-.8-2.4-.6-3-.4-.1 0-4.3 1.3-10.9 3.4-6.5-18.7-17.9-35.8-38-35.8h-1.8c-4.5-5.8-10-8.6-14.8-8.6C94 5.4 73.8 54 67.1 81c-14.9 4.6-25.4 7.9-26.7 8.3-8.3 2.6-8.6 2.9-9.7 10.7C29.5 110 .4 251.5.4 251.5l175.7 32.9 95.3-23.6S224 58.5 223.8 57.5zM162.4 47.8l-14.7 4.6c0-9-.5-21.6-3.3-32.4 12.4 2.4 18.3 16.3 18 27.8zM138 52.1l-29.7 9.2c2.9-11 8.4-22 15.2-29.2 2.5-2.7 6-5.6 10.1-7.3 4 8.3 4.5 20.1 4.4 27.3zM124.5 8.2c3.3 0 6 .7 8.3 2.1-3.8 1.8-7.4 4.9-10.7 8.5-9 9.5-15.8 24.3-18.6 38.6l-24 7.4C84.9 42.3 99.7 8.2 124.5 8.2z"/><path fill="#5E8E3E" d="M222.3 55.9c-1.3-.1-11.4-.8-11.4-.8s-7.6-7.5-8.4-8.3c-.3-.3-.7-.5-1.1-.5L176.2 284.4l95.3-23.6S224 58.5 223.8 57.5c-.2-1-.9-1.5-1.5-1.6z"/><path fill="#fff" d="M150.3 99.4l-5.4 16c-5.8-2-12.1-4.2-19.2-3.5-11.3.7-11.5 7.8-11.4 9.6.6 10.1 27.1 12.3 28.6 36 1.2 18.6-9.9 31.3-25.8 32.3-19.1 1.2-29.6-10.1-29.6-10.1l4.1-17.2s10.6 8 19.1 7.4c5.6-.4 7.6-4.9 7.4-8.1-.8-13.2-22.4-12.4-23.8-34.1-1.2-18.3 10.8-36.8 37.3-38.5 10.3-.5 15.5 2 15.5 2l.2 8.2z"/></svg></a>
+  <a href="https://www.solution-accessoires.fr" target="_blank" style="display:inline-flex;align-items:center;gap:6px;">📱 Tél. Reconditionnés <svg width="14" height="16" viewBox="0 0 256 292" xmlns="http://www.w3.org/2000/svg"><path fill="#95BF47" d="M223.8 57.5c-.1-1-.9-1.5-1.5-1.6-1.3-.1-11.4-.8-11.4-.8s-7.6-7.5-8.4-8.3c-.8-.8-2.4-.6-3-.4-.1 0-4.3 1.3-10.9 3.4-6.5-18.7-17.9-35.8-38-35.8h-1.8c-4.5-5.8-10-8.6-14.8-8.6C94 5.4 73.8 54 67.1 81c-14.9 4.6-25.4 7.9-26.7 8.3-8.3 2.6-8.6 2.9-9.7 10.7C29.5 110 .4 251.5.4 251.5l175.7 32.9 95.3-23.6S224 58.5 223.8 57.5z"/><path fill="#5E8E3E" d="M222.3 55.9c-1.3-.1-11.4-.8-11.4-.8s-7.6-7.5-8.4-8.3c-.3-.3-.7-.5-1.1-.5L176.2 284.4l95.3-23.6S224 58.5 223.8 57.5c-.2-1-.9-1.5-1.5-1.6z"/></svg></a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
   <a href="actualites.html" onclick="toggleMenu()">📰 Actualités</a>
   <a href="#devis" onclick="toggleMenu()" class="mobile-wa">💬 Devis Gratuit</a>
@@ -1347,9 +1366,9 @@ function sendDevisMail() {
           <div class="ccard-icon">📞</div>
           <div><div class="ccard-label">Téléphone</div><div class="ccard-val">03 85 33 06 89</div></div>
         </a>
-        <a href="/cdn-cgi/l/email-protection#294a46475d484a5d695a46455c5d40464704594146474c074f5b" class="ccard em rev" style="transition-delay:.16s">
+        <a href="mailto:contact@solution-phone.fr" class="ccard em rev" style="transition-delay:.16s">
           <div class="ccard-icon">✉️</div>
-          <div><div class="ccard-label">Email</div><div class="ccard-val"><span class="__cf_email__" data-cfemail="2b4844455f4a485f6b5844475e5f424445065b4344454e054d59">[email&#160;protected]</span></div></div>
+          <div><div class="ccard-label">Email</div><div class="ccard-val">contact@solution-phone.fr</div></div>
         </a>
         <a href="https://maps.google.com/?q=21+Rue+Gambetta+71000" target="_blank" class="ccard ad rev" style="transition-delay:.24s">
           <div class="ccard-icon">📍</div>
@@ -1406,7 +1425,7 @@ function sendDevisMail() {
     <div class="foot-links">
       <a href="https://wa.me/33783921884">WhatsApp</a>
       <a href="tel:0385330689">03 85 33 06 89</a>
-      <a href="/cdn-cgi/l/email-protection#9af9f5f4eefbf9eedae9f5f6efeef3f5f4b7eaf2f5f4ffb4fce8">Email</a>
+      <a href="mailto:contact@solution-phone.fr">Email</a>
       <a href="boutique.html">🛒 Accessoires</a>
       <a href="hydrogel.html">💧 Protection Écran</a>
       <a href="https://www.reparation-iphone-macon.fr" rel="dofollow">📱 Réparation iPhone Mâcon</a>
@@ -1512,7 +1531,7 @@ function sendDevisMail() {
       <p>Les lots doivent être retirés en boutique dans un délai de 30 jours à compter de la date de participation, sur présentation d'un justificatif d'identité et de l'écran de gain ou de l'email de confirmation. Passé ce délai, le lot est définitivement perdu.</p>
 
       <h3>Article 7 — Données personnelles</h3>
-      <p>L'adresse email fournie lors de la participation est utilisée uniquement pour l'envoi de la confirmation du lot et ne sera pas transmise à des tiers. Conformément au RGPD, le participant dispose d'un droit d'accès, de rectification et de suppression de ses données en contactant : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="53303c3d2732302713203c3f26273a3c3d7e233b3c3d367d3521">[email&#160;protected]</a></p>
+      <p>L'adresse email fournie lors de la participation est utilisée uniquement pour l'envoi de la confirmation du lot et ne sera pas transmise à des tiers. Conformément au RGPD, le participant dispose d'un droit d'accès, de rectification et de suppression de ses données en contactant : <a href="mailto:contact@solution-phone.fr">contact@solution-phone.fr</a></p>
 
       <h3>Article 8 — Responsabilité</h3>
       <p>Solution Phone ne pourra être tenu responsable en cas de problème technique indépendant de sa volonté empêchant le bon déroulement du jeu. Solution Phone se réserve le droit d'interrompre, modifier ou annuler le jeu à tout moment, notamment en cas de force majeure, sans que cela puisse ouvrir droit à une quelconque indemnisation.</p>
@@ -1545,7 +1564,7 @@ function sendDevisMail() {
 .legal-body::-webkit-scrollbar-thumb{background:#444;border-radius:3px;}
 </style>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function openModal(id) {
   document.getElementById('modal-' + id).classList.add('open');
   document.body.style.overflow = 'hidden';
