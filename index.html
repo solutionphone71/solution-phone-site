@@ -2192,4 +2192,49 @@ function closeTrump() {
 #roulette-modal{position:relative;width:min(430px,96vw);height:min(820px,94vh);border-radius:24px;overflow:hidden;box-shadow:0 0 0 1px rgba(229,62,62,0.3),0 32px 80px rgba(0,0,0,0.7);animation:modal-up .35s cubic-bezier(0.34,1.56,0.64,1);}
 @keyframes modal-up{from{transform:translateY(40px) scale(0.96);opacity:0;}to{transform:translateY(0) scale(1);opacity:1;}}
 #roulette-iframe{width:100%;height:100%;border:none;display:block;}
-#roulette-close{position:absolute;top:14px;right:14px;z-index:10;width:36px;height:36px;background:rgba(0,0,0,0.55);border:1px solid rgba(255,
+#roulette-close{position:absolute;top:14px;right:14px;z-index:10;width:36px;height:36px;background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.12);border-radius:50%;color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s;backdrop-filter:blur(4px);}
+#roulette-close:hover{background:rgba(229,62,62,0.7);transform:scale(1.1);}
+@media (max-width:500px){
+  #roulette-modal{width:100vw;height:100dvh;border-radius:0;animation:slide-up .3s cubic-bezier(0.34,1.56,0.64,1);}
+  #roulette-fab{bottom:16px;right:16px;padding:12px 18px 12px 14px;font-size:14px;}
+  @keyframes slide-up{from{transform:translateY(100%);}to{transform:translateY(0);}}
+}
+</style>
+
+<script>
+(function(){
+  var ROULETTE_URL = (function(){
+    var base = window.location.href.split('?')[0].split('#')[0]
+      .replace(/\/?index\.html$/, '').replace(/\/$/, '');
+    return base + '/roulette.html';
+  })();
+
+  window.openRoulette = function(){
+    var overlay = document.getElementById('roulette-overlay');
+    var iframe  = document.getElementById('roulette-iframe');
+    if (!iframe.src || iframe.src === 'about:blank' || iframe.src === window.location.href) {
+      iframe.src = ROULETTE_URL;
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeRoulette = function(){
+    var overlay = document.getElementById('roulette-overlay');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window.closeRouletteIfOutside = function(e){
+    if (e.target === document.getElementById('roulette-overlay')) window.closeRoulette();
+  };
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') window.closeRoulette();
+  });
+
+  console.log('🎡 Lien direct roulette :', ROULETTE_URL);
+})();
+</script>
+</body>
+</html>
