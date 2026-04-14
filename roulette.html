@@ -551,7 +551,8 @@ h1 .acc { color:var(--red); }
 const SUPA_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co';
 const SUPA_KEY = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
 const BREVO_KEY = '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';
-const SHOP_EMAIL = 'solution.phone71@gmail.com';
+const SHOP_EMAIL = 'contact@solution-phone.fr';
+const SHOP_NAME  = 'Solution Phone';
 
 const DEFAULT_CONFIG = {
   googleUrl: 'https://g.page/r/CbyQ_wiFpddjEBM/review',
@@ -975,45 +976,59 @@ async function sendPrizeEmail() {
 </body>
 </html>`;
 
-  try {
-    // Email au client
-    const r1 = await fetch('https://api.brevo.com/v3/smtp/email', {
+  async function brevoSend(payload, label) {
+    const r = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
-      headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sender:  { name: 'Solution Phone Roue', email: SHOP_EMAIL },
+      headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json', 'accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const txt = await r.text();
+    console.log('[Brevo][' + label + '] status=' + r.status, txt);
+    if (!r.ok) throw new Error('Brevo ' + label + ' HTTP ' + r.status + ' : ' + txt);
+    return txt;
+  }
+
+  try {
+    // 1. Email au client (facultatif — on continue meme si ca echoue)
+    try {
+      await brevoSend({
+        sender:  { name: SHOP_NAME + ' — Roue', email: SHOP_EMAIL },
         to:      [{ email: email }],
+        replyTo: { email: SHOP_EMAIL, name: SHOP_NAME },
         subject: '🎡 Votre cadeau Solution Phone — ' + winPrizeName,
         htmlContent
-      })
-    });
+      }, 'client');
+    } catch(e1) {
+      console.warn('Email client echoue (on continue quand meme):', e1.message);
+      showToast('⚠️ Envoi email client echoue — la boutique est quand meme notifiee');
+    }
 
-    // Notification à la boutique
-    await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
-      headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sender:  { name: 'Roue Cadeaux', email: SHOP_EMAIL },
-        to:      [{ email: SHOP_EMAIL, name: 'Solution Phone' }],
-        subject: '🎁 Nouveau gain roue — ' + winPrizeName,
-        htmlContent: `<p>Nouveau gagnant à la roue !</p>
-          <p><strong>Lot :</strong> ${winPrizeName}</p>
-          <p><strong>Email client :</strong> ${email}</p>
-          <p><strong>Téléphone :</strong> ${_phoneVerifie || 'non renseigné'}</p>
-          <p><strong>Date :</strong> ${new Date().toLocaleString('fr-FR')}</p>`
-      })
-    });
+    // 2. Notification obligatoire a la boutique (contact@solution-phone.fr)
+    await brevoSend({
+      sender:  { name: 'Roue Cadeaux', email: SHOP_EMAIL },
+      to:      [{ email: SHOP_EMAIL, name: SHOP_NAME }],
+      replyTo: email ? { email: email } : undefined,
+      subject: '🎁 Nouveau gain roue — ' + winPrizeName,
+      htmlContent:
+        '<h2>🎡 Nouveau gagnant a la roue !</h2>' +
+        '<p><strong>Lot :</strong> ' + winPrizeName + '</p>' +
+        '<p><strong>Telephone :</strong> ' + (_phoneVerifie || 'non renseigne') + '</p>' +
+        '<p><strong>Email client :</strong> ' + (email || '<em>non renseigne</em>') + '</p>' +
+        '<p><strong>Date :</strong> ' + new Date().toLocaleString('fr-FR') + '</p>' +
+        '<hr><p style="color:#888;font-size:12px;">App Solution Phone → Roue cadeaux → Statistiques</p>'
+    }, 'boutique');
 
     document.getElementById('email-sent-msg').style.display = 'block';
     btn.textContent = '✅ Email envoyé !';
   } catch(e) {
-    // Fallback mailto si Brevo KO
-    console.warn('Brevo failed, fallback mailto', e);
+    console.error('❌ Echec complet envoi Brevo:', e);
+    showToast('❌ Erreur d\'envoi — voir console. Solution Phone sera quand meme previenue.');
+    // Fallback mailto
     const subject = encodeURIComponent('🎡 Cadeau Roue — ' + winPrizeName);
-    const body    = encodeURIComponent(`Client : ${email}\nLot : ${winPrizeName}\nTél : ${_phoneVerifie || '-'}`);
+    const body    = encodeURIComponent('Client : ' + email + '\nLot : ' + winPrizeName + '\nTel : ' + (_phoneVerifie || '-'));
     window.open('mailto:' + SHOP_EMAIL + '?subject=' + subject + '&body=' + body, '_blank');
     document.getElementById('email-sent-msg').style.display = 'block';
-    btn.textContent = '✅ Email préparé !';
+    btn.textContent = '⚠️ Email préparé (fallback)';
   }
 }
 
