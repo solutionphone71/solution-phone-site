@@ -624,24 +624,28 @@ a[href*="wa.me"]:not(.btn-p):not(.wa-float){color:#e30613 !important;}
 <div class="promo-bar">⚡ Certifié QualiRépar — <a href="#devis" style="color:#fff;text-decoration:underline">-25€ déduits automatiquement sur votre réparation →</a></div>
 
 <!-- NAV -->
-<nav id="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-badge">SP</div>
-    <span class="nav-logo-text">SOLUTION PHONE</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Accueil</a>
-    <a href="#devis" class="active">Réparation iPhone</a>
-    <a href="#tarifs">Tarifs</a>
-    <a href="accessoires.html">🛒 Accessoires</a>
-    <a href="https://solution-accessoires.fr" target="_blank">📱 Reconditionnés</a>
-    <a href="#contact">Contact</a>
+<header style="position:sticky;top:0;z-index:40;background:linear-gradient(90deg,#e30613 0%,#b8050f 100%);box-shadow:0 2px 12px -4px rgba(227,6,19,.35);font-family:'Plus Jakarta Sans',system-ui,sans-serif">
+  <div style="max-width:1280px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;gap:24px;font-size:13px;color:#fff">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;flex-shrink:0;color:#fff;text-decoration:none">
+      <img src="img/logo.png" alt="Solution Phone" style="width:40px;height:40px;border-radius:8px;background:#fff;padding:2px;object-fit:contain;box-shadow:0 2px 8px -2px rgba(0,0,0,.25)"/>
+      <span style="font-weight:900;letter-spacing:-0.02em;font-size:15px;line-height:1">SOLUTION&nbsp;PHONE</span>
+    </a>
+    <nav class="rip-nav-links" style="display:flex;align-items:center;gap:24px;font-weight:500;flex:1;justify-content:center;line-height:1">
+      <a href="index.html" style="color:rgba(255,255,255,.9);text-decoration:none">Accueil</a>
+      <a href="index.html#equipe" style="color:rgba(255,255,255,.9);text-decoration:none">L'équipe</a>
+      <a href="accessoires.html" style="color:rgba(255,255,255,.9);text-decoration:none">🛒&nbsp;Accessoires</a>
+      <a href="hydrogel.html" style="color:rgba(255,255,255,.9);text-decoration:none">💧&nbsp;Protection écran</a>
+      <a href="https://solution-accessoires.fr" target="_blank" rel="noopener" style="color:rgba(255,255,255,.9);text-decoration:none">📱&nbsp;Reconditionnés</a>
+      <a href="actualites.html" style="color:rgba(255,255,255,.9);text-decoration:none">Actualités</a>
+      <a href="#devis" style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#e30613;font-weight:800;padding:6px 16px;border-radius:9999px;text-decoration:none;white-space:nowrap;box-shadow:0 4px 12px -3px rgba(0,0,0,.2)">Réparation iPhone ›</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px;margin-left:auto;line-height:1">
+      <a href="tel:+33385330689" style="color:rgba(255,255,255,.95);text-decoration:none;font-weight:500">03 85 33 06 89</a>
+      <a href="#devis" style="display:inline-flex;align-items:center;gap:4px;background:#1d1d1f;color:#fff;font-weight:700;border-radius:9999px;padding:.45rem 1rem;font-size:.8rem;text-decoration:none">Devis <span>›</span></a>
+    </div>
   </div>
-  <div style="display:flex;align-items:center;gap:20px;">
-    <div class="nav-phone">03 85 33 06 89</div>
-    <a href="#devis" class="nav-cta">Devis Gratuit</a>
-  </div>
-</nav>
+</header>
+<style>@media (max-width:900px){.rip-nav-links{display:none !important}}</style>
 
 <!-- HERO -->
 <section class="hero">
