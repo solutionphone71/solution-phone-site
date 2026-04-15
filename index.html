@@ -159,7 +159,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
       <a href="#contact" class="hover:text-accent">Contact</a>
       <a href="actualites.html" class="hover:text-accent">Actualités</a>
       <a href="#faq" class="hover:text-accent">FAQ</a>
-      <a href="#" onclick="openWizard();return false" class="text-accent font-bold">Réparation iPhone</a>
+      <a href="reparation-iphone.html" class="text-accent font-bold">Réparation iPhone</a>
     </nav>
     <div class="flex items-center gap-3 ml-auto">
       <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-emerald-600">
@@ -482,8 +482,9 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
       <div>
         <p class="text-[12px] uppercase tracking-[0.22em] label">Prix transparents · Devis rapide</p>
         <h3 class="mt-3 text-3xl md:text-4xl font-extrabold tracking-tightest leading-[0.95]">
-          Écran. Batterie.<br>À partir de <span class="text-accent">49&nbsp;€</span>.
+          Écran. Batterie.<br>À partir de <span class="text-accent">35&nbsp;€</span>.
         </h3>
+        <p class="mt-1 text-[11px] text-muted">Prix indicatif · Bonus QualiRépar déjà déduit</p>
         <div class="mt-4 flex flex-wrap gap-2 text-[11px]">
           <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-bg2 border border-black/5"><b>iPhone 13</b> écran 90 €</span>
           <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-bg2 border border-black/5"><b>iPhone 15</b> batterie 75 €</span>
@@ -1432,7 +1433,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
       <p class="mt-2 text-muted">On ne fait pas compliqué. Choisissez ce qui colle.</p>
       <div class="grid md:grid-cols-2 gap-3 mt-8" id="wzIssues"></div>
       <div class="mt-6 flex justify-between">
-        <button class="btn-ghost" onclick="gotoStep(2)">‹ Retour</button>
+        <button class="btn-ghost" onclick="gotoStep(state.brand==='Apple' ? 2 : 1)">‹ Retour</button>
       </div>
     </div>
 
@@ -1491,6 +1492,45 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
       </div>
       <div class="mt-6 flex justify-between">
         <button class="btn-ghost" onclick="gotoStep(3)">‹ Retour</button>
+      </div>
+    </div>
+
+    <!-- STEP 6 : Formulaire simple (marques non-Apple) -->
+    <div class="wz-step" data-step="6">
+      <p class="text-[12px] uppercase tracking-[0.22em] label">Devis rapide · <span id="wzSimpleBrand">—</span></p>
+      <h2 class="mt-2 text-3xl md:text-5xl font-extrabold tracking-tightest leading-[0.95]">
+        Dites-nous tout.<br><span class="text-accent">On vous renvoie le prix dans l'heure.</span>
+      </h2>
+      <p class="mt-3 text-muted">Un message, une réponse chiffrée. Pas de blabla, pas d'engagement.</p>
+
+      <!-- Tabs WhatsApp / Email -->
+      <div class="mt-6 inline-flex p-1 rounded-full bg-bg2 border border-black/5" role="tablist">
+        <button type="button" id="wzTabWA" onclick="wzSwitchTab('wa')" class="px-5 py-2 rounded-full text-sm font-semibold transition" style="background:#25D366;color:#fff">
+          <span class="inline-flex items-center gap-1.5">💬 WhatsApp</span>
+        </button>
+        <button type="button" id="wzTabMail" onclick="wzSwitchTab('mail')" class="px-5 py-2 rounded-full text-sm font-semibold transition text-ink">
+          <span class="inline-flex items-center gap-1.5">✉️ Email</span>
+        </button>
+      </div>
+
+      <form id="wzSimpleForm" class="mt-5 grid md:grid-cols-2 gap-3">
+        <input name="prenom" required placeholder="Prénom" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <input name="tel" required type="tel" placeholder="Téléphone / WhatsApp" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <input name="marque" id="wzSimpleMarque" required placeholder="Marque (ex: Samsung, Xiaomi...)" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <input name="modele" required placeholder="Modèle (ex: Galaxy S23, Redmi Note 12)" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <textarea name="panne" required rows="2" placeholder="Quelle panne ? (ex: écran cassé, ne charge plus, batterie faible...)" class="md:col-span-2 bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40 resize-none"></textarea>
+        <button type="submit" id="wzSimpleSubmit" class="md:col-span-2 btn-red" style="background:#25D366">Envoyer sur WhatsApp <span>›</span></button>
+      </form>
+
+      <div class="wz-trust mt-5">
+        <span>✓ Réponse dans l'heure</span>
+        <span>✓ Diagnostic gratuit</span>
+        <span>✓ Garantie 6 mois</span>
+        <span>✓ Sans engagement</span>
+      </div>
+
+      <div class="mt-6 flex justify-between">
+        <button type="button" class="btn-ghost" onclick="gotoStep(3)">‹ Retour</button>
       </div>
     </div>
 
@@ -1838,14 +1878,19 @@ function openWizard(preset){
   document.body.style.overflow='hidden';
   updateUrgency();
   if(state.brand){
-    renderModels();
-    if(state.issue){
-      if(!state.model) state.model = (MODELS[state.brand][0]||{}).m || null;
-      computeRecap(); gotoStep(4);
-    } else if(state.model){
+    if(state.brand !== 'Apple'){
+      // Marques non-Apple → choix de panne puis formulaire simple
       renderIssues(); gotoStep(3);
     } else {
-      gotoStep(2);
+      renderModels();
+      if(state.issue){
+        if(!state.model) state.model = (MODELS[state.brand][0]||{}).m || null;
+        computeRecap(); gotoStep(4);
+      } else if(state.model){
+        renderIssues(); gotoStep(3);
+      } else {
+        gotoStep(2);
+      }
     }
   } else {
     gotoStep(1);
@@ -1884,13 +1929,17 @@ function gotoStep(n){
   document.querySelectorAll('.wz-step').forEach(s=>s.classList.remove('on'));
   const el = document.querySelector('.wz-step[data-step="'+n+'"]');
   if(el) el.classList.add('on');
-  const pct = [0,25,50,75,100,100][n];
+  const pct = [0,25,50,75,100,100,75][n];
   document.getElementById('wzBar').style.width = pct+'%';
-  document.getElementById('wzStepLabel').textContent = n<=4 ? ('Étape '+n+'/4') : 'Terminé';
+  var lbl;
+  if(n === 6) lbl = 'Devis rapide';
+  else if(n === 5) lbl = 'Terminé';
+  else lbl = 'Étape '+n+'/4';
+  document.getElementById('wzStepLabel').textContent = lbl;
   document.querySelector('.wz-dialog').scrollTop = 0;
   // affiche/masque le bouton Retour selon l'étape
   var back = document.getElementById('wzBackBtn');
-  if(back){ back.style.display = (n>1 && n<5) ? '' : 'none'; }
+  if(back){ back.style.display = (n>1 && n!==5) ? '' : 'none'; }
   window.wzCurrentStep = n;
 }
 
@@ -1903,8 +1952,60 @@ function wzBack(){
 document.querySelectorAll('.wz-step[data-step="1"] .wz-card').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     state.brand = btn.dataset.brand; state.model=null; state.issue=null;
-    renderModels(); gotoStep(2);
+    if(state.brand === 'Apple'){
+      renderModels(); gotoStep(2);
+    } else {
+      // Autres marques → saut direct au choix de panne (sans prix), puis formulaire simple
+      renderIssues(); gotoStep(3);
+    }
   });
+});
+
+// Tabs WhatsApp / Email sur le formulaire simple
+var wzSimpleMode = 'wa';
+function wzSwitchTab(mode){
+  wzSimpleMode = mode;
+  var wa = document.getElementById('wzTabWA');
+  var ml = document.getElementById('wzTabMail');
+  var btn = document.getElementById('wzSimpleSubmit');
+  if(mode === 'wa'){
+    wa.style.background = '#25D366'; wa.style.color = '#fff';
+    ml.style.background = ''; ml.style.color = '';
+    btn.textContent = 'Envoyer sur WhatsApp ›';
+    btn.style.background = '#25D366';
+  } else {
+    ml.style.background = '#0071e3'; ml.style.color = '#fff';
+    wa.style.background = ''; wa.style.color = '';
+    btn.textContent = 'Envoyer par email ›';
+    btn.style.background = '#0071e3';
+  }
+}
+
+// Soumission du formulaire simple
+document.getElementById('wzSimpleForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var f = e.target;
+  var prenom = f.prenom.value.trim();
+  var tel    = f.tel.value.trim();
+  var marque = f.marque.value.trim();
+  var modele = f.modele.value.trim();
+  var panne  = f.panne.value.trim();
+  var msg =
+    'Bonjour, je souhaite un devis :\n'+
+    '• Marque : '+marque+'\n'+
+    '• Modèle : '+modele+'\n'+
+    '• Panne : '+panne+'\n'+
+    '• Prénom : '+prenom+'\n'+
+    '• Téléphone : '+tel+'\n'+
+    '(Envoyé depuis solution-phone.fr)';
+  if(wzSimpleMode === 'wa'){
+    window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg),'_blank');
+  } else {
+    var subject = 'Devis '+marque+' '+modele;
+    var body = 'Bonjour,%0A%0A'+encodeURIComponent(msg);
+    window.location.href = 'mailto:contact@solution-phone.fr?subject='+encodeURIComponent(subject)+'&body='+body;
+  }
+  gotoStep(5);
 });
 
 function renderModels(){
@@ -1921,16 +2022,32 @@ function renderModels(){
 
 function renderIssues(){
   const box = document.getElementById('wzIssues');
+  const isApple = state.brand === 'Apple';
   box.innerHTML = ISSUES.map(i=>{
-    const p = getPriceForIssue(state.brand, state.model, i.k);
-    const priceTxt = p ? ('dès '+p+' €') : 'sur devis';
+    const p = isApple ? getPriceForIssue(state.brand, state.model, i.k) : null;
+    const priceTxt = isApple ? (p ? ('dès '+p+' €') : 'sur devis') : '';
+    const priceBlock = isApple ? ('<div class="text-sm font-bold text-accent">'+priceTxt+'</div>') : '';
     return '<button class="wz-card" data-issue="'+i.k+'" style="flex-direction:row;align-items:center;gap:1rem">'+
       '<div style="font-size:1.6rem">'+i.ico+'</div>'+
       '<div style="flex:1"><div class="text-base font-semibold">'+i.k+'</div><div class="text-xs text-muted">'+i.sub+'</div></div>'+
-      '<div class="text-sm font-bold text-accent">'+priceTxt+'</div></button>';
+      priceBlock+'</button>';
   }).join('');
   box.querySelectorAll('button').forEach(b=>{
-    b.addEventListener('click', ()=>{ state.issue = b.dataset.issue; computeRecap(); gotoStep(4); });
+    b.addEventListener('click', ()=>{
+      state.issue = b.dataset.issue;
+      if(isApple){
+        computeRecap(); gotoStep(4);
+      } else {
+        // Pré-remplir le formulaire simple avec marque + panne
+        var sb = document.getElementById('wzSimpleBrand');
+        var sm = document.getElementById('wzSimpleMarque');
+        var fm = document.getElementById('wzSimpleForm');
+        if(sb) sb.textContent = state.brand;
+        if(sm) sm.value = (state.brand === 'Autre') ? '' : state.brand;
+        if(fm && fm.panne){ fm.panne.value = state.issue + ' — '; }
+        gotoStep(6);
+      }
+    });
   });
 }
 
@@ -1939,12 +2056,12 @@ function computeRecap(){
   const priceHtml = p ? ('À partir de <span class="text-accent">'+p+'&nbsp;€</span>') : '<span class="text-accent">Sur devis</span>';
   document.getElementById('wzPriceTitle').innerHTML = priceHtml;
   document.getElementById('wzPriceSub').textContent = p
-    ? "Prix indicatif avant bonus QualiRépar. Devis ferme après diagnostic gratuit."
+    ? "Prix indicatif · Bonus QualiRépar déjà déduit · Devis ferme après diagnostic gratuit."
     : "On vous confirme le prix ferme après un diagnostic express gratuit.";
   document.getElementById('wzRecapDevice').textContent = state.brand || '—';
   document.getElementById('wzRecapModel').textContent = state.model || '—';
   document.getElementById('wzRecapIssue').textContent = state.issue || '—';
-  document.getElementById('wzRecapBonus').textContent = (state.brand==='Apple' || state.brand==='Samsung') ? '−25 €' : 'Selon éligibilité';
+  document.getElementById('wzRecapBonus').textContent = '✓ Déjà déduit';
   updateTestimonial();
 }
 
