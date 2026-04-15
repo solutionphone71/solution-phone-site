@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Smartphones reconditionnés & neufs en stock — Solution Phone Mâcon</title>
+<meta name="description" content="iPhone, Samsung et autres smartphones reconditionnés ou neufs en stock à Mâcon. Stock mis à jour en temps réel depuis notre boutique.">
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="apple-touch-icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff; --bg2:#f5f5f7; --ink:#1d1d1f; --muted:#6e6e73;
+    --accent:#e30613; --accentDark:#b8050f; --line:rgba(0,0,0,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-0.01em}
+  a{color:inherit;text-decoration:none}
+  .tracking-tightest{letter-spacing:-0.04em}
+  .muted{color:var(--muted)}
+  .label{color:var(--muted);font-size:12px;letter-spacing:.22em;text-transform:uppercase}
+
+  /* ========== NAV ========== */
+  header.nav{position:sticky;top:0;z-index:40;background:linear-gradient(90deg,#e30613 0%,#b8050f 100%);box-shadow:0 2px 12px -4px rgba(227,6,19,.35)}
+  .nav-inner{max-width:1280px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;gap:24px;font-size:13px;color:#fff}
+  .nav-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;color:#fff}
+  .nav-logo img{width:40px;height:40px;border-radius:8px;background:#fff;padding:2px;object-fit:contain;box-shadow:0 2px 8px -2px rgba(0,0,0,.25)}
+  .nav-logo span{font-weight:900;letter-spacing:-0.02em;font-size:15px;line-height:1}
+  .nav-links{display:flex;align-items:center;gap:24px;font-weight:500;flex:1;justify-content:center;line-height:1}
+  .nav-links a{color:rgba(255,255,255,.9);transition:color .2s}
+  .nav-links a:hover{color:#fff}
+  .nav-links a.active{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+  .nav-cta{display:inline-flex;align-items:center;gap:4px;background:#1d1d1f;color:#fff;font-weight:700;border-radius:9999px;padding:.45rem 1rem;font-size:.8rem;white-space:nowrap}
+  .nav-phone{color:rgba(255,255,255,.95);font-weight:500;white-space:nowrap}
+  @media (max-width:900px){ .nav-links{display:none} }
+
+  /* ========== HERO ========== */
+  .hero{padding:80px 20px 40px;text-align:center;max-width:1100px;margin:0 auto}
+  .hero h1{font-size:clamp(44px,7vw,96px);font-weight:800;letter-spacing:-0.04em;line-height:0.95;margin:20px 0 0}
+  .hero h1 .accent{color:var(--accent)}
+  .hero p.sub{margin-top:20px;font-size:clamp(16px,1.5vw,20px);color:var(--muted);max-width:640px;margin-left:auto;margin-right:auto;line-height:1.5}
+  .live-dot{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:9999px;background:#ecfdf5;color:#047857;font-size:12px;font-weight:600;letter-spacing:.05em;border:1px solid #a7f3d0}
+  .live-dot::before{content:"";width:7px;height:7px;border-radius:50%;background:#10b981;animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+
+  /* ========== TABS (catégories) ========== */
+  .tabs{max-width:1280px;margin:36px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tab{background:#fff;border:1.5px solid var(--line);color:var(--ink);font-weight:700;font-size:14px;padding:12px 22px;border-radius:9999px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+  .tab:hover{border-color:var(--ink);transform:translateY(-1px)}
+  .tab.active{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 8px 20px -8px rgba(0,0,0,.3)}
+  .tab .tab-ic{font-size:16px}
+  .tab .tab-n{background:rgba(0,0,0,.06);color:inherit;font-size:11px;font-weight:800;padding:2px 8px;border-radius:9999px;min-width:22px;text-align:center}
+  .tab.active .tab-n{background:rgba(255,255,255,.2);color:#fff}
+
+  /* ========== SOUS-FILTRES ========== */
+  .filters{max-width:1280px;margin:18px auto 0;padding:0 20px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;min-height:30px}
+  .chip{background:var(--bg2);border:1px solid transparent;color:var(--ink);font-weight:600;font-size:12.5px;padding:7px 14px;border-radius:9999px;cursor:pointer;transition:all .18s}
+  .chip:hover{background:#ebebef}
+  .chip.active{background:var(--accent);color:#fff}
+
+  /* ========== CAROUSEL ========== */
+  .carousel-wrap{margin-top:48px;position:relative}
+  .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:20px 20px 40px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel::before,.carousel::after{content:"";flex-shrink:0;width:calc(50vw - 160px);max-width:300px;min-width:0}
+
+  .card{flex-shrink:0;width:300px;scroll-snap-align:center;background:var(--bg2);border-radius:24px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .3s ease,box-shadow .3s ease;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -12px rgba(0,0,0,.15)}
+  .card.sold{opacity:.55}
+  .card.sold::after{content:"VENDU";position:absolute;top:20px;right:-30px;background:#1d1d1f;color:#fff;font-size:11px;font-weight:800;letter-spacing:.2em;padding:4px 36px;transform:rotate(35deg)}
+
+  .card .grade-badge{position:absolute;top:18px;left:18px;background:#fff;color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.08em;padding:4px 10px;border-radius:9999px;border:1px solid rgba(0,0,0,.08)}
+  .card .grade-badge.gA{color:#047857;border-color:#a7f3d0;background:#ecfdf5}
+  .card .grade-badge.gB{color:#b45309;border-color:#fde68a;background:#fffbeb}
+  .card .grade-badge.gC{color:#6b7280;border-color:#e5e7eb;background:#f9fafb}
+
+  .card .ph{width:180px;height:240px;display:flex;align-items:center;justify-content:center;margin:10px 0 16px}
+  .card .ph img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(0,0,0,.15))}
+  .card .ph .noimg{width:140px;height:220px;border-radius:28px;background:linear-gradient(160deg,#e8e8ed,#d4d4d9);display:flex;align-items:center;justify-content:center;font-size:42px;color:#b0b0b5;box-shadow:inset 0 0 0 4px rgba(0,0,0,.05)}
+
+  .card .model{font-size:22px;font-weight:800;letter-spacing:-0.02em;line-height:1.1}
+  .card .meta{margin-top:8px;color:var(--muted);font-size:13px;font-weight:500;line-height:1.4}
+  .card .color-dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:6px;border:1px solid rgba(0,0,0,.1)}
+  .card .price{margin-top:18px;font-size:28px;font-weight:900;letter-spacing:-0.03em;color:var(--accent)}
+  .card .price small{font-size:13px;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:2px}
+  .card .cta{margin-top:14px;display:inline-flex;align-items:center;gap:4px;background:var(--ink);color:#fff;font-weight:700;font-size:13px;padding:10px 18px;border-radius:9999px;transition:background .2s}
+  .card .cta:hover{background:#000}
+
+  /* carousel controls */
+  .nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 6px 20px -6px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;transition:all .2s;font-size:20px;color:var(--ink)}
+  .nav-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .nav-btn.prev{left:20px}
+  .nav-btn.next{right:20px}
+  @media (max-width:720px){ .nav-btn{display:none} .carousel::before,.carousel::after{width:10vw} }
+
+  /* ========== STATS ========== */
+  .stats{max-width:1280px;margin:40px auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  .stat{background:var(--bg2);border-radius:20px;padding:22px;text-align:center}
+  .stat .val{font-size:32px;font-weight:800;letter-spacing:-0.03em}
+  .stat .lbl{color:var(--muted);font-size:13px;margin-top:4px}
+  @media (max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* ========== EMPTY ========== */
+  .empty{text-align:center;padding:80px 20px;color:var(--muted)}
+  .empty h3{font-size:24px;color:var(--ink);margin-bottom:12px;font-weight:700}
+  .skeleton{background:linear-gradient(90deg,#f0f0f3 0%,#e5e5ea 50%,#f0f0f3 100%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:16px}
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+  /* ========== POURQUOI CHEZ NOUS ========== */
+  .why{max-width:1280px;margin:60px auto 0;padding:0 20px}
+  .why-head{text-align:center;max-width:760px;margin:0 auto}
+  .why-head h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin:12px 0 16px}
+  .why-head h2 .accent{color:var(--accent)}
+  .why-sub{color:var(--muted);line-height:1.6;font-size:15px;margin:0 auto}
+  .why-grid{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .why-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px 24px;transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;overflow:hidden}
+  .why-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accentDark));transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+  .why-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -18px rgba(0,0,0,.15);border-color:rgba(227,6,19,.25)}
+  .why-card:hover::before{transform:scaleX(1)}
+  .why-ic{width:52px;height:52px;border-radius:14px;background:#fef2f2;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px}
+  .why-card h3{margin:0 0 10px;font-size:17px;font-weight:800;letter-spacing:-0.02em;line-height:1.2}
+  .why-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+  .why-card p b{color:var(--ink);font-weight:700}
+  @media (max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.why-grid{grid-template-columns:1fr}}
+
+  /* ========== QUALITÉ ========== */
+  .quality{max-width:1280px;margin:60px auto 0;padding:0 20px}
+  .quality-inner{background:var(--bg2);border-radius:36px;padding:56px 32px;text-align:center}
+  .quality-inner h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin:12px auto 16px;max-width:800px}
+  .quality-inner h2 .accent{color:var(--accent)}
+  .quality-sub{max-width:720px;margin:0 auto;color:var(--muted);line-height:1.6;font-size:15px}
+  .qgrid{margin-top:44px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;max-width:1000px;margin-left:auto;margin-right:auto}
+  .qitem{background:#fff;border-radius:20px;padding:24px 14px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;transition:transform .2s,box-shadow .2s}
+  .qitem:hover{transform:translateY(-3px);box-shadow:0 12px 30px -12px rgba(0,0,0,.1)}
+  .qitem svg{width:36px;height:36px;color:var(--ink);margin-bottom:8px}
+  .qitem b{font-size:14px;font-weight:800;letter-spacing:-0.01em}
+  .qitem span{font-size:11.5px;color:var(--muted);line-height:1.35}
+  @media (max-width:900px){.qgrid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:520px){.qgrid{grid-template-columns:repeat(2,1fr)}}
+
+  .qfoot{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .qpill{background:#fff;border-radius:9999px;padding:12px 20px;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line)}
+  .qpill-ic{font-size:18px}
+  .qpill b{font-size:13px;font-weight:800}
+  .qpill small{color:var(--muted);font-size:12px}
+
+  /* ========== SYMA FORFAITS ========== */
+  .syma{max-width:1280px;margin:70px auto;padding:0 20px}
+  .syma-head{text-align:center;margin-bottom:32px}
+  .syma-head .label{display:inline-flex;align-items:center;gap:8px;background:#fff3e8;color:#d64e0c;padding:6px 14px;border-radius:9999px;font-weight:700;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px}
+  .syma-head h2{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;color:var(--ink);margin:0 0 10px}
+  .syma-head h2 .accent{color:#f47216}
+  .syma-head .sub{color:var(--muted);max-width:640px;margin:0 auto;line-height:1.55}
+  .syma-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+  @media (max-width: 1000px){.syma-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width: 520px){.syma-grid{grid-template-columns:1fr}}
+  .syma-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 20px;display:flex;flex-direction:column;gap:10px;transition:all .2s;position:relative;overflow:hidden}
+  .syma-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08);border-color:#f4a261}
+  .syma-card.featured{border:2px solid #f47216;background:linear-gradient(180deg,#fff 0%,#fff8f0 100%)}
+  .syma-card.featured::before{content:"POPULAIRE";position:absolute;top:12px;right:12px;background:#f47216;color:#fff;font-size:10px;font-weight:800;letter-spacing:0.1em;padding:4px 9px;border-radius:9999px}
+  .syma-data{font-size:34px;font-weight:800;color:var(--ink);letter-spacing:-0.02em;line-height:1}
+  .syma-data small{font-size:14px;font-weight:600;color:var(--muted);margin-left:2px}
+  .syma-price{font-size:28px;font-weight:800;color:#f47216;letter-spacing:-0.02em;margin-top:4px}
+  .syma-price small{font-size:13px;font-weight:600;color:var(--muted);margin-left:4px}
+  .syma-list{list-style:none;padding:0;margin:8px 0 0;font-size:13.5px;color:#3a3a3c;line-height:1.8}
+  .syma-list li{display:flex;gap:8px;align-items:flex-start}
+  .syma-list li::before{content:"✓";color:#f47216;font-weight:800;flex-shrink:0}
+  .syma-cta{margin-top:14px;background:#1d1d1f;color:#fff;text-align:center;padding:11px;border-radius:12px;font-weight:700;font-size:14px;transition:all .2s}
+  .syma-cta:hover{background:#f47216}
+  .syma-foot{margin-top:28px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 22px}
+  .syma-foot-txt{font-size:13.5px;color:var(--muted);line-height:1.5}
+  .syma-foot-txt b{color:var(--ink)}
+  .syma-foot-btn{background:#f47216;color:#fff;padding:10px 20px;border-radius:9999px;font-weight:700;font-size:13.5px;white-space:nowrap}
+  .syma-foot-btn:hover{background:#d65e0c}
+
+  /* ========== CTA BAND ========== */
+  .band{max-width:1280px;margin:60px auto;padding:0 20px}
+  .band-inner{background:linear-gradient(135deg,#1d1d1f 0%,#2d2d31 100%);color:#fff;border-radius:32px;padding:48px 40px;text-align:center}
+  .band-inner h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin:0 0 14px}
+  .band-inner p{color:rgba(255,255,255,.7);margin:0 auto 24px;max-width:560px;line-height:1.5}
+  .band-inner .btns{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .band-inner .btn-p{background:var(--accent);color:#fff;padding:14px 28px;border-radius:9999px;font-weight:700;transition:all .2s}
+  .band-inner .btn-p:hover{background:var(--accentDark);transform:translateY(-2px)}
+  .band-inner .btn-s{background:rgba(255,255,255,.1);color:#fff;padding:14px 28px;border-radius:9999px;font-weight:700;border:1px solid rgba(255,255,255,.2)}
+  .band-inner .btn-s:hover{background:rgba(255,255,255,.18)}
+
+  /* ========== FOOTER ========== */
+  footer{background:#1d1d1f;color:rgba(255,255,255,.7);padding:40px 20px;text-align:center;font-size:13px}
+  footer a{color:#fff}
+  footer .lnks{margin-bottom:14px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="img/logo.png" alt="Solution Phone">
+      <span>SOLUTION&nbsp;PHONE</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="accessoires.html">🛒&nbsp;Accessoires</a>
+      <a href="hydrogel.html">💧&nbsp;Protection écran</a>
+      <a href="reconditionnes.html" class="active">📱&nbsp;Smartphones</a>
+      <a href="reparation-iphone.html">Réparation iPhone</a>
+      <a href="actualites.html">Actualités</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px;margin-left:auto">
+      <a href="tel:+33385330689" class="nav-phone">03&nbsp;85&nbsp;33&nbsp;06&nbsp;89</a>
+      <a href="https://wa.me/33783921884" class="nav-cta">Contact ›</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="live-dot" id="liveBadge">Stock en direct · <span id="stockCount">—</span> disponibles</span>
+  <h1>Smartphones reconditionnés.<br><span class="accent">En stock, à Mâcon.</span></h1>
+  <p class="sub">Chaque smartphone passe entre les mains de l'équipe : test complet, batterie vérifiée, garantie 12 mois. Le prix du neuf, divisé par deux.</p>
+</section>
+
+<!-- TABS PRINCIPALES (catégories) -->
+<div class="tabs" id="tabs">
+  <button class="tab active" data-cat="iphone"><span class="tab-ic">🍎</span> iPhone <span class="tab-n" id="nIphone">—</span></button>
+  <button class="tab" data-cat="samsung"><span class="tab-ic">📱</span> Samsung <span class="tab-n" id="nSamsung">—</span></button>
+  <button class="tab" data-cat="autre"><span class="tab-ic">✨</span> Autres marques <span class="tab-n" id="nAutre">—</span></button>
+  <button class="tab" data-cat="neuf"><span class="tab-ic">🆕</span> Smartphones neufs <span class="tab-n" id="nNeuf">—</span></button>
+</div>
+
+<!-- SOUS-FILTRES DYNAMIQUES -->
+<div class="filters" id="filters"></div>
+
+<!-- CAROUSEL -->
+<div class="carousel-wrap">
+  <button class="nav-btn prev" onclick="scrollCarousel(-1)" aria-label="Précédent">‹</button>
+  <div class="carousel" id="carousel">
+    <!-- Skeleton loaders -->
+    <div class="card"><div class="ph"><div class="skeleton" style="width:140px;height:220px;border-radius:28px"></div></div><div class="skeleton" style="width:140px;height:22px;margin-top:10px"></div><div class="skeleton" style="width:80px;height:14px;margin-top:8px"></div><div class="skeleton" style="width:100px;height:28px;margin-top:16px"></div></div>
+    <div class="card"><div class="ph"><div class="skeleton" style="width:140px;height:220px;border-radius:28px"></div></div><div class="skeleton" style="width:140px;height:22px;margin-top:10px"></div><div class="skeleton" style="width:80px;height:14px;margin-top:8px"></div><div class="skeleton" style="width:100px;height:28px;margin-top:16px"></div></div>
+    <div class="card"><div class="ph"><div class="skeleton" style="width:140px;height:220px;border-radius:28px"></div></div><div class="skeleton" style="width:140px;height:22px;margin-top:10px"></div><div class="skeleton" style="width:80px;height:14px;margin-top:8px"></div><div class="skeleton" style="width:100px;height:28px;margin-top:16px"></div></div>
+  </div>
+  <button class="nav-btn next" onclick="scrollCarousel(1)" aria-label="Suivant">›</button>
+</div>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat"><div class="val" id="statStock">—</div><div class="lbl">iPhone en stock</div></div>
+  <div class="stat"><div class="val">12 mois</div><div class="lbl">Garantie incluse</div></div>
+  <div class="stat"><div class="val">50%</div><div class="lbl">Moins cher que neuf</div></div>
+  <div class="stat"><div class="val">0€</div><div class="lbl">Frais de port (retrait Mâcon)</div></div>
+</section>
+
+<!-- POURQUOI CHEZ NOUS -->
+<section class="why">
+  <div class="why-head">
+    <p class="label" style="text-align:center">Pourquoi acheter chez nous ?</p>
+    <h2>Un smartphone, <span class="accent">et un vrai accompagnement.</span></h2>
+    <p class="why-sub">Acheter votre téléphone chez Solution Phone, c'est six avantages concrets que vous ne trouverez ni sur un site en ligne, ni en grande surface.</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-ic">📍</div>
+      <h3>Service de proximité</h3>
+      <p>On est à Mâcon, 21 Rue Gambetta. Un souci ? Vous poussez la porte, on s'en occupe. Pas de hotline, pas de chatbot, pas de 15 jours d'attente.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="why-ic">🛡️</div>
+      <h3>Garantie chez un vrai réparateur</h3>
+      <p>Contrairement aux plateformes qui vous renvoient l'appareil en SAV à l'autre bout de l'Europe, ici la garantie est assurée <b>par l'équipe qui a réparé le téléphone</b>. Ça change tout.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="why-ic">📲</div>
+      <h3>Transfert de vos données</h3>
+      <p>Contacts, photos, applis, réglages : on transfère tout depuis votre ancien téléphone sur le nouveau, devant vous, en magasin.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="why-ic">💬</div>
+      <h3>Transfert WhatsApp inclus</h3>
+      <p>La terreur de changer de téléphone ? Perdre ses conversations WhatsApp. On s'en charge : historique, médias, groupes — tout est migré proprement, iPhone vers Android ou l'inverse.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="why-ic">♻️</div>
+      <h3>Reprise de votre ancien smartphone</h3>
+      <p>On reprend votre ancien téléphone et on déduit sa valeur <b>directement sur le prix du nouveau</b>. Pas d'attente, pas de virement à relancer, vous repartez avec le prix net.</p>
+    </div>
+
+    <div class="why-card">
+      <div class="why-ic">🏪</div>
+      <h3>Une garantie physique</h3>
+      <p>Le jour où le téléphone coince, vous savez où nous trouver. On vous reconnaît, on retrouve votre fiche, on fait marcher la garantie sans paperasse. Une garantie qu'on peut regarder dans les yeux.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUALITÉ & FIABILITÉ -->
+<section class="quality">
+  <div class="quality-inner">
+    <p class="label" style="text-align:center">Contrôle Qualité & Fiabilité</p>
+    <h2>Testé sur <span class="accent">+30 points</span> essentiels.<br>Gradé. Noté. Garanti.</h2>
+    <p class="quality-sub">Acheter chez Solution Phone, c'est la sécurité d'un commerce de proximité. Chaque appareil passe un contrôle rigoureux sur plus de 30 points et reçoit une grade précise, avec la liste détaillée des éventuelles imperfections. Pas de mauvaise surprise.</p>
+
+    <div class="qgrid">
+      <div class="qitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M8 11h6M11 8v6" stroke-width="1.3"/></svg>
+        <b>+30 points</b><span>de contrôle</span>
+      </div>
+      <div class="qitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18h4" stroke-width="1.3"/></svg>
+        <b>Écran</b><span>pixels, tactile, vitre</span>
+      </div>
+      <div class="qitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="16" height="10" rx="2"/><rect x="19" y="11" width="2.5" height="4" rx=".5"/><path d="M7 13h2M7 11v4" stroke-width="1.3"/></svg>
+        <b>Batterie</b><span>santé & autonomie</span>
+      </div>
+      <div class="qitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0116 0v5a2 2 0 01-2 2h-1v-6h3M4 12v5a2 2 0 002 2h1v-6H4"/></svg>
+        <b>Audio</b><span>haut-parleurs, micro</span>
+      </div>
+      <div class="qitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h4l2-2h4l2 2h4v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        <b>Caméra</b><span>photo, vidéo, AF</span>
+      </div>
+      <div class="qitem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 6h14l-1 14H6L5 6z"/><path d="M9 6V4h6v2M9 10v6M15 10v6" stroke-width="1.3"/></svg>
+        <b>Effacement</b><span>données 100% supprimées</span>
+      </div>
+    </div>
+
+    <div class="qfoot">
+      <div class="qpill"><span class="qpill-ic">🛡️</span><b>Garantie 12 mois</b><small>incluse, sans condition</small></div>
+      <div class="qpill"><span class="qpill-ic">🔧</span><b>Réparateur agréé</b><small>SAV assuré sur place à Mâcon</small></div>
+      <div class="qpill"><span class="qpill-ic">📍</span><b>Commerce local Mâcon</b><small>on vous connaît, on vous voit</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- SYMA FORFAITS -->
+<section class="syma">
+  <div class="syma-head">
+    <span class="label">📶 Partenaire forfait mobile</span>
+    <h2>Besoin d'un forfait ? <span class="accent">Passez chez Syma Mobile.</span></h2>
+    <p class="sub">Des forfaits simples, <b>sans engagement</b>, activables en boutique en quelques minutes. Réseau Bouygues Telecom, appels &amp; SMS illimités en France et en Europe.</p>
+  </div>
+
+  <div class="syma-grid">
+    <div class="syma-card">
+      <div style="font-size:13px;font-weight:700;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px">le cinq</div>
+      <div class="syma-data">40<small>Go</small></div>
+      <div class="syma-price">5,99<small>€ / mois</small></div>
+      <ul class="syma-list">
+        <li>Appels, SMS, MMS illimités en France &amp; UE/DOM</li>
+        <li>40 Go en France métropolitaine</li>
+        <li>19 Go depuis l'UE &amp; DOM</li>
+        <li>Sans engagement</li>
+      </ul>
+      <a href="https://www.symamobile.com/forfait" target="_blank" rel="noopener" class="syma-cta">Souscrire ›</a>
+    </div>
+
+    <div class="syma-card">
+      <div style="font-size:13px;font-weight:700;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px">le sept</div>
+      <div class="syma-data">130<small>Go</small></div>
+      <div class="syma-price">7,99<small>€ / mois</small></div>
+      <ul class="syma-list">
+        <li>Appels, SMS, MMS illimités en France &amp; UE/DOM</li>
+        <li>130 Go en France métropolitaine</li>
+        <li>24 Go depuis l'UE &amp; DOM</li>
+        <li>Appels vers 100 destinations inclus</li>
+      </ul>
+      <a href="https://www.symamobile.com/forfait" target="_blank" rel="noopener" class="syma-cta">Souscrire ›</a>
+    </div>
+
+    <div class="syma-card featured">
+      <div style="font-size:13px;font-weight:700;color:#f47216;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px">le neuf</div>
+      <div class="syma-data">200<small>Go</small></div>
+      <div class="syma-price">9,99<small>€ / mois</small></div>
+      <ul class="syma-list">
+        <li>Appels, SMS, MMS illimités en France &amp; UE/DOM</li>
+        <li>200 Go en France métropolitaine</li>
+        <li>32 Go depuis l'UE &amp; DOM</li>
+        <li>Appels vers 100 destinations inclus</li>
+      </ul>
+      <a href="https://www.symamobile.com/forfait" target="_blank" rel="noopener" class="syma-cta">Souscrire ›</a>
+    </div>
+
+    <div class="syma-card">
+      <div style="font-size:13px;font-weight:700;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px">✈️ forfait voyage</div>
+      <div class="syma-data">250<small>Go</small></div>
+      <div class="syma-price">13,99<small>€ / mois</small></div>
+      <ul class="syma-list">
+        <li>Appels, SMS, MMS illimités en France &amp; UE/DOM</li>
+        <li>250 Go en France métropolitaine</li>
+        <li><b>35 Go depuis 128 destinations</b> : Maroc, Algérie, Tunisie, Sénégal, Turquie, USA, Canada, Inde…</li>
+        <li>Idéal pour les voyageurs et la diaspora</li>
+      </ul>
+      <a href="https://www.symamobile.com/forfait" target="_blank" rel="noopener" class="syma-cta">Souscrire ›</a>
+    </div>
+  </div>
+
+  <div class="syma-foot">
+    <div class="syma-foot-txt">
+      <b>Activation immédiate en boutique</b> · Carte SIM ou eSIM fournie · On s'occupe du paramétrage de votre nouveau téléphone.
+    </div>
+    <a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20des%20infos%20sur%20les%20forfaits%20Syma%20Mobile." target="_blank" rel="noopener" class="syma-foot-btn">💬 Demander conseil</a>
+  </div>
+
+  <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:14px;max-width:720px;margin-left:auto;margin-right:auto">
+    Tarifs donnés à titre indicatif. Les offres Syma Mobile sont susceptibles d'évoluer — conditions et prix définitifs sur <a href="https://www.symamobile.com/forfait" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline">symamobile.com</a>.
+  </p>
+</section>
+
+<!-- CTA BAND -->
+<section class="band">
+  <div class="band-inner">
+    <h2>Un modèle vous intéresse ?</h2>
+    <p>Passez en magasin pour l'essayer, ou réservez-le par WhatsApp. On le met de côté pendant 48h sans engagement.</p>
+    <div class="btns">
+      <a href="https://wa.me/33783921884?text=Bonjour, je suis intéressé par un iPhone reconditionné." class="btn-p">💬 Réserver sur WhatsApp</a>
+      <a href="tel:+33385330689" class="btn-s">📞 03 85 33 06 89</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="lnks">
+    <a href="index.html">Accueil</a>
+    <a href="reparation-iphone.html">Réparation</a>
+    <a href="accessoires.html">Accessoires</a>
+    <a href="hydrogel.html">Protection écran</a>
+  </div>
+  <div>Solution Phone · 21 Rue Gambetta · 71000 Mâcon · 03 85 33 06 89</div>
+  <div style="margin-top:6px;opacity:.6">© 2026 Solution Phone. Tous droits réservés.</div>
+</footer>
+
+<script>
+  // ====== CONFIG SUPABASE ======
+  // On lit directement les tables de l'app app.solution-phone.fr :
+  //   - `phones`       → smartphones reconditionnés (Achat smartphones)
+  //   - `phones_neufs` → smartphones neufs
+  // Un téléphone est "en stock" ⇔ date_vente IS NULL
+  var SU = 'https://kdvxcnjfrmvlnrymfyug.supabase.co';
+  var SK = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+
+  // ====== DONNÉES DE DÉMO (fallback tant que la table n'existe pas) ======
+  var DEMO = [
+    // iPhone reconditionnés
+    {brand:"iphone", condition:"reconditionne", model:"iPhone 15 Pro", storage:"256 Go", color:"Titane Naturel", color_hex:"#c5b9a5", grade:"A+", price:899, battery_pct:100, sold:false},
+    {brand:"iphone", condition:"reconditionne", model:"iPhone 14",     storage:"128 Go", color:"Minuit",         color_hex:"#2c2c2e", grade:"A",  price:549, battery_pct:95,  sold:false},
+    {brand:"iphone", condition:"reconditionne", model:"iPhone 13 Pro", storage:"256 Go", color:"Graphite",       color_hex:"#54524f", grade:"A",  price:649, battery_pct:92,  sold:false},
+    {brand:"iphone", condition:"reconditionne", model:"iPhone 13",     storage:"128 Go", color:"Bleu",           color_hex:"#a8c7d9", grade:"A",  price:469, battery_pct:100, sold:false},
+    {brand:"iphone", condition:"reconditionne", model:"iPhone 12",     storage:"64 Go",  color:"Blanc",          color_hex:"#f5f5f7", grade:"B",  price:349, battery_pct:88,  sold:false},
+    {brand:"iphone", condition:"reconditionne", model:"iPhone 11",     storage:"64 Go",  color:"Violet",         color_hex:"#d1cddb", grade:"B",  price:289, battery_pct:85,  sold:false},
+    {brand:"iphone", condition:"reconditionne", model:"iPhone SE 2022",storage:"64 Go",  color:"Noir",           color_hex:"#1d1d1f", grade:"A+", price:259, battery_pct:100, sold:false},
+    // Samsung reconditionnés
+    {brand:"samsung", condition:"reconditionne", model:"Galaxy S23 Ultra", storage:"256 Go", color:"Noir Fantôme", color_hex:"#1d1d1f", grade:"A+", price:749, battery_pct:98, sold:false},
+    {brand:"samsung", condition:"reconditionne", model:"Galaxy S22",        storage:"128 Go", color:"Vert",          color_hex:"#4b5945", grade:"A",  price:429, battery_pct:90, sold:false},
+    {brand:"samsung", condition:"reconditionne", model:"Galaxy A54",        storage:"128 Go", color:"Lilas",         color_hex:"#c9b5d4", grade:"A",  price:299, battery_pct:95, sold:false},
+    // Autres
+    {brand:"autre", condition:"reconditionne", model:"Xiaomi Redmi Note 12 Pro", storage:"256 Go", color:"Bleu",  color_hex:"#3a5b8c", grade:"A", price:239, battery_pct:92, sold:false},
+    {brand:"autre", condition:"reconditionne", model:"Google Pixel 7",            storage:"128 Go", color:"Noir", color_hex:"#1d1d1f", grade:"A+", price:349, battery_pct:100, sold:false},
+    // Neufs
+    {brand:"iphone",  condition:"neuf", model:"iPhone 15",        storage:"128 Go", color:"Bleu",     color_hex:"#b8cee0", price:829, sold:false},
+    {brand:"samsung", condition:"neuf", model:"Galaxy A15",        storage:"128 Go", color:"Noir",     color_hex:"#1d1d1f", price:199, sold:false},
+    {brand:"autre",   condition:"neuf", model:"Xiaomi Redmi 13C",  storage:"128 Go", color:"Vert",     color_hex:"#98b39e", price:149, sold:false}
+  ];
+
+  var allItems = [];
+  var currentCat = 'iphone';        // iphone | samsung | autre | neuf
+  var currentSeries = 'all';        // sous-filtre
+
+  // ====== FETCH ======
+  function supaGet(table, query){
+    return fetch(SU + '/rest/v1/' + table + query, {
+      headers: { apikey: SK, Authorization: 'Bearer ' + SK }
+    }).then(function(r){ return r.ok ? r.json() : []; }).catch(function(){ return []; });
+  }
+
+  function loadStock(){
+    var qRecon = '?select=modele,stockage,grade,batterie,vente,couleur,etat,date_vente,photo_face,photo_dos&date_vente=is.null&order=vente.desc';
+    var qNeuf  = '?select=modele,stockage,vente,couleur,etat,date_vente,photo_face,photo_dos&date_vente=is.null&order=vente.desc';
+    Promise.all([supaGet('phones', qRecon), supaGet('phones_neufs', qNeuf)])
+      .then(function(res){
+        var recon = (res[0]||[]).map(function(p){ return normalize(p, 'reconditionne'); });
+        var neufs = (res[1]||[]).map(function(p){ return normalize(p, 'neuf'); });
+        var items = recon.concat(neufs).filter(function(i){ return i.price > 0 && i.model; });
+        if(!items.length){
+          console.info('[stock] aucune donnée en base, fallback démo');
+          allItems = DEMO;
+        } else {
+          allItems = items;
+        }
+        render();
+      });
+  }
+
+  function normalize(p, cond){
+    var model = (p.modele || '').trim();
+    var brand = 'autre';
+    if(/iphone/i.test(model)) brand = 'iphone';
+    else if(/samsung|galaxy/i.test(model)) brand = 'samsung';
+    var s = p.stockage;
+    var storage = '';
+    if(s){
+      var str = String(s).trim();
+      if(/go|to/i.test(str)) storage = str;
+      else if(Number(str) >= 1000) storage = (Number(str)/1000) + ' To';
+      else storage = str + ' Go';
+    }
+    return {
+      brand: brand,
+      condition: cond,
+      model: model,
+      storage: storage,
+      color: p.couleur || '',
+      color_hex: colorToHex(p.couleur),
+      grade: (cond === 'neuf') ? null : (p.grade || null),
+      price: Number(p.vente) || 0,
+      battery_pct: (cond === 'neuf') ? null : (p.batterie ? Number(p.batterie) : null),
+      image_url: p.photo_face || p.photo_dos || '',
+      sold: false
+    };
+  }
+
+  function colorToHex(c){
+    if(!c) return '';
+    var map = {
+      'noir':'#1d1d1f','minuit':'#2c2c2e','graphite':'#54524f','space gray':'#3a3a3c','sidéral':'#3a3a3c',
+      'blanc':'#f5f5f7','argent':'#d9d9dc','silver':'#d9d9dc','nacré':'#ece8e1',
+      'or':'#e3c89d','gold':'#e3c89d','rose':'#f4c7c7','rose gold':'#e8b7a8',
+      'rouge':'#b8050f','red':'#b8050f','(product)red':'#b8050f',
+      'bleu':'#4c6fa1','bleu nuit':'#2a3a5c','bleu pacifique':'#2e4a6a','blue':'#4c6fa1',
+      'vert':'#4b5945','vert alpin':'#53624a','green':'#4b5945',
+      'violet':'#9a7fb3','mauve':'#c2a9d6','lilas':'#c9b5d4','purple':'#9a7fb3',
+      'titane naturel':'#c5b9a5','titane bleu':'#4c5a6a','titane blanc':'#e6e4df','titane noir':'#35352f',
+      'jaune':'#f4d35e','orange':'#e08a3c','gris':'#8a8d8f','corail':'#ff7e67'
+    };
+    var k = String(c).toLowerCase().trim();
+    if(map[k]) return map[k];
+    for(var key in map){ if(k.indexOf(key) >= 0) return map[key]; }
+    return '';
+  }
+
+  // ====== RENDER ======
+  function itemsInCat(cat){
+    return allItems.filter(function(i){
+      if(cat === 'neuf') return (i.condition||'').toLowerCase() === 'neuf';
+      if((i.condition||'').toLowerCase() === 'neuf') return false;
+      return (i.brand||'').toLowerCase() === cat;
+    });
+  }
+
+  function render(){
+    // Compteurs par catégorie
+    document.getElementById('nIphone').textContent  = itemsInCat('iphone').length;
+    document.getElementById('nSamsung').textContent = itemsInCat('samsung').length;
+    document.getElementById('nAutre').textContent   = itemsInCat('autre').length;
+    document.getElementById('nNeuf').textContent    = itemsInCat('neuf').length;
+
+    var available = allItems.filter(function(i){ return !i.sold; });
+    document.getElementById('stockCount').textContent = available.length;
+    document.getElementById('statStock').textContent  = available.length;
+
+    // Onglet actif
+    document.querySelectorAll('#tabs .tab').forEach(function(b){
+      b.classList.toggle('active', b.dataset.cat === currentCat);
+    });
+
+    var catItems = itemsInCat(currentCat);
+    renderSeriesFilters(catItems);
+
+    var filtered = currentSeries === 'all'
+      ? catItems
+      : catItems.filter(function(i){ return detectSeries(i.model) === currentSeries; });
+
+    var car = document.getElementById('carousel');
+    if(!filtered.length){
+      car.innerHTML = '<div class="empty" style="width:100%"><h3>Aucun modèle dans cette catégorie pour le moment</h3><p>Passez-nous voir en boutique, on a souvent des arrivages.</p></div>';
+      return;
+    }
+    car.innerHTML = filtered.map(cardHtml).join('');
+    // reset scroll to start
+    car.scrollLeft = 0;
+  }
+
+  function cardHtml(item){
+    var gradeClass = item.grade && item.grade.charAt(0) === 'A' ? 'gA' : (item.grade === 'B' ? 'gB' : 'gC');
+    var imgBlock = item.image_url
+      ? '<img src="' + item.image_url + '" alt="' + escapeHtml(item.model) + '">'
+      : '<div class="noimg">📱</div>';
+    var colorDot = item.color_hex ? '<span class="color-dot" style="background:' + item.color_hex + '"></span>' : '';
+    var battery = item.battery_pct ? ' · 🔋 ' + item.battery_pct + '%' : '';
+    var isNeuf = (item.condition||'').toLowerCase() === 'neuf';
+    var badge = isNeuf
+      ? '<span class="grade-badge gA" style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe">NEUF</span>'
+      : (item.grade ? '<span class="grade-badge ' + gradeClass + '">Grade ' + item.grade + '</span>' : '');
+    var waMsg = encodeURIComponent('Bonjour, je suis intéressé par le ' + item.model + ' ' + (item.storage||'') + ' ' + (item.color||'') + ' à ' + item.price + '€. Est-il toujours disponible ?');
+    return '<article class="card' + (item.sold ? ' sold' : '') + '">'
+      + badge
+      + '<div class="ph">' + imgBlock + '</div>'
+      + '<div class="model">' + escapeHtml(item.model) + '</div>'
+      + '<div class="meta">' + escapeHtml(item.storage || '') + (item.color ? ' · ' + colorDot + escapeHtml(item.color) : '') + battery + '</div>'
+      + '<div class="price">' + item.price + '&nbsp;€</div>'
+      + (item.sold
+          ? '<span class="cta" style="background:#9ca3af;pointer-events:none">Vendu</span>'
+          : '<a class="cta" href="https://wa.me/33783921884?text=' + waMsg + '" target="_blank" rel="noopener">Réserver ›</a>')
+      + '</article>';
+  }
+
+  function renderSeriesFilters(catItems){
+    var series = {};
+    catItems.forEach(function(i){
+      var s = detectSeries(i.model);
+      series[s] = (series[s]||0)+1;
+    });
+    var keys = Object.keys(series).sort();
+    if(keys.length < 2){ document.getElementById('filters').innerHTML=''; return; }
+    var html = '<button class="chip ' + (currentSeries==='all'?'active':'') + '" data-series="all">Tous (' + catItems.length + ')</button>';
+    keys.forEach(function(s){
+      html += '<button class="chip ' + (currentSeries===s?'active':'') + '" data-series="' + s + '">' + s + ' (' + series[s] + ')</button>';
+    });
+    document.getElementById('filters').innerHTML = html;
+    document.querySelectorAll('#filters .chip').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        currentSeries = btn.dataset.series;
+        render();
+      });
+    });
+  }
+
+  function detectSeries(model){
+    var m = model||'';
+    if(/iPhone 15/i.test(m)) return 'iPhone 15';
+    if(/iPhone 14/i.test(m)) return 'iPhone 14';
+    if(/iPhone 13/i.test(m)) return 'iPhone 13';
+    if(/iPhone 12/i.test(m)) return 'iPhone 12';
+    if(/iPhone 11/i.test(m)) return 'iPhone 11';
+    if(/iPhone SE/i.test(m)) return 'iPhone SE';
+    if(/iPhone X/i.test(m))  return 'iPhone X';
+    if(/S2[3-5]|Ultra/i.test(m)) return 'Galaxy S';
+    if(/A\d{2}/i.test(m))    return 'Galaxy A';
+    if(/Z\s?(Fold|Flip)/i.test(m)) return 'Galaxy Z';
+    if(/Redmi/i.test(m))     return 'Redmi';
+    if(/Pixel/i.test(m))     return 'Pixel';
+    return 'Autre';
+  }
+
+  // Attache les onglets une seule fois
+  document.querySelectorAll('#tabs .tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      currentCat = btn.dataset.cat;
+      currentSeries = 'all';
+      render();
+    });
+  });
+  function escapeHtml(s){
+    return String(s||'').replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  // ====== CAROUSEL CONTROLS ======
+  function scrollCarousel(dir){
+    var car = document.getElementById('carousel');
+    car.scrollBy({ left: dir * 340, behavior: 'smooth' });
+  }
+
+  // keyboard nav
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowLeft') scrollCarousel(-1);
+    if(e.key === 'ArrowRight') scrollCarousel(1);
+  });
+
+  // ====== INIT ======
+  loadStock();
+
+  // Auto-refresh toutes les 60 s
+  setInterval(loadStock, 60000);
+</script>
+</body>
+</html>
