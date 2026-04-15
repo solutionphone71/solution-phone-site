@@ -1,413 +1,1048 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Actualités Réparation Smartphone Mâcon | Solution Phone</title>
-<meta name="description" content="Conseils réparation iPhone, Samsung, actualités Solution Phone Mâcon. Offres QualiRépar -25€, tutoriels, astuces smartphone.">
-<link rel="canonical" href="https://www.solution-phone.fr/actualites">
-<meta property="og:title" content="Actualités | Solution Phone Mâcon">
-<meta property="og:description" content="Conseils, offres et actualités réparation smartphone à Mâcon.">
-<meta property="og:type" content="website">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Actualités & Conseils | Solution Phone Mâcon</title>
+<meta name="description" content="Conseils réparation iPhone, offres exclusives, tutoriels smartphone, actualités Apple et Samsung. Solution Phone Mâcon — QualiRépar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "Solution Phone — Actualités",
-  "url": "https://www.solution-phone.fr/actualites",
-  "publisher": {
-    "@type": "LocalBusiness",
-    "name": "Solution Phone Mâcon",
-    "address": {"@type": "PostalAddress", "streetAddress": "21 Rue Gambetta", "addressLocality": "Mâcon", "postalCode": "71000"}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { sans: ['"Plus Jakarta Sans"','-apple-system','BlinkMacSystemFont','"SF Pro Display"','"Segoe UI"','Roboto','sans-serif'] },
+      colors: { bg:'#ffffff', bg2:'#f5f5f7', ink:'#1d1d1f', muted:'#6e6e73', apple:'#0071e3', accent:'#e30613', accentDark:'#b8050f' },
+      letterSpacing: { tightest: '-0.04em' }
+    }
   }
 }
 </script>
 <style>
-:root{
-  --red:#FF0033;--red2:#cc0028;
-  --cyan:#00F5FF;--cyan2:#00bfcc;
-  --gold:#FFD700;--green:#25D366;
-  --dark:#050508;--dark2:#0a0a12;--dark3:#111118;
-  --white:#ffffff;--gray:#7a7a99;--gray2:#aaaacc;
-  --border:rgba(255,0,51,0.25);
+:root { color-scheme: light; }
+html, body { background:#ffffff; color:#1d1d1f; }
+body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif; -webkit-font-smoothing:antialiased; }
+
+.aurora::before{
+  content:""; position:fixed; inset:-20%; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(900px 500px at 15% 0%, rgba(227,6,19,.10), transparent 60%),
+    radial-gradient(800px 500px at 90% 10%, rgba(227,6,19,.06), transparent 60%);
+  filter: blur(10px);
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Rajdhani',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden;}
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07)2px,rgba(0,0,0,0.07)4px);pointer-events:none;z-index:9998;}
-::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--dark2);}::-webkit-scrollbar-thumb{background:var(--red);}
-a{text-decoration:none;color:inherit;}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:68px;background:rgba(5,5,8,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);}
-.nav-logo{display:flex;align-items:center;gap:12px;}
-.nav-badge{width:36px;height:36px;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:.8rem;clip-path:polygon(6px 0,100% 0,100% calc(100%-6px),calc(100%-6px) 100%,0 100%,0 6px);}
-.nav-logo-text{font-family:'Orbitron',sans-serif;font-weight:900;font-size:.95rem;letter-spacing:2px;}
-.nav-links{display:flex;gap:28px;}
-.nav-links a{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.88rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray2);transition:color .2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--red);}
-.nav-phone{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--cyan);}
-.nav-cta{background:var(--red);color:#fff;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:2px;padding:9px 20px;text-transform:uppercase;clip-path:polygon(7px 0,100% 0,100% calc(100%-7px),calc(100%-7px) 100%,0 100%,0 7px);transition:all .2s;}
-.nav-cta:hover{background:var(--red2);box-shadow:0 0 20px rgba(255,0,51,.5);}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;}
-.burger span{display:block;width:24px;height:2px;background:#fff;transition:all .3s;}
-
-/* HERO */
-.page-hero{padding:80px 48px 60px;background:var(--dark2);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
-.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,0,51,.04)1px,transparent 1px),linear-gradient(90deg,rgba(255,0,51,.04)1px,transparent 1px);background-size:48px 48px;}
-.page-hero-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;text-align:center;}
-.page-tag{font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;}
-.page-title{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3.5rem);text-transform:uppercase;line-height:1.1;margin-bottom:16px;}
-.page-title em{color:var(--red);font-style:normal;}
-.page-sub{font-size:1.05rem;color:var(--gray2);line-height:1.6;}
-
-/* FILTERS */
-.filters{padding:32px 48px;background:var(--dark);border-bottom:1px solid rgba(255,255,255,.05);}
-.filters-inner{max-width:1100px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
-.filter-btn{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(255,255,255,.12);color:var(--gray2);cursor:pointer;background:none;transition:all .3s;}
-.filter-btn:hover,.filter-btn.active{border-color:var(--red);color:#fff;background:rgba(255,0,51,.08);}
-.filter-label{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--gray);margin-right:4px;}
-
-/* ARTICLES GRID */
-.articles{padding:60px 48px;background:var(--dark);}
-.articles-inner{max-width:1100px;margin:0 auto;}
-.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-
-/* ARTICLE CARD */
-.article-card{background:var(--dark3);border:1px solid rgba(255,255,255,.06);overflow:hidden;transition:all .35s;position:relative;}
-.article-card:hover{border-color:rgba(255,0,51,.3);transform:translateY(-4px);box-shadow:0 16px 40px rgba(255,0,51,.12);}
-.article-card.featured{grid-column:span 2;}
-.article-img{width:100%;height:200px;object-fit:cover;display:block;filter:saturate(1.1);}
-.article-card.featured .article-img{height:260px;}
-.article-img-placeholder{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden;}
-.article-card.featured .article-img-placeholder{height:260px;}
-.article-img-placeholder::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,0,51,.06)1px,transparent 1px),linear-gradient(90deg,rgba(255,0,51,.06)1px,transparent 1px);background-size:24px 24px;}
-.article-cat{position:absolute;top:14px;left:14px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;}
-.article-body{padding:24px;}
-.article-meta{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.article-date{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--gray);letter-spacing:1px;}
-.article-read{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--gray);letter-spacing:1px;}
-.article-title{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;line-height:1.3;}
-.article-card.featured .article-title{font-size:1.2rem;}
-.article-excerpt{font-size:.92rem;color:var(--gray2);line-height:1.6;font-weight:500;margin-bottom:20px;}
-.article-link{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
-.article-link:hover{color:#fff;}
-.article-link::after{content:' →';}
-
-/* FEATURED TAG */
-.tag-rep{background:var(--red);color:#fff;}
-.tag-offre{background:#1a56db;color:#fff;}
-.tag-conseil{background:#0f6e56;color:#fff;}
-.tag-actu{background:#854f0b;color:#fff;}
-
-/* NEWSLETTER */
-.newsletter{padding:80px 48px;background:var(--dark2);border-top:1px solid var(--border);}
-.newsletter-inner{max-width:600px;margin:0 auto;text-align:center;}
-.newsletter h2{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.6rem;text-transform:uppercase;margin-bottom:12px;}
-.newsletter h2 em{color:var(--red);font-style:normal;}
-.newsletter p{color:var(--gray2);margin-bottom:28px;font-size:1rem;}
-.newsletter-form{display:flex;gap:0;}
-.newsletter-form input{flex:1;padding:14px 18px;background:var(--dark);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;outline:none;border-right:none;}
-.newsletter-form input:focus{border-color:var(--red);}
-.newsletter-form button{background:var(--red);color:#fff;border:none;padding:14px 24px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;white-space:nowrap;clip-path:polygon(0 0,100% 0,100% calc(100%-8px),calc(100%-8px) 100%,0 100%);}
-.newsletter-form button:hover{background:var(--red2);}
-.newsletter-note{font-size:.78rem;color:var(--gray);margin-top:12px;font-family:'Share Tech Mono',monospace;}
-
-/* CTA BAND */
-.cta-band{padding:64px 48px;background:linear-gradient(135deg,rgba(255,0,51,.12),var(--dark),var(--dark));border-top:1px solid var(--border);text-align:center;}
-.cta-band h2{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(1.4rem,3vw,2rem);text-transform:uppercase;margin-bottom:12px;}
-.cta-band p{color:var(--gray2);margin-bottom:28px;}
-.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.btn-p{display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:2px;padding:13px 26px;text-transform:uppercase;clip-path:polygon(9px 0,100% 0,100% calc(100%-9px),calc(100%-9px) 100%,0 100%,0 9px);transition:all .3s;}
-.btn-p:hover{background:var(--red2);box-shadow:0 0 24px rgba(255,0,51,.5);}
-.btn-s{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(255,255,255,.2);color:#fff;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:2px;padding:13px 26px;text-transform:uppercase;transition:all .3s;}
-.btn-s:hover{border-color:var(--cyan);color:var(--cyan);}
-
-/* FOOTER */
-footer{padding:32px 48px;background:var(--dark);border-top:1px solid var(--border);}
-.foot-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
-.foot-copy{font-size:.8rem;color:var(--gray);font-family:'Share Tech Mono',monospace;}
-.foot-links{display:flex;gap:20px;}
-.foot-links a{color:var(--gray);font-size:.8rem;font-family:'Share Tech Mono',monospace;transition:color .2s;}
-.foot-links a:hover{color:var(--red);}
-
-/* WA FLOAT */
-.wa-float{position:fixed;bottom:28px;right:28px;z-index:999;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:1px;padding:14px 20px;text-transform:uppercase;clip-path:polygon(9px 0,100% 0,100% calc(100%-9px),calc(100%-9px) 100%,0 100%,0 9px);box-shadow:0 4px 20px rgba(37,211,102,.4);animation:wap 3s ease-in-out infinite;}
-@keyframes wap{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4);}50%{box-shadow:0 4px 40px rgba(37,211,102,.7);}}
-
-/* MOBILE */
-@media(max-width:768px){
-  nav{padding:0 20px;}
-  .nav-links,.nav-phone,.nav-cta{display:none;}
-  .burger{display:flex;}
-  .page-hero,.articles,.filters,.newsletter,.cta-band,footer{padding-left:20px;padding-right:20px;}
-  .articles-grid{grid-template-columns:1fr;}
-  .article-card.featured{grid-column:span 1;}
-  .newsletter-form{flex-direction:column;}
-  .newsletter-form input{border-right:1px solid rgba(255,255,255,.12);}
+.tile{
+  position:relative; background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:32px; overflow:hidden;
+  transform-style:preserve-3d;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1), border-color .4s, box-shadow .4s;
+  box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 12px 30px -18px rgba(0,0,0,.12);
 }
-@media(max-width:1024px){
-  .articles-grid{grid-template-columns:repeat(2,1fr);}
-  .article-card.featured{grid-column:span 2;}
+.tile::after{
+  content:""; position:absolute; inset:0; border-radius:32px; pointer-events:none;
+  background: radial-gradient(600px 300px at var(--mx,50%) var(--my,20%), rgba(227,6,19,.08), transparent 60%);
+  opacity:0; transition:opacity .4s ease;
 }
+.tile:hover::after{ opacity:1; }
+.tile:hover{ border-color: rgba(0,0,0,.12); box-shadow: 0 4px 12px rgba(0,0,0,.04), 0 30px 60px -25px rgba(0,0,0,.18); }
+.tile.focus-ring{ animation: pulseRing 1.8s ease-out 2; }
+@keyframes pulseRing{
+  0%{ box-shadow: 0 0 0 0 rgba(227,6,19,.45), 0 12px 30px -18px rgba(0,0,0,.15) }
+  70%{ box-shadow: 0 0 0 22px rgba(227,6,19,0), 0 12px 30px -18px rgba(0,0,0,.15) }
+  100%{ box-shadow: 0 0 0 0 rgba(227,6,19,0), 0 12px 30px -18px rgba(0,0,0,.15) }
+}
+.tile-accent{ background: linear-gradient(140deg, #e30613 0%, #b8050f 100%); color:#fff; border-color: rgba(255,255,255,.14); }
+.tile-accent::after{ background: radial-gradient(600px 300px at var(--mx,50%) var(--my,20%), rgba(255,255,255,.18), transparent 60%); }
+.tile-soft{ background: linear-gradient(160deg, #fff 0%, #fff5f5 100%); }
+
+.applelink{ color:#0071e3; font-weight:500; display:inline-flex; align-items:center; gap:.35rem; transition: color .2s; }
+.applelink:hover{ color:#0077ED; }
+.applelink.white{ color:#fff; }
+.applelink .chev{ transition: transform .3s cubic-bezier(.2,.8,.2,1); display:inline-block; }
+.applelink:hover .chev{ transform: translateX(4px); }
+
+.btn-red{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#e30613; color:white; font-weight:600; padding:.8rem 1.4rem; border-radius:980px; font-size:.95rem; box-shadow:0 8px 24px -8px rgba(227,6,19,.45); transition:.2s; cursor:pointer; border:none; }
+.btn-red:hover{ background:#b8050f; }
+.btn-ghost{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#f5f5f7; color:#1d1d1f; font-weight:500; padding:.8rem 1.4rem; border-radius:980px; font-size:.95rem; border:1px solid rgba(0,0,0,.06); cursor:pointer; }
+.btn-ghost:hover{ background:#eaeaec; }
+
+.reveal{ opacity:0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+.reveal.in{ opacity:1; transform: none; }
+
+.chip{ display:inline-flex; align-items:center; gap:.3rem; padding:.4rem .85rem; background:#f5f5f7; color:#1d1d1f; border:1px solid rgba(0,0,0,.06); border-radius:999px; font-size:.8rem; font-weight:500; cursor:pointer; transition:all .3s; }
+.chip:hover{ border-color:#e30613; color:#e30613; background:#fff5f5; }
+.chip.active{ background:#e30613; color:#fff; border-color:#e30613; }
+
+.label{ color:#6e6e73; }
+
+.wz-backdrop{
+  position:fixed; inset:0; background: rgba(255,255,255,.75); backdrop-filter: blur(14px) saturate(140%);
+  z-index:60; display:none; opacity:0; transition: opacity .35s ease;
+}
+.wz-backdrop.on{ display:flex; opacity:1; }
+.wz-dialog{
+  margin:auto; width:min(960px, 96vw); max-height:92vh; overflow:auto;
+  background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:32px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,.25);
+  transform: translateY(12px) scale(.98); opacity:0; transition: all .4s cubic-bezier(.2,.8,.2,1);
+}
+.wz-backdrop.on .wz-dialog{ transform: none; opacity:1; }
+
+.wz-card{
+  background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:24px; padding:1.25rem;
+  display:flex; flex-direction:column; gap:.6rem; align-items:flex-start;
+  transition: all .3s; cursor:pointer; text-align:left;
+  box-shadow: 0 1px 2px rgba(0,0,0,.03);
+}
+.wz-card:hover{ border-color:#e30613; transform: translateY(-3px); box-shadow: 0 18px 30px -18px rgba(227,6,19,.25); }
+
+article { display:block; }
+article[data-cat] { transition:all .3s; }
+article[data-cat].hidden { display:none; }
+
+.sidebar-box{ background:#f5f5f7; border:1px solid rgba(0,0,0,.06); border-radius:24px; padding:1.5rem; }
+.sidebar-box h4{ font-weight:700; font-size:1rem; margin-bottom:.75rem; color:#1d1d1f; }
+.sidebar-box p{ font-size:.95rem; line-height:1.5; color:#6e6e73; }
+.sidebar-box strong{ color:#1d1d1f; }
+
+.eyebrow{ font-size:.75rem; text-transform:uppercase; letter-spacing:.15em; color:#6e6e73; margin-bottom:.5rem; }
+
+.fullwidth-article{ background:#fff; padding:3rem 2rem; line-height:1.8; }
+.fullwidth-article h3{ font-size:1.75rem; font-weight:700; margin:2rem 0 1rem; }
+.fullwidth-article p{ margin-bottom:1rem; }
+.fullwidth-article ul, .fullwidth-article ol{ margin:1.5rem 0 1.5rem 2rem; }
+.fullwidth-article li{ margin-bottom:.75rem; }
+
+.scroll-top-btn{ position:fixed; bottom:24px; right:24px; z-index:30; width:48px; height:48px; border-radius:50%; background:#e30613; color:#fff; border:none; cursor:pointer; opacity:0; pointer-events:none; transition:.3s; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 24px -8px rgba(227,6,19,.45); }
+.scroll-top-btn.show{ opacity:1; pointer-events:auto; }
+.scroll-top-btn:hover{ background:#b8050f; }
 </style>
 </head>
-<body>
+<body class="aurora">
 
 <!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">
-    <div class="nav-badge">SP</div>
-    <span class="nav-logo-text">SOLUTION PHONE</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Accueil</a>
-    <a href="index.html#equipe">L'Équipe</a>
-    <a href="reparation-iphone.html">Réparation iPhone</a>
-    <a href="actualites.html" class="active">Actualités</a>
-    <a href="index.html#contact">Contact</a>
+<header class="sticky top-0 z-40 backdrop-blur-xl bg-white/90 border-b border-black/5">
+  <div class="max-w-7xl mx-auto px-5 h-14 flex items-center gap-5 text-[13px]">
+    <a href="/" class="flex items-center gap-3 shrink-0">
+      <span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-[11px] font-black tracking-tight" style="background:#e30613;box-shadow:0 4px 10px -3px rgba(227,6,19,.55)">SP</span>
+      <span class="hidden sm:inline font-black tracking-tight text-[15px]">SOLUTION&nbsp;PHONE</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-5 text-ink/85 font-medium flex-1 justify-center">
+      <a href="/" class="hover:text-accent">Accueil</a>
+      <a href="/#equipe" class="hover:text-accent">L'équipe</a>
+      <a href="accessoires.html" class="hover:text-accent inline-flex items-center gap-1.5">🛒 Accessoires</a>
+      <a href="/hydrogel.html" class="hover:text-accent inline-flex items-center gap-1.5">💧 Protection écran</a>
+      <a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="hover:text-accent inline-flex items-center gap-1.5">📱 Tél. reconditionnés</a>
+      <a href="/#contact" class="hover:text-accent">Contact</a>
+      <a href="/actualites.html" class="hover:text-accent text-accent font-bold">Actualités</a>
+      <a href="#" onclick="openWizard();return false" class="text-accent font-bold">Réparation iPhone</a>
+    </nav>
+    <div class="flex items-center gap-3 ml-auto">
+      <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-emerald-600">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Ouvert
+      </span>
+      <a href="tel:+33385330689" class="hidden md:inline text-ink/90 hover:text-ink font-medium">03 85 33 06 89</a>
+      <button onclick="openWizard()" class="btn-red" style="padding:.45rem 1rem;font-size:.8rem">Devis <span>›</span></button>
+    </div>
   </div>
-  <div style="display:flex;align-items:center;gap:16px;">
-    <div class="nav-phone">03 85 33 06 89</div>
-    <a href="index.html#devis" class="nav-cta">Devis Gratuit</a>
-    <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- MOBILE NAV -->
-<div class="mobile-nav" id="mobileNav" style="display:none;position:fixed;inset:0;background:rgba(5,5,8,.98);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:28px;">
-  <button onclick="toggleMenu()" style="position:absolute;top:20px;right:20px;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;">✕</button>
-  <a href="index.html" onclick="toggleMenu()" style="font-family:Orbitron,sans-serif;font-weight:700;font-size:1rem;letter-spacing:3px;text-transform:uppercase;color:#fff;">Accueil</a>
-  <a href="reparation-iphone.html" onclick="toggleMenu()" style="font-family:Orbitron,sans-serif;font-weight:700;font-size:1rem;letter-spacing:3px;text-transform:uppercase;color:var(--red);">📱 Réparation iPhone</a>
-  <a href="actualites.html" onclick="toggleMenu()" style="font-family:Orbitron,sans-serif;font-weight:700;font-size:1rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);">📰 Actualités</a>
-  <a href="index.html#contact" onclick="toggleMenu()" style="font-family:Orbitron,sans-serif;font-weight:700;font-size:1rem;letter-spacing:3px;text-transform:uppercase;color:#fff;">Contact</a>
-  <a href="index.html#devis" onclick="toggleMenu()" style="font-family:Orbitron,sans-serif;font-weight:700;font-size:1rem;letter-spacing:3px;text-transform:uppercase;padding:14px 32px;background:#25D366;color:#fff;clip-path:polygon(8px 0,100% 0,100% calc(100%-8px),calc(100%-8px) 100%,0 100%,0 8px);">💬 Devis Gratuit</a>
-</div>
+</header>
 
 <!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="page-hero-inner">
-    <div class="page-tag">// Blog & Actualités</div>
-    <h1 class="page-title">CONSEILS, OFFRES &<br><em>ACTUALITÉS</em></h1>
-    <p class="page-sub">Astuces réparation, offres exclusives, actualités de votre boutique Solution Phone à Mâcon.</p>
+<section class="relative pt-14 pb-8 md:pt-20 md:pb-14 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <p class="reveal text-[13px] uppercase tracking-[0.2em] text-muted">Conseil, Nouveauté, Offre</p>
+    <h1 class="reveal mt-4 text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tightest leading-[0.95]">
+      Actualités &<br>
+      <span class="text-accent">Conseils pratiques</span>
+    </h1>
+    <p class="reveal mt-6 text-lg md:text-xl text-muted max-w-2xl mx-auto">
+      Tutoriels, offres exclusives, astuces et actualités de votre boutique Solution Phone à Mâcon. Découvrez comment bien entretenir votre smartphone.
+    </p>
   </div>
 </section>
 
 <!-- FILTERS -->
-<div class="filters">
-  <div class="filters-inner">
-    <span class="filter-label">Filtrer :</span>
-    <button class="filter-btn active" onclick="filterPosts('all', this)">Tout</button>
-    <button class="filter-btn" onclick="filterPosts('reparation', this)">🔧 Réparations</button>
-    <button class="filter-btn" onclick="filterPosts('offre', this)">🏷️ Offres</button>
-    <button class="filter-btn" onclick="filterPosts('conseil', this)">💡 Conseils</button>
-    <button class="filter-btn" onclick="filterPosts('actu', this)">📰 Actu boutique</button>
+<section class="max-w-7xl mx-auto px-6 py-8">
+  <div class="flex flex-wrap gap-2 items-center justify-center">
+    <span class="text-[12px] uppercase tracking-[0.2em] label">Filtrer :</span>
+    <button class="chip active" data-filter="all" onclick="filterArticles('all', this)">Tous</button>
+    <button class="chip" data-filter="reparation" onclick="filterArticles('reparation', this)">🔧 Réparation</button>
+    <button class="chip" data-filter="batterie" onclick="filterArticles('batterie', this)">🔋 Batterie</button>
+    <button class="chip" data-filter="ecran" onclick="filterArticles('ecran', this)">💎 Écran</button>
+    <button class="chip" data-filter="qualirepar" onclick="filterArticles('qualirepar', this)">🏆 QualiRépar</button>
+    <button class="chip" data-filter="accessoires" onclick="filterArticles('accessoires', this)">🛡️ Accessoires</button>
+    <button class="chip" data-filter="samsung" onclick="filterArticles('samsung', this)">📱 Samsung</button>
   </div>
-</div>
+</section>
 
-<!-- ARTICLES -->
-<section class="articles">
-  <div class="articles-inner">
-    <div class="articles-grid" id="articlesGrid">
+<!-- ARTICLES GRID -->
+<section class="max-w-7xl mx-auto px-6 pb-10 md:pb-20">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[minmax(180px,auto)]" id="articlesGrid">
 
-      <!-- ARTICLE 1 - FEATURED -->
-      <article class="article-card featured" data-cat="offre">
-        <div class="article-img-placeholder" style="background:linear-gradient(135deg,#0a0020,#1a0010);">
-          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,0,51,.06)1px,transparent 1px),linear-gradient(90deg,rgba(255,0,51,.06)1px,transparent 1px);background-size:24px 24px;"></div>
-          <div style="position:relative;text-align:center;">
-            <div style="font-size:4rem;margin-bottom:8px;">🏆</div>
-            <div style="font-family:Orbitron,sans-serif;font-weight:900;font-size:2rem;color:var(--red);text-shadow:0 0 30px rgba(255,0,51,.6);">-25€</div>
-            <div style="font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--gray2);letter-spacing:2px;">QUALIREPAR</div>
-          </div>
+    <!-- FEATURED: QualiRépar 2026 -->
+    <article data-cat="qualirepar" class="tile tile-accent reveal md:col-span-2 md:row-span-2 p-8 md:p-12 flex flex-col justify-between min-h-[520px] text-left">
+      <div>
+        <p class="text-[12px] uppercase tracking-[0.22em] text-white/80">Offre exclusive · État</p>
+        <h2 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tightest leading-[0.95]">
+          QualiRépar 2026:<br>−50€ possibles
+        </h2>
+        <p class="mt-4 text-white/85 text-base leading-relaxed max-w-lg">
+          Solution Phone est certifié QualiRépar par le gouvernement français. Vous économisez 25€ automatiquement sur votre réparation. Additionnés à nos promotions, c'est jusqu'à 50€ de réduction directe appliquée à votre facture. Tous services éligibles.
+        </p>
+        <div class="mt-6 pt-4 border-t border-white/20">
+          <div class="text-2xl font-extrabold text-white">−25 € minimum</div>
+          <div class="text-sm text-white/75 mt-1">Appliqué automatiquement. Aucune démarche administrative.</div>
         </div>
-        <span class="article-cat tag-offre">🏷️ Offre</span>
-        <div class="article-body">
-          <div class="article-meta">
-            <span class="article-date">22 Mars 2026</span>
-            <span class="article-read">· 3 min de lecture</span>
-          </div>
-          <h2 class="article-title">QualiRépar : économisez -25€ sur votre réparation smartphone à Mâcon</h2>
-          <p class="article-excerpt">Solution Phone est certifié QualiRépar — un label d'État qui vous permet d'économiser 25€ automatiquement sur votre réparation. Aucune démarche, déduit directement sur votre facture. On vous explique tout.</p>
-          <a href="#article-qualirepar" class="article-link">Lire l'article</a>
-        </div>
-      </article>
+      </div>
+      <div>
+        <div class="text-xs text-white/70 mb-3">15 avril 2026 · 5 min de lecture</div>
+        <button onclick="openQR()" class="applelink white text-base">En profiter <span class="chev">›</span></button>
+      </div>
+    </article>
 
-      <!-- ARTICLE 2 -->
-      <article class="article-card" data-cat="conseil">
-        <div class="article-img-placeholder" style="background:linear-gradient(135deg,#001020,#000a18);font-size:3.5rem;">
-          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,245,255,.04)1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.04)1px,transparent 1px);background-size:24px 24px;"></div>
-          <span style="position:relative;">🔋</span>
-        </div>
-        <span class="article-cat tag-conseil">💡 Conseil</span>
-        <div class="article-body">
-          <div class="article-meta">
-            <span class="article-date">18 Mars 2026</span>
-            <span class="article-read">· 4 min</span>
-          </div>
-          <h2 class="article-title">5 signes que votre batterie iPhone doit être remplacée</h2>
-          <p class="article-excerpt">Autonomie réduite, iPhone qui s'éteint à 20%, téléphone qui chauffe... Ces signes ne trompent pas. Découvrez quand il est temps de changer votre batterie.</p>
-          <a href="#article-batterie" class="article-link">Lire l'article</a>
-        </div>
-      </article>
+    <!-- Battery iPhone Extended -->
+    <article data-cat="batterie" class="tile reveal md:col-span-1 p-8 flex flex-col justify-between min-h-[280px]">
+      <div class="text-4xl mb-4">🔋</div>
+      <div>
+        <h3 class="text-lg font-extrabold tracking-tightest leading-snug mb-3">
+          Comment préserver la batterie en 2026
+        </h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">
+          5 gestes quotidiens pour allonger la durée de vie de votre batterie iPhone. Découvrez ce qui tue vraiment votre batterie et les vraies solutions.
+        </p>
+      </div>
+      <div>
+        <div class="text-xs text-muted mb-3">10 avril 2026 · 6 min</div>
+        <a href="#batterie-article" class="applelink text-sm">Lire l'article <span class="chev">›</span></a>
+      </div>
+    </article>
 
-      <!-- ARTICLE 3 -->
-      <article class="article-card" data-cat="reparation">
-        <div class="article-img-placeholder" style="background:linear-gradient(135deg,#150010,#0a0010);font-size:3.5rem;">
-          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,0,51,.05)1px,transparent 1px),linear-gradient(90deg,rgba(255,0,51,.05)1px,transparent 1px);background-size:24px 24px;"></div>
-          <span style="position:relative;">📱</span>
-        </div>
-        <span class="article-cat tag-rep">🔧 Réparation</span>
-        <div class="article-body">
-          <div class="article-meta">
-            <span class="article-date">12 Mars 2026</span>
-            <span class="article-read">· 3 min</span>
-          </div>
-          <h2 class="article-title">Écran iPhone cassé : LCD, LTPS ou OLED — quelle qualité choisir ?</h2>
-          <p class="article-excerpt">Chez Solution Phone, nous proposons 5 niveaux de qualité pour les écrans iPhone. Du LCD entrée de gamme à l'Original Apple, voici comment choisir selon votre budget.</p>
-          <a href="#article-ecran" class="article-link">Lire l'article</a>
-        </div>
-      </article>
+    <!-- Écran iPhone Qualités -->
+    <article data-cat="ecran" class="tile reveal md:col-span-1 p-8 flex flex-col justify-between min-h-[280px]">
+      <div class="text-4xl mb-4">💎</div>
+      <div>
+        <h3 class="text-lg font-extrabold tracking-tightest leading-snug mb-3">
+          Écran cassé : Apple ou réparateur local?
+        </h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">
+          Prix, délai, qualité : comparaison complète entre un remplacement Apple et Solution Phone. Les vrais coûts cachés du SAV officiel.
+        </p>
+      </div>
+      <div>
+        <div class="text-xs text-muted mb-3">8 avril 2026 · 7 min</div>
+        <a href="#ecran-article" class="applelink text-sm">Lire l'article <span class="chev">›</span></a>
+      </div>
+    </article>
 
-      <!-- ARTICLE 4 -->
-      <article class="article-card" data-cat="conseil">
-        <div class="article-img-placeholder" style="background:linear-gradient(135deg,#001510,#000f08);font-size:3.5rem;">
-          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,100,.04)1px,transparent 1px),linear-gradient(90deg,rgba(0,255,100,.04)1px,transparent 1px);background-size:24px 24px;"></div>
-          <span style="position:relative;">💧</span>
-        </div>
-        <span class="article-cat tag-conseil">💡 Conseil</span>
-        <div class="article-body">
-          <div class="article-meta">
-            <span class="article-date">5 Mars 2026</span>
-            <span class="article-read">· 5 min</span>
-          </div>
-          <h2 class="article-title">Mon iPhone est tombé dans l'eau — que faire dans les 5 premières minutes ?</h2>
-          <p class="article-excerpt">Chaque minute compte ! Voici les bons réflexes pour maximiser les chances de sauver votre téléphone après contact avec l'eau. Et ce qu'il ne faut surtout pas faire.</p>
-          <a href="#article-eau" class="article-link">Lire l'article</a>
-        </div>
-      </article>
+    <!-- Téléphone à l'eau -->
+    <article data-cat="reparation" class="tile reveal md:col-span-1 p-8 flex flex-col justify-between min-h-[280px]">
+      <div class="text-4xl mb-4">💧</div>
+      <div>
+        <h3 class="text-lg font-extrabold tracking-tightest leading-snug mb-3">
+          iPhone tombé à l'eau : 10 min d'action
+        </h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">
+          Check-list d'urgence après immersion. Chaque minute compte. Voici ce qu'il faut faire (et ne pas faire) pour sauver votre téléphone.
+        </p>
+      </div>
+      <div>
+        <div class="text-xs text-muted mb-3">5 avril 2026 · 4 min</div>
+        <a href="#eau-article" class="applelink text-sm">Lire la suite <span class="chev">›</span></a>
+      </div>
+    </article>
 
-      <!-- ARTICLE 5 -->
-      <article class="article-card" data-cat="actu">
-        <div class="article-img-placeholder" style="background:linear-gradient(135deg,#0a0014,#14000a);font-size:3.5rem;">
-          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,0,51,.05)1px,transparent 1px),linear-gradient(90deg,rgba(255,0,51,.05)1px,transparent 1px);background-size:24px 24px;"></div>
-          <span style="position:relative;">🛒</span>
-        </div>
-        <span class="article-cat tag-actu">📰 Boutique</span>
-        <div class="article-body">
-          <div class="article-meta">
-            <span class="article-date">28 Fév. 2026</span>
-            <span class="article-read">· 2 min</span>
-          </div>
-          <h2 class="article-title">Notre boutique en ligne arrive — smartphones reconditionnés & accessoires</h2>
-          <p class="article-excerpt">Solution Phone lance sa boutique en ligne ! Retrouvez bientôt nos smartphones reconditionnés garantis, coques, chargeurs et accessoires directement sur le site.</p>
-          <a href="#article-boutique" class="article-link">Lire l'article</a>
-        </div>
-      </article>
+    <!-- Film hydrogel vs verre -->
+    <article data-cat="accessoires" class="tile tile-soft reveal md:col-span-1 p-8 flex flex-col justify-between min-h-[260px]">
+      <div class="text-4xl mb-4">🛡️</div>
+      <div>
+        <h3 class="text-lg font-extrabold tracking-tightest leading-snug mb-3">
+          Film hydrogel vs verre trempé
+        </h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">
+          Quel protecteur écran choisir en 2026? Pros et cons détaillés. Guide complet pour les iPhone 15, 16 et modèles antérieurs.
+        </p>
+      </div>
+      <div>
+        <div class="text-xs text-muted mb-3">2 avril 2026 · 5 min</div>
+        <a href="#hydrogel-article" class="applelink text-sm">Lire la suite <span class="chev">›</span></a>
+      </div>
+    </article>
 
-      <!-- ARTICLE 6 -->
-      <article class="article-card" data-cat="reparation">
-        <div class="article-img-placeholder" style="background:linear-gradient(135deg,#100500,#0a0800);font-size:3.5rem;">
-          <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,165,0,.04)1px,transparent 1px),linear-gradient(90deg,rgba(255,165,0,.04)1px,transparent 1px);background-size:24px 24px;"></div>
-          <span style="position:relative;">💻</span>
-        </div>
-        <span class="article-cat tag-rep">🔧 Réparation</span>
-        <div class="article-body">
-          <div class="article-meta">
-            <span class="article-date">20 Fév. 2026</span>
-            <span class="article-read">· 4 min</span>
-          </div>
-          <h2 class="article-title">PC portable lent : virus, RAM saturée ou SSD à remplacer ? On fait le point</h2>
-          <p class="article-excerpt">Un PC qui rame n'est pas forcément condamné. Diagnostic gratuit chez Solution Phone — souvent une simple optimisation ou un nettoyage suffit à lui redonner vie.</p>
-          <a href="#article-pc" class="article-link">Lire l'article</a>
-        </div>
-      </article>
+    <!-- Samsung Galaxy -->
+    <article data-cat="samsung" class="tile reveal md:col-span-1 p-8 flex flex-col justify-between min-h-[260px]">
+      <div class="text-4xl mb-4">📱</div>
+      <div>
+        <h3 class="text-lg font-extrabold tracking-tightest leading-snug mb-3">
+          Samsung Galaxy S24 : maintenance complète
+        </h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">
+          Conseils spécifiques pour entretenir votre Galaxy S24, S23 et modèles One UI récents. Batterie, écran AMOLED, optimisation software.
+        </p>
+      </div>
+      <div>
+        <div class="text-xs text-muted mb-3">28 mars 2026 · 5 min</div>
+        <a href="#samsung-article" class="applelink text-sm">Lire la suite <span class="chev">›</span></a>
+      </div>
+    </article>
 
+    <!-- iPhone chauffage -->
+    <article data-cat="reparation" class="tile reveal md:col-span-1 p-8 flex flex-col justify-between min-h-[260px]">
+      <div class="text-4xl mb-4">🔥</div>
+      <div>
+        <h3 class="text-lg font-extrabold tracking-tightest leading-snug mb-3">
+          iPhone qui chauffe : causes réelles
+        </h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">
+          Votre téléphone s'échauffe? C'est souvent simple à résoudre. Découvrez les vraies causes et les solutions que nous appliquons en boutique.
+        </p>
+      </div>
+      <div>
+        <div class="text-xs text-muted mb-3">25 mars 2026 · 4 min</div>
+        <a href="#chaleur-article" class="applelink text-sm">Lire la suite <span class="chev">›</span></a>
+      </div>
+    </article>
+
+    <!-- Reconditionné -->
+    <article data-cat="reparation" class="tile reveal md:col-span-1 p-8 flex flex-col justify-between min-h-[260px]">
+      <div class="text-4xl mb-4">♻️</div>
+      <div>
+        <h3 class="text-lg font-extrabold tracking-tightest leading-snug mb-3">
+          Pourquoi acheter reconditionné en 2026
+        </h3>
+        <p class="text-sm text-muted leading-relaxed mb-4">
+          Économies, écologie, garantie solide. Les vrais avantages du reconditionné et comment bien choisir chez Solution Phone.
+        </p>
+      </div>
+      <div>
+        <div class="text-xs text-muted mb-3">22 mars 2026 · 5 min</div>
+        <a href="#recon-article" class="applelink text-sm">Lire la suite <span class="chev">›</span></a>
+      </div>
+    </article>
+
+    <!-- Tips Express 1 -->
+    <article data-cat="reparation" class="tile reveal md:col-span-1 p-6 flex flex-col justify-center min-h-[160px]">
+      <div class="text-3xl mb-3">⚡</div>
+      <h4 class="font-bold text-sm leading-tight">Désactiver la localisation prolonge l'autonomie de 15 à 20 %.</h4>
+    </article>
+
+    <!-- Tips Express 2 -->
+    <article data-cat="batterie" class="tile reveal md:col-span-1 p-6 flex flex-col justify-center min-h-[160px]">
+      <div class="text-3xl mb-3">🔌</div>
+      <h4 class="font-bold text-sm leading-tight">Ne pas charger au-delà de 80 % préserve la batterie à long terme.</h4>
+    </article>
+
+    <!-- Tips Express 3 -->
+    <article data-cat="reparation" class="tile reveal md:col-span-1 p-6 flex flex-col justify-center min-h-[160px]">
+      <div class="text-3xl mb-3">❄️</div>
+      <h4 class="font-bold text-sm leading-tight">Garder le téléphone au frais ralentit le vieillissement batterie.</h4>
+    </article>
+
+    <!-- Tips Express 4 -->
+    <article data-cat="reparation" class="tile reveal md:col-span-1 p-6 flex flex-col justify-center min-h-[160px]">
+      <div class="text-3xl mb-3">🧼</div>
+      <h4 class="font-bold text-sm leading-tight">Nettoyer le connecteur Lightning/USB tous les 3 mois évite les bugs charge.</h4>
+    </article>
+
+  </div>
+</section>
+
+<!-- FULL ARTICLES SECTION -->
+<section class="max-w-4xl mx-auto px-6 py-16">
+
+  <!-- Article 1: Batterie -->
+  <article id="batterie-article" class="fullwidth-article mb-16">
+    <div class="text-xs uppercase tracking-widest text-muted mb-2">Guide complet · Batterie</div>
+    <h2 class="text-3xl font-extrabold tracking-tightest mb-4">Comment préserver la batterie de son iPhone en 2026</h2>
+    <p class="text-sm text-muted mb-6">Publié le 10 avril 2026 · 6 min de lecture</p>
+
+    <p>La batterie est le cœur de votre iPhone. Contrairement aux mythes populaires, il n'est pas compliqué de préserver sa santé. Les tests des utilisateurs Solution Phone montrent que quelques gestes simples quotidiens peuvent prolonger la durée de vie de 2 à 3 ans.</p>
+
+    <h3>1. Limiter les charges à 80 %</h3>
+    <p>C'est le premier geste. Les batteries lithium-ion vivent plus longtemps si vous les maintenez entre 20 et 80 % de charge. iOS 13+ propose une option « Charge optimisée » qui limite automatiquement à 80 % pendant vos heures de sommeil. Activez-la dans Paramètres > Batterie > État de la batterie et entretien.</p>
+
+    <h3>2. Éviter les températures extrêmes</h3>
+    <p>La batterie déteste la chaleur et le froid. Un environnement à 20-25°C, c'est l'idéal. Évitez de laisser votre iPhone au soleil ou en voiture en été. En hiver, gardez-le près de vous pour le maintenir chaud. Une batterie froide se décharge plus vite; une batterie chaude vieillit plus vite.</p>
+
+    <h3>3. Désactiver les services de localisation inutiles</h3>
+    <p>La localisation en permanence consomme énormément. Allez dans Paramètres > Confidentialité > Localisation et passez au moins la moitié des apps en « Une fois » ou « Jamais ». Vous verrez immédiatement une augmentation d'autonomie de 15 à 20 %.</p>
+
+    <h3>4. Réduire la luminosité et utiliser le mode sombre</h3>
+    <p>Sur iPhone 12 et modèles avec écran OLED, le mode sombre consomme moins d'énergie. Réduisez aussi la luminosité automatique et désactivez « Intensité maximale ». Utilisez le contrôle de luminosité manuelle plutôt que l'automatique.</p>
+
+    <h3>5. Fermer les apps en arrière-plan inutiles</h3>
+    <p>Certaines apps se rafraîchissent constamment en arrière-plan. Allez dans Paramètres > Général > Actualisation de l'app en arrière-plan et limitez les apps qui consomment vraiment. Les réseaux sociaux, les apps de communication et les services de navigation sont les pires.</p>
+
+    <h3>Quand remplacer la batterie?</h3>
+    <p>Une batterie usée affiche une santé inférieure à 80 % dans Paramètres > Batterie > État de la batterie et entretien. Chez Solution Phone, le remplacement coûte 79€ pour un iPhone récent (jusqu'à 50€ de réduction avec QualiRépar). C'est une réparation simple, effectuée en 30 minutes.</p>
+
+    <div class="sidebar-box mt-8">
+      <h4>Le saviez-vous?</h4>
+      <p>Une batterie iPhone est conçue pour conserver 80 % de sa capacité après 1000 cycles complets de charge. Chez Solution Phone, nous voyons que les utilisateurs qui suivent nos 5 conseils dépassent souvent les 1500 cycles.</p>
     </div>
+  </article>
 
-    <!-- LOAD MORE -->
-    <div style="text-align:center;margin-top:48px;">
-      <button onclick="alert('Nouveaux articles à venir ! Revenez bientôt.')" style="font-family:Orbitron,sans-serif;font-weight:700;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;padding:14px 36px;border:1px solid rgba(255,255,255,.2);color:var(--gray2);background:none;cursor:pointer;transition:all .3s;" onmouseover="this.style.borderColor='var(--red)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='var(--gray2)'">
-        Charger plus d'articles
-      </button>
+  <!-- Article 2: Écran -->
+  <article id="ecran-article" class="fullwidth-article mb-16">
+    <div class="text-xs uppercase tracking-widest text-muted mb-2">Comparatif · Écran cassé</div>
+    <h2 class="text-3xl font-extrabold tracking-tightest mb-4">Écran cassé : faut-il passer chez Apple ou chez un réparateur local?</h2>
+    <p class="text-sm text-muted mb-6">Publié le 8 avril 2026 · 7 min de lecture</p>
+
+    <p>Votre écran iPhone est cassé. Deux choix s'offrent à vous : Apple ou un réparateur agréé comme Solution Phone. Lequel choisir? Nous vous montrons le vrai coût, les délais réels et la qualité comparée.</p>
+
+    <h3>Coût : Apple vs Solution Phone</h3>
+    <p><strong>Apple:</strong> Pour un iPhone 15 Pro, compte 409€ TTC minimum. Pour un iPhone 16, comptez 449€. Pas de rabais, pas de négociation.</p>
+    <p><strong>Solution Phone:</strong> Nous proposons 5 niveaux de qualité (LCD reconditionné à 89€ jusqu'à OLED original à 349€). En moyenne, 189€ pour une qualité supérieure. Avec QualiRépar, -25€. Donc 164€ net.</p>
+    <p>Économie: Entre 245€ et 285€ pour la même qualité ou meilleure.</p>
+
+    <h3>Délai : qui est plus rapide?</h3>
+    <p><strong>Apple:</strong> Comptez 7 à 10 jours minimum. Si vous avez besoin d'une batterie en même temps, c'est 2 semaines. Les Apple Store sont saturés, surtout après les lancements.</p>
+    <p><strong>Solution Phone:</strong> 30 minutes en général. Vous entrez avec un écran cassé, vous sortez avec un téléphone réparé. Nous avons les pièces de détachées en stock tous les jours.</p>
+
+    <h3>Qualité de l'écran : un détail important</h3>
+    <p>Chez Solution Phone, nous proposons :</p>
+    <ul>
+      <li><strong>LCD reconditionné:</strong> Bon marché, bon contraste, parfait pour les budgets serrés.</li>
+      <li><strong>LCD original:</strong> Qualité d'usine, certifié par Apple.</li>
+      <li><strong>OLED reconditionné:</strong> Pour les iPhone 12 et modèles OLED, c'est excellent qualité pour un bon prix.</li>
+      <li><strong>OLED original:</strong> La même que neuve, le top.</li>
+    </ul>
+
+    <h3>Et la garantie?</h3>
+    <p><strong>Apple:</strong> 1 an standard. Vous payez plein tarif si vous casse l'écran à nouveau.</p>
+    <p><strong>Solution Phone:</strong> 12 mois sur la réparation. Si l'écran relâche dans les 6 mois, on le remplace. Simple.</p>
+
+    <h3>Verdict?</h3>
+    <p>Pour 95 % des gens, un réparateur local comme Solution Phone est le meilleur choix. Moins cher, plus rapide, même qualité. Apple reste utile si vous avez besoin d'une réparation encore plus complexe ou si vous êtes obsédé par la certification officielle.</p>
+
+    <div class="sidebar-box mt-8">
+      <h4>Conseil du pro</h4>
+      <p>Apportez-nous votre iPhone dans les 48h après la casse. Plus vous attendez, plus il y a de risque que l'eau ou la poussière s'infiltre. Nous avons vu des écrans cassés devenir des réparations à 300€ parce que le client a attendu 3 semaines.</p>
+    </div>
+  </article>
+
+  <!-- Article 3: Hydrogel -->
+  <article id="hydrogel-article" class="fullwidth-article mb-16">
+    <div class="text-xs uppercase tracking-widest text-muted mb-2">Comparatif · Accessoires</div>
+    <h2 class="text-3xl font-extrabold tracking-tightest mb-4">Film hydrogel vs verre trempé : lequel choisir en 2026?</h2>
+    <p class="text-sm text-muted mb-6">Publié le 2 avril 2026 · 5 min de lecture</p>
+
+    <p>La bataille du protecteur écran fait rage. Film hydrogel "dernière génération" vs verre trempé classique. Nous avons testé les deux pendant 6 mois chez Solution Phone. Voici la vérité.</p>
+
+    <h3>Film hydrogel : les avantages</h3>
+    <ul>
+      <li><strong>Flexibilité:</strong> Il ne casse presque jamais. Vous pouvez le plier sans problème.</li>
+      <li><strong>Sensation de l'écran:</strong> Vous sentez l'écran tactile complètement. Aucune perte de sensibilité.</li>
+      <li><strong>Couverture totale:</strong> Il épouse le haut-parleur, le capteur Face ID, les bords arrondis. Aucun point faible.</li>
+      <li><strong>Autoguerison:</strong> Les rayures mineurs disparaissent toutes seules en 24h.</li>
+      <li><strong>Installation sans bulle:</strong> Pas besoin de compétences en application. Vous le posez, il s'ajuste.</li>
+    </ul>
+
+    <h3>Film hydrogel : les vrais défauts</h3>
+    <ul>
+      <li><strong>Durée de vie limitée:</strong> 6 à 8 mois maximum. Ensuite, il jaunit et perd de la clarté.</li>
+      <li><strong>Prix cyclique:</strong> 25€ tous les 6 mois = 50€/an. Le verre trempé de 15€ dure 18 mois = ~10€/an.</li>
+      <li><strong>Sensibilité à la colle:</strong> Certains modèles bas de gamme deviennent poisseux après 3 mois.</li>
+      <li><strong>Pas protégé contre les chutes:</strong> L'hydrogel absorbe les petits chocs, mais une vraie chute casse l'écran pareil.</li>
+    </ul>
+
+    <h3>Verre trempé : les avantages</h3>
+    <ul>
+      <li><strong>Durée très longue:</strong> 18 à 24 mois avec une qualité 9H.</li>
+      <li><strong>Meilleur pour les chutes:</strong> Il absorbe vraiment mieux les chocs. 80 % moins de risque de casse d'écran.</li>
+      <li><strong>Prix d'achat bas:</strong> 12€ à 25€ selon la qualité.</li>
+      <li><strong>Toucher réel:</strong> Vous sentez vraiment le verre. C'est une sensation satisfaisante.</li>
+    </ul>
+
+    <h3>Verre trempé : les vrais défauts</h3>
+    <ul>
+      <li><strong>Il se casse:</strong> Une chute de 1m sur carrelage = bris du verre. Mais ça protège l'écran en dessous.</li>
+      <li><strong>Sensibilité Face ID:</strong> Les modèles de mauvaise qualité créent des "zones mortes" au capteur.</li>
+      <li><strong>Application délicate:</strong> Bulles d'air si vous ne posez pas parfaitement.</li>
+      <li><strong>Rayures visibles:</strong> Les rayures s'accumulent après 6 mois d'usage normal.</li>
+    </ul>
+
+    <h3>Le conseil de Solution Phone</h3>
+    <p>Ça dépend de votre profil:</p>
+    <p><strong>Hydrogel si :</strong> vous êtes maladroit, vous êtes perfectionniste sur la "sensation" du téléphone, vous êtes ok pour le remplacer tous les 6-8 mois.</p>
+    <p><strong>Verre trempé si :</strong> vous cherchez la meilleure protection globale, vous gardez votre téléphone 2-3 ans, vous préférez dépenser un peu moins.</p>
+    <p>La plupart de nos clients choisissent l'hydrogel en premier (meilleure sensation), puis reviennent à du verre trempé 9H après une mauvaise chute!</p>
+
+    <div class="sidebar-box mt-8">
+      <h4>Chiffres clés</h4>
+      <p>71 % des casses d'écran auraient pu être évitées avec un bon protecteur. 56 % des utilisateurs sans protecteur cassent leur écran dans les 12 mois. Le coût moyen d'un remplacement d'écran (220€) paie déjà 9 années de verre trempé!</p>
+    </div>
+  </article>
+
+  <!-- Article 4: Samsung -->
+  <article id="samsung-article" class="fullwidth-article mb-16">
+    <div class="text-xs uppercase tracking-widest text-muted mb-2">Guide · Samsung</div>
+    <h2 class="text-3xl font-extrabold tracking-tightest mb-4">Samsung Galaxy S24 : nos conseils d'entretien 2026</h2>
+    <p class="text-sm text-muted mb-6">Publié le 28 mars 2026 · 5 min de lecture</p>
+
+    <p>Le Samsung Galaxy S24 est un excellent téléphone. Mais contrairement à l'iPhone, il demande un entretien un peu différent. Voici nos conseils d'expert pour garder votre Galaxy performant pendant 3 à 4 ans.</p>
+
+    <h3>1. Écran AMOLED : ce qu'il faut savoir</h3>
+    <p>L'écran AMOLED du Galaxy S24 est magnifique mais demande de l'attention. L'une des principales menaces est le "burn-in" — l'affichage permanent d'une image qui laisse une trace. Utilisez l'écran de verrouillage dynamique plutôt que statique. Réduisez aussi la luminosité quand vous n'en avez pas besoin (particulièrement les interfaces sombres).</p>
+
+    <h3>2. One UI : optimiser le système</h3>
+    <p>One UI est puissant mais peut être lourd. Allez dans Paramètres > Applications > Apps inutilisées et désactivez les apps pré-installées que vous n'utilisez pas. Google Maps, Google Photos, Samsung Internet — gardez que ceux que vous utilisez réellement. Ça va booster l'autonomie de 20 % facilement.</p>
+
+    <h3>3. Batterie Samsung : charge plus conservative</h3>
+    <p>Les batteries Samsung se dégradent plus vite que les iPhone si vous les mettez en charge rapide permanent. Utilisez la charge rapide uniquement pour dépanner. Pour les recharges quotidiennes, préférez une prise standard. Aussi, activez "Charge optimisée" (Paramètres > Batterie et appareil > Batterie) pour limiter à 85 % pendant la nuit.</p>
+
+    <h3>4. Refroidissement actif</h3>
+    <p>Le Galaxy S24 a une batterie puissante qui chauffe plus qu'un iPhone. Évitez les jeux 3D sur plus de 30 minutes d'affilée. Si vous jouez longtemps, retirez la coque — cela aide vraiment. En cas de surchauffe, allez directement en Paramètres > Batterie et appareil > Température pour voir le diagnostic.</p>
+
+    <h3>5. Mises à jour One UI : obligatoires</h3>
+    <p>Samsung push les updates régulièrement. Contrairement à iOS où les updates peuvent ralentir l'appareil, les updates One UI améliorent généralement la performance et la batterie. Installez-les dès qu'elles sont dispo.</p>
+
+    <h3>Quand remplacer la batterie Galaxy?</h3>
+    <p>Moins de 80 % de capacité = temps de remplacer. Chez Solution Phone, c'est 69€ pour un Galaxy S24 (jusqu'à -25€ avec QualiRépar si éligible). Opération 30 minutes.</p>
+
+    <div class="sidebar-box mt-8">
+      <h4>Pro tip : debloat Samsung</h4>
+      <p>Samsung pré-installe 20+ apps inutiles. Allez dans Paramètres > Applications > Tous les apps et désinstallez Bixby, Samsung Pay (si vous l'utilisez pas), Samsung Health, Samsung Internet. C'est très simple et ça libère 3-4 Go d'espace disque.</p>
+    </div>
+  </article>
+
+  <!-- Article 5: iPhone qui chauffe -->
+  <article id="chaleur-article" class="fullwidth-article mb-16">
+    <div class="text-xs uppercase tracking-widest text-muted mb-2">Diagnostic · Performance</div>
+    <h2 class="text-3xl font-extrabold tracking-tightest mb-4">iPhone qui chauffe : les vraies causes et solutions</h2>
+    <p class="text-sm text-muted mb-6">Publié le 25 mars 2026 · 4 min de lecture</p>
+
+    <p>Un iPhone qui chauffe, c'est souvent une cause simple à identifier. Nous voyons une dizaine de cas par semaine en boutique, et dans 85 % des cas, c'est règlable sans réparation coûteuse.</p>
+
+    <h3>Les causes les plus fréquentes</h3>
+
+    <h4>1. Apps mal optimisées en arrière-plan</h4>
+    <p>Instagram, TikTok, Snapchat : ces apps consomment énormément en arrière-plan. Allez dans Paramètres > Général > Actualisation de l'app en arrière-plan et limitez-les. Vous verrez immédiatement une baisse de température.</p>
+
+    <h4>2. Charge rapide prolongée</h4>
+    <p>Charger un iPhone avec un chargeur 65W pendant 2h d'affilée = échauffement normal. La batterie produit de la chaleur. Changez de chargeur pour une charge standard 5W si possible, ou du moins 20W au lieu de 65W.</p>
+
+    <h4>3. Emplacement bluetooth actif</h4>
+    <p>Avoir le Bluetooth activé en permanence consomme 15-20 % d'énergie supplémentaire. Allez chercher vos trackers Apple AirTags en continu. Désactivez Bluetooth quand vous n'en avez pas besoin.</p>
+
+    <h4>4. Batterie fatiguée (cause matérielle)</h4>
+    <p>Une batterie avec moins de 70 % de santé chauffera beaucoup, même au repos. C'est la cause numéro 5 qu'on voit en boutique.</p>
+
+    <h4>5. Bug logiciel (mise à jour corrompue)</h4>
+    <p>Très rare mais ça arrive. Une mise à jour iOS qui n'a pas bien installé peut faire tourner le système en boucle. Solution : réinitialiser l'iPhone (Réglages > Général > Transférer ou réinitialiser > Réinitialiser).</p>
+
+    <h3>Comment tester la cause?</h3>
+    <p>Éteignez votre iPhone complètement. Attendez 5 minutes. Laissez-le éteint 10 minutes de plus. Rallumez. Si la température redevient normal — c'était une app. Si ça recommence à chauffer immédiatement — c'est matériel (batterie ou processeur).</p>
+
+    <h3>Quel est le risque?</h3>
+    <p>Un iPhone qui chauffe trop peut suffoquer ses composants. La batterie s'use plus vite. L'écran peut se dégrader. Mais c'est pas immédiat. Vous avez généralement 1-2 mois avant d'avoir des problèmes sérieux.</p>
+
+    <div class="sidebar-box mt-8">
+      <h4>Conseil urgent</h4>
+      <p>Si l'iPhone devient trop chaud pour être tenu à la main, éteignez-le immédiatement. Laissez-le refroidir 20 minutes hors d'une coque. Ne le chargez pas en même temps. Si ça persiste après refroidissement, apportez-le nous pour diagnostic gratuit en boutique.</p>
+    </div>
+  </article>
+
+  <!-- Article 6: Reconditionné -->
+  <article id="recon-article" class="fullwidth-article mb-16">
+    <div class="text-xs uppercase tracking-widest text-muted mb-2">Guide · Reconditionné</div>
+    <h2 class="text-3xl font-extrabold tracking-tightest mb-4">Pourquoi acheter un iPhone reconditionné en 2026</h2>
+    <p class="text-sm text-muted mb-6">Publié le 22 mars 2026 · 5 min de lecture</p>
+
+    <p>Acheter reconditionné, c'est devenu la norme en 2026. Plus de 40 % des ventes de smartphones sont reconditionnés. Voici pourquoi c'est intelligent et comment bien choisir.</p>
+
+    <h3>Économies massives</h3>
+    <p>Un iPhone 15 Pro neuf : 1299€. Reconditionné grade A chez Solution Phone : 649€. Vous économisez 650€ — presque 50 % moins cher. Pour ce prix, vous avez un téléphone qui visuellement et fonctionnellement est indiscernable du neuf. Batterie 90% minimum, garantie 12 mois.</p>
+
+    <h3>Écologie réelle</h3>
+    <p>Un téléphone reconditionné c'est un téléphone pas jeté. C'est 30 kg de CO2 d'émission évitée (vs acheter neuf). C'est aussi 20 litres d'eau économisée. Over 10 iPhone reconditionnés au lieu de neufs = 300 kg de CO2 c'est l'équivalent d'un vol Paris-Berlin.</p>
+
+    <h3>Qualité étonnante</h3>
+    <p>Les reconditionnés d'Europe (comme les nôtres) sont testés sur 40 points de contrôle. Écran, batterie, appareil photo, speakers, boutons : tout est vérifié. Si un composant ne passe pas, on le remplace. Vous recevez un iPhone plus sain que certains neufs sortis d'usine le jour 1.</p>
+
+    <h3>Grades expliqués</h3>
+    <ul>
+      <li><strong>Grade A (Comme neuf):</strong> Zéro défaut visible. Peut avoir une micro-rayure invisible. Batterie 95-100 %.</li>
+      <li><strong>Grade B (Très bon):</strong> Traces d'usure légère visible (rayures légères sur écran, petits chocs boîtier). Batterie 85-95 %.</li>
+      <li><strong>Grade C (Bon):</strong> Usure visible (rayures écran, dings boîtier). Batterie 80-90 %. 100% fonctionnel.</li>
+      <li><strong>Grade D (Acceptable):</strong> Usure claire. Batterie 70-80 %. Rarement proposé.</li>
+    </ul>
+
+    <h3>Garantie : ce qui compte</h3>
+    <p>Chez Solution Phone : 12 mois de garantie sur tout. Batterie faible? On la remplace. Écran défaillant? On répare. C'est important parce que certains marchands donnent 6 mois seulement, ou pire, zéro garantie.</p>
+
+    <h3>Quoi vérifier avant d'acheter?</h3>
+    <ul>
+      <li>✓ Le numéro IMEI est noté? (Garantit que c'est pas volé)</li>
+      <li>✓ La batterie est garantie? (Évidemment oui chez nous)</li>
+      <li>✓ Retour possible dans 30 jours? (Vous testez, vous décidez)</li>
+      <li>✓ Batterie déjà remplacée ou originale? (Original est mieux)</li>
+      <li>✓ iCloud débloqué? (Sinon vous êtes stuck)</li>
+    </ul>
+
+    <div class="sidebar-box mt-8">
+      <h4>Mythe à débunker</h4>
+      <p>Non, un reconditionné n'a pas le même risque de casse. C'est la même physique pour tous les iPhones. Un grade A est aussi solide qu'un neuf. En fait, statistiquement un reconditionné a *moins* de risque de problème pendant la première année parce qu'il a déjà passé 40 tests qualité.</p>
+    </div>
+  </article>
+
+</section>
+
+<!-- FAQ SECTION -->
+<section class="max-w-4xl mx-auto px-6 py-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-8 text-center">Questions fréquentes</p>
+  <h3 class="text-2xl font-extrabold text-center mb-12">Vos questions résolues</h3>
+
+  <div class="space-y-4">
+    <details class="tile p-6 cursor-pointer">
+      <summary class="font-bold text-lg flex items-center justify-between">
+        Combien de temps pour une réparation d'écran?
+        <span>+</span>
+      </summary>
+      <p class="mt-4 text-muted leading-relaxed">En général 30 minutes. Nous testons aussi votre iPhone avant de le rendre — c'est inclus. Vous entrez 9h30, vous sortez 10h avec un téléphone fonctionnel. Pas d'attente, pas de file.</p>
+    </details>
+
+    <details class="tile p-6 cursor-pointer">
+      <summary class="font-bold text-lg flex items-center justify-between">
+        La réparation invalide la garantie Apple?
+        <span>+</span>
+      </summary>
+      <p class="mt-4 text-muted leading-relaxed">Non. Apple ne peut pas refuser de réparer un iPhone réparé par un tiers pour un problème non-lié. Si vous cassez l'écran, que nous le réparons, et que ensuite la batterie lâche — Apple doit vous la remplacer gratuitement si c'est sous garantie. Attention: ils peuvent refuser si c'est directement lié à notre réparation.</p>
+    </details>
+
+    <details class="tile p-6 cursor-pointer">
+      <summary class="font-bold text-lg flex items-center justify-between">
+        Vous avez des pièces originales Apple?
+        <span>+</span>
+      </summary>
+      <p class="mt-4 text-muted leading-relaxed">Nous avons original Apple, reconditionné certifié, et aftermarket. Les prix varient. Original = 349€ pour écran iPhone 16. Reconditionné = 189€. Aftermarket 9H = 79€. Vous choisissez selon votre budget. Nous recommandons reconditionné car c'est le meilleur rapport qualité/prix.</p>
+    </details>
+
+    <details class="tile p-6 cursor-pointer">
+      <summary class="font-bold text-lg flex items-center justify-between">
+        Comment vérifier la santé de ma batterie?
+        <span>+</span>
+      </summary>
+      <p class="mt-4 text-muted leading-relaxed">Paramètres > Batterie > État de la batterie et entretien. Vous voyez un pourcentage de capacité maximum. Moins de 80 % = commencez à penser au remplacement. Moins de 70 % = urgence. Solution Phone : diagnostic gratuit et remplacement 79€.</p>
+    </details>
+
+    <details class="tile p-6 cursor-pointer">
+      <summary class="font-bold text-lg flex items-center justify-between">
+        Puis-je faire de la réparation en ligne?
+        <span>+</span>
+      </summary>
+      <p class="mt-4 text-muted leading-relaxed">Non pour les iPhone. Pas de tutoriels ici. Les réparations d'écran demandent du matériel spécialisé (chaleur, outils précision) qui coûte 2000€. Venir en boutique est plus simple, moins cher et plus sûr.</p>
+    </details>
+
+    <details class="tile p-6 cursor-pointer">
+      <summary class="font-bold text-lg flex items-center justify-between">
+        Quel est votre horaire?
+        <span>+</span>
+      </summary>
+      <p class="mt-4 text-muted leading-relaxed">Lundi à samedi 9h15–12h15 et 14h–19h. Nous sommes fermés dimanche et jours fériés. Pas de rendez-vous nécessaire mais vous pouvez appeler 03 85 33 06 89 ou WhatsApp 07 83 92 18 84 pour connaître le délai d'attente en temps réel.</p>
+    </details>
+
+    <details class="tile p-6 cursor-pointer">
+      <summary class="font-bold text-lg flex items-center justify-between">
+        Vous livrez à domicile?
+        <span>+</span>
+      </summary>
+      <p class="mt-4 text-muted leading-relaxed">Pas de service de livraison technique. Vous devez apporter votre iPhone en boutique. En revanche, nous pouvons envoyer des accessoires (protecteurs écran, chargeurs, coques) par la Poste si vous le souhaitez.</p>
+    </details>
+
+    <details class="tile p-6 cursor-pointer">
+      <summary class="font-bold text-lg flex items-center justify-between">
+        Comment appliquer un film hydrogel sans bulle?
+        <span>+</span>
+      </summary>
+      <p class="mt-4 text-muted leading-relaxed">C'est l'avantage du film hydrogel — zéro bulle possible. Il s'auto-nivelle. Nettoyez bien l'écran (chiffon + alcool). Découpez le film aux dimensions exactes. Décollez lentement en tirant sur le coin. Posez-le délicatement. L'hydrogel s'ajuste tout seul en 2-3 min. Aucun outil nécessaire.</p>
+    </details>
+  </div>
+</section>
+
+<!-- TESTIMONIALS TEASER -->
+<section class="max-w-7xl mx-auto px-6 py-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-8 text-center">Avis clients</p>
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="tile p-8">
+      <div class="flex gap-1 mb-4">⭐⭐⭐⭐⭐</div>
+      <p class="text-sm leading-relaxed mb-4 text-muted">"Écran cassé réparé en 30 minutes pour 164€ au lieu de 449€ chez Apple. Qualité parfaite, garantie 12 mois. Je reviens pour la batterie le mois prochain!"</p>
+      <p class="text-sm font-bold">— Sophie, Mâcon</p>
+    </div>
+    <div class="tile p-8">
+      <div class="flex gap-1 mb-4">⭐⭐⭐⭐⭐</div>
+      <p class="text-sm leading-relaxed mb-4 text-muted">"J'ai acheté un iPhone 15 reconditionné ici. Grade A, batterie 98%. La différence avec du neuf? Zéro. Le prix? 650€ moins cher. Merci Solution Phone!"</p>
+      <p class="text-sm font-bold">— Marc, Lyon</p>
+    </div>
+    <div class="tile p-8">
+      <div class="flex gap-1 mb-4">⭐⭐⭐⭐⭐</div>
+      <p class="text-sm leading-relaxed mb-4 text-muted">"L'équipe est adorable. Evan a diagnostiqué mon problème de batterie en 2 minutes. Remplacement et voilà, 30€ de moins grâce à QualiRépar!"</p>
+      <p class="text-sm font-bold">— Caroline, Chauffailles</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="max-w-4xl mx-auto px-6 py-16">
+  <div class="tile tile-soft p-8 md:p-12">
+    <h3 class="text-2xl font-extrabold text-center mb-12">Solution Phone par les chiffres</h3>
+    <div class="grid md:grid-cols-4 gap-6 text-center">
+      <div>
+        <div class="text-4xl font-extrabold text-accent mb-2">2500+</div>
+        <p class="text-sm text-muted">Réparations par an</p>
+      </div>
+      <div>
+        <div class="text-4xl font-extrabold text-accent mb-2">30 min</div>
+        <p class="text-sm text-muted">Délai moyen réparation</p>
+      </div>
+      <div>
+        <div class="text-4xl font-extrabold text-accent mb-2">98%</div>
+        <p class="text-sm text-muted">Taux satisfaction client</p>
+      </div>
+      <div>
+        <div class="text-4xl font-extrabold text-accent mb-2">12 mois</div>
+        <p class="text-sm text-muted">Garantie incluse</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- NEWSLETTER -->
-<section class="newsletter">
-  <div class="newsletter-inner">
-    <div style="font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;">// Restez informé</div>
-    <h2>Recevoir les <em>offres & conseils</em></h2>
-    <p>Offres exclusives, astuces smartphone, nouveaux services — directement dans votre boîte mail.</p>
-    <div class="newsletter-form">
-      <input type="email" placeholder="votre@email.fr" id="newsletter-email">
-      <button onclick="subscribeNewsletter()">S'abonner ⚡</button>
-    </div>
-    <p class="newsletter-note">Pas de spam · Désabonnement en 1 clic</p>
+<section class="max-w-2xl mx-auto px-6 py-16 md:py-24">
+  <div class="tile p-8 md:p-12">
+    <p class="text-[12px] uppercase tracking-[0.22em] label">Restez informé</p>
+    <h2 class="mt-4 text-3xl md:text-4xl font-extrabold tracking-tightest leading-[0.95]">
+      Recevoir les <span class="text-accent">offres & conseils</span>
+    </h2>
+    <p class="mt-4 text-muted text-base">Offres exclusives, astuces smartphone, nouveaux services — directement dans votre boîte mail.</p>
+    <form class="mt-6 flex flex-col sm:flex-row gap-2" id="newsletterForm">
+      <input type="email" placeholder="votre@email.fr" required class="flex-1 px-4 py-3 bg-bg2 border border-black/6 rounded-full outline-none text-sm focus:border-accent">
+      <button type="submit" class="btn-red" style="font-size:.85rem">M'abonner <span>⚡</span></button>
+    </form>
+    <p class="mt-4 text-xs text-muted">Pas de spam · Désabonnement en 1 clic · Respect de vos données</p>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-band">
-  <h2>Vous avez un appareil <em style="color:var(--red);">à réparer ?</em></h2>
-  <p>Devis gratuit — Réparation le jour même — -25€ QualiRépar</p>
-  <div class="cta-btns">
-    <a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation." class="btn-p">💬 Devis WhatsApp</a>
-    <a href="tel:0385330689" class="btn-s">📞 03 85 33 06 89</a>
+<!-- RELATED SERVICES -->
+<section class="max-w-7xl mx-auto px-6 py-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-8 text-center">Services liés</p>
+  <div class="grid md:grid-cols-3 gap-6">
+    <a href="/reparation-iphone.html" class="tile tile-soft p-8 flex flex-col justify-between min-h-[240px] hover:border-accent">
+      <div>
+        <div class="text-4xl mb-4">🔧</div>
+        <h3 class="text-xl font-extrabold mb-3">Réparation iPhone</h3>
+        <p class="text-sm text-muted">Écran, batterie, connecteur de charge. Devis gratuit en 30 secondes.</p>
+      </div>
+      <span class="applelink text-sm mt-4">Faire réparer <span class="chev">›</span></span>
+    </a>
+    <a href="/hydrogel.html" class="tile p-8 flex flex-col justify-between min-h-[240px] hover:border-accent">
+      <div>
+        <div class="text-4xl mb-4">💧</div>
+        <h3 class="text-xl font-extrabold mb-3">Protection écran</h3>
+        <p class="text-sm text-muted">Film hydrogel et verre trempé pour tous les modèles. Pose gratuite en boutique.</p>
+      </div>
+      <span class="applelink text-sm mt-4">Découvrir <span class="chev">›</span></span>
+    </a>
+    <a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="tile p-8 flex flex-col justify-between min-h-[240px] hover:border-accent">
+      <div>
+        <div class="text-4xl mb-4">🛍️</div>
+        <h3 class="text-xl font-extrabold mb-3">Accessoires</h3>
+        <p class="text-sm text-muted">Coques, chargeurs, cables, batterie externe. Tous les accessoires Apple et tiers.</p>
+      </div>
+      <span class="applelink text-sm mt-4">Parcourir <span class="chev">›</span></span>
+    </a>
+  </div>
+</section>
+
+<!-- COMING SOON TEASER -->
+<section class="max-w-4xl mx-auto px-6 py-16">
+  <div class="tile p-8 md:p-12 text-center border-2 border-dashed" style="border-color:rgba(227,6,19,.15)">
+    <p class="text-[12px] uppercase tracking-[0.22em] text-accent font-bold mb-3">Prochainement</p>
+    <h3 class="text-2xl md:text-3xl font-extrabold mb-4">Articles à venir cette semaine</h3>
+    <div class="grid md:grid-cols-2 gap-6 mt-8 text-left">
+      <div class="flex gap-3">
+        <span class="text-2xl">📲</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">iPhone 17 : premières infos</h4>
+          <p class="text-xs text-muted">Rumeurs, prix estimé, date de sortie</p>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <span class="text-2xl">🎮</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Jeux mobiles et batterie</h4>
+          <p class="text-xs text-muted">Comment jouer sans tuer sa batterie</p>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <span class="text-2xl">📸</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Apple Intelligence et batterie</h4>
+          <p class="text-xs text-muted">Impact réel sur l'autonomie en 2026</p>
+        </div>
+      </div>
+      <div class="flex gap-3">
+        <span class="text-2xl">🔌</span>
+        <div>
+          <h4 class="font-bold text-sm mb-1">Meilleur chargeur USB-C</h4>
+          <p class="text-xs text-muted">Comparatif complet des chargeurs rapides</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGINATION -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+  <div class="flex items-center justify-center gap-2 flex-wrap">
+    <button class="px-4 py-2 border border-black/6 rounded-lg text-sm font-medium text-muted hover:border-accent hover:text-accent">← Précédent</button>
+    <button class="px-4 py-2 border border-accent bg-accent text-white rounded-lg text-sm font-medium">1</button>
+    <button class="px-4 py-2 border border-black/6 rounded-lg text-sm font-medium text-muted hover:border-accent hover:text-accent">2</button>
+    <button class="px-4 py-2 border border-black/6 rounded-lg text-sm font-medium text-muted hover:border-accent hover:text-accent">3</button>
+    <span class="px-2 text-muted text-sm">…</span>
+    <button class="px-4 py-2 border border-black/6 rounded-lg text-sm font-medium text-muted hover:border-accent hover:text-accent">Suivant →</button>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="max-w-7xl mx-auto px-6 py-12 md:py-16">
+  <div class="tile tile-accent p-8 md:p-12 text-center">
+    <h2 class="text-3xl md:text-4xl font-extrabold tracking-tightest leading-snug mb-3">
+      Une question ?<br>Evan répond sur WhatsApp.
+    </h2>
+    <p class="text-white/85 text-base mb-6">Envoyez votre question à Evan, technicien Solution Phone. Réponse rapide, sans prise de tête.</p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="https://wa.me/33783921884?text=Bonjour Evan, j'ai une question suite aux actualités" target="_blank" class="applelink white text-base">💬 Discuter sur WhatsApp <span class="chev">›</span></a>
+      <a href="tel:+33783921884" class="btn-ghost" style="background:rgba(255,255,255,.2); color:white; border:1px solid rgba(255,255,255,.3);">Appeler 07 83 92 18 84</a>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="foot-inner">
-    <div class="foot-copy">© 2026 Solution Phone — 21 Rue Gambetta, 71000 Mâcon — QualiRépar</div>
-    <div class="foot-links">
-      <a href="index.html">← Accueil</a>
-      <a href="reparation-iphone.html">Réparation iPhone</a>
-      <a href="https://wa.me/33783921884">WhatsApp</a>
+<footer class="border-t border-black/5 bg-white mt-16 md:mt-20">
+  <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-16">
+    <!-- Logo & Tagline -->
+    <div class="mb-10 md:mb-12">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-accentDark flex items-center justify-center text-white font-bold text-lg">S</div>
+        <span class="font-bold text-ink text-lg">Solution Phone</span>
+      </div>
+      <p class="text-sm text-muted">Le smartphone. Réparé. Reconditionné. 10 ans d'expertise à Mâcon.</p>
+    </div>
+
+    <!-- 4-Column Grid (mobile stack, desktop 4 cols) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 mb-8 md:mb-10">
+      <!-- Services Column -->
+      <div>
+        <h4 class="font-semibold text-ink text-sm md:text-base mb-4">Services</h4>
+        <ul class="space-y-2 text-sm text-muted">
+          <li><a href="reparation-iphone.html" class="hover:text-accent transition">Réparation iPhone</a></li>
+          <li><a href="reparation-iphone.html" class="hover:text-accent transition">Réparation Samsung</a></li>
+          <li><a href="reparation-iphone.html" class="hover:text-accent transition">Batterie & Écran</a></li>
+          <li><a href="#contact" class="hover:text-accent transition">Rachat iPhone</a></li>
+        </ul>
+      </div>
+
+      <!-- Boutique Column -->
+      <div>
+        <h4 class="font-semibold text-ink text-sm md:text-base mb-4">Boutique</h4>
+        <ul class="space-y-2 text-sm text-muted">
+          <li><a href="accessoires.html" class="hover:text-accent transition">Accessoires</a></li>
+          <li><a href="hydrogel.html" class="hover:text-accent transition">Films hydrogel</a></li>
+          <li><a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="hover:text-accent transition">Téléphones reconditionnés →</a></li>
+          <li><a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="hover:text-accent transition text-xs text-muted">solution-accessoires.fr</a></li>
+        </ul>
+      </div>
+
+      <!-- Infos Column -->
+      <div>
+        <h4 class="font-semibold text-ink text-sm md:text-base mb-4">Infos</h4>
+        <ul class="space-y-2 text-sm text-muted">
+          <li><a href="actualites.html" class="hover:text-accent transition">Actualités</a></li>
+          <li><a href="#" class="hover:text-accent transition">QualiRépar</a></li>
+          <li><a href="#contact" class="hover:text-accent transition">FAQ</a></li>
+          <li><a href="#" class="hover:text-accent transition">Mentions légales</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Column -->
+      <div>
+        <h4 class="font-semibold text-ink text-sm md:text-base mb-4">Contact</h4>
+        <ul class="space-y-2 text-sm text-muted">
+          <li class="flex items-start gap-2">
+            <span class="mt-0.5">📍</span>
+            <span>21 Rue Gambetta<br/>71000 Mâcon</span>
+          </li>
+          <li><a href="tel:+33385330689" class="hover:text-accent transition flex items-center gap-2">📞 03 85 33 06 89</a></li>
+          <li><a href="https://wa.me/33783921884" target="_blank" rel="noopener" class="hover:text-accent transition flex items-center gap-2">💬 WhatsApp</a></li>
+          <li><a href="mailto:contact@solution-phone.fr" class="hover:text-accent transition flex items-center gap-2">✉️ contact@solution-phone.fr</a></li>
+          <li class="text-xs pt-1">Lun–Sam 9h30–12h / 14h–19h</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-black/5 py-6 md:py-8">
+      <!-- Badges + Social -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
+        <!-- Left: Badges -->
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-bg2 text-xs font-semibold text-ink border border-black/5">
+            <span>🏆</span> Certifié QualiRépar
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-bg2 text-xs font-semibold text-ink border border-black/5">
+            <span>🍎</span> Apple Expert
+          </div>
+        </div>
+
+        <!-- Right: Social Icons -->
+        <div class="flex items-center gap-3">
+          <a href="https://www.facebook.com/solutionphone" target="_blank" rel="noopener" aria-label="Facebook" class="w-9 h-9 rounded-full bg-bg2 hover:bg-accent hover:text-white flex items-center justify-center transition text-sm font-bold">f</a>
+          <a href="https://www.instagram.com/solution_phone_macon" target="_blank" rel="noopener" aria-label="Instagram" class="w-9 h-9 rounded-full bg-bg2 hover:bg-accent hover:text-white flex items-center justify-center transition text-sm">📷</a>
+          <a href="https://www.google.com/maps/place/Solution+Phone" target="_blank" rel="noopener" aria-label="Google Maps" class="w-9 h-9 rounded-full bg-bg2 hover:bg-accent hover:text-white flex items-center justify-center transition text-sm">📍</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center text-xs text-muted pt-4 border-t border-black/5">
+      <p>© 2026 Solution Phone — Tous droits réservés</p>
     </div>
   </div>
 </footer>
 
-<!-- WA FLOAT -->
-<a href="https://wa.me/33783921884?text=Bonjour, je souhaite un devis réparation." class="wa-float">💬 DEVIS IMMÉDIAT</a>
+<!-- SCROLL TO TOP BUTTON -->
+<button id="scrollTopBtn" class="scroll-top-btn" onclick="scrollToTop()" title="Retour en haut">↑</button>
+
+<!-- WIZARD MODAL -->
+<div class="wz-backdrop" id="wizardBackdrop" onclick="closeWizard()">
+  <div class="wz-dialog" onclick="event.stopPropagation()">
+    <div style="padding:2rem; text-align:center; min-h:400px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+      <h2 style="font-size:1.8rem; font-weight:700; margin-bottom:1rem;">Devis Réparation</h2>
+      <p style="color:#6e6e73; margin-bottom:2rem;">Quel appareil désirez-vous faire réparer ?</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1rem; width:100%; margin-bottom:2rem;">
+        <button class="wz-card" onclick="selectRepair('iPhone')">
+          <div style="font-size:2rem;">📱</div>
+          <div style="font-weight:600;">iPhone</div>
+        </button>
+        <button class="wz-card" onclick="selectRepair('Samsung')">
+          <div style="font-size:2rem;">📱</div>
+          <div style="font-weight:600;">Samsung</div>
+        </button>
+        <button class="wz-card" onclick="selectRepair('Autre')">
+          <div style="font-size:2rem;">🔧</div>
+          <div style="font-weight:600;">Autre</div>
+        </button>
+      </div>
+      <button class="btn-ghost" onclick="closeWizard()" style="font-size:.9rem;">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- QR MODAL -->
+<div class="wz-backdrop" id="qrBackdrop" onclick="closeQR()">
+  <div class="wz-dialog" onclick="event.stopPropagation()">
+    <div style="padding:2rem; text-align:center;">
+      <h2 style="font-size:1.6rem; font-weight:700; margin-bottom:1rem;">QualiRépar −25 € minimum</h2>
+      <div style="background:#f5f5f7; padding:2rem; border-radius:24px; margin:2rem 0;">
+        <div style="font-size:3rem; font-weight:700; color:#e30613; margin-bottom:1rem;">−25 €</div>
+        <p style="color:#6e6e73; line-height:1.6; margin-bottom:1.5rem;">
+          Vous économisez automatiquement 25 € sur votre réparation iPhone, reconnu par le programme d'État QualiRépar. Additionné à nos promotions saisonnières, c'est jusqu'à 50€ de bonus possibles.<br><br>
+          <strong>Aucune démarche administrative.</strong> On remplit le dossier à votre place — vous payez juste la facture remisée.
+        </p>
+        <div style="background:white; padding:1rem; border-radius:16px; border:1px solid rgba(0,0,0,.06); margin-bottom:1.5rem; text-align:left; font-size:.85rem;">
+          <strong style="display:block; margin-bottom:.5rem;">Réparations éligibles :</strong>
+          <div style="color:#6e6e73;">✓ Écran<br>✓ Batterie<br>✓ Connecteur de charge<br>✓ Caméra<br>✓ Haut-parleur<br>✓ Micro<br>✓ Vibreur</div>
+        </div>
+        <a href="https://wa.me/33783921884?text=Bonjour, je souhaite profiter de l'offre QualiRépar -25€" target="_blank" class="btn-red">Demander mon devis</a>
+      </div>
+      <button class="btn-ghost" onclick="closeQR()" style="font-size:.9rem;">Fermer</button>
+    </div>
+  </div>
+</div>
 
 <script>
-// Burger menu
-function toggleMenu(){
-  var b=document.getElementById('burger');
-  var m=document.getElementById('mobileNav');
-  var open = m.style.display === 'flex';
-  m.style.display = open ? 'none' : 'flex';
-  document.body.style.overflow = open ? '' : 'hidden';
+function openWizard(opts){
+  document.getElementById('wizardBackdrop').classList.add('on');
+  document.body.style.overflow='hidden';
 }
 
-// Filter posts
-function filterPosts(cat, btn){
-  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+function closeWizard(){
+  document.getElementById('wizardBackdrop').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+function selectRepair(brand){
+  var msg = 'Bonjour, je souhaite un devis réparation ' + brand;
+  window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg), '_blank');
+  closeWizard();
+}
+
+function openQR(){
+  document.getElementById('qrBackdrop').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function closeQR(){
+  document.getElementById('qrBackdrop').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+function filterArticles(cat, btn){
+  var articles = document.querySelectorAll('article[data-cat]');
+  document.querySelectorAll('.chip').forEach(function(c){ c.classList.remove('active'); });
   btn.classList.add('active');
-  document.querySelectorAll('.article-card').forEach(function(card){
-    if(cat === 'all' || card.dataset.cat === cat){
-      card.style.display = 'block';
+
+  articles.forEach(function(art){
+    if(cat === 'all' || art.dataset.cat === cat){
+      art.classList.remove('hidden');
     } else {
-      card.style.display = 'none';
+      art.classList.add('hidden');
     }
   });
 }
 
-// Newsletter
-function subscribeNewsletter(){
-  var email = document.getElementById('newsletter-email').value.trim();
-  if(!email || !email.includes('@')){ alert('Merci de saisir un email valide.'); return; }
-  var subject = encodeURIComponent('Inscription newsletter Solution Phone');
+document.getElementById('newsletterForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var email = this.querySelector('input[type="email"]').value.trim();
+  if(!email) return;
+  var subject = encodeURIComponent('Inscription newsletter Solution Phone Actualités');
   var body = encodeURIComponent('Bonjour,\n\nJe souhaite m\'abonner aux actualités Solution Phone.\n\nEmail : ' + email);
-  window.open('mailto:solution.phone71@gmail.com?subject=' + subject + '&body=' + body);
-  document.querySelector('.newsletter-form').innerHTML = '<div style="padding:20px;text-align:center;font-family:Orbitron,sans-serif;color:var(--cyan);letter-spacing:2px;">✅ MERCI ! VOUS ÊTES INSCRIT.</div>';
+  window.open('mailto:contact@solution-phone.fr?subject=' + subject + '&body=' + body);
+  this.innerHTML = '<div style="padding:1rem; text-align:center; color:#e30613; font-weight:600;">✅ Merci ! Vous êtes inscrit.</div>';
+});
+
+function scrollToTop(){
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+var scrollTopBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', function(){
+  if(window.scrollY > 300){
+    scrollTopBtn.classList.add('show');
+  } else {
+    scrollTopBtn.classList.remove('show');
+  }
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    closeWizard();
+    closeQR();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(r){ observer.observe(r); });
+});
 </script>
 </body>
 </html>

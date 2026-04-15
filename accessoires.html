@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Accessoires smartphone — Solution Phone Mâcon</title>
+<meta name="description" content="Coques, chargeurs, verres trempés, câbles, batteries. +200 références d'accessoires pour chaque smartphone à Mâcon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { sans: ['"Plus Jakarta Sans"','-apple-system','BlinkMacSystemFont','"SF Pro Display"','"Segoe UI"','Roboto','sans-serif'] },
+      colors: { bg:'#ffffff', bg2:'#f5f5f7', ink:'#1d1d1f', muted:'#6e6e73', apple:'#0071e3', accent:'#e30613', accentDark:'#b8050f' },
+      letterSpacing: { tightest: '-0.04em' }
+    }
+  }
+}
+</script>
+<style>
+:root { color-scheme: light; }
+html, body { background:#ffffff; color:#1d1d1f; }
+body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif; -webkit-font-smoothing:antialiased; }
+
+.aurora::before{
+  content:""; position:fixed; inset:-20%; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(900px 500px at 15% 0%, rgba(227,6,19,.10), transparent 60%),
+    radial-gradient(800px 500px at 90% 10%, rgba(227,6,19,.06), transparent 60%);
+  filter: blur(10px);
+}
+
+.tile{
+  position:relative; background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:32px; overflow:hidden;
+  transform-style:preserve-3d;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1), border-color .4s, box-shadow .4s;
+  box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 12px 30px -18px rgba(0,0,0,.12);
+}
+.tile::after{
+  content:""; position:absolute; inset:0; border-radius:32px; pointer-events:none;
+  background: radial-gradient(600px 300px at var(--mx,50%) var(--my,20%), rgba(227,6,19,.08), transparent 60%);
+  opacity:0; transition:opacity .4s ease;
+}
+.tile:hover::after{ opacity:1; }
+.tile:hover{ border-color: rgba(0,0,0,.12); box-shadow: 0 4px 12px rgba(0,0,0,.04), 0 30px 60px -25px rgba(0,0,0,.18); }
+.tile.focus-ring{ animation: pulseRing 1.8s ease-out 2; }
+@keyframes pulseRing{
+  0%{ box-shadow: 0 0 0 0 rgba(227,6,19,.45), 0 12px 30px -18px rgba(0,0,0,.15) }
+  70%{ box-shadow: 0 0 0 22px rgba(227,6,19,0), 0 12px 30px -18px rgba(0,0,0,.15) }
+  100%{ box-shadow: 0 0 0 0 rgba(227,6,19,0), 0 12px 30px -18px rgba(0,0,0,.15) }
+}
+.tile-accent{ background: linear-gradient(140deg, #e30613 0%, #b8050f 100%); color:#fff; border-color: rgba(255,255,255,.14); }
+.tile-accent::after{ background: radial-gradient(600px 300px at var(--mx,50%) var(--my,20%), rgba(255,255,255,.18), transparent 60%); }
+.tile-soft{ background: linear-gradient(160deg, #fff 0%, #fff5f5 100%); }
+
+.applelink{ color:#0071e3; font-weight:500; display:inline-flex; align-items:center; gap:.35rem; transition: color .2s; }
+.applelink:hover{ color:#0077ED; }
+.applelink.white{ color:#fff; }
+.applelink .chev{ transition: transform .3s cubic-bezier(.2,.8,.2,1); display:inline-block; }
+.applelink:hover .chev{ transform: translateX(4px); }
+
+.btn-apple{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#0071e3; color:white; font-weight:500; padding:.8rem 1.4rem; border-radius:980px; font-size:.95rem; transition:.2s; }
+.btn-apple:hover{ background:#0077ED; }
+.btn-red{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#e30613; color:white; font-weight:600; padding:.8rem 1.4rem; border-radius:980px; font-size:.95rem; box-shadow:0 8px 24px -8px rgba(227,6,19,.45); transition:.2s; }
+.btn-red:hover{ background:#b8050f; }
+.btn-ghost{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; background:#f5f5f7; color:#1d1d1f; font-weight:500; padding:.8rem 1.4rem; border-radius:980px; font-size:.95rem; border:1px solid rgba(0,0,0,.06); }
+.btn-ghost:hover{ background:#eaeaec; }
+
+.reveal{ opacity:0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1); }
+.reveal.in{ opacity:1; transform: none; }
+
+.chip{ display:inline-flex; align-items:center; justify-content:center; padding:.6rem 1.2rem; border-radius:999px; background:#f5f5f7; color:#1d1d1f; border:1px solid rgba(0,0,0,.06); font-weight:500; font-size:.92rem; cursor:pointer; transition:.2s; }
+.chip:hover{ background:#eaeaec; border-color:rgba(0,0,0,.12); }
+.chip.active{ background:#e30613; color:#fff; border-color:#e30613; }
+
+.num{ font-variant-numeric: tabular-nums; letter-spacing:-0.03em; }
+.label{ color:#6e6e73; }
+
+/* Wizard */
+.wz-backdrop{
+  position:fixed; inset:0; background: rgba(255,255,255,.75); backdrop-filter: blur(14px) saturate(140%);
+  z-index:60; display:none; opacity:0; transition: opacity .35s ease;
+}
+.wz-backdrop.on{ display:flex; opacity:1; }
+.wz-dialog{
+  margin:auto; width:min(960px, 96vw); max-height:92vh; overflow:auto;
+  background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:32px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,.25);
+  transform: translateY(12px) scale(.98); opacity:0; transition: all .4s cubic-bezier(.2,.8,.2,1);
+}
+.wz-backdrop.on .wz-dialog{ transform: none; opacity:1; }
+.wz-step{ display:none; }
+.wz-step.on{ display:block; animation: stepIn .45s cubic-bezier(.2,.8,.2,1); }
+@keyframes stepIn{ from{ opacity:0; transform: translateY(14px) } to{ opacity:1; transform:none } }
+.wz-card{
+  background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:24px; padding:1.25rem;
+  display:flex; flex-direction:column; gap:.6rem; align-items:flex-start;
+  transition: all .3s; cursor:pointer; text-align:left;
+  box-shadow: 0 1px 2px rgba(0,0,0,.03);
+}
+.wz-card:hover{ border-color:#e30613; transform: translateY(-3px); box-shadow: 0 18px 30px -18px rgba(227,6,19,.25); }
+.wz-progress{ height:4px; background:#f0f0f2; border-radius:99px; overflow:hidden; }
+.wz-progress > span{ display:block; height:100%; background:#e30613; transition: width .5s cubic-bezier(.2,.8,.2,1); }
+.wz-trust{ display:flex; gap:.75rem; flex-wrap:wrap; font-size:.78rem; color:#6e6e73; }
+.wz-trust span{ display:inline-flex; align-items:center; gap:.3rem; background:#f5f5f7; padding:.3rem .65rem; border-radius:999px; }
+
+/* Product grid */
+.product-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:1rem; }
+@media (min-width:640px){ .product-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:768px){ .product-grid{ grid-template-columns:repeat(3,1fr); } }
+@media (min-width:1024px){ .product-grid{ grid-template-columns:repeat(4,1fr); } }
+.product-card{ position:relative; border:1px solid rgba(0,0,0,.06); border-radius:20px; overflow:hidden; transition:.2s; }
+.product-card:hover{ border-color:rgba(0,0,0,.12); box-shadow:0 8px 24px -8px rgba(0,0,0,.15); }
+.product-img{ position:relative; aspect-ratio:1/1; background:#f5f5f7; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.product-img img{ width:100%; height:100%; object-fit:cover; }
+.product-badge{ position:absolute; top:8px; right:8px; padding:.4rem .8rem; background:rgba(227,6,19,.95); color:#fff; font-size:.75rem; font-weight:600; border-radius:999px; }
+.product-info{ padding:1rem; }
+.product-name{ font-size:.85rem; font-weight:600; color:#1d1d1f; line-height:1.3; }
+.product-brand{ font-size:.75rem; color:#6e6e73; margin-top:.3rem; }
+</style>
+</head>
+<body class="aurora">
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 backdrop-blur-xl bg-white/90 border-b border-black/5">
+  <div class="max-w-7xl mx-auto px-5 h-14 flex items-center gap-5 text-[13px]">
+    <a href="/" class="flex items-center gap-3 shrink-0">
+      <span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-[11px] font-black tracking-tight" style="background:#e30613;box-shadow:0 4px 10px -3px rgba(227,6,19,.55)">SP</span>
+      <span class="hidden sm:inline font-black tracking-tight text-[15px]">SOLUTION&nbsp;PHONE</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-5 text-ink/85 font-medium flex-1 justify-center">
+      <a href="index.html" class="hover:text-accent">Accueil</a>
+      <a href="#equipe" class="hover:text-accent">L'équipe</a>
+      <a href="accessoires.html" class="text-accent">🛒 Accessoires</a>
+      <a href="hydrogel.html" class="hover:text-accent inline-flex items-center gap-1.5">💧 Protection écran</a>
+      <a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="hover:text-accent inline-flex items-center gap-1.5">📱 Tél. reconditionnés</a>
+      <a href="#contact" class="hover:text-accent">Contact</a>
+      <a href="actualites.html" class="hover:text-accent">Actualités</a>
+      <a href="reparation-iphone.html" class="text-accent font-bold">Réparation iPhone</a>
+    </nav>
+    <div class="flex items-center gap-3 ml-auto">
+      <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-emerald-600">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Ouvert
+      </span>
+      <a href="tel:+33385330689" class="hidden md:inline text-ink/90 hover:text-ink font-medium">03 85 33 06 89</a>
+      <button onclick="openWizard()" class="btn-red" style="padding:.45rem 1rem;font-size:.8rem">Devis <span>›</span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="relative pt-14 pb-12 md:pt-20 md:pb-16 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <p class="reveal text-[13px] uppercase tracking-[0.2em] text-muted">Boutique · Accessoires</p>
+    <h1 class="reveal mt-4 text-5xl md:text-7xl font-extrabold tracking-tightest leading-[0.95]">
+      L'accessoire.<br>
+      <span class="text-accent">Pour chaque smartphone.</span>
+    </h1>
+    <p class="reveal mt-6 text-lg md:text-xl text-muted max-w-2xl mx-auto">
+      Coques, chargeurs, câbles, verres trempés. +200 références certifiées. Tous les appareils, tous les budgets.
+    </p>
+  </div>
+</section>
+
+<!-- STATS TILES -->
+<section class="max-w-7xl mx-auto px-6 pb-10 md:pb-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="tile p-6 md:p-8">
+      <p class="text-[12px] uppercase tracking-[0.22em] label">Référence</p>
+      <div class="mt-3 text-4xl md:text-5xl font-extrabold tracking-tightest num">+200</div>
+      <p class="mt-1 text-muted">Coques et accessoires en stock</p>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <p class="text-[12px] uppercase tracking-[0.22em] label">Avis clients</p>
+      <div class="mt-3 flex items-baseline gap-2">
+        <div class="text-4xl font-extrabold tracking-tightest">4,6<span class="text-xl text-muted">/5</span></div>
+        <div class="text-amber-500">★★★★★</div>
+      </div>
+      <p class="mt-1 text-muted text-sm">+550 avis vérifiés</p>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <p class="text-[12px] uppercase tracking-[0.22em] label">Expérience</p>
+      <div class="mt-3 text-4xl md:text-5xl font-extrabold tracking-tightest num">10</div>
+      <p class="mt-1 text-muted">Ans d'expertise accessoires</p>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUES STRIP -->
+<section class="max-w-7xl mx-auto px-6 pb-10 md:pb-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-5">Marques partenaires</p>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+    <div class="tile p-6 text-center">
+      <div class="text-3xl mb-2">🔴</div>
+      <div class="font-semibold text-sm">CoverMe</div>
+      <p class="text-xs text-muted mt-1">Coques premium</p>
+    </div>
+    <div class="tile p-6 text-center">
+      <div class="text-3xl mb-2">🟠</div>
+      <div class="font-semibold text-sm">FairPlay</div>
+      <p class="text-xs text-muted mt-1">Accessoires français</p>
+    </div>
+    <div class="tile p-6 text-center">
+      <div class="text-3xl mb-2">🟢</div>
+      <div class="font-semibold text-sm">Belkin</div>
+      <p class="text-xs text-muted mt-1">Chargeurs reconnus</p>
+    </div>
+    <div class="tile p-6 text-center">
+      <div class="text-3xl mb-2">🔵</div>
+      <div class="font-semibold text-sm">RhinoShield</div>
+      <p class="text-xs text-muted mt-1">Protection milieu</p>
+    </div>
+    <div class="tile p-6 text-center">
+      <div class="text-3xl mb-2">💧</div>
+      <div class="font-semibold text-sm">Ocadia</div>
+      <p class="text-xs text-muted mt-1">Hydrogel sur mesure</p>
+    </div>
+  </div>
+</section>
+
+<!-- SÉLECTION RAPIDE MODÈLES -->
+<section class="max-w-7xl mx-auto px-6 pb-10 md:pb-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-5">Votre modèle</p>
+  <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 md:gap-3">
+    <button class="chip active" onclick="filterByModel('iphone16')">iPhone 16</button>
+    <button class="chip" onclick="filterByModel('iphone16pro')">16 Pro</button>
+    <button class="chip" onclick="filterByModel('iphone15')">iPhone 15</button>
+    <button class="chip" onclick="filterByModel('iphone14')">iPhone 14</button>
+    <button class="chip" onclick="filterByModel('iphone13')">iPhone 13</button>
+    <button class="chip" onclick="filterByModel('galaxy-s25')">Galaxy S25</button>
+    <button class="chip" onclick="filterByModel('galaxy-s24')">Galaxy S24</button>
+    <button class="chip" onclick="filterByModel('galaxy-a55')">Galaxy A55</button>
+    <button class="chip" onclick="filterByModel('galaxy-a15')">Galaxy A15</button>
+    <button class="chip" onclick="filterByModel('xiaomi15')">Xiaomi 15</button>
+    <button class="chip" onclick="filterByModel('redmi13c')">Redmi 13C</button>
+    <button class="chip" onclick="filterByModel('all')">Tous les modèles</button>
+  </div>
+</section>
+
+<!-- SÉLECTEURS MARQUE/MODÈLE/CATÉGORIE -->
+<section class="max-w-7xl mx-auto px-6 pb-10 md:pb-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div>
+      <label class="text-[12px] uppercase tracking-[0.22em] label block mb-2">Marque</label>
+      <select id="sBrand" onchange="loadModels()" class="w-full bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <option value="">— Toutes les marques —</option>
+        <option value="apple">Apple (iPhone)</option>
+        <option value="samsung">Samsung (Galaxy)</option>
+        <option value="xiaomi">Xiaomi</option>
+      </select>
+    </div>
+    <div>
+      <label class="text-[12px] uppercase tracking-[0.22em] label block mb-2">Modèle</label>
+      <select id="sModel" onchange="showProducts()" class="w-full bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <option value="">— Choisir un modèle —</option>
+      </select>
+    </div>
+    <div>
+      <label class="text-[12px] uppercase tracking-[0.22em] label block mb-2">Catégorie</label>
+      <select id="sCat" onchange="showCategory()" class="w-full bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <option value="coques">Coques</option>
+        <option value="verres">Verres trempés</option>
+        <option value="chargeurs">Chargeurs</option>
+        <option value="batteries">Batteries</option>
+        <option value="cables">Câbles</option>
+        <option value="audio">Audio</option>
+        <option value="supports">Supports</option>
+        <option value="accessoires">Accessoires</option>
+      </select>
+    </div>
+  </div>
+</section>
+
+<!-- ONGLETS CATÉGORIES -->
+<section class="max-w-7xl mx-auto px-6 pb-10">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-5">Parcourir par catégorie</p>
+  <div class="flex flex-wrap gap-2 md:gap-3">
+    <button class="chip active" onclick="selectCategory('coques', this)">🛡️ Coques</button>
+    <button class="chip" onclick="selectCategory('verres', this)">💎 Verres</button>
+    <button class="chip" onclick="selectCategory('chargeurs', this)">⚡ Chargeurs</button>
+    <button class="chip" onclick="selectCategory('batteries', this)">🔋 Batteries</button>
+    <button class="chip" onclick="selectCategory('cables', this)">🔌 Câbles</button>
+    <button class="chip" onclick="selectCategory('audio', this)">🎧 Audio</button>
+    <button class="chip" onclick="selectCategory('supports', this)">📍 Supports</button>
+    <button class="chip" onclick="selectCategory('accessoires', this)">🎁 Accessoires</button>
+  </div>
+</section>
+
+<!-- GRILLE PRODUITS -->
+<section class="max-w-7xl mx-auto px-6 pb-12 md:pb-16">
+  <div id="productGrid" class="product-grid"></div>
+  <div id="noProducts" class="text-center py-12 hidden">
+    <p class="text-muted mb-4">Aucun produit ne correspond à votre sélection.</p>
+    <a href="https://wa.me/33385330689" class="applelink">Nous contacter sur WhatsApp <span class="chev">›</span></a>
+  </div>
+  <div class="mt-10 p-6 bg-bg2 rounded-2xl border border-black/5">
+    <p class="text-sm text-muted">+ d'autres références disponibles en boutique et sur <a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="text-accent font-semibold">solution-accessoires.fr</a></p>
+  </div>
+</section>
+
+<!-- NOTE RÉFÉRENCE SUPPLÉMENTAIRE -->
+<section class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <div class="bg-accent/10 border border-accent/30 rounded-2xl p-6 md:p-10">
+    <h3 class="text-2xl font-extrabold tracking-tightest mb-3">+ d'autres références disponibles</h3>
+    <p class="text-muted mb-4">Vous ne trouvez pas l'accessoire que vous cherchez parmi nos 200+ références? Nous en avons d'autres en stock.</p>
+    <div class="flex gap-3 flex-wrap">
+      <a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="btn-red">Voir la boutique en ligne</a>
+      <a href="https://wa.me/33385330689" class="btn-ghost">Demander sur WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ / CONSEILS D'ACHAT -->
+<section class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-8">Conseils d'achat</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-xl font-extrabold tracking-tightest mb-3">Quel verre choisir?</h3>
+      <p class="text-muted text-sm mb-3">Les verres trempés protègent l'écran contre les rayures et les chocs. Disponibles en différentes qualités : Standard, Privacy (confidentialité), ou Hydrogel sur mesure pour une couverture maximale.</p>
+      <a href="https://wa.me/33385330689" class="applelink text-sm">Conseiller en ligne <span class="chev">›</span></a>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-xl font-extrabold tracking-tightest mb-3">Coques : MagSafe ou classique?</h3>
+      <p class="text-muted text-sm mb-3">Les coques MagSafe vous permettent d'utiliser des supports magnétiques, des chargeurs sans fil et des accessoires pratiques. Les coques classiques offrent une protection optimale sans système magnétique.</p>
+      <a href="https://wa.me/33385330689" class="applelink text-sm">Conseiller en ligne <span class="chev">›</span></a>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-xl font-extrabold tracking-tightest mb-3">Chargeurs : quelle puissance?</h3>
+      <p class="text-muted text-sm mb-3">Pour iPhone 15/16 : minimum 20W recommandé. Pour Samsung Galaxy : 25W+ pour charge rapide. Les chargeurs GaN offrent une recharge plus rapide et une meilleure dissipation thermique.</p>
+      <a href="https://wa.me/33385330689" class="applelink text-sm">Conseiller en ligne <span class="chev">›</span></a>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-xl font-extrabold tracking-tightest mb-3">Câbles : Lightning ou USB-C?</h3>
+      <p class="text-muted text-sm mb-3">iPhone 15/16 utilisent USB-C. Les anciens modèles utilisent Lightning. Nos câbles Belkin sont tressés et durables, avec garantie 2 ans. Certifiés pour charge et données.</p>
+      <a href="https://wa.me/33385330689" class="applelink text-sm">Conseiller en ligne <span class="chev">›</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES / AVIS CLIENTS -->
+<section class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-8">Ce disent nos clients</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="tile p-6">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="text-amber-500">★★★★★</div>
+        <span class="text-xs text-muted">4,7/5</span>
+      </div>
+      <p class="text-sm text-ink/90 mb-3">"Coques de excellente qualité, bien rangées en boutique. Excellent rapport qualité-prix."</p>
+      <p class="text-xs text-muted">Marc R. · Client vérifié</p>
+    </div>
+    <div class="tile p-6">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="text-amber-500">★★★★★</div>
+        <span class="text-xs text-muted">5/5</span>
+      </div>
+      <p class="text-sm text-ink/90 mb-3">"Chargeur Belkin très rapide, livré rapidement. Parfait pour mon iPhone 15."</p>
+      <p class="text-xs text-muted">Sophie L. · Client vérifié</p>
+    </div>
+    <div class="tile p-6">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="text-amber-500">★★★★★</div>
+        <span class="text-xs text-muted">5/5</span>
+      </div>
+      <p class="text-sm text-ink/90 mb-3">"Équipe sympathique, conseils pertinents. Verre trempé posé à la boutique sans bulles."</p>
+      <p class="text-xs text-muted">Jean P. · Client vérifié</p>
+    </div>
+  </div>
+</section>
+
+<!-- VISITE EN BOUTIQUE -->
+<section id="contact" class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div>
+      <p class="text-[12px] uppercase tracking-[0.22em] label mb-4">Nous trouver</p>
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tightest leading-[0.95] mb-6">
+        Visite en boutique.
+      </h2>
+      <div class="space-y-4">
+        <div>
+          <p class="font-semibold text-lg">📍 Adresse</p>
+          <p class="text-muted mt-1">21 Rue Gambetta<br>71000 Mâcon<br>Centre-ville</p>
+        </div>
+        <div>
+          <p class="font-semibold text-lg">🕒 Horaires d'ouverture</p>
+          <p class="text-muted mt-1">
+            <b>Lundi–Vendredi:</b> 10h–12h30, 14h–19h<br>
+            <b>Samedi:</b> 10h–17h (continu)<br>
+            <b>Dimanche:</b> Fermé<br>
+            <b>Jours fériés:</b> Fermé
+          </p>
+        </div>
+        <div>
+          <p class="font-semibold text-lg">📞 Contact direct</p>
+          <p class="text-muted mt-1">
+            <b>Téléphone:</b> <a href="tel:+33385330689" class="text-accent font-semibold">03 85 33 06 89</a><br>
+            <b>WhatsApp:</b> <a href="https://wa.me/33385330689" class="text-accent font-semibold">+33 7 83 92 18 84</a><br>
+            <b>Email:</b> <a href="mailto:contact@solution-phone.fr" class="text-accent font-semibold">contact@solution-phone.fr</a>
+          </p>
+        </div>
+        <div class="mt-6 p-4 bg-bg2 rounded-xl border border-black/5">
+          <p class="text-xs text-muted"><b>Parking gratuit</b> à proximité. Accès PMR. Conseil gratuit avant achat.</p>
+        </div>
+      </div>
+      <div class="mt-6 flex gap-3 flex-wrap">
+        <a href="tel:+33385330689" class="btn-red">Appeler maintenant</a>
+        <a href="https://wa.me/33385330689" class="btn-ghost">WhatsApp</a>
+      </div>
+    </div>
+    <div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2764.1644305193307!2d4.8368597!3d46.30518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5b6b6b6b6b6b7%3A0x0!2sSolution%20Phone%20Macon!5e0!3m2!1sfr!2sfr!4v1234567890" width="100%" height="400" style="border:1px solid rgba(0,0,0,.06);border-radius:24px;background:#f5f5f7;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIE & RETOURS -->
+<section class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div>
+      <p class="text-[12px] uppercase tracking-[0.22em] label mb-4">Garantie</p>
+      <h3 class="text-3xl font-extrabold tracking-tightest mb-4">Tous nos accessoires sont garantis</h3>
+      <div class="space-y-3">
+        <div class="flex gap-3">
+          <span class="text-xl">✅</span>
+          <div>
+            <p class="font-semibold">Coques & Étuis</p>
+            <p class="text-sm text-muted">Garantie 12 mois contre les défauts de fabrication</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xl">✅</span>
+          <div>
+            <p class="font-semibold">Chargeurs & Câbles</p>
+            <p class="text-sm text-muted">Garantie 24 mois Belkin, 12 mois FAIRPLAY</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xl">✅</span>
+          <div>
+            <p class="font-semibold">Verres trempés</p>
+            <p class="text-sm text-muted">Garantie remplacement en cas de casse sur choc</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xl">✅</span>
+          <div>
+            <p class="font-semibold">Batterie externe</p>
+            <p class="text-sm text-muted">Garantie 24 mois contre les défauts</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="text-[12px] uppercase tracking-[0.22em] label mb-4">Retours & Échanges</p>
+      <h3 class="text-3xl font-extrabold tracking-tightest mb-4">Satisfait ou remboursé</h3>
+      <div class="space-y-3">
+        <div class="flex gap-3">
+          <span class="text-xl">📦</span>
+          <div>
+            <p class="font-semibold">Retour simple</p>
+            <p class="text-sm text-muted">14 jours pour changer d'avis, retour gratuit en boutique</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xl">💱</span>
+          <div>
+            <p class="font-semibold">Échange produit</p>
+            <p class="text-sm text-muted">Changement de couleur ou modèle en 48h maximum</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xl">🔄</span>
+          <div>
+            <p class="font-semibold">Remboursement</p>
+            <p class="text-sm text-muted">Remboursement intégral si défaut de fabrication</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-xl">🚚</span>
+          <div>
+            <p class="font-semibold">Livraison gratuite</p>
+            <p class="text-sm text-muted">Sur commande en boutique à partir de 30€</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER & FLOATING WHATSAPP -->
+<!-- MARQUES DÉTAILS -->
+<section class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-8">Nos partenaires & marques</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-2xl font-extrabold tracking-tightest mb-4">🔴 CoverMe</h3>
+      <p class="text-muted mb-3">Coques premium design français. MagSafe intégré, protection optimale. Gammes GRAVITY, ONYX, PHANTOM, HAZE.</p>
+      <p class="text-sm">22 modèles disponibles en boutique</p>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-2xl font-extrabold tracking-tightest mb-4">🟠 FairPlay</h3>
+      <p class="text-muted mb-3">Accessoires français certifiés. Chargeurs GaN ultra-rapides, TWS audio ANC, chaînes chaînes design. Rapport qualité-prix imbattable.</p>
+      <p class="text-sm">45+ références en stock</p>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-2xl font-extrabold tracking-tightest mb-4">🟢 Belkin</h3>
+      <p class="text-muted mb-3">Référence mondiale en chargeurs et câbles. Certifiés MFi pour iPhone, durables et fiables. Garantie 24 mois.</p>
+      <p class="text-sm">38 produits chargeurs, câbles, batteries</p>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-2xl font-extrabold tracking-tightest mb-4">🔵 RhinoShield</h3>
+      <p class="text-muted mb-3">Protection robuste et stylée. Coques AirX MagSafe, SolidX, SolidSuit. Absorption des chocs optimale.</p>
+      <p class="text-sm">15 coques et protections</p>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-2xl font-extrabold tracking-tightest mb-4">💧 Ocadia</h3>
+      <p class="text-muted mb-3">Hydrogel sur mesure. Technologies CRYSTAL et OBSIDIAN Privacy. Protection complète 360°.</p>
+      <p class="text-sm">Tous modèles iPhone et Samsung</p>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <h3 class="text-2xl font-extrabold tracking-tightest mb-4">⭐ Autres marques</h3>
+      <p class="text-muted mb-3">Verres trempés, coques silicone, supports magnétiques. Gamme complète de marques reconnues.</p>
+      <p class="text-sm">50+ accessoires complémentaires</p>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE ACHAT DÉTAILLÉ -->
+<section class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <div class="tile p-6 md:p-10">
+    <p class="text-[12px] uppercase tracking-[0.22em] label mb-4">Guide d'achat complet</p>
+    <h3 class="text-3xl font-extrabold tracking-tightest mb-6">Choisir le bon accessoire</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <h4 class="font-semibold text-lg mb-3">🛡️ Coques: votre style, votre protection</h4>
+        <p class="text-muted text-sm mb-3">Les coques sont le premier rempart contre les chocs et les chutes. Nous proposons plusieurs niveaux de protection:</p>
+        <ul class="text-sm text-muted space-y-2 ml-4">
+          <li>✓ <b>Coques translucides</b> (Clear) : Design épuré, voir le téléphone</li>
+          <li>✓ <b>Coques silicone</b> : Flexibilité, prise en main agréable</li>
+          <li>✓ <b>Coques rigides</b> : Protection maximale, design premium</li>
+          <li>✓ <b>Étuis folio</b> : Protection écran + dos, style carnet</li>
+          <li>✓ <b>Coques MagSafe</b> : Compatibilité chargeur sans fil et supports</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-lg mb-3">💎 Verres trempés: invisible, efficace</h4>
+        <p class="text-muted text-sm mb-3">Protection transparente pour votre écran contre rayures et chocs:</p>
+        <ul class="text-sm text-muted space-y-2 ml-4">
+          <li>✓ <b>Verre standard</b> (9H) : Protection quotidienne parfaite</li>
+          <li>✓ <b>Verre Privacy</b> : Confidentialité, vision de côté bloquée</li>
+          <li>✓ <b>Hydrogel Ocadia</b> : Sur mesure, couverture 100% écran</li>
+          <li>✓ <b>Full Cover</b> : Couvre aussi les bords incurvés</li>
+          <li>✓ <b>Protection caméra</b> : Lentille optique résistante</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-lg mb-3">⚡ Chargeurs: charge rapide, sécurisé</h4>
+        <p class="text-muted text-sm mb-3">Chargeurs certifiés pour votre appareil, avec technologie GaN dernière génération:</p>
+        <ul class="text-sm text-muted space-y-2 ml-4">
+          <li>✓ <b>20W minimum</b> : Pour iPhone 15, charge optimale en 30min</li>
+          <li>✓ <b>GaN 67W+</b> : Multi-port, charge 3 appareils simultanément</li>
+          <li>✓ <b>USB-C universel</b> : iPhone 15/16, iPad, Samsung</li>
+          <li>✓ <b>Compact & léger</b> : Portable, design épuré</li>
+          <li>✓ <b>Certifié MFi/UL</b> : Sécurité garantie pour batterie</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-lg mb-3">🔌 Câbles: durabilité premium</h4>
+        <p class="text-muted text-sm mb-3">Câbles tressés Belkin, testés pour 10 000+ flexions:</p>
+        <ul class="text-sm text-muted space-y-2 ml-4">
+          <li>✓ <b>Lightning 2m</b> : Charge + données, tresse nylon</li>
+          <li>✓ <b>USB-C 1m/2m</b> : iPhone 15/16, durabilité extrême</li>
+          <li>✓ <b>Thunderbolt 4</b> : Données ultra-rapides (40 Gbps)</li>
+          <li>✓ <b>HDMI 4K</b> : Connectique vidéo professionnelle</li>
+          <li>✓ <b>Garantie 24 mois</b> : Remplace si rupture</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIF COQUES -->
+<section class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-6">Tableau comparatif</p>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm border border-black/5 rounded-xl overflow-hidden">
+      <thead class="bg-bg2 border-b border-black/5">
+        <tr>
+          <th class="px-4 py-3 text-left font-semibold">Marque</th>
+          <th class="px-4 py-3 text-left font-semibold">Type</th>
+          <th class="px-4 py-3 text-left font-semibold">Protection</th>
+          <th class="px-4 py-3 text-left font-semibold">Design</th>
+          <th class="px-4 py-3 text-left font-semibold">Prix</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-black/5">
+        <tr>
+          <td class="px-4 py-3"><b>CoverMe</b></td>
+          <td class="px-4 py-3">MagSafe premium</td>
+          <td class="px-4 py-3">★★★★★</td>
+          <td class="px-4 py-3">★★★★★</td>
+          <td class="px-4 py-3 text-accent font-semibold">35-45€</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><b>FairPlay</b></td>
+          <td class="px-4 py-3">Folio / MagSafe</td>
+          <td class="px-4 py-3">★★★★☆</td>
+          <td class="px-4 py-3">★★★★☆</td>
+          <td class="px-4 py-3 text-accent font-semibold">25-35€</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><b>RhinoShield</b></td>
+          <td class="px-4 py-3">SolidX robuste</td>
+          <td class="px-4 py-3">★★★★★</td>
+          <td class="px-4 py-3">★★★★☆</td>
+          <td class="px-4 py-3 text-accent font-semibold">40-50€</td>
+        </tr>
+        <tr>
+          <td class="px-4 py-3"><b>Autres</b></td>
+          <td class="px-4 py-3">Silicone / Clear</td>
+          <td class="px-4 py-3">★★★☆☆</td>
+          <td class="px-4 py-3">★★★☆☆</td>
+          <td class="px-4 py-3 text-accent font-semibold">10-20€</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-xs text-muted mt-3">Les prix indiqués sont approximatifs et peuvent varier. Consulter en boutique pour les tarifs exacts.</p>
+</section>
+
+<!-- FAQ -->
+<section class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <p class="text-[12px] uppercase tracking-[0.22em] label mb-8">Questions fréquentes</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="tile p-6">
+      <h4 class="font-semibold mb-3">Quelle est la différence entre verre standard et Hydrogel?</h4>
+      <p class="text-muted text-sm">Le verre standard est classique et transparent. L'Hydrogel Ocadia offre une couverture 100% de l'écran sur mesure, meilleure pour les bords incurvés, et plus flexible en cas de choc.</p>
+    </div>
+    <div class="tile p-6">
+      <h4 class="font-semibold mb-3">Les chargeurs GaN sont-ils sûrs?</h4>
+      <p class="text-muted text-sm">Oui, les chargeurs GaN Belkin et FairPlay sont certifiés UL et testés pour la sécurité. Ils dissipent mieux la chaleur et sont plus durables que les anciens chargeurs.</p>
+    </div>
+    <div class="tile p-6">
+      <h4 class="font-semibold mb-3">Mon coque MagSafe fonctionne-t-elle avec tous les supports?</h4>
+      <p class="text-muted text-sm">Oui, les coques MagSafe CoverMe, FairPlay et RhinoShield sont compatibles avec tous les supports, chargeurs et accessoires magnétiques standards.</p>
+    </div>
+    <div class="tile p-6">
+      <h4 class="font-semibold mb-3">Puis-je faire poser le verre trempé en boutique?</h4>
+      <p class="text-muted text-sm">Absolument! Nos techniciens peuvent poser votre verre trempé en 5-10 minutes, sans bulles d'air. Service gratuit à l'achat du verre.</p>
+    </div>
+    <div class="tile p-6">
+      <h4 class="font-semibold mb-3">Y a-t-il une livraison pour les accessoires?</h4>
+      <p class="text-muted text-sm">Oui, livraison gratuite en retrait en boutique à partir de 30€. Nous pouvons aussi envoyer par courrier sur demande (frais réduits).</p>
+    </div>
+    <div class="tile p-6">
+      <h4 class="font-semibold mb-3">Acceptez-vous les anciennes coques?</h4>
+      <p class="text-muted text-sm">Oui! Nous récyclons vos anciennes coques et verres trempés dans le cadre de notre démarche écologique. Remise jusqu'à 5€ à l'échange.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NOTRE ENGAGEMENT -->
+<section class="max-w-7xl mx-auto px-6 py-10 md:py-16">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="tile p-6 md:p-8">
+      <p class="text-[12px] uppercase tracking-[0.22em] label mb-4">Notre engagement</p>
+      <h3 class="text-2xl font-extrabold tracking-tightest mb-4">Vente responsable & consciente</h3>
+      <div class="space-y-3">
+        <div class="flex gap-3">
+          <span class="text-lg">♻️</span>
+          <div>
+            <p class="font-semibold text-sm">Recyclage d'emballages</p>
+            <p class="text-xs text-muted mt-0.5">Tous nos emballages sont recyclables ou compostables</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-lg">🌍</span>
+          <div>
+            <p class="font-semibold text-sm">Marques éco-responsables</p>
+            <p class="text-xs text-muted mt-0.5">FairPlay, Belkin et CoverMe respectent les normes environnementales</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-lg">🤝</span>
+          <div>
+            <p class="font-semibold text-sm">Conseil honnête</p>
+            <p class="text-xs text-muted mt-0.5">On ne vend que ce qui est utile, pas de surcharge inutile</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-lg">⏱️</span>
+          <div>
+            <p class="font-semibold text-sm">Installation rapide</p>
+            <p class="text-xs text-muted mt-0.5">Pose de verres, déballage et test de compatibilité en boutique</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tile p-6 md:p-8">
+      <p class="text-[12px] uppercase tracking-[0.22em] label mb-4">Pourquoi nous choisir</p>
+      <h3 class="text-2xl font-extrabold tracking-tightest mb-4">Au-delà du produit</h3>
+      <div class="space-y-3">
+        <div class="flex gap-3">
+          <span class="text-lg">🎯</span>
+          <div>
+            <p class="font-semibold text-sm">Spécialistes depuis 10 ans</p>
+            <p class="text-xs text-muted mt-0.5">Expérience réelle, conseils avisés, pas de généraliste</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-lg">📱</span>
+          <div>
+            <p class="font-semibold text-sm">Tous les appareils couverts</p>
+            <p class="text-xs text-muted mt-0.5">iPhone, Samsung Galaxy, Xiaomi, Honor, OnePlus…</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-lg">💬</span>
+          <div>
+            <p class="font-semibold text-sm">Support à proximité</p>
+            <p class="text-xs text-muted mt-0.5">WhatsApp, téléphone ou visite directe en centre-ville</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-lg">✨</span>
+          <div>
+            <p class="font-semibold text-sm">Stock important et varié</p>
+            <p class="text-xs text-muted mt-0.5">170+ références toujours en stock, réappro hebdo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-black/5 bg-white mt-16 md:mt-20">
+  <div class="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-16">
+    <!-- Logo & Tagline -->
+    <div class="mb-10 md:mb-12">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-accentDark flex items-center justify-center text-white font-bold text-lg">S</div>
+        <span class="font-bold text-ink text-lg">Solution Phone</span>
+      </div>
+      <p class="text-sm text-muted">L'accessoire. Pour chaque smartphone. 10 ans d'expertise à Mâcon.</p>
+    </div>
+
+    <!-- 4-Column Grid (mobile stack, desktop 4 cols) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6 mb-8 md:mb-10">
+      <!-- Services Column -->
+      <div>
+        <h4 class="font-semibold text-ink text-sm md:text-base mb-4">Services</h4>
+        <ul class="space-y-2 text-sm text-muted">
+          <li><a href="reparation-iphone.html" class="hover:text-accent transition">Réparation iPhone</a></li>
+          <li><a href="reparation-iphone.html" class="hover:text-accent transition">Réparation Samsung</a></li>
+          <li><a href="reparation-iphone.html" class="hover:text-accent transition">Batterie & Écran</a></li>
+          <li><a href="#contact" class="hover:text-accent transition">Rachat iPhone</a></li>
+        </ul>
+      </div>
+
+      <!-- Boutique Column -->
+      <div>
+        <h4 class="font-semibold text-ink text-sm md:text-base mb-4">Boutique</h4>
+        <ul class="space-y-2 text-sm text-muted">
+          <li><a href="accessoires.html" class="hover:text-accent transition">Accessoires</a></li>
+          <li><a href="hydrogel.html" class="hover:text-accent transition">Films hydrogel</a></li>
+          <li><a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="hover:text-accent transition">Téléphones reconditionnés →</a></li>
+          <li><a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="hover:text-accent transition text-xs text-muted">solution-accessoires.fr</a></li>
+        </ul>
+      </div>
+
+      <!-- Infos Column -->
+      <div>
+        <h4 class="font-semibold text-ink text-sm md:text-base mb-4">Infos</h4>
+        <ul class="space-y-2 text-sm text-muted">
+          <li><a href="actualites.html" class="hover:text-accent transition">Actualités</a></li>
+          <li><a href="#" onclick="openQR(); return false;" class="hover:text-accent transition">QualiRépar</a></li>
+          <li><a href="#contact" class="hover:text-accent transition">FAQ</a></li>
+          <li><a href="#" class="hover:text-accent transition">Mentions légales</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Column -->
+      <div>
+        <h4 class="font-semibold text-ink text-sm md:text-base mb-4">Contact</h4>
+        <ul class="space-y-2 text-sm text-muted">
+          <li class="flex items-start gap-2">
+            <span class="mt-0.5">📍</span>
+            <span>21 Rue Gambetta<br/>71000 Mâcon</span>
+          </li>
+          <li><a href="tel:+33385330689" class="hover:text-accent transition flex items-center gap-2">📞 03 85 33 06 89</a></li>
+          <li><a href="https://wa.me/33783921884" target="_blank" rel="noopener" class="hover:text-accent transition flex items-center gap-2">💬 WhatsApp</a></li>
+          <li><a href="mailto:contact@solution-phone.fr" class="hover:text-accent transition flex items-center gap-2">✉️ contact@solution-phone.fr</a></li>
+          <li class="text-xs pt-1">Lun–Sam 9h30–12h / 14h–19h</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-black/5 py-6 md:py-8">
+      <!-- Badges + Social -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
+        <!-- Left: Badges -->
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-bg2 text-xs font-semibold text-ink border border-black/5">
+            <span>🏆</span> Certifié QualiRépar
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-bg2 text-xs font-semibold text-ink border border-black/5">
+            <span>🍎</span> Apple Expert
+          </div>
+        </div>
+
+        <!-- Right: Social Icons -->
+        <div class="flex items-center gap-3">
+          <a href="https://www.facebook.com/solutionphone" target="_blank" rel="noopener" aria-label="Facebook" class="w-9 h-9 rounded-full bg-bg2 hover:bg-accent hover:text-white flex items-center justify-center transition text-sm font-bold">f</a>
+          <a href="https://www.instagram.com/solution_phone_macon" target="_blank" rel="noopener" aria-label="Instagram" class="w-9 h-9 rounded-full bg-bg2 hover:bg-accent hover:text-white flex items-center justify-center transition text-sm">📷</a>
+          <a href="https://www.google.com/maps/place/Solution+Phone" target="_blank" rel="noopener" aria-label="Google Maps" class="w-9 h-9 rounded-full bg-bg2 hover:bg-accent hover:text-white flex items-center justify-center transition text-sm">📍</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center text-xs text-muted pt-4 border-t border-black/5">
+      <p>© 2026 Solution Phone — Tous droits réservés</p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/33385330689" class="wa" style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:999px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 6px 20px -6px rgba(37,211,102,.6);z-index:50;transition:.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">💬</a>
+
+<!-- QUALIREPAR MODAL -->
+<div id="qr" class="wz-backdrop" onclick="if(event.target===this) closeQR()" style="background:rgba(0,41,73,.6)">
+  <div class="wz-dialog" style="background:#0a1b3a;color:#fff;border-color:rgba(255,255,255,.08);max-width:960px">
+    <div class="relative p-7 md:p-10">
+      <button onclick="closeQR()" aria-label="Fermer"
+        class="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-white/80 hover:text-white"
+        style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)">✕</button>
+      <div class="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl" style="background:rgba(0,167,225,.10);border:1px solid rgba(0,167,225,.35)">
+        <svg viewBox="0 0 64 64" width="26" height="26" aria-hidden="true">
+          <path d="M32 6c-5 0-9 4-9 9 0 3 1.5 5.6 4 7v3h10v-3c2.5-1.4 4-4 4-7 0-5-4-9-9-9Zm-3 7a3 3 0 116 0 3 3 0 01-6 0Z" fill="#00A7E1"/>
+          <path d="M24 28h16v22c0 4-3 8-8 8s-8-4-8-8V28Z" fill="#00A7E1"/>
+          <rect x="28" y="34" width="8" height="12" rx="1" fill="#0a1b3a"/>
+        </svg>
+        <div class="leading-tight">
+          <div class="text-[9px] tracking-[0.25em] font-bold text-white/70">LABEL</div>
+          <div class="text-[15px] font-extrabold tracking-tight" style="color:#00A7E1">QualiRépar<span class="text-white">.</span></div>
+        </div>
+      </div>
+      <h2 class="mt-6 text-4xl md:text-6xl font-extrabold tracking-tightest leading-[0.95]">
+        C'est quoi <span style="color:#00A7E1">QualiRépar</span>&nbsp;?
+      </h2>
+      <p class="mt-4 text-white/75 md:text-lg max-w-3xl">
+        Le label <b class="text-white">QualiRépar</b> est un programme du gouvernement français qui encourage la réparation des appareils électroniques plutôt que leur remplacement.
+      </p>
+      <div class="grid md:grid-cols-2 gap-4 mt-8">
+        <div class="p-5 rounded-2xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,167,225,.25)">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-3" style="background:rgba(0,167,225,.15)">💳</div>
+          <div class="text-[13px] font-bold tracking-[0.18em]" style="color:#00A7E1">−25 € DIRECTS</div>
+          <p class="mt-1.5 text-white/80 text-sm">Déduits automatiquement sur votre facture. Pas de remboursement, pas d'attente.</p>
+        </div>
+        <div class="p-5 rounded-2xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,167,225,.25)">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-3" style="background:rgba(16,185,129,.15)">✅</div>
+          <div class="text-[13px] font-bold tracking-[0.18em]" style="color:#00A7E1">CERTIFIÉ ÉTAT</div>
+          <p class="mt-1.5 text-white/80 text-sm">Solution Phone est un réparateur agréé et audité par l'État français.</p>
+        </div>
+        <div class="p-5 rounded-2xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,167,225,.25)">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-3" style="background:rgba(16,185,129,.15)">♻️</div>
+          <div class="text-[13px] font-bold tracking-[0.18em]" style="color:#00A7E1">ANTI-GASPILLAGE</div>
+          <p class="mt-1.5 text-white/80 text-sm">Réparer plutôt que jeter : une démarche écologique soutenue par l'ADEME.</p>
+        </div>
+        <div class="p-5 rounded-2xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,167,225,.25)">
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-3" style="background:rgba(0,167,225,.15)">📱</div>
+          <div class="text-[13px] font-bold tracking-[0.18em]" style="color:#00A7E1">TOUS APPAREILS</div>
+          <p class="mt-1.5 text-white/80 text-sm">Smartphones, tablettes — le bonus s'applique sur toutes les réparations éligibles.</p>
+        </div>
+      </div>
+      <button onclick="closeQR(); openWizard()"
+        class="mt-8 w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-extrabold text-white text-[15px] tracking-wider"
+        style="background:linear-gradient(135deg,#00A7E1,#0080B5);box-shadow:0 14px 32px -10px rgba(0,167,225,.55)">
+        <span>⚡</span> PROFITER DU −25 € MAINTENANT
+      </button>
+      <div class="mt-4 flex items-center gap-0 rounded-full overflow-hidden h-1.5">
+        <span class="flex-1" style="background:#0055A4"></span>
+        <span class="flex-1 bg-white"></span>
+        <span class="flex-1" style="background:#EF4135"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WIZARD -->
+<div id="wz" class="wz-backdrop" onclick="if(event.target===this) closeWizard()">
+  <div class="wz-dialog p-6 md:p-10">
+    <div class="flex items-center justify-between mb-5">
+      <div class="flex items-center gap-3">
+        <span class="font-semibold">Solution Phone · Devis</span>
+        <span class="text-xs text-muted" id="wzStepLabel">Étape 1/4</span>
+      </div>
+      <button onclick="closeWizard()" class="w-9 h-9 rounded-full bg-bg2 hover:bg-black/10 flex items-center justify-center text-muted">✕</button>
+    </div>
+    <div class="wz-progress mb-6"><span id="wzBar" style="width:25%"></span></div>
+    <div class="wz-trust mb-6">
+      <span>✓ Certifié QualiRépar</span>
+      <span>✓ Garantie 6 mois</span>
+      <span>★ 4,7/5 sur Google</span>
+      <span>✓ Sans engagement</span>
+    </div>
+
+    <!-- STEP 1 : Marque -->
+    <div class="wz-step on" data-step="1">
+      <h2 class="text-3xl md:text-5xl font-extrabold tracking-tightest leading-[0.95]">Quelle est la marque ?</h2>
+      <p class="mt-2 text-muted">On commence par ça. Rien de plus.</p>
+      <div class="grid md:grid-cols-3 gap-4 mt-8">
+        <button class="wz-card" data-brand="Apple" onclick="setBrand('Apple'); gotoStep(2)">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="#1d1d1f"><path d="M17.05 20.28c-.98.95-2.05.86-3.08.42-1.09-.47-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.42C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.78 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.1zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+          <div class="text-xl font-extrabold tracking-tightest">iPhone</div>
+          <p class="text-xs text-muted">iPhone 7 → 15 Pro Max</p>
+        </button>
+        <button class="wz-card" data-brand="Samsung" onclick="setBrand('Samsung'); gotoStep(2)">
+          <svg width="72" height="44" viewBox="0 0 140 40" fill="#1428A0"><text x="70" y="28" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="22" letter-spacing="1">SAMSUNG</text></svg>
+          <div class="text-xl font-extrabold tracking-tightest">Samsung</div>
+          <p class="text-xs text-muted">Galaxy S, A, Note, Z</p>
+        </button>
+        <button class="wz-card" data-brand="Autre" onclick="setBrand('Autre'); gotoStep(2)">
+          <div class="flex items-center gap-2">
+            <span class="w-11 h-11 rounded-full bg-bg2 border border-black/10 flex items-center justify-center text-2xl font-black">?</span>
+          </div>
+          <div class="text-xl font-extrabold tracking-tightest">Autre marque</div>
+          <p class="text-xs text-muted">Xiaomi, Huawei, Google, OnePlus…</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2 : Modèle -->
+    <div class="wz-step" data-step="2">
+      <h2 class="text-3xl md:text-5xl font-extrabold tracking-tightest leading-[0.95]">Quel modèle ?</h2>
+      <p class="mt-2 text-muted" id="wzStep2Sub">Choisissez le plus proche du vôtre.</p>
+      <div id="wzModels" class="grid md:grid-cols-3 gap-3 mt-8"></div>
+      <div class="mt-6 flex justify-between">
+        <button class="btn-ghost" onclick="gotoStep(1)">‹ Retour</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 : Récap + coordonnées -->
+    <div class="wz-step" data-step="3">
+      <h2 class="text-3xl md:text-5xl font-extrabold tracking-tightest leading-[0.95]">Contact</h2>
+      <p class="mt-2 text-muted">Appelez-nous ou envoyez vos infos.</p>
+      <form id="wzForm" class="mt-8 grid gap-3">
+        <input name="nom" required placeholder="Votre prénom" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <input name="tel" required type="tel" placeholder="Téléphone / WhatsApp" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <textarea name="note" rows="2" placeholder="Un détail à préciser ? (optionnel)" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40 resize-none"></textarea>
+        <button type="submit" class="btn-red mt-1">Demande sur WhatsApp <span>›</span></button>
+        <div class="text-xs text-muted text-center">Ou appelez : <a class="text-accent font-semibold" href="tel:+33385330689">03 85 33 06 89</a></div>
+      </form>
+      <div class="mt-6 flex justify-between">
+        <button class="btn-ghost" onclick="gotoStep(2)">‹ Retour</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var U='https://www.utopya.fr/media/catalog/product/cache/662ea76faaa51bafdb496e43b67d620b/';
+
+// ===== PRODUITS UNIVERSELS =====
+var CHARGEURS=[
+  {img:U+'9/5/958--monzachar_1.jpg',name:'FAIRPLAY Chargeur 20W USB-C',brand:'FAIRPLAY'},
+  {img:U+'9/5/958--monzachar.jpg',name:'FAIRPLAY Chargeur 20W USB-C Bulk',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--chargeur30wusbc.jpg',name:'FAIRPLAY Chargeur 30W USB-C',brand:'FAIRPLAY'},
+  {img:U+'0/4/04-0y7a0268.jpg',name:'FAIRPLAY Chargeur GaN 30W',brand:'FAIRPLAY'},
+  {img:U+'6/4/641--67w.jpg',name:'FAIRPLAY Chargeur GaN 67W',brand:'FAIRPLAY'},
+  {img:U+'6/3/636--100w.jpg',name:'FAIRPLAY Chargeur GaN 100W',brand:'FAIRPLAY'},
+  {img:U+'6/2/626--65w.jpg',name:'FAIRPLAY Chargeur 65W 3 ports',brand:'FAIRPLAY'},
+  {img:U+'9/1/917--new749-air--1zk0019k0445072612-_com-prevue_.jpg',name:'FAIRPLAY Chargeur 45W Blanc',brand:'FAIRPLAY'},
+  {img:U+'9/2/921--chargeurfp45wblack.jpg',name:'FAIRPLAY Chargeur 45W Noir',brand:'FAIRPLAY'},
+  {img:U+'3/8/387--charuniv90.jpg',name:'FAIRPLAY Chargeur Laptop 90W',brand:'FAIRPLAY'},
+  {img:U+'b/e/belkk13.jpeg',name:'BELKIN Chargeur Secteur 20W',brand:'BELKIN'},
+  {img:U+'b/e/belkk11.jpeg',name:'BELKIN Chargeur Secteur 25W',brand:'BELKIN'},
+  {img:U+'b/e/belkk12.jpeg',name:'BELKIN Chargeur Secteur 25W Noir',brand:'BELKIN'},
+  {img:U+'8/4/848--wca008kq1mwh-b6_1.jpg',name:'BELKIN Chargeur USB-C 30W',brand:'BELKIN'},
+  {img:U+'b/e/belkk.jpeg',name:'BELKIN Chargeur 30W + Câble',brand:'BELKIN'},
+  {img:U+'0/1/01-wch019kqwh.jpg',name:'BELKIN Chargeur GaN 50W Blanc',brand:'BELKIN'},
+  {img:U+'0/1/01-wch019kqbk.jpg',name:'BELKIN Chargeur GaN 50W Noir',brand:'BELKIN'},
+  {img:U+'0/1/01-wca013kqwh_front.jpg',name:'BELKIN Chargeur USB-C 45W Blanc',brand:'BELKIN'},
+  {img:U+'4/6/462--wca013kqbk.jpg',name:'BELKIN Chargeur USB-C 45W Noir',brand:'BELKIN'},
+  {img:U+'w/c/wca011kqwh.png',name:'BELKIN Chargeur USB-C 65W Blanc',brand:'BELKIN'},
+  {img:U+'0/1/01-wch020kqbk.jpg',name:'BELKIN Chargeur GaN 67W Noir',brand:'BELKIN'},
+  {img:U+'0/1/01-wch020kqwh.jpg',name:'BELKIN Chargeur GaN 67W Blanc',brand:'BELKIN'},
+  {img:U+'1/3/132--dftgyhj_1.jpg',name:'BELKIN Chargeur 3x USB-C 67W',brand:'BELKIN'},
+  {img:U+'5/6/563--inc016glbk.jpg',name:'BELKIN Chargeur USB-C 100W Laptop',brand:'BELKIN'},
+  {img:U+'8/1/814--belkin.jpg',name:'BELKIN Chargeur 42W Mixed',brand:'BELKIN'},
+];
+var BATTERIES=[
+  {img:U+'0/0/001-bpb011btbk.jpg',name:'BELKIN PowerBank 10 000mAh 15W',brand:'BELKIN'},
+  {img:U+'0/0/000-bpb011btbl.jpg',name:'BELKIN PowerBank 10 000mAh Bleu',brand:'BELKIN'},
+  {img:U+'0/0/000-bpb012btbk.jpg',name:'BELKIN PowerBank 20 000mAh 15W',brand:'BELKIN'},
+  {img:U+'0/0/001-bpb012btbl00.jpg',name:'BELKIN PowerBank 20 000mAh Bleu',brand:'BELKIN'},
+  {img:U+'5/4/548--bpb016btbk.jpg',name:'BELKIN PowerBank 26 000mAh 32W',brand:'BELKIN'},
+  {img:U+'0/0/001-bpb021hqbl.jpg',name:'BELKIN PowerBank 10 000mAh 20W',brand:'BELKIN'},
+  {img:U+'0/0/001-bpb021hqpk.jpg',name:'BELKIN PowerBank 10 000mAh 20W Rose',brand:'BELKIN'},
+  {img:U+'5/4/546--bpb021hqbk.jpg',name:'BELKIN PowerBank 10 000mAh Noir',brand:'BELKIN'},
+  {img:U+'0/0/001-bpb024hqbl0.jpg',name:'BELKIN PowerBank 20 000mAh 30W Bleu',brand:'BELKIN'},
+  {img:U+'9/1/919--bpb024hqpk.jpg',name:'BELKIN PowerBank 20 000mAh Rose',brand:'BELKIN'},
+];
+var CABLES=[
+  {img:U+'c/a/caa001bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web.jpg',name:'BELKIN Câble Lightning 2m',brand:'BELKIN'},
+  {img:U+'l/d/ld0005699966_1.jpeg',name:'BELKIN Câble Lightning 1m Noir',brand:'BELKIN'},
+  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_5.jpg',name:'BELKIN Câble Tressé Lightning Noir',brand:'BELKIN'},
+  {img:U+'c/a/caa002bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_3.jpg',name:'BELKIN Câble Tressé Lightning Blanc',brand:'BELKIN'},
+  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_1.jpg',name:'BELKIN Câble Tressé Lightning 2m',brand:'BELKIN'},
+  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web_2.jpg',name:'BELKIN Câble USB-C 1m Noir',brand:'BELKIN'},
+  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web.jpg',name:'BELKIN Câble USB-C 2m Noir',brand:'BELKIN'},
+  {img:U+'h/d/hdmi0018g-1m.jpeg',name:'BELKIN Câble HDMI 4K 1m',brand:'BELKIN'},
+  {img:U+'9/2/926--inz002bt2mbk.jpg',name:'BELKIN Câble Thunderbolt 4 2m',brand:'BELKIN'},
+  {img:U+'b/b/bblk1.jpeg',name:'BELKIN Câble DisplayPort 1.8m',brand:'BELKIN'},
+];
+var AUDIO=[
+  {img:U+'9/0/902--twscaliforniablanc.jpg',name:'FAIRPLAY CALIFORNIA TWS Blanc',brand:'FAIRPLAY'},
+  {img:U+'8/9/896--twscalifornianoir.jpg',name:'FAIRPLAY CALIFORNIA TWS Noir',brand:'FAIRPLAY'},
+  {img:U+'8/5/856--112403.jpg',name:'FAIRPLAY OREGON TWS Blanc',brand:'FAIRPLAY'},
+  {img:U+'8/6/861--112403_1.jpg',name:'FAIRPLAY OREGON TWS Noir',brand:'FAIRPLAY'},
+  {img:U+'_/5/_54a7842.jpg',name:'FAIRPLAY ALASKA TWS Noir',brand:'FAIRPLAY'},
+  {img:U+'h/e/he-0441-9.jpg',name:'FAIRPLAY ALASKA TWS Blanc',brand:'FAIRPLAY'},
+  {img:U+'_/5/_54a1923.jpg',name:'FAIRPLAY Écouteurs Jack 3.5mm',brand:'FAIRPLAY'},
+  {img:U+'_/5/_54a.jpg',name:'FAIRPLAY Écouteurs Lightning',brand:'FAIRPLAY'},
+  {img:U+'9/2/920--test.jpg',name:'FAIRPLAY Écouteurs USB-C',brand:'FAIRPLAY'},
+  {img:U+'1/3/133--f8z274bt.jpg',name:'BELKIN Répartiteur Audio Jack',brand:'BELKIN'},
+];
+var SUPPORTS=[
+  {img:U+'1/3/135--556536.jpg',name:'FAIRPLAY Support Voiture Magnétique',brand:'FAIRPLAY'},
+  {img:U+'2/8/286--support-ordi.jpg',name:'FAIRPLAY Support Ordinateur',brand:'FAIRPLAY'},
+  {img:U+'0/1/01-f7u017bt_.jpg',name:'BELKIN Support Voiture',brand:'BELKIN'},
+  {img:U+'1/-/1-avc024hqbk.jpg',name:'BELKIN Adaptateur HDMI sans Fil',brand:'BELKIN'},
+  {img:U+'3/7/372--bsv400ca2m.jpg',name:'BELKIN Multiprise Parafoudre 4',brand:'BELKIN'},
+  {img:U+'b/s/bsv603ca2m_angled_3.jpg',name:'BELKIN Multiprise Parafoudre 6',brand:'BELKIN'},
+];
+var ACCESSOIRES=[
+  {img:U+'6/1/617--perla.jpg',name:'FAIRPLAY Chaîne 120cm PERLA',brand:'FAIRPLAY'},
+  {img:U+'6/2/623--arla.jpg',name:'FAIRPLAY Chaîne 120cm ARLA',brand:'FAIRPLAY'},
+  {img:U+'6/2/629--ciala.jpg',name:'FAIRPLAY Chaîne 120cm CIALA',brand:'FAIRPLAY'},
+  {img:U+'6/3/635--flavia.jpg',name:'FAIRPLAY Chaîne 120cm FLAVIA',brand:'FAIRPLAY'},
+  {img:U+'1/0/100--luana_1.jpg',name:'FAIRPLAY Chaîne 120cm LUANA',brand:'FAIRPLAY'},
+  {img:U+'9/4/94-rer_22-aura.jpg',name:'FAIRPLAY Chaîne 120cm OLIVIA',brand:'FAIRPLAY'},
+  {img:U+'8/9/894--sac-fp.jpg',name:'FAIRPLAY Sac Multimédia',brand:'FAIRPLAY'},
+  {img:U+'2/m/2mma013hqbk.jpeg',name:'BELKIN Sacoche de Voyage',brand:'BELKIN'},
+  {img:U+'h/o/housse_belkin_ordinateur.jpg',name:'BELKIN Sacoche Laptop 13"',brand:'BELKIN'},
+  {img:U+'h/o/housse_belkin_ordinateur_1.jpg',name:'BELKIN Sacoche Laptop 14"',brand:'BELKIN'},
+  {img:U+'h/o/housse_belkin_ordinateur_2.jpg',name:'BELKIN Sacoche Laptop 11"',brand:'BELKIN'},
+];
+
+// ===== COQUES =====
+var CM=[
+  {img:U+'0/1/01-gravity_magsafeviolet_3.jpg',name:'COVERME GRAVITY MagSafe Violet',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafenoir_3.jpg',name:'COVERME GRAVITY MagSafe Noir',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafebleu_3.jpg',name:'COVERME GRAVITY MagSafe Bleu',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafeblanc_3.jpg',name:'COVERME GRAVITY MagSafe Blanc',brand:'COVERME'},
+  {img:U+'o/n/onyxgris4_6.jpeg',name:'COVERME ONYX MagSafe Gris',brand:'COVERME'},
+  {img:U+'o/n/onyxgold4_9.jpeg',name:'COVERME ONYX MagSafe Gold',brand:'COVERME'},
+  {img:U+'c/o/copie_de_2phantom_3.jpeg',name:'COVERME PHANTOM Violet',brand:'COVERME'},
+  {img:U+'c/o/copie_de_5phantom_6.jpeg',name:'COVERME PHANTOM Bleu Roi',brand:'COVERME'},
+  {img:U+'c/o/copie_de_phantom_6.jpeg',name:'COVERME PHANTOM Noir',brand:'COVERME'},
+  {img:U+'1/-/1--walletbleu_10_1.jpg',name:'COVERME Étui Wallet Bleu',brand:'COVERME'},
+  {img:U+'1/-/1--walletmarron_1_4_1.jpg',name:'COVERME Étui Wallet Marron',brand:'COVERME'},
+  {img:U+'1/-/1--walletrouge_1_4_1.jpg',name:'COVERME Étui Wallet Rouge',brand:'COVERME'},
+  {img:U+'1/-/1--walletnoir_8_1.jpg',name:'COVERME Étui Wallet Noir',brand:'COVERME'},
+  {img:U+'0/1/01-cskinmagbleu00_1.jpg',name:'COVERME Skin MagSafe Bleu',brand:'COVERME'},
+  {img:U+'0/1/01-ckinmagpastel_5.jpg',name:'COVERME Skin MagSafe Rose',brand:'COVERME'},
+  {img:U+'0/1/01-ckinmaglilas_1_3.jpg',name:'COVERME Skin MagSafe Lilas',brand:'COVERME'},
+  {img:U+'0/1/01-cskinmagnoir00_3.jpg',name:'COVERME Skin MagSafe Noir',brand:'COVERME'},
+  {img:U+'0/0/001-chazebleu001-0000_5.jpg',name:'COVERME HAZE MagSafe Bleu',brand:'COVERME'},
+  {img:U+'0/0/0001-hazeviolet000_5.jpeg',name:'COVERME HAZE MagSafe Violet',brand:'COVERME'},
+  {img:U+'0/0/001-hazenoir00_5.jpeg',name:'COVERME HAZE MagSafe Noir',brand:'COVERME'},
+  {img:U+'9/0/908--coverme_10.jpg',name:'COVERME Coque Anneaux Clear',brand:'COVERME'},
+  {img:U+'_/5/_54a3748_2_5.jpg',name:'COVERME Coque TPU Clear',brand:'COVERME'},
+];
+var CM_SS=[
+  {img:U+'1/-/1--walletbleu_3_4.jpg',name:'COVERME Étui Wallet Galaxy Bleu',brand:'COVERME'},
+  {img:U+'1/-/1--walletrouge_5_2.jpg',name:'COVERME Étui Wallet Galaxy Rouge',brand:'COVERME'},
+  {img:U+'1/-/1--walletnoir_12.jpg',name:'COVERME Étui Wallet Galaxy Noir',brand:'COVERME'},
+  {img:U+'9/0/908--coverme_10.jpg',name:'COVERME Coque Anneaux Clear',brand:'COVERME'},
+  {img:U+'_/5/_54a3748_2_5.jpg',name:'COVERME Coque TPU Clear',brand:'COVERME'},
+  {img:U+'o/n/onyxgris4_6.jpeg',name:'COVERME ONYX Gris Titane',brand:'COVERME'},
+  {img:U+'o/n/onyxgold4_9.jpeg',name:'COVERME ONYX Gold',brand:'COVERME'},
+  {img:U+'c/o/copie_de_2phantom_3.jpeg',name:'COVERME PHANTOM Violet',brand:'COVERME'},
+  {img:U+'c/o/copie_de_phantom_6.jpeg',name:'COVERME PHANTOM Noir',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafeviolet_3.jpg',name:'COVERME GRAVITY Violet',brand:'COVERME'},
+  {img:U+'0/1/01-gravity_magsafenoir_3.jpg',name:'COVERME GRAVITY Noir',brand:'COVERME'},
+];
+var FP_PAVONE_SS=[
+  {img:U+'p/a/pavone_1_noir_14_28.jpg',name:'FAIRPLAY PAVONE Galaxy Noir',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_pavone_rouge_mars_11_1.jpg',name:'FAIRPLAY PAVONE Galaxy Rouge',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--pavone_rose_pastel_25.jpg',name:'FAIRPLAY PAVONE Galaxy Rose',brand:'FAIRPLAY'},
+  {img:U+'p/a/pavone_1_noir_15_27.jpg',name:'FAIRPLAY PAVONE S24+ Noir',brand:'FAIRPLAY'},
+];
+var CIRCLE_SS=[
+  {img:U+'9/6/963--tc-circle-blanc_17.jpg',name:'Coque Circle MagSafe Galaxy Blanc',brand:'Autres'},
+  {img:U+'9/6/964--tc-circle-violet_12.jpg',name:'Coque Circle MagSafe Galaxy Violet',brand:'Autres'},
+  {img:U+'9/6/965--tc-circle-rose_17.jpg',name:'Coque Circle MagSafe Galaxy Rose',brand:'Autres'},
+  {img:U+'9/6/966--tc-circle-noir_17.jpg',name:'Coque Circle MagSafe Galaxy Noir',brand:'Autres'},
+];
+var SILI_SS=[
+  {img:U+'1/-/1--tycoonsiliconered_13_2_2_6.jpg',name:'Coque Silicone Galaxy Rouge',brand:'Autres'},
+  {img:U+'1/-/1--tycoonsiliconebleu_25.jpg',name:'Coque Silicone Galaxy Bleu',brand:'Autres'},
+  {img:U+'1/-/1--tycoonsiliconevert_24.jpg',name:'Coque Silicone Galaxy Vert',brand:'Autres'},
+  {img:U+'1/-/1--tycoonsiliconerose_25.jpg',name:'Coque Silicone Galaxy Rose',brand:'Autres'},
+];
+var VERRE_SS=[
+  {img:U+'8/1/811--774871_2_1.jpg',name:'OCADIA Hydrogel CRYSTAL',brand:'OCADIA'},
+  {img:U+'8/1/810--779811_1_1.jpg',name:'OCADIA Hydrogel OBSIDIAN',brand:'OCADIA'},
+  {img:U+'f/a/fairplay_1_1.jpg',name:'FAIRPLAY IMPACT Verre Galaxy S25',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_48.jpg',name:'FAIRPLAY IMPACT Verre S25+',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_47.jpg',name:'FAIRPLAY IMPACT Verre S25 Ultra',brand:'FAIRPLAY'},
+  {img:U+'3/6/3667075118817-1.jpg',name:'FAIRPLAY INTEGRAL Verre S25+',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_36.jpg',name:'FAIRPLAY IMPACT Verre Galaxy A54',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_40.jpg',name:'FAIRPLAY IMPACT Verre Galaxy A35',brand:'FAIRPLAY'},
+  {img:U+'7/9/793--mobeen_10.jpg',name:'Verre Trempé Galaxy Full Cover',brand:'Autres'},
+  {img:U+'5/8/587--privacy_3.jpg',name:'Verre Trempé Galaxy Privacy',brand:'Autres'},
+  {img:U+'3/3/332--28962_1_4_29.jpg',name:'Verre Trempé Caméra Galaxy',brand:'Autres'},
+];
+var RS=[
+  {img:U+'v/1/v16mar013254f.jpeg',name:'RHINOSHIELD AirX MagSafe Gris',brand:'RHINOSHIELD'},
+  {img:U+'1/6/16mar013254e.jpeg',name:'RHINOSHIELD AirX MagSafe Noir',brand:'RHINOSHIELD'},
+  {img:U+'7/0/704--clearcasemag-ip16.jpg',name:'RHINOSHIELD Clear Case MagSafe',brand:'RHINOSHIELD'},
+  {img:U+'o/u/outremer_3.jpeg',name:'RHINOSHIELD SolidX MagSafe Bleu',brand:'RHINOSHIELD'},
+  {img:U+'0/-/0--solmagblanc_4.jpeg',name:'RHINOSHIELD SolidX MagSafe Blanc',brand:'RHINOSHIELD'},
+  {img:U+'0/-/0--solmagnoir_4.jpeg',name:'RHINOSHIELD SolidX MagSafe Noir',brand:'RHINOSHIELD'},
+  {img:U+'0/-/0--solmagveal_2_10.jpeg',name:'RHINOSHIELD SolidX MagSafe Vert',brand:'RHINOSHIELD'},
+  {img:U+'0/-/0--solmagbleugla_5.jpeg',name:'RHINOSHIELD SolidX MagSafe Glacier',brand:'RHINOSHIELD'},
+  {img:U+'6/9/697--4711502653248.jpg',name:'RHINOSHIELD SolidSuit Rose Sorbet',brand:'RHINOSHIELD'},
+  {img:U+'6/9/698--4711502653217.jpg',name:'RHINOSHIELD SolidSuit Bleu Océan',brand:'RHINOSHIELD'},
+  {img:U+'6/9/699--4711502653187.jpg',name:'RHINOSHIELD SolidSuit Gris',brand:'RHINOSHIELD'},
+  {img:U+'9/6/963--tc-circle-blanc_13.jpg',name:'Coque Circle MagSafe Blanc',brand:'Autres'},
+  {img:U+'9/6/964--tc-circle-violet_16.jpg',name:'Coque Circle MagSafe Violet',brand:'Autres'},
+  {img:U+'9/6/965--tc-circle-rose_13.jpg',name:'Coque Circle MagSafe Rose',brand:'Autres'},
+  {img:U+'9/6/966--tc-circle-noir_13.jpg',name:'Coque Circle MagSafe Noir',brand:'Autres'},
+];
+var FP_VERRE=[
+  {img:U+'8/1/811--774871_2_1.jpg',name:'OCADIA Hydrogel CRYSTAL',brand:'OCADIA'},
+  {img:U+'8/1/810--779811_1_1.jpg',name:'OCADIA Hydrogel OBSIDIAN',brand:'OCADIA'},
+  {img:U+'f/a/fairplay_14.jpg',name:'FAIRPLAY IMPACT Verre iPhone 15/16',brand:'FAIRPLAY'},
+  {img:U+'v/2/v2integral_2_4_1_1.jpg',name:'FAIRPLAY INTEGRAL Verre iPhone',brand:'FAIRPLAY'},
+  {img:U+'3/4/347--fairplay-privacy-_5_3.jpg',name:'FAIRPLAY PRIVACY Verre iPhone',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_16.jpg',name:'FAIRPLAY IMPACT Verre iPhone 15 Pro',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_12.jpg',name:'FAIRPLAY IMPACT Verre iPhone 14 Pro',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay.jpg',name:'FAIRPLAY IMPACT Verre iPhone XR/11',brand:'FAIRPLAY'},
+  {img:U+'f/a/fairplay_5.jpg',name:'FAIRPLAY IMPACT Verre iPhone 12/12 Pro',brand:'FAIRPLAY'},
+  {img:U+'c/h/chatgpt_image_6_ao_t_2025_10_37_13.png',name:'BELKIN Protection Caméra iPhone',brand:'BELKIN'},
+  {img:U+'0/1/01-lpa01363m8-000.jpg',name:'RHINOSHIELD Protection Caméra Gris',brand:'RHINOSHIELD'},
+  {img:U+'0/1/01-lpa013634w-000.jpg',name:'RHINOSHIELD Protection Caméra Violet',brand:'RHINOSHIELD'},
+  {img:U+'0/1/01-lpa013634v-000.jpg',name:'RHINOSHIELD Protection Caméra Bleu',brand:'RHINOSHIELD'},
+];
+var FP_IP=[
+  {img:U+'3/2/326--rigel_3.jpg',name:'FAIRPLAY RIGEL Folio MagSafe',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--polarisv2mag_16.jpg',name:'FAIRPLAY POLARIS 2M MagSafe',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--polarisv2_3_2.jpg',name:'FAIRPLAY POLARIS 2M',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--gamma_4_1.jpg',name:'FAIRPLAY GAMMA Folio',brand:'FAIRPLAY'},
+  {img:U+'6/3/639--pavonemag_15_17.jpg',name:'FAIRPLAY PAVONE MagSafe Noir',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_11_2.jpg',name:'FAIRPLAY PAVONE Rose Pastel',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_7_5.jpg',name:'FAIRPLAY PAVONE Rouge',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_-pavone_1_noir_16_25.jpg',name:'FAIRPLAY PAVONE Noir',brand:'FAIRPLAY'},
+  {img:U+'1/-/1--pavone_rose_fushia_6_1.jpg',name:'FAIRPLAY PAVONE Rose Fuschia',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_pavone_bleu_givre_6_1.jpg',name:'FAIRPLAY PAVONE Bleu Givré',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_pavone_plum_2_1_1.jpg',name:'FAIRPLAY PAVONE Plum',brand:'FAIRPLAY'},
+  {img:U+'2/_/2_10_1_2_3.jpg',name:'FAIRPLAY CAPELLA iPhone 16',brand:'FAIRPLAY'},
+  {img:U+'2/_/2_10_1_2_4.jpg',name:'FAIRPLAY CAPELLA iPhone 16 Plus',brand:'FAIRPLAY'},
+  {img:U+'2/_/2_10_1_2_5.jpg',name:'FAIRPLAY CAPELLA iPhone 16 Pro',brand:'FAIRPLAY'},
+];
+var COQUES_IP=FP_IP.concat(CM).concat(RS);
+var COQUES_SS=FP_PAVONE_SS.concat(CM_SS).concat(CIRCLE_SS);
+
+var curCat='coques';
+var allProducts={
+  coques: COQUES_IP.concat(COQUES_SS),
+  verres: FP_VERRE.concat(VERRE_SS),
+  chargeurs: CHARGEURS,
+  batteries: BATTERIES,
+  cables: CABLES,
+  audio: AUDIO,
+  supports: SUPPORTS,
+  accessoires: ACCESSOIRES
+};
+
+var curModel='all';
+function matchesModel(name, model){
+  if(!model || model==='all') return true;
+  var n=(name||'').toLowerCase();
+  // universal products (chargeurs USB-C, câbles, audio génériques) n'ont pas de modèle → on les garde
+  var hasModelKw = /iphone|galaxy|note|redmi|xiaomi|pixel|ipad|airpods|watch/.test(n);
+  if(!hasModelKw) return true;
+  var map = {
+    'iphone16pro': /iphone\s*16\s*pro/,
+    'iphone16':    /iphone\s*16(?!\s*pro)/,
+    'iphone15':    /iphone\s*15/,
+    'iphone14':    /iphone\s*14/,
+    'iphone13':    /iphone\s*13/,
+    'galaxy-s25':  /galaxy\s*s\s*25|s25/,
+    'galaxy-s24':  /galaxy\s*s\s*24|s24/,
+    'galaxy-a55':  /galaxy\s*a\s*55|a55/,
+    'galaxy-a15':  /galaxy\s*a\s*15|a15/,
+    'xiaomi15':    /xiaomi\s*15|mi\s*15/,
+    'redmi13c':    /redmi\s*13\s*c|13c/
+  };
+  var rx = map[model];
+  return rx ? rx.test(n) : true;
+}
+
+function renderProducts(category){
+  var grid=document.getElementById('productGrid');
+  var noProducts=document.getElementById('noProducts');
+  grid.innerHTML='';
+  var all=allProducts[category]||[];
+  var products = all.filter(function(p){ return matchesModel(p.name, curModel); });
+  if(!products||products.length===0){
+    grid.style.display='none';
+    noProducts.classList.remove('hidden');
+    return;
+  }
+  noProducts.classList.add('hidden');
+  grid.style.display='grid';
+  products.forEach(function(p,i){
+    var badge=i<8 ? '<span class="product-badge">⭐ Top</span>' : '';
+    var fb = categoryPlaceholder(category, p.name, p.brand);
+    var html='<div class="product-card">'+badge+'<div class="product-img"><img src="'+p.img+'" alt="'+p.name+'" onerror="this.onerror=null;this.src=&quot;'+fb+'&quot;" loading="lazy" class="w-full h-full object-cover"></div><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-brand">'+p.brand+'</div></div></div>';
+    grid.innerHTML+=html;
+  });
+}
+
+// --- Rich per-category SVG placeholders (shown if Utopya image fails) ---
+function categoryPlaceholder(cat, name, brand){
+  var n = (name||'').toLowerCase();
+  var bg = { coques:'#fff0f0', verres:'#eaf4ff', chargeurs:'#fff5e5', batteries:'#eaffea', cables:'#f3eafe', audio:'#ffe9f4', supports:'#eafcff', accessoires:'#f5f5f7' }[cat] || '#f5f5f7';
+  var ink = '#e30613';
+  var shape = '';
+  if(cat==='coques'){
+    shape = '<rect x="64" y="30" width="72" height="140" rx="18" fill="#fff" stroke="'+ink+'" stroke-width="3"/><rect x="78" y="44" width="44" height="80" rx="6" fill="'+bg+'"/><circle cx="82" cy="54" r="6" fill="'+ink+'" opacity=".2"/>';
+  } else if(cat==='verres'){
+    shape = '<rect x="58" y="26" width="84" height="148" rx="18" fill="#fff" stroke="#0071e3" stroke-width="3"/><rect x="72" y="42" width="56" height="116" rx="6" fill="#eaf4ff"/><path d="M82 70 l 14 14" stroke="#0071e3" stroke-width="2" opacity=".3"/><path d="M90 110 l 20 20" stroke="#0071e3" stroke-width="2" opacity=".3"/>';
+  } else if(cat==='chargeurs'){
+    shape = '<rect x="60" y="40" width="80" height="120" rx="16" fill="#fff" stroke="'+ink+'" stroke-width="3"/><path d="M100 60 v40 l-16 28 h32 l-16 -28" stroke="#f5a623" stroke-width="3" fill="none" stroke-linejoin="round"/><circle cx="84" cy="150" r="3" fill="'+ink+'"/><circle cx="116" cy="150" r="3" fill="'+ink+'"/>';
+  } else if(cat==='batteries'){
+    shape = '<rect x="40" y="76" width="108" height="48" rx="8" fill="#fff" stroke="#10b981" stroke-width="3"/><rect x="148" y="92" width="12" height="16" rx="2" fill="#10b981"/><rect x="48" y="84" width="32" height="32" fill="#10b981"/><rect x="84" y="84" width="24" height="32" fill="#10b981" opacity=".65"/><rect x="112" y="84" width="16" height="32" fill="#10b981" opacity=".3"/>';
+  } else if(cat==='cables'){
+    shape = '<rect x="44" y="96" width="24" height="10" rx="2" fill="'+ink+'"/><path d="M68 101 C 100 80, 120 130, 156 101" stroke="#6b3fa0" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="148" y="96" width="16" height="10" rx="2" fill="'+ink+'"/>';
+  } else if(cat==='audio'){
+    shape = '<circle cx="76" cy="100" r="22" fill="#ff4d88" stroke="#fff" stroke-width="3"/><circle cx="124" cy="100" r="22" fill="#ff4d88" stroke="#fff" stroke-width="3"/><path d="M76 100 Q 100 70 124 100" stroke="#ff4d88" stroke-width="4" fill="none"/>';
+  } else if(cat==='supports'){
+    shape = '<rect x="56" y="50" width="88" height="60" rx="6" fill="#fff" stroke="#0ea5b7" stroke-width="3"/><path d="M70 110 v26 l30 14 l30 -14 v-26" fill="#0ea5b7" opacity=".2" stroke="#0ea5b7" stroke-width="2"/>';
+  } else {
+    shape = '<circle cx="100" cy="100" r="54" fill="#fff" stroke="'+ink+'" stroke-width="3"/><text x="100" y="112" text-anchor="middle" font-size="40" fill="'+ink+'">🛒</text>';
+  }
+  var label = (brand||'').slice(0,16);
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="'+bg+'"/>'+shape+'<text x="100" y="188" text-anchor="middle" font-size="11" font-family="Plus Jakarta Sans, -apple-system, sans-serif" font-weight="700" fill="#1d1d1f" letter-spacing="0.5">'+label+'</text></svg>';
+  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+}
+
+function selectCategory(cat, btn){
+  curCat=cat;
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('active');});
+  btn.classList.add('active');
+  renderProducts(cat);
+  document.getElementById('productGrid').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function filterByModel(model){
+  curModel = model || 'all';
+  // met à jour la chip active
+  document.querySelectorAll('.chip').forEach(function(c){
+    if(c.getAttribute('onclick') && c.getAttribute('onclick').indexOf("filterByModel('"+model+"'")!==-1){
+      // on retire uniquement les actives parmi les chips de modèle
+      document.querySelectorAll('.chip[onclick*="filterByModel"]').forEach(function(x){x.classList.remove('active');});
+      c.classList.add('active');
+    }
+  });
+  renderProducts(curCat || 'coques');
+  document.getElementById('productGrid').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showCategory(){
+  var cat=document.getElementById('sCat').value;
+  selectCategory(cat, document.querySelector('.chip[onclick*="selectCategory(\''+cat+'\'"]'));
+}
+
+function showProducts(){
+  renderProducts('coques');
+}
+
+function loadModels(){
+  var brand=document.getElementById('sBrand').value;
+  var sel=document.getElementById('sModel');
+  sel.innerHTML='<option value="">— Choisir un modèle —</option>';
+  if(brand==='apple'){
+    var models=['iPhone 16','iPhone 16 Pro','iPhone 15','iPhone 14','iPhone 13','iPhone 12','iPhone 11'];
+    models.forEach(function(m){sel.innerHTML+='<option value="'+m.toLowerCase().replace(/ /g,'-')+'">'+m+'</option>';});
+  } else if(brand==='samsung'){
+    var models=['Galaxy S25','Galaxy S24','Galaxy A55','Galaxy A15'];
+    models.forEach(function(m){sel.innerHTML+='<option value="'+m.toLowerCase().replace(/ /g,'-')+'">'+m+'</option>';});
+  } else if(brand==='xiaomi'){
+    var models=['Xiaomi 15','Xiaomi 14','Redmi 13C'];
+    models.forEach(function(m){sel.innerHTML+='<option value="'+m.toLowerCase().replace(/ /g,'-')+'">'+m+'</option>';});
+  }
+}
+
+var wzBrand=null;
+function setBrand(b){ wzBrand=b; }
+function gotoStep(n){
+  document.querySelectorAll('.wz-step').forEach(function(s){s.classList.remove('on');});
+  document.querySelector('[data-step="'+n+'"]').classList.add('on');
+  document.getElementById('wzStepLabel').textContent='Étape '+n+'/3';
+  var pct=Math.round((n/3)*100);
+  document.getElementById('wzBar').style.width=pct+'%';
+  if(n===2 && wzBrand){
+    var models=[];
+    if(wzBrand==='Apple') models=['iPhone 16','iPhone 15 Pro','iPhone 15','iPhone 14','iPhone 13','iPhone 12','iPhone 11'];
+    else if(wzBrand==='Samsung') models=['Galaxy S25','Galaxy S24','Galaxy A55','Galaxy A15'];
+    else models=['Xiaomi 15','Redmi 13C','Autre'];
+    var html='';
+    models.forEach(function(m){
+      html+='<button class="wz-card" onclick="gotoStep(3)"><div class="text-lg font-bold">'+m+'</div></button>';
+    });
+    document.getElementById('wzModels').innerHTML=html;
+  }
+}
+function openWizard(){ document.getElementById('wz').classList.add('on'); gotoStep(1); }
+function closeWizard(){ document.getElementById('wz').classList.remove('on'); }
+function openQR(){ document.getElementById('qr').classList.add('on'); }
+function closeQR(){ document.getElementById('qr').classList.remove('on'); }
+
+document.getElementById('wzForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var msg='Bonjour, je souhaite un devis/renseignement accessoires.';
+  window.open('https://wa.me/33385330689?text='+encodeURIComponent(msg),'_blank');
+  closeWizard();
+});
+
+// Reveal animation
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+// Initial render
+renderProducts('coques');
+
+document.addEventListener('keydown', function(e){if(e.key==='Escape'){closeWizard();closeQR();}});
+</script>
+</body>
+</html>
