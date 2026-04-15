@@ -157,7 +157,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
       <a href="#equipe" class="text-white/90 hover:text-white transition">L'équipe</a>
       <a href="accessoires.html" class="text-white/90 hover:text-white transition inline-flex items-center gap-1">🛒&nbsp;Accessoires</a>
       <a href="hydrogel.html" class="text-white/90 hover:text-white transition inline-flex items-center gap-1">💧&nbsp;Protection écran</a>
-      <a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="text-white/90 hover:text-white transition inline-flex items-center gap-1">📱&nbsp;Tél. reconditionnés</a>
+      <a href="reconditionnes.html">📱&nbsp;Tél. reconditionnés</a>
       <a href="#contact" class="text-white/90 hover:text-white transition">Contact</a>
       <a href="actualites.html" class="text-white/90 hover:text-white transition">Actualités</a>
       <a href="#faq" class="text-white/90 hover:text-white transition">FAQ</a>
@@ -264,7 +264,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
     </p>
     <div class="reveal mt-8 flex items-center justify-center gap-3 flex-wrap">
       <button onclick="openWizard()" class="btn-red">Obtenir un devis en 30 s <span>›</span></button>
-      <a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="btn-ghost">Acheter un smartphone reconditionné</a>
+      <a href="reconditionnes.html">Acheter un smartphone reconditionné</a>
     </div>
 
     <!-- TRUST BAR -->
@@ -293,7 +293,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
   <div class="grid grid-cols-1 md:grid-cols-6 gap-4 md:gap-6 auto-rows-[minmax(200px,auto)]">
 
     <!-- A — Vente iPhone -->
-    <a id="boutique" href="https://solution-accessoires.fr" target="_blank" rel="noopener"
+    <a id="boutique" href="reconditionnes.html"
        data-tilt class="tile tile-soft reveal md:col-span-4 md:row-span-2 p-8 md:p-12 flex flex-col justify-between min-h-[520px]">
       <div>
         <p class="text-[12px] uppercase tracking-[0.22em] label">Boutique · Reconditionné</p>
@@ -946,15 +946,15 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
 
       <div class="grid md:grid-cols-2 gap-4">
         <!-- Smartphone reconditionné -->
-        <a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="group rounded-2xl p-6 transition hover:scale-[1.02] block" style="background:linear-gradient(135deg,rgba(0,224,255,.15),rgba(0,113,227,.15));border:1px solid rgba(0,224,255,.4)">
+        <a href="reconditionnes.html">
           <div class="text-4xl mb-3">📱</div>
           <div class="text-[11px] uppercase tracking-[0.22em] font-semibold" style="color:#66f0ff">J'achète un smartphone</div>
           <h3 class="mt-2 text-xl font-extrabold tracking-tightest">Neuf &amp; reconditionné</h3>
           <p class="mt-2 text-sm text-white/70">iPhone, Samsung, Xiaomi… Testés 40 points, batterie ≥ 90 %, garantie 12 mois.</p>
           <div class="mt-4 inline-flex items-center gap-2 text-sm font-bold" style="color:#00e0ff">
-            Vers la boutique Shopify <span class="transition group-hover:translate-x-1">›</span>
+            Voir les smartphones en stock <span class="transition group-hover:translate-x-1">›</span>
           </div>
-          <div class="mt-2 text-[11px] text-white/40">solution-accessoires.fr</div>
+          <div class="mt-2 text-[11px] text-white/40">stock mis à jour en direct</div>
         </a>
 
         <!-- Accessoires -->
@@ -1088,8 +1088,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
         <ul class="space-y-2 text-sm text-muted">
           <li><a href="accessoires.html" class="hover:text-accent transition">Accessoires</a></li>
           <li><a href="hydrogel.html" class="hover:text-accent transition">Films hydrogel</a></li>
-          <li><a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="hover:text-accent transition">Téléphones reconditionnés →</a></li>
-          <li><a href="https://solution-accessoires.fr" target="_blank" rel="noopener" class="hover:text-accent transition text-xs text-muted">solution-accessoires.fr</a></li>
+          <li><a href="reconditionnes.html">Téléphones reconditionnés →</a></li>
         </ul>
       </div>
 
@@ -2366,9 +2365,9 @@ var Evan = (function(){
     } else if(v==='achat'){
       typing(); delay(function(){
         rmTyping();
-        bot('Nos iPhone reconditionnés sont en boutique et sur solution-accessoires.fr 🚀');
+        bot('Nos smartphones reconditionnés sont en boutique et visibles en stock direct en ligne 🚀');
         var d=document.createElement('div'); d.className='ev-cta';
-        d.innerHTML='<a class="form" href="https://solution-accessoires.fr" target="_blank">🛒 Voir la boutique</a>'
+        d.innerHTML='<a class="form" href="reconditionnes.html">🛒 Voir la boutique</a>'
                   +'<a class="wa" href="'+WA+'?text='+encodeURIComponent('Bonjour, je suis intéressé par un smartphone reconditionné.')+'" target="_blank">💬 WhatsApp</a>';
         M.appendChild(d); scroll();
         delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 300);
@@ -2378,7 +2377,7 @@ var Evan = (function(){
         rmTyping();
         bot('Coques, chargeurs, câbles, écouteurs… Large choix en boutique !');
         var d=document.createElement('div'); d.className='ev-cta';
-        d.innerHTML='<a class="form" href="https://solution-accessoires.fr" target="_blank">🛒 Voir la boutique</a>'
+        d.innerHTML='<a class="form" href="accessoires.html">🛒 Voir les accessoires</a>'
                   +'<a class="wa" href="'+WA+'?text='+encodeURIComponent('Bonjour, je cherche un accessoire.')+'" target="_blank">💬 WhatsApp</a>';
         M.appendChild(d); scroll();
         delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 300);
