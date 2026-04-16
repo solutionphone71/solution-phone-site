@@ -1785,8 +1785,8 @@ function getPriceForIssue(brand, model, issue){
     var key = (model||'').replace(/^iPhone\s*/i,'').trim();
     if(issue==='Écran'){ var p = findPriceByModel(DE, key); return minPrice(p); }
     if(issue==='Batterie'){ var p2 = findPriceByModel(DB, key); return minPrice(p2); }
-    if(issue==='Charge') return 49;
-    if(issue==='Face arrière') return 69;
+    if(issue==='Charge') return 30;
+    if(issue==='Face arrière') return 60;
     if(issue==='Caméra') return 69;
     return null;
   }
