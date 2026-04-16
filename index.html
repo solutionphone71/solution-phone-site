@@ -245,6 +245,14 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
 .wz-trust{ display:flex; gap:.75rem; flex-wrap:wrap; font-size:.78rem; color:#6e6e73; }
 .wz-trust span{ display:inline-flex; align-items:center; gap:.3rem; background:#f5f5f7; padding:.3rem .65rem; border-radius:999px; }
 </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3QP90K1TLM"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", "G-3QP90K1TLM");
+</script>
 </head>
 <body class="aurora">
 
@@ -2762,5 +2770,17 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')spCloseMenu(
 </script>
 <!-- === FIN MENU MOBILE === -->
 
+<script>
+/* GA4 event tracking — boutons clés */
+document.addEventListener('click', function(e) {
+  var a = e.target.closest('a[href],button');
+  if (!a) return;
+  var h = a.getAttribute('href') || '';
+  if (h.indexOf('wa.me') > -1) gtag('event','contact_whatsapp',{method:'whatsapp'});
+  else if (h.indexOf('tel:') === 0) gtag('event','contact_phone',{method:'phone'});
+  else if (a.textContent.indexOf('Devis') > -1) gtag('event','open_devis',{method:'wizard'});
+  else if (h.indexOf('g.page') > -1) gtag('event','click_google_review');
+});
+</script>
 </body>
 </html>
