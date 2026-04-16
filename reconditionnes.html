@@ -665,7 +665,7 @@
   function cardHtml(item){
     var gradeClass = item.grade && item.grade.charAt(0) === 'A' ? 'gA' : (item.grade === 'B' ? 'gB' : 'gC');
     var imgBlock = item.image_url
-      ? '<img src="' + item.image_url + '" alt="' + escapeHtml(item.model) + '">'
+      ? '<img src="' + item.image_url + '" alt="' + escapeHtml(item.model) + '" loading="lazy">'
       : '<div class="noimg">📱</div>';
     var colorDot = item.color_hex ? '<span class="color-dot" style="background:' + item.color_hex + '"></span>' : '';
     var battery = item.battery_pct ? ' · 🔋 ' + item.battery_pct + '%' : '';
@@ -822,9 +822,12 @@
     <nav class="sp-drawer-nav">
       <a href="index.html">🏠 Accueil</a>
       <a href="reparation-iphone.html">🔧 Réparation iPhone</a>
+      <a href="reparation-samsung.html">📲 Réparation Samsung</a>
+      <a href="tarifs.html">💰 Tarifs</a>
       <a href="reconditionnes.html">📱 Smartphones reconditionnés</a>
       <a href="accessoires.html">🛒 Accessoires</a>
       <a href="hydrogel.html">💧 Protection écran</a>
+      <a href="faq.html">❓ FAQ</a>
       <a href="actualites.html">📰 Actualités</a>
     </nav>
     <div class="sp-drawer-foot">

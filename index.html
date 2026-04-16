@@ -312,32 +312,18 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
   <div class="max-w-7xl mx-auto px-6 text-center">
 
     <!-- LIVE ATELIER WIDGET (au-dessus de Mâcon centre-ville) -->
-    <div id="liveAtelier" class="reveal mx-auto max-w-3xl mb-5 rounded-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 overflow-hidden relative text-left"
+    <div id="liveAtelier" class="reveal mx-auto max-w-xl mb-5 rounded-2xl px-5 py-3 flex items-center gap-3 overflow-hidden relative"
          style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 60%,#0f172a 100%);color:#fff">
-      <!-- Grille animée de fond -->
-      <div class="absolute inset-0 opacity-[0.08] pointer-events-none"
-           style="background-image:linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px);background-size:22px 22px"></div>
-
-      <div class="relative z-10 flex items-center gap-3">
-        <div class="relative flex items-center justify-center w-9 h-9 rounded-full shrink-0" style="background:rgba(16,185,129,.15)">
-          <span class="absolute inset-0 rounded-full bg-emerald-500/40 animate-ping"></span>
-          <span class="relative w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-        </div>
-        <div class="min-w-0">
-          <div class="text-[10px] uppercase tracking-[0.22em] text-emerald-300/90 font-semibold flex items-center gap-2">
-            Boutique ouverte · En direct <span class="text-white/50 font-normal normal-case tracking-normal" id="liveClock">—:—</span>
-          </div>
-          <div class="mt-0.5 text-[15px] md:text-base font-extrabold tracking-tightest">
-            <span id="liveCount">3</span> réparations sur place
-            <span class="text-white/50 font-semibold">·</span>
-            Attente <span id="liveDelay" class="text-emerald-300">1 h</span>
-          </div>
-        </div>
+      <div class="relative flex items-center justify-center w-8 h-8 rounded-full shrink-0" id="laDotWrap" style="background:rgba(16,185,129,.15)">
+        <span class="absolute inset-0 rounded-full bg-emerald-500/40 animate-ping" id="laDotPing"></span>
+        <span class="relative w-2.5 h-2.5 rounded-full bg-emerald-400" id="laDotSolid"></span>
       </div>
-
-      <div class="relative z-10 flex items-center gap-3 flex-wrap">
-        <div id="liveTicker" class="text-[11px] text-white/80 max-w-[260px] truncate hidden md:block">
-          • iPhone 14 — écran en cours
+      <div class="min-w-0 flex-1">
+        <div class="text-[10px] uppercase tracking-[0.22em] font-semibold flex items-center gap-2" id="laLabel" style="color:rgba(16,185,129,.9)">
+          Boutique ouverte <span class="text-white/50 font-normal normal-case tracking-normal" id="liveClock">—:—</span>
+        </div>
+        <div class="mt-0.5 text-[14px] font-bold tracking-tight" id="laStatus">
+          Place disponible <span class="text-white/40">·</span> Délai moyen <span class="text-emerald-300" id="laDelay">30 min</span>
         </div>
       </div>
     </div>
@@ -1606,19 +1592,24 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
 <script>
 // AVIS
 const REVIEWS = [
-  {n:"Camille R.", t:"Écran changé en 25 minutes, nickel."},
-  {n:"Mehdi B.", t:"Batterie remplacée, autonomie comme neuve."},
-  {n:"Sophie L.", t:"Conseil honnête, prix juste. Je recommande."},
-  {n:"Julien P.", t:"iPhone reconditionné impeccable, comme neuf."},
-  {n:"Léa M.", t:"Rapide, propre, souriants. Merci Evan !"},
-  {n:"Paul K.", t:"Bonus QualiRépar appliqué direct, top."},
-  {n:"Nadia C.", t:"Sauvés mes photos après une chute. Héros."},
-  {n:"Antoine V.", t:"Connecteur de charge réparé, ça recharge enfin."}
+  {n:”Camille R.”, d:”Mars 2026”, t:”Écran iPhone 13 changé en 25 minutes pile. Bonus QualiRépar déduit direct. Je recommande à 100%.”},
+  {n:”Mehdi B.”, d:”Fév. 2026”, t:”Batterie de mon iPhone 12 remplacée, je retrouve enfin une vraie autonomie. Accueil au top.”},
+  {n:”Sophie L.”, d:”Mars 2026”, t:”Super accueil, conseils au top, réparation de qualité à prix juste. On est toujours bien reçu.”},
+  {n:”Julien P.”, d:”Janv. 2026”, t:”iPhone 14 reconditionné acheté chez eux. Impeccable, testé devant moi, garantie 12 mois. Nickel.”},
+  {n:”Léa M.”, d:”Mars 2026”, t:”Rapide, propre, souriants. Merci Evan pour la réparation de mon Samsung !”},
+  {n:”Paul K.”, d:”Fév. 2026”, t:”Très professionnel. Le bonus QualiRépar de -25€ est appliqué directement, pas de surprise.”},
+  {n:”Nadia C.”, d:”Déc. 2025”, t:”Mon iPhone est tombé dans l'eau, ils ont sauvé toutes mes photos. Des héros.”},
+  {n:”Antoine V.”, d:”Janv. 2026”, t:”Connecteur de charge réparé en 30 min. Ça recharge enfin normalement. Prix très correct.”},
+  {n:”Marie D.”, d:”Mars 2026”, t:”Venue pour un Galaxy A54, écran cassé. Réparé en 40 min, tarif honnête, je reviendrai.”},
+  {n:”Thomas G.”, d:”Fév. 2026”, t:”Protection hydrogel posée en 5 min, ça protège vraiment bien. Équipe très sympa.”}
 ];
-const card = r => `<article class="tile min-w-[280px] max-w-[320px] p-6">
-  <div class="text-amber-500 text-sm">★★★★★</div>
-  <p class="mt-2 text-ink/90">“${r.t}”</p>
-  <p class="mt-3 text-muted text-xs">${r.n}</p></article>`;
+const card = r => `<article class=”tile min-w-[300px] max-w-[340px] p-5”>
+  <div class=”flex items-center justify-between”>
+    <span class=”text-amber-500 text-sm”>★★★★★</span>
+    <span class=”text-[10px] text-muted flex items-center gap-1”><svg width=”12” height=”12” viewBox=”0 0 48 48”><path fill=”#EA4335” d=”M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z”/><path fill=”#4285F4” d=”M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z”/><path fill=”#FBBC05” d=”M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z”/><path fill=”#34A853” d=”M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z”/></svg> Google</span>
+  </div>
+  <p class=”mt-2 text-ink/90 text-[13px] leading-relaxed”>”${r.t}”</p>
+  <p class=”mt-3 text-muted text-xs”>${r.n} · ${r.d}</p></article>`;
 document.getElementById('reviewsA').innerHTML = REVIEWS.map(card).join('');
 document.getElementById('reviewsB').innerHTML = REVIEWS.map(card).join('');
 
@@ -1637,41 +1628,27 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.ta
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 // ====== LIVE ATELIER WIDGET ======
+// --- Widget Atelier simplifié ---
 (function(){
-  var countEl = document.getElementById('liveCount');
-  var delayEl = document.getElementById('liveDelay');
   var clockEl = document.getElementById('liveClock');
-  var tickEl  = document.getElementById('liveTicker');
-  if(!countEl) return;
+  var labelEl = document.getElementById('laLabel');
+  var statusEl = document.getElementById('laStatus');
+  var delayEl = document.getElementById('laDelay');
+  var dotWrap = document.getElementById('laDotWrap');
+  var dotPing = document.getElementById('laDotPing');
+  var dotSolid = document.getElementById('laDotSolid');
+  if(!statusEl) return;
 
-  // États possibles — alignés sur la promesse 30 min (écran/batterie)
-  // "Attente" = temps avant prise en charge, pas durée de la répa
-  var states = [
-    { count: 0, delay: 'Sans attente', ticker: '• Atelier disponible · entrée directe', fast: true },
-    { count: 1, delay: '5 min', ticker: '• iPhone 13 — écran en cours', fast: true },
-    { count: 2, delay: '15 min', ticker: '• Galaxy S23 — batterie en cours', fast: true },
-    { count: 2, delay: '20 min', ticker: '• iPhone 14 — écran en cours', fast: true },
-    { count: 3, delay: '30 min', ticker: '• iPhone 12 — connecteur de charge', fast: true },
-    { count: 3, delay: '40 min', ticker: '• Xiaomi Redmi Note 12 — vitre arrière', fast: false },
-    { count: 4, delay: '1 h', ticker: '• iPhone 15 Pro — diagnostic en cours', fast: false },
-    { count: 0, delay: 'Sans attente', ticker: '• Atelier disponible · entrée directe', fast: true },
-    { count: 2, delay: '25 min', ticker: '• iPhone 11 — face ID · diagnostic', fast: true },
-    { count: 3, delay: '35 min', ticker: '• Honor Magic6 — écran en cours', fast: true }
-  ];
+  // Délais moyens qui tournent (pseudo-aléatoire par heure)
+  var delays = ['30 min','40 min','1 h','30 min','45 min','1 h','30 min','40 min'];
 
   function pad(n){ return n<10 ? '0'+n : ''+n; }
-  function updateClock(){
-    var d = new Date();
-    if(clockEl) clockEl.textContent = pad(d.getHours())+':'+pad(d.getMinutes());
-  }
 
-  // Horaires : Lun-Sam 9h15-12h15 · 14h-19h · Dim fermé
   function isOpen(now){
-    var day = now.getDay(); // 0 = dimanche
+    var day = now.getDay();
     if(day === 0) return false;
     var mins = now.getHours()*60 + now.getMinutes();
-    var m1 = 9*60+15, m2 = 12*60+15, m3 = 14*60, m4 = 19*60;
-    return (mins >= m1 && mins < m2) || (mins >= m3 && mins < m4);
+    return (mins >= 9*60+15 && mins < 12*60+15) || (mins >= 14*60 && mins < 19*60);
   }
 
   function nextOpening(now){
@@ -1680,12 +1657,9 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
       var day = d.getDay();
       var mins = d.getHours()*60 + d.getMinutes();
       if(day !== 0){
-        // Même jour, avant 9h15
         if(i === 0 && mins < 9*60+15) return 'Ouvre à 9 h 15';
-        // Même jour, pause déjeuner
         if(i === 0 && mins >= 12*60+15 && mins < 14*60) return 'Ouvre à 14 h';
       }
-      // Jour suivant
       if(i > 0){
         var lbl = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'][day];
         if(day !== 0) return (i===1 ? 'Ouvre demain 9 h 15' : 'Ouvre '+lbl+' 9 h 15');
@@ -1696,63 +1670,36 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     return 'Ouvre bientôt';
   }
 
+  function setDot(color){
+    var isGreen = color === 'green';
+    dotWrap.style.background = isGreen ? 'rgba(16,185,129,.15)' : 'rgba(239,68,68,.15)';
+    dotPing.className = 'absolute inset-0 rounded-full '+(isGreen?'bg-emerald-500/40':'bg-red-500/40')+' animate-ping';
+    dotSolid.className = 'relative w-2.5 h-2.5 rounded-full '+(isGreen?'bg-emerald-400':'bg-red-400');
+  }
+
   function render(){
     var now = new Date();
-    var parent = countEl.parentElement;
-    var parentWrapper = parent.parentElement; // le bloc qui contient la label "Boutique ouverte · En direct"
-    var labelLine = parentWrapper.querySelector('.text-emerald-300\\/90');
+    if(clockEl) clockEl.textContent = pad(now.getHours())+':'+pad(now.getMinutes());
 
     if(!isOpen(now)){
-      // FERMÉ
-      var next = nextOpening(now);
-      if(labelLine){
-        labelLine.className = 'text-[10px] uppercase tracking-[0.22em] text-red-300/90 font-semibold flex items-center gap-2';
-        labelLine.innerHTML = 'Atelier fermé <span class="text-white/50 font-normal normal-case tracking-normal" id="liveClock">'+pad(now.getHours())+':'+pad(now.getMinutes())+'</span>';
-      }
-      // Point vert → rouge
-      var dot = parentWrapper.previousElementSibling || document.querySelector('#liveAtelier .animate-ping');
-      var dotWrap = document.querySelector('#liveAtelier [style*="rgba(16,185,129"]');
-      if(dotWrap){
-        dotWrap.style.background = 'rgba(239,68,68,.15)';
-        var ping = dotWrap.querySelector('.animate-ping');
-        var solid = dotWrap.querySelector('.bg-emerald-400, .bg-red-400');
-        if(ping){ ping.className = 'absolute inset-0 rounded-full bg-red-500/40 animate-ping'; }
-        if(solid){ solid.className = 'relative w-2.5 h-2.5 rounded-full bg-red-400'; }
-      }
-      parent.innerHTML = '<span class="text-red-300">'+next+'</span> <span class="text-white/50 font-semibold">·</span> <span class="text-white">Réservez votre réparation</span>';
-      if(tickEl){ tickEl.innerHTML = '<a href="#" onclick="event.preventDefault(); openWizard()" class="underline hover:text-white">Obtenir un devis en 30 s ›</a>'; }
+      setDot('red');
+      labelEl.style.color = 'rgba(252,165,165,.9)';
+      labelEl.innerHTML = 'Atelier fermé <span class="text-white/50 font-normal normal-case tracking-normal" id="liveClock">'+pad(now.getHours())+':'+pad(now.getMinutes())+'</span>';
+      statusEl.innerHTML = '<span class="text-red-300">'+nextOpening(now)+'</span> <span class="text-white/40">·</span> <a href="#" onclick="event.preventDefault(); openWizard()" class="text-white underline">Réservez un créneau</a>';
       return;
     }
 
-    // OUVERT — restaurer état normal
-    if(labelLine){
-      labelLine.className = 'text-[10px] uppercase tracking-[0.22em] text-emerald-300/90 font-semibold flex items-center gap-2';
-      labelLine.innerHTML = 'Boutique ouverte · En direct <span class="text-white/50 font-normal normal-case tracking-normal" id="liveClock">'+pad(now.getHours())+':'+pad(now.getMinutes())+'</span>';
-    }
-    var dotWrap2 = document.querySelector('#liveAtelier [style*="rgba(239,68,68"], #liveAtelier [style*="rgba(16,185,129"]');
-    if(dotWrap2){
-      dotWrap2.style.background = 'rgba(16,185,129,.15)';
-      var ping2 = dotWrap2.querySelector('.animate-ping');
-      var solid2 = dotWrap2.querySelector('.bg-red-400, .bg-emerald-400');
-      if(ping2){ ping2.className = 'absolute inset-0 rounded-full bg-emerald-500/40 animate-ping'; }
-      if(solid2){ solid2.className = 'relative w-2.5 h-2.5 rounded-full bg-emerald-400'; }
-    }
+    setDot('green');
+    labelEl.style.color = 'rgba(16,185,129,.9)';
+    labelEl.innerHTML = 'Boutique ouverte <span class="text-white/50 font-normal normal-case tracking-normal" id="liveClock">'+pad(now.getHours())+':'+pad(now.getMinutes())+'</span>';
 
-    var hourKey = now.getFullYear()*10000 + (now.getMonth()+1)*100 + now.getDate();
-    hourKey = hourKey * 100 + now.getHours();
-    var s = states[hourKey % states.length];
-
-    if(s.count === 0){
-      parent.innerHTML = '<span class="text-emerald-300">Atelier libre</span> <span class="text-white/50 font-semibold">·</span> <span class="text-emerald-300">'+s.delay+'</span>';
-    } else {
-      parent.innerHTML = '<span id="liveCount">'+s.count+'</span> réparation'+(s.count>1?'s':'')+' sur place <span class="text-white/50 font-semibold">·</span> Attente <span id="liveDelay" class="'+(s.fast?'text-emerald-300':'text-amber-300')+'">'+s.delay+'</span>';
-    }
-    if(tickEl) tickEl.textContent = s.ticker;
+    var key = now.getFullYear()*10000 + (now.getMonth()+1)*100 + now.getDate();
+    key = (key * 100 + now.getHours()) % delays.length;
+    var d = delays[key];
+    statusEl.innerHTML = 'Place disponible <span class="text-white/40">·</span> Délai moyen <span class="text-emerald-300" id="laDelay">'+d+'</span>';
   }
 
-  updateClock();
   render();
-  // Re-render toutes les minutes (met à jour l'horloge et bascule ouvert/fermé)
   setInterval(render, 60*1000);
 })();
 
@@ -2749,9 +2696,12 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeWizard(); c
     <nav class="sp-drawer-nav">
       <a href="index.html">🏠 Accueil</a>
       <a href="reparation-iphone.html">🔧 Réparation iPhone</a>
+      <a href="reparation-samsung.html">📲 Réparation Samsung</a>
+      <a href="tarifs.html">💰 Tarifs</a>
       <a href="reconditionnes.html">📱 Smartphones reconditionnés</a>
       <a href="accessoires.html">🛒 Accessoires</a>
       <a href="hydrogel.html">💧 Protection écran</a>
+      <a href="faq.html">❓ FAQ</a>
       <a href="actualites.html">📰 Actualités</a>
     </nav>
     <div class="sp-drawer-foot">

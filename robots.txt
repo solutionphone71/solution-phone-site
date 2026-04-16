@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /roulette.html
+Disallow: /app-index.html
+Disallow: /img/team-*
 
-Sitemap: https://solution-phone.fr/sitemap.xml
+Sitemap: https://www.solution-phone.fr/sitemap.xml
