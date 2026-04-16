@@ -581,30 +581,44 @@ h1.hero-title .accent {
   background: #f5f5f7;
 }
 
-/* BRANDS GRID */
-.brands-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-  max-width: 1000px;
+/* BRANDS MARQUEE */
+.brands-marquee-wrap {
+  overflow: hidden;
+  width: 100%;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 24px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
 }
-
-.brand-pill {
+.brands-marquee {
+  display: flex;
+  gap: 32px;
+  animation: marquee-scroll 28s linear infinite;
+  width: max-content;
+}
+.brands-marquee:hover { animation-play-state: paused; }
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.brand-chip {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 18px 20px;
-  background: #f5f5f7;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 18px;
-  text-align: center;
-  transition: all 0.3s;
-  cursor: default;
+  gap: 10px;
+  padding: 14px 22px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 60px;
   font-weight: 600;
   color: #1d1d1f;
-  font-size: 0.95rem;
+  font-size: .95rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  flex-shrink: 0;
+}
+.brand-chip img {
+  width: 28px; height: 28px; object-fit: contain;
 }
 
 .brand-pill:hover {
@@ -980,14 +994,13 @@ footer .foot-links a:hover {
     font-size: 1rem;
   }
 
-  .brands-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .brand-pill {
+  .brand-chip {
     font-size: 0.85rem;
-    padding: 14px 16px;
+    padding: 10px 16px;
+    gap: 8px;
   }
+  .brand-chip img { width: 22px; height: 22px; }
+  .brands-marquee { gap: 20px; }
 
   .stats {
     padding: 40px 20px;
@@ -1032,7 +1045,7 @@ footer .foot-links a:hover {
   </a>
   <div class="nav-links">
     <a href="index.html">Accueil</a>
-    <a href="reparation-iphone.html">Réparation iPhone</a>
+    <a href="reparation-iphone.html"><svg width="14" height="14" viewBox="0 0 384 512" fill="currentColor" style="vertical-align:-1px;margin-right:3px"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>Réparation iPhone</a>
     <a href="reconditionnes.html">Reconditionnés</a>
     <a href="actualites.html">Actualités</a>
   </div>
@@ -1109,13 +1122,34 @@ footer .foot-links a:hover {
     <h2 class="section-h">Toutes les marques <span class="accent">Android</span></h2>
     <p class="section-sub">Nous réparons tous les smartphones Android du marché</p>
 
-    <div class="brands-grid">
-      <div class="brand-pill"><span class="icon">📱</span> Samsung Galaxy</div>
-      <div class="brand-pill"><span class="icon">📱</span> Xiaomi & Redmi</div>
-      <div class="brand-pill"><span class="icon">📱</span> Huawei & Honor</div>
-      <div class="brand-pill"><span class="icon">📱</span> Oppo & OnePlus</div>
-      <div class="brand-pill"><span class="icon">📱</span> Google Pixel</div>
-      <div class="brand-pill"><span class="icon">📱</span> Motorola</div>
+    <div class="brands-marquee-wrap">
+      <div class="brands-marquee" id="brandsMarquee">
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung"> Samsung Galaxy</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Xiaomi_logo_%282021-%29.svg" alt="Xiaomi"> Xiaomi & Redmi</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Huawei_Logo.svg" alt="Huawei"> Huawei</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Honor_logo_2022.svg" alt="Honor"> Honor</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/OPPO_LOGO_2019.svg" alt="Oppo"> Oppo</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/OnePlus_logo.svg" alt="OnePlus"> OnePlus</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google"> Pixel</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Motorola-logo.svg" alt="Motorola"> Motorola</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Realme_logo.svg" alt="Realme"> Realme</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Vivo_logo_2019.svg" alt="Vivo"> Vivo</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/ASUS_Logo.svg" alt="Asus"> Asus ROG</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/8/80/Sony_logo.svg" alt="Sony"> Sony Xperia</div>
+        <!-- duplicate set for seamless loop -->
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung"> Samsung Galaxy</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Xiaomi_logo_%282021-%29.svg" alt="Xiaomi"> Xiaomi & Redmi</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Huawei_Logo.svg" alt="Huawei"> Huawei</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Honor_logo_2022.svg" alt="Honor"> Honor</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/OPPO_LOGO_2019.svg" alt="Oppo"> Oppo</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/OnePlus_logo.svg" alt="OnePlus"> OnePlus</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google"> Pixel</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Motorola-logo.svg" alt="Motorola"> Motorola</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Realme_logo.svg" alt="Realme"> Realme</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Vivo_logo_2019.svg" alt="Vivo"> Vivo</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/ASUS_Logo.svg" alt="Asus"> Asus ROG</div>
+        <div class="brand-chip"><img src="https://upload.wikimedia.org/wikipedia/commons/8/80/Sony_logo.svg" alt="Sony"> Sony Xperia</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1178,39 +1212,38 @@ footer .foot-links a:hover {
     <div class="pricing-box">
       <h3 class="pricing-header">📋 Nos tarifs</h3>
       <div class="pricing-note">
-        Chaque modèle Samsung, Xiaomi, Huawei ou autre marque Android dispose de pièces détachées spécifiques.
-        <strong>Le diagnostic est gratuit</strong> en boutique (21 Rue Gambetta, Mâcon) ou envoyez une photo via WhatsApp pour un devis en 10 minutes.
+        Il existe tellement de modèles Android qu'il est impossible de tous les lister. <strong>Envoyez-nous une photo de votre téléphone via WhatsApp</strong> et on vous répond avec le prix exact en quelques minutes. Voici nos tarifs de base :
       </div>
 
       <ul class="pricing-list">
         <li>
-          <strong>Écran Samsung Galaxy S24/S23</strong>
-          <em>À partir de 180€ TTC</em>
+          <strong>Écran Samsung</strong>
+          <em>À partir de 45 € TTC</em>
         </li>
         <li>
-          <strong>Écran Xiaomi Redmi Note 13</strong>
-          <em>À partir de 110€ TTC</em>
+          <strong>Écran Huawei</strong>
+          <em>À partir de 45 € TTC</em>
         </li>
         <li>
-          <strong>Batterie (toutes marques)</strong>
-          <em>À partir de 45€ TTC</em>
+          <strong>Écran Xiaomi</strong>
+          <em>À partir de 35 € TTC</em>
         </li>
         <li>
-          <strong>Connecteur USB-C (réparation)</strong>
-          <em>À partir de 65€ TTC</em>
+          <strong>Batterie (toutes marques Android)</strong>
+          <em>Compatible : à partir de 30 € · Originale : 45 €</em>
         </li>
         <li>
-          <strong>Caméra arrière Samsung</strong>
-          <em>À partir de 85€ TTC</em>
+          <strong>Connecteur de charge (toutes marques)</strong>
+          <em>À partir de 25 € TTC</em>
         </li>
         <li>
-          <strong>Diagnostic dégât des eaux</strong>
+          <strong>Diagnostic</strong>
           <em>Gratuit</em>
         </li>
       </ul>
 
       <div class="qual-badge">
-        ✓ QualiRépar certifié — Réduction -25€ appliquée automatiquement
+        ✓ QualiRépar certifié — Réduction -25 € appliquée automatiquement
       </div>
     </div>
   </div>
@@ -1303,8 +1336,8 @@ footer .foot-links a:hover {
     </div>
     <nav class="sp-drawer-nav">
       <a href="index.html">🏠 Accueil</a>
-      <a href="reparation-iphone.html">🔧 Réparation iPhone</a>
-      <a href="reparation-samsung.html">📱 Réparation Samsung</a>
+      <a href="reparation-iphone.html"> Réparation iPhone</a>
+      <a href="reparation-samsung.html"><span style="color:#3DDC84">🤖</span> Samsung & Android</a>
       <a href="reconditionnes.html">♻️ Smartphones reconditionnés</a>
       <a href="accessoires.html">🛒 Accessoires</a>
       <a href="hydrogel.html">💧 Protection écran</a>
