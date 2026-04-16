@@ -93,7 +93,29 @@
   .nav-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
   .nav-btn.prev{left:20px}
   .nav-btn.next{right:20px}
-  @media (max-width:720px){ .nav-btn{display:none} .carousel::before,.carousel::after{width:10vw} }
+
+  /* Indicateurs de scroll mobile */
+  .scroll-hint{display:none}
+  .edge-fade{display:none}
+  @media (max-width:720px){
+    .nav-btn{display:none}
+    .carousel::before,.carousel::after{width:10vw}
+    /* Dégradé sur le bord droit qui indique "y a encore" */
+    .edge-fade{display:block;position:absolute;top:0;right:0;width:60px;height:100%;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.95) 100%);z-index:4;transition:opacity .3s}
+    .edge-fade.hidden{opacity:0}
+    /* Barre de contrôle bas : ← compteur → */
+    .scroll-hint{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:-18px;margin-bottom:14px;position:relative;z-index:5}
+    .scroll-hint .mb-btn{width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 4px 12px -4px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--ink);cursor:pointer;transition:all .15s}
+    .scroll-hint .mb-btn:active{transform:scale(.92);background:var(--ink);color:#fff}
+    .scroll-hint .mb-btn:disabled{opacity:.35;cursor:default}
+    .scroll-hint .mb-count{font-size:13px;font-weight:700;color:var(--muted);min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
+    /* Hint animé "Faites glisser" qui disparaît au premier scroll */
+    .swipe-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(29,29,31,.92);color:#fff;padding:10px 18px;border-radius:9999px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;pointer-events:none;z-index:6;animation:swipePulse 1.6s ease-in-out infinite;backdrop-filter:blur(6px)}
+    .swipe-hint.hidden{display:none}
+    .swipe-hint .arr{display:inline-block;animation:swipeArr 1.6s ease-in-out infinite}
+    @keyframes swipePulse{0%,100%{opacity:.85}50%{opacity:1}}
+    @keyframes swipeArr{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+  }
 
   /* ========== STATS ========== */
   .stats{max-width:1280px;margin:40px auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -238,6 +260,8 @@
 <!-- CAROUSEL -->
 <div class="carousel-wrap">
   <button class="nav-btn prev" onclick="scrollCarousel(-1)" aria-label="Précédent">‹</button>
+  <div class="edge-fade" id="edgeFade"></div>
+  <div class="swipe-hint" id="swipeHint"><span>Faites glisser</span><span class="arr">→</span></div>
   <div class="carousel" id="carousel">
     <!-- Skeleton loaders -->
     <div class="card"><div class="ph"><div class="skeleton" style="width:140px;height:220px;border-radius:28px"></div></div><div class="skeleton" style="width:140px;height:22px;margin-top:10px"></div><div class="skeleton" style="width:80px;height:14px;margin-top:8px"></div><div class="skeleton" style="width:100px;height:28px;margin-top:16px"></div></div>
@@ -245,6 +269,13 @@
     <div class="card"><div class="ph"><div class="skeleton" style="width:140px;height:220px;border-radius:28px"></div></div><div class="skeleton" style="width:140px;height:22px;margin-top:10px"></div><div class="skeleton" style="width:80px;height:14px;margin-top:8px"></div><div class="skeleton" style="width:100px;height:28px;margin-top:16px"></div></div>
   </div>
   <button class="nav-btn next" onclick="scrollCarousel(1)" aria-label="Suivant">›</button>
+</div>
+
+<!-- Contrôles mobile : ← compteur → -->
+<div class="scroll-hint">
+  <button class="mb-btn" id="mbPrev" onclick="scrollCarousel(-1)" aria-label="Précédent">‹</button>
+  <div class="mb-count" id="mbCount">— / —</div>
+  <button class="mb-btn" id="mbNext" onclick="scrollCarousel(1)" aria-label="Suivant">›</button>
 </div>
 
 <!-- STATS -->
@@ -590,6 +621,12 @@
     car.innerHTML = filtered.map(cardHtml).join('');
     // reset scroll to start
     car.scrollLeft = 0;
+    // Réafficher le hint "Faites glisser" quand on change de catégorie
+    var sh = document.getElementById('swipeHint');
+    if(sh && filtered.length > 1) sh.classList.remove('hidden');
+    var ef = document.getElementById('edgeFade');
+    if(ef) ef.classList.remove('hidden');
+    setTimeout(updateScrollUI, 50);
   }
 
   function cardHtml(item){
@@ -672,6 +709,7 @@
   function scrollCarousel(dir){
     var car = document.getElementById('carousel');
     car.scrollBy({ left: dir * 340, behavior: 'smooth' });
+    hideSwipeHint();
   }
 
   // keyboard nav
@@ -679,6 +717,56 @@
     if(e.key === 'ArrowLeft') scrollCarousel(-1);
     if(e.key === 'ArrowRight') scrollCarousel(1);
   });
+
+  // Mise à jour du compteur "X / N", des boutons mobile et du fade
+  function updateScrollUI(){
+    var car = document.getElementById('carousel');
+    var cards = car.querySelectorAll('.card');
+    var total = cards.length;
+    if(!total){
+      document.getElementById('mbCount').textContent = '— / —';
+      document.getElementById('mbPrev').disabled = true;
+      document.getElementById('mbNext').disabled = true;
+      var sh = document.getElementById('swipeHint'); if(sh) sh.classList.add('hidden');
+      var ef = document.getElementById('edgeFade'); if(ef) ef.classList.add('hidden');
+      return;
+    }
+    // Carte la plus centrée à l'écran
+    var carRect = car.getBoundingClientRect();
+    var center = carRect.left + carRect.width / 2;
+    var bestIdx = 0, bestDist = Infinity;
+    for(var i=0; i<cards.length; i++){
+      var r = cards[i].getBoundingClientRect();
+      var d = Math.abs((r.left + r.width/2) - center);
+      if(d < bestDist){ bestDist = d; bestIdx = i; }
+    }
+    document.getElementById('mbCount').textContent = (bestIdx+1) + ' / ' + total;
+    document.getElementById('mbPrev').disabled = (car.scrollLeft <= 4);
+    document.getElementById('mbNext').disabled = (car.scrollLeft + car.clientWidth >= car.scrollWidth - 4);
+    // Cache le fade quand on est arrivé au bout à droite
+    var ef2 = document.getElementById('edgeFade');
+    if(ef2){
+      if(car.scrollLeft + car.clientWidth >= car.scrollWidth - 8) ef2.classList.add('hidden');
+      else ef2.classList.remove('hidden');
+    }
+  }
+
+  function hideSwipeHint(){
+    var sh = document.getElementById('swipeHint');
+    if(sh) sh.classList.add('hidden');
+  }
+
+  // Hook scroll listener (throttled)
+  (function(){
+    var car = document.getElementById('carousel');
+    if(!car) return;
+    var t = null;
+    car.addEventListener('scroll', function(){
+      hideSwipeHint();
+      if(t) cancelAnimationFrame(t);
+      t = requestAnimationFrame(updateScrollUI);
+    }, { passive: true });
+  })();
 
   // ====== INIT ======
   loadStock();
