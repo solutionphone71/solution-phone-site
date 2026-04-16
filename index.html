@@ -1495,7 +1495,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
             <input name="nom" required placeholder="Votre prénom" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
             <input name="contact" id="wzContactField" required type="tel" placeholder="Téléphone / WhatsApp" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
             <textarea name="note" rows="2" placeholder="Un détail à préciser ? (optionnel)" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40 resize-none"></textarea>
-            <button type="submit" id="wzSubmitBtn" class="btn-red mt-1">Envoyer sur WhatsApp <span>›</span></button>
+            <button type="submit" id="wzSubmitBtn" class="btn-red mt-1">Discutez sur WhatsApp <span>›</span></button>
             <div class="text-xs text-muted text-center">Boutique : <a class="text-accent font-semibold" href="tel:+33385330689">03 85 33 06 89</a> · 21 Rue Gambetta, Mâcon</div>
           </form>
         </div>
@@ -2178,15 +2178,15 @@ function wzPickChannel(ch){
   if(ch==='wa'){
     field.type = 'tel';
     field.placeholder = 'Téléphone / WhatsApp';
-    btn.innerHTML = 'Envoyer sur WhatsApp <span>›</span>';
+    btn.innerHTML = 'Discutez sur WhatsApp <span>›</span>';
   } else if(ch==='mail'){
     field.type = 'email';
     field.placeholder = 'Votre email';
-    btn.innerHTML = 'Envoyer par email <span>›</span>';
+    btn.innerHTML = 'Écrivez-nous par email <span>›</span>';
   } else {
     field.type = 'tel';
     field.placeholder = 'Votre numéro (rappel)';
-    btn.innerHTML = 'Demander à être rappelé <span>›</span>';
+    btn.innerHTML = 'Soyez rappelé rapidement <span>›</span>';
   }
 }
 
