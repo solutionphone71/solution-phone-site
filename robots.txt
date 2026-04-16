@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /app-index.html
 Disallow: /img/team-*
+Disallow: /tarifs.html
 
 Sitemap: https://www.solution-phone.fr/sitemap.xml
