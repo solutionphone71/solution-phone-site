@@ -1466,7 +1466,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
           <!-- Urgency banner -->
           <div id="wzUrgency" class="mt-5 p-3 rounded-2xl text-sm flex items-center gap-2" style="background:linear-gradient(135deg,#fff5f5,#ffe9ea);border:1px solid rgba(227,6,19,.15);color:#8b0410">
             <span>⏱️</span>
-            <span><b id="wzUrgencyText">Si vous déposez avant 17h00</b>, réparation terminée <b>aujourd'hui</b>. Il reste <b id="wzCountdown">—</b>.</span>
+            <span><b id="wzUrgencyText">Si vous déposez avant 18h00</b>, réparation terminée <b>aujourd'hui</b>. Il reste <b id="wzCountdown">—</b>.</span>
           </div>
 
           <!-- Contextual testimonial -->
@@ -1481,14 +1481,22 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
 
         <div>
           <p class="text-[12px] uppercase tracking-[0.22em] label">Vos coordonnées</p>
-          <h3 class="mt-2 text-2xl font-extrabold tracking-tightest">On vous rappelle dans l'heure.</h3>
-          <p class="mt-1 text-muted text-sm">Prénom + téléphone ou WhatsApp. Rien d'autre.</p>
+          <h3 class="mt-2 text-2xl font-extrabold tracking-tightest">Devis immédiat.</h3>
+          <p class="mt-1 text-muted text-sm">Choisissez votre canal. On répond tout de suite.</p>
+
+          <!-- Channel picker -->
+          <div class="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Canal de contact">
+            <button type="button" id="wzChWA" onclick="wzPickChannel('wa')" class="px-4 py-2 rounded-full text-sm font-semibold transition inline-flex items-center gap-1.5" style="background:#25D366;color:#fff">💬 WhatsApp</button>
+            <button type="button" id="wzChMail" onclick="wzPickChannel('mail')" class="px-4 py-2 rounded-full text-sm font-semibold transition inline-flex items-center gap-1.5 bg-bg2 text-ink border border-black/5">📧 Email</button>
+            <button type="button" id="wzChTel" onclick="wzPickChannel('tel')" class="px-4 py-2 rounded-full text-sm font-semibold transition inline-flex items-center gap-1.5 bg-bg2 text-ink border border-black/5">📞 Téléphone</button>
+          </div>
+
           <form id="wzForm" class="mt-4 grid gap-3">
             <input name="nom" required placeholder="Votre prénom" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
-            <input name="tel" required type="tel" placeholder="Téléphone / WhatsApp" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+            <input name="contact" id="wzContactField" required type="tel" placeholder="Téléphone / WhatsApp" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
             <textarea name="note" rows="2" placeholder="Un détail à préciser ? (optionnel)" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40 resize-none"></textarea>
-            <button type="submit" class="btn-red mt-1">Recevoir mon devis sur WhatsApp <span>›</span></button>
-            <div class="text-xs text-muted text-center">Ou appelez-nous : <a class="text-accent font-semibold" href="tel:+33385330689">03 85 33 06 89</a></div>
+            <button type="submit" id="wzSubmitBtn" class="btn-red mt-1">Envoyer sur WhatsApp <span>›</span></button>
+            <div class="text-xs text-muted text-center">Boutique : <a class="text-accent font-semibold" href="tel:+33385330689">03 85 33 06 89</a> · 21 Rue Gambetta, Mâcon</div>
           </form>
         </div>
       </div>
@@ -2126,16 +2134,16 @@ function updateTestimonial(){
   document.getElementById('wzTestiAuthor').textContent = t.a;
 }
 
-// --- Urgency countdown : "avant 17h00 réparation aujourd'hui" ---
+// --- Urgency countdown : "avant 18h00 réparation aujourd'hui" ---
 function updateUrgency(){
   const el = document.getElementById('wzCountdown');
   const box = document.getElementById('wzUrgency');
   if(!el || !box) return;
   const now = new Date();
-  const cutoff = new Date(now); cutoff.setHours(17,0,0,0);
+  const cutoff = new Date(now); cutoff.setHours(18,0,0,0);
   const diff = cutoff - now;
   if(diff <= 0){
-    box.innerHTML = '<span>📅</span><span>Dépôt après 17h00 — votre appareil sera prêt <b>demain matin</b> dès 9h15.</span>';
+    box.innerHTML = '<span>📅</span><span>Dépôt après 18h00 — votre appareil sera prêt <b>demain matin</b> dès 9h15.</span>';
     return;
   }
   const h = Math.floor(diff/3600000);
@@ -2144,19 +2152,76 @@ function updateUrgency(){
 }
 setInterval(updateUrgency, 30000);
 
+// Devis wizard — canal de contact (WhatsApp / Email / Téléphone)
+var wzChannel = 'wa';
+function wzPickChannel(ch){
+  wzChannel = ch;
+  var map = {wa:'wzChWA', mail:'wzChMail', tel:'wzChTel'};
+  Object.keys(map).forEach(function(k){
+    var b = document.getElementById(map[k]);
+    if(!b) return;
+    if(k===ch){
+      if(k==='wa'){ b.style.background = '#25D366'; }
+      else if(k==='mail'){ b.style.background = '#e30613'; }
+      else { b.style.background = '#1d1d1f'; }
+      b.style.color = '#fff';
+      b.classList.remove('bg-bg2','text-ink','border','border-black/5');
+    } else {
+      b.style.background = '';
+      b.style.color = '';
+      b.classList.add('bg-bg2','text-ink','border','border-black/5');
+    }
+  });
+  var field = document.getElementById('wzContactField');
+  var btn = document.getElementById('wzSubmitBtn');
+  if(!field || !btn) return;
+  if(ch==='wa'){
+    field.type = 'tel';
+    field.placeholder = 'Téléphone / WhatsApp';
+    btn.innerHTML = 'Envoyer sur WhatsApp <span>›</span>';
+  } else if(ch==='mail'){
+    field.type = 'email';
+    field.placeholder = 'Votre email';
+    btn.innerHTML = 'Envoyer par email <span>›</span>';
+  } else {
+    field.type = 'tel';
+    field.placeholder = 'Votre numéro (rappel)';
+    btn.innerHTML = 'Demander à être rappelé <span>›</span>';
+  }
+}
+
 document.getElementById('wzForm').addEventListener('submit', e=>{
   e.preventDefault();
   const f = e.target;
-  const msg =
-    'Bonjour, je souhaite un devis :\n'+
+  const summary =
     '• Marque : '+(state.brand||'—')+'\n'+
     '• Modèle : '+(state.model||'—')+'\n'+
     '• Panne : '+(state.issue||'—')+'\n'+
     '• Prénom : '+f.nom.value+'\n'+
-    '• Téléphone : '+f.tel.value+'\n'+
-    (f.note.value ? '• Précision : '+f.note.value+'\n' : '')+
-    '(Envoyé depuis solution-phone.fr)';
-  window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg),'_blank');
+    (f.note.value ? '• Précision : '+f.note.value+'\n' : '');
+  if(wzChannel==='wa'){
+    const msg =
+      'Bonjour, je souhaite un devis :\n'+
+      summary+
+      '• Téléphone / WhatsApp : '+f.contact.value+'\n'+
+      '(Envoyé depuis solution-phone.fr)';
+    window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg),'_blank');
+  } else if(wzChannel==='mail'){
+    const subject = 'Demande de devis — '+(state.model||'iPhone')+(state.issue?' · '+state.issue:'');
+    const body =
+      'Bonjour,\n\nJe souhaite un devis pour :\n'+
+      summary+
+      '• Email de contact : '+f.contact.value+'\n\n'+
+      'Merci.\n(Envoyé depuis solution-phone.fr)';
+    window.location.href = 'mailto:contact@solution-phone.fr?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  } else {
+    const msg =
+      'Bonjour, merci de me rappeler pour un devis :\n'+
+      summary+
+      '• Numéro à rappeler : '+f.contact.value+'\n'+
+      '(Envoyé depuis solution-phone.fr)';
+    window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg),'_blank');
+  }
   gotoStep(5);
 });
 
