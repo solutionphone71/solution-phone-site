@@ -248,9 +248,6 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
         <div id="liveTicker" class="text-[11px] text-white/80 max-w-[260px] truncate hidden md:block">
           • iPhone 14 — écran en cours
         </div>
-        <button onclick="openWizard()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-ink text-[12px] font-bold hover:bg-accent hover:text-white transition shrink-0">
-          Réserver ›
-        </button>
       </div>
     </div>
 
@@ -479,50 +476,22 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
       </div>
     </button>
 
-    <!-- F — Prix + Devis rapide (allongée) -->
-    <div id="prix" data-tilt class="tile reveal md:col-span-4 p-8 min-h-[260px] flex flex-col justify-between relative overflow-hidden">
+    <!-- F — Prix transparents (allongée, sans formulaire) -->
+    <button id="prix" onclick="openWizard()" data-tilt class="tile reveal md:col-span-4 p-8 min-h-[260px] flex flex-col justify-between relative overflow-hidden text-left w-full">
       <div>
-        <p class="text-[12px] uppercase tracking-[0.22em] label">Prix transparents · Devis rapide</p>
+        <p class="text-[12px] uppercase tracking-[0.22em] label">Prix transparents</p>
         <h3 class="mt-3 text-3xl md:text-4xl font-extrabold tracking-tightest leading-[0.95]">
           Écran. Batterie.<br>À partir de <span class="text-accent">35&nbsp;€</span>.
         </h3>
-        <p class="mt-1 text-[11px] text-muted">Prix indicatif · Bonus QualiRépar déjà déduit</p>
+        <p class="mt-2 text-[13px] text-muted leading-snug">Bonus QualiRépar déduit · Diagnostic gratuit · Pas de surprise à la caisse</p>
         <div class="mt-4 flex flex-wrap gap-2 text-[11px]">
           <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-bg2 border border-black/5"><b>iPhone 13</b> écran 90 €</span>
           <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-bg2 border border-black/5"><b>iPhone 15</b> batterie 75 €</span>
           <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-bg2 border border-black/5"><b>Galaxy S23</b> écran 99 €</span>
         </div>
       </div>
-      <!-- Formulaire devis ultra-rapide -->
-      <form onsubmit="return quickDevis(event)" class="mt-5 flex flex-col sm:flex-row gap-2">
-        <input id="qdModel" type="text" placeholder="Votre modèle (ex: iPhone 13)" required
-               class="flex-1 px-4 py-3 rounded-full border border-black/10 bg-white text-[14px] focus:outline-none focus:ring-2 focus:ring-accent/40" />
-        <button type="submit" class="inline-flex items-center justify-center px-4 py-3 rounded-full bg-accent text-white font-bold text-[13px] hover:bg-accentDark transition whitespace-nowrap">
-          Voir mon prix ›
-        </button>
-      </form>
-      <div class="mt-3 flex items-center gap-2 flex-wrap">
-        <span class="text-[11px] text-muted">Ou un devis direct :</span>
-        <a id="qdWA" href="https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20un%20devis." target="_blank" rel="noopener"
-           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-semibold text-white transition hover:scale-105"
-           style="background:#25D366">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31c-.82-1.31-1.26-2.83-1.26-4.38 0-4.54 3.7-8.23 8.24-8.23s8.24 3.69 8.24 8.23c0 4.54-3.69 8.24-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.8-.23-.08-.39-.12-.56.12-.17.25-.64.8-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.4-.42-.56-.42-.14 0-.31-.02-.47-.02-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.23 3.74 1.48.64 2.06.69 2.8.58.45-.07 1.38-.56 1.57-1.11.2-.54.2-1 .14-1.11-.06-.1-.22-.17-.47-.29z"/></svg>
-          WhatsApp
-        </a>
-        <a id="qdMail" href="mailto:contact@solution-phone.fr?subject=Demande%20de%20devis&body=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20la%20r%C3%A9paration%20de%20mon%20t%C3%A9l%C3%A9phone."
-           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-semibold text-white transition hover:scale-105"
-           style="background:#1d1d1f">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          Email
-        </a>
-        <a href="tel:+33385330689"
-           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-semibold text-white transition hover:scale-105"
-           style="background:#0071e3">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.25 1.12.37 2.32.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1A17 17 0 0 1 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          Appeler
-        </a>
-      </div>
-    </div>
+      <span class="applelink text-[15px]">Voir le prix pour mon modèle <span class="chev">›</span></span>
+    </button>
 
     <!-- H — Diagnostic avec timer animé -->
     <a href="https://maps.google.com/?q=21+Rue+Gambetta+71000+M%C3%A2con" target="_blank" rel="noopener" data-tilt class="tile reveal md:col-span-2 p-8 min-h-[260px] flex flex-col justify-between text-left w-full relative overflow-hidden">
@@ -675,23 +644,6 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
         Autres petits soucis ? <a href="https://wa.me/33783921884" target="_blank" rel="noopener" class="text-accent font-semibold hover:underline">Posez-nous la question sur WhatsApp</a> — réponse sous 10 min.
       </div>
     </div>
-
-    <!-- J — WhatsApp (nouvelle tuile) -->
-    <a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20une%20r%C3%A9paration." target="_blank" rel="noopener" data-tilt class="tile reveal md:col-span-6 p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 relative overflow-hidden" style="background:linear-gradient(135deg,#25d366 0%,#128c7e 100%);color:#fff">
-      <div class="flex items-center gap-4 md:gap-5">
-        <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center shrink-0">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.5-.5.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5 0-.1-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5H7.7c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.5s1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1.1 3 .9 3.5.8.5 0 1.6-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.2-1.4c1.4.8 3 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
-        </div>
-        <div>
-          <p class="text-[11px] uppercase tracking-[0.22em] text-white/80">WhatsApp · Ligne directe</p>
-          <h3 class="mt-1 text-2xl md:text-3xl font-extrabold tracking-tightest leading-tight">Votre devis.<br class="md:hidden">Par message. En 10 minutes.</h3>
-        </div>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur text-[12px] font-semibold"><span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> En ligne</span>
-        <span class="font-bold text-lg">07 83 92 18 84 ›</span>
-      </div>
-    </a>
 
   </div>
 </section>
