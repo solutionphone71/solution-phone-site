@@ -747,38 +747,10 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
       </div>
     </div>
     <div class="reveal relative">
-      <div class="tile p-0 overflow-hidden aspect-[4/3] md:aspect-[5/4] relative bg-gradient-to-br from-black to-neutral-800">
-        <!-- Placeholder vidéo stylé atelier -->
-        <svg viewBox="0 0 400 320" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <radialGradient id="spot" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#e30613" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
-            <linearGradient id="deskG" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#1a1a1a"/><stop offset="1" stop-color="#0a0a0a"/></linearGradient>
-          </defs>
-          <rect width="400" height="320" fill="url(#deskG)"/>
-          <rect width="400" height="320" fill="url(#spot)"/>
-          <!-- tapis atelier -->
-          <rect x="40" y="180" width="320" height="120" rx="8" fill="#2a2a2a"/>
-          <!-- iPhone en cours de réparation -->
-          <rect x="140" y="100" width="120" height="180" rx="16" fill="#e5e5e7"/>
-          <rect x="148" y="108" width="104" height="164" rx="10" fill="#0b1220"/>
-          <!-- tournevis -->
-          <g transform="translate(280,140) rotate(25)">
-            <rect x="0" y="0" width="80" height="6" rx="3" fill="#c8c8cc"/>
-            <rect x="-30" y="-3" width="30" height="12" rx="4" fill="#e30613"/>
-          </g>
-          <!-- étincelles -->
-          <circle cx="200" cy="190" r="3" fill="#ffe082"/>
-          <circle cx="215" cy="180" r="2" fill="#ffe082"/>
-          <circle cx="185" cy="175" r="2" fill="#ffe082"/>
-        </svg>
-        <!-- Play button overlay -->
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div class="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center shadow-2xl hover:bg-white transition cursor-pointer" onclick="openWizard()">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#e30613"><path d="M8 5v14l11-7z"/></svg>
-          </div>
-        </div>
-        <div class="absolute bottom-4 left-4 text-white/90 text-sm font-medium">
-          <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Atelier Mâcon · 21 Rue Gambetta</span>
+      <div class="tile p-0 overflow-hidden aspect-[4/3] md:aspect-[5/4] relative">
+        <img src="img/atelier-solution-phone-outils.jpg" alt="Atelier Solution Phone Mâcon — tapis de réparation bleu avec outils professionnels et iPhone ouvert" class="w-full h-full object-cover" loading="lazy" width="1200" height="819">
+        <div class="absolute bottom-4 left-4 text-white text-sm font-medium drop-shadow-lg">
+          <span class="inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Atelier Mâcon · 21 Rue Gambetta</span>
         </div>
       </div>
       <div class="mt-4 grid grid-cols-3 gap-3 text-center">
