@@ -2528,6 +2528,13 @@ var Evan = (function(){
     } else if(v==='rdv'){
       bot('Parfait ! Contactez-nous pour confirmer :');
       cta('Bonjour, je souhaite prendre rendez-vous pour une réparation.');
+    } else if(v==='crisp'){
+      typing(); delay(function(){
+        rmTyping();
+        bot('Je vous mets en relation avec un technicien Solution Phone 🧑‍🔧<br><br>La fenêtre de chat va s\'ouvrir…');
+        delay(function(){ openCrispFromEvan(); }, 600);
+        delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 800);
+      }, 500);
     } else if(v==='menu'){
       iaMode=false; awaitModel=false; showFree(false);
       delay(function(){
@@ -2538,7 +2545,8 @@ var Evan = (function(){
           {l:'🎁 Accessoire', v:'acces'},
           {l:'💻 Informatique', v:'info'},
           {l:'💡 Services & Conseils', v:'services'},
-          {l:'🏆 QualiRépar', v:'quali'}
+          {l:'🏆 QualiRépar', v:'quali'},
+          {l:'💬 Parler à un technicien', v:'crisp'}
         ]);
       }, 250);
     }
@@ -2610,12 +2618,12 @@ var Evan = (function(){
       });
       var d = await r.json(); rmTyping();
       bot((d && d.content && d.content[0] && d.content[0].text) || 'Je suis là pour vous aider !');
-      delay(function(){ btns([{l:'❓ Autre question', v:'services'},{l:'🏠 Retour menu', v:'menu'}]); }, 300);
+      delay(function(){ btns([{l:'❓ Autre question', v:'services'},{l:'💬 Parler à un technicien', v:'crisp'},{l:'🏠 Retour menu', v:'menu'}]); }, 300);
     } catch(e){
       rmTyping();
-      bot('Je suis là pour vous aider ! Pour une réponse rapide contactez-nous directement :');
+      bot('Je n\'ai pas pu trouver la réponse… Voulez-vous parler directement à un technicien ?');
       cta('Bonjour, j\'ai une question : '+txt);
-      delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 300);
+      delay(function(){ btns([{l:'💬 Parler à un technicien', v:'crisp'},{l:'🏠 Retour menu', v:'menu'}]); }, 300);
     }
   }
 
@@ -2629,7 +2637,8 @@ var Evan = (function(){
         {l:'🎁 Accessoire', v:'acces'},
         {l:'💻 Informatique', v:'info'},
         {l:'💡 Services & Conseils', v:'services'},
-        {l:'🏆 C\'est quoi QualiRépar ?', v:'quali'}
+        {l:'🏆 C\'est quoi QualiRépar ?', v:'quali'},
+        {l:'💬 Parler à un technicien', v:'crisp'}
       ]);
     }, 1300);
   }
@@ -2790,7 +2799,18 @@ document.addEventListener('click', function(e) {
   else if (h.indexOf('g.page') > -1) gtag('event','click_google_review');
 });
 </script>
-<!-- Crisp Live Chat -->
-<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="309b806d-57cc-4a29-b347-2c78be66e79c";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+<!-- Crisp Live Chat (hidden widget — integrated into Evan chatbot) -->
+<script type="text/javascript">
+window.$crisp=[];window.CRISP_WEBSITE_ID="309b806d-57cc-4a29-b347-2c78be66e79c";
+(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+/* Hide default Crisp bubble — we open it from Evan */
+window.$crisp.push(["safe", true]);
+window.$crisp.push(["do", "chat:hide"]);
+window.$crisp.push(["on", "chat:closed", function(){ window.$crisp.push(["do", "chat:hide"]); }]);
+function openCrispFromEvan(){
+  window.$crisp.push(["do", "chat:show"]);
+  window.$crisp.push(["do", "chat:open"]);
+}
+</script>
 </body>
 </html>
