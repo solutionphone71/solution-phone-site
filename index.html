@@ -2204,8 +2204,15 @@ document.getElementById('wzForm').addEventListener('submit', e=>{
       '(Envoyé depuis solution-phone.fr)';
     window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg),'_blank');
   } else if(wzChannel==='mail'){
+    // Vérifier que l'email est renseigné et valide
+    var emailVal = (f.contact.value||'').trim();
+    if(!emailVal || emailVal.indexOf('@')===-1 || emailVal.indexOf('.')===-1){
+      alert('Merci de saisir votre adresse email pour qu\'on puisse vous répondre.');
+      f.contact.focus();
+      return;
+    }
     const subject = 'Demande de devis — '+(state.model||'iPhone')+(state.issue?' · '+state.issue:'');
-    const body = summary + '• Email de contact : '+f.contact.value;
+    const body = summary + '• Email de contact : '+emailVal;
     // Envoi direct par formulaire (pas de mailto:)
     var btn = f.querySelector('button[type=submit]');
     if(btn){ btn.disabled=true; btn.innerHTML='Envoi en cours…'; }
@@ -2215,7 +2222,8 @@ document.getElementById('wzForm').addEventListener('submit', e=>{
       body: JSON.stringify({
         _subject: subject,
         nom: f.nom.value,
-        email: f.contact.value,
+        email: emailVal,
+        _replyto: emailVal,
         marque: state.brand||'—',
         modele: state.model||'—',
         panne: state.issue||'—',
