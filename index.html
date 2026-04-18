@@ -1665,7 +1665,7 @@ setTimeout(()=>{ document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.cl
       setDot('red');
       labelEl.style.color = 'rgba(252,165,165,.9)';
       labelEl.innerHTML = 'Atelier fermé <span class="text-white/50 font-normal normal-case tracking-normal" id="liveClock">'+pad(now.getHours())+':'+pad(now.getMinutes())+'</span>';
-      statusEl.innerHTML = '<span class="text-red-300">'+nextOpening(now)+'</span> <span class="text-white/40">·</span> <a href="#" onclick="event.preventDefault(); openWizard()" class="text-white underline">Réservez un créneau</a>';
+      statusEl.innerHTML = '<span class="text-red-300">'+nextOpening(now)+'</span> <span class="text-white/40">·</span> <a href="#" onclick="event.preventDefault(); openWizard()" class="text-white underline">Devis immédiat 24/24</a>';
       return;
     }
 
