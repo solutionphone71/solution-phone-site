@@ -1119,13 +1119,17 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')spCloseMenu(
 </script>
 <!-- === FIN MENU MOBILE === -->
 
-<!-- Crisp Live Chat (hidden widget — opens from Evan on index) -->
+<!-- Bouton flottant Crisp + Live Chat -->
+<button id="crispFloatBtn" onclick="openCrispFloat()" style="position:fixed;bottom:20px;right:20px;z-index:9998;background:linear-gradient(135deg,#e30613,#b8050f);color:#fff;border:none;border-radius:50px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(227,6,19,.4);display:flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">💬 Besoin d'aide ?</button>
 <script type="text/javascript">
 window.$crisp=[];window.CRISP_WEBSITE_ID="309b806d-57cc-4a29-b347-2c78be66e79c";
 (function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
 window.$crisp.push(["safe", true]);
 window.$crisp.push(["do", "chat:hide"]);
 window.$crisp.push(["on", "chat:closed", function(){ window.$crisp.push(["do", "chat:hide"]); }]);
+window.$crisp.push(["on", "chat:opened", function(){ var b=document.getElementById('crispFloatBtn'); if(b) b.style.display='none'; }]);
+window.$crisp.push(["on", "chat:closed", function(){ var b=document.getElementById('crispFloatBtn'); if(b) b.style.display='flex'; }]);
+function openCrispFloat(){ window.$crisp.push(["do","chat:show"]); window.$crisp.push(["do","chat:open"]); }
 </script>
 </body>
 </html>
