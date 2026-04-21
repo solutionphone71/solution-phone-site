@@ -93,62 +93,46 @@
   .chip:hover{background:#ebebef}
   .chip.active{background:var(--accent);color:#fff}
 
-  /* ========== CAROUSEL ========== */
-  .carousel-wrap{margin-top:48px;position:relative}
-  .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:20px 20px 40px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .carousel::-webkit-scrollbar{display:none}
-  .carousel::before,.carousel::after{content:"";flex-shrink:0;width:calc(50vw - 160px);max-width:300px;min-width:0}
+  /* ========== PRODUCT GRID ========== */
+  .products-wrap{max-width:1280px;margin:40px auto 0;padding:0 20px}
+  .series-group{margin-bottom:36px}
+  .series-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+  .series-header h3{font-size:22px;font-weight:800;letter-spacing:-0.02em;margin:0;color:var(--ink)}
+  .series-header .series-count{background:var(--bg2);color:var(--muted);font-size:12px;font-weight:700;padding:4px 10px;border-radius:9999px}
+  .series-header .series-from{margin-left:auto;font-size:14px;color:var(--accent);font-weight:700}
 
-  .card{flex-shrink:0;width:300px;scroll-snap-align:center;background:var(--bg2);border-radius:24px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .3s ease,box-shadow .3s ease;position:relative;overflow:hidden}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media(max-width:1100px){.pgrid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:780px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.pgrid{grid-template-columns:1fr}}
+
+  .card{background:var(--bg2);border-radius:24px;padding:24px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .3s ease,box-shadow .3s ease;position:relative;overflow:hidden}
   .card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -12px rgba(0,0,0,.15)}
   .card.sold{opacity:.55}
   .card.sold::after{content:"VENDU";position:absolute;top:20px;right:-30px;background:#1d1d1f;color:#fff;font-size:11px;font-weight:800;letter-spacing:.2em;padding:4px 36px;transform:rotate(35deg)}
 
-  .card .grade-badge{position:absolute;top:18px;left:18px;background:#fff;color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.08em;padding:4px 10px;border-radius:9999px;border:1px solid rgba(0,0,0,.08)}
+  .card .grade-badge{position:absolute;top:14px;left:14px;background:#fff;color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.08em;padding:4px 10px;border-radius:9999px;border:1px solid rgba(0,0,0,.08)}
   .card .grade-badge.gA{color:#047857;border-color:#a7f3d0;background:#ecfdf5}
   .card .grade-badge.gB{color:#b45309;border-color:#fde68a;background:#fffbeb}
   .card .grade-badge.gC{color:#6b7280;border-color:#e5e7eb;background:#f9fafb}
 
-  .card .ph{width:180px;height:240px;display:flex;align-items:center;justify-content:center;margin:10px 0 16px}
-  .card .ph img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(0,0,0,.15))}
-  .card .ph .noimg{width:140px;height:220px;border-radius:28px;background:linear-gradient(160deg,#e8e8ed,#d4d4d9);display:flex;align-items:center;justify-content:center;font-size:42px;color:#b0b0b5;box-shadow:inset 0 0 0 4px rgba(0,0,0,.05)}
+  .card .ph{width:140px;height:190px;display:flex;align-items:center;justify-content:center;margin:6px 0 12px}
+  .card .ph img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 16px 24px rgba(0,0,0,.12))}
+  .card .ph .noimg{width:110px;height:170px;border-radius:24px;background:linear-gradient(160deg,#e8e8ed,#d4d4d9);display:flex;align-items:center;justify-content:center;font-size:36px;color:#b0b0b5;box-shadow:inset 0 0 0 4px rgba(0,0,0,.05)}
 
-  .card .model{font-size:22px;font-weight:800;letter-spacing:-0.02em;line-height:1.1}
-  .card .meta{margin-top:8px;color:var(--muted);font-size:13px;font-weight:500;line-height:1.4}
-  .card .color-dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:6px;border:1px solid rgba(0,0,0,.1)}
-  .card .price{margin-top:18px;font-size:28px;font-weight:900;letter-spacing:-0.03em;color:var(--accent)}
-  .card .price small{font-size:13px;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:2px}
-  .card .cta{margin-top:14px;display:inline-flex;align-items:center;gap:4px;background:var(--ink);color:#fff;font-weight:700;font-size:13px;padding:10px 18px;border-radius:9999px;transition:background .2s}
+  .card .model{font-size:18px;font-weight:800;letter-spacing:-0.02em;line-height:1.1}
+  .card .meta{margin-top:6px;color:var(--muted);font-size:12px;font-weight:500;line-height:1.4}
+  .card .color-dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:4px;border:1px solid rgba(0,0,0,.1)}
+  .card .price{margin-top:14px;font-size:26px;font-weight:900;letter-spacing:-0.03em;color:var(--accent)}
+  .card .price small{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0;margin-left:2px}
+  .card .cta{margin-top:12px;display:inline-flex;align-items:center;gap:4px;background:var(--ink);color:#fff;font-weight:700;font-size:12px;padding:9px 16px;border-radius:9999px;transition:background .2s;width:100%;justify-content:center}
   .card .cta:hover{background:#000}
 
-  /* carousel controls */
-  .nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 6px 20px -6px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;transition:all .2s;font-size:20px;color:var(--ink)}
-  .nav-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .nav-btn.prev{left:20px}
-  .nav-btn.next{right:20px}
-
-  /* Indicateurs de scroll mobile */
-  .scroll-hint{display:none}
-  .edge-fade{display:none}
-  @media (max-width:720px){
-    .nav-btn{display:none}
-    .carousel::before,.carousel::after{width:10vw}
-    /* Dégradé sur le bord droit qui indique "y a encore" */
-    .edge-fade{display:block;position:absolute;top:0;right:0;width:60px;height:100%;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.95) 100%);z-index:4;transition:opacity .3s}
-    .edge-fade.hidden{opacity:0}
-    /* Barre de contrôle bas : ← compteur → */
-    .scroll-hint{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:-18px;margin-bottom:14px;position:relative;z-index:5}
-    .scroll-hint .mb-btn{width:42px;height:42px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 4px 12px -4px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--ink);cursor:pointer;transition:all .15s}
-    .scroll-hint .mb-btn:active{transform:scale(.92);background:var(--ink);color:#fff}
-    .scroll-hint .mb-btn:disabled{opacity:.35;cursor:default}
-    .scroll-hint .mb-count{font-size:13px;font-weight:700;color:var(--muted);min-width:54px;text-align:center;font-variant-numeric:tabular-nums}
-    /* Hint animé "Faites glisser" qui disparaît au premier scroll */
-    .swipe-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(29,29,31,.92);color:#fff;padding:10px 18px;border-radius:9999px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;pointer-events:none;z-index:6;animation:swipePulse 1.6s ease-in-out infinite;backdrop-filter:blur(6px)}
-    .swipe-hint.hidden{display:none}
-    .swipe-hint .arr{display:inline-block;animation:swipeArr 1.6s ease-in-out infinite}
-    @keyframes swipePulse{0%,100%{opacity:.85}50%{opacity:1}}
-    @keyframes swipeArr{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
-  }
+  /* Tri / sort bar */
+  .sort-bar{max-width:1280px;margin:20px auto 0;padding:0 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .sort-bar label{font-size:13px;font-weight:600;color:var(--muted)}
+  .sort-bar select{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit}
+  .sort-bar .result-count{margin-left:auto;font-size:13px;color:var(--muted);font-weight:600}
 
   /* ========== STATS ========== */
   .stats{max-width:1280px;margin:40px auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -314,25 +298,27 @@ gtag("config", "G-3QP90K1TLM");
 <!-- SOUS-FILTRES DYNAMIQUES -->
 <div class="filters" id="filters"></div>
 
-<!-- CAROUSEL -->
-<div class="carousel-wrap">
-  <button class="nav-btn prev" onclick="scrollCarousel(-1)" aria-label="Précédent">‹</button>
-  <div class="edge-fade" id="edgeFade"></div>
-  <div class="swipe-hint" id="swipeHint"><span>Faites glisser</span><span class="arr">→</span></div>
-  <div class="carousel" id="carousel">
-    <!-- Skeleton loaders -->
-    <div class="card"><div class="ph"><div class="skeleton" style="width:140px;height:220px;border-radius:28px"></div></div><div class="skeleton" style="width:140px;height:22px;margin-top:10px"></div><div class="skeleton" style="width:80px;height:14px;margin-top:8px"></div><div class="skeleton" style="width:100px;height:28px;margin-top:16px"></div></div>
-    <div class="card"><div class="ph"><div class="skeleton" style="width:140px;height:220px;border-radius:28px"></div></div><div class="skeleton" style="width:140px;height:22px;margin-top:10px"></div><div class="skeleton" style="width:80px;height:14px;margin-top:8px"></div><div class="skeleton" style="width:100px;height:28px;margin-top:16px"></div></div>
-    <div class="card"><div class="ph"><div class="skeleton" style="width:140px;height:220px;border-radius:28px"></div></div><div class="skeleton" style="width:140px;height:22px;margin-top:10px"></div><div class="skeleton" style="width:80px;height:14px;margin-top:8px"></div><div class="skeleton" style="width:100px;height:28px;margin-top:16px"></div></div>
-  </div>
-  <button class="nav-btn next" onclick="scrollCarousel(1)" aria-label="Suivant">›</button>
+<!-- TRI -->
+<div class="sort-bar">
+  <label for="sortSelect">Trier par :</label>
+  <select id="sortSelect" onchange="currentSort=this.value;render()">
+    <option value="series">Référence (modèle)</option>
+    <option value="price_asc">Prix croissant</option>
+    <option value="price_desc">Prix décroissant</option>
+    <option value="grade">Meilleur état</option>
+  </select>
+  <span class="result-count" id="resultCount"></span>
 </div>
 
-<!-- Contrôles mobile : ← compteur → -->
-<div class="scroll-hint">
-  <button class="mb-btn" id="mbPrev" onclick="scrollCarousel(-1)" aria-label="Précédent">‹</button>
-  <div class="mb-count" id="mbCount">— / —</div>
-  <button class="mb-btn" id="mbNext" onclick="scrollCarousel(1)" aria-label="Suivant">›</button>
+<!-- GRILLE PRODUITS -->
+<div class="products-wrap" id="productsWrap">
+  <!-- Skeleton loaders -->
+  <div class="pgrid">
+    <div class="card"><div class="ph"><div class="skeleton" style="width:110px;height:170px;border-radius:24px"></div></div><div class="skeleton" style="width:120px;height:20px;margin-top:8px"></div><div class="skeleton" style="width:80px;height:26px;margin-top:12px"></div></div>
+    <div class="card"><div class="ph"><div class="skeleton" style="width:110px;height:170px;border-radius:24px"></div></div><div class="skeleton" style="width:120px;height:20px;margin-top:8px"></div><div class="skeleton" style="width:80px;height:26px;margin-top:12px"></div></div>
+    <div class="card"><div class="ph"><div class="skeleton" style="width:110px;height:170px;border-radius:24px"></div></div><div class="skeleton" style="width:120px;height:20px;margin-top:8px"></div><div class="skeleton" style="width:80px;height:26px;margin-top:12px"></div></div>
+    <div class="card"><div class="ph"><div class="skeleton" style="width:110px;height:170px;border-radius:24px"></div></div><div class="skeleton" style="width:120px;height:20px;margin-top:8px"></div><div class="skeleton" style="width:80px;height:26px;margin-top:12px"></div></div>
+  </div>
 </div>
 
 <!-- STATS -->
