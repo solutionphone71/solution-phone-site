@@ -355,36 +355,6 @@ gtag("config", "G-3QP90K1TLM");
   <style>@media(max-width:720px){section [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr!important}}</style>
 </section>
 
-<!-- COMPARAISON PRIX -->
-<section style="max-width:1280px;margin:50px auto;padding:0 20px">
-  <div style="background:linear-gradient(135deg,#1d1d1f,#2d2d31);border-radius:32px;padding:48px 32px;text-align:center;color:#fff">
-    <p style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin:0">Économies réelles</p>
-    <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin:12px 0 8px">Pourquoi payer le <span style="color:#ff6b6b;text-decoration:line-through">prix fort</span> ?</h2>
-    <p style="color:rgba(255,255,255,.6);max-width:560px;margin:0 auto 32px;line-height:1.5">Même smartphone, mêmes performances, garantie incluse. Seul le prix change.</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:800px;margin:0 auto">
-      <div style="background:rgba(255,255,255,.08);border-radius:20px;padding:24px 16px;border:1px solid rgba(255,255,255,.1)">
-        <div style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:8px">iPhone 13 128Go</div>
-        <div style="font-size:16px;color:#ff6b6b;text-decoration:line-through;margin-bottom:4px">699 € neuf</div>
-        <div style="font-size:32px;font-weight:900;color:#25D366">469 €</div>
-        <div style="font-size:13px;color:#25D366;font-weight:700;margin-top:4px">−230 € d'économie</div>
-      </div>
-      <div style="background:rgba(255,255,255,.08);border-radius:20px;padding:24px 16px;border:1px solid rgba(255,255,255,.1)">
-        <div style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:8px">iPhone 14 128Go</div>
-        <div style="font-size:16px;color:#ff6b6b;text-decoration:line-through;margin-bottom:4px">829 € neuf</div>
-        <div style="font-size:32px;font-weight:900;color:#25D366">549 €</div>
-        <div style="font-size:13px;color:#25D366;font-weight:700;margin-top:4px">−280 € d'économie</div>
-      </div>
-      <div style="background:rgba(255,255,255,.08);border-radius:20px;padding:24px 16px;border:1px solid rgba(255,255,255,.1)">
-        <div style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:8px">Galaxy S23 Ultra</div>
-        <div style="font-size:16px;color:#ff6b6b;text-decoration:line-through;margin-bottom:4px">1 419 € neuf</div>
-        <div style="font-size:32px;font-weight:900;color:#25D366">749 €</div>
-        <div style="font-size:13px;color:#25D366;font-weight:700;margin-top:4px">−670 € d'économie</div>
-      </div>
-    </div>
-    <style>@media(max-width:720px){section [style*="grid-template-columns:repeat(3,1fr)"][style*="max-width:800px"]{grid-template-columns:1fr!important}}</style>
-  </div>
-</section>
-
 <!-- AVIS CLIENTS -->
 <section style="max-width:1280px;margin:50px auto;padding:0 20px">
   <div style="text-align:center;margin-bottom:36px">
@@ -844,18 +814,25 @@ gtag("config", "G-3QP90K1TLM");
 
   function detectSeries(model){
     var m = model||'';
+    if(/iPhone 16/i.test(m)) return 'iPhone 16';
     if(/iPhone 15/i.test(m)) return 'iPhone 15';
     if(/iPhone 14/i.test(m)) return 'iPhone 14';
     if(/iPhone 13/i.test(m)) return 'iPhone 13';
     if(/iPhone 12/i.test(m)) return 'iPhone 12';
     if(/iPhone 11/i.test(m)) return 'iPhone 11';
     if(/iPhone SE/i.test(m)) return 'iPhone SE';
-    if(/iPhone X/i.test(m))  return 'iPhone X';
-    if(/S2[3-5]|Ultra/i.test(m)) return 'Galaxy S';
+    if(/iPhone\s?XR/i.test(m)) return 'iPhone XR';
+    if(/iPhone\s?XS/i.test(m)) return 'iPhone XS';
+    if(/iPhone\s?X/i.test(m)) return 'iPhone X';
+    if(/iPhone\s?8/i.test(m)) return 'iPhone 8';
+    if(/iPhone\s?7/i.test(m)) return 'iPhone 7';
+    if(/S2[0-5]|Ultra/i.test(m)) return 'Galaxy S';
     if(/A\d{2}/i.test(m))    return 'Galaxy A';
     if(/Z\s?(Fold|Flip)/i.test(m)) return 'Galaxy Z';
-    if(/Redmi/i.test(m))     return 'Redmi';
+    if(/Redmi|POCO/i.test(m))return 'Xiaomi';
     if(/Pixel/i.test(m))     return 'Pixel';
+    if(/Huawei|Honor/i.test(m)) return 'Huawei';
+    if(/Oppo|OnePlus/i.test(m)) return 'Oppo/OnePlus';
     return 'Autre';
   }
 
