@@ -2171,23 +2171,24 @@ function wzPickChannel(ch){
   });
   var field = document.getElementById('wzContactField');
   var btn = document.getElementById('wzSubmitBtn');
-  if(!field || !btn) return;
-  field.value = '';
+  /* Also update the simple form (wzSimpleForm) */
+  var sField = document.querySelector('#wzSimpleForm input[name="tel"]');
+  var sBtn = document.getElementById('wzSimpleSubmit');
   if(ch==='wa'){
-    field.type = 'tel';
-    field.placeholder = 'Téléphone / WhatsApp';
-    field.setAttribute('placeholder','Téléphone / WhatsApp');
-    btn.innerHTML = 'Discutez sur WhatsApp <span>›</span>';
+    if(field){ field.value=''; field.type='tel'; field.placeholder='Téléphone / WhatsApp'; field.setAttribute('placeholder','Téléphone / WhatsApp'); }
+    if(btn) btn.innerHTML = 'Discutez sur WhatsApp <span>›</span>';
+    if(sField){ sField.value=''; sField.type='tel'; sField.name='tel'; sField.placeholder='Téléphone / WhatsApp'; sField.setAttribute('placeholder','Téléphone / WhatsApp'); }
+    if(sBtn){ sBtn.innerHTML='Envoyer sur WhatsApp <span>›</span>'; sBtn.style.background='#25D366'; }
   } else if(ch==='mail'){
-    field.type = 'email';
-    field.placeholder = 'Votre adresse mail';
-    field.setAttribute('placeholder','Votre adresse mail');
-    btn.innerHTML = 'Envoyer par email <span>›</span>';
+    if(field){ field.value=''; field.type='email'; field.placeholder='Votre adresse mail'; field.setAttribute('placeholder','Votre adresse mail'); }
+    if(btn) btn.innerHTML = 'Envoyer par email <span>›</span>';
+    if(sField){ sField.value=''; sField.type='email'; sField.name='tel'; sField.placeholder='Votre adresse mail'; sField.setAttribute('placeholder','Votre adresse mail'); }
+    if(sBtn){ sBtn.innerHTML='Envoyer par email <span>›</span>'; sBtn.style.background='#e30613'; }
   } else {
-    field.type = 'tel';
-    field.placeholder = 'Votre numéro (rappel)';
-    field.setAttribute('placeholder','Votre numéro (rappel)');
-    btn.innerHTML = 'Soyez rappelé rapidement <span>›</span>';
+    if(field){ field.value=''; field.type='tel'; field.placeholder='Votre numéro (rappel)'; field.setAttribute('placeholder','Votre numéro (rappel)'); }
+    if(btn) btn.innerHTML = 'Soyez rappelé rapidement <span>›</span>';
+    if(sField){ sField.value=''; sField.type='tel'; sField.name='tel'; sField.placeholder='Votre numéro (rappel)'; sField.setAttribute('placeholder','Votre numéro (rappel)'); }
+    if(sBtn){ sBtn.innerHTML='Soyez rappelé <span>›</span>'; sBtn.style.background='#1d1d1f'; }
   }
 }
 
