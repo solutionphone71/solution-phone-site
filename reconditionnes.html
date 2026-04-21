@@ -645,6 +645,7 @@ gtag("config", "G-3QP90K1TLM");
   var allItems = [];
   var currentCat = 'iphone';        // iphone | samsung | autre | neuf
   var currentSeries = 'all';        // sous-filtre
+  var currentSort = 'series';       // series | price_asc | price_desc | grade
 
   // ====== FETCH ======
   function supaGet(table, query){
@@ -727,6 +728,17 @@ gtag("config", "G-3QP90K1TLM");
     });
   }
 
+  function gradeRank(g){ return g==='A+'?0 : g==='A'?1 : g==='B'?2 : g==='C'?3 : 4; }
+
+  function sortItems(items){
+    var sorted = items.slice();
+    if(currentSort==='price_asc') sorted.sort(function(a,b){ return a.price-b.price; });
+    else if(currentSort==='price_desc') sorted.sort(function(a,b){ return b.price-a.price; });
+    else if(currentSort==='grade') sorted.sort(function(a,b){ return gradeRank(a.grade)-gradeRank(b.grade); });
+    // 'series' = grouped by series (default)
+    return sorted;
+  }
+
   function render(){
     // Compteurs par catégorie
     document.getElementById('nIphone').textContent  = itemsInCat('iphone').length;
@@ -750,20 +762,39 @@ gtag("config", "G-3QP90K1TLM");
       ? catItems
       : catItems.filter(function(i){ return detectSeries(i.model) === currentSeries; });
 
-    var car = document.getElementById('carousel');
+    var wrap = document.getElementById('productsWrap');
+    document.getElementById('resultCount').textContent = filtered.length + ' produit' + (filtered.length>1?'s':'');
+
     if(!filtered.length){
-      car.innerHTML = '<div class="empty" style="width:100%"><h3>Aucun modèle dans cette catégorie pour le moment</h3><p>Passez-nous voir en boutique, on a souvent des arrivages.</p></div>';
+      wrap.innerHTML = '<div class="empty"><h3>Aucun modèle dans cette catégorie pour le moment</h3><p>Passez-nous voir en boutique, on a souvent des arrivages.</p></div>';
       return;
     }
-    car.innerHTML = filtered.map(cardHtml).join('');
-    // reset scroll to start
-    car.scrollLeft = 0;
-    // Réafficher le hint "Faites glisser" quand on change de catégorie
-    var sh = document.getElementById('swipeHint');
-    if(sh && filtered.length > 1) sh.classList.remove('hidden');
-    var ef = document.getElementById('edgeFade');
-    if(ef) ef.classList.remove('hidden');
-    setTimeout(updateScrollUI, 50);
+
+    if(currentSort==='series'){
+      // Group by series
+      var groups = {};
+      var order = [];
+      filtered.forEach(function(item){
+        var s = detectSeries(item.model);
+        if(!groups[s]){ groups[s] = []; order.push(s); }
+        groups[s].push(item);
+      });
+      // Sort each group by price ascending
+      order.forEach(function(s){ groups[s].sort(function(a,b){ return a.price-b.price; }); });
+      var html = '';
+      order.forEach(function(s){
+        var items = groups[s];
+        var minPrice = items.reduce(function(m,i){ return Math.min(m,i.price); }, Infinity);
+        html += '<div class="series-group">';
+        html += '<div class="series-header"><h3>'+escapeHtml(s)+'</h3><span class="series-count">'+items.length+' en stock</span><span class="series-from">à partir de '+minPrice+' €</span></div>';
+        html += '<div class="pgrid">'+items.map(cardHtml).join('')+'</div>';
+        html += '</div>';
+      });
+      wrap.innerHTML = html;
+    } else {
+      var sorted = sortItems(filtered);
+      wrap.innerHTML = '<div class="pgrid">'+sorted.map(cardHtml).join('')+'</div>';
+    }
   }
 
   function cardHtml(item){
@@ -841,69 +872,6 @@ gtag("config", "G-3QP90K1TLM");
       return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
     });
   }
-
-  // ====== CAROUSEL CONTROLS ======
-  function scrollCarousel(dir){
-    var car = document.getElementById('carousel');
-    car.scrollBy({ left: dir * 340, behavior: 'smooth' });
-    hideSwipeHint();
-  }
-
-  // keyboard nav
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'ArrowLeft') scrollCarousel(-1);
-    if(e.key === 'ArrowRight') scrollCarousel(1);
-  });
-
-  // Mise à jour du compteur "X / N", des boutons mobile et du fade
-  function updateScrollUI(){
-    var car = document.getElementById('carousel');
-    var cards = car.querySelectorAll('.card');
-    var total = cards.length;
-    if(!total){
-      document.getElementById('mbCount').textContent = '— / —';
-      document.getElementById('mbPrev').disabled = true;
-      document.getElementById('mbNext').disabled = true;
-      var sh = document.getElementById('swipeHint'); if(sh) sh.classList.add('hidden');
-      var ef = document.getElementById('edgeFade'); if(ef) ef.classList.add('hidden');
-      return;
-    }
-    // Carte la plus centrée à l'écran
-    var carRect = car.getBoundingClientRect();
-    var center = carRect.left + carRect.width / 2;
-    var bestIdx = 0, bestDist = Infinity;
-    for(var i=0; i<cards.length; i++){
-      var r = cards[i].getBoundingClientRect();
-      var d = Math.abs((r.left + r.width/2) - center);
-      if(d < bestDist){ bestDist = d; bestIdx = i; }
-    }
-    document.getElementById('mbCount').textContent = (bestIdx+1) + ' / ' + total;
-    document.getElementById('mbPrev').disabled = (car.scrollLeft <= 4);
-    document.getElementById('mbNext').disabled = (car.scrollLeft + car.clientWidth >= car.scrollWidth - 4);
-    // Cache le fade quand on est arrivé au bout à droite
-    var ef2 = document.getElementById('edgeFade');
-    if(ef2){
-      if(car.scrollLeft + car.clientWidth >= car.scrollWidth - 8) ef2.classList.add('hidden');
-      else ef2.classList.remove('hidden');
-    }
-  }
-
-  function hideSwipeHint(){
-    var sh = document.getElementById('swipeHint');
-    if(sh) sh.classList.add('hidden');
-  }
-
-  // Hook scroll listener (throttled)
-  (function(){
-    var car = document.getElementById('carousel');
-    if(!car) return;
-    var t = null;
-    car.addEventListener('scroll', function(){
-      hideSwipeHint();
-      if(t) cancelAnimationFrame(t);
-      t = requestAnimationFrame(updateScrollUI);
-    }, { passive: true });
-  })();
 
   // ====== INIT ======
   loadStock();
