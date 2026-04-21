@@ -1384,8 +1384,44 @@ gtag("config", "G-3QP90K1TLM");
       <span>✓ Sans engagement</span>
     </div>
 
+    <!-- STEP 0 : Que cherchez-vous ? -->
+    <div class="wz-step on" data-step="0">
+      <h2 class="text-3xl md:text-5xl font-extrabold tracking-tightest leading-[0.95]">Comment on vous aide ?</h2>
+      <p class="mt-2 text-muted">Choisissez et on s'occupe du reste.</p>
+      <div class="grid grid-cols-2 gap-3 md:gap-4 mt-8">
+        <button class="wz-card" onclick="gotoStep(1)" style="align-items:center;text-align:center">
+          <div style="font-size:36px;margin-bottom:4px">🔧</div>
+          <div class="text-lg font-extrabold tracking-tightest">Réparation</div>
+          <p class="text-[11px] text-muted">Écran, batterie, charge…<br><b style="color:#e30613">−25 € QualiRépar</b></p>
+        </button>
+        <button class="wz-card" onclick="window.location.href='reconditionnes.html'" style="align-items:center;text-align:center">
+          <div style="font-size:36px;margin-bottom:4px">📱</div>
+          <div class="text-lg font-extrabold tracking-tightest">Smartphone</div>
+          <p class="text-[11px] text-muted">iPhone & Android reconditionnés<br><b style="color:#e30613">Garantie 12 mois</b></p>
+        </button>
+        <button class="wz-card" onclick="window.location.href='accessoires.html'" style="align-items:center;text-align:center">
+          <div style="font-size:36px;margin-bottom:4px">🎁</div>
+          <div class="text-lg font-extrabold tracking-tightest">Accessoires</div>
+          <p class="text-[11px] text-muted">Coques, chargeurs, câbles…<br>En boutique & en ligne</p>
+        </button>
+        <button class="wz-card" onclick="wzShowInfo()" style="align-items:center;text-align:center">
+          <div style="font-size:36px;margin-bottom:4px">💻</div>
+          <div class="text-lg font-extrabold tracking-tightest">Informatique</div>
+          <p class="text-[11px] text-muted">PC, Mac, virus, données…<br>Diagnostic gratuit</p>
+        </button>
+      </div>
+      <!-- Info panel (hidden by default) -->
+      <div id="wzInfoPanel" style="display:none;margin-top:20px;background:var(--bg2);border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:24px;text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">💻</div>
+        <div class="text-lg font-extrabold">Dépannage informatique</div>
+        <p class="text-muted text-sm mt-2">Virus, PC lent, récupération de données, réinstallation Windows/Mac…</p>
+        <a href="tel:+33748348743" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:#1d1d1f;color:#fff;padding:14px 28px;border-radius:9999px;font-weight:700;font-size:15px">📞 07 48 34 87 43</a>
+        <p class="text-muted text-xs mt-3">Appelez-nous ou passez en boutique · 21 Rue Gambetta, Mâcon</p>
+      </div>
+    </div>
+
     <!-- STEP 1 : Marque -->
-    <div class="wz-step on" data-step="1">
+    <div class="wz-step" data-step="1">
       <h2 class="text-3xl md:text-5xl font-extrabold tracking-tightest leading-[0.95]">Quelle est la marque ?</h2>
       <p class="mt-2 text-muted">On commence par ça. Rien de plus.</p>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-8">
@@ -1927,7 +1963,7 @@ function openWizard(preset){
       }
     }
   } else {
-    gotoStep(1);
+    gotoStep(0);
   }
 }
 
@@ -1963,24 +1999,33 @@ function gotoStep(n){
   document.querySelectorAll('.wz-step').forEach(s=>s.classList.remove('on'));
   const el = document.querySelector('.wz-step[data-step="'+n+'"]');
   if(el) el.classList.add('on');
-  const pct = [0,25,50,75,100,100,75][n];
+  const pct = [0,0,25,50,75,100,100,75][n];
   document.getElementById('wzBar').style.width = pct+'%';
+  // Masquer progress bar + label sur step 0
+  var progressBar = document.querySelector('.wz-progress');
+  if(progressBar) progressBar.style.display = (n === 0) ? 'none' : '';
   var lbl;
-  if(n === 6) lbl = 'Devis rapide';
+  if(n === 0) lbl = '';
+  else if(n === 6) lbl = 'Devis rapide';
   else if(n === 5) lbl = 'Terminé';
   else lbl = 'Étape '+n+'/4';
   document.getElementById('wzStepLabel').textContent = lbl;
   document.querySelector('.wz-dialog').scrollTop = 0;
   // affiche/masque le bouton Retour selon l'étape
   var back = document.getElementById('wzBackBtn');
-  if(back){ back.style.display = (n>1 && n!==5) ? '' : 'none'; }
+  if(back){ back.style.display = (n >= 1 && n !== 5) ? '' : 'none'; }
   window.wzCurrentStep = n;
 }
 
 function wzBack(){
-  var n = window.wzCurrentStep || 1;
-  if(n>1) gotoStep(n-1);
+  var n = window.wzCurrentStep || 0;
+  if(n === 1) gotoStep(0);
+  else if(n > 1) gotoStep(n-1);
   else closeWizard();
+}
+function wzShowInfo(){
+  var p = document.getElementById('wzInfoPanel');
+  if(p) p.style.display = p.style.display === 'none' ? '' : 'none';
 }
 
 document.querySelectorAll('.wz-step[data-step="1"] .wz-card').forEach(btn=>{
