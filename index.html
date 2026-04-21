@@ -1532,7 +1532,7 @@ gtag("config", "G-3QP90K1TLM");
 
       <form id="wzSimpleForm" class="mt-5 grid md:grid-cols-2 gap-3">
         <input name="prenom" required placeholder="Prénom" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
-        <input name="tel" required type="tel" placeholder="Téléphone / WhatsApp" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
+        <input name="tel" id="wzSimpleContact" required type="tel" placeholder="Téléphone / WhatsApp" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
         <input name="marque" id="wzSimpleMarque" required placeholder="Marque (ex: Samsung, Xiaomi...)" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
         <input name="modele" required placeholder="Modèle (ex: Galaxy S23, Redmi Note 12)" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
         <textarea name="panne" required rows="2" placeholder="Quelle panne ? (ex: écran cassé, ne charge plus, batterie faible...)" class="md:col-span-2 bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40 resize-none"></textarea>
@@ -2172,7 +2172,7 @@ function wzPickChannel(ch){
   var field = document.getElementById('wzContactField');
   var btn = document.getElementById('wzSubmitBtn');
   /* Also update the simple form (wzSimpleForm) */
-  var sField = document.querySelector('#wzSimpleForm input[name="tel"]');
+  var sField = document.getElementById('wzSimpleContact');
   var sBtn = document.getElementById('wzSimpleSubmit');
   if(ch==='wa'){
     if(field){ field.value=''; field.type='tel'; field.placeholder='Téléphone / WhatsApp'; field.setAttribute('placeholder','Téléphone / WhatsApp'); }
