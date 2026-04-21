@@ -646,6 +646,8 @@ gtag("config", "G-3QP90K1TLM");
     var model = (p.modele || '').trim();
     var brand = 'autre';
     if(/iphone/i.test(model)) brand = 'iphone';
+    // Detect short iPhone names: "14 Pro", "15 Pro Max", "SE", "XR", "13 mini", etc.
+    else if(/^(1[0-6]|SE|XR|XS|X\b|[7-9]\b)\s*(Pro|Plus|Max|mini)?/i.test(model)) brand = 'iphone';
     else if(/samsung|galaxy/i.test(model)) brand = 'samsung';
     var s = p.stockage;
     var storage = '';
@@ -814,25 +816,33 @@ gtag("config", "G-3QP90K1TLM");
 
   function detectSeries(model){
     var m = model||'';
-    if(/iPhone 16/i.test(m)) return 'iPhone 16';
-    if(/iPhone 15/i.test(m)) return 'iPhone 15';
-    if(/iPhone 14/i.test(m)) return 'iPhone 14';
-    if(/iPhone 13/i.test(m)) return 'iPhone 13';
-    if(/iPhone 12/i.test(m)) return 'iPhone 12';
-    if(/iPhone 11/i.test(m)) return 'iPhone 11';
-    if(/iPhone SE/i.test(m)) return 'iPhone SE';
-    if(/iPhone\s?XR/i.test(m)) return 'iPhone XR';
-    if(/iPhone\s?XS/i.test(m)) return 'iPhone XS';
-    if(/iPhone\s?X/i.test(m)) return 'iPhone X';
-    if(/iPhone\s?8/i.test(m)) return 'iPhone 8';
-    if(/iPhone\s?7/i.test(m)) return 'iPhone 7';
-    if(/S2[0-5]|Ultra/i.test(m)) return 'Galaxy S';
-    if(/A\d{2}/i.test(m))    return 'Galaxy A';
-    if(/Z\s?(Fold|Flip)/i.test(m)) return 'Galaxy Z';
-    if(/Redmi|POCO/i.test(m))return 'Xiaomi';
-    if(/Pixel/i.test(m))     return 'Pixel';
+    // iPhone — with or without "iPhone" prefix (e.g. "14 Pro Max", "iPhone 14 Pro Max")
+    if(/iPhone\s*16|^16\s*(Pro|Plus|mini)/i.test(m)) return 'iPhone 16';
+    if(/iPhone\s*15|^15\s*(Pro|Plus|mini)/i.test(m)) return 'iPhone 15';
+    if(/iPhone\s*14|^14\s*(Pro|Plus|mini)/i.test(m)) return 'iPhone 14';
+    if(/iPhone\s*13|^13\s*(Pro|Max|mini)/i.test(m)) return 'iPhone 13';
+    if(/iPhone\s*12|^12\s*(Pro|Max|mini)/i.test(m)) return 'iPhone 12';
+    if(/iPhone\s*11|^11\s*(Pro|Max)/i.test(m)) return 'iPhone 11';
+    if(/iPhone\s*SE|^SE\b/i.test(m)) return 'iPhone SE';
+    if(/iPhone\s*XR|^XR\b/i.test(m)) return 'iPhone XR';
+    if(/iPhone\s*XS|^XS\b/i.test(m)) return 'iPhone XS';
+    if(/iPhone\s*X\b|^X\b/i.test(m)) return 'iPhone X';
+    if(/iPhone\s*8|^8\s*(Plus)?$/i.test(m)) return 'iPhone 8';
+    if(/iPhone\s*7|^7\s*(Plus)?$/i.test(m)) return 'iPhone 7';
+    if(/iPhone/i.test(m)) return 'iPhone';
+    // Samsung
+    if(/Galaxy\s*S2[0-5]|S2[0-5]|Ultra/i.test(m)) return 'Galaxy S';
+    if(/Galaxy\s*A|A\d{2}/i.test(m)) return 'Galaxy A';
+    if(/Galaxy\s*Z|Z\s*(Fold|Flip)/i.test(m)) return 'Galaxy Z';
+    if(/Samsung|Galaxy/i.test(m)) return 'Samsung';
+    // Autres marques
+    if(/Redmi|POCO|Xiaomi/i.test(m)) return 'Xiaomi';
+    if(/Pixel/i.test(m)) return 'Pixel';
     if(/Huawei|Honor/i.test(m)) return 'Huawei';
     if(/Oppo|OnePlus/i.test(m)) return 'Oppo/OnePlus';
+    if(/Motorola|Moto/i.test(m)) return 'Motorola';
+    if(/Sony|Xperia/i.test(m)) return 'Sony';
+    if(/Nothing/i.test(m)) return 'Nothing';
     return 'Autre';
   }
 
