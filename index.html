@@ -2002,16 +2002,19 @@ function wzSwitchTab(mode){
   var wa = document.getElementById('wzTabWA');
   var ml = document.getElementById('wzTabMail');
   var btn = document.getElementById('wzSimpleSubmit');
+  var contact = document.getElementById('wzSimpleContact');
   if(mode === 'wa'){
     wa.style.background = '#25D366'; wa.style.color = '#fff';
     ml.style.background = ''; ml.style.color = '';
     btn.textContent = 'Envoyer sur WhatsApp ›';
     btn.style.background = '#25D366';
+    if(contact){ contact.type='tel'; contact.value=''; contact.placeholder='Téléphone / WhatsApp'; contact.setAttribute('placeholder','Téléphone / WhatsApp'); }
   } else {
     ml.style.background = '#0071e3'; ml.style.color = '#fff';
     wa.style.background = ''; wa.style.color = '';
     btn.textContent = 'Envoyer par email ›';
     btn.style.background = '#0071e3';
+    if(contact){ contact.type='email'; contact.value=''; contact.placeholder='Votre adresse mail'; contact.setAttribute('placeholder','Votre adresse mail'); }
   }
 }
 
