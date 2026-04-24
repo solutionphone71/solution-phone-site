@@ -19,3 +19,6 @@ node_modules/
 dist/
 .env
 .env.local
+
+# Documents internes Cowork (non publics, hors site)
+docs-cowork/
