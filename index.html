@@ -947,7 +947,7 @@ RÈGLES DE RÉPONSE :
 - Pas de markdown, pas de listes, pas de **, pas de titres.
 - Sois naturel : "Ah oui", "Pas de souci", "Bonne question", "Je t'explique"…
 - Propose TOUJOURS une action concrète : venir en boutique, envoyer un WhatsApp (07 83 92 18 84), appeler (03 85 33 06 89), ou visiter une page du site.
-- Si tu ne sais pas ou si la question est trop complexe, ne bloque JAMAIS. Dis "Le plus simple c'est qu'on en parle directement" et oriente vers : WhatsApp, téléphone, mail contact@solution-phone.fr, ou le tchat Crisp en bas à droite du site.
+- Si tu ne sais pas ou si la question est trop complexe, ne bloque JAMAIS. Dis "Le plus simple c'est qu'on en parle directement" et oriente vers : WhatsApp, téléphone, ou mail contact@solution-phone.fr.
 - Tu es là pour AIDER, pas pour refuser. Trouve toujours une porte de sortie positive.`;
 
 const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
@@ -1081,7 +1081,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
     }
     else if (action === 'brand_samsung' || action === 'brand_other') {
       setRepairState(s => ({...s, step:'contact', brand:'other'}));
-      botSay("Pour Samsung, Xiaomi et autres marques, envoie-moi une photo du téléphone sur WhatsApp — je te réponds avec le prix exact en 5 min !", {
+      botSay("Pour Samsung, Xiaomi et autres marques, dis-moi le modèle et la panne sur WhatsApp — je te réponds avec le prix exact en 5 min !", {
         cta: {
           primary: { label:'📲 WhatsApp · devis en 5 min', href:'https://wa.me/33783921884?text=Bonjour%20Evan%2C%20devis%20pour%20mon%20téléphone%20(je%20viens%20du%20site)', style:'wa' },
           secondary: [
@@ -1108,9 +1108,9 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
       const panne = PANNES_SCAN.find(p => p.id === panneId);
       const phone = repairState.phone;
       if (panneId === 'autre' || !panne) {
-        botSay("Pas de souci ! Envoie-moi une photo sur WhatsApp, je te fais un devis en 5 min.", {
+        botSay(`Pas de souci ! Dis-moi ce qui ne va pas sur WhatsApp${phone ? ' avec ton ' + phone.name : ''}, je te fais un devis en 5 min.`, {
           cta: {
-            primary: { label:`📲 WhatsApp · devis ${phone ? phone.name : ''}`, href:`https://wa.me/33783921884?text=${encodeURIComponent('Bonjour Evan, devis pour mon '+( phone ? phone.name : 'téléphone') + ' (autre panne)')}`, style:'wa' },
+            primary: { label:`📲 WhatsApp · devis ${phone ? phone.name : ''}`, href:`https://wa.me/33783921884?text=${encodeURIComponent('Bonjour Evan, devis pour mon '+( phone ? phone.name : 'téléphone') + ' (panne : )')}`, style:'wa' },
             secondary: [
               { label:'📞 Appeler', href:'tel:+33385330689' },
             ],
@@ -1122,9 +1122,9 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
         addMsg({ type:'scanner', phone, panne });
       } else {
         /* connecteur, caméra → WhatsApp avec urgence */
-        botSay(`${panne.label} sur ${phone.name} — le prix dépend de l'état exact. Envoie-moi une photo, je te fais un devis gratuit en 5 min !`, {
+        botSay(`${panne.label} sur ${phone.name} — je te fais un devis gratuit en 5 min !`, {
           cta: {
-            primary: { label:`📲 WhatsApp · devis ${panne.label} ${phone.name}`, href:`https://wa.me/33783921884?text=${encodeURIComponent('Bonjour Evan, devis ' + panne.label + ' ' + phone.name + ' SVP')}`, style:'wa' },
+            primary: { label:`📲 WhatsApp · devis ${panne.label} ${phone.name}`, href:`https://wa.me/33783921884?text=${encodeURIComponent('Bonjour Evan, devis ' + panne.label + ' ' + phone.name + ' SVP (je viens du site)')}`, style:'wa' },
             secondary: [
               { label:'📞 Appeler', href:'tel:+33385330689' },
             ],
@@ -1527,7 +1527,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
       botSay("Ça dépend du modèle et de la panne ! Lance le diagnostic, c'est gratuit et ça prend 30 secondes :", {
         tiles: [
           { icon:'🔧', title:'Lancer le diagnostic', sub:'Prix en 1 min · gratuit', action:'repair', featured: true },
-          { icon:'📲', title:'Envoyer photo WhatsApp', sub:'Devis en 5 min', action:'wa_devis' },
+          { icon:'📲', title:'Demander un devis WhatsApp', sub:'Réponse en 5 min', action:'wa_devis' },
         ],
       });
     } else {
@@ -2591,10 +2591,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
   </div>
 </footer>
 
-<!-- Crisp Live Chat -->
-<script type="text/javascript">
-window.$crisp=[];window.CRISP_WEBSITE_ID="309b806d-57cc-4a29-b347-2c78be66e79c";
-(function(){var d=document;var s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
-</script>
 </body>
 </html>
