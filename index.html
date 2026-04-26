@@ -570,7 +570,7 @@ details > summary::-webkit-details-marker { display:none; }
     </nav>
     <div class="flex items-center gap-2 ml-auto leading-none shrink-0">
       <a href="tel:+33385330689" class="hidden xl:inline text-white/95 hover:text-white font-medium whitespace-nowrap text-[12px]">03&nbsp;85&nbsp;33&nbsp;06&nbsp;89</a>
-      <a href="#devis" class="inline-flex items-center gap-1 bg-ink text-white font-bold rounded-full hover:bg-black transition whitespace-nowrap" style="padding:.4rem .9rem;font-size:.75rem">Devis ›</a>
+      <a href="#" onclick="event.preventDefault();window.dispatchEvent(new CustomEvent('open-wizard'))" class="inline-flex items-center gap-1 bg-ink text-white font-bold rounded-full hover:bg-black transition whitespace-nowrap" style="padding:.4rem .9rem;font-size:.75rem">Devis ›</a>
     </div>
   </div>
 </header>
@@ -2006,6 +2006,11 @@ function QualiReparBlock() {
   const [wzModel, setWzModel] = useState('');
   const [wzPanne, setWzPanne] = useState(null);
   const [wzNom, setWzNom] = useState('');
+  const [wzEmail, setWzEmail] = useState('');
+  const [wzTel, setWzTel] = useState('');
+  const [wzEmailMode, setWzEmailMode] = useState(false);
+  const [wzSending, setWzSending] = useState(false);
+  const [wzSent, setWzSent] = useState(false);
   const allBrands = ['iPhone','Samsung','Xiaomi','Google Pixel','Honor','Huawei','OnePlus','iPad'];
 
   const pourquoiArgs = [
@@ -2045,12 +2050,48 @@ function QualiReparBlock() {
     {id:'autre',label:'Autre problème',icon:'❓',bonus:false},
   ];
 
-  const openWiz = (e) => { e.stopPropagation(); setWzStep(0); setWzBrand(null); setWzModel(''); setWzPanne(null); setWzNom(''); setShowWizard(true); };
+  const openWiz = (e) => { if(e) e.stopPropagation(); setWzStep(0); setWzBrand(null); setWzModel(''); setWzPanne(null); setWzNom(''); setWzEmail(''); setWzTel(''); setWzEmailMode(false); setWzSending(false); setWzSent(false); setShowWizard(true); };
+  /* Écouter l'événement depuis la navbar HTML */
+  useEffect(() => {
+    const handler = () => openWiz(null);
+    window.addEventListener('open-wizard', handler);
+    return () => window.removeEventListener('open-wizard', handler);
+  }, []);
   const sendWzWA = () => {
     const b = wzBrands.find(x=>x.id===wzBrand);
     const p = wzPannes.find(x=>x.id===wzPanne);
     const msg = `Bonjour, devis SVP :\n• ${b?.label||''} ${wzModel}\n• Panne : ${p?.label||''}\n• ${wzNom}`;
     window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg),'_blank');
+  };
+  const sendWzEmail = async () => {
+    if (!wzEmail) return;
+    const b = wzBrands.find(x=>x.id===wzBrand);
+    const p = wzPannes.find(x=>x.id===wzPanne);
+    setWzSending(true);
+    try {
+      const r = await fetch('https://formsubmit.co/ajax/contact@solution-phone.fr', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify({
+          _subject: `Devis ${b?.label||''} ${wzModel}`,
+          nom: wzNom || 'Client site web',
+          email: wzEmail,
+          telephone: wzTel,
+          marque: b?.label || '',
+          modele: wzModel,
+          panne: p?.label || '',
+          message: `Demande de devis :\n• ${b?.label||''} ${wzModel}\n• Panne : ${p?.label||''}\n• Prénom : ${wzNom}\n• Email : ${wzEmail}\n• Tél : ${wzTel}\n(Envoyé depuis solution-phone.fr)`,
+          _template: 'table'
+        })
+      });
+      const d = await r.json();
+      setWzSending(false);
+      if (d.success) setWzSent(true);
+      else alert('Erreur. Essayez WhatsApp ou appelez le 03 85 33 06 89.');
+    } catch(e) {
+      setWzSending(false);
+      alert('Erreur réseau. Essayez WhatsApp ou appelez le 03 85 33 06 89.');
+    }
   };
 
   /* Modèles par marque — Apple depuis PHONES (Supabase), autres en texte libre */
@@ -2120,11 +2161,32 @@ function QualiReparBlock() {
               <span>⏱️</span><span>Réparation en <strong>30 min à 1h</strong> · Garantie 6 mois · Diagnostic gratuit</span>
             </div>
             <input value={wzNom} onChange={e=>setWzNom(e.target.value)} placeholder="Votre prénom" className="w-full mt-4 bg-[var(--sp-bg-2)] border border-black/5 rounded-2xl px-4 py-3 focus:outline-none focus:border-[var(--sp-red)]/40"/>
-            <button onClick={sendWzWA} className="btn-wa w-full mt-3 justify-center text-[15px]"><WaIcon/> Envoyer sur WhatsApp</button>
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              <a href="tel:+33385330689" className="btn-red text-center text-[13px] justify-center"><PhoneIcon/> Appeler</a>
-              <a href="mailto:contact@solution-phone.fr" className="btn-ghost text-center text-[13px] justify-center"><MailIcon/> Email</a>
-            </div>
+
+            {!wzEmailMode && !wzSent && (<>
+              <button onClick={sendWzWA} className="btn-wa w-full mt-3 justify-center text-[15px]"><WaIcon/> Envoyer sur WhatsApp</button>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                <a href="tel:+33385330689" className="btn-red text-center text-[13px] justify-center"><PhoneIcon/> Appeler</a>
+                <button onClick={()=>setWzEmailMode(true)} className="btn-ghost text-center text-[13px] justify-center"><MailIcon/> Email</button>
+              </div>
+            </>)}
+
+            {wzEmailMode && !wzSent && (<>
+              <input value={wzEmail} onChange={e=>setWzEmail(e.target.value)} placeholder="Votre adresse email" type="email" className="w-full mt-3 bg-[var(--sp-bg-2)] border border-black/5 rounded-2xl px-4 py-3 focus:outline-none focus:border-[var(--sp-red)]/40"/>
+              <input value={wzTel} onChange={e=>setWzTel(e.target.value)} placeholder="Téléphone (optionnel)" type="tel" className="w-full mt-2 bg-[var(--sp-bg-2)] border border-black/5 rounded-2xl px-4 py-3 focus:outline-none focus:border-[var(--sp-red)]/40"/>
+              <button onClick={sendWzEmail} disabled={!wzEmail || wzSending} className="w-full mt-3 py-3 rounded-2xl font-bold text-[15px] text-white transition" style={{background: wzEmail ? 'var(--sp-red)' : '#ccc'}}>
+                {wzSending ? 'Envoi en cours…' : '✉️ Envoyer ma demande de devis'}
+              </button>
+              <button onClick={()=>setWzEmailMode(false)} className="mt-2 text-sm font-semibold text-[var(--sp-muted)]">← Retour</button>
+            </>)}
+
+            {wzSent && (
+              <div className="mt-4 p-4 rounded-2xl text-center" style={{background:'#f0fdf4', border:'1px solid #bbf7d0'}}>
+                <div className="text-2xl mb-1">✅</div>
+                <div className="font-bold text-[#166534]">Demande envoyée !</div>
+                <div className="text-sm text-[#166534]/70 mt-1">On vous répond très vite par email.</div>
+              </div>
+            )}
+
             <button onClick={()=>setWzStep(2)} className="mt-3 text-sm font-semibold text-[var(--sp-muted)]">‹ Modifier</button>
           </>)}
         </div>
