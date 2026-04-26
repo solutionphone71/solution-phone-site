@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Solution Accessoires | Coques, Chargeurs, Smartphones Reconditionnés — Mâcon</title>
+<link rel="icon" type="image/png" href="../img/logo.png">
+<link rel="apple-touch-icon" href="../img/logo.png">
+<link rel="canonical" href="https://www.solution-accessoires.fr/">
+<meta name="description" content="Accessoires smartphone et téléphones reconditionnés à Mâcon. Coques, chargeurs, protections écran. +5000 références. Garantie 12 mois. Depuis 2014 — Solution Accessoires by Solution Phone.">
+<meta name="keywords" content="accessoires smartphone Mâcon, coque iPhone Mâcon, iPhone reconditionné Mâcon, chargeur, verre trempé, Solution Accessoires">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Solution Accessoires — Coques, Chargeurs, Reconditionnés à Mâcon">
+<meta property="og:description" content="+5000 accessoires et smartphones reconditionnés garantis. Depuis 2014 à Mâcon.">
+<meta property="og:url" content="https://www.solution-accessoires.fr/">
+<meta property="og:image" content="https://www.solution-phone.fr/img/logo.png">
+<meta property="og:locale" content="fr_FR">
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Solution Accessoires by Solution Phone",
+  "description": "Accessoires smartphone et téléphones reconditionnés à Mâcon. +5000 références, garantie 12 mois.",
+  "url": "https://www.solution-accessoires.fr",
+  "telephone": "+33385330689",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "21 Rue Gambetta",
+    "addressLocality": "Mâcon",
+    "postalCode": "71000",
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 46.3066,
+    "longitude": 4.8337
+  },
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "10:00", "closes": "12:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "14:00", "closes": "19:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "18:00"}
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "reviewCount": "550"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ========== DESIGN TOKENS ========== */
+:root {
+  --bg: #ffffff;
+  --bg2: #f5f5f7;
+  --bg3: #fafafa;
+  --ink: #1d1d1f;
+  --muted: #86868b;
+  --accent: #e30613;
+  --accentDark: #b8050f;
+  --accentSoft: rgba(227,6,19,.06);
+  --line: rgba(0,0,0,.06);
+  --radius: 20px;
+  --radius-lg: 32px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.04);
+  --shadow-md: 0 8px 30px -12px rgba(0,0,0,.12);
+  --shadow-lg: 0 24px 60px -20px rgba(0,0,0,.18);
+}
+
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+img { display: block; max-width: 100%; }
+
+/* ========== UTILITY ========== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.muted { color: var(--muted); }
+.accent { color: var(--accent); }
+.tracking-tight { letter-spacing: -0.03em; }
+.tracking-tighter { letter-spacing: -0.045em; }
+
+/* ========== NAV ========== */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  height: 52px; display: flex; align-items: center; gap: 32px;
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.nav-brand img { width: 32px; height: 32px; border-radius: 8px; }
+.nav-brand span { font-weight: 800; font-size: 14px; letter-spacing: -0.02em; }
+.nav-brand small { font-weight: 500; font-size: 10px; color: var(--muted); display: block; line-height: 1; margin-top: 1px; }
+.nav-links {
+  display: flex; align-items: center; gap: 28px; flex: 1; justify-content: center;
+  font-size: 13px; font-weight: 500; color: var(--muted);
+}
+.nav-links a { transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-links a.active { font-weight: 700; }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent); color: #fff; font-weight: 700;
+  padding: 8px 18px; border-radius: 980px; font-size: 13px;
+  transition: all .2s; white-space: nowrap;
+}
+.nav-cta:hover { background: var(--accentDark); transform: translateY(-1px); }
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-brand small { display: none; }
+}
+
+/* ========== HERO ========== */
+.hero {
+  padding: 100px 24px 80px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 900px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(227,6,19,.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg2); border: 1px solid var(--line);
+  padding: 6px 16px; border-radius: 980px;
+  font-size: 12px; font-weight: 600; color: var(--muted);
+}
+.hero-badge .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #34c759; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+.hero h1 {
+  margin-top: 24px;
+  font-size: clamp(42px, 7vw, 80px);
+  font-weight: 900; letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+.hero .sub {
+  margin: 20px auto 0; max-width: 560px;
+  font-size: 18px; color: var(--muted); line-height: 1.55;
+}
+.hero-actions {
+  margin-top: 36px; display: flex; gap: 12px;
+  justify-content: center; flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: #fff;
+  font-weight: 700; font-size: 15px;
+  padding: 14px 28px; border-radius: 980px;
+  box-shadow: 0 8px 24px -8px rgba(227,6,19,.4);
+  transition: all .25s;
+}
+.btn-primary:hover { background: var(--accentDark); transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(227,6,19,.5); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg2); color: var(--ink);
+  font-weight: 600; font-size: 15px;
+  padding: 14px 28px; border-radius: 980px;
+  border: 1px solid var(--line); transition: all .25s;
+}
+.btn-secondary:hover { background: #ececee; transform: translateY(-2px); }
+
+/* ========== TRUST BAR ========== */
+.trust-bar {
+  margin-top: 48px; display: flex; justify-content: center;
+  gap: 24px; flex-wrap: wrap; font-size: 13px; color: var(--muted);
+}
+.trust-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; background: var(--bg2);
+  border-radius: 980px; font-weight: 500;
+}
+.trust-item b { color: var(--ink); }
+.trust-item .stars { color: #f59e0b; }
+
+/* ========== CATEGORIES ========== */
+.categories { padding: 80px 0; }
+.section-label {
+  font-size: 12px; text-transform: uppercase;
+  letter-spacing: 0.15em; font-weight: 700;
+  color: var(--accent); text-align: center;
+}
+.section-title {
+  margin-top: 12px; text-align: center;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+}
+.section-sub {
+  margin: 16px auto 0; text-align: center;
+  max-width: 520px; font-size: 16px; color: var(--muted); line-height: 1.55;
+}
+.cat-grid {
+  margin-top: 48px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+@media (min-width: 768px) { .cat-grid { grid-template-columns: repeat(4, 1fr); } }
+.cat-card {
+  position: relative; background: var(--bg2);
+  border-radius: var(--radius-lg); padding: 40px 24px 32px;
+  text-align: center; overflow: hidden;
+  transition: all .35s cubic-bezier(.2,.8,.2,1);
+  border: 1px solid transparent;
+}
+.cat-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(227,6,19,.15);
+  box-shadow: var(--shadow-lg);
+}
+.cat-card::after {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accentDark));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s cubic-bezier(.2,.8,.2,1);
+}
+.cat-card:hover::after { transform: scaleX(1); }
+.cat-icon {
+  width: 64px; height: 64px; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; border-radius: 18px;
+  background: #fff; box-shadow: var(--shadow-sm);
+}
+.cat-card h3 { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+.cat-card p { margin-top: 6px; font-size: 13px; color: var(--muted); line-height: 1.4; }
+.cat-arrow {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 14px; font-size: 13px; font-weight: 700;
+  color: var(--accent); transition: gap .3s;
+}
+.cat-card:hover .cat-arrow { gap: 8px; }
+
+/* ========== FEATURES (Bento) ========== */
+.features { padding: 80px 0; }
+.bento {
+  margin-top: 48px;
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+}
+.bento-card {
+  background: var(--bg2); border-radius: var(--radius-lg);
+  padding: 36px 28px; position: relative; overflow: hidden;
+  border: 1px solid var(--line);
+  transition: all .35s cubic-bezier(.2,.8,.2,1);
+}
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(0,0,0,.1);
+}
+.bento-card.span-4 { grid-column: span 4; }
+.bento-card.span-3 { grid-column: span 3; }
+.bento-card.span-2 { grid-column: span 2; }
+.bento-card.dark {
+  background: var(--ink); color: #fff; border-color: transparent;
+}
+.bento-card.dark .muted { color: rgba(255,255,255,.55); }
+.bento-card.red {
+  background: linear-gradient(135deg, #e30613 0%, #b8050f 100%);
+  color: #fff; border-color: transparent;
+}
+.bento-card.red .muted { color: rgba(255,255,255,.7); }
+.bento-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 20px;
+}
+.bento-card .bento-icon { background: rgba(0,0,0,.04); }
+.bento-card.dark .bento-icon { background: rgba(255,255,255,.1); }
+.bento-card.red .bento-icon { background: rgba(255,255,255,.2); }
+.bento-card h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+.bento-card p { margin-top: 8px; font-size: 14px; line-height: 1.5; }
+.bento-stat { font-size: 48px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .bento-card.span-4, .bento-card.span-3 { grid-column: span 2; }
+}
+@media (max-width: 520px) {
+  .bento { grid-template-columns: 1fr; }
+  .bento-card.span-4, .bento-card.span-3, .bento-card.span-2 { grid-column: span 1; }
+}
+
+/* ========== PRODUCTS PREVIEW ========== */
+.products-preview { padding: 80px 0; }
+.pp-grid {
+  margin-top: 48px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+@media (max-width: 900px) { .pp-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .pp-grid { grid-template-columns: 1fr; } }
+.pp-card {
+  background: var(--bg2); border-radius: var(--radius); padding: 24px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; transition: all .3s;
+  border: 1px solid transparent; position: relative;
+}
+.pp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(0,0,0,.08);
+}
+.pp-badge {
+  position: absolute; top: 14px; left: 14px;
+  background: #ecfdf5; color: #047857;
+  font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 980px;
+  letter-spacing: 0.02em;
+}
+.pp-img {
+  width: 120px; height: 160px; display: flex;
+  align-items: center; justify-content: center; margin: 8px 0 16px;
+}
+.pp-img .placeholder {
+  width: 90px; height: 150px; border-radius: 20px;
+  background: linear-gradient(160deg, #e8e8ed, #d4d4d9);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; color: #b0b0b5;
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,.04);
+}
+.pp-model { font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+.pp-meta { margin-top: 4px; font-size: 12px; color: var(--muted); }
+.pp-price {
+  margin-top: 12px; font-size: 24px; font-weight: 900;
+  letter-spacing: -0.03em; color: var(--accent);
+}
+.pp-price small { font-size: 12px; font-weight: 500; color: var(--muted); }
+.pp-cta {
+  margin-top: 14px; width: 100%;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  background: var(--ink); color: #fff;
+  font-weight: 700; font-size: 13px;
+  padding: 10px 16px; border-radius: 980px;
+  transition: background .2s;
+}
+.pp-cta:hover { background: #000; }
+.pp-skeleton {
+  background: linear-gradient(90deg, #f0f0f3 0%, #e5e5ea 50%, #f0f0f3 100%);
+  background-size: 200% 100%; animation: shimmer 1.4s infinite;
+  border-radius: 16px; min-height: 320px;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ========== TESTIMONIALS ========== */
+.testimonials { padding: 80px 0; background: var(--bg2); }
+.testi-grid {
+  margin-top: 48px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+@media (max-width: 768px) { .testi-grid { grid-template-columns: 1fr; } }
+.testi-card {
+  background: #fff; border-radius: var(--radius);
+  padding: 28px; border: 1px solid var(--line);
+}
+.testi-stars { color: #f59e0b; font-size: 14px; letter-spacing: 2px; }
+.testi-text { margin-top: 12px; font-size: 15px; line-height: 1.6; color: #3a3a3c; }
+.testi-author { margin-top: 16px; font-size: 13px; }
+.testi-author b { color: var(--ink); }
+.testi-author span { color: var(--muted); }
+
+/* ========== CTA SECTION ========== */
+.cta-section { padding: 80px 0; }
+.cta-box {
+  background: var(--ink); color: #fff;
+  border-radius: var(--radius-lg); padding: 64px 40px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-box::before {
+  content: ""; position: absolute; top: -100px; right: -100px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(227,6,19,.25), transparent 70%);
+  pointer-events: none;
+}
+.cta-box h2 {
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+  position: relative;
+}
+.cta-box p {
+  margin: 16px auto 0; max-width: 480px;
+  color: rgba(255,255,255,.6); font-size: 16px; line-height: 1.55;
+  position: relative;
+}
+.cta-buttons {
+  margin-top: 32px; display: flex; gap: 12px;
+  justify-content: center; flex-wrap: wrap; position: relative;
+}
+.cta-btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: #fff;
+  font-weight: 700; font-size: 15px;
+  padding: 14px 28px; border-radius: 980px;
+  transition: all .25s;
+}
+.cta-btn-primary:hover { background: var(--accentDark); transform: translateY(-2px); }
+.cta-btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.1); color: #fff;
+  font-weight: 600; font-size: 15px;
+  padding: 14px 28px; border-radius: 980px;
+  border: 1px solid rgba(255,255,255,.15);
+  transition: all .25s;
+}
+.cta-btn-secondary:hover { background: rgba(255,255,255,.18); }
+
+/* ========== FOOTER ========== */
+.footer {
+  padding: 48px 24px 32px;
+  border-top: 1px solid var(--line);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+}
+@media (max-width: 768px) { .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; } }
+@media (max-width: 480px) { .footer-inner { grid-template-columns: 1fr; } }
+.footer-brand { }
+.footer-brand img { width: 36px; height: 36px; border-radius: 8px; }
+.footer-brand p { margin-top: 12px; font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 280px; }
+.footer-col h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: var(--muted); margin-bottom: 14px; }
+.footer-col a { display: block; font-size: 14px; color: var(--ink); padding: 4px 0; transition: color .2s; }
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom {
+  max-width: 1200px; margin: 32px auto 0; padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--muted); flex-wrap: wrap; gap: 12px;
+}
+
+/* ========== SCROLL REVEAL ========== */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ========== FLOATING BUTTONS ========== */
+.float-wa {
+  display: none; position: fixed; bottom: 20px; right: 20px; z-index: 999;
+  background: #25D366; color: #fff; border-radius: 980px;
+  padding: 12px 20px; font-size: 13px; font-weight: 700;
+  box-shadow: 0 4px 20px -4px rgba(37,211,102,.5);
+  align-items: center; gap: 8px; transition: transform .2s;
+}
+.float-wa:hover { transform: translateY(-2px); }
+@media (max-width: 768px) { .float-wa { display: flex; } }
+</style>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3QP90K1TLM"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", "G-3QP90K1TLM");
+</script>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="../img/logo.png" alt="Solution Accessoires">
+      <div>
+        <span>Solution Accessoires</span>
+        <small>by Solution Phone</small>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Accueil</a>
+      <a href="accessoires.html">Accessoires</a>
+      <a href="reconditionnes.html">Reconditionnés</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Nous contacter <span>›</span></a>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="container">
+    <div class="reveal">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Boutique ouverte · Depuis 2014 à Mâcon
+      </div>
+    </div>
+    <h1 class="reveal tracking-tighter">
+      Vos accessoires.<br>
+      Vos smartphones.<br>
+      <span class="accent">Notre expertise.</span>
+    </h1>
+    <p class="reveal sub">
+      +5000 accessoires en stock et smartphones reconditionnés garantis 12 mois.
+      La confiance de Mâcon depuis 12 ans.
+    </p>
+    <div class="reveal hero-actions">
+      <a href="accessoires.html" class="btn-primary">Voir les accessoires <span>›</span></a>
+      <a href="reconditionnes.html" class="btn-secondary">Smartphones reconditionnés <span>›</span></a>
+    </div>
+    <div class="reveal trust-bar">
+      <span class="trust-item"><span class="stars">★★★★★</span> <b>4,7/5</b> · 550+ avis</span>
+      <span class="trust-item">🇫🇷 <b>Depuis 2014</b> à Mâcon</span>
+      <span class="trust-item">🛡️ Garantie <b>12 mois</b></span>
+      <span class="trust-item">📍 21 Rue Gambetta</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CATEGORIES ==================== -->
+<section class="categories">
+  <div class="container">
+    <p class="reveal section-label">Nos univers</p>
+    <h2 class="reveal section-title tracking-tight">Tout pour votre smartphone</h2>
+    <p class="reveal section-sub">Équipez, protégez, renouvelez — en boutique ou en ligne.</p>
+    <div class="cat-grid">
+      <a href="accessoires.html#coques" class="cat-card reveal">
+        <div class="cat-icon">🛡️</div>
+        <h3>Coques & Protection</h3>
+        <p>iPhone, Samsung, Xiaomi… Des centaines de modèles en stock.</p>
+        <span class="cat-arrow">Découvrir <span>›</span></span>
+      </a>
+      <a href="accessoires.html#chargeurs" class="cat-card reveal">
+        <div class="cat-icon">⚡</div>
+        <h3>Chargeurs & Câbles</h3>
+        <p>Lightning, USB-C, sans fil. Charge rapide certifiée.</p>
+        <span class="cat-arrow">Découvrir <span>›</span></span>
+      </a>
+      <a href="accessoires.html#audio" class="cat-card reveal">
+        <div class="cat-icon">🎧</div>
+        <h3>Audio & Écouteurs</h3>
+        <p>Écouteurs Bluetooth, enceintes portables, adaptateurs.</p>
+        <span class="cat-arrow">Découvrir <span>›</span></span>
+      </a>
+      <a href="reconditionnes.html" class="cat-card reveal">
+        <div class="cat-icon">📱</div>
+        <h3>Reconditionnés</h3>
+        <p>iPhone & Samsung testés 40 points. Garantie 12 mois.</p>
+        <span class="cat-arrow">Voir le stock <span>›</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BENTO FEATURES ==================== -->
+<section class="features">
+  <div class="container">
+    <p class="reveal section-label">Pourquoi nous</p>
+    <h2 class="reveal section-title tracking-tight">La confiance, <span class="accent">depuis 2014</span></h2>
+    <div class="bento">
+
+      <div class="bento-card span-4 reveal">
+        <div class="bento-icon">🏪</div>
+        <h3>Une vraie boutique.<br>De vrais techniciens.</h3>
+        <p class="muted">Pas un vendeur en ligne anonyme. On est au 21 Rue Gambetta à Mâcon depuis 2014. Vous pouvez venir, toucher, essayer. Et si il y a un souci, on est là.</p>
+      </div>
+      <div class="bento-card span-2 dark reveal">
+        <div class="bento-icon">⭐</div>
+        <div class="bento-stat">4,7<span style="font-size:24px;color:rgba(255,255,255,.4)">/5</span></div>
+        <p class="muted" style="margin-top:8px">550+ avis Google vérifiés</p>
+      </div>
+
+      <div class="bento-card span-2 red reveal">
+        <div class="bento-icon">🛡️</div>
+        <h3>Garantie 12 mois</h3>
+        <p class="muted">Tous nos smartphones reconditionnés sont garantis. Un problème ? On échange ou on rembourse.</p>
+      </div>
+      <div class="bento-card span-2 reveal">
+        <div class="bento-icon">🔬</div>
+        <h3>40 points de contrôle</h3>
+        <p class="muted">Chaque reconditionné passe un test complet : écran, batterie, capteurs, étanchéité, réseau…</p>
+      </div>
+      <div class="bento-card span-2 reveal">
+        <div class="bento-icon">🇫🇷</div>
+        <div class="bento-stat">12 <span style="font-size:20px;font-weight:600;letter-spacing:0">ans</span></div>
+        <p class="muted" style="margin-top:8px">D'expertise à Mâcon · Depuis 2014</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== RECONDITIONNÉS PREVIEW ==================== -->
+<section class="products-preview" id="recond">
+  <div class="container">
+    <p class="reveal section-label">En stock maintenant</p>
+    <h2 class="reveal section-title tracking-tight">Smartphones reconditionnés</h2>
+    <p class="reveal section-sub">Stock en temps réel. Testé, garanti, prêt à partir.</p>
+    <div class="pp-grid" id="ppGrid">
+      <div class="pp-skeleton"></div>
+      <div class="pp-skeleton"></div>
+      <div class="pp-skeleton"></div>
+      <div class="pp-skeleton"></div>
+    </div>
+    <div style="text-align:center;margin-top:32px" class="reveal">
+      <a href="reconditionnes.html" class="btn-primary">Voir tout le stock <span>›</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section class="testimonials">
+  <div class="container">
+    <p class="reveal section-label">Avis clients</p>
+    <h2 class="reveal section-title tracking-tight">Ils nous font confiance</h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Super boutique ! J'ai acheté un iPhone 13 reconditionné, il est comme neuf. L'équipe est vraiment sympa et de bon conseil."</p>
+        <div class="testi-author"><b>Marie L.</b> <span>· Google</span></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Large choix de coques et accessoires. Prix corrects et service rapide. Je recommande à 100% !"</p>
+        <div class="testi-author"><b>Thomas R.</b> <span>· Google</span></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Fidèle depuis des années. À chaque changement de téléphone, je viens ici pour ma coque et mon verre trempé. Jamais déçu."</p>
+        <div class="testi-author"><b>Sophie M.</b> <span>· Google</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Passez en boutique.<br>Ou contactez-nous.</h2>
+      <p>21 Rue Gambetta, Mâcon. Du mardi au samedi. Conseil gratuit, sans engagement.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="cta-btn-primary">Nous contacter <span>›</span></a>
+        <a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20des%20informations." target="_blank" class="cta-btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.616l4.574-1.453A11.949 11.949 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.312-.727-5.994-1.96l-.42-.312-3.084.98.998-3.008-.338-.444A9.958 9.958 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          WhatsApp
+        </a>
+        <a href="tel:+33385330689" class="cta-btn-secondary">📞 03 85 33 06 89</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="../img/logo.png" alt="Solution Accessoires">
+      <p><b>Solution Accessoires</b> by Solution Phone. Votre boutique d'accessoires et smartphones reconditionnés à Mâcon depuis 2014.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <a href="accessoires.html">Accessoires</a>
+      <a href="reconditionnes.html">Reconditionnés</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Infos</h4>
+      <a href="https://www.solution-phone.fr" target="_blank">Solution Phone</a>
+      <a href="https://www.solution-phone.fr/faq.html" target="_blank">FAQ</a>
+      <a href="https://www.solution-phone.fr/cgv.html" target="_blank">CGV</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:+33385330689">03 85 33 06 89</a>
+      <a href="https://wa.me/33783921884" target="_blank">WhatsApp</a>
+      <a href="mailto:contact@solution-phone.fr">Email</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2014–2026 Solution Accessoires by Solution Phone. Tous droits réservés.</span>
+    <span>21 Rue Gambetta, 71000 Mâcon</span>
+  </div>
+</footer>
+
+<!-- ==================== FLOATING WHATSAPP ==================== -->
+<a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20vos%20accessoires." target="_blank" class="float-wa">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.616l4.574-1.453A11.949 11.949 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.312-.727-5.994-1.96l-.42-.312-3.084.98.998-3.008-.338-.444A9.958 9.958 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+  WhatsApp
+</a>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Load 4 recent reconditionnés from Supabase
+(async function(){
+  const SUPA = 'https://kdvxcnjfrmvlnrymfyug.supabase.co';
+  const KEY  = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+  try {
+    const res = await fetch(SUPA + '/rest/v1/phones?select=*&status=eq.en vente&order=created_at.desc&limit=4', {
+      headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
+    });
+    const data = await res.json();
+    const grid = document.getElementById('ppGrid');
+    if(!data.length){ grid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:40px">Aucun smartphone en stock pour le moment.</p>'; return; }
+
+    var gradeMap = { 'A': ['Grade A', 'gA'], 'B': ['Grade B', 'gB'], 'C': ['Grade C', 'gC'] };
+
+    grid.innerHTML = data.map(function(p){
+      var model = p.modele || p.model || 'Smartphone';
+      // Detect if short name (no brand prefix)
+      if(/^(1[0-6]|SE|XR|XS|X\b|[7-9]\b)/i.test(model)) model = 'iPhone ' + model;
+      var grade = (p.grade || 'B').charAt(0).toUpperCase();
+      var gi = gradeMap[grade] || ['Grade ' + grade, ''];
+      var price = p.prix || p.price || '—';
+      var color = p.couleur || p.color || '';
+      var storage = p.stockage || p.storage || '';
+      var img = p.image || p.photo || '';
+
+      var imgHtml = img
+        ? '<img src="' + img + '" alt="' + model + '" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 12px 20px rgba(0,0,0,.1))">'
+        : '<div class="placeholder">📱</div>';
+
+      return '<div class="pp-card">'
+        + '<div class="pp-badge ' + gi[1] + '">' + gi[0] + '</div>'
+        + '<div class="pp-img">' + imgHtml + '</div>'
+        + '<div class="pp-model">' + model + '</div>'
+        + '<div class="pp-meta">' + [storage, color].filter(Boolean).join(' · ') + '</div>'
+        + '<div class="pp-price">' + price + ' €<small> TTC</small></div>'
+        + '<a href="https://wa.me/33783921884?text=' + encodeURIComponent('Bonjour, je suis intéressé par le ' + model + ' à ' + price + '€.') + '" target="_blank" class="pp-cta">Je le veux <span>›</span></a>'
+        + '</div>';
+    }).join('');
+  } catch(e) {
+    document.getElementById('ppGrid').innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:40px">Chargement en cours…</p>';
+  }
+})();
+</script>
+
+</body>
+</html>

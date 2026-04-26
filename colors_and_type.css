@@ -1,0 +1,219 @@
+/* ============================================================
+   SOLUTION PHONE — Colors & Type tokens
+   Extracted from solution-phone-site (index.html, reconditionnes.html,
+   accessoires.html, hydrogel.html, actualites.html).
+   "Apple-like" light UI with a signature Solution-Phone red accent.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+:root {
+  color-scheme: light;
+
+  /* ---------------- BRAND ---------------- */
+  --sp-red:        #e30613;   /* accent principal — rouge Solution Phone */
+  --sp-red-dark:   #b8050f;   /* hover / gradient tail */
+  --sp-red-soft:   #fff5f5;   /* wash pastel pour cartes douces */
+  --sp-red-tint-08:rgba(227,6,19,.08);
+  --sp-red-tint-15:rgba(227,6,19,.15);
+  --sp-red-tint-25:rgba(227,6,19,.25);
+  --sp-red-tint-45:rgba(227,6,19,.45);
+
+  /* ---------------- NEUTRALS (Apple-like) ---------------- */
+  --sp-bg:         #ffffff;   /* page background */
+  --sp-bg-2:       #f5f5f7;   /* cards / chips / subtle sections */
+  --sp-bg-3:       #eaeaec;   /* hover on bg-2 */
+  --sp-ink:        #1d1d1f;   /* primary text */
+  --sp-ink-2:      #515154;   /* secondary text */
+  --sp-muted:      #6e6e73;   /* muted / captions */
+  --sp-line:       rgba(0,0,0,.06);     /* hairlines */
+  --sp-line-2:     rgba(0,0,0,.08);     /* stronger hairlines */
+  --sp-line-hover: rgba(0,0,0,.12);
+
+  /* ---------------- SEMANTIC / UTILITY ---------------- */
+  --sp-apple-blue: #0071e3;   /* "applelink" secondary CTA color */
+  --sp-apple-blue-hover: #0077ed;
+  --sp-wa-green:   #25D366;   /* WhatsApp brand */
+  --sp-wa-green-dark: #128C7E;
+  --sp-qr-blue:    #00A7E1;   /* QualiRépar official blue */
+  --sp-star:       #f5b100;   /* Google review stars */
+  --sp-success:    #10b981;   /* "● Ouvert" dot */
+  --sp-success-bg: #ecfdf5;
+  --sp-success-bd: #a7f3d0;
+  --sp-warn:       #d97706;
+  --sp-android:    #3DDC84;
+
+  /* Grade badges (reconditionné) */
+  --sp-grade-a-bg: #ecfdf5; --sp-grade-a-fg: #047857; --sp-grade-a-bd:#a7f3d0;
+  --sp-grade-b-bg: #fffbeb; --sp-grade-b-fg: #b45309; --sp-grade-b-bd:#fde68a;
+  --sp-grade-c-bg: #f9fafb; --sp-grade-c-fg: #6b7280; --sp-grade-c-bd:#e5e7eb;
+
+  /* French flag (QualiRépar label ribbon) */
+  --sp-fr-blue: #0055A4;
+  --sp-fr-red:  #EF4135;
+
+  /* Cyberpunk team modal (special, used in team overlay only) */
+  --sp-cp-bg:      #050014;
+  --sp-cp-pink:    #ff0080;
+  --sp-cp-cyan:    #00e0ff;
+  --sp-cp-purple:  #a855f7;
+  --sp-cp-green:   #22c55e;
+
+  /* ---------------- TYPE FAMILIES ---------------- */
+  --sp-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  --sp-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---------------- TYPE SCALE (letter-spacing tight, Apple-style) ---------------- */
+  --sp-track-tightest: -0.04em;   /* display / h1-h2 */
+  --sp-track-tight:    -0.03em;   /* h3 / big numbers */
+  --sp-track-body:     -0.01em;   /* body */
+  --sp-track-label:    0.22em;    /* eyebrow labels UPPERCASE */
+  --sp-track-caps:     0.18em;    /* buttons caps */
+
+  /* ---------------- RADII ---------------- */
+  --sp-r-xs: 8px;     /* pills inside cards, nav-logo backdrop */
+  --sp-r-sm: 12px;    /* chips inside cards, small icon squares */
+  --sp-r-md: 16px;    /* inputs */
+  --sp-r-lg: 20px;    /* secondary cards */
+  --sp-r-xl: 24px;    /* wizard cards, review cards */
+  --sp-r-2xl:32px;    /* main "tile" cards — the signature radius */
+  --sp-r-pill: 9999px;
+
+  /* ---------------- SHADOWS & ELEVATION ---------------- */
+  --sp-shadow-tile:     0 1px 2px rgba(0,0,0,.03), 0 12px 30px -18px rgba(0,0,0,.12);
+  --sp-shadow-tile-hv:  0 4px 12px rgba(0,0,0,.04), 0 30px 60px -25px rgba(0,0,0,.18);
+  --sp-shadow-btn-red:  0 8px 24px -8px rgba(227,6,19,.45);
+  --sp-shadow-btn-wa:   0 12px 32px -8px rgba(37,211,102,.55);
+  --sp-shadow-nav:      0 2px 12px -4px rgba(227,6,19,.35);
+  --sp-shadow-lift:     0 20px 40px -12px rgba(0,0,0,.15);
+
+  /* ---------------- GRADIENTS ---------------- */
+  --sp-grad-red:    linear-gradient(90deg, #e30613 0%, #b8050f 100%);    /* header */
+  --sp-grad-red-45: linear-gradient(135deg,#e30613 0%,#b8050f 100%);     /* CTA / accent tile */
+  --sp-grad-soft:   linear-gradient(160deg,#fff 0%,#fff5f5 100%);        /* tile-soft */
+  --sp-grad-wa:     linear-gradient(135deg,#25D366,#128C7E);
+  --sp-aurora:
+    radial-gradient(900px 500px at 15% 0%, rgba(227,6,19,.10), transparent 60%),
+    radial-gradient(800px 500px at 90% 10%, rgba(227,6,19,.06), transparent 60%);
+
+  /* ---------------- TRANSITIONS ---------------- */
+  --sp-ease: cubic-bezier(.2,.8,.2,1);
+  --sp-dur-fast: .2s;
+  --sp-dur: .3s;
+  --sp-dur-slow: .6s;
+}
+
+/* ============================================================
+   SEMANTIC TYPE CLASSES
+   ============================================================ */
+
+.sp-body {
+  font-family: var(--sp-font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--sp-ink);
+  letter-spacing: var(--sp-track-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display — used for hero titles only (clamp 44px → 96px) */
+.sp-display {
+  font-family: var(--sp-font-sans);
+  font-weight: 800;
+  font-size: clamp(44px, 7vw, 96px);
+  line-height: 0.95;
+  letter-spacing: var(--sp-track-tightest);
+  color: var(--sp-ink);
+}
+
+.sp-h1 {
+  font-family: var(--sp-font-sans);
+  font-weight: 800;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 0.95;
+  letter-spacing: var(--sp-track-tightest);
+}
+
+.sp-h2 {
+  font-family: var(--sp-font-sans);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: var(--sp-track-tight);
+}
+
+.sp-h3 {
+  font-family: var(--sp-font-sans);
+  font-weight: 800;
+  font-size: clamp(22px, 2.4vw, 28px);
+  line-height: 1.1;
+  letter-spacing: var(--sp-track-tight);
+}
+
+.sp-h4 {
+  font-family: var(--sp-font-sans);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Eyebrow label — the signature "UPPERCASE · TIGHT TRACKING 0.22em" caption */
+.sp-eyebrow {
+  font-family: var(--sp-font-sans);
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: var(--sp-track-label);
+  color: var(--sp-muted);
+}
+
+.sp-p {
+  font-family: var(--sp-font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--sp-ink);
+}
+
+.sp-muted {
+  color: var(--sp-muted);
+}
+
+.sp-caption {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--sp-muted);
+}
+
+.sp-mono {
+  font-family: var(--sp-font-mono);
+  letter-spacing: 0;
+}
+
+.sp-num {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--sp-track-tight);
+}
+
+/* Price tag — big red number */
+.sp-price {
+  font-family: var(--sp-font-sans);
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--sp-red);
+  letter-spacing: var(--sp-track-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+.sp-price-sub {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sp-muted);
+  letter-spacing: 0;
+}
+
+/* Accent text used inside headlines — the classic "split hero" */
+.sp-accent {
+  color: var(--sp-red);
+}
