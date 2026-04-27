@@ -2353,8 +2353,8 @@ function Reviews() {
         {cards.map((r,i) => (<div key={i} className="tile p-6 shrink-0" style={{width:'340px'}}><StarRow n={r.stars}/><p className="mt-3 text-[14px] leading-relaxed">"{r.text}"</p><div className="mt-4 flex items-center gap-2 text-[12px] text-[var(--sp-muted)]"><GoogleG/> {r.name}</div></div>))}
       </div></div>
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 mt-6 reveal flex flex-wrap gap-3 items-center justify-center">
-        <a href="https://search.google.com/local/writereview?placeid=ChIJnXpeThae80cRDHx_DV9aCo8" target="_blank" rel="noopener" className="btn-ghost text-[13px]">⭐ Laisser un avis Google</a>
-        <span className="text-[12px] text-[var(--sp-muted)]">Votre retour nous aide à nous améliorer</span>
+        <a href="roulette.html" className="btn-ghost text-[13px]" style={{background:'linear-gradient(135deg,#ff3b30,#c9251b)',color:'#fff',border:'none',boxShadow:'0 4px 16px rgba(255,59,48,0.3)'}}>🎰 Tentez votre chance !</a>
+        <span className="text-[12px] text-[var(--sp-muted)]">Laissez un avis et gagnez un cadeau 🎁</span>
       </div>
     </section>
   );
