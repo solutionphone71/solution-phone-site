@@ -806,5 +806,516 @@ document.querySelector('.hero').addEventListener('mousemove',function(e){
   if(iphone)iphone.style.transform='translateY('+(Math.sin(Date.now()/1000)*10)+'px) rotateY('+(-15+x)+'deg) rotateX('+(5-y)+'deg)';
 });
 </script>
+
+<!-- EVAN CHAT WIDGET — Solution Phone -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+:root{--sp-red:#c0392b;--sp-dark:#111111;--sp-dark2:#1a1a1a;--sp-dark3:#222222;--sp-border:#2d2d2d;--sp-text:#f0f0f0;--sp-muted:#888888;}
+
+#sp-win{position:fixed;bottom:120px;right:20px;width:360px;max-height:560px;background:var(--sp-dark2);border-radius:16px;border:1px solid var(--sp-border);box-shadow:0 16px 50px rgba(0,0,0,0.7);display:none;flex-direction:column;z-index:9001;overflow:hidden;font-family:'DM Sans',sans-serif;}
+#sp-win.visible{display:flex;}
+.sp-hdr{background:linear-gradient(135deg,#8b1e15,var(--sp-red));padding:13px 16px;display:flex;align-items:center;gap:10px;}
+.sp-hdr-av{width:40px;height:40px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid rgba(255,255,255,0.2);flex-shrink:0;}
+.sp-hdr-info{flex:1;}
+.sp-hdr-name{color:#fff;font-weight:700;font-size:13px;}
+.sp-hdr-sub{color:rgba(255,255,255,0.75);font-size:11px;}
+.sp-hdr-sub::before{content:'● ';color:#2ecc71;}
+.sp-x{background:none;border:none;color:rgba(255,255,255,0.8);font-size:20px;cursor:pointer;padding:0 4px;line-height:1;}
+.sp-x:hover{color:#fff;}
+#sp-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--sp-dark);max-height:380px;}
+.sp-bot-row{display:flex;align-items:flex-end;gap:6px;}
+.sp-user-row{display:flex;justify-content:flex-end;}
+.sp-av{width:24px;height:24px;background:var(--sp-red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.sp-bot-bbl{background:var(--sp-dark3);color:var(--sp-text);padding:8px 12px;border-radius:12px;border-bottom-left-radius:2px;font-size:13px;line-height:1.5;max-width:85%;}
+.sp-user-bbl{background:var(--sp-red);color:#fff;padding:8px 12px;border-radius:12px;border-bottom-right-radius:2px;font-size:13px;line-height:1.5;max-width:85%;}
+.sp-btns{display:flex;flex-wrap:wrap;gap:5px;padding:2px 0;}
+.sp-btn{background:var(--sp-dark3);border:1px solid var(--sp-border);color:var(--sp-text);padding:6px 12px;border-radius:16px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;}
+.sp-btn:hover{border-color:var(--sp-red);color:var(--sp-red);}
+.sp-dots{display:flex;gap:3px;align-items:center;padding:10px 12px;background:var(--sp-dark3);border-radius:12px;border-bottom-left-radius:2px;}
+.sp-dots span{width:5px;height:5px;background:var(--sp-muted);border-radius:50%;animation:spd 1.2s infinite;}
+.sp-dots span:nth-child(2){animation-delay:.2s;}
+.sp-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes spd{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.sp-card{background:var(--sp-dark);border:1px solid var(--sp-border);border-radius:10px;overflow:hidden;font-size:12px;}
+.sp-card-hdr{background:var(--sp-red);color:#fff;padding:8px 12px;font-weight:700;font-size:12px;}
+.sp-card-row{display:grid;grid-template-columns:1fr auto;padding:6px 10px;border-bottom:1px solid var(--sp-border);}
+.sp-card-row:last-child{border-bottom:none;}
+.sp-card-q{color:var(--sp-text);font-weight:500;}
+.sp-card-d{color:var(--sp-muted);font-size:10px;}
+.sp-card-p{color:var(--sp-red);font-weight:700;font-size:14px;}
+.sp-card-note{padding:7px 10px;background:rgba(192,57,43,0.08);border-top:1px solid var(--sp-border);font-size:10px;color:var(--sp-muted);}
+.sp-cta{display:flex;gap:6px;flex-wrap:wrap;}
+.sp-cta a{flex:1;min-width:100px;padding:9px;border-radius:8px;text-align:center;font-size:12px;font-weight:600;text-decoration:none;font-family:'DM Sans',sans-serif;}
+.sp-wa-btn{background:#25D366;color:#fff;}
+.sp-form-btn{background:var(--sp-dark3);color:var(--sp-text);border:1px solid var(--sp-border);}
+
+@media(max-width:500px){
+  #sp-bar{right:0;bottom:70px;border-radius:0;}
+  #sp-win{width:calc(100vw - 16px);right:8px;bottom:140px;}
+}
+
+/* ── FAB EVAN CHAT ── */
+#sp-fab{
+  position:fixed;bottom:28px;left:28px;z-index:9002;
+  width:64px;height:64px;
+  background:linear-gradient(135deg,#8b1e15,var(--sp-red));
+  border-radius:50%;cursor:pointer;border:none;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(192,57,43,0.55);
+  animation:fabPulse 3s ease-in-out infinite;
+  transition:transform .2s;
+}
+#sp-fab:hover{transform:scale(1.1);}
+@keyframes fabPulse{0%,100%{box-shadow:0 4px 20px rgba(192,57,43,0.55);}50%{box-shadow:0 4px 36px rgba(192,57,43,0.9),0 0 0 8px rgba(192,57,43,0.12);}}
+#sp-fab-emoji{font-size:28px;line-height:1;}
+#sp-fab-badge{
+  position:absolute;top:-2px;right:-2px;
+  width:18px;height:18px;background:#2ecc71;border-radius:50%;
+  border:2px solid #0d0d0d;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;color:#fff;font-family:sans-serif;
+}
+#sp-fab-tooltip{
+  position:absolute;left:72px;bottom:50%;transform:translateY(50%);
+  background:#111;border:1px solid var(--sp-red);color:#fff;
+  padding:8px 14px;border-radius:8px;white-space:nowrap;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+  pointer-events:none;opacity:0;transition:opacity .2s;
+}
+#sp-fab-tooltip::before{
+  content:'';position:absolute;right:100%;top:50%;transform:translateY(-50%);
+  border:6px solid transparent;border-right-color:var(--sp-red);
+}
+#sp-fab:hover #sp-fab-tooltip{opacity:1;}
+#sp-win{bottom:24px;left:24px;right:auto;}
+
+@media(max-width:500px){
+  #sp-fab{bottom:16px;left:16px;width:56px;height:56px;}
+  #sp-fab-emoji{font-size:24px;}
+  #sp-win{left:8px;right:8px;width:auto;bottom:90px;}
+}
+</style>
+
+<!-- FAB BUTTON -->
+<button id="sp-fab" onclick="SPchat.open()" aria-label="Chat avec Evan">
+  <span id="sp-fab-emoji">🧑‍🔧</span>
+  <div id="sp-fab-badge">1</div>
+  <div id="sp-fab-tooltip">💬 Bonjour ! Besoin d'aide ?</div>
+</button>
+
+<!-- CHAT WINDOW -->
+<div id="sp-win">
+  <div class="sp-hdr">
+    <div class="sp-hdr-av">🧑‍🔧</div>
+    <div class="sp-hdr-info">
+      <div class="sp-hdr-name">Evan — Solution Phone</div>
+      <div class="sp-hdr-sub">En ligne · Répond rapidement</div>
+    </div>
+    <button class="sp-x" onclick="SPchat.close()">×</button>
+  </div>
+  <div id="sp-msgs"></div>
+  <div id="sp-input-zone" style="display:none;padding:10px 12px;background:var(--sp-dark2);border-top:1px solid var(--sp-border);flex-shrink:0;">
+    <div style="display:flex;gap:8px;align-items:center;">
+      <input id="sp-free-input" type="text" placeholder="Posez votre question à Evan..."
+        style="flex:1;background:var(--sp-dark3);border:1.5px solid var(--sp-border);border-radius:20px;padding:9px 14px;color:var(--sp-text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;"
+        onkeydown="if(event.key==='Enter'){SPchat.sendFree();}"
+        onfocus="this.style.borderColor='var(--sp-red)'" onblur="this.style.borderColor='var(--sp-border)'">
+      <button onclick="SPchat.sendFree()" style="width:36px;height:36px;background:var(--sp-red);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('sp-fab').addEventListener('click', function(){
+  var badge = document.getElementById('sp-fab-badge');
+  if(badge) badge.style.display = 'none';
+});
+
+var SPchat = (function(){
+  var WA = 'https://wa.me/33783921884';
+  var FORM = 'https://www.reparation-iphone-macon.fr/#contact';
+  var CLAUDE_KEY = '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';
+  var started = false;
+  var awaitModel = false;
+  var iaMode = false;
+
+  var PRIX = {
+    '5s':      {l:'iPhone 5S/SE/5C/6/6S/6S+', p:[null,40,null,null,60]},
+    '7':       {l:'iPhone 7/7+/8/8+',          p:[null,40,null,50,60]},
+    'x':       {l:'iPhone X/XS/XS Max',        p:[30,40,55,70,85]},
+    'xr':      {l:'iPhone XR',                 p:[30,40,55,null,70]},
+    '11':      {l:'iPhone 11',                 p:[30,40,55,null,70]},
+    '12':      {l:'iPhone 12/12 Pro',          p:[40,50,65,90,115]},
+    '12mini':  {l:'iPhone 12 mini',            p:[null,40,null,null,60]},
+    '13':      {l:'iPhone 13',                 p:[45,50,65,90,115]},
+    '13mini':  {l:'iPhone 13 mini',            p:[null,40,null,50,60]},
+    '13pro':   {l:'iPhone 13 Pro',             p:[30,40,55,null,70]},
+    '13promax':{l:'iPhone 13 Pro Max',         p:[40,50,65,90,115]},
+    '14':      {l:'iPhone 14',                 p:[45,50,65,90,115]},
+    '14pro':   {l:'iPhone 14 Pro',             p:[45,50,65,90,115]},
+    '14promax':{l:'iPhone 14 Pro Max',         p:[45,50,65,90,115]},
+    '15':      {l:'iPhone 15',                 p:[50,60,null,140,185]},
+    '15pro':   {l:'iPhone 15 Pro',             p:[50,60,null,155,185]},
+    '15promax':{l:'iPhone 15 Pro Max',         p:[null,70,null,165,215]},
+    '16':      {l:'iPhone 16',                 p:[null,70,null,165,215]},
+  };
+  var Q = [
+    {n:'HD',       d:'LCD entrée de gamme',      e:'🟡'},
+    {n:'LTPS',     d:'LCD amélioré',              e:'🟠'},
+    {n:'LTPS Prime',d:'Luminosité supérieure',   e:'🟢'},
+    {n:'Soft OLED',d:'Proche original Apple',    e:'🔵'},
+    {n:'ReLife',   d:'Écran Apple reconditionné',e:'⭐'},
+  ];
+
+  var M = document.getElementById('sp-msgs');
+  var W = document.getElementById('sp-win');
+
+  function open(){
+    W.classList.add('visible');
+    if(!started){ started=true; start(); }
+  }
+  function close(){ W.classList.remove('visible'); }
+
+  function start(){
+    delay(function(){ bot('👋 Bonjour ! Je suis <b>Evan</b>, technicien chez Solution Phone Mâcon.'); }, 300);
+    delay(function(){ bot('Que puis-je faire pour vous ?'); }, 900);
+    delay(function(){
+      btns([
+        {l:'🔧 Réparation smartphone', v:'rep'},
+        {l:'📱 Achat téléphone reconditionné', v:'achat'},
+        {l:'🎁 Accessoire', v:'acces'},
+        {l:'💻 Informatique', v:'info'},
+        {l:'💡 Services & Conseils', v:'services'},
+        {l:'🏆 C\'est quoi QualiRépar ?', v:'quali'},
+      ]);
+    }, 1400);
+  }
+
+  function delay(fn, ms){ setTimeout(fn, ms); }
+
+  function bot(html){
+    var d = document.createElement('div');
+    d.className = 'sp-bot-row';
+    d.innerHTML = '<div class="sp-av">🧑‍🔧</div><div class="sp-bot-bbl">'+html+'</div>';
+    M.appendChild(d); scroll();
+  }
+  function user(txt){
+    var d = document.createElement('div');
+    d.className = 'sp-user-row';
+    d.innerHTML = '<div class="sp-user-bbl">'+txt+'</div>';
+    M.appendChild(d); scroll();
+  }
+  function typing(){
+    var d = document.createElement('div');
+    d.className = 'sp-bot-row'; d.id = 'sp-typing';
+    d.innerHTML = '<div class="sp-av">🧑‍🔧</div><div class="sp-dots"><span></span><span></span><span></span></div>';
+    M.appendChild(d); scroll();
+  }
+  function rmTyping(){ var t=document.getElementById('sp-typing'); if(t)t.remove(); }
+  function scroll(){ M.scrollTop = M.scrollHeight; }
+
+  function btns(list){
+    var wrap = document.createElement('div');
+    wrap.className = 'sp-btns';
+    list.forEach(function(item){
+      var b = document.createElement('button');
+      b.className = 'sp-btn';
+      b.textContent = item.l;
+      b.onclick = function(){ wrap.remove(); user(item.l); handle(item.v); };
+      wrap.appendChild(b);
+    });
+    M.appendChild(wrap); scroll();
+  }
+
+  function cta(msg){
+    var m = encodeURIComponent(msg || 'Bonjour, je souhaite un renseignement Solution Phone.');
+    var d = document.createElement('div');
+    d.className = 'sp-cta';
+    d.innerHTML = '<a href="'+WA+'?text='+m+'" target="_blank" class="sp-wa-btn">💬 WhatsApp</a>'
+                + '<a href="'+FORM+'" target="_blank" class="sp-form-btn">📝 Formulaire</a>';
+    M.appendChild(d); scroll();
+  }
+
+  function card(key){
+    var data = PRIX[key]; if(!data) return;
+    var txt = '📱 <b>'+data.l+'</b><br><br>';
+    Q.forEach(function(q,i){
+      var p = data.p[i];
+      if(p) txt += q.e+' <b>'+q.n+'</b> — <b style="color:#ff6b6b;">'+p+' €</b><br>';
+    });
+    txt += '<br><small style="color:#aaa;">✅ Prix avec -25€ QualiRépar déjà déduits · Garantie 3 mois</small>';
+    bot(txt);
+  }
+
+  function handle(v){
+    if(v==='rep'){
+      typing(); delay(function(){
+        rmTyping(); bot('Quelle réparation souhaitez-vous ?');
+        btns([
+          {l:'💥 Écran iPhone', v:'ecran_iphone'},
+          {l:'🔋 Autre réparation iPhone', v:'autre_iphone'},
+          {l:'📱 Samsung', v:'samsung'},
+          {l:'🔌 Autre marque', v:'autre_marque'},
+        ]);
+      }, 600);
+
+    } else if(v==='ecran_iphone'){
+      typing(); delay(function(){
+        rmTyping(); bot('Quel modèle ?');
+        btns([
+          {l:'iPhone 11', v:'m_11'}, {l:'iPhone 12', v:'m_12'},
+          {l:'iPhone 13', v:'m_13'}, {l:'iPhone 14', v:'m_14'},
+          {l:'iPhone 15', v:'m_15'}, {l:'iPhone 16', v:'m_16'},
+          {l:'Pro / Max / mini', v:'m_pro'}, {l:'Autre', v:'m_autre'},
+        ]);
+      }, 600);
+
+    } else if(v==='m_pro'){
+      bot('Quel modèle Pro / Max / mini ?');
+      btns([
+        {l:'13 Pro', v:'m_13pro'}, {l:'13 Pro Max', v:'m_13promax'},
+        {l:'14 Pro', v:'m_14pro'}, {l:'14 Pro Max', v:'m_14promax'},
+        {l:'15 Pro', v:'m_15pro'}, {l:'15 Pro Max', v:'m_15promax'},
+        {l:'12 mini', v:'m_12mini'}, {l:'13 mini', v:'m_13mini'},
+      ]);
+
+    } else if(v==='m_autre'){
+      bot('Quel modèle exactement ? (ex: iPhone XR, iPhone X...)');
+      awaitModel = true;
+
+    } else if(v.substring(0,2)==='m_'){
+      var key = v.substring(2);
+      if(PRIX[key]){
+        typing(); delay(function(){
+          rmTyping();
+          card(key);
+          delay(function(){
+            btns([
+              {l:'📞 Prendre RDV', v:'rdv'},
+              {l:'❓ Différence entre les qualités ?', v:'qualites'},
+              {l:'🏠 Retour menu', v:'menu'},
+            ]);
+          }, 400);
+        }, 700);
+      } else {
+        bot('Modèle non trouvé. Contactez-nous directement !');
+        cta('Bonjour, je voudrais un devis écran iPhone '+key+'.');
+      }
+
+    } else if(v==='qualites'){
+      typing(); delay(function(){
+        rmTyping();
+        bot('Les 5 qualités d\'écrans :<br><br>🟡 <b>HD</b> — LCD basique, bon prix<br>🟠 <b>LTPS</b> — LCD amélioré, couleurs plus vives<br>🟢 <b>LTPS Prime</b> — Luminosité supérieure<br>🔵 <b>Soft OLED</b> — OLED souple, proche Apple<br>⭐ <b>ReLife</b> — Écran Apple d\'origine reconditionné');
+        delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+      }, 800);
+
+    } else if(v==='autre_iphone'){
+      typing(); delay(function(){
+        rmTyping(); bot('Pour quelle réparation iPhone ?');
+        btns([
+          {l:'🔋 Batterie', v:'msg_bat_iphone'},
+          {l:'🔌 Connecteur charge', v:'msg_connect_iphone'},
+          {l:'📷 Caméra', v:'msg_cam_iphone'},
+          {l:'Autre', v:'msg_autre_iphone'},
+        ]);
+      }, 600);
+
+    } else if(v.substring(0,4)==='msg_'){
+      var msgs = {
+        bat_iphone:'devis batterie iPhone', connect_iphone:'devis connecteur de charge iPhone',
+        cam_iphone:'devis réparation caméra iPhone', autre_iphone:'devis réparation iPhone',
+        bat_samsung:'devis batterie Samsung', ecran_samsung:'devis écran Samsung',
+        connect_samsung:'devis connecteur Samsung', autre_samsung:'devis réparation Samsung',
+      };
+      var k = v.substring(4);
+      bot('Je vous prépare un devis rapidement ! Contactez-moi :');
+      cta('Bonjour, je souhaite un '+( msgs[k]||'devis réparation')+'.');
+      delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+
+    } else if(v==='samsung'){
+      typing(); delay(function(){
+        rmTyping(); bot('Quelle réparation pour votre Samsung ?');
+        btns([
+          {l:'💥 Écran', v:'msg_ecran_samsung'},
+          {l:'🔋 Batterie', v:'msg_bat_samsung'},
+          {l:'🔌 Connecteur', v:'msg_connect_samsung'},
+          {l:'Autre', v:'msg_autre_samsung'},
+        ]);
+      }, 600);
+
+    } else if(v==='autre_marque'){
+      bot('Xiaomi, Huawei, OnePlus, Google... On répare toutes les marques !');
+      cta('Bonjour, je souhaite faire réparer mon téléphone (autre marque).');
+      delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+
+    } else if(v==='achat'){
+      typing(); delay(function(){
+        rmTyping();
+        bot('Notre boutique en ligne arrive bientôt ! 🚀<br>En attendant, contactez-moi pour voir le stock disponible en boutique.');
+        cta('Bonjour, je suis intéressé par un smartphone reconditionné.');
+        delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+      }, 700);
+
+    } else if(v==='acces'){
+      typing(); delay(function(){
+        rmTyping();
+        bot('Coques, chargeurs, câbles, écouteurs... Large choix en boutique !');
+        cta('Bonjour, je cherche un accessoire.');
+        delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+      }, 700);
+
+    } else if(v==='info'){
+      typing(); delay(function(){
+        rmTyping();
+        bot('Dépannage PC/Mac, virus, réinstallation Windows, récupération de données...<br><b>Diagnostic gratuit</b> en boutique !');
+        cta('Bonjour, j\'ai un problème informatique.');
+        delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+      }, 700);
+
+    } else if(v==='services'){
+      typing(); delay(function(){
+        rmTyping(); bot('Quel service vous intéresse ?');
+        btns([
+          {l:'❓ Aide sur votre smartphone', v:'aide'},
+          {l:'📲 Transfert de données', v:'transfert'},
+          {l:'🔒 Écran cassé — récupérer mes données', v:'recup'},
+          {l:'⚙️ Configuration / Paramétrage', v:'config'},
+          {l:'🔋 Téléphone lent ou batterie faible', v:'perfo'},
+        ]);
+      }, 600);
+
+    } else if(v==='aide'){
+      bot('Posez votre question directement ici, je vous réponds grâce à l\'IA 👇');
+      showInput(true);
+
+    } else if(v==='transfert'){
+      typing(); delay(function(){
+        rmTyping();
+        bot('✅ Transfert de données en boutique !<br>Contacts, photos, apps, SMS... tout est transféré de votre ancien vers le nouveau. Rapide et sécurisé.');
+        cta('Bonjour, je souhaite un transfert de données entre mes téléphones.');
+        delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+      }, 700);
+
+    } else if(v==='recup'){
+      typing(); delay(function(){
+        rmTyping();
+        bot('Pas de panique ! 🔒<br>Nos techniciens peuvent récupérer vos données même avec l\'écran cassé ou un téléphone qui ne s\'allume plus.');
+        cta('Bonjour, mon écran est cassé et je voudrais récupérer mes données.');
+        delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+      }, 700);
+
+    } else if(v==='config'){
+      bot('Email, iCloud, Google, applications... Configuration rapide en boutique !');
+      cta('Bonjour, j\'ai besoin d\'aide pour configurer mon smartphone.');
+      delay(function(){ btns([{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+
+    } else if(v==='perfo'){
+      typing(); delay(function(){
+        rmTyping();
+        bot('Un téléphone lent se résout souvent sans remplacement !<br>🔋 Batterie à partir de 25€ après QualiRépar<br>⚡ Nettoyage et optimisation<br><br>Venez pour un <b>diagnostic gratuit</b> !');
+        cta('Bonjour, mon téléphone est lent et la batterie tient peu.');
+        delay(function(){ btns([{l:'🔋 Prix batterie iPhone', v:'autre_iphone'},{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+      }, 700);
+
+    } else if(v==='quali'){
+      typing(); delay(function(){
+        rmTyping();
+        bot('Le label <b>QualiRépar</b> est un programme d\'État 🇫🇷<br><br>✅ Solution Phone est <b>certifié QualiRépar</b> — <b>-25€ déduits automatiquement</b> sur votre facture.<br><br>📋 Éligible : écran, batterie, connecteur, caméra...<br><br>🏆 Aucune démarche de votre côté !');
+        delay(function(){ btns([{l:'🔧 Voir les réparations', v:'rep'},{l:'🏠 Retour menu', v:'menu'}]); }, 400);
+      }, 900);
+
+    } else if(v==='rdv'){
+      bot('Parfait ! Contactez-nous pour confirmer :');
+      cta('Bonjour, je souhaite prendre rendez-vous pour une réparation.');
+
+    } else if(v==='menu'){
+      showInput(false);
+      delay(function(){
+        bot('Autre chose ?');
+        btns([
+          {l:'🔧 Réparation smartphone', v:'rep'},
+          {l:'📱 Achat reconditionné', v:'achat'},
+          {l:'🎁 Accessoire', v:'acces'},
+          {l:'💻 Informatique', v:'info'},
+          {l:'💡 Services & Conseils', v:'services'},
+          {l:'🏆 QualiRépar', v:'quali'},
+        ]);
+      }, 300);
+    }
+  }
+
+  function detectModel(txt){
+    var l = txt.toLowerCase();
+    if(l.indexOf('13 pro max')>-1) return '13promax';
+    if(l.indexOf('14 pro max')>-1) return '14promax';
+    if(l.indexOf('15 pro max')>-1) return '15promax';
+    if(l.indexOf('13 pro')>-1) return '13pro';
+    if(l.indexOf('14 pro')>-1) return '14pro';
+    if(l.indexOf('15 pro')>-1) return '15pro';
+    if(l.indexOf('12 mini')>-1) return '12mini';
+    if(l.indexOf('13 mini')>-1) return '13mini';
+    if(l.indexOf('xr')>-1) return 'xr';
+    if(l.indexOf('xs')>-1||l.indexOf(' x ')>-1) return 'x';
+    if(l.indexOf('16')>-1) return '16';
+    if(l.indexOf('15')>-1) return '15';
+    if(l.indexOf('14')>-1) return '14';
+    if(l.indexOf('13')>-1) return '13';
+    if(l.indexOf('12')>-1) return '12';
+    if(l.indexOf('11')>-1) return '11';
+    if(l.indexOf('7')>-1||l.indexOf('8')>-1) return '7';
+    return null;
+  }
+
+  function showInput(show){
+    var z = document.getElementById('sp-input-zone');
+    if(z) z.style.display = show ? 'flex' : 'none';
+    if(show) setTimeout(function(){ var i=document.getElementById('sp-free-input'); if(i)i.focus(); }, 100);
+  }
+
+  async function sendFree(){
+    var inp = document.getElementById('sp-free-input');
+    if(!inp) return;
+    var txt = inp.value.trim();
+    if(!txt) return;
+    inp.value = '';
+    user(txt);
+    typing();
+    try {
+      var key = CLAUDE_KEY || localStorage.getItem('sp_claude_key');
+      if(!key) throw new Error('no key');
+      var r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': key,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-5',
+          max_tokens: 300,
+          system: "Tu es Evan, technicien expert chez Solution Phone à Mâcon (21 Rue Gambetta, 03 85 33 06 89). Tu réponds aux clients dans la section Services & Conseils du chat du site. Tu donnes des conseils techniques clairs et pratiques sur les smartphones. Si tu connais un lien utile (Apple Support, Samsung Support, tutoriel), tu peux le donner. Tu peux répondre à des questions comme : comment sauvegarder son iPhone, différence entre modèles, que faire si le téléphone tombe à l'eau, comment améliorer la batterie, etc. Si la question nécessite une intervention physique, propose de venir en boutique ou de contacter via WhatsApp. Rappelle le label QualiRépar (-25€) si pertinent. Réponds en français, de façon claire et concise (max 4 phrases). Pas de markdown, pas de listes à puces.",
+          messages: [{ role: 'user', content: txt }]
+        })
+      });
+      var d = await r.json();
+      rmTyping();
+      bot(d.content[0].text);
+      delay(function(){
+        btns([{l:'❓ Autre question', v:'services'},{l:'🏠 Retour menu', v:'menu'}]);
+      }, 400);
+    } catch(e) {
+      rmTyping();
+      bot('Je suis là pour vous aider ! Pour une réponse rapide contactez-nous directement :');
+      cta('Bonjour, j\'ai une question : ' + txt);
+    }
+  }
+
+  return { open: open, close: close, sendFree: sendFree };
+})();
+</script>
+
 </body>
 </html>
