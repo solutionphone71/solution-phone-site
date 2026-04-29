@@ -1,18 +1,91 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=https://www.solution-phone.fr/">
-  <script>window.location.replace("https://www.solution-phone.fr/");</script>
-  <title>Solution Phone</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Page introuvable — Solution Phone Mâcon</title>
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="apple-touch-icon" href="img/logo.png">
+<meta name="robots" content="noindex,nofollow">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3QP90K1TLM"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag("js", new Date());
-gtag("config", "G-3QP90K1TLM");
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-3QP90K1TLM");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#e30613;--red-dark:#b8050f;--ink:#1d1d1f;--muted:#6e6e73;--bg:#ffffff;--bg2:#f5f5f7;--line:rgba(0,0,0,.06)}
+html{-webkit-font-smoothing:antialiased}
+body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 15% 0%,rgba(227,6,19,.08),transparent 60%),
+  radial-gradient(800px 500px at 90% 10%,rgba(227,6,19,.05),transparent 60%)}
+a{text-decoration:none;color:inherit}
+
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,4vw,48px);height:56px;background:rgba(255,255,255,.85);
+  border-bottom:1px solid var(--line);backdrop-filter:saturate(180%) blur(20px)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{width:32px;height:32px;border-radius:8px}
+.nav-logo span{font-weight:800;font-size:.9rem;letter-spacing:-.02em}
+.nav-cta{background:var(--red);color:#fff;font-weight:700;font-size:.8rem;padding:8px 20px;
+  border-radius:9999px;transition:all .3s;box-shadow:0 4px 16px -4px rgba(227,6,19,.4)}
+.nav-cta:hover{background:var(--red-dark);transform:translateY(-1px);box-shadow:0 8px 24px -8px rgba(227,6,19,.5)}
+
+.error-wrap{flex:1;display:flex;align-items:center;justify-content:center;position:relative;padding:60px 20px}
+.error-content{text-align:center;max-width:520px;position:relative;z-index:1;animation:fadeUp .8s ease-out}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.error-icon{font-size:5rem;margin-bottom:20px;display:inline-block;animation:float 3s ease-in-out infinite}
+.error-code{font-weight:900;font-size:clamp(6rem,20vw,12rem);line-height:.9;letter-spacing:-.06em;
+  background:linear-gradient(135deg,var(--red),var(--red-dark));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.error-title{font-weight:800;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.03em;margin-bottom:12px}
+.error-text{color:var(--muted);font-size:1rem;line-height:1.6;margin-bottom:32px}
+.error-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--red),var(--red-dark));
+  color:#fff;font-weight:700;font-size:.9rem;padding:14px 28px;border-radius:14px;transition:all .3s;
+  box-shadow:0 8px 24px -8px rgba(227,6,19,.45)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px -8px rgba(227,6,19,.55)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);
+  color:var(--ink);background:var(--bg);font-weight:600;font-size:.9rem;padding:14px 28px;
+  border-radius:14px;transition:all .3s}
+.btn-outline:hover{border-color:rgba(0,0,0,.15);background:var(--bg2);transform:translateY(-2px)}
+
+footer{padding:32px clamp(20px,4vw,48px);border-top:1px solid var(--line);text-align:center}
+footer p{color:var(--muted);font-size:.8rem;margin-bottom:4px}
+footer a{color:var(--red);transition:color .3s}
+footer a:hover{color:var(--red-dark)}
+@media(max-width:480px){.error-btns{flex-direction:column;align-items:center}}
+</style>
 </head>
-<body></body>
+<body>
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="img/logo.png" alt="Solution Phone">
+    <span>Solution Phone</span>
+  </a>
+  <a href="tel:+33385330689" class="nav-cta">03 85 33 06 89</a>
+</nav>
+
+<div class="error-wrap">
+  <div class="error-content">
+    <div class="error-icon">📱</div>
+    <div class="error-code">404</div>
+    <h1 class="error-title">Cette page n'existe pas</h1>
+    <p class="error-text">La page que vous cherchez a peut-être été déplacée ou supprimée. Pas de panique, on peut quand même réparer votre smartphone !</p>
+    <div class="error-btns">
+      <a href="/" class="btn-primary">Retour à l'accueil</a>
+      <a href="tel:+33385330689" class="btn-outline">Nous appeler</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>Solution Phone</strong> — 21 Rue Gambetta, 71000 Mâcon — <a href="tel:+33385330689">03 85 33 06 89</a></p>
+  <p>&copy; 2024-2026 Solution Phone Mâcon. Tous droits réservés.</p>
+</footer>
+</body>
 </html>
