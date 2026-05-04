@@ -2104,9 +2104,16 @@ function QualiReparBlock() {
   const wzProgress = Math.min(((wzStep + 1) / totalSteps) * 100, 100);
 
   /* Wizard Popup — 4 étapes pour Apple, 3 pour les autres */
-  const WizardPopup = () => {
-    useEffect(() => { const esc=(e)=>e.key==='Escape'&&setShowWizard(false); document.addEventListener('keydown',esc); document.body.style.overflow='hidden'; return ()=>{document.removeEventListener('keydown',esc);document.body.style.overflow='';}; },[]);
-    return (
+  /* Escape key + body overflow pour le wizard */
+  useEffect(() => {
+    if (!showWizard) return;
+    const esc = (e) => e.key === 'Escape' && setShowWizard(false);
+    document.addEventListener('keydown', esc);
+    document.body.style.overflow = 'hidden';
+    return () => { document.removeEventListener('keydown', esc); document.body.style.overflow = ''; };
+  }, [showWizard]);
+
+  const wizardJSX = showWizard && (
       <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4" onClick={()=>setShowWizard(false)}>
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
         <div className="relative bg-white rounded-[28px] max-w-[560px] w-full max-h-[90vh] overflow-y-auto p-7 md:p-9 shadow-2xl" onClick={e=>e.stopPropagation()}>
@@ -2191,8 +2198,7 @@ function QualiReparBlock() {
           </>)}
         </div>
       </div>
-    );
-  };
+  );
 
   return (
     <>
@@ -2326,7 +2332,7 @@ function QualiReparBlock() {
       </div>
     </section>
     {showPopup && <QualiReparPopup onClose={() => setShowPopup(false)}/>}
-    {showWizard && <WizardPopup/>}
+    {wizardJSX}
     </>
   );
 }
