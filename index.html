@@ -2158,7 +2158,12 @@ function QualiReparBlock() {
 
           {/* Header */}
           <div className="flex items-center gap-2 mb-3"><span className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-black" style={{background:'#e30613'}}>SP</span><span className="font-bold text-[15px]">Devis en 30 secondes</span></div>
-          <div className="h-1 bg-[var(--sp-bg-2)] rounded-full mb-5"><div className="h-1 rounded-full transition-all" style={{width:wzProgress+'%', background:'#e30613'}}></div></div>
+          <div className="h-1 bg-[var(--sp-bg-2)] rounded-full mb-4"><div className="h-1 rounded-full transition-all" style={{width:wzProgress+'%', background:'#e30613'}}></div></div>
+
+          {/* Bandeau réassurance */}
+          <div className="mb-4 p-3 rounded-xl text-[11px] text-[var(--sp-muted)] leading-relaxed" style={{background:'linear-gradient(135deg, #fef3f3, #fff8f0)', border:'1px solid rgba(227,6,19,.08)'}}>
+            <span className="font-bold text-[var(--sp-red)]">−25 € QualiRépar déduits</span> — tarifs parmi les plus bas de la région. Plusieurs qualités d'écran au choix pour une transparence totale.
+          </div>
 
           {/* ── ÉTAPE 1 : Marque + Modèle ── */}
           {wzStep===0 && (<>
