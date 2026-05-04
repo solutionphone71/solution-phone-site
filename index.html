@@ -2005,12 +2005,7 @@ function QualiReparBlock() {
   const [wzBrand, setWzBrand] = useState(null);
   const [wzModel, setWzModel] = useState('');
   const [wzPanne, setWzPanne] = useState(null);
-  const [wzNom, setWzNom] = useState('');
-  const [wzEmail, setWzEmail] = useState('');
-  const [wzTel, setWzTel] = useState('');
-  const [wzEmailMode, setWzEmailMode] = useState(false);
-  const [wzSending, setWzSending] = useState(false);
-  const [wzSent, setWzSent] = useState(false);
+  const [wzSearch, setWzSearch] = useState('');
   const allBrands = ['iPhone','Samsung','Xiaomi','Google Pixel','Honor','Huawei','OnePlus','iPad'];
 
   const pourquoiArgs = [
@@ -2034,76 +2029,57 @@ function QualiReparBlock() {
 
 
   const wzBrands = [
-    {id:'apple',label:'iPhone',sub:'7 → 16 Pro Max'},
-    {id:'samsung',label:'Samsung',sub:'Galaxy S · A · Z'},
-    {id:'xiaomi',label:'Xiaomi',sub:'Redmi · Mi · Poco'},
-    {id:'google',label:'Google Pixel',sub:'6 · 7 · 8 · 9'},
-    {id:'honor',label:'Honor',sub:'Magic · X · View'},
-    {id:'autre',label:'Autre marque',sub:'Huawei, OnePlus, Oppo…'},
+    {id:'apple',label:'iPhone',icon:''},
+    {id:'samsung',label:'Samsung',icon:''},
+    {id:'autre',label:'Autre',icon:''},
   ];
   const wzPannes = [
     {id:'ecran',label:'Écran cassé',icon:'💥',bonus:true},
-    {id:'batterie',label:'Batterie faible',icon:'🔋',bonus:true},
-    {id:'charge',label:'Ne charge plus',icon:'🔌',bonus:true},
-    {id:'camera',label:'Caméra HS',icon:'📸',bonus:false},
-    {id:'eau',label:'Tombé dans l\'eau',icon:'💧',bonus:false},
-    {id:'autre',label:'Autre problème',icon:'❓',bonus:false},
+    {id:'batterie',label:'Batterie',icon:'🔋',bonus:true},
+    {id:'charge',label:'Connecteur',icon:'🔌',bonus:true},
+    {id:'camera',label:'Caméra',icon:'📸',bonus:false},
+    {id:'eau',label:'Oxydation',icon:'💧',bonus:false},
+    {id:'autre',label:'Autre',icon:'❓',bonus:false},
   ];
 
-  const openWiz = (e) => { if(e) e.stopPropagation(); setWzStep(0); setWzBrand(null); setWzModel(''); setWzPanne(null); setWzNom(''); setWzEmail(''); setWzTel(''); setWzEmailMode(false); setWzSending(false); setWzSent(false); setShowWizard(true); };
-  /* Écouter l'événement depuis la navbar HTML */
+  const openWiz = (e) => { if(e) e.stopPropagation(); setWzStep(0); setWzBrand(null); setWzModel(''); setWzPanne(null); setWzSearch(''); setShowWizard(true); };
   useEffect(() => {
     const handler = () => openWiz(null);
     window.addEventListener('open-wizard', handler);
     return () => window.removeEventListener('open-wizard', handler);
   }, []);
+
   const sendWzWA = () => {
     const b = wzBrands.find(x=>x.id===wzBrand);
     const p = wzPannes.find(x=>x.id===wzPanne);
-    const msg = `Bonjour, devis SVP :\n• ${b?.label||''} ${wzModel}\n• Panne : ${p?.label||''}\n• ${wzNom}`;
+    const prix = wzEstimatedPrice();
+    const msg = `Bonjour, je souhaite un devis pour :\n• ${b?.label||''} ${wzModel}\n• ${p?.label||''}\n${prix ? '• Budget estimé : à partir de '+prix+' €\n' : ''}Merci !`;
     window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg),'_blank');
   };
-  const sendWzEmail = async () => {
-    if (!wzEmail) return;
-    const b = wzBrands.find(x=>x.id===wzBrand);
-    const p = wzPannes.find(x=>x.id===wzPanne);
-    setWzSending(true);
-    try {
-      const r = await fetch('https://formsubmit.co/ajax/contact@solution-phone.fr', {
-        method: 'POST',
-        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
-        body: JSON.stringify({
-          _subject: `Devis ${b?.label||''} ${wzModel}`,
-          nom: wzNom || 'Client site web',
-          email: wzEmail,
-          telephone: wzTel,
-          marque: b?.label || '',
-          modele: wzModel,
-          panne: p?.label || '',
-          message: `Demande de devis :\n• ${b?.label||''} ${wzModel}\n• Panne : ${p?.label||''}\n• Prénom : ${wzNom}\n• Email : ${wzEmail}\n• Tél : ${wzTel}\n(Envoyé depuis solution-phone.fr)`,
-          _template: 'table'
-        })
-      });
-      const d = await r.json();
-      setWzSending(false);
-      if (d.success) setWzSent(true);
-      else alert('Erreur. Essayez WhatsApp ou appelez le 03 85 33 06 89.');
-    } catch(e) {
-      setWzSending(false);
-      alert('Erreur réseau. Essayez WhatsApp ou appelez le 03 85 33 06 89.');
-    }
-  };
 
-  /* Modèles par marque — Apple depuis PHONES (Supabase), autres en texte libre */
   const wzAppleModels = useMemo(() => {
-    if (!window.PHONES || !window.PHONES.length) return ['iPhone 7','iPhone 8','iPhone X','iPhone XR','iPhone XS','iPhone 11','iPhone 11 Pro','iPhone 12','iPhone 12 mini','iPhone 12 Pro','iPhone 13','iPhone 13 mini','iPhone 13 Pro','iPhone 14','iPhone 14 Plus','iPhone 14 Pro','iPhone 14 Pro Max','iPhone 15','iPhone 15 Plus','iPhone 15 Pro','iPhone 15 Pro Max','iPhone 16','iPhone 16 Plus','iPhone 16 Pro','iPhone 16 Pro Max'];
-    return [...new Set(window.PHONES.map(p => p.name))].sort();
+    if (!window.PHONES || !window.PHONES.length) return ['iPhone 16 Pro Max','iPhone 16 Pro','iPhone 16','iPhone 15 Pro Max','iPhone 15 Pro','iPhone 15','iPhone 14 Pro Max','iPhone 14 Pro','iPhone 14','iPhone 13 Pro','iPhone 13','iPhone 13 mini','iPhone 12 Pro','iPhone 12','iPhone 12 mini','iPhone 11','iPhone XR','iPhone X','iPhone 8','iPhone 7'];
+    return [...new Set(window.PHONES.map(p => p.name))].sort().reverse();
   }, []);
 
-  const totalSteps = wzBrand === 'apple' ? 4 : 3;
-  const wzProgress = Math.min(((wzStep + 1) / totalSteps) * 100, 100);
+  /* Prix estimé depuis ECRANS / BATTERIES */
+  const wzEstimatedPrice = () => {
+    if (!wzModel || !wzPanne) return null;
+    const m = wzModel.toLowerCase();
+    if (wzPanne === 'ecran') {
+      const found = ECRANS.find(e => m.includes(e.name.toLowerCase().replace('iphone ','').replace('/12 pro','')) || e.name.toLowerCase().includes(m.replace('iphone ','')));
+      if (found) { const p = found.prix.find(x => x !== null); return p || null; }
+    }
+    if (wzPanne === 'batterie') {
+      const found = BATTERIES.find(e => m.includes(e.name.toLowerCase().replace('iphone ','').replace('/12 pro','')) || e.name.toLowerCase().includes(m.replace('iphone ','')));
+      if (found) { const p = found.prix.find(x => x !== null); return p || null; }
+    }
+    return null;
+  };
 
-  /* Wizard Popup — 4 étapes pour Apple, 3 pour les autres */
+  const totalSteps = 2;
+  const wzProgress = wzStep === 0 ? 50 : 100;
+
   /* Escape key + body overflow pour le wizard */
   useEffect(() => {
     if (!showWizard) return;
@@ -2113,88 +2089,91 @@ function QualiReparBlock() {
     return () => { document.removeEventListener('keydown', esc); document.body.style.overflow = ''; };
   }, [showWizard]);
 
+  /* Filtered models for search */
+  const wzFilteredModels = useMemo(() => {
+    if (wzBrand !== 'apple') return [];
+    const q = wzSearch.toLowerCase().trim();
+    return q ? wzAppleModels.filter(m => m.toLowerCase().includes(q)) : wzAppleModels;
+  }, [wzBrand, wzSearch, wzAppleModels]);
+
   const wizardJSX = showWizard && (
       <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4" onClick={()=>setShowWizard(false)}>
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-        <div className="relative bg-white rounded-[28px] max-w-[560px] w-full max-h-[90vh] overflow-y-auto p-7 md:p-9 shadow-2xl" onClick={e=>e.stopPropagation()}>
-          <button onClick={()=>setShowWizard(false)} className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/5 flex items-center justify-center hover:bg-black/10 transition text-[18px]">✕</button>
-          <div className="flex items-center gap-2 mb-2"><span className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-black" style={{background:'#e30613'}}>SP</span><span className="font-semibold text-[14px]">Devis express</span><span className="text-[12px] text-[var(--sp-muted)]">· Étape {Math.min(wzStep+1, totalSteps)}/{totalSteps}</span></div>
-          <div className="h-1 bg-[var(--sp-bg-2)] rounded-full mb-5"><div className="h-1 bg-[var(--sp-red)] rounded-full transition-all" style={{width:wzProgress+'%'}}></div></div>
-          <div className="flex flex-wrap gap-2 text-[10px] text-[var(--sp-muted)] font-semibold mb-5"><span>✓ QualiRépar</span><span>✓ Garantie 6 mois</span><span>★ 4,7/5</span><span>✓ Sans engagement</span></div>
+        <div className="relative bg-white rounded-[28px] max-w-[520px] w-full max-h-[90vh] overflow-y-auto p-6 md:p-8 shadow-2xl" onClick={e=>e.stopPropagation()}>
+          <button onClick={()=>setShowWizard(false)} className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/5 flex items-center justify-center hover:bg-black/10 transition text-[16px]">✕</button>
 
-          {/* STEP 0 : Marque */}
+          {/* Header */}
+          <div className="flex items-center gap-2 mb-3"><span className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-black" style={{background:'#e30613'}}>SP</span><span className="font-bold text-[15px]">Devis en 30 secondes</span></div>
+          <div className="h-1 bg-[var(--sp-bg-2)] rounded-full mb-5"><div className="h-1 rounded-full transition-all" style={{width:wzProgress+'%', background:'#e30613'}}></div></div>
+
+          {/* ── ÉTAPE 1 : Marque + Modèle ── */}
           {wzStep===0 && (<>
-            <h2 className="text-2xl font-extrabold tracking-tight">Quelle marque ?</h2>
-            <p className="text-[var(--sp-muted)] text-sm mt-1">On commence par là.</p>
-            <div className="grid grid-cols-2 gap-2.5 mt-5">{wzBrands.map(b=>(<button key={b.id} onClick={()=>{setWzBrand(b.id); setWzModel(''); setWzStep(b.id==='apple'?1:1);}} className="p-4 rounded-2xl border border-black/8 hover:border-[var(--sp-red)] hover:shadow-md transition text-left"><div className="font-extrabold text-[16px]">{b.label}</div><div className="text-[11px] text-[var(--sp-muted)]">{b.sub}</div></button>))}</div>
+            <h2 className="text-xl font-extrabold tracking-tight">Quel téléphone ?</h2>
+            <div className="flex gap-2 mt-4">{wzBrands.map(b=>(<button key={b.id} onClick={()=>{setWzBrand(b.id); setWzModel(''); setWzSearch('');}} className={'flex-1 py-2.5 rounded-xl font-bold text-[13px] transition border-2 ' + (wzBrand===b.id ? 'border-[var(--sp-red)] bg-red-50 text-[var(--sp-red)]' : 'border-black/8 hover:border-[var(--sp-red)]/40')}>{b.label}</button>))}</div>
+
+            {wzBrand==='apple' && (<div className="mt-4">
+              <input value={wzSearch} onChange={e=>setWzSearch(e.target.value)} placeholder="Rechercher un modèle…" className="w-full bg-[var(--sp-bg-2)] border border-black/5 rounded-xl px-4 py-2.5 text-[14px] focus:outline-none focus:border-[var(--sp-red)]/40 mb-3"/>
+              <div className="grid grid-cols-2 gap-1.5 max-h-[40vh] overflow-y-auto pr-1">
+                {wzFilteredModels.map(m=>(<button key={m} onClick={()=>{setWzModel(m);setWzStep(1);}} className="p-2.5 rounded-xl border border-black/6 hover:border-[var(--sp-red)] hover:bg-red-50/50 transition text-left"><div className="font-semibold text-[13px]">{m}</div></button>))}
+              </div>
+            </div>)}
+
+            {wzBrand==='samsung' && (<div className="mt-4">
+              <input value={wzModel} onChange={e=>setWzModel(e.target.value)} placeholder="Ex : Galaxy S24, A54, Z Flip…" className="w-full bg-[var(--sp-bg-2)] border border-black/5 rounded-xl px-4 py-3 text-[14px] focus:outline-none focus:border-[var(--sp-red)]/40" autoFocus/>
+              <button onClick={()=>{if(wzModel.trim())setWzStep(1);}} disabled={!wzModel.trim()} className="w-full mt-3 py-3 rounded-xl font-bold text-[14px] text-white transition" style={{background: wzModel.trim() ? '#e30613' : '#ccc'}}>Continuer →</button>
+            </div>)}
+
+            {wzBrand==='autre' && (<div className="mt-4">
+              <input value={wzModel} onChange={e=>setWzModel(e.target.value)} placeholder="Ex : Xiaomi Redmi Note 13, Pixel 8…" className="w-full bg-[var(--sp-bg-2)] border border-black/5 rounded-xl px-4 py-3 text-[14px] focus:outline-none focus:border-[var(--sp-red)]/40" autoFocus/>
+              <button onClick={()=>{if(wzModel.trim())setWzStep(1);}} disabled={!wzModel.trim()} className="w-full mt-3 py-3 rounded-xl font-bold text-[14px] text-white transition" style={{background: wzModel.trim() ? '#e30613' : '#ccc'}}>Continuer →</button>
+            </div>)}
+
+            {!wzBrand && <p className="text-[var(--sp-muted)] text-sm mt-6 text-center">Choisissez une marque ci-dessus</p>}
           </>)}
 
-          {/* STEP 1 : Modèle */}
+          {/* ── ÉTAPE 2 : Panne + Prix + WhatsApp ── */}
           {wzStep===1 && (<>
-            <h2 className="text-2xl font-extrabold tracking-tight">Quel modèle ?</h2>
-            <p className="text-[var(--sp-muted)] text-sm mt-1">{wzBrands.find(x=>x.id===wzBrand)?.label} — choisissez le plus proche.</p>
-
-            {wzBrand==='apple' ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-5 max-h-[50vh] overflow-y-auto pr-1">
-                {wzAppleModels.map(m=>(<button key={m} onClick={()=>{setWzModel(m);setWzStep(2);}} className="p-3 rounded-2xl border border-black/8 hover:border-[var(--sp-red)] hover:shadow-md transition text-left"><div className="font-semibold text-[14px]">{m}</div></button>))}
-              </div>
-            ) : (
-              <div className="mt-5">
-                <input value={wzModel} onChange={e=>setWzModel(e.target.value)} placeholder={`Modèle (ex: ${wzBrand==='samsung'?'Galaxy S24, A54':'Redmi Note 13, Pixel 8'}…)`} className="w-full bg-[var(--sp-bg-2)] border border-black/5 rounded-2xl px-4 py-3 text-[15px] focus:outline-none focus:border-[var(--sp-red)]/40" autoFocus/>
-                <button onClick={()=>{if(wzModel.trim())setWzStep(2);}} disabled={!wzModel.trim()} className="btn-red w-full mt-3 justify-center disabled:opacity-30 disabled:cursor-not-allowed">Continuer →</button>
-              </div>
-            )}
-            <button onClick={()=>setWzStep(0)} className="mt-4 text-sm font-semibold text-[var(--sp-muted)]">‹ Retour</button>
-          </>)}
-
-          {/* STEP 2 : Panne */}
-          {wzStep===2 && (<>
-            <h2 className="text-2xl font-extrabold tracking-tight">Quelle panne ?</h2>
-            <p className="text-[var(--sp-muted)] text-sm mt-1">{wzBrands.find(x=>x.id===wzBrand)?.label} {wzModel}</p>
-            <div className="grid grid-cols-2 gap-2.5 mt-4">{wzPannes.map(p=>(<button key={p.id} onClick={()=>{setWzPanne(p.id);setWzStep(3);}} className="p-4 rounded-2xl border border-black/8 hover:border-[var(--sp-red)] hover:shadow-md transition text-left"><div className="text-[20px] mb-1">{p.icon}</div><div className="font-bold text-[13px]">{p.label}</div>{p.bonus&&<div className="text-[10px] font-bold text-[var(--sp-red)] mt-0.5">−25 € QualiRépar</div>}</button>))}</div>
-            <button onClick={()=>setWzStep(1)} className="mt-4 text-sm font-semibold text-[var(--sp-muted)]">‹ Retour</button>
-          </>)}
-
-          {/* STEP 3 : Récap + envoi */}
-          {wzStep===3 && (<>
-            <h2 className="text-2xl font-extrabold tracking-tight">Votre devis</h2>
-            <div className="mt-4 p-4 rounded-2xl bg-[var(--sp-bg-2)] border border-black/5 text-sm space-y-2">
-              <div className="flex justify-between"><span className="text-[var(--sp-muted)]">Marque</span><strong>{wzBrands.find(x=>x.id===wzBrand)?.label}</strong></div>
-              <div className="flex justify-between"><span className="text-[var(--sp-muted)]">Modèle</span><strong>{wzModel||'—'}</strong></div>
-              <div className="flex justify-between"><span className="text-[var(--sp-muted)]">Panne</span><strong>{wzPannes.find(x=>x.id===wzPanne)?.label}</strong></div>
-              {wzPannes.find(x=>x.id===wzPanne)?.bonus&&<div className="flex justify-between border-t border-black/5 pt-2"><span className="text-[var(--sp-muted)]">Bonus QualiRépar</span><strong className="text-[var(--sp-red)]">−25 €</strong></div>}
+            <div className="flex items-center gap-2 mb-3">
+              <button onClick={()=>setWzStep(0)} className="text-[var(--sp-muted)] hover:text-black transition text-sm font-semibold">← Modifier</button>
+              <span className="text-sm font-bold">{wzBrands.find(x=>x.id===wzBrand)?.label} {wzModel}</span>
             </div>
-            <div className="mt-4 p-3 rounded-2xl text-sm flex items-center gap-2" style={{background:'linear-gradient(135deg,#fff5f5,#ffe9ea)', border:'1px solid rgba(227,6,19,.12)', color:'#8b0410'}}>
-              <span>⏱️</span><span>Réparation en <strong>30 min à 1h</strong> · Garantie 6 mois · Diagnostic gratuit</span>
-            </div>
-            <input value={wzNom} onChange={e=>setWzNom(e.target.value)} placeholder="Votre prénom" className="w-full mt-4 bg-[var(--sp-bg-2)] border border-black/5 rounded-2xl px-4 py-3 focus:outline-none focus:border-[var(--sp-red)]/40"/>
 
-            {!wzEmailMode && !wzSent && (<>
-              <button onClick={sendWzWA} className="btn-wa w-full mt-3 justify-center text-[15px]"><WaIcon/> Envoyer sur WhatsApp</button>
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                <a href="tel:+33385330689" className="btn-red text-center text-[13px] justify-center"><PhoneIcon/> Appeler</a>
-                <button onClick={()=>setWzEmailMode(true)} className="btn-ghost text-center text-[13px] justify-center"><MailIcon/> Email</button>
+            {!wzPanne ? (<>
+              <h2 className="text-xl font-extrabold tracking-tight">Quelle panne ?</h2>
+              <div className="grid grid-cols-3 gap-2 mt-4">{wzPannes.map(p=>(<button key={p.id} onClick={()=>setWzPanne(p.id)} className="p-3 rounded-xl border border-black/6 hover:border-[var(--sp-red)] hover:bg-red-50/50 transition text-center"><div className="text-[22px] mb-1">{p.icon}</div><div className="font-bold text-[11px] leading-tight">{p.label}</div>{p.bonus&&<div className="text-[9px] font-bold text-[var(--sp-red)] mt-0.5">−25 €</div>}</button>))}</div>
+            </>) : (<>
+              {/* Récap compact + prix */}
+              <div className="p-4 rounded-2xl border border-black/5" style={{background:'linear-gradient(135deg, #fafafa, #f5f5f7)'}}>
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <div className="font-extrabold text-[16px]">{wzModel}</div>
+                    <div className="text-[13px] text-[var(--sp-muted)] flex items-center gap-1.5">{wzPannes.find(x=>x.id===wzPanne)?.icon} {wzPannes.find(x=>x.id===wzPanne)?.label} <button onClick={()=>setWzPanne(null)} className="text-[10px] underline text-[var(--sp-muted)]">changer</button></div>
+                  </div>
+                  {wzEstimatedPrice() && (<div className="text-right">
+                    <div className="text-[10px] text-[var(--sp-muted)] font-semibold uppercase">À partir de</div>
+                    <div className="text-[28px] font-black text-[var(--sp-red)] leading-none">{wzEstimatedPrice()} <span className="text-[16px]">€</span></div>
+                    {wzPannes.find(x=>x.id===wzPanne)?.bonus && <div className="text-[10px] font-bold text-[var(--sp-red)]">dont −25 € QualiRépar</div>}
+                  </div>)}
+                </div>
               </div>
-            </>)}
 
-            {wzEmailMode && !wzSent && (<>
-              <input value={wzEmail} onChange={e=>setWzEmail(e.target.value)} placeholder="Votre adresse email" type="email" className="w-full mt-3 bg-[var(--sp-bg-2)] border border-black/5 rounded-2xl px-4 py-3 focus:outline-none focus:border-[var(--sp-red)]/40"/>
-              <input value={wzTel} onChange={e=>setWzTel(e.target.value)} placeholder="Téléphone (optionnel)" type="tel" className="w-full mt-2 bg-[var(--sp-bg-2)] border border-black/5 rounded-2xl px-4 py-3 focus:outline-none focus:border-[var(--sp-red)]/40"/>
-              <button onClick={sendWzEmail} disabled={!wzEmail || wzSending} className="w-full mt-3 py-3 rounded-2xl font-bold text-[15px] text-white transition" style={{background: wzEmail ? 'var(--sp-red)' : '#ccc'}}>
-                {wzSending ? 'Envoi en cours…' : '✉️ Envoyer ma demande de devis'}
+              {/* Reassurance */}
+              <div className="flex gap-3 mt-3 text-[10px] font-semibold text-[var(--sp-muted)]">
+                <span>⚡ 30 min</span><span>🛡️ Garantie 6 mois</span><span>🎯 Devis gratuit</span><span>★ 4,7/5</span>
+              </div>
+
+              {/* CTA WhatsApp — HERO */}
+              <button onClick={sendWzWA} className="w-full mt-4 py-4 rounded-2xl font-bold text-[16px] text-white flex items-center justify-center gap-2 transition hover:opacity-90" style={{background:'linear-gradient(135deg, #25d366, #128c7e)'}}>
+                <WaIcon/> Obtenir mon devis sur WhatsApp
               </button>
-              <button onClick={()=>setWzEmailMode(false)} className="mt-2 text-sm font-semibold text-[var(--sp-muted)]">← Retour</button>
-            </>)}
+              <p className="text-center text-[11px] text-[var(--sp-muted)] mt-1.5">Réponse en quelques minutes — même le soir</p>
 
-            {wzSent && (
-              <div className="mt-4 p-4 rounded-2xl text-center" style={{background:'#f0fdf4', border:'1px solid #bbf7d0'}}>
-                <div className="text-2xl mb-1">✅</div>
-                <div className="font-bold text-[#166534]">Demande envoyée !</div>
-                <div className="text-sm text-[#166534]/70 mt-1">On vous répond très vite par email.</div>
+              {/* Secondary actions */}
+              <div className="mt-3 flex gap-2">
+                <a href="tel:+33385330689" className="flex-1 py-2.5 rounded-xl border border-black/8 text-center text-[12px] font-semibold hover:border-[var(--sp-red)] transition"><PhoneIcon className="inline w-3 h-3 mr-1"/> 03 85 33 06 89</a>
+                <a href="mailto:contact@solution-phone.fr?subject=Devis ${wzModel}&body=Bonjour, devis pour ${wzModel} - ${wzPannes.find(x=>x.id===wzPanne)?.label}. Merci !" className="flex-1 py-2.5 rounded-xl border border-black/8 text-center text-[12px] font-semibold hover:border-[var(--sp-red)] transition"><MailIcon className="inline w-3 h-3 mr-1"/> Email</a>
               </div>
-            )}
-
-            <button onClick={()=>setWzStep(2)} className="mt-3 text-sm font-semibold text-[var(--sp-muted)]">‹ Modifier</button>
+            </>)}
           </>)}
         </div>
       </div>
