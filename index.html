@@ -48,7 +48,7 @@
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "14:00", "closes": "19:00" }
   ],
   "priceRange": "€€",
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "550", "bestRating": "5" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "590", "bestRating": "5" },
   "areaServed": [
     {"@type":"City","name":"Mâcon"},
     {"@type":"City","name":"Charnay-lès-Mâcon"},
@@ -1878,7 +1878,9 @@ function HeroEvan({ live }) {
             {live.open ? `Ouvert · ${live.countdown}` : `Fermé · ${live.nextOpenStr}`}
           </span>
           <span className="text-[var(--sp-line-hover)]">·</span>
-          <span>★ 4,7 / 5 · 550 avis Google</span>
+          <span>★ 4,7 / 5 · 590 avis Google</span>
+          <span className="text-[var(--sp-line-hover)]">·</span>
+          <span>Sans rendez-vous</span>
           <span className="text-[var(--sp-line-hover)]">·</span>
           <span>Mâcon</span>
         </div>
@@ -2426,7 +2428,8 @@ function Reviews() {
     <section id="avis" className="relative py-16 overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-5 md:px-8 mb-8 reveal flex flex-wrap items-end justify-between gap-3">
         <div><Eyebrow>Vos avis · Google</Eyebrow>
-          <h2 className="sp-h2 mt-3 flex items-baseline gap-3 flex-wrap"><span>4,7/5</span><span className="star-row" style={{fontSize:'28px'}}>★★★★★</span><span className="text-[var(--sp-muted)] text-[18px] font-semibold">+ de 550 avis</span></h2>
+          <h2 className="sp-h2 mt-3 flex items-baseline gap-3 flex-wrap"><span>4,7/5</span><span className="star-row" style={{fontSize:'28px'}}>★★★★★</span><span className="text-[var(--sp-muted)] text-[18px] font-semibold">+ de 590 avis</span></h2>
+          <p className="mt-2 text-[12px] text-[var(--sp-muted)] max-w-lg leading-relaxed" style={{fontStyle:'italic'}}>Notre note était de 4,9/5. Un concurrent a publié 17 faux avis en une semaine 😅 Les procédures sont en cours — mais nos 590 vrais clients parlent pour nous 💪</p>
         </div>
         <a href="https://www.google.com/maps/place/Solution+Phone" target="_blank" rel="noopener" className="applelink">Voir tous les avis sur Google <span className="chev">›</span></a>
       </div>
@@ -2639,8 +2642,8 @@ function App() {
     <main>
       <ProgressBar/>
       <HeroEvan live={live}/>
-      <QualiReparBlock/>
       <Reviews/>
+      <QualiReparBlock/>
       <TeamSection/>
       <TroisBoutiques/>
       <GoogleMap/>
