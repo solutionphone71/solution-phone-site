@@ -907,7 +907,21 @@ function ScrollTop() {
 const EVAN_PROXY_URL = SUPABASE_URL + '/functions/v1/evan-chat';
 /* Fallback: clé directe (à supprimer une fois la Edge Function déployée) */
 const CLAUDE_KEY = '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';
-const EVAN_SYSTEM = `Tu es Evan, technicien expert chez Solution Phone à Mâcon. Tu parles comme une vraie personne au comptoir : chaleureux, direct, tu tutoies, tu connais tout sur tout. Tu es le MEILLEUR ami du client. Tu ne bloques JAMAIS — tu as TOUJOURS une solution ou une piste.
+/* Construit dynamiquement la section "Prix écrans iPhone" du prompt
+   depuis l'array ECRANS (lui-même synchronisé avec Supabase au chargement).
+   Comme ça, les futurs changements de prix dans la gestion app se
+   propagent AUTOMATIQUEMENT au chatbot — plus jamais de désync. */
+function buildPrixEcransLine(){
+  var labels = ['HD','LTPS','LTPSPrime','OLED','Orig']; // 5 qualités, ordre identique au tableau
+  if(typeof ECRANS === 'undefined' || !Array.isArray(ECRANS)) return '';
+  return ECRANS.map(function(r){
+    if(!r || !r.prix) return null;
+    var parts = r.prix.map(function(p,i){ return (p && p>0) ? labels[i]+'='+p+'€' : null; }).filter(Boolean);
+    if(!parts.length) return null;
+    return r.name+' '+parts.join(' ');
+  }).filter(Boolean).join('. ');
+}
+function buildEvanSystem(){ return `Tu es Evan, technicien expert chez Solution Phone à Mâcon. Tu parles comme une vraie personne au comptoir : chaleureux, direct, tu tutoies, tu connais tout sur tout. Tu es le MEILLEUR ami du client. Tu ne bloques JAMAIS — tu as TOUJOURS une solution ou une piste.
 
 INFOS BOUTIQUE :
 Adresse : 21 Rue Gambetta, 71000 Mâcon.
@@ -917,7 +931,7 @@ Parking gratuit à proximité (Parking Lamartine, 2 min à pied).
 On existe depuis 2014, plus de 12 ans d'expérience. Label QualiRépar (réparation certifiée par l'État).
 
 RÉPARATION (notre spécialité) :
-Prix écrans iPhone : iPhone 16/16Pro/16PM LTPS=70€ Soft OLED=165€ Original=215€. iPhone 15PM LTPS=70€ OLED=165€ Orig=215€. iPhone 15 Pro HD=50€ LTPS=60€ OLED=155€ Orig=185€. iPhone 15 HD=50€ LTPS=60€ OLED=140€ Orig=185€. iPhone 14/13/13Pro/13PM/12 HD=45€ LTPS=50€ LTPSPrime=65€ OLED=90€ Orig=115€. iPhone 11 HD=30€ LTPS=40€ LTPSPrime=55€ Orig=70€.
+Prix écrans iPhone (à jour, source : base de données Solution Phone) : ${buildPrixEcransLine()}.
 Batteries : de 35€ à 75€ selon modèle.
 QualiRépar = -25€ déduits automatiquement sur écran, batterie, connecteur de charge.
 Réparation en 30 min à 1h. Garantie 6 mois pièces et main d'œuvre. Diagnostic gratuit, sans engagement.
@@ -948,7 +962,7 @@ RÈGLES DE RÉPONSE :
 - Sois naturel : "Ah oui", "Pas de souci", "Bonne question", "Je t'explique"…
 - Propose TOUJOURS une action concrète : venir en boutique, envoyer un WhatsApp (07 83 92 18 84), appeler (03 85 33 06 89), ou visiter une page du site.
 - Si tu ne sais pas ou si la question est trop complexe, ne bloque JAMAIS. Dis "Le plus simple c'est qu'on en parle directement" et oriente vers : WhatsApp, téléphone, mail contact@solution-phone.fr, ou le tchat Crisp en bas à droite du site.
-- Tu es là pour AIDER, pas pour refuser. Trouve toujours une porte de sortie positive.`;
+- Tu es là pour AIDER, pas pour refuser. Trouve toujours une porte de sortie positive.`; }
 
 const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
   const [messages, setMessages] = useState([]);
@@ -1403,7 +1417,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
         r = await fetch(EVAN_PROXY_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ system: EVAN_SYSTEM, messages: cleaned })
+          body: JSON.stringify({ system: buildEvanSystem(), messages: cleaned })
         });
         if (!r.ok && r.status >= 500) throw new Error('proxy down');
       } catch(_proxyErr) {
@@ -1419,7 +1433,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
           body: JSON.stringify({
             model: 'claude-sonnet-4-5',
             max_tokens: 300,
-            system: EVAN_SYSTEM,
+            system: buildEvanSystem(),
             messages: cleaned
           })
         });
