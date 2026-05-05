@@ -728,8 +728,12 @@ function formatStorage(s){
 }
 
 function applyPrix(data, arr, len){
+  // Map normalisée en minuscules pour gérer "16 PRO MAX" vs "16 Pro Max" (gestion app autorise n'importe quelle casse)
+  const lowerMap = {};
+  Object.keys(ID_MAP).forEach(k => { lowerMap[k.toLowerCase()] = ID_MAP[k]; });
   data.forEach(row => {
-    const id = ID_MAP[row.modele];
+    if(!row || !row.modele) return;
+    const id = ID_MAP[row.modele] || lowerMap[String(row.modele).toLowerCase().trim()];
     if(!id) return;
     const item = arr.find(x => x.id === id);
     if(item && row.prix && row.prix.length === len) item.prix = row.prix;
