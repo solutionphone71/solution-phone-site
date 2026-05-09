@@ -2164,23 +2164,34 @@ function QualiReparBlock() {
   const wzQualites = () => {
     if (!wzModel || !wzPanne) return [];
     const m = wzModel.toLowerCase().replace('iphone ', '').trim();
-    const match = (e) => {
+
+    // 1) MATCH EXACT en priorité (évite que "14" matche "14 pro max" via substring)
+    const exactMatch = (e) => {
       const n = e.name.toLowerCase().replace('iphone ', '');
       if (n === m) return true;
+      // Pour les modèles groupés comme "12/12 PRO" ou "X/XS/XS MAX"
+      const variants = n.split('/').map(v => v.trim());
+      return variants.indexOf(m) >= 0;
+    };
+
+    // 2) Match approché (substring) en dernier recours seulement
+    const fuzzyMatch = (e) => {
+      const n = e.name.toLowerCase().replace('iphone ', '');
       const main = n.split('/')[0].trim();
+      // ⚠️ on s'assure que ça ne fasse pas matcher "14" sur "14 pro max" :
+      // on n'accepte le substring que si ce qu'on cherche EST plus long ou égal
+      // au candidat (ex: chercher "14 pro max" peut matcher partiellement)
       if (main === m) return true;
-      if (n.includes(m) || m.includes(main)) return true;
+      if (m.length > main.length && m.includes(main)) return true;
       return false;
     };
-    if (wzPanne === 'ecran') {
-      const found = ECRANS.find(match);
-      return found ? QUALITES.map((q, i) => ({...q, price: found.prix[i]})).filter(q => q.price) : [];
-    }
-    if (wzPanne === 'batterie') {
-      const found = BATTERIES.find(match);
-      return found ? QUALITES_BAT.map((q, i) => ({...q, price: found.prix[i]})).filter(q => q.price) : [];
-    }
-    return [];
+
+    const arr = wzPanne === 'ecran' ? ECRANS : (wzPanne === 'batterie' ? BATTERIES : null);
+    if (!arr) return [];
+    const QualSet = wzPanne === 'ecran' ? QUALITES : QUALITES_BAT;
+
+    let found = arr.find(exactMatch) || arr.find(fuzzyMatch);
+    return found ? QualSet.map((q, i) => ({...q, price: found.prix[i]})).filter(q => q.price) : [];
   };
   const wzEstimatedPrice = () => {
     const qs = wzQualites();
