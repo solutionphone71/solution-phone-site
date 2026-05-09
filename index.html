@@ -1717,7 +1717,13 @@ function PriceQualityCard({ card, live }) {
           <span className="price-new">{fp} €</span>
           <span className="price-saved">−25€ QualiRépar</span>
         </div>
-        <div style={{fontSize:'9px',color:'rgba(255,255,255,.5)',fontWeight:600,textTransform:'uppercase',letterSpacing:'.12em',marginTop:'10px'}}>Choisir la qualité</div>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginTop:'10px'}}>
+          <div style={{fontSize:'9px',color:'rgba(255,255,255,.5)',fontWeight:600,textTransform:'uppercase',letterSpacing:'.12em'}}>Choisir la qualité</div>
+          <button type="button" onClick={()=>window.dispatchEvent(new CustomEvent('open-qual-info'))} style={{display:'inline-flex',alignItems:'center',gap:'4px',background:'transparent',border:0,color:'#fff',fontSize:'10px',fontWeight:700,cursor:'pointer',opacity:.85}}>
+            <span style={{display:'inline-flex',alignItems:'center',justifyContent:'center',width:'12px',height:'12px',borderRadius:'50%',border:'1.2px solid currentColor',fontSize:'8px',fontWeight:900}}>?</span>
+            Comprendre
+          </button>
+        </div>
         <div style={{display:'grid',gap:'4px',marginTop:'6px'}}>
           {card.qualites.map(q => {
             const isSel = q.id === sel?.id;
@@ -2031,6 +2037,8 @@ function QualiReparBlock() {
   const [wzTel, setWzTel] = useState('');
   const [wzSending, setWzSending] = useState(false);
   const [wzSent, setWzSent] = useState(false);
+  const [wzSelQ, setWzSelQ] = useState(null);            /* qualité sélectionnée dans le wizard */
+  const [showQualInfo, setShowQualInfo] = useState(false); /* popup explicatif des qualités d'écran */
   /* Formulaire contact section */
   const [ctShow, setCtShow] = useState(false);
   const [ctNom, setCtNom] = useState('');
@@ -2092,14 +2100,24 @@ function QualiReparBlock() {
     {id:'autre',label:'Autre',icon:'❓',bonus:false},
   ];
 
-  const openWiz = (e) => { if(e) e.stopPropagation(); setWzStep(0); setWzBrand(null); setWzModel(''); setWzPanne(null); setWzSearch(''); setWzShowEmail(false); setWzNom(''); setWzTel(''); setWzSending(false); setWzSent(false); setShowWizard(true); };
+  const openWiz = (e) => { if(e) e.stopPropagation(); setWzStep(0); setWzBrand(null); setWzModel(''); setWzPanne(null); setWzSearch(''); setWzShowEmail(false); setWzNom(''); setWzTel(''); setWzSending(false); setWzSent(false); setWzSelQ(null); setShowWizard(true); };
+
+  /* Reset la qualité quand le modèle/panne change */
+  useEffect(() => { setWzSelQ(null); }, [wzModel, wzPanne]);
+
+  /* Listener global pour ouvrir le popup "Comprendre les qualités" depuis n'importe où (chatbot, wizard) */
+  useEffect(() => {
+    const h = () => setShowQualInfo(true);
+    window.addEventListener('open-qual-info', h);
+    return () => window.removeEventListener('open-qual-info', h);
+  }, []);
 
   const sendWzEmail = async () => {
     if (!wzNom.trim() || !wzTel.trim()) return;
     setWzSending(true);
     const b = wzBrands.find(x=>x.id===wzBrand);
     const p = wzPannes.find(x=>x.id===wzPanne);
-    const prix = wzEstimatedPrice();
+    const q = wzActiveQ();
     try {
       await fetch('https://formsubmit.co/ajax/contact@solution-phone.fr', {
         method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
@@ -2109,7 +2127,7 @@ function QualiReparBlock() {
           Telephone: wzTel.trim(),
           Appareil: (b?.label||'') + ' ' + wzModel,
           Panne: p?.label || '',
-          Prix_estime: prix ? 'À partir de ' + prix + ' €' : 'Non disponible',
+          Qualite_choisie: q ? q.name + ' (' + q.price + ' €)' : 'À confirmer',
           _template: 'table'
         })
       });
@@ -2126,9 +2144,15 @@ function QualiReparBlock() {
   const sendWzWA = () => {
     const b = wzBrands.find(x=>x.id===wzBrand);
     const p = wzPannes.find(x=>x.id===wzPanne);
-    const prix = wzEstimatedPrice();
-    const msg = `Bonjour, je souhaite un devis pour :\n• ${b?.label||''} ${wzModel}\n• ${p?.label||''}\n${prix ? '• Budget estimé : à partir de '+prix+' €\n' : ''}Merci !`;
-    window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg),'_blank');
+    const q = wzActiveQ();
+    const lines = [
+      'Bonjour, je souhaite vérifier la disponibilité et confirmer le tarif pour :',
+      `• ${b?.label||''} ${wzModel}`,
+      `• ${p?.label||''}`,
+    ];
+    if (q) lines.push(`• Qualité choisie : ${q.name} (${q.price} €)`);
+    lines.push('', 'Merci !');
+    window.open('https://wa.me/33783921884?text='+encodeURIComponent(lines.join('\n')),'_blank');
   };
 
   const wzAppleModels = useMemo(() => {
@@ -2136,19 +2160,37 @@ function QualiReparBlock() {
     return [...new Set(window.PHONES.map(p => p.name))].sort().reverse();
   }, []);
 
-  /* Prix estimé depuis ECRANS / BATTERIES */
-  const wzEstimatedPrice = () => {
-    if (!wzModel || !wzPanne) return null;
-    const m = wzModel.toLowerCase();
+  /* === DEVIS : qualités + prix (cohérent avec le chatbot Evan, mêmes données) === */
+  const wzQualites = () => {
+    if (!wzModel || !wzPanne) return [];
+    const m = wzModel.toLowerCase().replace('iphone ', '').trim();
+    const match = (e) => {
+      const n = e.name.toLowerCase().replace('iphone ', '');
+      if (n === m) return true;
+      const main = n.split('/')[0].trim();
+      if (main === m) return true;
+      if (n.includes(m) || m.includes(main)) return true;
+      return false;
+    };
     if (wzPanne === 'ecran') {
-      const found = ECRANS.find(e => m.includes(e.name.toLowerCase().replace('iphone ','').replace('/12 pro','')) || e.name.toLowerCase().includes(m.replace('iphone ','')));
-      if (found) { const p = found.prix.find(x => x !== null); return p || null; }
+      const found = ECRANS.find(match);
+      return found ? QUALITES.map((q, i) => ({...q, price: found.prix[i]})).filter(q => q.price) : [];
     }
     if (wzPanne === 'batterie') {
-      const found = BATTERIES.find(e => m.includes(e.name.toLowerCase().replace('iphone ','').replace('/12 pro','')) || e.name.toLowerCase().includes(m.replace('iphone ','')));
-      if (found) { const p = found.prix.find(x => x !== null); return p || null; }
+      const found = BATTERIES.find(match);
+      return found ? QUALITES_BAT.map((q, i) => ({...q, price: found.prix[i]})).filter(q => q.price) : [];
     }
-    return null;
+    return [];
+  };
+  const wzEstimatedPrice = () => {
+    const qs = wzQualites();
+    return qs.length ? Math.min(...qs.map(q => q.price)) : null;
+  };
+  const wzActiveQ = () => {
+    const qs = wzQualites();
+    if (!qs.length) return null;
+    if (wzSelQ) { const f = qs.find(q => q.id === wzSelQ); if (f) return f; }
+    return qs.length > 2 ? qs[1] : qs[0];
   };
 
   const totalSteps = 2;
@@ -2182,7 +2224,7 @@ function QualiReparBlock() {
 
           {/* Bandeau réassurance */}
           <div className="mb-4 p-3 rounded-xl text-[11px] text-[var(--sp-muted)] leading-relaxed" style={{background:'linear-gradient(135deg, #fef3f3, #fff8f0)', border:'1px solid rgba(227,6,19,.08)'}}>
-            <span className="font-bold text-[var(--sp-red)]">−25 € QualiRépar déduits</span> — tarifs parmi les plus bas de la région. Plusieurs qualités d'écran au choix pour une transparence totale.
+            <span className="font-bold text-[var(--sp-red)]">Devis 100% personnalisé</span> — bonus QualiRépar −25 € appliqué quand éligible. Réponse rapide sur WhatsApp avec le tarif exact selon la qualité choisie.
           </div>
 
           {/* ── ÉTAPE 1 : Marque + Modèle ── */}
@@ -2221,20 +2263,55 @@ function QualiReparBlock() {
               <h2 className="text-xl font-extrabold tracking-tight">Quelle panne ?</h2>
               <div className="grid grid-cols-3 gap-2 mt-4">{wzPannes.map(p=>(<button key={p.id} onClick={()=>setWzPanne(p.id)} className="p-3 rounded-xl border border-black/6 hover:border-[var(--sp-red)] hover:bg-red-50/50 transition text-center"><div className="text-[22px] mb-1">{p.icon}</div><div className="font-bold text-[11px] leading-tight">{p.label}</div>{p.bonus&&<div className="text-[9px] font-bold text-[var(--sp-red)] mt-0.5">−25 €</div>}</button>))}</div>
             </>) : (<>
-              {/* Récap compact + prix */}
+              {/* Récap compact + prix (qualité sélectionnée) */}
               <div className="p-4 rounded-2xl border border-black/5" style={{background:'linear-gradient(135deg, #fafafa, #f5f5f7)'}}>
                 <div className="flex items-center justify-between mb-2">
                   <div>
                     <div className="font-extrabold text-[16px]">{wzModel}</div>
                     <div className="text-[13px] text-[var(--sp-muted)] flex items-center gap-1.5">{wzPannes.find(x=>x.id===wzPanne)?.icon} {wzPannes.find(x=>x.id===wzPanne)?.label} <button onClick={()=>setWzPanne(null)} className="text-[10px] underline text-[var(--sp-muted)]">changer</button></div>
                   </div>
-                  {wzEstimatedPrice() && (<div className="text-right">
-                    <div className="text-[10px] text-[var(--sp-muted)] font-semibold uppercase">À partir de</div>
-                    <div className="text-[28px] font-black text-[var(--sp-red)] leading-none">{wzEstimatedPrice()} <span className="text-[16px]">€</span></div>
-                    {wzPannes.find(x=>x.id===wzPanne)?.bonus && <div className="text-[10px] font-bold text-[var(--sp-red)]">dont −25 € QualiRépar</div>}
+                  {wzActiveQ() && (<div className="text-right">
+                    <div className="text-[10px] text-[var(--sp-muted)] font-semibold uppercase">{wzPannes.find(x=>x.id===wzPanne)?.bonus ? 'À partir de' : 'Tarif'}</div>
+                    {wzPannes.find(x=>x.id===wzPanne)?.bonus && <div className="text-[12px] text-[var(--sp-muted)] line-through leading-none">{wzActiveQ().price + 25} €</div>}
+                    <div className="text-[28px] font-black text-[var(--sp-red)] leading-none">{wzActiveQ().price} <span className="text-[16px]">€</span></div>
+                    {wzPannes.find(x=>x.id===wzPanne)?.bonus && <div className="text-[10px] font-bold text-[var(--sp-red)]">−25 € QualiRépar inclus</div>}
                   </div>)}
                 </div>
               </div>
+
+              {/* Sélecteur de qualité — affiche TOUTES les qualités d'écran/batterie avec leurs prix */}
+              {wzQualites().length > 0 && (
+                <div className="mt-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-[10px] text-[var(--sp-muted)] font-semibold uppercase tracking-wider">Choisir la qualité</div>
+                    <button onClick={()=>setShowQualInfo(true)} type="button" className="text-[11px] text-[var(--sp-red)] font-semibold hover:underline flex items-center gap-1">
+                      <span style={{display:'inline-flex',alignItems:'center',justifyContent:'center',width:'14px',height:'14px',borderRadius:'50%',border:'1.5px solid currentColor',fontSize:'9px',fontWeight:900}}>?</span>
+                      Comprendre les qualités
+                    </button>
+                  </div>
+                  <div className="grid gap-1.5">
+                    {wzQualites().map(q => {
+                      const isSel = q.id === wzActiveQ()?.id;
+                      return (
+                        <div key={q.id} onClick={()=>setWzSelQ(q.id)}
+                          className="flex items-center justify-between px-3 py-2 rounded-xl cursor-pointer transition"
+                          style={{
+                            background: isSel ? 'rgba(227,6,19,.08)' : '#fff',
+                            border: isSel ? '1.5px solid #e30613' : '1.5px solid rgba(0,0,0,.08)'
+                          }}>
+                          <div>
+                            <div style={{color:'#f5a524',fontSize:'10px',letterSpacing:'1px'}}>{'★'.repeat(q.stars)}</div>
+                            <div className="font-bold text-[13px]">{q.name}</div>
+                            {q.desc && <div className="text-[10px] text-[var(--sp-muted)]">{q.desc}</div>}
+                          </div>
+                          <div className="font-black text-[16px]">{q.price} €</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="text-[10px] text-[var(--sp-muted)] mt-2">Prix TTC · Garantie 6 mois pièces et main d'œuvre</div>
+                </div>
+              )}
 
               {/* Reassurance */}
               <div className="flex gap-3 mt-3 text-[10px] font-semibold text-[var(--sp-muted)]">
@@ -2428,6 +2505,43 @@ function QualiReparBlock() {
     </section>
     {showPopup && <QualiReparPopup onClose={() => setShowPopup(false)}/>}
     {wizardJSX}
+    {showQualInfo && (
+      <div className="fixed inset-0 z-[10001] flex items-center justify-center p-4" onClick={()=>setShowQualInfo(false)}>
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div className="relative bg-white rounded-[24px] max-w-[480px] w-full max-h-[88vh] overflow-y-auto p-6 shadow-2xl" onClick={e=>e.stopPropagation()}>
+          <button onClick={()=>setShowQualInfo(false)} className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center transition text-[16px]">✕</button>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-[10px] font-black" style={{background:'#e30613'}}>SP</span>
+            <span className="font-bold text-[15px]">Les qualités d'écran</span>
+          </div>
+          <h2 className="text-xl font-extrabold tracking-tight mb-1">Choisissez la qualité qui vous convient</h2>
+          <p className="text-[13px] text-[var(--sp-muted)] mb-4 leading-relaxed">
+            Chez Solution Phone, on est <strong>100% transparent</strong> : plusieurs qualités d'écran sont disponibles, à vous de choisir selon votre budget et l'usage de votre iPhone.
+          </p>
+          <div className="space-y-2.5">
+            {QUALITES.map(q => (
+              <div key={q.id} className="p-3 rounded-xl border border-black/8 bg-[var(--sp-bg-2)]/40">
+                <div className="flex items-center justify-between mb-1">
+                  <div className="font-bold text-[14px]">{q.name}</div>
+                  <div className="text-amber-500 text-[12px] tracking-widest">{'★'.repeat(q.stars)}</div>
+                </div>
+                <div className="text-[12px] text-[var(--sp-muted)]">{q.desc}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 p-3 rounded-xl" style={{background:'linear-gradient(135deg, #fef3f3, #fff8f0)', border:'1px solid rgba(227,6,19,.15)'}}>
+            <div className="text-[11px] font-bold text-[var(--sp-red)] mb-1">💡 Notre conseil</div>
+            <div className="text-[12px] text-ink leading-relaxed">
+              Pour un usage quotidien sans contrainte, le <strong>LTPS Prime</strong> ou le <strong>Soft OLED</strong> offrent le meilleur rapport qualité/prix. L'<strong>Original</strong> est recommandé si vous voulez un Face ID/True Tone et des couleurs strictement identiques au neuf.
+            </div>
+          </div>
+          <div className="mt-3 p-3 rounded-xl bg-[var(--sp-bg-2)] text-[11px] text-[var(--sp-muted)] leading-relaxed">
+            <strong>Bonus QualiRépar −25 €</strong> : Solution Phone est certifié par l'État. Sur écran/batterie/connecteur, le bonus est déduit automatiquement de votre facture, sans démarche de votre part.
+          </div>
+          <button onClick={()=>setShowQualInfo(false)} className="w-full mt-4 py-3 rounded-xl font-bold text-[14px] text-white" style={{background:'#e30613'}}>J'ai compris</button>
+        </div>
+      </div>
+    )}
     </>
   );
 }
