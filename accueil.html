@@ -569,7 +569,7 @@ details > summary::-webkit-details-marker { display:none; }
       <a href="reparation-samsung.html" class="text-white/90 hover:text-white transition whitespace-nowrap inline-flex items-center gap-1"><svg width="13" height="13" viewBox="0 0 24 24" fill="#3DDC84" style="flex-shrink:0"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48A5.84 5.84 0 0012 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.983 5.983 0 006 7h12c0-2.12-1.1-3.98-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg> Android</a>
     </nav>
     <div class="flex items-center gap-2 ml-auto leading-none shrink-0">
-      <a href="tel:+33783921884" class="hidden xl:inline text-white/95 hover:text-white font-medium whitespace-nowrap text-[12px]">03&nbsp;85&nbsp;33&nbsp;06&nbsp;89</a>
+      <a href="tel:+33385330689" class="hidden xl:inline text-white/95 hover:text-white font-medium whitespace-nowrap text-[12px]">03&nbsp;85&nbsp;33&nbsp;06&nbsp;89</a>
       <a href="#devis" class="inline-flex items-center gap-1 bg-ink text-white font-bold rounded-full hover:bg-black transition whitespace-nowrap" style="padding:.4rem .9rem;font-size:.75rem">Devis ›</a>
     </div>
   </div>
@@ -929,7 +929,7 @@ function buildEvanSystem(){ return `Tu es Evan, technicien expert chez Solution 
 
 INFOS BOUTIQUE :
 Adresse : 21 Rue Gambetta, 71000 Mâcon.
-Téléphone : 07 83 92 18 84. WhatsApp : 07 83 92 18 84. Mail : contact@solution-phone.fr
+Téléphone : 03 85 33 06 89. WhatsApp : 07 83 92 18 84. Mail : contact@solution-phone.fr
 Horaires : Lun-Sam 9h15-12h15 / 14h-19h (fermé entre midi et 14h). Dimanche fermé.
 Parking gratuit à proximité (Parking Lamartine, 2 min à pied).
 On existe depuis 2014, plus de 12 ans d'expérience. Label QualiRépar (réparation certifiée par l'État).
@@ -964,7 +964,7 @@ RÈGLES DE RÉPONSE :
 - Réponds en français, 2-4 phrases max, comme une vraie conversation.
 - Pas de markdown, pas de listes, pas de **, pas de titres.
 - Sois naturel : "Ah oui", "Pas de souci", "Bonne question", "Je t'explique"…
-- Propose TOUJOURS une action concrète : venir en boutique, envoyer un WhatsApp (07 83 92 18 84), appeler (07 83 92 18 84), ou visiter une page du site.
+- Propose TOUJOURS une action concrète : venir en boutique, envoyer un WhatsApp (07 83 92 18 84), appeler (03 85 33 06 89), ou visiter une page du site.
 - Si tu ne sais pas ou si la question est trop complexe, ne bloque JAMAIS. Dis "Le plus simple c'est qu'on en parle directement" et oriente vers : WhatsApp, téléphone, mail contact@solution-phone.fr, ou le tchat Crisp en bas à droite du site.
 - Tu es là pour AIDER, pas pour refuser. Trouve toujours une porte de sortie positive.`; }
 
@@ -1103,7 +1103,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
         cta: {
           primary: { label:'📲 WhatsApp · devis en 5 min', href:'https://wa.me/33783921884?text=Bonjour%20Evan%2C%20devis%20pour%20mon%20téléphone%20(je%20viens%20du%20site)', style:'wa' },
           secondary: [
-            { label:'📞 Appeler', href:'tel:+33783921884' },
+            { label:'📞 Appeler', href:'tel:+33385330689' },
             { label:'✉️ Email', href:'mailto:contact@solution-phone.fr' },
           ],
         },
@@ -1130,7 +1130,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
           cta: {
             primary: { label:`📲 WhatsApp · devis ${phone ? phone.name : ''}`, href:`https://wa.me/33783921884?text=${encodeURIComponent('Bonjour Evan, devis pour mon '+( phone ? phone.name : 'téléphone') + ' (autre panne)')}`, style:'wa' },
             secondary: [
-              { label:'📞 Appeler', href:'tel:+33783921884' },
+              { label:'📞 Appeler', href:'tel:+33385330689' },
             ],
           },
           buttons: [{ label:"← Menu principal", action:'menu' }],
@@ -1144,7 +1144,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
           cta: {
             primary: { label:`📲 WhatsApp · devis ${panne.label} ${phone.name}`, href:`https://wa.me/33783921884?text=${encodeURIComponent('Bonjour Evan, devis ' + panne.label + ' ' + phone.name + ' SVP')}`, style:'wa' },
             secondary: [
-              { label:'📞 Appeler', href:'tel:+33783921884' },
+              { label:'📞 Appeler', href:'tel:+33385330689' },
             ],
           },
           urgency: live.open ? 'Créneau disponible maintenant' : 'Réponse sous 30 min',
@@ -1297,7 +1297,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
           cta: {
             primary: { label:`📲 Réserver · ${phone.model} · ${phone.price} €`, href:`https://wa.me/33783921884?text=${encodeURIComponent('Bonjour Evan, je réserve le ' + phone.model + ' ' + (phone.storage||'') + ' à ' + phone.price + '€ (site web)')}`, style:'wa' },
             secondary: [
-              { label:'📞 Appeler', href:'tel:+33783921884' },
+              { label:'📞 Appeler', href:'tel:+33385330689' },
               { label:'Tout le stock', href:'reconditionnes.html' },
             ],
           },
@@ -1354,7 +1354,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
       });
     }
     else if (action === 'call') {
-      window.open('tel:+33783921884');
+      window.open('tel:+33385330689');
     }
     else if (action === 'map') {
       window.open('https://maps.google.com/?q=21+Rue+Gambetta+71000+Mâcon', '_blank');
@@ -1453,10 +1453,10 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
       ]});
     } catch(e) {
       setTyping(false);
-      botSay("Oups, problème de connexion ! Le plus simple : envoie-moi un WhatsApp ou appelle le 07 83 92 18 84.", {
+      botSay("Oups, problème de connexion ! Le plus simple : envoie-moi un WhatsApp ou appelle le 03 85 33 06 89.", {
         cta: {
           primary: { label:'📲 WhatsApp', href:'https://wa.me/33783921884', style:'wa' },
-          secondary: [{ label:'📞 Appeler', href:'tel:+33783921884' }],
+          secondary: [{ label:'📞 Appeler', href:'tel:+33385330689' }],
         },
       }, 200);
     }
@@ -1678,7 +1678,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
           <div className="evan-chat-name">Evan · Solution Phone</div>
           <div className="evan-chat-status"><span className="dot"></span> {live.open ? 'En boutique · répond en 1 min' : 'Hors boutique · répond sur WhatsApp'}</div>
         </div>
-        <a href="tel:+33783921884" style={{width:'32px',height:'32px',borderRadius:'50%',background:'rgba(255,255,255,.1)',display:'flex',alignItems:'center',justifyContent:'center',transition:'background .2s',flexShrink:0}} title="Appeler">
+        <a href="tel:+33385330689" style={{width:'32px',height:'32px',borderRadius:'50%',background:'rgba(255,255,255,.1)',display:'flex',alignItems:'center',justifyContent:'center',transition:'background .2s',flexShrink:0}} title="Appeler">
           <PhoneIcon className="text-white/80"/>
         </a>
       </div>
@@ -1743,7 +1743,7 @@ function PriceQualityCard({ card, live }) {
           <span>📲 Vérifier si pièce en stock · {fp} €</span>
         </a>
         <div className="cta-secondary">
-          <a href="tel:+33783921884">📞 Appeler</a>
+          <a href="tel:+33385330689">📞 Appeler</a>
           <a href={`mailto:contact@solution-phone.fr?subject=${encodeURIComponent('Devis ' + card.panne + ' ' + card.model)}`}>✉️ Email</a>
         </div>
       </div>
@@ -2006,7 +2006,7 @@ function QualiReparPopup({ onClose }) {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <a href="tel:+33783921884" className="btn-red flex items-center gap-2">📞 Appeler · 07 83 92 18 84</a>
+          <a href="tel:+33385330689" className="btn-red flex items-center gap-2">📞 Appeler · 03 85 33 06 89</a>
           <a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20voudrais%20un%20devis%20avec%20QualiR%C3%A9par" target="_blank" className="px-5 py-2.5 rounded-full font-bold border border-black/10 hover:border-[var(--sp-red)] hover:text-[var(--sp-red)] transition text-[14px]">WhatsApp · devis gratuit</a>
         </div>
       </div>
@@ -2140,7 +2140,7 @@ function QualiReparBlock() {
             <input value={wzNom} onChange={e=>setWzNom(e.target.value)} placeholder="Votre prénom" className="w-full mt-4 bg-[var(--sp-bg-2)] border border-black/5 rounded-2xl px-4 py-3 focus:outline-none focus:border-[var(--sp-red)]/40"/>
             <button onClick={sendWzWA} className="btn-wa w-full mt-3 justify-center text-[15px]"><WaIcon/> Envoyer sur WhatsApp</button>
             <div className="mt-3 grid grid-cols-2 gap-2">
-              <a href="tel:+33783921884" className="btn-red text-center text-[13px] justify-center"><PhoneIcon/> Appeler</a>
+              <a href="tel:+33385330689" className="btn-red text-center text-[13px] justify-center"><PhoneIcon/> Appeler</a>
               <a href="mailto:contact@solution-phone.fr" className="btn-ghost text-center text-[13px] justify-center"><MailIcon/> Email</a>
             </div>
             <button onClick={()=>setWzStep(2)} className="mt-3 text-sm font-semibold text-[var(--sp-muted)]">‹ Modifier</button>
@@ -2261,7 +2261,7 @@ function QualiReparBlock() {
             <p className="mt-3 text-white/50 text-[15px]">21 Rue Gambetta · 71000 Mâcon · Lun-Sam 9h15-12h15 / 14h-19h</p>
 
             <div className="mt-6 flex flex-wrap gap-3 justify-center">
-              <a href="tel:+33783921884" className="btn-red"><PhoneIcon/> 07 83 92 18 84</a>
+              <a href="tel:+33385330689" className="btn-red"><PhoneIcon/> 03 85 33 06 89</a>
               <a href="https://wa.me/33783921884" target="_blank" rel="noopener" className="btn-wa"><WaIcon/> Devis WhatsApp</a>
               <a href="mailto:contact@solution-phone.fr" className="btn-ghost" style={{background:'rgba(255,255,255,.08)', color:'#fff', borderColor:'rgba(255,255,255,.14)'}}><MailIcon/> contact@solution-phone.fr</a>
             </div>
@@ -2568,7 +2568,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
       <div><h4 class="font-semibold text-ink text-sm md:text-base mb-4">Contact</h4>
         <ul class="space-y-2 text-sm text-muted">
           <li class="flex items-start gap-2"><span class="mt-0.5">📍</span><span>21 Rue Gambetta<br/>71000 Mâcon</span></li>
-          <li><a href="tel:+33783921884" class="hover:text-accent transition flex items-center gap-2">📞 07 83 92 18 84 <span class="text-muted text-xs">(Solution Phone)</span></a></li>
+          <li><a href="tel:+33385330689" class="hover:text-accent transition flex items-center gap-2">📞 03 85 33 06 89 <span class="text-muted text-xs">(fixe)</span></a></li>
+          <li><a href="tel:+33783921884" class="hover:text-accent transition flex items-center gap-2">📱 07 83 92 18 84 <span class="text-muted text-xs">(mobile/WhatsApp)</span></a></li>
           <li><a href="tel:+33602849953" class="hover:text-accent transition flex items-center gap-2">📞 06 02 84 99 53 <span class="text-muted text-xs">(Solution Accessoires)</span></a></li>
           <li><a href="https://wa.me/33783921884" target="_blank" rel="noopener" class="hover:text-accent transition flex items-center gap-2">💬 WhatsApp</a></li>
           <li><a href="mailto:contact@solution-phone.fr" class="hover:text-accent transition flex items-center gap-2">✉️ contact@solution-phone.fr</a></li>
@@ -2588,7 +2589,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
       </div>
       <div class="text-center text-xs text-muted border-t border-black/5 pt-4">
         <p>Exploités par l'<strong>EURL Solution Phone</strong> au capital de 5 000 € — SIRET 801 044 785 00021 — RCS Mâcon B 801 044 785</p>
-        <p class="mt-1">21 Rue Gambetta, 71000 Mâcon · 07 83 92 18 84 (Solution Phone) · 06 02 84 99 53 (Solution Accessoires) · contact@solution-phone.fr · Ouvert du lundi au samedi</p>
+        <p class="mt-1">21 Rue Gambetta, 71000 Mâcon · 03 85 33 06 89 (fixe) · 07 83 92 18 84 (mobile/WhatsApp) · 06 02 84 99 53 (Solution Accessoires) · contact@solution-phone.fr · Ouvert du lundi au samedi</p>
       </div>
     </div>
     <div class="border-t border-black/5 py-6 md:py-8">
@@ -2615,41 +2616,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 window.$crisp=[];window.CRISP_WEBSITE_ID="309b806d-57cc-4a29-b347-2c78be66e79c";
 (function(){var d=document;var s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
 </script>
-<!-- POPUP info ligne fixe (auto-disparait apres 8s) -->
-<div id="sp-phone-alert" role="alertdialog" aria-labelledby="sp-phone-alert-title" aria-describedby="sp-phone-alert-desc">
-  <button type="button" id="sp-phone-alert-close" aria-label="Fermer">&times;</button>
-  <div id="sp-phone-alert-title">📞 Problème de ligne fixe</div>
-  <div id="sp-phone-alert-desc">Notre ligne fixe ne fonctionne pas toujours en ce moment. Merci d'appeler :</div>
-  <div class="sp-phone-alert-numbers">
-    <a href="tel:+33783921884">📱 07 83 92 18 84 — Solution Phone</a>
-    <a href="tel:+33602849953">📱 06 02 84 99 53 — Solution Accessoires</a>
-  </div>
-</div>
-<style>
-#sp-phone-alert{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-30px);z-index:99999;max-width:420px;width:calc(100% - 24px);background:#fff;border:2px solid #e30613;border-radius:16px;box-shadow:0 18px 60px rgba(0,0,0,.22);padding:18px 44px 18px 20px;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;color:#1d1d1f;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
-#sp-phone-alert.sp-show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
-#sp-phone-alert-close{position:absolute;top:6px;right:10px;background:transparent;border:0;font-size:26px;line-height:1;color:#6e6e73;cursor:pointer;padding:4px 8px;border-radius:8px}
-#sp-phone-alert-close:hover{background:#f5f5f7;color:#1d1d1f}
-#sp-phone-alert-title{font-weight:800;font-size:15px;color:#e30613;margin-bottom:6px}
-#sp-phone-alert-desc{font-size:13.5px;color:#1d1d1f;margin-bottom:10px;line-height:1.4}
-#sp-phone-alert .sp-phone-alert-numbers{display:flex;flex-direction:column;gap:6px}
-#sp-phone-alert .sp-phone-alert-numbers a{display:block;background:#e30613;color:#fff;padding:9px 14px;border-radius:10px;font-weight:700;font-size:13.5px;text-decoration:none;text-align:center;transition:background .2s}
-#sp-phone-alert .sp-phone-alert-numbers a:hover{background:#b8050f}
-@media (max-width:480px){#sp-phone-alert{top:10px;padding:14px 40px 14px 16px}#sp-phone-alert-title{font-size:14px}#sp-phone-alert-desc{font-size:12.5px}}
-</style>
-<script>
-(function(){
-  try{if(sessionStorage.getItem('sp-phone-alert-dismissed')==='1')return;}catch(e){}
-  var el=document.getElementById('sp-phone-alert');if(!el)return;
-  var btn=document.getElementById('sp-phone-alert-close');
-  var t=null;
-  function hide(){el.classList.remove('sp-show');try{sessionStorage.setItem('sp-phone-alert-dismissed','1');}catch(e){}if(t){clearTimeout(t);t=null;}}
-  if(btn)btn.addEventListener('click',hide);
-  setTimeout(function(){el.classList.add('sp-show');},500);
-  t=setTimeout(hide,8000);
-})();
-</script>
-<!-- /POPUP info ligne fixe -->
 
 </body>
 </html>

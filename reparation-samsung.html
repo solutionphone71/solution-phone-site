@@ -1086,7 +1086,7 @@ gtag("config", "G-3QP90K1TLM");
     <a href="reconditionnes.html">Reconditionnés</a>
     <a href="actualites.html">Actualités</a>
   </div>
-  <a href="tel:+33783921884" class="nav-phone">📞 07 83 92 18 84</a>
+  <a href="tel:+33385330689" class="nav-phone">📞 03 85 33 06 89</a>
   <a href="https://wa.me/33783921884" target="_blank" rel="noopener" class="nav-cta">💬 WhatsApp</a>
 </nav>
 
@@ -1106,7 +1106,7 @@ gtag("config", "G-3QP90K1TLM");
       <a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20voudrais%20un%20devis%20pour%20ma%20r%C3%A9paration%20Samsung" target="_blank" rel="noopener" class="btn-p btn-wa">
         💬 Obtenir un devis
       </a>
-      <a href="tel:+33783921884" class="btn-s">
+      <a href="tel:+33385330689" class="btn-s">
         📞 Appeler maintenant
       </a>
     </div>
@@ -1338,7 +1338,7 @@ gtag("config", "G-3QP90K1TLM");
         <a href="https://wa.me/33783921884?text=Bonjour%2C%20j%27aimerais%20un%20devis%20pour%20ma%20r%C3%A9paration%20Samsung" target="_blank" rel="noopener" class="btn-p btn-wa">
           💬 Devis WhatsApp
         </a>
-        <a href="tel:+33783921884" class="btn-p">
+        <a href="tel:+33385330689" class="btn-p">
           📞 Appeler
         </a>
         <a href="index.html" class="btn-s">
@@ -1420,7 +1420,7 @@ gtag("config", "G-3QP90K1TLM");
       <a href="reparation-iphone.html">Réparation iPhone</a>
       <a href="cgv.html">CGV & Mentions légales</a>
       <a href="https://wa.me/33783921884">WhatsApp</a>
-      <a href="tel:0783921884">07 83 92 18 84</a>
+      <a href="tel:0385330689">03 85 33 06 89</a>
     </div>
   </div>
 </footer>
@@ -1451,7 +1451,7 @@ gtag("config", "G-3QP90K1TLM");
       <a href="actualites.html">📰 Actualités</a>
     </nav>
     <div class="sp-drawer-foot">
-      <a href="tel:+33783921884">📞 07 83 92 18 84</a>
+      <a href="tel:+33385330689">📞 03 85 33 06 89</a>
       <a href="https://wa.me/33783921884" target="_blank" rel="noopener">💬 WhatsApp</a>
       <a href="cgv.html" style="font-size:12px;color:#888;margin-top:6px">CGV &amp; Mentions légales</a>
     </div>
@@ -1501,41 +1501,6 @@ window.$crisp.push(["on", "chat:opened", function(){ var b=document.getElementBy
 window.$crisp.push(["on", "chat:closed", function(){ var b=document.getElementById('crispFloatBtn'); if(b) b.style.display='flex'; }]);
 function openCrispFloat(){ window.$crisp.push(["do","chat:show"]); window.$crisp.push(["do","chat:open"]); }
 </script>
-<!-- POPUP info ligne fixe (auto-disparait apres 8s) -->
-<div id="sp-phone-alert" role="alertdialog" aria-labelledby="sp-phone-alert-title" aria-describedby="sp-phone-alert-desc">
-  <button type="button" id="sp-phone-alert-close" aria-label="Fermer">&times;</button>
-  <div id="sp-phone-alert-title">📞 Problème de ligne fixe</div>
-  <div id="sp-phone-alert-desc">Notre ligne fixe ne fonctionne pas toujours en ce moment. Merci d'appeler :</div>
-  <div class="sp-phone-alert-numbers">
-    <a href="tel:+33783921884">📱 07 83 92 18 84 — Solution Phone</a>
-    <a href="tel:+33602849953">📱 06 02 84 99 53 — Solution Accessoires</a>
-  </div>
-</div>
-<style>
-#sp-phone-alert{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-30px);z-index:99999;max-width:420px;width:calc(100% - 24px);background:#fff;border:2px solid #e30613;border-radius:16px;box-shadow:0 18px 60px rgba(0,0,0,.22);padding:18px 44px 18px 20px;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;color:#1d1d1f;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
-#sp-phone-alert.sp-show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
-#sp-phone-alert-close{position:absolute;top:6px;right:10px;background:transparent;border:0;font-size:26px;line-height:1;color:#6e6e73;cursor:pointer;padding:4px 8px;border-radius:8px}
-#sp-phone-alert-close:hover{background:#f5f5f7;color:#1d1d1f}
-#sp-phone-alert-title{font-weight:800;font-size:15px;color:#e30613;margin-bottom:6px}
-#sp-phone-alert-desc{font-size:13.5px;color:#1d1d1f;margin-bottom:10px;line-height:1.4}
-#sp-phone-alert .sp-phone-alert-numbers{display:flex;flex-direction:column;gap:6px}
-#sp-phone-alert .sp-phone-alert-numbers a{display:block;background:#e30613;color:#fff;padding:9px 14px;border-radius:10px;font-weight:700;font-size:13.5px;text-decoration:none;text-align:center;transition:background .2s}
-#sp-phone-alert .sp-phone-alert-numbers a:hover{background:#b8050f}
-@media (max-width:480px){#sp-phone-alert{top:10px;padding:14px 40px 14px 16px}#sp-phone-alert-title{font-size:14px}#sp-phone-alert-desc{font-size:12.5px}}
-</style>
-<script>
-(function(){
-  try{if(sessionStorage.getItem('sp-phone-alert-dismissed')==='1')return;}catch(e){}
-  var el=document.getElementById('sp-phone-alert');if(!el)return;
-  var btn=document.getElementById('sp-phone-alert-close');
-  var t=null;
-  function hide(){el.classList.remove('sp-show');try{sessionStorage.setItem('sp-phone-alert-dismissed','1');}catch(e){}if(t){clearTimeout(t);t=null;}}
-  if(btn)btn.addEventListener('click',hide);
-  setTimeout(function(){el.classList.add('sp-show');},500);
-  t=setTimeout(hide,8000);
-})();
-</script>
-<!-- /POPUP info ligne fixe -->
 
 </body>
 </html>

@@ -241,6 +241,10 @@ h1 .acc {
 }
 .step-item:hover { transform:translateX(4px); }
 .step-item.highlight { background:rgba(255,59,48,0.06); }
+.step-item.done-pulse { background:rgba(76,175,80,0.10); animation: donePulse 0.6s ease; }
+.step-item.done-pulse .step-num { background:linear-gradient(135deg, #66bb6a, #43a047); }
+.step-item.done-pulse .step-text::after { content:' ✓'; color:#2e7d32; font-weight:900; }
+@keyframes donePulse { 0% { transform:scale(1); } 40% { transform:scale(1.03); } 100% { transform:scale(1); } }
 .step-num {
   width:36px; height:36px; flex-shrink:0;
   background:linear-gradient(135deg, var(--red), var(--red2));
@@ -529,15 +533,15 @@ h1 .acc {
     <h2>Suivez les étapes :</h2>
 
     <div class="steps-list">
-      <div class="step-item highlight">
+      <div class="step-item highlight" id="step-1">
         <div class="step-num">1</div>
         <div class="step-text">Laissez-nous un avis Google</div>
       </div>
-      <div class="step-item">
+      <div class="step-item" id="step-2">
         <div class="step-num">2</div>
-        <div class="step-text">Revenez sur cette page</div>
+        <div class="step-text"><strong>Revenez sur cette page</strong> 👈</div>
       </div>
-      <div class="step-item">
+      <div class="step-item" id="step-3">
         <div class="step-num">3</div>
         <div class="step-text">Faites tourner la roue !</div>
       </div>
@@ -548,12 +552,28 @@ h1 .acc {
       <span class="star">⭐</span><span class="star">⭐</span>
     </div>
 
+    <!-- Bandeau prévention AVANT le clic Google : crucial -->
+    <div id="warn-before-google" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);border:2px solid #ffa726;border-radius:14px;padding:14px 16px;margin:12px 0 16px;display:flex;gap:10px;align-items:flex-start;">
+      <div style="font-size:26px;line-height:1;">⚠️</div>
+      <div style="font-size:13.5px;color:#5d4037;line-height:1.45;">
+        <strong style="display:block;color:#bf360c;font-size:14.5px;margin-bottom:4px;">Important — après votre avis :</strong>
+        Un nouvel onglet va s'ouvrir avec Google.
+        <strong>Une fois votre avis publié, revenez sur CETTE page</strong> pour tourner la roue 🎡
+      </div>
+    </div>
+
     <a class="btn-google" id="btn-google" href="#" target="_blank" rel="noopener" onclick="onReviewClick()">
       Notez sur Google
     </a>
 
     <!-- Zone countdown — apparaît après clic -->
     <div class="countdown-zone" id="countdown-zone">
+      <!-- Rappel BIG visible pendant le countdown -->
+      <div id="return-reminder" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border:2px solid #1976d2;border-radius:14px;padding:14px 16px;margin-bottom:12px;text-align:center;">
+        <div style="font-size:30px;margin-bottom:6px;">👈</div>
+        <div style="font-size:14px;font-weight:800;color:#0d47a1;line-height:1.35;">Bravo ! Une fois votre avis Google laissé,<br>vous êtes au bon endroit ici 🎯</div>
+        <div style="font-size:12px;color:#1565c0;margin-top:6px;">Le bouton "JOUER" apparaît dans quelques secondes…</div>
+      </div>
       <div class="lock-info">⏳ Roue disponible dans <strong id="countdown-num">20</strong>s</div>
       <div class="countdown-bar-wrap">
         <div class="countdown-bar" id="countdown-bar" style="width:100%;"></div>
@@ -987,6 +1007,55 @@ function onReviewClick() {
   if (countdownActive) return;
   countdownActive = true;
 
+  /* === Titre d'onglet clignotant tant que le client est sur Google ===
+     Quand le client part sur l'onglet Google, son titre d'onglet ici devient une alerte
+     qui lui rappelle de revenir. */
+  const origTitle = document.title;
+  let titleFlip = false;
+  let titleInterval = null;
+  let userReturned = false;
+
+  const startTitleFlash = () => {
+    if (titleInterval) return;
+    titleInterval = setInterval(() => {
+      titleFlip = !titleFlip;
+      document.title = titleFlip ? '👈 REVENEZ ICI - Roue Solution Phone' : '⏳ Vous avez gagné un cadeau !';
+    }, 1100);
+  };
+  const stopTitleFlash = () => {
+    if (titleInterval) { clearInterval(titleInterval); titleInterval = null; }
+    document.title = origTitle;
+  };
+
+  /* === Détection retour onglet via Page Visibility API === */
+  const onVisChange = () => {
+    if (document.hidden) {
+      /* Client est parti sur l'onglet Google → on flash le titre */
+      startTitleFlash();
+    } else {
+      /* Client revient sur notre onglet */
+      stopTitleFlash();
+      if (!userReturned) {
+        userReturned = true;
+        /* Surlignage de l'étape 2 (revenez) → étape 3 (jouez) */
+        const step2 = document.getElementById('step-2');
+        const step3 = document.getElementById('step-3');
+        if (step2) step2.classList.add('done-pulse');
+        setTimeout(() => { if (step3) step3.classList.add('highlight'); }, 600);
+        /* Mettre à jour le rappel pour confirmer le retour */
+        const rem = document.getElementById('return-reminder');
+        if (rem) {
+          rem.style.background = 'linear-gradient(135deg,#c8e6c9,#a5d6a7)';
+          rem.style.borderColor = '#2e7d32';
+          rem.innerHTML = '<div style="font-size:34px;margin-bottom:6px;">✅</div>'
+            + '<div style="font-size:15px;font-weight:800;color:#1b5e20;line-height:1.35;">Parfait, vous êtes revenu !</div>'
+            + '<div style="font-size:12.5px;color:#2e7d32;margin-top:6px;">Cliquez sur JOUER ci-dessous pour tourner la roue 🎡</div>';
+        }
+      }
+    }
+  };
+  document.addEventListener('visibilitychange', onVisChange);
+
   setTimeout(() => {
     const zone = document.getElementById('countdown-zone');
     if (zone) zone.style.display = 'block';
@@ -1050,54 +1119,55 @@ async function sendPrizeEmail() {
       avec cet email ou montrez l'écran de gain.
     </p>
     <div style="margin-top:24px;padding:18px;background:#f5f5f7;border-radius:12px;">
-      <p style="font-size:13px;color:#6e6e73;margin:0;">📍 Solution Phone — 21 Rue Gambetta, 71000 Mâcon<br>📞 07 83 92 18 84</p>
+      <p style="font-size:13px;color:#6e6e73;margin:0;">📍 Solution Phone — 21 Rue Gambetta, 71000 Mâcon<br>📞 03 85 33 06 89</p>
     </div>
   </div>
   <div style="padding:16px 28px;text-align:center;border-top:1px solid rgba(0,0,0,0.06);">
     <p style="font-size:12px;color:#aeaeb2;margin:0;">Solution Phone · Certifié QualiRépar · Mâcon</p>
   </div>
 </div>
-<!-- POPUP info ligne fixe (auto-disparait apres 8s) -->
-<div id="sp-phone-alert" role="alertdialog" aria-labelledby="sp-phone-alert-title" aria-describedby="sp-phone-alert-desc">
-  <button type="button" id="sp-phone-alert-close" aria-label="Fermer">&times;</button>
-  <div id="sp-phone-alert-title">📞 Problème de ligne fixe</div>
-  <div id="sp-phone-alert-desc">Notre ligne fixe ne fonctionne pas toujours en ce moment. Merci d'appeler :</div>
-  <div class="sp-phone-alert-numbers">
-    <a href="tel:+33783921884">📱 07 83 92 18 84 — Solution Phone</a>
-    <a href="tel:+33602849953">📱 06 02 84 99 53 — Solution Accessoires</a>
-  </div>
-</div>
-<style>
-#sp-phone-alert{position:fixed;left:50%;top:20px;transform:translateX(-50%) translateY(-30px);z-index:99999;max-width:420px;width:calc(100% - 24px);background:#fff;border:2px solid #e30613;border-radius:16px;box-shadow:0 18px 60px rgba(0,0,0,.22);padding:18px 44px 18px 20px;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;color:#1d1d1f;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
-#sp-phone-alert.sp-show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
-#sp-phone-alert-close{position:absolute;top:6px;right:10px;background:transparent;border:0;font-size:26px;line-height:1;color:#6e6e73;cursor:pointer;padding:4px 8px;border-radius:8px}
-#sp-phone-alert-close:hover{background:#f5f5f7;color:#1d1d1f}
-#sp-phone-alert-title{font-weight:800;font-size:15px;color:#e30613;margin-bottom:6px}
-#sp-phone-alert-desc{font-size:13.5px;color:#1d1d1f;margin-bottom:10px;line-height:1.4}
-#sp-phone-alert .sp-phone-alert-numbers{display:flex;flex-direction:column;gap:6px}
-#sp-phone-alert .sp-phone-alert-numbers a{display:block;background:#e30613;color:#fff;padding:9px 14px;border-radius:10px;font-weight:700;font-size:13.5px;text-decoration:none;text-align:center;transition:background .2s}
-#sp-phone-alert .sp-phone-alert-numbers a:hover{background:#b8050f}
-@media (max-width:480px){#sp-phone-alert{top:10px;padding:14px 40px 14px 16px}#sp-phone-alert-title{font-size:14px}#sp-phone-alert-desc{font-size:12.5px}}
-</style>
-<script>
-(function(){
-  try{if(sessionStorage.getItem('sp-phone-alert-dismissed')==='1')return;}catch(e){}
-  var el=document.getElementById('sp-phone-alert');if(!el)return;
-  var btn=document.getElementById('sp-phone-alert-close');
-  var t=null;
-  function hide(){el.classList.remove('sp-show');try{sessionStorage.setItem('sp-phone-alert-dismissed','1');}catch(e){}if(t){clearTimeout(t);t=null;}}
-  if(btn)btn.addEventListener('click',hide);
-  setTimeout(function(){el.classList.add('sp-show');},500);
-  t=setTimeout(hide,8000);
-})();
-</script>
-<!-- /POPUP info ligne fixe -->
 
 </body>
 </html>`;
 
+  /* === Envoi via formsubmit.co (même service que le reste du site, prouvé fonctionnel) ===
+     - Notifie le shop sur contact@solution-phone.fr
+     - Envoie automatiquement une confirmation au client via _autoresponse  */
+  const autoMsg = `Bonjour,
+
+Felicitations, vous avez gagne a la roue Solution Phone !
+
+Votre cadeau : ${winPrizeName}
+
+Pour le recuperer, passez en boutique avec cet email ou montrez l'ecran de gain.
+
+Solution Phone
+21 Rue Gambetta, 71000 Macon
+03 85 33 06 89 (fixe) / 07 83 92 18 84 (mobile/WhatsApp)
+Ouvert du lundi au samedi : 9h15-12h15 et 14h-19h
+
+A bientot !`;
+
   try {
-    const r1 = await fetch('https://api.brevo.com/v3/smtp/email', {
+    const resp = await fetch('https://formsubmit.co/ajax/' + SHOP_EMAIL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: '🎡 Nouveau gain roue — ' + winPrizeName,
+        _template: 'table',
+        _autoresponse: autoMsg,
+        _replyto: email,
+        email: email,
+        Lot_gagne: winPrizeName,
+        Telephone: _phoneVerifie || 'non renseigne',
+        Date: new Date().toLocaleString('fr-FR')
+      })
+    });
+    const json = await resp.json().catch(() => ({}));
+    if (!resp.ok || json.success === 'false') throw new Error('formsubmit failed');
+
+    /* Backup : envoyer une copie HTML stylisée au client via Brevo si possible (best effort, on ignore l'erreur) */
+    fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1106,32 +1176,17 @@ async function sendPrizeEmail() {
         subject: '🎡 Votre cadeau Solution Phone — ' + winPrizeName,
         htmlContent
       })
-    });
-
-    await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
-      headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sender:  { name: 'Roue Cadeaux', email: SHOP_EMAIL },
-        to:      [{ email: SHOP_EMAIL, name: 'Solution Phone' }],
-        subject: '🎁 Nouveau gain roue — ' + winPrizeName,
-        htmlContent: `<p>Nouveau gagnant à la roue !</p>
-          <p><strong>Lot :</strong> ${winPrizeName}</p>
-          <p><strong>Email client :</strong> ${email}</p>
-          <p><strong>Téléphone :</strong> ${_phoneVerifie || 'non renseigné'}</p>
-          <p><strong>Date :</strong> ${new Date().toLocaleString('fr-FR')}</p>`
-      })
-    });
+    }).catch(() => {});
 
     document.getElementById('email-sent-msg').style.display = 'block';
     btn.textContent = '✅ Email envoyé !';
   } catch(e) {
-    console.warn('Brevo failed, fallback mailto', e);
+    console.warn('formsubmit failed, fallback mailto', e);
     const subject = encodeURIComponent('🎡 Cadeau Roue — ' + winPrizeName);
     const body    = encodeURIComponent(`Client : ${email}\nLot : ${winPrizeName}\nTél : ${_phoneVerifie || '-'}`);
     window.open('mailto:' + SHOP_EMAIL + '?subject=' + subject + '&body=' + body, '_blank');
     document.getElementById('email-sent-msg').style.display = 'block';
-    btn.textContent = '✅ Email préparé !';
+    btn.textContent = '✅ Email préparé (à envoyer manuellement)';
   }
 }
 
