@@ -44,8 +44,9 @@
   },
   "geo": { "@type": "GeoCoordinates", "latitude": 46.3065, "longitude": 4.8336 },
   "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "09:15", "closes": "12:15" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "14:00", "closes": "19:00" }
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday"], "opens": "09:15", "closes": "12:15" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday"], "opens": "14:00", "closes": "19:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "09:15", "closes": "19:00" }
   ],
   "priceRange": "€€",
   "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "590", "bestRating": "5" },
@@ -799,21 +800,26 @@ function useLiveOpen() {
   const day = now.getDay();
   const hm = now.getHours() * 60 + now.getMinutes();
   let open = false, opens = '', closes = '', nextOpenStr = '';
-  /* Horaires : Lun-Sam 9h15-12h15 / 14h-19h (pause déjeuner), Dim fermé */
+  /* Horaires : Lundi 9h15-12h15 / 14h-19h (pause déjeuner), Mar-Sam 9h15-19h (journée continue), Dim fermé */
+  const isMonday = day === 1;
   const matin = hm >= 9*60+15 && hm < 12*60+15;
   const aprem = hm >= 14*60 && hm < 19*60;
-  if (day >= 1 && day <= 6) { opens = '9:15'; closes = '19:00'; open = matin || aprem; }
+  const journeeContinue = hm >= 9*60+15 && hm < 19*60;
+  if (day >= 1 && day <= 6) {
+    opens = '9:15'; closes = '19:00';
+    open = isMonday ? (matin || aprem) : journeeContinue;
+  }
   let countdown = '';
   if (open) {
-    const closeMin = matin ? 12*60+15 : 19*60;
+    const closeMin = (isMonday && matin) ? 12*60+15 : 19*60;
     const left = closeMin - hm;
     const h = Math.floor(left / 60), m = left % 60;
     countdown = h > 0 ? `${h}h${String(m).padStart(2,'0')}` : `${m} min`;
   } else {
     /* Trouver la prochaine ouverture */
     let found = false;
-    /* D'abord vérifier si on est dans la pause déj aujourd'hui */
-    if (day >= 1 && day <= 6 && hm >= 12*60+15 && hm < 14*60) {
+    /* Pause déj uniquement le lundi */
+    if (isMonday && hm >= 12*60+15 && hm < 14*60) {
       nextOpenStr = "aujourd'hui 14h00";
       found = true;
     }
@@ -941,7 +947,7 @@ function buildEvanSystem(){ return `Tu es Evan, technicien expert chez Solution 
 INFOS BOUTIQUE :
 Adresse : 21 Rue Gambetta, 71000 Mâcon.
 Téléphone : 03 85 33 06 89. WhatsApp : 07 83 92 18 84. Mail : contact@solution-phone.fr
-Horaires : Lun-Sam 9h15-12h15 / 14h-19h (fermé entre midi et 14h). Dimanche fermé.
+Horaires : Lundi 9h15-12h15 / 14h-19h (pause déjeuner). Mardi au samedi 9h15-19h (journée continue). Dimanche fermé.
 Parking gratuit à proximité (Parking Lamartine, 2 min à pied).
 On existe depuis 2014, plus de 12 ans d'expérience. Label QualiRépar (réparation certifiée par l'État).
 
@@ -1545,7 +1551,7 @@ const ChatEvan = forwardRef(function ChatEvan({ live }, ref) {
     } else if (/accessoire|coque|chargeur|hydrogel|protection/i.test(text)) {
       setTimeout(() => handleAction('access', null), 100);
     } else if (/horaire|ouvert|ferm[ée]|heure|quand/i.test(text)) {
-      botSay(`On est ouvert du lundi au samedi, 9h15-12h15 puis 14h-19h. ${live.open ? "Là c'est ouvert, passe quand tu veux !" : "Là c'est fermé, mais envoie un WhatsApp, je réponds dès qu'on ouvre."}`, {
+      botSay(`On est ouvert du lundi au samedi à partir de 9h15. Le lundi on fait une pause déj (9h15-12h15 puis 14h-19h), et du mardi au samedi c'est journée continue jusqu'à 19h ! ${live.open ? "Là c'est ouvert, passe quand tu veux !" : "Là c'est fermé, mais envoie un WhatsApp, je réponds dès qu'on ouvre."}`, {
         buttons: [
           { label:"📍 Itinéraire", action:'map' },
           { label:"📲 WhatsApp", action:'wa_devis' },
@@ -2604,7 +2610,7 @@ function Reviews() {
 function FAQ() {
   const items = [
     {q:'Combien de temps dure une réparation ?',a:'Pour les interventions standards (écran, batterie, connecteur de charge), comptez 30 à 45 minutes en boutique. Pour les cas plus complexes (carte mère, désoxydation), nous diagnostiquons gratuitement sous 24h puis vous proposons un devis.'},
-    {q:'Dois-je prendre rendez-vous ?',a:<>Non, vous pouvez passer directement en boutique du <strong>lundi au samedi, 9h15–12h15 et 14h–19h</strong>. Pour gagner du temps, un message WhatsApp au <a href="https://wa.me/33783921884" style={{color:'var(--sp-red)',fontWeight:600}}>07 83 92 18 84</a> nous permet de préparer la pièce avant votre arrivée.</>},
+    {q:'Dois-je prendre rendez-vous ?',a:<>Non, vous pouvez passer directement en boutique du <strong>lundi au samedi dès 9h15</strong> (lundi : pause déjeuner 12h15–14h, mardi au samedi : journée continue jusqu'à 19h). Pour gagner du temps, un message WhatsApp au <a href="https://wa.me/33783921884" style={{color:'var(--sp-red)',fontWeight:600}}>07 83 92 18 84</a> nous permet de préparer la pièce avant votre arrivée.</>},
     {q:'Mes données personnelles seront-elles protégées ?',a:'Absolument. La réparation s\'effectue sans déverrouillage de votre appareil dans 99 % des cas. Si un test fonctionnel nécessite le code, il reste confidentiel et nous ne consultons jamais vos contenus personnels. Notre éthique : votre téléphone, vos données.'},
     {q:'Comment fonctionne le bonus QualiRépar −25 € ?',a:'Solution Phone est certifié QualiRépar par l\'État. Le bonus (25 € sur écran, batterie, connecteur) est appliqué directement sur votre facture, sans démarche de votre part. Nous remplissons le dossier pour vous.'},
     {q:'Quelle est la durée de garantie ?',a:'6 mois pièces et main-d\'œuvre sur toutes nos réparations. Si la pièce présente un défaut dans ce délai, on la remplace gratuitement. Conservez votre facture.'},
@@ -2736,7 +2742,7 @@ function GoogleMap() {
         <div>
           <Eyebrow>Nous trouver · Zone d'intervention</Eyebrow>
           <h2 className="sp-h2 mt-3">21 Rue Gambetta, <span className="sp-accent">71000 Mâcon</span></h2>
-          <p className="text-[15px] text-[var(--sp-ink-2)] mt-2">Lundi au samedi 9h15–12h15 / 14h–19h · Sans rendez-vous.</p>
+          <p className="text-[15px] text-[var(--sp-ink-2)] mt-2">Lundi 9h15–12h15 / 14h–19h · Mardi au samedi 9h15–19h (journée continue) · Sans rendez-vous.</p>
           <p className="text-[14px] text-[var(--sp-ink-2)] mt-3 leading-relaxed">On accueille les clients de <strong>Mâcon</strong> et dans un rayon de 30 km : Charnay, Sancé, Saint-Laurent, Crèches, Prissé, Hurigny, Cluny, Tournus, Bourg-en-Bresse, Belleville.</p>
           <div className="mt-4 flex flex-wrap gap-1.5">
             {villes.map(v => <span key={v} className="px-2.5 py-1 rounded-full bg-[var(--sp-bg-2)] border border-black/5 text-[11px] font-semibold text-[var(--sp-ink)]/70">{v}</span>)}
