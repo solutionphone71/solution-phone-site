@@ -2052,6 +2052,7 @@ function QualiReparBlock() {
   const [wzShowEmail, setWzShowEmail] = useState(false);
   const [wzNom, setWzNom] = useState('');
   const [wzTel, setWzTel] = useState('');
+  const [wzEmail, setWzEmail] = useState('');
   const [wzSending, setWzSending] = useState(false);
   const [wzSent, setWzSent] = useState(false);
   const [wzSelQ, setWzSelQ] = useState(null);            /* qualité sélectionnée dans le wizard */
@@ -2060,6 +2061,7 @@ function QualiReparBlock() {
   const [ctShow, setCtShow] = useState(false);
   const [ctNom, setCtNom] = useState('');
   const [ctTel, setCtTel] = useState('');
+  const [ctEmail, setCtEmail] = useState('');
   const [ctMsg, setCtMsg] = useState('');
   const [ctSending, setCtSending] = useState(false);
   const [ctSent, setCtSent] = useState(false);
@@ -2069,13 +2071,13 @@ function QualiReparBlock() {
     try {
       await fetch('https://formsubmit.co/ajax/contact@solution-phone.fr', {
         method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body: JSON.stringify({
+        body: JSON.stringify(Object.assign({
           _subject: 'Message site web — ' + ctNom.trim(),
           Nom: ctNom.trim(),
           Telephone: ctTel.trim(),
           Message: ctMsg.trim(),
           _template: 'table'
-        })
+        }, ctEmail.trim() ? { email: ctEmail.trim(), _replyto: ctEmail.trim(), Email: ctEmail.trim() } : {}))
       });
       setCtSent(true);
     } catch(err) { alert('Erreur d\'envoi. Réessayez ou contactez-nous par WhatsApp.'); }
@@ -2117,7 +2119,7 @@ function QualiReparBlock() {
     {id:'autre',label:'Autre',icon:'❓',bonus:false},
   ];
 
-  const openWiz = (e) => { if(e) e.stopPropagation(); setWzStep(0); setWzBrand(null); setWzModel(''); setWzPanne(null); setWzSearch(''); setWzShowEmail(false); setWzNom(''); setWzTel(''); setWzSending(false); setWzSent(false); setWzSelQ(null); setShowWizard(true); };
+  const openWiz = (e) => { if(e) e.stopPropagation(); setWzStep(0); setWzBrand(null); setWzModel(''); setWzPanne(null); setWzSearch(''); setWzShowEmail(false); setWzNom(''); setWzTel(''); setWzEmail(''); setWzSending(false); setWzSent(false); setWzSelQ(null); setShowWizard(true); };
 
   /* Reset la qualité quand le modèle/panne change */
   useEffect(() => { setWzSelQ(null); }, [wzModel, wzPanne]);
@@ -2130,7 +2132,7 @@ function QualiReparBlock() {
   }, []);
 
   const sendWzEmail = async () => {
-    if (!wzNom.trim() || !wzTel.trim()) return;
+    if (!wzNom.trim() || !wzTel.trim() || !wzEmail.trim()) return;
     setWzSending(true);
     const b = wzBrands.find(x=>x.id===wzBrand);
     const p = wzPannes.find(x=>x.id===wzPanne);
@@ -2140,8 +2142,11 @@ function QualiReparBlock() {
         method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
         body: JSON.stringify({
           _subject: 'Devis Express — ' + (b?.label||'') + ' ' + wzModel + ' — ' + (p?.label||''),
+          email: wzEmail.trim(),
+          _replyto: wzEmail.trim(),
           Nom: wzNom.trim(),
           Telephone: wzTel.trim(),
+          Email: wzEmail.trim(),
           Appareil: (b?.label||'') + ' ' + wzModel,
           Panne: p?.label || '',
           Qualite_choisie: q ? q.name + ' (' + q.price + ' €)' : 'À confirmer',
@@ -2364,7 +2369,8 @@ function QualiReparBlock() {
                   <p className="text-[12px] font-semibold text-[var(--sp-muted)]">Recevez votre devis par email :</p>
                   <input value={wzNom} onChange={e=>setWzNom(e.target.value)} placeholder="Votre nom" className="w-full bg-white border border-black/8 rounded-xl px-3.5 py-2.5 text-[13px] focus:outline-none focus:border-[var(--sp-red)]/40"/>
                   <input value={wzTel} onChange={e=>setWzTel(e.target.value)} placeholder="Votre téléphone" type="tel" className="w-full bg-white border border-black/8 rounded-xl px-3.5 py-2.5 text-[13px] focus:outline-none focus:border-[var(--sp-red)]/40"/>
-                  <button onClick={sendWzEmail} disabled={wzSending || !wzNom.trim() || !wzTel.trim()} className="w-full py-2.5 rounded-xl font-bold text-[13px] text-white transition" style={{background: (!wzSending && wzNom.trim() && wzTel.trim()) ? '#e30613' : '#ccc'}}>
+                  <input value={wzEmail} onChange={e=>setWzEmail(e.target.value)} placeholder="Votre email (pour recevoir la réponse)" type="email" className="w-full bg-white border border-black/8 rounded-xl px-3.5 py-2.5 text-[13px] focus:outline-none focus:border-[var(--sp-red)]/40"/>
+                  <button onClick={sendWzEmail} disabled={wzSending || !wzNom.trim() || !wzTel.trim() || !wzEmail.trim()} className="w-full py-2.5 rounded-xl font-bold text-[13px] text-white transition" style={{background: (!wzSending && wzNom.trim() && wzTel.trim() && wzEmail.trim()) ? '#e30613' : '#ccc'}}>
                     {wzSending ? 'Envoi en cours…' : 'Envoyer ma demande'}
                   </button>
                 </div>
@@ -2503,6 +2509,7 @@ function QualiReparBlock() {
                 <p className="text-[13px] font-semibold text-white/70 text-center">Envoyez-nous un message :</p>
                 <input value={ctNom} onChange={e=>setCtNom(e.target.value)} placeholder="Votre nom" className="w-full rounded-xl px-3.5 py-2.5 text-[13px] text-white focus:outline-none" style={{background:'rgba(255,255,255,.08)', border:'1px solid rgba(255,255,255,.12)'}}/>
                 <input value={ctTel} onChange={e=>setCtTel(e.target.value)} placeholder="Votre téléphone" type="tel" className="w-full rounded-xl px-3.5 py-2.5 text-[13px] text-white focus:outline-none" style={{background:'rgba(255,255,255,.08)', border:'1px solid rgba(255,255,255,.12)'}}/>
+                <input value={ctEmail} onChange={e=>setCtEmail(e.target.value)} placeholder="Votre email (pour la réponse)" type="email" className="w-full rounded-xl px-3.5 py-2.5 text-[13px] text-white focus:outline-none" style={{background:'rgba(255,255,255,.08)', border:'1px solid rgba(255,255,255,.12)'}}/>
                 <textarea value={ctMsg} onChange={e=>setCtMsg(e.target.value)} placeholder="Votre message…" rows="3" className="w-full rounded-xl px-3.5 py-2.5 text-[13px] text-white focus:outline-none resize-none" style={{background:'rgba(255,255,255,.08)', border:'1px solid rgba(255,255,255,.12)'}}/>
                 <button onClick={sendContact} disabled={ctSending || !ctNom.trim() || !ctTel.trim() || !ctMsg.trim()} className="w-full py-2.5 rounded-xl font-bold text-[13px] text-white transition" style={{background: (!ctSending && ctNom.trim() && ctTel.trim() && ctMsg.trim()) ? '#e30613' : 'rgba(255,255,255,.15)'}}>
                   {ctSending ? 'Envoi en cours…' : 'Envoyer le message'}
