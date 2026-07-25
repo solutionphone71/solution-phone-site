@@ -248,7 +248,8 @@ async function notifyOwner(reference: string, customerQuestion: string, expertRe
     'Réponds directement à ce message. J’enregistrerai ta réponse dans ma mémoire.',
   ].join('\n').slice(0, 3900)
   try {
-    const apiResponse = await fetch(`https://graph.facebook.com/v25.0/${WHATSAPP_PHONE_NUMBER_ID}/messages`, {
+    let messageType = 'text'
+    let apiResponse = await fetch(`https://graph.facebook.com/v25.0/${WHATSAPP_PHONE_NUMBER_ID}/messages`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -259,14 +260,39 @@ async function notifyOwner(reference: string, customerQuestion: string, expertRe
         text: { preview_url: false, body: text },
       }),
     })
-    const result = await apiResponse.json()
+    let result = await apiResponse.json()
+    if (!apiResponse.ok && Number(result?.error?.code) === 131047) {
+      messageType = 'template'
+      apiResponse = await fetch(`https://graph.facebook.com/v25.0/${WHATSAPP_PHONE_NUMBER_ID}/messages`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messaging_product: 'whatsapp',
+          recipient_type: 'individual',
+          to: EVAN_OWNER_WHATSAPP,
+          type: 'template',
+          template: {
+            name: 'evan_question_equipe',
+            language: { code: 'fr' },
+            components: [{
+              type: 'body',
+              parameters: [
+                { type: 'text', text: reference },
+                { type: 'text', text: customerQuestion.slice(0, 900) },
+              ],
+            }],
+          },
+        }),
+      })
+      result = await apiResponse.json()
+    }
     if (!apiResponse.ok) throw new Error(result?.error?.message || `Erreur WhatsApp ${apiResponse.status}`)
     await admin.from('evan_whatsapp_events').insert({
       meta_message_id: result?.messages?.[0]?.id || null,
       direction: 'outbound',
       from_number: '33602849953',
       to_number: EVAN_OWNER_WHATSAPP,
-      message_type: 'text',
+      message_type: messageType,
       body: text,
       reference,
       expert_request_id: expertRequestId,
@@ -275,6 +301,18 @@ async function notifyOwner(reference: string, customerQuestion: string, expertRe
       payload: result,
     })
   } catch (error) {
+    await admin.from('evan_whatsapp_events').insert({
+      direction: 'outbound',
+      from_number: '33602849953',
+      to_number: EVAN_OWNER_WHATSAPP,
+      message_type: 'text',
+      body: text,
+      reference,
+      expert_request_id: expertRequestId,
+      processed_status: 'failed',
+      processed_at: new Date().toISOString(),
+      error_message: (error instanceof Error ? error.message : String(error)).slice(0, 1000),
+    })
     console.error('owner notification failed', error)
   }
 }
@@ -439,14 +477,18 @@ Deno.serve(async (req: Request) => {
 
     const { data: matches, error: searchError } = await admin.rpc('evan_search_knowledge', {
       query_text: normalizedMessage,
-      result_limit: 3,
+      result_limit: 5,
     })
     if (searchError) throw searchError
 
     const rankedMatches = rankForDeviceDomain(normalizedMessage, (matches || []) as KnowledgeMatch[])
-    const best = (rankedMatches[0] || null) as KnowledgeMatch | null
+    const relevantMatches = rankedMatches.filter((match) => (
+      match.slug !== 'bonus-qualirepar' ||
+      /\b(qualirepar|bonus|remise|25\s*(?:euros?|eur))\b/.test(normalizedMessage)
+    ))
+    const best = (relevantMatches[0] || null) as KnowledgeMatch | null
     const accepted = best && (
-      Number(best.score) >= 0.29 ||
+      Number(best.score) >= 0.36 ||
       (Number(best.score) >= 0.19 && matchesDeviceDomain(normalizedMessage, best))
     )
 
