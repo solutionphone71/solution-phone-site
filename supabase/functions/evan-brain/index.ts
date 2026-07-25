@@ -114,6 +114,28 @@ function conciseAnswer(value: string, maxLength = 300) {
   return short
 }
 
+function rankForDeviceDomain(message: string, matches: KnowledgeMatch[]) {
+  const domain = /\b(ps[2345]|playstation|xbox|switch|nintendo|console)\b/.test(message)
+    ? 'console'
+    : /\b(trottinette|mobilite|scooter electrique)\b/.test(message)
+      ? 'mobilite'
+      : /\b(pc|ordinateur|macbook|imac|windows|laptop)\b/.test(message)
+        ? 'informatique'
+        : null
+
+  if (!domain) return matches
+
+  return [...matches].sort((a, b) => {
+    const affinity = (match: KnowledgeMatch) => {
+      const searchable = normalize(`${match.slug} ${match.category} ${match.title}`)
+      if (domain === 'console') return /console|playstation|xbox|nintendo|switch/.test(searchable) ? 0.5 : -0.35
+      if (domain === 'mobilite') return /mobilite|trottinette|scooter/.test(searchable) ? 0.5 : -0.35
+      return /informatique|ordinateur|pc|macbook|imac|windows/.test(searchable) ? 0.4 : -0.25
+    }
+    return (Number(b.score) + affinity(b)) - (Number(a.score) + affinity(a))
+  })
+}
+
 function isUuid(value: unknown): value is string {
   return typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
 }
@@ -379,7 +401,8 @@ Deno.serve(async (req: Request) => {
     })
     if (searchError) throw searchError
 
-    const best = (matches?.[0] || null) as KnowledgeMatch | null
+    const rankedMatches = rankForDeviceDomain(normalizedMessage, (matches || []) as KnowledgeMatch[])
+    const best = (rankedMatches[0] || null) as KnowledgeMatch | null
     const accepted = best && Number(best.score) >= 0.29
 
     if (accepted && best) {
