@@ -140,6 +140,27 @@ async function processOwnerMessage(message: MetaMessage, payload: unknown) {
     return
   }
 
+  const command = body
+    .toLocaleLowerCase('fr-FR')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+
+  if (/^(bonjour|salut|hello|coucou|oui|ok|aide)( evan)?$/.test(command)) {
+    await admin.from('evan_whatsapp_events').upsert({
+      ...eventBase,
+      processed_status: 'processed',
+      processed_at: new Date().toISOString(),
+      payload: { raw: payload, action: 'private_connection' },
+    }, { onConflict: 'meta_message_id' })
+    await sendText(
+      'Connexion privée active ✅\n\nJe te contacte ici uniquement lorsqu’un client pose une question que je ne sais pas traiter.\n\nPour m’apprendre une réponse :\nApprends : question => réponse',
+      message.id,
+    )
+    return
+  }
+
   const directTeaching = body.match(/^apprends\s*[:\-]\s*(.+?)\s*(?:=>|=)\s*(.+)$/is)
   if (directTeaching) {
     const question = directTeaching[1].trim().slice(0, 2000)
