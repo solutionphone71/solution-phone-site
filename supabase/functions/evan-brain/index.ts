@@ -114,23 +114,34 @@ function conciseAnswer(value: string, maxLength = 300) {
   return short
 }
 
-function rankForDeviceDomain(message: string, matches: KnowledgeMatch[]) {
-  const domain = /\b(ps[2345]|playstation|xbox|switch|nintendo|console)\b/.test(message)
+function deviceDomain(message: string) {
+  return /\b(ps[2345]|playstation|xbox|switch|nintendo|console)\b/.test(message)
     ? 'console'
     : /\b(trottinette|mobilite|scooter electrique)\b/.test(message)
       ? 'mobilite'
       : /\b(pc|ordinateur|macbook|imac|windows|laptop)\b/.test(message)
         ? 'informatique'
         : null
+}
+
+function matchesDeviceDomain(message: string, match: KnowledgeMatch) {
+  const domain = deviceDomain(message)
+  if (!domain) return false
+  const searchable = normalize(`${match.slug} ${match.category} ${match.title}`)
+  if (domain === 'console') return /console|playstation|xbox|nintendo|switch/.test(searchable)
+  if (domain === 'mobilite') return /mobilite|trottinette|scooter/.test(searchable)
+  return /informatique|ordinateur|pc|macbook|imac|windows/.test(searchable)
+}
+
+function rankForDeviceDomain(message: string, matches: KnowledgeMatch[]) {
+  const domain = deviceDomain(message)
 
   if (!domain) return matches
 
   return [...matches].sort((a, b) => {
     const affinity = (match: KnowledgeMatch) => {
-      const searchable = normalize(`${match.slug} ${match.category} ${match.title}`)
-      if (domain === 'console') return /console|playstation|xbox|nintendo|switch/.test(searchable) ? 0.5 : -0.35
-      if (domain === 'mobilite') return /mobilite|trottinette|scooter/.test(searchable) ? 0.5 : -0.35
-      return /informatique|ordinateur|pc|macbook|imac|windows/.test(searchable) ? 0.4 : -0.25
+      if (matchesDeviceDomain(message, match)) return domain === 'informatique' ? 0.4 : 0.5
+      return domain === 'informatique' ? -0.25 : -0.35
     }
     return (Number(b.score) + affinity(b)) - (Number(a.score) + affinity(a))
   })
@@ -403,7 +414,10 @@ Deno.serve(async (req: Request) => {
 
     const rankedMatches = rankForDeviceDomain(normalizedMessage, (matches || []) as KnowledgeMatch[])
     const best = (rankedMatches[0] || null) as KnowledgeMatch | null
-    const accepted = best && Number(best.score) >= 0.29
+    const accepted = best && (
+      Number(best.score) >= 0.29 ||
+      (Number(best.score) >= 0.19 && matchesDeviceDomain(normalizedMessage, best))
+    )
 
     if (accepted && best) {
       const confidence = Math.min(Number(best.confidence || 0.8), Number(best.score || 0.3) + 0.2)
