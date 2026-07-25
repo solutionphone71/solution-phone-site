@@ -406,6 +406,37 @@ Deno.serve(async (req: Request) => {
       }).eq('id', conversation.id)
     }
 
+    const outsideCurrentScope = /\b(aspirateurs?|refrigerateurs?|frigos?|lave[ -]linges?|lave[ -]vaisselles?|fours?|micro[ -]ondes?|televisions?|televiseurs?|voitures?|velos?)\b/.test(normalizedMessage)
+    if (outsideCurrentScope) {
+      const answer = 'Je ne peux pas confirmer la prise en charge de cet appareil. Envoyez la demande sur WhatsApp avant de vous déplacer : l’équipe vous répondra directement.'
+      const whatsappText = `Bonjour, prenez-vous en charge cette demande : ${message} ?`
+      await Promise.all([
+        admin.from('evan_messages').insert({
+          conversation_id: conversation.id,
+          role: 'evan',
+          content: answer,
+          confidence: 0.95,
+          metadata: { mode: 'outside_scope' },
+        }),
+        admin.from('evan_conversations').update({
+          status: 'resolved',
+          last_message_at: new Date().toISOString(),
+        }).eq('id', conversation.id),
+      ])
+      return json(origin, {
+        conversation_token: conversation.public_token,
+        mode: 'outside_scope',
+        matched: true,
+        answer,
+        topic: 'Prise en charge à confirmer',
+        whatsapp_url: `https://wa.me/33783921884?text=${encodeURIComponent(whatsappText)}`,
+        quick_replies: [
+          { label: 'Demander sur WhatsApp', value: 'whatsapp', action: 'whatsapp' },
+          { label: 'Demander par e-mail', value: 'mail', action: 'mail' },
+        ],
+      })
+    }
+
     const { data: matches, error: searchError } = await admin.rpc('evan_search_knowledge', {
       query_text: normalizedMessage,
       result_limit: 3,
