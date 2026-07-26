@@ -5,6 +5,8 @@ import { businessFactAnswer, knowledgeMatchAllowed, networkKnowledgeSlug } from 
 const ALLOWED_ORIGINS = new Set([
   'https://solution-phone.fr',
   'https://www.solution-phone.fr',
+  'https://reparation-iphone-macon.fr',
+  'https://www.reparation-iphone-macon.fr',
   'http://localhost:4173',
   'http://127.0.0.1:4173',
   'http://localhost:4174',
