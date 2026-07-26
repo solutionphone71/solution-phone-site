@@ -193,6 +193,9 @@ function matchesPriceRow(requestedModel: string, rowModel: string) {
 
 async function liveIphonePriceAnswer(message: string): Promise<LiveDirectAnswer | null> {
   const asksPrice = /\b(prix|tarif|combien|coute|cout)\b/.test(message)
+  // Une vitre arrière est une réparation de dos, pas un écran avant.
+  // Elle doit suivre la connaissance validée dédiée et son tarif indicatif.
+  if (/\b(vitre arriere|dos arriere|face arriere)\b/.test(message)) return null
   const repair = /\b(batterie|autonomie)\b/.test(message) ? 'batterie' : /\b(ecran|vitre|affichage|tactile|dalle)\b/.test(message) ? 'ecran' : ''
   if (!asksPrice || !repair || !/\biphone\b/.test(message)) return null
 
