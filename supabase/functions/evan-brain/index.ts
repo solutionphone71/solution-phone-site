@@ -441,7 +441,15 @@ async function withinRateLimit(req: Request) {
   return data === true
 }
 
-async function getConversation(token: string | undefined, context: EvanRequest['context']) {
+function attributedTrafficOrigin(origin: string, page: string | undefined) {
+  const label = normalize(String(page || ''))
+  return /(?:^|[\/:_-])(audit|test|retest|verification|regression|codex|qa)(?:$|[\/:_-])/.test(label)
+    || label === 'automated eval'
+    ? 'internal-test'
+    : origin
+}
+
+async function getConversation(token: string | undefined, context: EvanRequest['context'], origin: string) {
   // Les scénarios de recette doivent exercer le même moteur de réponse sans
   // créer de faux visiteurs, messages, demandes expert ou statistiques.
   if (context?.page === 'automated-eval') {
@@ -455,13 +463,24 @@ async function getConversation(token: string | undefined, context: EvanRequest['
     }
   }
 
+  const trafficOrigin = attributedTrafficOrigin(origin, context?.page)
+
   if (isUuid(token)) {
     const { data } = await admin
       .from('evan_conversations')
       .select('id, public_token, metadata, device_brand, device_model')
       .eq('public_token', token)
       .maybeSingle()
-    if (data) return data
+    if (data) {
+      const existingMetadata = data.metadata && typeof data.metadata === 'object' ? data.metadata : {}
+      const nextMetadata = {
+        ...existingMetadata,
+        origin: trafficOrigin,
+        last_page: context?.page?.slice(0, 200) || existingMetadata.last_page || existingMetadata.page || null,
+      }
+      await admin.from('evan_conversations').update({ metadata: nextMetadata }).eq('id', data.id)
+      return { ...data, metadata: nextMetadata }
+    }
   }
 
   const { data, error } = await admin
@@ -471,7 +490,11 @@ async function getConversation(token: string | undefined, context: EvanRequest['
       device_brand: context?.brand?.slice(0, 80) || null,
       device_model: context?.model?.slice(0, 120) || null,
       consent_to_store: context?.consent_to_store === true,
-      metadata: { page: context?.page?.slice(0, 200) || null },
+      metadata: {
+        page: context?.page?.slice(0, 200) || null,
+        last_page: context?.page?.slice(0, 200) || null,
+        origin: trafficOrigin,
+      },
     })
     .select('id, public_token, metadata, device_brand, device_model')
     .single()
@@ -840,7 +863,7 @@ Deno.serve(async (req: Request) => {
 
     if (body.event) {
       if (!TRACKED_EVENTS.has(body.event)) return json(origin, { error: 'Événement invalide.' }, 400)
-      const eventConversation = await getConversation(body.conversation_token, body.context)
+      const eventConversation = await getConversation(body.conversation_token, body.context, origin)
       if (isAutomatedEval) {
         return json(origin, {
           conversation_token: eventConversation.public_token,
@@ -852,7 +875,11 @@ Deno.serve(async (req: Request) => {
         conversation_id: eventConversation.id,
         event_type: body.event,
         channel: body.event === 'whatsapp_clicked' ? 'whatsapp' : body.event === 'email_clicked' ? 'email' : 'web',
-        metadata: cleanEventMetadata(body.event_metadata),
+        metadata: {
+          ...cleanEventMetadata(body.event_metadata),
+          page: body.context?.page?.slice(0, 200) || null,
+          origin: attributedTrafficOrigin(origin, body.context?.page),
+        },
       })
       if (eventError) throw eventError
       return json(origin, { conversation_token: eventConversation.public_token, event_recorded: true })
@@ -916,7 +943,7 @@ Deno.serve(async (req: Request) => {
     const message = typeof body.message === 'string' ? body.message.trim().slice(0, 1200) : ''
     if (message.length < 3) return json(origin, { error: 'Décrivez le problème en quelques mots.' }, 400)
 
-    const conversation = await getConversation(body.conversation_token, body.context)
+    const conversation = await getConversation(body.conversation_token, body.context, origin)
     const normalizedMessage = normalize(message)
     const learningQuestion = sanitizeForLearning(message)
 
