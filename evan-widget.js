@@ -63,5 +63,6 @@
   document.querySelectorAll('[data-evan-question]').forEach(function(button){button.addEventListener('click',function(){ask(button.dataset.evanQuestion)})});
   root.querySelector('form').addEventListener('submit',function(event){event.preventDefault();ask(input.value.trim())});
   root.querySelector('a[href*="wa.me"]').addEventListener('click',function(){ensureMetricOpened().then(function(){trackMetric('whatsapp_clicked',{source:'page_widget_direct',page:page||'home'})})});
+  root.querySelector('a[href^="mailto:"]').addEventListener('click',function(){ensureMetricOpened().then(function(){trackMetric('email_clicked',{source:'page_widget_direct',page:page||'home'})})});
   document.addEventListener('keydown',function(event){if(event.key==='Escape')toggle(false)});
 })();
