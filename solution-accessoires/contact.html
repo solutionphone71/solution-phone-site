@@ -255,17 +255,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     <div class="form-box reveal">
       <h2>Envoyez-nous un message</h2>
       <p class="sub">On vous répond sous 24h maximum.</p>
-      <form action="https://formsubmit.co/contact@solution-phone.fr" method="POST">
+      <form id="contact-form" action="https://formsubmit.co/contact@solution-phone.fr" method="POST">
         <input type="hidden" name="_subject" value="Contact Solution Accessoires">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://www.solution-accessoires.fr/contact.html?sent=1">
+        <input type="hidden" id="reply-to" name="_replyto" value="">
         <div class="form-group">
           <label for="name">Nom</label>
           <input type="text" id="name" name="name" placeholder="Votre nom" required>
         </div>
         <div class="form-group">
-          <label for="email">Email ou téléphone</label>
-          <input type="text" id="email" name="email" placeholder="Pour vous recontacter" required>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="vous@email.fr" required>
+        </div>
+        <div class="form-group">
+          <label for="telephone">Téléphone <span style="font-weight:400">(facultatif)</span></label>
+          <input type="tel" id="telephone" name="telephone" autocomplete="tel" placeholder="06 12 34 56 78">
         </div>
         <div class="form-group">
           <label for="sujet">Sujet</label>
@@ -336,6 +341,14 @@ var obs = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) { if(e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+
+// Permet de répondre directement à l'adresse saisie par le client.
+var contactForm = document.getElementById('contact-form');
+if(contactForm) {
+  contactForm.addEventListener('submit', function() {
+    document.getElementById('reply-to').value = document.getElementById('email').value.trim();
+  });
+}
 
 // Check if form was sent
 if(window.location.search.indexOf('sent=1') > -1) {

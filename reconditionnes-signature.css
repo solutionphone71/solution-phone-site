@@ -1,0 +1,42 @@
+/* Direction produit — reconditionnés */
+body{background:#fff}
+.sp-page-hero.sp-recon-hero{padding-top:72px;padding-bottom:72px;align-items:stretch}
+.sp-recon-hero .sp-page-title{max-width:640px}
+.sp-recon-hero .sp-page-lead{max-width:590px}
+.sp-recon-points{display:flex;flex-wrap:wrap;gap:10px 20px;margin:28px 0 0;padding:20px 0;border-top:1px solid #dedede;border-bottom:1px solid #dedede;color:#424245;font-size:13px;font-weight:650}
+.sp-recon-points span{display:flex;align-items:center;gap:8px}
+.sp-recon-points span:before{content:"";width:6px;height:6px;border-radius:50%;background:#e30613}
+.sp-stock-visual{min-height:500px}
+.sp-stock-visual .sp-page-aside-label{font-size:10px}
+.sp-stock-price{position:relative;z-index:3;max-width:45%;margin:16px 0 0;font-size:54px;font-weight:780;line-height:1;letter-spacing:-.055em;color:#fff}
+.sp-stock-price small{font-size:13px;color:rgba(255,255,255,.55);font-weight:600;letter-spacing:0}
+.sp-stock-visual .sp-page-primary{position:relative;z-index:4;max-width:45%;margin-top:20px;background:#fff;color:#111!important;border-color:#fff;width:100%;justify-content:center}
+.sp-stock-visual .sp-page-primary:hover{background:#e30613;border-color:#e30613;color:#fff}
+.sp-stock-heading{max-width:1280px;margin:0 auto;padding:72px 20px 28px;display:flex;align-items:end;justify-content:space-between;gap:30px}
+.sp-stock-heading p{margin:0 0 10px;color:#e30613;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.sp-stock-heading h2{margin:0;font-size:clamp(38px,5vw,68px);line-height:.95;letter-spacing:-.055em}
+.sp-stock-heading .sp-stock-note{max-width:360px;color:#6e6e73;font-size:15px;line-height:1.5}
+.stock-anchor{scroll-margin-top:80px}
+.tabs{margin-top:0;padding-top:0;border-top:1px solid #dedede;border-bottom:1px solid #dedede;border-radius:0;gap:0;justify-content:center;max-width:none}
+.tab{border:0!important;border-right:1px solid #dedede!important;border-radius:0!important;background:#fff!important;padding:18px 30px!important;color:#616166!important}
+.tab:first-child{border-left:1px solid #dedede!important}
+.tab.active{background:#111!important;color:#fff!important;box-shadow:none!important}
+.tab-ic{display:none}.tab-n{background:#efeff1!important;color:#111!important}.tab.active .tab-n{background:#fff!important;color:#111!important}
+.filters{margin-top:22px}.filters .chip{border-radius:2px!important;background:#fff!important;border:1px solid #dedede!important;padding:9px 14px!important}.filters .chip.active{background:#111!important;color:#fff!important;border-color:#111!important}
+.sort-bar{margin-top:18px;margin-bottom:26px}.sort-bar select{border-radius:2px!important;background:#fff!important}
+.products-wrap{margin-top:0}.series-group{margin-bottom:64px}
+.series-header{display:grid;grid-template-columns:1fr auto auto;align-items:end;gap:18px;margin:0 0 20px;padding:0 0 16px;border-bottom:1px solid #d8d8dc}
+.series-header h3{font-size:30px!important;letter-spacing:-.04em!important}.series-count,.series-from{font-size:12px!important;color:#6e6e73!important}.series-from{color:#111!important;font-weight:750!important}
+.pgrid{grid-template-columns:repeat(3,1fr);gap:18px}
+.card{align-items:stretch;text-align:left;border-radius:2px;background:#f5f5f7;padding:0 0 22px;box-shadow:none;transition:transform .25s ease,box-shadow .25s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.10)}
+.card .ph{width:100%;height:330px;margin:0 0 20px;background:#eeeef0;overflow:hidden}
+.card .ph img{width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;padding:24px;filter:drop-shadow(0 18px 22px rgba(0,0,0,.12));transition:transform .35s ease}
+.card:hover .ph img{transform:scale(1.025)}.card .ph .noimg{margin:auto}
+.card .grade-badge{top:16px;left:16px;border-radius:2px;padding:7px 10px;z-index:2}
+.card .model,.card .meta,.card .price,.card .cta{margin-left:22px;margin-right:22px}
+.card .model{font-size:22px;line-height:1.05}.card .meta{min-height:34px;margin-top:9px;font-size:13px}.card .price{margin-top:16px;color:#111;font-size:34px}
+.card .cta{margin-top:16px;border-radius:2px;padding:13px 16px;background:#111;font-size:13px}.card .cta:hover{background:#e30613}
+@media(max-width:980px){.pgrid{grid-template-columns:repeat(2,1fr)}.sp-stock-heading{align-items:start;flex-direction:column}}
+@media(max-width:820px){.sp-page-hero.sp-recon-hero{padding-top:42px;padding-bottom:48px}.sp-stock-visual{min-height:430px}.tabs{justify-content:flex-start;overflow-x:auto;padding:0 20px;scrollbar-width:none}.tab{flex:0 0 auto;padding:16px 20px!important}.sp-stock-heading{padding-top:52px}}
+@media(max-width:560px){.sp-recon-points{display:grid;grid-template-columns:1fr 1fr;gap:12px}.sp-stock-photo{width:54%}.sp-stock-visual:after{right:54%}.sp-stock-model,.sp-stock-visual .sp-page-aside-list,.sp-stock-price,.sp-stock-visual .sp-page-primary{max-width:42%}.sp-stock-model{font-size:17px}.sp-stock-price{font-size:38px}.sp-stock-visual .sp-page-primary{font-size:11px;padding:11px 8px}.sp-page-aside-list span{display:grid;padding:9px 0}.sp-page-aside-list b{text-align:left}.sp-stock-heading{padding-left:20px;padding-right:20px}.pgrid{grid-template-columns:1fr}.card .ph{height:360px}.series-header{grid-template-columns:1fr auto}.series-from{grid-column:1/-1}}

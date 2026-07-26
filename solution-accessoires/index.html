@@ -709,15 +709,14 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Load 4 recent reconditionnés from Supabase
+// Charge 4 reconditionnés depuis le catalogue public filtré.
 (async function(){
-  const SUPA = 'https://kdvxcnjfrmvlnrymfyug.supabase.co';
-  const KEY  = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+  const CATALOG = 'https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog?resource=stock';
   try {
-    const res = await fetch(SUPA + '/rest/v1/phones?select=*&status=eq.en vente&order=created_at.desc&limit=4', {
-      headers: { 'apikey': KEY, 'Authorization': 'Bearer ' + KEY }
-    });
-    const data = await res.json();
+    const res = await fetch(CATALOG);
+    if(!res.ok) throw new Error('catalogue indisponible');
+    const catalogue = await res.json();
+    const data = (catalogue.stock && catalogue.stock.used || []).slice(0, 4);
     const grid = document.getElementById('ppGrid');
     if(!data.length){ grid.innerHTML = '<p style="text-align:center;color:var(--muted);grid-column:1/-1;padding:40px">Aucun smartphone en stock pour le moment.</p>'; return; }
 
@@ -729,10 +728,10 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       if(/^(1[0-6]|SE|XR|XS|X\b|[7-9]\b)/i.test(model)) model = 'iPhone ' + model;
       var grade = (p.grade || 'B').charAt(0).toUpperCase();
       var gi = gradeMap[grade] || ['Grade ' + grade, ''];
-      var price = p.prix || p.price || '—';
+      var price = p.vente || '—';
       var color = p.couleur || p.color || '';
       var storage = p.stockage || p.storage || '';
-      var img = p.image || p.photo || '';
+      var img = p.photo_face || p.photo_dos || '';
 
       var imgHtml = img
         ? '<img src="' + img + '" alt="' + model + '" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 12px 20px rgba(0,0,0,.1))">'

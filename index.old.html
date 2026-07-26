@@ -6,7 +6,7 @@
 <title>Réparation iPhone & Smartphone à Mâcon | Solution Phone — QualiRépar -25 €</title>
 <link rel="icon" type="image/png" href="img/logo.png">
 <link rel="apple-touch-icon" href="img/logo.png">
-<link rel="canonical" href="https://www.solution-phone.fr/">
+<link rel="canonical" href="https://solution-phone.fr/">
 <meta name="description" content="Réparation iPhone et smartphone à Mâcon en 30 minutes. Écran, batterie, connecteur de charge. Smartphones reconditionnés garantis 12 mois. Bonus QualiRépar -25 € déduit. Diagnostic gratuit.">
 <meta name="keywords" content="réparation iPhone Mâcon, réparation smartphone Mâcon, écran iPhone Mâcon, batterie iPhone Mâcon, smartphone reconditionné Mâcon, réparateur iPhone Mâcon, QualiRépar Mâcon, changement écran iPhone, Solution Phone">
 <meta name="robots" content="index, follow">
@@ -17,8 +17,8 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Réparation iPhone & Smartphone à Mâcon | Solution Phone">
 <meta property="og:description" content="Écran, batterie, connecteur — réparé en 30 min. Smartphones reconditionnés garantis 12 mois. Bonus QualiRépar -25 €.">
-<meta property="og:url" content="https://www.solution-phone.fr/">
-<meta property="og:image" content="https://www.solution-phone.fr/img/logo.png">
+<meta property="og:url" content="https://solution-phone.fr/">
+<meta property="og:image" content="https://solution-phone.fr/img/logo.png">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Solution Phone Mâcon">
 
@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Réparation iPhone & Smartphone à Mâcon | Solution Phone">
 <meta name="twitter:description" content="Écran, batterie, connecteur — réparé en 30 min. Smartphones reconditionnés garantis 12 mois.">
-<meta name="twitter:image" content="https://www.solution-phone.fr/img/logo.png">
+<meta name="twitter:image" content="https://solution-phone.fr/img/logo.png">
 
 <!-- Schema.org LocalBusiness + JSON-LD -->
 <script type="application/ld+json">
@@ -35,10 +35,10 @@
   "@type": "LocalBusiness",
   "name": "Solution Phone",
   "description": "Réparation iPhone et smartphone à Mâcon. Écran, batterie, connecteur de charge. Smartphones reconditionnés garantis 12 mois. Certifié QualiRépar.",
-  "url": "https://www.solution-phone.fr",
+  "url": "https://solution-phone.fr",
   "telephone": "+33385330689",
   "email": "contact@solution-phone.fr",
-  "image": "https://www.solution-phone.fr/img/logo.png",
+  "image": "https://solution-phone.fr/img/logo.png",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "21 Rue Gambetta",
@@ -754,7 +754,7 @@ gtag("config", "G-3QP90K1TLM");
     </div>
     <div class="reveal relative">
       <div class="tile p-0 overflow-hidden aspect-[4/3] md:aspect-[5/4] relative">
-        <img src="img/atelier-solution-phone-outils.jpg" alt="Atelier Solution Phone Mâcon — tapis de réparation bleu avec outils professionnels et iPhone ouvert" class="w-full h-full object-cover" loading="lazy" width="1200" height="819">
+        <img src="img/smartphone-anatomy-3d-v1.webp" alt="Vue détaillée des composants d’un smartphone réparé chez Solution Phone" class="w-full h-full object-cover" loading="lazy" width="1536" height="1024">
         <div class="absolute bottom-4 left-4 text-white text-sm font-medium drop-shadow-lg">
           <span class="inline-flex items-center gap-1.5 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Atelier Mâcon · 21 Rue Gambetta</span>
         </div>
@@ -1194,8 +1194,8 @@ gtag("config", "G-3QP90K1TLM");
   <div class="wz-dialog team-cp" style="background:#050014;color:#e5f7ff;border-color:rgba(0,255,255,.15);max-width:1180px;width:96vw;max-height:94vh;overflow:hidden;position:relative;padding:0;border-radius:28px">
 
     <!-- VIDÉO FOND BOUTIQUE DANS LE FUTUR (opacité faible) -->
-    <video src="solution-phone-cyberpunk.mp4" autoplay muted loop playsinline
-      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.18;pointer-events:none;z-index:0"></video>
+    <div aria-hidden="true"
+      style="position:absolute;inset:0;opacity:.18;pointer-events:none;z-index:0;background:radial-gradient(circle at 50% 20%,#e30613,transparent 42%),linear-gradient(135deg,#050014,#111827)"></div>
 
     <!-- Grille néon + glow -->
     <div style="position:absolute;inset:0;pointer-events:none;z-index:1;
@@ -1743,10 +1743,8 @@ setTimeout(()=>{ document.querySelectorAll('.reveal:not(.in)').forEach(el=>el.cl
   setInterval(render, 60*1000);
 })();
 
-// ====== SUPABASE (temps réel, repris du site actuel) ======
-var SU='https://kdvxcnjfrmvlnrymfyug.supabase.co';
-var SK='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
-function sg(p){return fetch(SU+p,{headers:{apikey:SK,Authorization:'Bearer '+SK}}).then(function(r){return r.json();});}
+// ====== CATALOGUE PUBLIC FILTRÉ ======
+var PUBLIC_CATALOG='https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog';
 
 // ====== PRIX iPhone par défaut (fallback) ======
 // DE = écrans (5 niveaux de qualité), DB = batteries
@@ -1875,17 +1873,14 @@ function getPriceForIssue(brand, model, issue){
   return null;
 }
 
-// Fetch prix Supabase en arrière-plan (temps réel)
-sg('/rest/v1/settings?key=eq.ecrans_prix_json&select=value').then(function(r){
-  if(r&&r.length&&r[0].value){ try{ var d=JSON.parse(r[0].value), l=(d.t1||[]).concat(d.t2||[]); if(l.length) DE=l; }catch(e){} }
-}).catch(function(){});
-sg('/rest/v1/settings?key=eq.batteries_prix_json&select=value').then(function(r){
-  if(r&&r.length&&r[0].value){ try{ var lignes=JSON.parse(r[0].value);
-    if(Array.isArray(lignes)&&lignes.length>0){
-      var hasReal=lignes.some(function(d){return d.prix&&d.prix.some(function(p){return p&&p>0;});});
-      if(hasReal) DB=lignes;
-    }
-  }catch(e){} }
+// Prix mis à jour via une réponse limitée aux données publiques.
+fetch(PUBLIC_CATALOG+'?resource=prices').then(function(response){
+  if(!response.ok)throw new Error('catalogue indisponible');
+  return response.json();
+}).then(function(catalogue){
+  var prices=catalogue.prices||{},screens=prices.screens||[],batteries=prices.batteries||[];
+  if(screens.length)DE=screens;
+  if(batteries.length&&batteries.some(function(d){return d.prix&&d.prix.some(function(p){return p&&p>0;});}))DB=batteries;
 }).catch(function(){});
 const ISSUES = [
   {k:'Écran', ico:'🔨', sub:'Vitre cassée, tactile HS, affichage'},

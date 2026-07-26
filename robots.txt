@@ -4,4 +4,4 @@ Disallow: /app-index.html
 Disallow: /img/team-*
 Disallow: /tarifs.html
 
-Sitemap: https://www.solution-phone.fr/sitemap.xml
+Sitemap: https://solution-phone.fr/sitemap.xml

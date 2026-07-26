@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#f5f5f7">
 <title>🎡 Tentez votre chance — Solution Phone</title>
+<meta name="description" content="Jeu promotionnel Solution Phone Mâcon réservé aux clients de la boutique.">
+<meta name="robots" content="noindex,follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -468,6 +470,8 @@ h1 .acc {
 ::-webkit-scrollbar-track { background:transparent; }
 ::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.1); border-radius:4px; }
 </style>
+<link rel="stylesheet" href="premium-shared.css?v=signature-2">
+<script src="premium-nav.js?v=signature-3" defer></script>
 </head>
 <body>
 
@@ -651,9 +655,7 @@ h1 .acc {
 // ─────────────────────────────────────────────────────────────
 // CONFIG
 // ─────────────────────────────────────────────────────────────
-const SUPA_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co';
-const SUPA_KEY = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
-const BREVO_KEY = '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';
+const ROULETTE_API = 'https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-roulette';
 const SHOP_EMAIL = 'contact@solution-phone.fr';
 
 const DEFAULT_CONFIG = {
@@ -674,15 +676,14 @@ let TOTAL  = PRIZES.reduce((s,p) => s + p.weight, 0);
 
 async function loadConfig() {
   try {
-    const res  = await fetch(SUPA_URL + '/rest/v1/roulette_config?id=eq.1', {
-      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
-    });
+    const res  = await fetch(ROULETTE_API);
+    if (!res.ok) throw new Error('Configuration indisponible');
     const data = await res.json();
-    if (data && data[0]) {
-      const prizes = (data[0].prizes || DEFAULT_CONFIG.prizes).map((p,i) => ({
+    if (data) {
+      const prizes = (data.prizes || DEFAULT_CONFIG.prizes).map((p,i) => ({
         ...DEFAULT_CONFIG.prizes[i] || {}, ...p
       }));
-      return { googleUrl: data[0].google_url || DEFAULT_CONFIG.googleUrl, prizes };
+      return { googleUrl: data.googleUrl || DEFAULT_CONFIG.googleUrl, prizes };
     }
   } catch(e) {}
   return DEFAULT_CONFIG;
@@ -853,7 +854,7 @@ drawWheel(rotation);
 // ─────────────────────────────────────────────────────────────
 let spinning = false;
 
-function spinWheel() {
+async function spinWheel() {
   if (spinning) return;
 
   if (sessionStorage.getItem('sp_played')) {
@@ -864,11 +865,39 @@ function spinWheel() {
   spinning = true;
   document.getElementById('btn-spin').disabled = true;
 
-  const rand = Math.random() * TOTAL;
-  let cum = 0, winIdx = 0;
-  for (let i = 0; i < PRIZES.length; i++) {
-    cum += PRIZES[i].weight;
-    if (rand < cum) { winIdx = i; break; }
+  let serverPrize;
+  let winIdx;
+  try {
+    const response = await fetch(ROULETTE_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'spin', telephone: _phoneVerifie })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.error || 'Tirage indisponible');
+    if (result.alreadyPlayed) {
+      sessionStorage.setItem('sp_played', '1');
+      spinning = false;
+      document.getElementById('btn-spin').disabled = false;
+      showToast('Ce numéro a déjà participé 😊');
+      goTo('s-phone');
+      return;
+    }
+    serverPrize = result.prize;
+    winIdx = PRIZES.findIndex(p => p.label === serverPrize?.label);
+    if (winIdx < 0 && serverPrize?.label) {
+      PRIZES = [serverPrize, ...PRIZES];
+      TOTAL = PRIZES.reduce((sum, prize) => sum + Number(prize.weight || 0), 0);
+      winIdx = 0;
+      drawWheel(rotation);
+    }
+    if (winIdx < 0) throw new Error('Lot invalide');
+  } catch (error) {
+    spinning = false;
+    document.getElementById('btn-spin').disabled = false;
+    showToast('La roue est momentanément indisponible. Réessayez dans un instant.');
+    console.warn('Secure spin failed:', error);
+    return;
   }
 
   const segAngles = PRIZES.map(p => (p.weight / TOTAL) * Math.PI * 2);
@@ -898,7 +927,7 @@ function spinWheel() {
       drawWheel(rotation);
       sessionStorage.setItem('sp_played', '1');
       setTimeout(() => {
-        showWin(PRIZES[winIdx]);
+        showWin(serverPrize);
         spinning = false;
         document.getElementById('btn-spin').disabled = false;
       }, 400);
@@ -913,7 +942,6 @@ function spinWheel() {
 let winPrizeName = '';
 
 function showWin(prize) {
-  saveParticipation(prize.label);
   document.getElementById('win-emoji').textContent = prize.emoji;
   document.getElementById('win-name').textContent  = prize.label;
   winPrizeName = prize.label;
@@ -1086,7 +1114,7 @@ function onReviewClick() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// EMAIL via Brevo API
+// EMAIL via FormSubmit
 // ─────────────────────────────────────────────────────────────
 async function sendPrizeEmail() {
   const email = document.getElementById('win-email').value.trim();
@@ -1098,37 +1126,6 @@ async function sendPrizeEmail() {
   const btn = document.getElementById('btn-send-email');
   btn.innerHTML = '<span class="spinner"></span>Envoi en cours…';
   btn.disabled = true;
-
-  const htmlContent = `
-<!DOCTYPE html>
-<html>
-<body style="background:#f5f5f7;color:#1d1d1f;font-family:-apple-system,sans-serif;margin:0;padding:20px;">
-<div style="max-width:480px;margin:0 auto;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
-  <div style="background:linear-gradient(135deg,#ff3b30,#c9251b);padding:36px 28px;text-align:center;">
-    <div style="font-size:56px;margin-bottom:10px;">🎡</div>
-    <h1 style="font-size:26px;font-weight:900;color:#fff;margin:0;">Félicitations !</h1>
-    <p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:15px;">Vous avez gagné à la Roue Solution Phone</p>
-  </div>
-  <div style="padding:32px 28px;text-align:center;">
-    <div style="background:rgba(245,158,11,0.08);border:1.5px solid rgba(245,158,11,0.2);border-radius:16px;padding:24px;margin-bottom:24px;">
-      <p style="font-size:11px;color:#d97706;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">🎉 Votre cadeau</p>
-      <p style="font-size:22px;font-weight:900;color:#1d1d1f;margin:0;">${winPrizeName}</p>
-    </div>
-    <p style="color:#6e6e73;font-size:14px;line-height:1.8;">
-      Pour récupérer votre cadeau, <strong style="color:#1d1d1f;">venez en boutique</strong><br>
-      avec cet email ou montrez l'écran de gain.
-    </p>
-    <div style="margin-top:24px;padding:18px;background:#f5f5f7;border-radius:12px;">
-      <p style="font-size:13px;color:#6e6e73;margin:0;">📍 Solution Phone — 21 Rue Gambetta, 71000 Mâcon<br>📞 03 85 33 06 89</p>
-    </div>
-  </div>
-  <div style="padding:16px 28px;text-align:center;border-top:1px solid rgba(0,0,0,0.06);">
-    <p style="font-size:12px;color:#aeaeb2;margin:0;">Solution Phone · Certifié QualiRépar · Mâcon</p>
-  </div>
-</div>
-
-</body>
-</html>`;
 
   /* === Envoi via formsubmit.co (même service que le reste du site, prouvé fonctionnel) ===
      - Notifie le shop sur contact@solution-phone.fr
@@ -1144,7 +1141,7 @@ Pour le recuperer, passez en boutique avec cet email ou montrez l'ecran de gain.
 Solution Phone
 21 Rue Gambetta, 71000 Macon
 03 85 33 06 89 (fixe) / 07 83 92 18 84 (mobile/WhatsApp)
-Ouvert du lundi au samedi : 9h15-12h15 et 14h-19h
+Ouvert lundi 9h15-12h15 / 14h-19h, puis mardi-samedi 9h15-19h en journée continue
 
 A bientot !`;
 
@@ -1165,18 +1162,6 @@ A bientot !`;
     });
     const json = await resp.json().catch(() => ({}));
     if (!resp.ok || json.success === 'false') throw new Error('formsubmit failed');
-
-    /* Backup : envoyer une copie HTML stylisée au client via Brevo si possible (best effort, on ignore l'erreur) */
-    fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
-      headers: { 'api-key': BREVO_KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sender:  { name: 'Solution Phone Roue', email: SHOP_EMAIL },
-        to:      [{ email: email }],
-        subject: '🎡 Votre cadeau Solution Phone — ' + winPrizeName,
-        htmlContent
-      })
-    }).catch(() => {});
 
     document.getElementById('email-sent-msg').style.display = 'block';
     btn.textContent = '✅ Email envoyé !';
@@ -1220,22 +1205,21 @@ async function checkPhone() {
   if (loading) loading.style.display = 'flex';
 
   try {
-    var res  = await fetch(SUPA_URL + '/rest/v1/roulette_participations?telephone=eq.' + digits + '&select=id,lot_gagne', {
-      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    var res  = await fetch(ROULETTE_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'check', telephone: digits })
     });
+    if (!res.ok) throw new Error('Vérification indisponible');
     var data = await res.json();
 
     if (loading) loading.style.display = 'none';
 
-    if (data && data.length > 0) {
+    if (data && data.alreadyPlayed) {
       var msg = document.getElementById('phone-already-msg');
       if (msg) {
         msg.style.display = 'block';
-        var lotGagne = data[0].lot_gagne || '';
-        if (lotGagne) {
-          msg.querySelector('.phone-already-sub').innerHTML =
-            'Une seule participation par personne.<br>Vous aviez gagné : <strong>' + lotGagne + '</strong>';
-        }
+        msg.querySelector('.phone-already-sub').textContent = 'Une seule participation par personne.';
       }
       input.style.borderColor = 'var(--red)';
       btn.disabled = false;
@@ -1245,30 +1229,10 @@ async function checkPhone() {
     }
   } catch(e) {
     if (loading) loading.style.display = 'none';
-    _phoneVerifie = digits;
-    goTo('s-intro');
-    console.warn('Supabase check failed, allowing play:', e);
+    btn.disabled = false;
+    showToast('Vérification momentanément indisponible. Réessayez dans un instant.');
+    console.warn('Secure phone check failed:', e);
   }
-}
-
-async function saveParticipation(prizeName) {
-  if (!_phoneVerifie) return;
-  try {
-    await fetch(SUPA_URL + '/rest/v1/roulette_participations', {
-      method: 'POST',
-      headers: {
-        'apikey': SUPA_KEY,
-        'Authorization': 'Bearer ' + SUPA_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
-        telephone: _phoneVerifie,
-        lot_gagne: prizeName,
-        date_participation: new Date().toISOString()
-      })
-    });
-  } catch(e) { console.warn('Erreur sauvegarde:', e); }
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -1283,5 +1247,6 @@ function showToast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
 }
 </script>
+<script src="evan-widget.js?v=8" defer></script>
 </body>
 </html>

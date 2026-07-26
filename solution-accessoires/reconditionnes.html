@@ -7,8 +7,8 @@
 <meta name="description" content="Achetez un iPhone ou Samsung reconditionné à Mâcon. Testés 40 points, garantie 12 mois, stock en temps réel. Forfaits Syma Mobile disponibles. Solution Phone, 21 Rue Gambetta.">
 <meta name="keywords" content="iPhone reconditionné Mâcon, smartphone reconditionné Mâcon, Samsung reconditionné, téléphone reconditionné garanti, achat iPhone Mâcon, Solution Phone">
 <meta name="robots" content="index, follow">
-<link rel="icon" type="image/png" href="img/logo.png">
-<link rel="apple-touch-icon" href="img/logo.png">
+<link rel="icon" type="image/png" href="../img/logo.png">
+<link rel="apple-touch-icon" href="../img/logo.png">
 <link rel="canonical" href="https://www.solution-phone.fr/reconditionnes.html">
 
 <!-- Open Graph -->
@@ -583,13 +583,8 @@ gtag("config", "G-3QP90K1TLM");
 </footer>
 
 <script>
-  // ====== CONFIG SUPABASE ======
-  // On lit directement les tables de l'app app.solution-phone.fr :
-  //   - `phones`       → smartphones reconditionnés (Achat smartphones)
-  //   - `phones_neufs` → smartphones neufs
-  // Un téléphone est "en stock" ⇔ date_vente IS NULL
-  var SU = 'https://kdvxcnjfrmvlnrymfyug.supabase.co';
-  var SK = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+  // Catalogue public filtré : aucun accès direct aux tables internes de l'application.
+  var PUBLIC_CATALOG_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog';
 
   // ====== DONNÉES DE DÉMO (fallback tant que la table n'existe pas) ======
   var DEMO = [
@@ -619,20 +614,12 @@ gtag("config", "G-3QP90K1TLM");
   var currentSeries = 'all';        // sous-filtre
   var currentSort = 'series';       // series | price_asc | price_desc | grade
 
-  // ====== FETCH ======
-  function supaGet(table, query){
-    return fetch(SU + '/rest/v1/' + table + query, {
-      headers: { apikey: SK, Authorization: 'Bearer ' + SK }
-    }).then(function(r){ return r.ok ? r.json() : []; }).catch(function(){ return []; });
-  }
-
   function loadStock(){
-    var qRecon = '?select=modele,stockage,grade,batterie,vente,couleur,etat,date_vente,photo_face,photo_dos&date_vente=is.null&order=vente.desc';
-    var qNeuf  = '?select=modele,stockage,vente,couleur,etat,date_vente,photo_face,photo_dos&date_vente=is.null&order=vente.desc';
-    Promise.all([supaGet('phones', qRecon), supaGet('phones_neufs', qNeuf)])
-      .then(function(res){
-        var recon = (res[0]||[]).map(function(p){ return normalize(p, 'reconditionne'); });
-        var neufs = (res[1]||[]).map(function(p){ return normalize(p, 'neuf'); });
+    fetch(PUBLIC_CATALOG_URL + '?resource=stock')
+      .then(function(response){ if(!response.ok) throw new Error('catalogue indisponible'); return response.json(); })
+      .then(function(catalogue){
+        var recon = (catalogue.stock && catalogue.stock.used || []).map(function(p){ return normalize(p, 'reconditionne'); });
+        var neufs = (catalogue.stock && catalogue.stock.new || []).map(function(p){ return normalize(p, 'neuf'); });
         var items = recon.concat(neufs).filter(function(i){ return i.price > 0 && i.model; });
         if(!items.length){
           console.info('[stock] aucune donnée en base, fallback démo');
@@ -641,7 +628,7 @@ gtag("config", "G-3QP90K1TLM");
           allItems = items;
         }
         render();
-      });
+      }).catch(function(){ allItems = DEMO; render(); });
   }
 
   function normalize(p, cond){

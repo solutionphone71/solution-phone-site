@@ -1,0 +1,14 @@
+/* Pages de lecture — mise en page éditoriale Solution Phone. */
+body{background:#f3f2ef!important;color:#171719!important}
+body>section:first-of-type{max-width:1280px;margin:0 auto;padding:78px clamp(20px,5vw,64px) 56px!important;border-bottom:1px solid rgba(0,0,0,.13)}
+body>section:first-of-type>div{text-align:left!important;margin:0!important;padding:0!important}
+body>section:first-of-type h1{max-width:880px;margin:16px 0 0!important;font-size:clamp(46px,6vw,78px)!important;line-height:.96!important;letter-spacing:-.055em!important;font-weight:720!important}
+body>section:first-of-type h1 span{color:inherit!important;font-weight:390!important}
+body>section:first-of-type p:last-child{max-width:680px;margin:24px 0 0!important;line-height:1.55!important}
+.tile,.tile-soft,.fullwidth-article,.info-card,.legal-card{border-radius:2px!important;box-shadow:none!important;border-color:rgba(0,0,0,.14)!important}
+.tile:not(.tile-accent),.tile-soft{background:transparent!important}.tile:hover{transform:none!important;box-shadow:none!important}
+.chip{border-radius:2px!important}.chip.active{background:#171719!important}
+.tile-accent{background:#171719!important}
+#articlesGrid{gap:1px!important;background:rgba(0,0,0,.14)}#articlesGrid>article{border:0!important;background:#f3f2ef!important}#articlesGrid>article.tile-accent{background:#171719!important}
+.applelink{color:#d92d28!important}
+@media(max-width:720px){body>section:first-of-type{padding-top:48px!important}body>section:first-of-type h1{font-size:clamp(42px,12vw,58px)!important}#articlesGrid{gap:1px!important}}
