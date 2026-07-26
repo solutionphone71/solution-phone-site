@@ -611,6 +611,51 @@ async function notifyOwner(reference: string, customerQuestion: string, expertRe
   }
 }
 
+async function getOrCreateExpertRequest(input: {
+  conversationId: string
+  customerQuestion: string
+  normalizedQuestion: string
+  expertQuestion: string
+}) {
+  const { data: existing, error: existingError } = await admin
+    .from('evan_expert_requests')
+    .select('id,reference')
+    .eq('conversation_id', input.conversationId)
+    .eq('evan_summary', input.normalizedQuestion)
+    .eq('status', 'pending')
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+  if (existingError) throw existingError
+  if (existing) return { ...existing, created: false }
+
+  const reference = expertReference()
+  const { data: created, error: createError } = await admin
+    .from('evan_expert_requests')
+    .insert({
+      reference,
+      conversation_id: input.conversationId,
+      customer_question: input.customerQuestion,
+      evan_summary: input.normalizedQuestion,
+      expert_question: input.expertQuestion,
+    })
+    .select('id,reference')
+    .single()
+  if (createError?.code === '23505') {
+    const { data: concurrent, error: concurrentError } = await admin
+      .from('evan_expert_requests')
+      .select('id,reference')
+      .eq('conversation_id', input.conversationId)
+      .eq('evan_summary', input.normalizedQuestion)
+      .eq('status', 'pending')
+      .maybeSingle()
+    if (concurrentError) throw concurrentError
+    if (concurrent) return { ...concurrent, created: false }
+  }
+  if (createError) throw createError
+  return { ...created, created: true }
+}
+
 async function saveDirectAnswer(
   conversationId: string,
   mode: string,
@@ -785,6 +830,11 @@ Deno.serve(async (req: Request) => {
 
   try {
     await admin.rpc('evan_prune_expired_conversations')
+    await admin
+      .from('evan_expert_requests')
+      .update({ status: 'dismissed' })
+      .eq('status', 'pending')
+      .lt('created_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
     const body = await req.json() as EvanRequest
     const isAutomatedEval = body.context?.page === 'automated-eval'
 
@@ -852,6 +902,12 @@ Deno.serve(async (req: Request) => {
           answer: conciseAnswer(expertReply.expert_answer, 320),
           knowledge_id: expertReply.learned_knowledge_id || null,
           answered_at: expertReply.answered_at || null,
+        })
+      }
+      if (expertReply?.status === 'dismissed') {
+        return json(origin, {
+          conversation_token: body.conversation_token,
+          status: 'unavailable',
         })
       }
       return json(origin, { conversation_token: body.conversation_token, status: 'waiting' })
@@ -1217,18 +1273,19 @@ Deno.serve(async (req: Request) => {
         : coreAnswer
       const whatsappText = `Bonjour Sébastien, je viens du site Solution Phone. Ma demande : ${message}`
       let expertRequestId: string | null = null
-      const reference = expertReference()
+      let reference: string | null = null
+      let shouldNotifyOwner = false
 
       if (aiAnswer.needs_human) {
-        const { data: expertRequest, error: expertError } = await admin.from('evan_expert_requests').insert({
-          reference,
-          conversation_id: conversation.id,
-          customer_question: message,
-          evan_summary: normalizedMessage,
-          expert_question: `L’assistant a préparé cette réponse : « ${answer} ». Peux-tu confirmer ou préciser pour le client ?`,
-        }).select('id').single()
-        if (expertError) throw expertError
-        expertRequestId = expertRequest?.id || null
+        const expertRequest = await getOrCreateExpertRequest({
+          conversationId: conversation.id,
+          customerQuestion: message,
+          normalizedQuestion: normalizedMessage,
+          expertQuestion: `L’assistant a préparé cette réponse : « ${answer} ». Peux-tu confirmer ou préciser pour le client ?`,
+        })
+        expertRequestId = expertRequest.id
+        reference = expertRequest.reference
+        shouldNotifyOwner = expertRequest.created
       }
 
       const [, learningResult] = await Promise.all([
@@ -1256,7 +1313,9 @@ Deno.serve(async (req: Request) => {
         }).eq('id', conversation.id),
       ])
       if (learningResult.error) throw learningResult.error
-      if (aiAnswer.needs_human && expertRequestId) await notifyOwner(reference, message, expertRequestId)
+      if (aiAnswer.needs_human && expertRequestId && reference && shouldNotifyOwner) {
+        await notifyOwner(reference, message, expertRequestId)
+      }
 
       return json(origin, {
         conversation_token: conversation.public_token,
@@ -1277,7 +1336,6 @@ Deno.serve(async (req: Request) => {
       })
     }
 
-    const reference = expertReference()
     const expertQuestion = `Un client demande : « ${message} ». Quelle réponse Solution Phone dois-je lui transmettre ?`
     const fallbackAnswer = 'Je demande à l’équipe. Si personne n’est disponible immédiatement, envoyez votre demande sur WhatsApp ou par e-mail.'
     const whatsappText = `Bonjour Sébastien, demande depuis l’assistant : ${message}`
@@ -1294,27 +1352,26 @@ Deno.serve(async (req: Request) => {
       })
     }
 
-    const [{ data: expertRequest, error: expertError }, { error: learningError }] = await Promise.all([
-      admin.from('evan_expert_requests').insert({
-        reference,
-        conversation_id: conversation.id,
-        customer_question: message,
-        evan_summary: normalizedMessage,
-        expert_question: expertQuestion,
-      }).select('id').single(),
-      admin.from('evan_learning_items').upsert({
+    const expertRequest = await getOrCreateExpertRequest({
+      conversationId: conversation.id,
+      customerQuestion: message,
+      normalizedQuestion: normalizedMessage,
+      expertQuestion,
+    })
+    const reference = expertRequest.reference
+    const { error: learningError } = await admin
+      .from('evan_learning_items')
+      .upsert({
         source_type: 'customer',
         source_reference: reference,
         question: learningQuestion,
         status: 'waiting_answer',
         created_by_label: 'Visiteur du site',
         metadata: { normalized: normalizedMessage },
-      }, { onConflict: 'question_fingerprint,source_type' }),
-    ])
-    if (expertError) throw expertError
+      }, { onConflict: 'question_fingerprint,source_type' })
     if (learningError) throw learningError
 
-    if (expertRequest?.id) await notifyOwner(reference, message, expertRequest.id)
+    if (expertRequest.created) await notifyOwner(reference, message, expertRequest.id)
 
     await Promise.all([
       admin.from('evan_messages').insert({

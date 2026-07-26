@@ -809,7 +809,14 @@
             }
           }
         }catch(e){}
-        if(expertPollCount>=8){stopExpertPolling();$('#device-state').textContent='Équipe indisponible';return}
+        if(expertPollCount>=8){
+          stopExpertPolling();
+          $('#device-state').textContent='Équipe indisponible';
+          addMessage('bot','Personne n’est disponible dans l’équipe pour le moment. Vous pouvez continuer immédiatement sur WhatsApp ou envoyer votre demande par e-mail.');
+          setQuickReplies([{label:'Continuer sur WhatsApp',value:'whatsapp',kind:'brainWhatsApp'},{label:'Envoyer ma demande par e-mail',value:'mail',kind:'brainMail'}]);
+          trackBrainEvent('handoff_timeout',{after_seconds:78});
+          return
+        }
         expertPollTimer=setTimeout(poll,10000);
       };
       expertPollTimer=setTimeout(poll,8000);
