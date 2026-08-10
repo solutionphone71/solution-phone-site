@@ -171,7 +171,7 @@
     .network-stores{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.network-store{border:1px solid rgba(0,0,0,.06);border-radius:13px;padding:9px 10px;background:rgba(255,255,255,.72);box-shadow:0 5px 18px rgba(0,0,0,.035)}.network-store:before{content:"";display:block;width:17px;height:3px;border-radius:3px;background:var(--red);margin-bottom:7px}.network-store b{display:block;font-size:10px}.network-store span{display:block;font-size:8px;color:#777;margin-top:3px;line-height:1.25}
     .privacy{display:flex;align-items:center;gap:8px;margin-top:20px;color:#777;font-size:11px}
     .privacy i{width:7px;height:7px;background:var(--green);border-radius:50%}
-    .fast-lane{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:17px}
+    .fast-lane{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:17px}
     .fast-action{min-height:48px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;text-align:center;padding:9px 14px;text-decoration:none;font-size:11px;font-weight:790;cursor:pointer;transition:.2s}
     .fast-action:hover{background:var(--ink);color:#fff;transform:translateY(-2px)}
     .fast-action.wa{border-color:var(--green);background:var(--green);color:#fff}
@@ -412,6 +412,7 @@
             <div class="privacy"><i></i> Aucun engagement · aucun appareil réparé sans votre accord</div>
             <div class="fast-lane" aria-label="Accès directs">
               <a class="fast-action wa" href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20je%20souhaite%20un%20renseignement." target="_blank" rel="noopener">WhatsApp direct</a>
+              <a class="fast-action" href="tel:+33385330689">Appeler l’atelier</a>
               <button class="fast-action" type="button" onclick="openMail()">Devis par e-mail</button>
             </div>
             <div class="network">
@@ -519,12 +520,13 @@
       <button class="close" id="close-modal" aria-label="Fermer">×</button>
       <h3>Recevoir mon devis</h3>
       <p>L’assistant de Sébastien transmet votre demande à l’équipe Solution Phone.</p>
-      <form class="formgrid" id="mail-form">
+      <form class="formgrid" id="mail-form" action="https://formsubmit.co/contact@solution-phone.fr" method="POST">
         <input name="Nom" required placeholder="Votre nom">
         <input name="email" required type="email" autocomplete="email" placeholder="Votre adresse e-mail">
         <input name="Telephone" placeholder="Votre téléphone (facultatif)">
         <textarea name="Demande" id="mail-request" required placeholder="Votre demande"></textarea>
         <input type="hidden" name="_subject" value="Nouveau devis — Assistant Solution Phone">
+        <input type="hidden" name="_url" value="https://solution-phone.fr/">
         <button>Envoyer ma demande</button>
       </form>
       <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
@@ -1476,7 +1478,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
         const data={Nom:name,email,Email:email,_replyto:email,Telephone:phone,Demande:request,_subject:'Nouveau devis — Autre pièce iPhone',_template:'table'};
         const response=await fetch('https://formsubmit.co/ajax/contact@solution-phone.fr',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)}),payload=await response.json().catch(()=>null);
         if(!response.ok||!payload||(payload.success!==true&&payload.success!=='true'))throw new Error();
-        status.textContent='Demande envoyée. L’équipe vous répondra directement par e-mail.';status.classList.add('is-success');track('devis_autre_piece_email',{model:iphoneLabel($('#quick-model').value)});trackBrainEvent('email_clicked',{intent:'other_iphone_part',source:'quick_quote'});
+        status.textContent='Demande envoyée. L’équipe vous répondra directement par e-mail.';status.classList.add('is-success');track('devis_email_envoye',{method:'email',form_type:'quick_other_part'});track('devis_autre_piece_email',{model:iphoneLabel($('#quick-model').value)});trackBrainEvent('email_clicked',{intent:'other_iphone_part',source:'quick_quote'});
       }catch(error){status.textContent='L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';status.classList.add('is-error')}finally{button.disabled=false}
     });
     syncQuickModels();
@@ -1523,13 +1525,14 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       try{
         const r=await fetch('https://formsubmit.co/ajax/contact@solution-phone.fr',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
         const payload=await r.json().catch(()=>null);
-        if(!r.ok||!payload||(payload.success!==true&&payload.success!=='true'))throw new Error();
-        status.textContent='Demande envoyée. L’équipe Solution Phone vous répond rapidement.';e.currentTarget.reset();track('devis_email_envoye');trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'});
+        if(!r.ok||(payload&&String(payload.success).toLowerCase()==='false'))throw new Error();
+        status.textContent='Demande envoyée. L’équipe Solution Phone vous répond rapidement.';e.currentTarget.reset();track('devis_email_envoye',{method:'email',form_type:'main_quote'});trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'});
       }catch(err){status.textContent='L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';track('devis_email_erreur')}finally{if(submit)submit.disabled=false}
     });
-    function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,params||{})}catch(e){}}
+    function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,{transport_type:'beacon',...(params||{})})}catch(e){}}
     document.addEventListener('click',e=>{
-      const link=e.target.closest('a[href*="wa.me"]');if(link){track('contact_whatsapp',{page:'assistant',intent:current?.intent||'unknown',brand:current?.brand||''});trackBrainEvent('whatsapp_clicked',{intent:current?.intent||'unknown',brand:current?.brand||'',source:link.id||link.className||'link'})}
+      const link=e.target.closest('a[href*="wa.me"]');if(link){track('contact_whatsapp',{method:'whatsapp',page:'assistant',intent:current?.intent||'unknown',brand:current?.brand||''});trackBrainEvent('whatsapp_clicked',{intent:current?.intent||'unknown',brand:current?.brand||'',source:link.id||link.className||'link'})}
+      const phoneLink=e.target.closest('a[href^="tel:"]');if(phoneLink)track('contact_phone',{method:'phone',page:'assistant'});
       if(e.target.closest('.express-price,#dock-price-button'))track('ouverture_tarif_direct',{page:'evan',context:requestText()});
     });
     const visualPanel=document.querySelector('.visual'),agentStage=document.querySelector('.agent-stage');
