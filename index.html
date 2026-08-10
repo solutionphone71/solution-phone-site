@@ -1526,7 +1526,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
         const r=await fetch('https://formsubmit.co/ajax/contact@solution-phone.fr',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
         const payload=await r.json().catch(()=>null);
         if(!r.ok||(payload&&String(payload.success).toLowerCase()==='false'))throw new Error();
-        status.textContent='Demande envoyée. L’équipe Solution Phone vous répond rapidement.';e.currentTarget.reset();track('devis_email_envoye',{method:'email',form_type:'main_quote'});trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'});
+        status.textContent='Demande envoyée. L’équipe Solution Phone vous répond rapidement.';e.currentTarget.reset();track('devis_email_envoye',{method:'email',form_type:'main_quote'});track('devis_autre_piece_email',{method:'email',form_type:'main_quote',migration_bridge:true});trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'});
       }catch(err){status.textContent='L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';track('devis_email_erreur')}finally{if(submit)submit.disabled=false}
     });
     function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,{transport_type:'beacon',...(params||{})})}catch(e){}}

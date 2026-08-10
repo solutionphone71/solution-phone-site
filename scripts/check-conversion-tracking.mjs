@@ -21,4 +21,9 @@ const successIndex = html.indexOf("track('devis_email_envoye'", html.indexOf("$(
 const responseIndex = html.indexOf('if(!r.ok', html.indexOf("$('#mail-form').addEventListener('submit'"));
 if (successIndex < responseIndex) throw new Error('Le devis est compté avant la confirmation du serveur.');
 
+const mainHandler = html.slice(html.indexOf("$('#mail-form').addEventListener('submit'"), html.indexOf('function track(name,params)'));
+if (!mainHandler.includes("track('devis_autre_piece_email'")) {
+  throw new Error('Le devis principal ne remonte pas encore dans la conversion Ads existante.');
+}
+
 console.log('Suivi des conversions : OK');
