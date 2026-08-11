@@ -565,44 +565,29 @@ async function notifyOwner(reference: string, customerQuestion: string, expertRe
     'Réponds directement à ce message. J’enregistrerai ta réponse dans ma mémoire.',
   ].join('\n').slice(0, 3900)
   try {
-    let messageType = 'text'
-    let apiResponse = await fetch(`https://graph.facebook.com/v25.0/${WHATSAPP_PHONE_NUMBER_ID}/messages`, {
+    const messageType = 'template'
+    const apiResponse = await fetch(`https://graph.facebook.com/v25.0/${WHATSAPP_PHONE_NUMBER_ID}/messages`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         messaging_product: 'whatsapp',
         recipient_type: 'individual',
         to: EVAN_OWNER_WHATSAPP,
-        type: 'text',
-        text: { preview_url: false, body: text },
+        type: 'template',
+        template: {
+          name: 'evan_question_equipe',
+          language: { code: 'fr' },
+          components: [{
+            type: 'body',
+            parameters: [
+              { type: 'text', text: reference },
+              { type: 'text', text: customerQuestion.replace(/\s+/g, ' ').trim().slice(0, 900) },
+            ],
+          }],
+        },
       }),
     })
-    let result = await apiResponse.json()
-    if (!apiResponse.ok && Number(result?.error?.code) === 131047) {
-      messageType = 'template'
-      apiResponse = await fetch(`https://graph.facebook.com/v25.0/${WHATSAPP_PHONE_NUMBER_ID}/messages`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messaging_product: 'whatsapp',
-          recipient_type: 'individual',
-          to: EVAN_OWNER_WHATSAPP,
-          type: 'template',
-          template: {
-            name: 'evan_question_equipe',
-            language: { code: 'fr' },
-            components: [{
-              type: 'body',
-              parameters: [
-                { type: 'text', text: reference },
-                { type: 'text', text: customerQuestion.slice(0, 900) },
-              ],
-            }],
-          },
-        }),
-      })
-      result = await apiResponse.json()
-    }
+    const result = await apiResponse.json()
     if (!apiResponse.ok) throw new Error(result?.error?.message || `Erreur WhatsApp ${apiResponse.status}`)
     await admin.from('evan_whatsapp_events').insert({
       meta_message_id: result?.messages?.[0]?.id || null,

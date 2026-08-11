@@ -9,8 +9,8 @@ const checks = [
   ['événement devis envoyé', "track('devis_email_envoye'"],
   ['événement devis après succès', "form_type:'main_quote'"],
   ['événement devis rapide après succès', "form_type:'quick_other_part'"],
-  ['formulaire de secours POST', 'method="POST"'],
-  ['URL source FormSubmit', 'name="_url" value="https://solution-phone.fr/"'],
+  ['réception serveur des devis', "const QUOTE_REQUEST_URL=SUPABASE_URL+'/functions/v1/quote-request'"],
+  ['confirmation serveur durable', 'if(!response.ok||!payload?.received)'],
 ];
 
 for (const [label, needle] of checks) {
@@ -18,8 +18,12 @@ for (const [label, needle] of checks) {
 }
 
 const successIndex = html.indexOf("track('devis_email_envoye'", html.indexOf("$('#mail-form').addEventListener('submit'"));
-const responseIndex = html.indexOf('if(!r.ok', html.indexOf("$('#mail-form').addEventListener('submit'"));
+const responseIndex = html.indexOf('const payload=await sendQuoteRequest', html.indexOf("$('#mail-form').addEventListener('submit'"));
 if (successIndex < responseIndex) throw new Error('Le devis est compté avant la confirmation du serveur.');
+
+if (html.toLowerCase().includes('formsubmit')) {
+  throw new Error('L’ancien service FormSubmit est encore référencé.');
+}
 
 const mainHandler = html.slice(html.indexOf("$('#mail-form').addEventListener('submit'"), html.indexOf('function track(name,params)'));
 if (!mainHandler.includes("track('devis_autre_piece_email'")) {

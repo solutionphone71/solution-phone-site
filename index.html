@@ -520,13 +520,12 @@
       <button class="close" id="close-modal" aria-label="Fermer">×</button>
       <h3>Recevoir mon devis</h3>
       <p>L’assistant de Sébastien transmet votre demande à l’équipe Solution Phone.</p>
-      <form class="formgrid" id="mail-form" action="https://formsubmit.co/contact@solution-phone.fr" method="POST">
+      <form class="formgrid" id="mail-form">
         <input name="Nom" required placeholder="Votre nom">
         <input name="email" required type="email" autocomplete="email" placeholder="Votre adresse e-mail">
         <input name="Telephone" placeholder="Votre téléphone (facultatif)">
         <textarea name="Demande" id="mail-request" required placeholder="Votre demande"></textarea>
-        <input type="hidden" name="_subject" value="Nouveau devis — Assistant Solution Phone">
-        <input type="hidden" name="_url" value="https://solution-phone.fr/">
+        <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px" placeholder="Ne pas remplir">
         <button>Envoyer ma demande</button>
       </form>
       <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
@@ -551,6 +550,7 @@
           <input id="quick-other-name" autocomplete="name" placeholder="Votre nom">
           <input id="quick-other-email" type="email" autocomplete="email" placeholder="Votre e-mail pour recevoir la réponse">
           <input id="quick-other-phone" autocomplete="tel" placeholder="Votre téléphone (facultatif)">
+          <input id="quick-other-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px" placeholder="Ne pas remplir">
           <div class="quick-other-actions">
             <button class="action wa" type="button" id="quick-other-wa">Envoyer sur WhatsApp</button>
             <button class="action mail" type="button" id="quick-other-mail">Envoyer par e-mail</button>
@@ -566,6 +566,7 @@
     const SUPABASE_URL='https://kdvxcnjfrmvlnrymfyug.supabase.co';
     const SUPABASE_KEY='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
     const EVAN_BRAIN_URL=SUPABASE_URL+'/functions/v1/evan-brain';
+    const QUOTE_REQUEST_URL=SUPABASE_URL+'/functions/v1/quote-request';
     const PUBLIC_CATALOG_URL=SUPABASE_URL+'/functions/v1/public-catalog';
     const EVAN_CONTEXT_PAGE=new URLSearchParams(location.search).get('from')||location.pathname;
     const EVAN_SOURCE_PAGE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?'/audit-local/'+EVAN_CONTEXT_PAGE.replace(/^\/+/, ''):EVAN_CONTEXT_PAGE;
@@ -1458,6 +1459,15 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       const key=$('#quick-model').value,detail=$('#quick-other-detail').value.trim();
       return key&&detail?`Devis autre pièce iPhone · ${iphoneLabel(key)} · ${detail}`:'';
     }
+    const quoteRequestTokens={main_quote:null,quick_other_part:null};
+    async function sendQuoteRequest(data){
+      const formType=data.form_type,clientToken=quoteRequestTokens[formType]||(quoteRequestTokens[formType]=crypto.randomUUID());
+      const response=await fetch(QUOTE_REQUEST_URL,{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({...data,page:location.pathname,client_token:clientToken})});
+      const payload=await response.json().catch(()=>null);
+      if(!response.ok||!payload?.received)throw new Error(payload?.error||'quote_failed');
+      quoteRequestTokens[formType]=null;
+      return payload;
+    }
     document.querySelectorAll('[data-quick-issue]').forEach(tab=>tab.addEventListener('click',()=>setQuickIssue(tab.dataset.quickIssue)));
     $('#quick-other-wa').addEventListener('click',()=>{
       const request=quickOtherRequest(),status=$('#quick-other-status');status.className='quick-status';
@@ -1475,10 +1485,8 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       if(!email||!$('#quick-other-email').checkValidity()){status.textContent='Indiquez une adresse e-mail valide.';status.classList.add('is-error');$('#quick-other-email').focus();return}
       button.disabled=true;status.textContent='Envoi en cours…';
       try{
-        const data={Nom:name,email,Email:email,_replyto:email,Telephone:phone,Demande:request,_subject:'Nouveau devis — Autre pièce iPhone',_template:'table'};
-        const response=await fetch('https://formsubmit.co/ajax/contact@solution-phone.fr',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)}),payload=await response.json().catch(()=>null);
-        if(!response.ok||!payload||(payload.success!==true&&payload.success!=='true'))throw new Error();
-        status.textContent='Demande envoyée. L’équipe vous répondra directement par e-mail.';status.classList.add('is-success');track('devis_email_envoye',{method:'email',form_type:'quick_other_part'});track('devis_autre_piece_email',{model:iphoneLabel($('#quick-model').value)});trackBrainEvent('email_clicked',{intent:'other_iphone_part',source:'quick_quote'});
+        const payload=await sendQuoteRequest({name,email,phone,request,form_type:'quick_other_part',website:$('#quick-other-website').value});
+        status.textContent=`Demande reçue (${payload.reference}). L’équipe vous répondra directement par e-mail.`;status.classList.add('is-success');track('devis_email_envoye',{method:'email',form_type:'quick_other_part',reference:payload.reference});track('devis_autre_piece_email',{model:iphoneLabel($('#quick-model').value)});trackBrainEvent('email_clicked',{intent:'other_iphone_part',source:'quick_quote'});
       }catch(error){status.textContent='L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';status.classList.add('is-error')}finally{button.disabled=false}
     });
     syncQuickModels();
@@ -1519,14 +1527,9 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
     $('#mail-form').addEventListener('submit',async e=>{
       e.preventDefault();const status=$('#form-status'),submit=e.currentTarget.querySelector('button[type="submit"],button:not([type])');status.textContent='Envoi en cours…';if(submit)submit.disabled=true;
       const data=Object.fromEntries(new FormData(e.currentTarget).entries());
-      data.Email=data.email;
-      data._replyto=data.email;
-      data._template='table';
       try{
-        const r=await fetch('https://formsubmit.co/ajax/contact@solution-phone.fr',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
-        const payload=await r.json().catch(()=>null);
-        if(!r.ok||(payload&&String(payload.success).toLowerCase()==='false'))throw new Error();
-        status.textContent='Demande envoyée. L’équipe Solution Phone vous répond rapidement.';e.currentTarget.reset();track('devis_email_envoye',{method:'email',form_type:'main_quote'});track('devis_autre_piece_email',{method:'email',form_type:'main_quote',migration_bridge:true});trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'});
+        const payload=await sendQuoteRequest({name:data.Nom,email:data.email,phone:data.Telephone,request:data.Demande,form_type:'main_quote',website:data.website});
+        status.textContent=`Demande reçue (${payload.reference}). L’équipe Solution Phone vous répond rapidement.`;e.currentTarget.reset();track('devis_email_envoye',{method:'email',form_type:'main_quote',reference:payload.reference});track('devis_autre_piece_email',{method:'email',form_type:'main_quote',migration_bridge:true});trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'});
       }catch(err){status.textContent='L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';track('devis_email_erreur')}finally{if(submit)submit.disabled=false}
     });
     function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,{transport_type:'beacon',...(params||{})})}catch(e){}}
