@@ -1462,11 +1462,17 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
     const quoteRequestTokens={main_quote:null,quick_other_part:null};
     async function sendQuoteRequest(data){
       const formType=data.form_type,clientToken=quoteRequestTokens[formType]||(quoteRequestTokens[formType]=crypto.randomUUID());
-      const response=await fetch(QUOTE_REQUEST_URL,{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({...data,page:location.pathname,client_token:clientToken})});
-      const payload=await response.json().catch(()=>null);
-      if(!response.ok||!payload?.received)throw new Error(payload?.error||'quote_failed');
-      quoteRequestTokens[formType]=null;
-      return payload;
+      let lastError=new Error('quote_failed');
+      for(let attempt=0;attempt<2;attempt++){
+        if(attempt)await new Promise(resolve=>setTimeout(resolve,650));
+        try{
+          const response=await fetch(QUOTE_REQUEST_URL,{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({...data,page:location.pathname,client_token:clientToken})});
+          const payload=await response.json().catch(()=>null);
+          if(response.ok&&payload?.received){quoteRequestTokens[formType]=null;return payload}
+          lastError=new Error(payload?.error||'quote_failed');
+        }catch(error){lastError=error instanceof Error?error:lastError}
+      }
+      throw lastError;
     }
     document.querySelectorAll('[data-quick-issue]').forEach(tab=>tab.addEventListener('click',()=>setQuickIssue(tab.dataset.quickIssue)));
     $('#quick-other-wa').addEventListener('click',()=>{

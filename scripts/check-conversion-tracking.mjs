@@ -10,7 +10,9 @@ const checks = [
   ['événement devis après succès', "form_type:'main_quote'"],
   ['événement devis rapide après succès', "form_type:'quick_other_part'"],
   ['réception serveur des devis', "const QUOTE_REQUEST_URL=SUPABASE_URL+'/functions/v1/quote-request'"],
-  ['confirmation serveur durable', 'if(!response.ok||!payload?.received)'],
+  ['confirmation serveur durable', 'response.ok&&payload?.received'],
+  ['identifiant anti-doublon', 'client_token:clientToken'],
+  ['nouvelle vérification après réponse perdue', 'for(let attempt=0;attempt<2;attempt++)'],
 ];
 
 for (const [label, needle] of checks) {
