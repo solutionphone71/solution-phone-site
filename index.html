@@ -18,8 +18,9 @@
   <link rel="icon" type="image/png" href="img/logo.png">
   <link rel="apple-touch-icon" href="img/logo.png">
   <meta name="theme-color" content="#e30613">
+  <script src="scripts/consent-tracking.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3QP90K1TLM"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-3QP90K1TLM',{anonymize_ip:true})</script>
+  <script>gtag('js',new Date());gtag('config','G-3QP90K1TLM',{anonymize_ip:true})</script>
   <script>if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('evan-embed')</script>
   <script type="application/ld+json">
   {
@@ -1114,10 +1115,10 @@
       finishConversation();
     }
     function handleConversationAnswer(value,label,kind){
-      if(kind==='brainWhatsApp'){window.open(lastBrainWhatsApp||waLink(),'_blank','noopener');return}
+      if(kind==='brainWhatsApp'){openTrackedWhatsApp(lastBrainWhatsApp||waLink(),'assistant_quick_reply');return}
       if(kind==='brainMail'){openMail();return}
       if(kind==='openPrice'){openQuickPrice();return}
-      if(kind==='directWhatsApp'){window.open(waLink(),'_blank','noopener');return}
+      if(kind==='directWhatsApp'){openTrackedWhatsApp(waLink(),'assistant_direct_reply');return}
       if(kind==='directMail'){openMail();return}
       addMessage('user',label||value);$('#chat-quick').innerHTML='';
       if(kind==='education'){replyEducation(value);return}
@@ -1460,6 +1461,11 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       return key&&detail?`Devis autre pièce iPhone · ${iphoneLabel(key)} · ${detail}`:'';
     }
     const quoteRequestTokens={main_quote:null,quick_other_part:null};
+    function quoteErrorMessage(error){
+      if(error?.status===429)return 'Plusieurs demandes ont déjà été envoyées récemment. Votre devis est peut-être déjà arrivé ; sinon, réessayez dans 15 minutes ou utilisez WhatsApp.';
+      if(error?.status>=400&&error?.status<500)return 'La demande contient une information invalide. Vérifiez les champs puis réessayez.';
+      return 'L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';
+    }
     async function sendQuoteRequest(data){
       const formType=data.form_type,clientToken=quoteRequestTokens[formType]||(quoteRequestTokens[formType]=crypto.randomUUID());
       let lastError=new Error('quote_failed');
@@ -1469,8 +1475,13 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
           const response=await fetch(QUOTE_REQUEST_URL,{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({...data,page:location.pathname,client_token:clientToken})});
           const payload=await response.json().catch(()=>null);
           if(response.ok&&payload?.received){quoteRequestTokens[formType]=null;return payload}
-          lastError=new Error(payload?.error||'quote_failed');
-        }catch(error){lastError=error instanceof Error?error:lastError}
+          const error=new Error(payload?.error||'quote_failed');error.status=response.status;
+          if(response.status>=400&&response.status<500)throw error;
+          lastError=error;
+        }catch(error){
+          if(error?.status>=400&&error?.status<500)throw error;
+          lastError=error instanceof Error?error:lastError;
+        }
       }
       throw lastError;
     }
@@ -1481,7 +1492,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       if(!request){status.textContent='Indiquez la pièce ou la panne.';status.classList.add('is-error');$('#quick-other-detail').focus();return}
       const name=$('#quick-other-name').value.trim(),phone=$('#quick-other-phone').value.trim();
       const message=`Bonjour Sébastien, je viens du site Solution Phone. ${request}${name?' · Nom : '+name:''}${phone?' · Téléphone : '+phone:''}. Pouvez-vous me confirmer le devis ?`;
-      window.open('https://wa.me/33783921884?text='+encodeURIComponent(message),'_blank','noopener');track('devis_autre_piece_whatsapp',{model:iphoneLabel($('#quick-model').value)});trackBrainEvent('whatsapp_clicked',{intent:'other_iphone_part',source:'quick_quote'});
+      openTrackedWhatsApp('https://wa.me/33783921884?text='+encodeURIComponent(message),'quick_other_part');track('devis_autre_piece_whatsapp',{model:iphoneLabel($('#quick-model').value)});
     });
     $('#quick-other-mail').addEventListener('click',async()=>{
       const request=quickOtherRequest(),status=$('#quick-other-status'),name=$('#quick-other-name').value.trim(),email=$('#quick-other-email').value.trim(),phone=$('#quick-other-phone').value.trim(),button=$('#quick-other-mail');status.className='quick-status';
@@ -1492,8 +1503,8 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       button.disabled=true;status.textContent='Envoi en cours…';
       try{
         const payload=await sendQuoteRequest({name,email,phone,request,form_type:'quick_other_part',website:$('#quick-other-website').value});
-        status.textContent=`Demande reçue (${payload.reference}). L’équipe vous répondra directement par e-mail.`;status.classList.add('is-success');track('devis_email_envoye',{method:'email',form_type:'quick_other_part',reference:payload.reference});track('devis_autre_piece_email',{model:iphoneLabel($('#quick-model').value)});trackBrainEvent('email_clicked',{intent:'other_iphone_part',source:'quick_quote'});
-      }catch(error){status.textContent='L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';status.classList.add('is-error')}finally{button.disabled=false}
+        status.textContent=`Demande reçue (${payload.reference}). L’équipe vous répondra directement par e-mail.`;status.classList.add('is-success');trackLeadSuccess('devis_email_envoye',{method:'email',form_type:'quick_other_part',reference:payload.reference},{email,phone});track('devis_autre_piece_email',{model:iphoneLabel($('#quick-model').value)});trackBrainEvent('email_clicked',{intent:'other_iphone_part',source:'quick_quote'});
+      }catch(error){status.textContent=quoteErrorMessage(error);status.classList.add('is-error')}finally{button.disabled=false}
     });
     syncQuickModels();
     $('#diagnostic-form').addEventListener('submit',async e=>{e.preventDefault();const v=$('#diagnostic-input').value.trim();if(v){await trackBrainEvent('assistant_opened',{source:'diagnostic_form'});runDiagnostic(v)}});
@@ -1535,13 +1546,28 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       const data=Object.fromEntries(new FormData(e.currentTarget).entries());
       try{
         const payload=await sendQuoteRequest({name:data.Nom,email:data.email,phone:data.Telephone,request:data.Demande,form_type:'main_quote',website:data.website});
-        status.textContent=`Demande reçue (${payload.reference}). L’équipe Solution Phone vous répond rapidement.`;e.currentTarget.reset();track('devis_email_envoye',{method:'email',form_type:'main_quote',reference:payload.reference});track('devis_autre_piece_email',{method:'email',form_type:'main_quote',migration_bridge:true});trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'});
-      }catch(err){status.textContent='L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';track('devis_email_erreur')}finally{if(submit)submit.disabled=false}
+        status.textContent=`Demande reçue (${payload.reference}). L’équipe Solution Phone vous répond rapidement.`;trackLeadSuccess('devis_email_envoye',{method:'email',form_type:'main_quote',reference:payload.reference},{email:data.email,phone:data.Telephone});track('devis_autre_piece_email',{method:'email',form_type:'main_quote',migration_bridge:true});e.currentTarget.reset();trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'});
+      }catch(err){status.textContent=quoteErrorMessage(err);track('devis_email_erreur',{status:err?.status||0})}finally{if(submit)submit.disabled=false}
     });
     function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,{transport_type:'beacon',...(params||{})})}catch(e){}}
+    function trackLeadSuccess(name,params,contact){
+      const userData=window.SolutionPhoneConsent?.enhancedLeadData(contact);
+      if(userData)window.gtag('set','user_data',userData);
+      track(name,params);
+      if(userData)window.gtag('set','user_data',{});
+    }
+    function trackWhatsApp(source){
+      track('contact_whatsapp',{method:'whatsapp',page:'assistant',source:String(source||'link'),intent:current?.intent||'unknown',brand:current?.brand||''});
+      trackBrainEvent('whatsapp_clicked',{intent:current?.intent||'unknown',brand:current?.brand||'',source:String(source||'link')});
+    }
+    function openTrackedWhatsApp(url,source){trackWhatsApp(source);window.open(url,'_blank','noopener')}
+    function phoneClickData(href){
+      const number=String(href||'').replace(/^tel:/,'').replace(/\s/g,''),destinations={'+33385330689':'atelier_fixe','+33783921884':'mobile_whatsapp','+33602849953':'solution_accessoires','+33748348743':'solution_informatique'};
+      return {phone_number:number,phone_destination:destinations[number]||'autre'};
+    }
     document.addEventListener('click',e=>{
-      const link=e.target.closest('a[href*="wa.me"]');if(link){track('contact_whatsapp',{method:'whatsapp',page:'assistant',intent:current?.intent||'unknown',brand:current?.brand||''});trackBrainEvent('whatsapp_clicked',{intent:current?.intent||'unknown',brand:current?.brand||'',source:link.id||link.className||'link'})}
-      const phoneLink=e.target.closest('a[href^="tel:"]');if(phoneLink)track('contact_phone',{method:'phone',page:'assistant'});
+      const link=e.target.closest('a[href*="wa.me"]');if(link)trackWhatsApp(link.id||link.className||'link');
+      const phoneLink=e.target.closest('a[href^="tel:"]');if(phoneLink)track('contact_phone',{method:'phone',page:'assistant',...phoneClickData(phoneLink.getAttribute('href'))});
       if(e.target.closest('.express-price,#dock-price-button'))track('ouverture_tarif_direct',{page:'evan',context:requestText()});
     });
     const visualPanel=document.querySelector('.visual'),agentStage=document.querySelector('.agent-stage');
