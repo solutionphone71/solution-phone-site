@@ -18,6 +18,7 @@
   <link rel="icon" type="image/png" href="img/logo.png">
   <link rel="apple-touch-icon" href="img/logo.png">
   <meta name="theme-color" content="#e30613">
+  <link rel="preload" as="image" href="img/evan-comptoir.webp" fetchpriority="high">
   <script src="scripts/consent-tracking.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3QP90K1TLM"></script>
   <script>gtag('js',new Date());gtag('config','G-3QP90K1TLM',{anonymize_ip:true})</script>
@@ -113,6 +114,7 @@
     .device-halo{display:none}
     .device-halo:before,.device-halo:after{content:"";position:absolute;border-radius:50%;inset:11%;border:1px dashed rgba(227,6,19,.6)}
     .device-halo:after{inset:26%;border-style:solid;border-color:rgba(255,255,255,.22);box-shadow:0 0 30px rgba(255,255,255,.08)}
+    .local-seo-guides{max-width:1180px;margin:0 auto;padding:0 28px 72px}.local-seo-guides>p{margin:0 0 12px;color:var(--red);font:760 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase}.local-seo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.local-seo-grid a{display:block;min-height:132px;padding:22px;border:1px solid rgba(0,0,0,.13);background:#fff;color:var(--ink);text-decoration:none;transition:.2s}.local-seo-grid a:hover,.local-seo-grid a:focus-visible{transform:translateY(-3px);border-color:var(--red);box-shadow:0 16px 38px rgba(0,0,0,.08)}.local-seo-grid small{display:block;color:var(--red);font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.local-seo-grid b{display:block;margin-top:8px;font-size:20px;letter-spacing:-.035em}.local-seo-grid span{display:block;margin-top:7px;color:#686868;font-size:12px;line-height:1.45}
     .device{display:none}
     .device:before{content:"";position:absolute;left:50%;top:10px;transform:translateX(-50%);width:34%;height:18px;border-radius:12px;background:#050505}
     .agent-stage{position:absolute;inset:0;overflow:hidden;animation:agentBreathe 5s var(--ease) infinite;--look-x:0px;--look-y:0px}
@@ -276,6 +278,7 @@
     }
     @media(max-width:720px){
       .topbar{height:60px;padding:0 12px}.brand small,.status span{display:none}.brand{gap:7px}.brand-mark{width:28px;height:28px}.brand strong{font-size:14px}.top-wa{display:none}.live-availability{min-height:52px;padding:7px 12px;grid-template-columns:auto 1fr auto;gap:10px}.live-availability-copy{display:block}.live-availability-copy strong{display:block;font-size:10px}.live-availability-copy span{display:block;margin-top:3px;max-width:230px;font-size:8px}.live-availability-meta{display:none}.live-availability button{min-height:36px;padding:0 10px;font-size:8px}.stage{min-height:calc(100svh - 112px)}.visual{min-height:39svh;padding:24px 20px}.edition{font-size:8px}.hero-copy{width:68%}.hero-copy h1{font-size:12vw}.hero-copy p{font-size:13px;max-width:88%;margin-top:14px}.hero-trust{margin-top:12px;gap:5px}.hero-trust span{min-height:27px;padding:6px 8px;font-size:8px}.hero-trust small{font-size:6px}.workshop-photo{width:54%;opacity:.72}.workshop-photo:after{display:none}.conversation{align-items:flex-start;min-height:61svh;padding:34px 18px 38px}.conversation:after{top:15px;right:18px;font-size:6px}.evan{margin-bottom:19px}.avatar{width:44px;height:44px}.dialogue{font-size:31px;margin-bottom:20px}.entry{padding:6px}.entry input{padding:12px 10px;font-size:14px}.send{width:48px;height:48px}.quality-guides{grid-template-columns:repeat(3,minmax(128px,1fr));overflow-x:auto;margin-right:-18px;padding:0 18px 5px 0;scroll-snap-type:x proximity}.quality-guide{scroll-snap-align:start}.needs-grid{gap:6px}.need-card{min-height:68px;padding:11px}.need-card b{font-size:11px}.need-card.data-service{grid-template-columns:1fr}.need-card.data-service span{margin-top:5px;padding-left:0;border-left:0}.fast-action{font-size:9px;padding:7px 4px}.network-store{padding:6px}.network-store b{font-size:8px}.network-store span{font-size:7px}.brand-pick{margin-top:20px}.brand-list{margin-right:-18px;padding-right:18px}.actions,.offer-grid{grid-template-columns:1fr}.qualities{gap:6px}.answer h3{font-size:34px}.recap strong{font-size:34px}
+      .local-seo-guides{padding:0 18px 50px}.local-seo-grid{grid-template-columns:1fr}.local-seo-grid a{min-height:0}
     }
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
   </style>
@@ -509,6 +512,14 @@
         <button class="repair-device" data-repair-prompt="j'ai besoin d'une réparation de trottinette"><small>Trottinette</small><b>Pneu · frein · autonomie</b><span>Obtenir un tarif →</span></button>
       </div>
     </div>
+    <nav class="local-seo-guides" aria-label="Guides de réparation à Mâcon">
+      <p>Guides locaux</p>
+      <div class="local-seo-grid">
+        <a href="ecran-iphone-casse-macon.html"><small>iPhone</small><b>Écran cassé à Mâcon</b><span>Vitre fissurée, affichage noir, taches ou tactile défaillant.</span></a>
+        <a href="remplacement-batterie-telephone-macon.html"><small>Autonomie</small><b>Remplacement de batterie</b><span>Décharge rapide, chauffe, extinction ou batterie gonflée.</span></a>
+        <a href="reparation-telephone-macon.html"><small>Multimarque</small><b>Réparation téléphone à Mâcon</b><span>Écran, charge, caméra et diagnostic iPhone, Samsung ou Android.</span></a>
+      </div>
+    </nav>
   </section>
 
   <div class="home-contact-dock" aria-label="Accès directs">
