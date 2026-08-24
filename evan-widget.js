@@ -17,7 +17,7 @@
   var ctx=contexts[page]||{label:'Solution Phone',title:'Que puis-je faire pour vous ?',items:['Obtenir un tarif de réparation','Diagnostiquer mon appareil','Parler directement à l’équipe']};
   var oldCrispButton=document.getElementById('crispFloatBtn');if(oldCrispButton)oldCrispButton.remove();
   if(window.$crisp&&Array.isArray(window.$crisp))window.$crisp.push(['do','chat:hide']);
-  var css=document.createElement('link');css.rel='stylesheet';css.href='evan-widget.css?v=7';document.head.appendChild(css);
+  var css=document.createElement('link');css.rel='stylesheet';css.href='evan-widget.css?v=8';document.head.appendChild(css);
   var directMailSubject='Demande depuis '+ctx.label+' — Solution Phone';
   var directMailBody='Bonjour,\n\nJe viens de la page « '+ctx.label+' » du site Solution Phone.\n\nMa demande : \n\nMon appareil et son modèle : \n\nVous pouvez me répondre à cette adresse e-mail.\n\nMerci.';
   var brainUrl='https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/evan-brain';

@@ -15,8 +15,8 @@
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta name="geo.region" content="FR-71">
   <meta name="geo.placename" content="Mâcon">
-  <link rel="icon" type="image/png" href="img/logo.png">
-  <link rel="apple-touch-icon" href="img/logo.png">
+  <link rel="icon" type="image/png" href="img/favicon-96.png">
+  <link rel="apple-touch-icon" href="img/favicon-96.png">
   <meta name="theme-color" content="#e30613">
   <link rel="preload" as="image" href="img/evan-comptoir.webp" fetchpriority="high">
   <script src="scripts/consent-tracking.js"></script>
@@ -338,15 +338,20 @@
         <div class="workshop-photo"><img src="img/evan-comptoir.webp" alt="Intérieur de la boutique Solution Phone à Mâcon" width="1448" height="1086" fetchpriority="high" decoding="async"></div>
         <div class="edition"><span aria-hidden="true"></span>Sébastien & l’équipe · Mâcon depuis 2014</div>
         <div class="hero-copy">
+          <strong class="hero-answer">Vous êtes au bon endroit.</strong>
           <h1>Réparation.<em>Smartphone.</em>À Mâcon.</h1>
-          <p>Chez Solution Phone, mon équipe et moi réparons vos iPhone, Samsung et smartphones Android ici, à Mâcon. Besoin d’un prix maintenant&nbsp;? Mon assistant numérique est disponible 24h/24. Et si besoin, je prends personnellement le relais sur WhatsApp.</p>
+          <p>Panne urgente&nbsp;? Obtenez rapidement un tarif par WhatsApp ou par e-mail. Notre service après-vente reste disponible après l’intervention.</p>
           <div class="hero-trust" aria-label="Garanties Solution Phone">
-            <span class="local-proof"><b>Sébastien & son équipe</b>&nbsp;· Réparateurs à Mâcon</span>
+            <div class="hero-reasons">
+              <span><b>90 % &lt; 1 h</b><small>Selon la panne et la pièce disponible</small></span>
+              <span><b>400+ / mois</b><small>Téléphones pris en charge</small></span>
+              <span><b>5 techniciens</b><small>À votre écoute à Mâcon</small></span>
+            </div>
             <a class="qualirepar-banner" href="atelier.html#qualirepar" aria-label="Découvrir la remise QualiRépar de 25 euros">
               <span class="qualirepar-logo"><img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar"></span>
               <span class="qualirepar-message">
                 <strong><em>−25 €</em> de remise immédiate</strong>
-                <small>Bénéficiez de 25 € de remise immédiate sur toute réparation éligible, directement chez Solution Phone.</small>
+                <small>25 € déduits directement sur les réparations couvertes par le dispositif QualiRépar.</small>
                 <i>Bonus déduit en boutique · Aucun dossier à remplir</i>
               </span>
             </a>
@@ -524,8 +529,8 @@
   </section>
 
   <div class="home-contact-dock" aria-label="Accès directs">
-    <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20je%20viens%20du%20site%20Solution%20Phone" target="_blank" rel="noopener">WhatsApp</a>
-    <button id="dock-price-button" type="button" onclick="openContextAction()">Tarif iPhone</button>
+    <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20est%20urgente.%20Mon%20appareil%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">WhatsApp urgent</a>
+    <button id="dock-price-button" type="button" onclick="openMail()">Devis e-mail</button>
   </div>
 
   <div class="modal" id="mail-modal" role="dialog" aria-modal="true" aria-label="Recevoir un devis par e-mail">
@@ -892,7 +897,7 @@
     }
     function replyEducation(type){
       if(type==='qualirepar'){
-        botReply('QualiRépar est un label obtenu après audit par les réparateurs professionnels.\n\nPour un smartphone hors garantie et une panne éligible, 25 € sont retirés directement de votre facture. Vous n’avez aucun dossier à remplir et aucune avance à faire.',[
+        botReply('QualiRépar est un label obtenu après audit par les réparateurs professionnels.\n\nPour une réparation couverte par le dispositif, 25 € sont retirés directement de votre facture. Vous n’avez aucun dossier à remplir et aucune avance à faire.',[
           {label:'Voir mon tarif',value:'price',kind:'openPrice'},
           {label:'Comparer les écrans iPhone',value:'iphoneScreen',kind:'education'},
           {label:'Demander sur WhatsApp',value:'whatsapp',kind:'directWhatsApp'}
@@ -1213,7 +1218,7 @@ Originale — pièce d’origine, selon disponibilité.
 
 Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. La compatibilité, le prix et l’affichage de l’état de santé sont confirmés avant l’intervention.</p></details>`:''}
             <div class="qualities">${qualities.map(q=>`<button class="quality ${q.id===current.selected.id?'selected':''}" data-id="${q.id}"><div><b>${q.name}</b><span>${q.desc}</span></div><strong>${q.price} €</strong></button>`).join('')}</div>
-            <div class="recap${livePrice?' bonus-eligible':''}"><div><small>${livePrice?'Prix TTC après bonus si éligible':'Estimation TTC à confirmer'}</small><b>${livePrice?'Éligibilité QualiRépar confirmée en boutique':'Confirmation nécessaire par WhatsApp ou e-mail'}</b></div><strong id="recap-price">${current.selected.price} €</strong></div>
+            <div class="recap${livePrice?' bonus-eligible':''}"><div><small>${livePrice?'Prix TTC après bonus QualiRépar':'Estimation TTC à confirmer'}</small><b>${livePrice?'Bonus déjà intégré au tarif affiché':'Confirmation nécessaire par WhatsApp ou e-mail'}</b></div><strong id="recap-price">${current.selected.price} €</strong></div>
             ${p.issue==='screen'?protectionOffersHtml():''}
             <div class="actions"><a class="action wa" id="result-wa" target="_blank" rel="noopener">Confirmer sur WhatsApp</a><button class="action mail" onclick="openMail()">Recevoir par e-mail</button></div>
             <p class="assurance">${livePrice?'Tarif issu de la base atelier':'Estimation de secours'} · Garantie 6 mois · Facture détaillée · Rien n’est effectué sans votre accord. Le tarif final reste soumis au diagnostic visuel et à la disponibilité de la pièce.</p>`;
@@ -1413,7 +1418,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       if(['computer','scooter','console'].includes(current.intent))return `${current.issueLabel} · ${current.model}${current.text?' · Demande : '+current.text:''}${brainContext}`;
       const q=current.selected?` · ${current.selected.name} · ${current.selected.priceLabel||current.selected.price+' €'}`:'';
       const priceStatus=current.priceSource==='estimation_secours'?' · Estimation de secours à confirmer':current.priceSource==='atelier_connecte'?' · Tarif issu de la base atelier':'';
-      const qualiStatus=current.brand==='Apple'&&['screen','battery'].includes(current.issue)?' · Prix affiché après bonus QualiRépar si éligible':'';
+      const qualiStatus=current.brand==='Apple'&&['screen','battery'].includes(current.issue)?' · Prix affiché après bonus QualiRépar':'';
       const symptom=current.symptom?` · ${current.symptom}`:'';
       const declared=current.text?` · ${current.intent==='repair'?'Symptôme déclaré':'Demande originale'} : ${current.text}`:'';
       return `${current.issueLabel||'Diagnostic'} · ${current.model||current.text}${symptom}${q}${priceStatus}${qualiStatus}${declared}${brainContext}${addons}`;

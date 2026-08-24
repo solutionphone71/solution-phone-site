@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Magasin de téléphonie et accessoires à Mâcon | Solution Phone</title>
-<link rel="icon" type="image/png" href="img/logo.png">
-<link rel="apple-touch-icon" href="img/logo.png">
+<link rel="icon" type="image/png" href="img/favicon-96.png">
+<link rel="apple-touch-icon" href="img/favicon-96.png">
 <link rel="canonical" href="https://solution-phone.fr/accessoires.html">
 <meta name="description" content="Magasin de téléphonie et accessoires à Mâcon : coques, chargeurs, câbles et protections d’écran. Compatibilité vérifiée en boutique au 21 Rue Gambetta.">
 <meta name="keywords" content="accessoires smartphone Mâcon, coque iPhone Mâcon, chargeur iPhone, verre trempé, câble Lightning, Solution Phone">
@@ -16,6 +16,7 @@
 <meta property="og:url" content="https://solution-phone.fr/accessoires.html">
 <meta property="og:image" content="https://solution-phone.fr/img/logo.png">
 <meta property="og:locale" content="fr_FR">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Solution Phone","url":"https://solution-phone.fr/accessoires.html","telephone":"+33385330689","address":{"@type":"PostalAddress","streetAddress":"21 Rue Gambetta","postalCode":"71000","addressLocality":"Mâcon","addressCountry":"FR"},"makesOffer":{"@type":"Offer","itemOffered":{"@type":"Service","name":"Conseil et vente d’accessoires pour smartphone"}}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -143,6 +144,7 @@ gtag("config", "G-3QP90K1TLM");
 <link rel="stylesheet" href="premium-shared.css?v=expert-banners-1">
 <link rel="stylesheet" href="accessoires-signature.css?v=signature-1">
 <script src="premium-nav.js?v=signature-3" defer></script>
+<link rel="stylesheet" href="contact-dock.css?v=1">
 </head>
 <body class="aurora">
 
@@ -265,7 +267,7 @@ gtag("config", "G-3QP90K1TLM");
 <section class="max-w-7xl mx-auto px-6 pb-10 md:pb-16">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <div>
-      <label class="text-[12px] uppercase tracking-[0.22em] label block mb-2">Marque</label>
+      <label for="sBrand" class="text-[12px] uppercase tracking-[0.22em] label block mb-2">Marque</label>
       <select id="sBrand" onchange="loadModels()" class="w-full bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
         <option value="">— Toutes les marques —</option>
         <option value="apple">Apple (iPhone)</option>
@@ -274,13 +276,13 @@ gtag("config", "G-3QP90K1TLM");
       </select>
     </div>
     <div>
-      <label class="text-[12px] uppercase tracking-[0.22em] label block mb-2">Modèle</label>
+      <label for="sModel" class="text-[12px] uppercase tracking-[0.22em] label block mb-2">Modèle</label>
       <select id="sModel" onchange="showProducts()" class="w-full bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
         <option value="">— Choisir un modèle —</option>
       </select>
     </div>
     <div>
-      <label class="text-[12px] uppercase tracking-[0.22em] label block mb-2">Catégorie</label>
+      <label for="sCat" class="text-[12px] uppercase tracking-[0.22em] label block mb-2">Catégorie</label>
       <select id="sCat" onchange="showCategory()" class="w-full bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
         <option value="coques">Coques</option>
         <option value="verres">Verres trempés</option>
@@ -410,7 +412,7 @@ gtag("config", "G-3QP90K1TLM");
       </div>
     </div>
     <div>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2764.1644305193307!2d4.8368597!3d46.30518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5b6b6b6b6b6b7%3A0x0!2sSolution%20Phone%20Macon!5e0!3m2!1sfr!2sfr!4v1234567890" width="100%" height="400" style="border:1px solid rgba(0,0,0,.06);border-radius:24px;background:#f5f5f7;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe title="Plan d’accès à Solution Phone, 21 Rue Gambetta à Mâcon" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2764.1644305193307!2d4.8368597!3d46.30518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5b6b6b6b6b6b7%3A0x0!2sSolution%20Phone%20Macon!5e0!3m2!1sfr!2sfr!4v1234567890" width="100%" height="400" style="border:1px solid rgba(0,0,0,.06);border-radius:24px;background:#f5f5f7;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </section>
@@ -571,18 +573,18 @@ gtag("config", "G-3QP90K1TLM");
         C'est quoi <span style="color:#00A7E1">QualiRépar</span>&nbsp;?
       </h2>
       <p class="mt-4 text-white/75 md:text-lg max-w-3xl">
-        <b class="text-white">QualiRépar</b> est le label du fonds réparation. Solution Phone est labellisé pour appliquer le bonus lorsque l’appareil et l’intervention sont éligibles.
+        <b class="text-white">QualiRépar</b> est le label du fonds réparation. Solution Phone applique le bonus de 25 € sur les réparations couvertes par le dispositif.
       </p>
       <div class="grid md:grid-cols-2 gap-4 mt-8">
         <div class="p-5 rounded-2xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,167,225,.25)">
           <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-3" style="background:rgba(0,167,225,.15)">💳</div>
           <div class="text-[13px] font-bold tracking-[0.18em]" style="color:#00A7E1">−25 € DIRECTS</div>
-          <p class="mt-1.5 text-white/80 text-sm">Déduits directement de la facture après vérification de l’éligibilité en boutique.</p>
+          <p class="mt-1.5 text-white/80 text-sm">Déduits directement de la facture lorsque la réparation est couverte.</p>
         </div>
         <div class="p-5 rounded-2xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,167,225,.25)">
           <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-3" style="background:rgba(16,185,129,.15)">✅</div>
           <div class="text-[13px] font-bold tracking-[0.18em]" style="color:#00A7E1">CERTIFIÉ ÉTAT</div>
-          <p class="mt-1.5 text-white/80 text-sm">Solution Phone est labellisé QualiRépar. L’éligibilité de l’appareil et de la réparation est vérifiée en boutique.</p>
+          <p class="mt-1.5 text-white/80 text-sm">Solution Phone est labellisé QualiRépar. L’équipe vous confirme directement le prix final.</p>
         </div>
         <div class="p-5 rounded-2xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,167,225,.25)">
           <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-3" style="background:rgba(16,185,129,.15)">♻️</div>
@@ -592,7 +594,7 @@ gtag("config", "G-3QP90K1TLM");
         <div class="p-5 rounded-2xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(0,167,225,.25)">
           <div class="w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-3" style="background:rgba(0,167,225,.15)">📱</div>
           <div class="text-[13px] font-bold tracking-[0.18em]" style="color:#00A7E1">TOUS APPAREILS</div>
-          <p class="mt-1.5 text-white/80 text-sm">Smartphones, tablettes — le bonus s'applique sur toutes les réparations éligibles.</p>
+          <p class="mt-1.5 text-white/80 text-sm">Smartphones, tablettes — l’équipe identifie les réparations couvertes par le dispositif.</p>
         </div>
       </div>
       <button onclick="closeQR(); openWizard()"
@@ -1062,7 +1064,7 @@ function closeQR(){ document.getElementById('qr').classList.remove('on'); }
 document.getElementById('wzForm').addEventListener('submit', function(e){
   e.preventDefault();
   var msg='Bonjour, je souhaite un devis/renseignement accessoires.';
-  window.open('https://wa.me/33385330689?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/33783921884?text='+encodeURIComponent(msg),'_blank','noopener');
   closeWizard();
 });
 
@@ -1143,5 +1145,6 @@ window.$crisp.push(["on", "chat:closed", function(){ window.$crisp.push(["do", "
 </script>
 
 <script src="evan-widget.js?v=9" defer></script>
+<script src="contact-dock.js?v=1" defer></script>
 </body>
 </html>

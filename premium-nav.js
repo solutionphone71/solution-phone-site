@@ -2,7 +2,7 @@
   function current(path){return location.pathname.endsWith('/'+path)||location.pathname.endsWith(path)}
   function init(){
     var iphoneBase=location.hostname==='localhost'?'http://localhost:4174/':'https://reparation-iphone-macon.fr/';
-    document.querySelectorAll('#crispFloatBtn,#waFloatBtn').forEach(function(el){el.hidden=true;el.style.setProperty('display','none','important')});
+    document.querySelectorAll('#crispFloatBtn,#waFloatBtn,.wa-float,a.wa[style*="position:fixed"]').forEach(function(el){el.hidden=true;el.style.setProperty('display','none','important')});
     document.querySelectorAll('header.nav,header.sticky,nav#nav,#sp-burger,#sp-drawer').forEach(function(el){el.classList.add('sp-legacy-nav')});
     var header=document.createElement('header');
     header.className='sp-global-header';
@@ -33,10 +33,6 @@
     document.addEventListener('keydown',function(e){if(e.key==='Escape'){panel.classList.remove('open');button.setAttribute('aria-expanded','false');button.textContent='☰'}});
     var active=current('reconditionnes.html')?'reconditionnes.html':current('accessoires.html')?'accessoires.html':current('hydrogel.html')?'hydrogel.html':current('reparation-samsung.html')?'reparation-samsung.html':'';
     if(active)header.querySelectorAll('a').forEach(function(a){if((a.getAttribute('href')||'').indexOf(active)>-1)a.classList.add('active')});
-    var floating=document.createElement('a');
-    floating.className='sp-global-float';floating.href='https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20un%20renseignement.';floating.target='_blank';floating.rel='noopener';floating.textContent='WhatsApp direct';
-    document.body.appendChild(floating);
-    var widget=document.createElement('script');widget.src='evan-widget.js?v=7';widget.defer=true;document.body.appendChild(widget);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
