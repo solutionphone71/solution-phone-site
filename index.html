@@ -283,7 +283,7 @@
     }
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
   </style>
-  <link rel="stylesheet" href="signature-home.css?v=qualirepar-banner-2">
+  <link rel="stylesheet" href="signature-home.css?v=conversion-simple-1">
   <link rel="stylesheet" href="qualirepar-top.css?v=2">
   <script src="qualirepar-top.js?v=2" defer></script>
 </head>
@@ -343,6 +343,10 @@
           <strong class="hero-answer">Vous êtes au bon endroit.</strong>
           <h1>Réparation.<em>Smartphone.</em>À Mâcon.</h1>
           <p>Panne urgente&nbsp;? Obtenez rapidement un tarif par WhatsApp ou par e-mail. Notre service après-vente reste disponible après l’intervention.</p>
+          <div class="hero-conversion-actions" aria-label="Demander un devis">
+            <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20de%20devis%20est%20urgente.%20Mon%20t%C3%A9l%C3%A9phone%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp urgent</a>
+            <button type="button" onclick="openMail()">Devis par e-mail</button>
+          </div>
           <div class="hero-trust" aria-label="Garanties Solution Phone">
             <div class="hero-reasons">
               <span><b>90 % &lt; 1 h</b><small>Selon la panne et la pièce disponible</small></span>
@@ -386,7 +390,7 @@
               <div class="avatar">SÉBASTIEN</div>
               <div><h2>Sébastien · Solution Phone</h2><p>Diagnostic &amp; devis · équipe à Mâcon</p></div>
             </div>
-            <p class="dialogue">De quoi avez-vous <span>besoin aujourd’hui&nbsp;?</span></p>
+            <p class="dialogue">Obtenez votre <span>devis maintenant.</span></p>
             <form class="entry" id="diagnostic-form">
               <input id="diagnostic-input" autocomplete="off" aria-label="Décrivez votre besoin" placeholder="Écrivez directement votre demande…">
               <button class="send" type="submit" aria-label="Envoyer la demande">→</button>
@@ -405,36 +409,25 @@
                 </div>
               </div>
             </div>
-            <div class="quality-guides" aria-label="Choisir la qualité de la pièce">
-              <button class="quality-guide prompt" type="button" data-prompt="Quelles sont les 4 qualités d’écran iPhone ?"><small>Écrans iPhone</small><b>4 niveaux de qualité</b><span>Compatible · LTPS Prime · Soft OLED · ReLife</span></button>
-              <button class="quality-guide prompt" type="button" data-prompt="Écran Android compatible ou Service Pack ?"><small>Écrans Android</small><b>2 choix selon le modèle</b><span>Compatible ou Service Pack constructeur</span></button>
-              <button class="quality-guide prompt" type="button" data-prompt="Batterie compatible ou originale ?"><small>Batteries</small><b>Budget ou origine</b><span>Choix expliqué avant réparation</span></button>
-            </div>
-            <div class="choice-promise"><i>✓</i><span><b>Rien n’est imposé.</b> Lorsqu’il existe plusieurs qualités pour votre modèle, vous choisissez celle adaptée à votre budget.</span></div>
-            <div class="prompts help-prompts" aria-label="Comprendre la réduction"><button class="prompt" type="button" data-prompt="Comment obtenir mes 25 € avec Solution Phone et QualiRépar ?">−25 € pour tout le monde : comment ça marche ?</button></div>
-            <div class="needs-grid" aria-label="Choisir un besoin">
-              <button class="need-card featured" data-prompt="je veux faire réparer mon appareil"><b>Faire réparer</b><span>Téléphone · tablette · diagnostic</span></button>
-              <button class="need-card" data-prompt="je veux acheter un smartphone"><b>Acheter un smartphone</b><span>Neuf ou reconditionné · stock réel</span></button>
-              <button class="need-card" data-prompt="je cherche un accessoire téléphone"><b>Acheter un accessoire</b><span>Coque · protection · chargeur</span></button>
-              <button class="need-card" data-prompt="j'ai besoin d'un service informatique"><b>Informatique</b><span>PC · Mac · dépannage · données</span></button>
-              <button class="need-card" data-prompt="j'ai besoin d'une réparation de trottinette"><b>Trottinette</b><span>Diagnostic · entretien · réparation</span></button>
-              <button class="need-card" data-prompt="j'ai besoin d'une réparation de console"><b>Console</b><span>Diagnostic · connectique · entretien</span></button>
-              <button class="need-card data-service" data-prompt="je veux transférer mes données vers un nouveau smartphone"><b>Transfert & sauvegarde</b><span>Smartphone à smartphone 30 € · WhatsApp · photos sur clé USB</span></button>
-            </div>
-            <div class="privacy"><i></i> Aucun engagement · aucun appareil réparé sans votre accord</div>
             <div class="fast-lane" aria-label="Accès directs">
               <a class="fast-action wa" href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20de%20devis%20est%20urgente.%20Mon%20t%C3%A9l%C3%A9phone%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp urgent</a>
-              <a class="fast-action" href="tel:+33385330689">Appeler l’atelier</a>
               <button class="fast-action" type="button" onclick="openMail()">Devis par e-mail</button>
             </div>
-            <div class="network">
-              <div class="network-head"><b>Le groupe Solution</b><span>3 boutiques · une seule adresse</span></div>
-              <div class="network-stores">
-                <div class="network-store"><b>Solution Phone</b><span>Réparation mobile</span></div>
-                <div class="network-store"><b>Solution Accessoires</b><span>Smartphones & accessoires</span></div>
-                <div class="network-store"><b>Solution Informatique</b><span>PC · consoles · trottinettes</span></div>
+            <div class="privacy"><i></i> Réponse humaine · aucun engagement · rien n’est réparé sans votre accord</div>
+            <details class="secondary-needs">
+              <summary>Conseils, achat et autres services</summary>
+              <div class="quality-guides" aria-label="Conseils sur les pièces">
+                <button class="quality-guide prompt" type="button" data-prompt="Quelles sont les 4 qualités d’écran iPhone ?"><small>Écrans iPhone</small><b>4 niveaux de qualité</b><span>Compatible · LTPS Prime · Soft OLED · ReLife</span></button>
+                <button class="quality-guide prompt" type="button" data-prompt="Écran Android compatible ou Service Pack ?"><small>Écrans Android</small><b>2 choix selon le modèle</b><span>Compatible ou Service Pack constructeur</span></button>
+                <button class="quality-guide prompt" type="button" data-prompt="Batterie compatible ou originale ?"><small>Batteries</small><b>Budget ou origine</b><span>Choix expliqué avant réparation</span></button>
               </div>
-            </div>
+              <div class="needs-grid" aria-label="Autres besoins">
+                <button class="need-card" data-prompt="je veux acheter un smartphone"><b>Acheter un smartphone</b><span>Neuf ou reconditionné · stock réel</span></button>
+                <button class="need-card" data-prompt="je cherche un accessoire téléphone"><b>Acheter un accessoire</b><span>Coque · protection · chargeur</span></button>
+                <button class="need-card" data-prompt="j'ai besoin d'un service informatique"><b>Informatique</b><span>PC · Mac · dépannage · données</span></button>
+                <button class="need-card" data-prompt="j'ai besoin d'une réparation de console ou trottinette"><b>Autres réparations</b><span>Console · trottinette · tablette</span></button>
+              </div>
+            </details>
           </div>
 
           <div class="chat" id="chat-view">

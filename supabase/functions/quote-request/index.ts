@@ -6,6 +6,8 @@ const ALLOWED_ORIGINS = new Set([
   'https://www.solution-phone.fr',
   'https://reparation-iphone-macon.fr',
   'https://www.reparation-iphone-macon.fr',
+  'https://solution-accessoires.fr',
+  'https://www.solution-accessoires.fr',
   'http://localhost:4173',
   'http://127.0.0.1:4173',
 ])
