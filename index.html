@@ -284,8 +284,8 @@
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
   </style>
   <link rel="stylesheet" href="signature-home.css?v=qualirepar-banner-2">
-  <link rel="stylesheet" href="qualirepar-top.css?v=1">
-  <script src="qualirepar-top.js?v=1" defer></script>
+  <link rel="stylesheet" href="qualirepar-top.css?v=2">
+  <script src="qualirepar-top.js?v=2" defer></script>
 </head>
 <body>
   <main class="shell">
@@ -349,12 +349,12 @@
               <span><b>400+ / mois</b><small>Téléphones pris en charge</small></span>
               <span><b>5 techniciens</b><small>À votre écoute à Mâcon</small></span>
             </div>
-            <a class="qualirepar-banner" href="atelier.html#qualirepar" aria-label="Découvrir la remise QualiRépar de 25 euros">
+            <a class="qualirepar-banner" href="#devis" aria-label="Obtenir 25 euros de réduction sur sa réparation de smartphone">
               <span class="qualirepar-logo"><img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar"></span>
               <span class="qualirepar-message">
-                <strong><em>−25 €</em> de remise immédiate</strong>
-                <small>25 € déduits directement sur les réparations couvertes par le dispositif QualiRépar.</small>
-                <i>Bonus déduit en boutique · Aucun dossier à remplir</i>
+                <strong><em>−25 €</em> sur votre réparation</strong>
+                <small>Une réduction garantie pour tous les clients Solution Phone.</small>
+                <i>Déduits directement · Aucun dossier à remplir</i>
               </span>
             </a>
           </div>
@@ -411,7 +411,7 @@
               <button class="quality-guide prompt" type="button" data-prompt="Batterie compatible ou originale ?"><small>Batteries</small><b>Budget ou origine</b><span>Choix expliqué avant réparation</span></button>
             </div>
             <div class="choice-promise"><i>✓</i><span><b>Rien n’est imposé.</b> Lorsqu’il existe plusieurs qualités pour votre modèle, vous choisissez celle adaptée à votre budget.</span></div>
-            <div class="prompts help-prompts" aria-label="Comprendre QualiRépar"><button class="prompt" type="button" data-prompt="C’est quoi QualiRépar ?">−25 € avec QualiRépar : comment ça marche ?</button></div>
+            <div class="prompts help-prompts" aria-label="Comprendre la réduction"><button class="prompt" type="button" data-prompt="Comment obtenir mes 25 € avec Solution Phone et QualiRépar ?">−25 € pour tout le monde : comment ça marche ?</button></div>
             <div class="needs-grid" aria-label="Choisir un besoin">
               <button class="need-card featured" data-prompt="je veux faire réparer mon appareil"><b>Faire réparer</b><span>Téléphone · tablette · diagnostic</span></button>
               <button class="need-card" data-prompt="je veux acheter un smartphone"><b>Acheter un smartphone</b><span>Neuf ou reconditionné · stock réel</span></button>
@@ -529,6 +529,8 @@
       </div>
     </nav>
   </section>
+
+  <p class="spq-legal">Réduction de 25 € appliquée par Solution Phone sur la réparation d’un smartphone. Lorsqu’elle est éligible au dispositif, cette réduction correspond au Bonus Réparation QualiRépar ; à défaut, elle est prise en charge commercialement par Solution Phone.</p>
 
   <div class="home-contact-dock" aria-label="Accès directs">
     <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20est%20urgente.%20Mon%20appareil%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">WhatsApp urgent</a>
@@ -899,7 +901,7 @@
     }
     function replyEducation(type){
       if(type==='qualirepar'){
-        botReply('QualiRépar est un label obtenu après audit par les réparateurs professionnels.\n\nPour une réparation couverte par le dispositif, 25 € sont retirés directement de votre facture. Vous n’avez aucun dossier à remplir et aucune avance à faire.',[
+        botReply('Solution Phone est labellisé QualiRépar. Chez nous, 25 € sont déduits de votre réparation de smartphone pour tout le monde.\n\nLorsque votre réparation est éligible, il s’agit du Bonus Réparation QualiRépar. Sinon, Solution Phone prend directement les 25 € à sa charge. Vous n’avez aucun dossier à remplir.',[
           {label:'Voir mon tarif',value:'price',kind:'openPrice'},
           {label:'Comparer les écrans iPhone',value:'iphoneScreen',kind:'education'},
           {label:'Demander sur WhatsApp',value:'whatsapp',kind:'directWhatsApp'}
@@ -1220,7 +1222,7 @@ Originale — pièce d’origine, selon disponibilité.
 
 Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. La compatibilité, le prix et l’affichage de l’état de santé sont confirmés avant l’intervention.</p></details>`:''}
             <div class="qualities">${qualities.map(q=>`<button class="quality ${q.id===current.selected.id?'selected':''}" data-id="${q.id}"><div><b>${q.name}</b><span>${q.desc}</span></div><strong>${q.price} €</strong></button>`).join('')}</div>
-            <div class="recap${livePrice?' bonus-eligible':''}"><div><small>${livePrice?'Prix TTC après bonus QualiRépar':'Estimation TTC à confirmer'}</small><b>${livePrice?'Bonus déjà intégré au tarif affiché':'Confirmation nécessaire par WhatsApp ou e-mail'}</b></div><strong id="recap-price">${current.selected.price} €</strong></div>
+            <div class="recap${livePrice?' bonus-eligible':''}"><div><small>${livePrice?'Prix TTC après avantage Solution Phone':'Estimation TTC à confirmer'}</small><b>${livePrice?'25 € déjà déduits du tarif affiché':'Confirmation nécessaire par WhatsApp ou e-mail'}</b></div><strong id="recap-price">${current.selected.price} €</strong></div>
             ${p.issue==='screen'?protectionOffersHtml():''}
             <div class="actions"><a class="action wa" id="result-wa" target="_blank" rel="noopener">Confirmer sur WhatsApp</a><button class="action mail" onclick="openMail()">Recevoir par e-mail</button></div>
             <p class="assurance">${livePrice?'Tarif issu de la base atelier':'Estimation de secours'} · Garantie 6 mois · Facture détaillée · Rien n’est effectué sans votre accord. Le tarif final reste soumis au diagnostic visuel et à la disponibilité de la pièce.</p>`;
@@ -1420,7 +1422,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       if(['computer','scooter','console'].includes(current.intent))return `${current.issueLabel} · ${current.model}${current.text?' · Demande : '+current.text:''}${brainContext}`;
       const q=current.selected?` · ${current.selected.name} · ${current.selected.priceLabel||current.selected.price+' €'}`:'';
       const priceStatus=current.priceSource==='estimation_secours'?' · Estimation de secours à confirmer':current.priceSource==='atelier_connecte'?' · Tarif issu de la base atelier':'';
-      const qualiStatus=current.brand==='Apple'&&['screen','battery'].includes(current.issue)?' · Prix affiché après bonus QualiRépar':'';
+      const qualiStatus=current.brand==='Apple'&&['screen','battery'].includes(current.issue)?' · Prix affiché après réduction Solution Phone de 25 €':'';
       const symptom=current.symptom?` · ${current.symptom}`:'';
       const declared=current.text?` · ${current.intent==='repair'?'Symptôme déclaré':'Demande originale'} : ${current.text}`:'';
       return `${current.issueLabel||'Diagnostic'} · ${current.model||current.text}${symptom}${q}${priceStatus}${qualiStatus}${declared}${brainContext}${addons}`;
