@@ -283,7 +283,7 @@
     }
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
   </style>
-  <link rel="stylesheet" href="signature-home.css?v=conversion-simple-1">
+  <link rel="stylesheet" href="signature-home.css?v=conversion-simple-2">
   <link rel="stylesheet" href="qualirepar-top.css?v=2">
   <script src="qualirepar-top.js?v=2" defer></script>
 </head>
@@ -295,7 +295,7 @@
         <div><strong>Solution Phone</strong><small>Atelier indépendant · Mâcon</small></div>
       </a>
       <nav class="site-nav" aria-label="Navigation principale">
-        <a href="https://reparation-iphone-macon.fr/" data-iphone-site>iPhone</a>
+        <a href="reparation-iphone.html">Réparation iPhone</a>
         <a href="reparation-samsung.html">Android</a>
         <a href="atelier.html#expertise">L’atelier</a>
         <a href="atelier.html#qualirepar">QualiRépar</a>
@@ -310,7 +310,7 @@
         <details class="mobile-menu">
           <summary>Menu</summary>
           <nav class="mobile-links" aria-label="Navigation mobile">
-            <a href="https://reparation-iphone-macon.fr/" data-iphone-site>Réparation iPhone</a>
+            <a href="reparation-iphone.html">Réparation iPhone</a>
             <a href="reparation-samsung.html">Réparation Android</a>
             <a href="atelier.html#expertise">L’atelier</a>
             <a href="atelier.html#qualirepar">QualiRépar −25 €</a>
@@ -516,7 +516,7 @@
     <nav class="local-seo-guides" aria-label="Guides de réparation à Mâcon">
       <p>Guides locaux</p>
       <div class="local-seo-grid">
-        <a href="ecran-iphone-casse-macon.html"><small>iPhone</small><b>Écran cassé à Mâcon</b><span>Vitre fissurée, affichage noir, taches ou tactile défaillant.</span></a>
+        <a href="reparation-iphone.html"><small>iPhone</small><b>Réparation iPhone à Mâcon</b><span>Écran, batterie, charge, vitre arrière et tarifs par modèle.</span></a>
         <a href="remplacement-batterie-telephone-macon.html"><small>Autonomie</small><b>Remplacement de batterie</b><span>Décharge rapide, chauffe, extinction ou batterie gonflée.</span></a>
         <a href="reparation-telephone-macon.html"><small>Multimarque</small><b>Réparation téléphone à Mâcon</b><span>Écran, charge, caméra et diagnostic iPhone, Samsung ou Android.</span></a>
       </div>
@@ -1596,6 +1596,8 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       $('#diagnostic-input').value=sharedQuestion;
       Promise.race([evanDataReady,new Promise(resolve=>setTimeout(resolve,900))]).then(async()=>{await trackBrainEvent('assistant_opened',{source:'page_context',from:EVAN_SOURCE_PAGE});runDiagnostic(sharedQuestion)});
     }
+    const updateContactDock=()=>document.body.classList.toggle('contact-dock-visible',window.scrollY>Math.min(520,window.innerHeight*.62));
+    updateContactDock();window.addEventListener('scroll',updateContactDock,{passive:true});
   </script>
 </body>
 </html>
