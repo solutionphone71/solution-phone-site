@@ -5,7 +5,7 @@
   var publicKey='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
   var pageTitle=(document.querySelector('h1')||document).textContent.trim()||document.title;
   var page=location.pathname||'/';
-  function track(name,params){if(typeof window.gtag==='function')window.gtag('event',name,Object.assign({transport_type:'beacon',page_location:location.href},params||{}));}
+  function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,Object.assign({transport_type:'beacon',page_location:location.href},params||{}));}catch(error){}}
   document.querySelectorAll('#crispFloatBtn,#waFloatBtn,.wa-float,a.wa[style*="position:fixed"],.sp-global-float').forEach(function(el){el.remove()});
   var dock=document.createElement('div');dock.className='sp-contact-dock';dock.setAttribute('aria-label','Demander un devis');
   dock.innerHTML='<a class="sp-contact-wa" href="https://wa.me/33783921884?text='+encodeURIComponent('Bonjour, ma demande est urgente. Je souhaite un devis depuis la page « '+pageTitle+' ». Mon appareil et mon problème : ')+'" target="_blank" rel="noopener" aria-label="Demander un devis urgent par WhatsApp">WhatsApp urgent</a><button class="sp-contact-email" type="button" aria-label="Demander un devis par e-mail">E-mail</button>';
@@ -19,13 +19,12 @@
   openButton.addEventListener('click',open);closeButton.addEventListener('click',close);modal.addEventListener('click',function(e){if(e.target===modal)close()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close()});
   dock.querySelector('a').addEventListener('click',function(){if(!document.querySelector('script[src*="landing-tracking"]'))track('contact_whatsapp',{method:'whatsapp',page:page,source:'contact_dock'});});
   form.addEventListener('submit',function(e){
-    e.preventDefault();if(form.website.value)return;
+    e.preventDefault();if(submit.disabled||form.website.value)return;
     submit.disabled=true;submit.textContent='Envoi en cours…';status.className='sp-contact-status';status.textContent='';
     var token=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)});
     fetch(endpoint,{method:'POST',headers:{apikey:publicKey,Authorization:'Bearer '+publicKey,'Content-Type':'application/json'},body:JSON.stringify({name:form.nom.value.trim(),email:form.email.value.trim(),phone:form.telephone.value.trim(),request:form.demande.value.trim(),form_type:'main_quote',page:page,client_token:token,website:''})})
       .then(function(response){return response.json().catch(function(){return{}}).then(function(payload){if(!response.ok||!payload.received)throw new Error(payload.error||'Envoi impossible');return payload})})
-      .then(function(payload){status.className='sp-contact-status ok';status.textContent='Votre demande est bien enregistrée'+(payload.reference?' — référence '+payload.reference:'')+'.';form.reset();track('devis_email_envoye',{method:'email',page:page,source:'contact_dock'});})
-      .catch(function(){status.className='sp-contact-status err';status.textContent='La demande n’a pas pu être envoyée. Utilisez WhatsApp ou appelez le 03 85 33 06 89.';})
+      .then(function(payload){status.className='sp-contact-status ok';status.textContent='Votre demande est bien enregistrée'+(payload.reference?' — référence '+payload.reference:'')+'.';try{form.reset()}catch(error){}track('devis_email_envoye',{method:'email',page:page,source:'contact_dock'});},function(){status.className='sp-contact-status err';status.textContent='La demande n’a pas pu être envoyée. Utilisez WhatsApp ou appelez le 03 85 33 06 89.';})
       .finally(function(){submit.disabled=false;submit.textContent='Envoyer ma demande urgente'});
   });
 })();

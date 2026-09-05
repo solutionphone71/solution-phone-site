@@ -115,7 +115,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
 
 .wz-backdrop{
   position:fixed; inset:0; background: rgba(255,255,255,.75); backdrop-filter: blur(14px) saturate(140%);
-  z-index:60; display:none; opacity:0; transition: opacity .35s ease;
+  z-index:2147483501; display:none; opacity:0; transition: opacity .35s ease;
 }
 .wz-backdrop.on{ display:flex; opacity:1; }
 .wz-dialog{
@@ -139,6 +139,8 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
 .wz-progress > span{ display:block; height:100%; background:#e30613; transition: width .5s cubic-bezier(.2,.8,.2,1); }
 .wz-trust{ display:flex; gap:.75rem; flex-wrap:wrap; font-size:.78rem; color:#6e6e73; }
 .wz-trust span{ display:inline-flex; align-items:center; gap:.3rem; background:#f5f5f7; padding:.3rem .65rem; border-radius:999px; }
+#wzRecapModel{max-width:65%;overflow-wrap:anywhere;text-align:right}
+#wzWhatsApp{background:#168a48;color:#fff}
 
 details { cursor:pointer; }
 summary { font-weight:600; padding:.8rem 0; border-bottom:1px solid rgba(0,0,0,.06); user-select:none; }
@@ -401,7 +403,7 @@ gtag("config", "G-3QP90K1TLM");
         </tr>
         <tr style="border-bottom:1px solid rgba(0,0,0,.04)">
           <td class="p-4 font-medium">Pose</td>
-          <td class="text-center p-4">5 min — pro</td>
+          <td class="text-center p-4">Pose en boutique</td>
           <td class="text-center p-4">15 min — risqué</td>
         </tr>
         <tr style="border-bottom:1px solid rgba(0,0,0,.04)">
@@ -559,7 +561,7 @@ gtag("config", "G-3QP90K1TLM");
   <div class="space-y-4">
     <details class="tile p-6">
       <summary>Combien de temps tient la pose en boutique ?</summary>
-      <p>La pose prend exactement 5 minutes. Vous apportez votre téléphone, nous le préparons, découpons le film sur mesure et le fixons sous lampe UV. C'est rapide, sans attente, sans rendez-vous.</p>
+      <p>La pose est réalisée en boutique, sans rendez-vous. L’équipe vérifie votre modèle et vous confirme le temps nécessaire avant de préparer et poser la protection.</p>
     </details>
     <details class="tile p-6">
       <summary>Ça rend mon écran moins sensible au toucher ?</summary>
@@ -586,7 +588,7 @@ gtag("config", "G-3QP90K1TLM");
 
 <!-- CTA FINAL -->
 <section class="max-w-4xl mx-auto px-6 py-10 md:py-20 text-center">
-  <h2 class="text-4xl md:text-5xl font-extrabold tracking-tightest mb-4">Passez aujourd'hui.<br>Pose en 10 min.</h2>
+  <h2 class="text-4xl md:text-5xl font-extrabold tracking-tightest mb-4">Passez aujourd'hui.<br>Pose en boutique.</h2>
   <p class="text-lg text-muted mb-8">21 Rue Gambetta, Mâcon · Sans rendez-vous</p>
   <div class="flex flex-col sm:flex-row justify-center gap-3 flex-wrap mb-6">
     <button onclick="openWizard()" class="btn-red">Réserver une pose <span>›</span></button>
@@ -616,7 +618,7 @@ gtag("config", "G-3QP90K1TLM");
           <li><a href="https://reparation-iphone-macon.fr/" class="hover:text-accent transition">Réparation iPhone</a></li>
           <li><a href="reparation-samsung.html" class="hover:text-accent transition">Réparation Samsung</a></li>
           <li><a href="https://reparation-iphone-macon.fr/" class="hover:text-accent transition">Batterie & Écran</a></li>
-          <li><a href="#contact" class="hover:text-accent transition">Rachat iPhone</a></li>
+          <li><a href="atelier.html#contact" class="hover:text-accent transition">Rachat iPhone</a></li>
         </ul>
       </div>
 
@@ -636,8 +638,8 @@ gtag("config", "G-3QP90K1TLM");
         <ul class="space-y-2 text-sm text-muted">
           <li><a href="actualites.html" class="hover:text-accent transition">Actualités</a></li>
           <li><a href="#" onclick="openQR(); return false;" class="hover:text-accent transition">QualiRépar</a></li>
-          <li><a href="#contact" class="hover:text-accent transition">FAQ</a></li>
-          <li><a href="#" class="hover:text-accent transition">Mentions légales</a></li>
+          <li><a href="faq.html" class="hover:text-accent transition">FAQ</a></li>
+          <li><a href="cgv.html" class="hover:text-accent transition">Informations légales & CGV</a></li>
         </ul>
       </div>
 
@@ -793,18 +795,18 @@ gtag("config", "G-3QP90K1TLM");
 </div>
 
 <!-- WIZARD -->
-<div id="wz" class="wz-backdrop" onclick="if(event.target===this) closeWizard()">
+<div id="wz" class="wz-backdrop" role="dialog" aria-modal="true" aria-label="Choisir ma protection hydrogel" onclick="if(event.target===this) closeWizard()">
   <div class="wz-dialog p-6 md:p-10">
     <div class="flex items-center justify-between mb-5">
       <div class="flex items-center gap-3">
         <span class="font-semibold">Solution Phone · Hydrogel</span>
         <span class="text-xs text-muted" id="wzStepLabel">Étape 1/3</span>
       </div>
-      <button onclick="closeWizard()" class="w-9 h-9 rounded-full bg-bg2 hover:bg-black/10 flex items-center justify-center text-muted">✕</button>
+      <button onclick="closeWizard()" aria-label="Fermer le choix de protection" class="w-9 h-9 rounded-full bg-bg2 hover:bg-black/10 flex items-center justify-center text-muted">✕</button>
     </div>
     <div class="wz-progress mb-6"><span id="wzBar" style="width:33%"></span></div>
     <div class="wz-trust mb-6">
-      <span>✓ Pose en 5 min</span>
+      <span>✓ Pose en boutique</span>
       <span>✓ Tous téléphones</span>
       <span>✓ 5 niveaux de protection</span>
       <span>✓ Sans engagement</span>
@@ -845,6 +847,14 @@ gtag("config", "G-3QP90K1TLM");
     <div class="wz-step" data-step="2">
       <h2 class="text-3xl md:text-5xl font-extrabold tracking-tightest leading-[0.95]">Quel modèle ?</h2>
       <p class="mt-2 text-muted" id="wzStep2Sub">Sélectionnez votre téléphone.</p>
+      <form id="wzOtherModelForm" class="mt-6">
+        <label for="wzOtherModel" class="block font-semibold">Votre modèle n’est pas dans la liste ?</label>
+        <p class="text-sm text-muted mt-1">Indiquez-le ici. L’équipe vérifiera la découpe disponible.</p>
+        <div class="flex flex-col sm:flex-row gap-3 mt-3">
+          <input id="wzOtherModel" name="model" required maxlength="100" placeholder="Ex. iPhone 16 Pro, Google Pixel…" class="bg-bg2 border border-black/5 rounded-2xl px-4 py-3 flex-1">
+          <button type="submit" class="btn-ghost">Continuer avec ce modèle ›</button>
+        </div>
+      </form>
       <div id="wzModels" class="grid md:grid-cols-3 gap-3 mt-8"></div>
       <div class="mt-6 flex justify-between">
         <button class="btn-ghost" onclick="gotoStep(1)">‹ Retour</button>
@@ -866,29 +876,17 @@ gtag("config", "G-3QP90K1TLM");
             <div class="flex justify-between py-1 border-t border-black/5 mt-1 pt-2"><span class="text-muted">Prix</span><b class="text-accent" id="wzRecapPrice">—</b></div>
           </div>
 
-          <div class="wz-trust mt-5">
-            <span>✓ Pose sans engagement</span>
-            <span>✓ Découpe sur mesure</span>
-            <span>✓ Tous téléphones</span>
-            <span>✓ Sans rendez-vous</span>
-          </div>
-
-          <div class="mt-4 p-4 rounded-2xl bg-white border border-black/5 text-sm">
-            <strong>Prix confirmé avant la pose.</strong>
-            <p class="mt-1 text-muted">L’équipe vérifie le modèle, la découpe et la formule choisie avec vous en boutique.</p>
-          </div>
+          <p class="mt-3 text-muted text-sm">Modèle et tarif confirmés par l’équipe avant la pose.</p>
         </div>
 
         <div>
-          <p class="text-[12px] uppercase tracking-[0.22em] label">Vos coordonnées</p>
-          <h3 class="mt-2 text-2xl font-extrabold tracking-tightest">L’équipe vous recontacte.</h3>
-          <p class="mt-1 text-muted text-sm">Prénom + téléphone. Rien d'autre.</p>
-          <form id="wzForm" class="mt-4 grid gap-3">
-            <input name="nom" required placeholder="Votre prénom" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
-            <input name="tel" required type="tel" placeholder="Téléphone / WhatsApp" class="bg-bg2 border border-black/5 text-ink rounded-2xl px-4 py-3 focus:outline-none focus:border-accent/40">
-            <button type="submit" class="btn-red mt-1">Réserver ma pose <span>›</span></button>
+          <p class="text-[12px] uppercase tracking-[0.22em] label">Dernière étape</p>
+          <h3 class="mt-2 text-2xl font-extrabold tracking-tightest">Votre message est prêt.</h3>
+          <p class="mt-2 text-muted">Ouvrez WhatsApp, puis envoyez le message prérempli. L’équipe confirme la disponibilité et la pose après réception.</p>
+          <div class="mt-4 grid gap-3">
+            <a id="wzWhatsApp" href="https://wa.me/33783921884" target="_blank" rel="noopener" class="btn-red mt-1">Continuer sur WhatsApp <span>›</span></a>
             <div class="text-xs text-muted text-center">Ou appelez : <a class="text-accent font-semibold" href="tel:+33385330689">03 85 33 06 89</a></div>
-          </form>
+          </div>
         </div>
       </div>
       <div class="mt-6 flex justify-between">
@@ -896,29 +894,20 @@ gtag("config", "G-3QP90K1TLM");
       </div>
     </div>
 
-    <div class="wz-step" data-step="4">
-      <div class="text-center py-6">
-        <div class="mx-auto w-16 h-16 rounded-full flex items-center justify-center text-3xl" style="background:rgba(227,6,19,.1);color:#e30613">✓</div>
-        <h2 class="mt-4 text-3xl md:text-5xl font-extrabold tracking-tightest leading-[0.95]">Votre message est prêt.<br>Envoyez-le sur WhatsApp.</h2>
-        <p class="mt-3 text-muted">La pose sera confirmée par l’équipe après réception de votre message.</p>
-        <div class="mt-6 flex justify-center gap-3 flex-wrap">
-          <a href="https://wa.me/33783921884" target="_blank" rel="noopener" class="btn-red">Ouvrir WhatsApp <span>›</span></a>
-          <button class="btn-ghost" onclick="closeWizard()">Fermer</button>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
 <script>
+let wizardReturnFocus=null,wizardBodyOverflow='';
 function openWizard(formula) {
+  wizardReturnFocus=document.activeElement;wizardBodyOverflow=document.body.style.overflow;document.body.style.overflow='hidden';
   document.getElementById('wz').classList.add('on');
   if (formula) {
     const target = [...document.querySelectorAll('[data-formula]')].find(button => button.dataset.formula === formula);
     if (target) target.click();
-  }
+  } else gotoStep(1);
 }
-function closeWizard() { document.getElementById('wz').classList.remove('on'); gotoStep(1); }
+function closeWizard() { document.getElementById('wz').classList.remove('on'); document.body.style.overflow=wizardBodyOverflow; gotoStep(1); if(wizardReturnFocus?.isConnected)wizardReturnFocus.focus(); }
 function openQR() { document.getElementById('qr').classList.add('on'); }
 function closeQR() { document.getElementById('qr').classList.remove('on'); }
 
@@ -928,7 +917,17 @@ function gotoStep(n) {
   document.getElementById('wzStepLabel').textContent = `Étape ${n}/3`;
   const pct = (n / 3) * 100;
   document.getElementById('wzBar').style.width = pct + '%';
+  document.querySelector('#wz .wz-trust').style.display=n===3?'none':'';
+  document.querySelector('#wz .wz-dialog').scrollTop=0;
+  const heading=document.querySelector(`.wz-step[data-step="${n}"] h2`);
+  if(heading&&document.getElementById('wz').classList.contains('on')){heading.tabIndex=-1;heading.focus({preventScroll:true})}
 }
+document.getElementById('wz').addEventListener('keydown',function(event){
+  if(event.key==='Escape'){event.stopPropagation();closeWizard();return}
+  if(event.key!=='Tab')return;
+  const items=[...this.querySelectorAll('button,input,a[href]')].filter(el=>!el.disabled&&el.tabIndex>=0&&el.getClientRects().length),first=items[0],last=items[items.length-1];
+  if(event.shiftKey&&(document.activeElement===first||!items.includes(document.activeElement))){event.preventDefault();last?.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus()}
+});
 
 const formulas = {
   'ECOSHIELD 7H': 30,
@@ -940,11 +939,27 @@ const formulas = {
 const models = {
   iPhone: ['iPhone 15', 'iPhone 15 Pro', 'iPhone 14', 'iPhone 13', 'iPhone 12', 'iPhone 11', 'iPhone X'],
   Samsung: ['Galaxy S24', 'Galaxy S23', 'Galaxy S22', 'Galaxy A54', 'Galaxy A53', 'Galaxy Z Fold', 'Galaxy Z Flip'],
-  Xiaomi: ['Xiaomi 14', 'Xiaomi 13', 'Xiaomi 12', 'OnePlus 12', 'Google Pixel 8', 'Oppo A78', 'Realme 12']
+  Xiaomi: ['Xiaomi 14', 'Xiaomi 13', 'Xiaomi 12'],
+  OnePlus: ['OnePlus 12'],
+  Google: ['Google Pixel 8'],
+  Oppo: ['Oppo A78'],
+  Realme: ['Realme 12']
 };
 
 let selectedFormula = '';
 let selectedModel = '';
+
+function selectHydrogelModel(model) {
+  selectedModel = model.trim();
+  if (!selectedModel || !Object.hasOwn(formulas, selectedFormula)) return;
+  document.getElementById('wzRecapFormula').textContent = selectedFormula;
+  document.getElementById('wzRecapModel').textContent = selectedModel;
+  document.getElementById('wzRecapPrice').textContent = formulas[selectedFormula] + ' €';
+  document.getElementById('wzPriceTitle').innerHTML = `À partir de <span class="text-accent">${formulas[selectedFormula]} €</span>`;
+  const message = `Bonjour, je souhaite une protection ${selectedFormula} pour mon ${selectedModel}. Tarif affiché : ${formulas[selectedFormula]} €, pose incluse. Pouvez-vous confirmer la disponibilité et la pose ?`;
+  document.getElementById('wzWhatsApp').href = 'https://wa.me/33783921884?text=' + encodeURIComponent(message);
+  gotoStep(3);
+}
 
 document.querySelectorAll('[data-formula]').forEach(btn => {
   btn.addEventListener('click', function() {
@@ -962,12 +977,7 @@ document.querySelectorAll('[data-formula]').forEach(btn => {
 
     document.querySelectorAll('[data-model]').forEach(btn => {
       btn.addEventListener('click', function() {
-        selectedModel = this.dataset.model;
-        document.getElementById('wzRecapFormula').textContent = selectedFormula;
-        document.getElementById('wzRecapModel').textContent = selectedModel;
-        document.getElementById('wzRecapPrice').textContent = formulas[selectedFormula] + ' €';
-        document.getElementById('wzPriceTitle').innerHTML = `À partir de <span class="text-accent">${formulas[selectedFormula]} €</span>`;
-        gotoStep(3);
+        selectHydrogelModel(this.dataset.model);
       });
     });
 
@@ -975,14 +985,13 @@ document.querySelectorAll('[data-formula]').forEach(btn => {
   });
 });
 
-document.getElementById('wzForm').addEventListener('submit', function(e) {
+document.getElementById('wzOtherModelForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const nom = this.nom.value;
-  const tel = this.tel.value;
-  const msg = `Bonjour, je voudrais poser ${selectedFormula} sur ${selectedModel} (${nom}, ${tel})`;
-  window.open('https://wa.me/33783921884?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-  gotoStep(4);
+  const input = document.getElementById('wzOtherModel');
+  input.setCustomValidity(input.value.trim() ? '' : 'Indiquez votre modèle.');
+  if (input.reportValidity()) selectHydrogelModel(input.value);
 });
+document.getElementById('wzOtherModel').addEventListener('input', function() { this.setCustomValidity(''); });
 
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) {

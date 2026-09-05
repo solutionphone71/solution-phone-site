@@ -255,7 +255,9 @@
     .quick-repair-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:11px}.quick-repair-tabs button{min-height:52px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font-size:12px;font-weight:780;cursor:pointer;transition:.2s}.quick-repair-tabs button[aria-selected="true"]{border-color:var(--ink);background:var(--ink);color:#fff}.quick-repair-tabs button:last-child[aria-selected="true"]{border-color:var(--red);background:var(--red)}
     .quick-other-fields{display:grid;gap:9px;padding-top:4px}.quick-other-fields[hidden]{display:none}.quick-other-actions{display:grid;grid-template-columns:1.2fr 1fr;gap:7px}.quick-other-actions .action{min-height:52px}.quick-status{min-height:18px;font-size:11px;line-height:1.4;color:#666}.quick-status.is-error{color:#b0000c}.quick-status.is-success{color:#187443;font-weight:720}
     .formgrid{display:grid;gap:9px}.formgrid input,.formgrid textarea,.formgrid select{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px 15px;outline:none;font:inherit;color:var(--ink)}.formgrid textarea{min-height:85px;resize:vertical}.formgrid input:focus,.formgrid textarea:focus,.formgrid select:focus{border-color:var(--red)}
-    .formgrid button{border:0;border-radius:999px;background:var(--red);color:#fff;padding:15px;font-weight:790;cursor:pointer}.form-status{font-size:12px;margin-top:10px}
+    .formgrid button{border:0;border-radius:999px;background:var(--red);color:#fff;padding:15px;font-weight:790;cursor:pointer}.form-status{font-size:14px;margin-top:10px}
+    #mail-form label{display:grid;gap:5px;font-size:14px;font-weight:650}#mail-form details summary{font-size:14px;cursor:pointer;color:#555}#mail-form details label{margin-top:9px}#mail-form button:disabled{opacity:.65;cursor:wait}#mail-modal .modal-card{max-height:calc(100dvh - 32px);overflow:auto}
+    body.modal-open .home-contact-dock{visibility:hidden}
     @keyframes scan{0%{top:12%;opacity:0}12%{opacity:1}85%{opacity:1}100%{top:88%;opacity:0}}
     @keyframes pulse{50%{box-shadow:0 0 0 9px rgba(36,189,104,0)}}
     @keyframes load{0%{transform:translateX(-110%)}100%{transform:translateX(240%)}}
@@ -534,14 +536,14 @@
     <div class="modal-card">
       <button class="close" id="close-modal" aria-label="Fermer">×</button>
       <h3>Recevoir mon devis</h3>
-      <p>L’assistant de Sébastien transmet votre demande à l’équipe Solution Phone.</p>
+      <p>Votre modèle, votre panne, votre e-mail. L’équipe vous répond directement.</p>
       <form class="formgrid" id="mail-form">
-        <input name="Nom" required placeholder="Votre nom">
-        <input name="email" required type="email" autocomplete="email" placeholder="Votre adresse e-mail">
-        <input name="Telephone" placeholder="Votre téléphone (facultatif)">
-        <textarea name="Demande" id="mail-request" required placeholder="Votre demande"></textarea>
+        <label for="mail-request">Votre appareil et le problème<textarea name="Demande" id="mail-request" required minlength="10" maxlength="1800" placeholder="Ex. iPhone 13, écran cassé, besoin de mon téléphone aujourd’hui"></textarea></label>
+        <label for="mail-name">Votre nom<input id="mail-name" name="Nom" required autocomplete="name" maxlength="80" placeholder="Votre nom"></label>
+        <label for="mail-email">Votre e-mail<input id="mail-email" name="email" required type="email" autocomplete="email" maxlength="160" placeholder="vous@exemple.fr"></label>
+        <details><summary>Ajouter un téléphone (facultatif)</summary><label for="mail-phone">Votre téléphone<input id="mail-phone" name="Telephone" type="tel" autocomplete="tel" maxlength="40" placeholder="06 12 34 56 78"></label></details>
         <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px" placeholder="Ne pas remplir">
-        <button>Envoyer ma demande</button>
+        <button type="submit">Recevoir mon devis par e-mail</button>
       </form>
       <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
     </div>
@@ -1427,10 +1429,21 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
     function resetDiagnostic(){
       stopExpertPolling();$('#answer-view').classList.remove('show');$('#answer-view').innerHTML='';$('#chat-view').classList.remove('show');$('#chat-thread').innerHTML='';$('#chat-quick').innerHTML='';$('#loading-view').classList.remove('show');$('#start-view').style.display='block';$('#diagnostic-input').value='';$('#diagnostic-input').placeholder='Écrivez directement votre demande…';document.querySelectorAll('.brand-button').forEach(x=>x.classList.remove('active'));conversationText='';conversationParsed=null;waitingFor=null;flowData={};current=null;lastBrainWhatsApp='';updateDiagnosticProgress(null);evanConversationToken='';try{sessionStorage.removeItem('evan_conversation_token')}catch(e){}$('#device-state').textContent='En attente';syncContextCta();setTimeout(()=>$('#diagnostic-input').focus(),80);
     }
+    let mailReturnFocus=null,mailDraftContext='';
     function openMail(){
-      $('#mail-request').value=requestText();$('#form-status').textContent='';$('#mail-modal').classList.add('open');document.body.classList.add('modal-open');track('devis_email_ouvert',{intent:current?.intent||'unknown'});
+      mailReturnFocus=document.activeElement;
+      const request=$('#mail-request');
+      if(!request.value||request.value===mailDraftContext){mailDraftContext=current?requestText():'';request.value=mailDraftContext}
+      $('#mail-modal').classList.add('open');document.body.classList.add('modal-open');
+      setTimeout(()=>{if($('#mail-modal').classList.contains('open'))(request.value?$('#mail-name'):request).focus()},30);
+      track('devis_email_ouvert',{intent:current?.intent||'unknown'});
     }
-    function closeMail(){$('#mail-modal').classList.remove('open');if(!$('#quick-modal').classList.contains('open'))document.body.classList.remove('modal-open')}
+    function closeMail(){const wasOpen=$('#mail-modal').classList.contains('open');$('#mail-modal').classList.remove('open');if(!$('#quick-modal').classList.contains('open'))document.body.classList.remove('modal-open');if(wasOpen&&mailReturnFocus?.isConnected)mailReturnFocus.focus()}
+    $('#mail-modal').addEventListener('keydown',e=>{
+      if(e.key!=='Tab')return;
+      const items=[...$('#mail-modal').querySelectorAll('button,input,textarea,summary,a[href]')].filter(el=>!el.disabled&&el.tabIndex>=0&&el.getClientRects().length),first=items[0],last=items[items.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus()}
+    });
     function openQuickPrice(){
       $('#quick-modal').classList.add('open');document.body.classList.add('modal-open');setTimeout(()=>$('#quick-model').focus(),60);
     }
@@ -1509,16 +1522,21 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       openTrackedWhatsApp('https://wa.me/33783921884?text='+encodeURIComponent(message),'quick_other_part');track('devis_autre_piece_whatsapp',{model:iphoneLabel($('#quick-model').value)});
     });
     $('#quick-other-mail').addEventListener('click',async()=>{
+      if($('#quick-other-mail').disabled)return;
       const request=quickOtherRequest(),status=$('#quick-other-status'),name=$('#quick-other-name').value.trim(),email=$('#quick-other-email').value.trim(),phone=$('#quick-other-phone').value.trim(),button=$('#quick-other-mail');status.className='quick-status';
       if(!$('#quick-model').value){$('#quick-model').reportValidity();return}
       if(!request){status.textContent='Indiquez la pièce ou la panne.';status.classList.add('is-error');$('#quick-other-detail').focus();return}
       if(!name){status.textContent='Indiquez votre nom pour que l’équipe puisse vous répondre.';status.classList.add('is-error');$('#quick-other-name').focus();return}
       if(!email||!$('#quick-other-email').checkValidity()){status.textContent='Indiquez une adresse e-mail valide.';status.classList.add('is-error');$('#quick-other-email').focus();return}
       button.disabled=true;status.textContent='Envoi en cours…';
-      try{
-        const payload=await sendQuoteRequest({name,email,phone,request,form_type:'quick_other_part',website:$('#quick-other-website').value});
-        status.textContent=`Demande reçue (${payload.reference}). L’équipe vous répondra directement par e-mail.`;status.classList.add('is-success');trackLeadSuccess('devis_email_envoye',{method:'email',form_type:'quick_other_part',reference:payload.reference},{email,phone});track('devis_autre_piece_email',{model:iphoneLabel($('#quick-model').value)});trackBrainEvent('email_clicked',{intent:'other_iphone_part',source:'quick_quote'});
-      }catch(error){status.textContent=quoteErrorMessage(error);status.classList.add('is-error')}finally{button.disabled=false}
+      let payload;
+      try{payload=await sendQuoteRequest({name,email,phone,request,form_type:'quick_other_part',website:$('#quick-other-website').value})}
+      catch(error){status.textContent=quoteErrorMessage(error);status.classList.add('is-error');button.disabled=false;return}
+      status.textContent=`Demande reçue (${payload.reference}). L’équipe vous répondra directement par e-mail.`;status.classList.add('is-success');
+      runQuoteSideEffect(()=>trackLeadSuccess('devis_email_envoye',{method:'email',form_type:'quick_other_part',reference:payload.reference},{email,phone}));
+      runQuoteSideEffect(()=>track('devis_autre_piece_email',{model:iphoneLabel($('#quick-model').value)}));
+      runQuoteSideEffect(()=>trackBrainEvent('email_clicked',{intent:'other_iphone_part',source:'quick_quote'}));
+      button.disabled=false;
     });
     syncQuickModels();
     $('#diagnostic-form').addEventListener('submit',async e=>{e.preventDefault();const v=$('#diagnostic-input').value.trim();if(v){await trackBrainEvent('assistant_opened',{source:'diagnostic_form'});runDiagnostic(v)}});
@@ -1555,13 +1573,24 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       const parsed={text:'Tarif direct '+iphoneLabel(key),intent:'repair',brand:'Apple',key,detectedModel:iphoneLabel(key),issue,symptom:'Tarif immédiat demandé'};
       current=parsed;launchLookup(parsed);
     });
+    // Analytics and UI cleanup must never turn an accepted request into a send failure.
+    function runQuoteSideEffect(callback){try{Promise.resolve(callback()).catch(()=>{})}catch(error){}}
     $('#mail-form').addEventListener('submit',async e=>{
-      e.preventDefault();const status=$('#form-status'),submit=e.currentTarget.querySelector('button[type="submit"],button:not([type])');status.textContent='Envoi en cours…';if(submit)submit.disabled=true;
-      const data=Object.fromEntries(new FormData(e.currentTarget).entries());
+      e.preventDefault();const form=e.currentTarget,status=$('#form-status'),submit=form.querySelector('button[type="submit"]');
+      if(submit.disabled)return;
+      const data=Object.fromEntries(new FormData(form).entries());
+      if(data.website)return;
+      status.textContent='Envoi en cours…';submit.disabled=true;
+      let payload;
       try{
-        const payload=await sendQuoteRequest({name:data.Nom,email:data.email,phone:data.Telephone,request:data.Demande,form_type:'main_quote',website:data.website});
-        status.textContent=`Demande reçue (${payload.reference}). L’équipe Solution Phone vous répond rapidement.`;trackLeadSuccess('devis_email_envoye',{method:'email',form_type:'main_quote',reference:payload.reference},{email:data.email,phone:data.Telephone});track('devis_autre_piece_email',{method:'email',form_type:'main_quote',migration_bridge:true});e.currentTarget.reset();trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'});
-      }catch(err){status.textContent=quoteErrorMessage(err);track('devis_email_erreur',{status:err?.status||0})}finally{if(submit)submit.disabled=false}
+        payload=await sendQuoteRequest({name:data.Nom,email:data.email,phone:data.Telephone,request:data.Demande,form_type:'main_quote',website:data.website});
+      }catch(err){status.textContent=quoteErrorMessage(err);runQuoteSideEffect(()=>track('devis_email_erreur',{status:err?.status||0}));submit.disabled=false;return}
+      status.textContent=`Demande enregistrée${payload.reference?' ('+payload.reference+')':''}. L’équipe Solution Phone vous répondra par e-mail.`;
+      runQuoteSideEffect(()=>form.reset());
+      runQuoteSideEffect(()=>trackLeadSuccess('devis_email_envoye',{method:'email',form_type:'main_quote',reference:payload.reference},{email:data.email,phone:data.Telephone}));
+      runQuoteSideEffect(()=>track('devis_autre_piece_email',{method:'email',form_type:'main_quote',migration_bridge:true}));
+      runQuoteSideEffect(()=>trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'}));
+      submit.disabled=false;
     });
     function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,{transport_type:'beacon',...(params||{})})}catch(e){}}
     function trackLeadSuccess(name,params,contact){
