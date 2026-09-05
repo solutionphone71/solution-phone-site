@@ -40,6 +40,25 @@ for (const mode of ['accepted', 'refused', 'rate_limited', 'tracking_throws', 't
   count++;
 }
 
+// The alternative iPhone-parts form uses the same post-send isolation.
+const otherStart = html.indexOf("$('#quick-other-mail').addEventListener('click',async()=>{");
+const otherHandler = html.slice(otherStart, html.indexOf('\n    });', otherStart) + 8);
+for (const mode of ['accepted', 'refused', 'tracking_throws', 'double_click']) {
+  let click, calls = 0, release;
+  const classes = [], status = { classList: { add: value => classes.push(value) } }, events = [];
+  const button = { disabled: false, addEventListener: (_, fn) => click = fn };
+  const nodes = { '#quick-other-mail': button, '#quick-other-status': status, '#quick-model': { value: '13' }, '#quick-other-name': { value: 'Test' }, '#quick-other-email': { value: 'test@example.invalid', checkValidity: () => true }, '#quick-other-phone': { value: '' }, '#quick-other-website': { value: '' } };
+  const context = { $: key => nodes[key], quickOtherRequest: () => 'iPhone 13 caméra', iphoneLabel: () => 'iPhone 13', sendQuoteRequest: async () => { calls++; if (mode === 'double_click') await new Promise(resolve => release = resolve); if (mode === 'refused') throw Error('server'); return {received:true, reference:'LOCAL-ONLY'}; }, quoteErrorMessage: () => 'server error', trackLeadSuccess: name => { events.push(name); if (mode === 'tracking_throws') throw Error('tracking'); }, track: name => events.push(name), trackBrainEvent: name => events.push(name) };
+  vm.runInNewContext(sideEffect + '\n' + otherHandler, context);
+  const pending = click();
+  if (mode === 'double_click') { await click(); release(); }
+  await pending;
+  assert.equal(calls, 1); assert.equal(button.disabled, false);
+  assert.deepEqual(classes, [mode === 'refused' ? 'is-error' : 'is-success']);
+  assert.equal(events.filter(x => x === 'devis_email_envoye').length, mode === 'refused' ? 0 : 1);
+  count++;
+}
+
 // The shared dock must also isolate accepted requests from post-send exceptions.
 const dock = fs.readFileSync(path.join(root, 'contact-dock.js'), 'utf8');
 const dockStart = dock.indexOf("  form.addEventListener('submit'");
