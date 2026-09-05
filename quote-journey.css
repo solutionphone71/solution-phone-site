@@ -1,0 +1,32 @@
+/* One clear quote entry; extend the existing shop identity and keep the assistant. */
+body.journey-in-view .home-contact-dock{visibility:hidden}
+.topbar .status{display:none}.topbar .site-nav{gap:13px;padding:0 16px}
+@media(max-width:1220px){.topbar .site-nav{display:none}.topbar .mobile-menu{display:block}}
+.stage{grid-template-columns:minmax(0,1fr) minmax(430px,1fr);min-height:0}
+.visual{min-height:660px;padding:42px;justify-content:center}
+.hero-copy{width:100%;margin:30px 0}
+.hero-copy h1{font-size:clamp(44px,4.8vw,68px);line-height:1.02;max-width:620px}
+.hero-copy h1 em{display:block;margin-top:8px;font-size:.83em;line-height:1.1}
+.hero-copy p{font-size:17px;max-width:440px;margin-top:22px}
+.hero-conversion-actions{display:block}.hero-conversion-actions a{display:inline-flex;padding:0 24px;min-height:48px;font-size:15px;border-radius:12px}
+.hero-trust .qualirepar-banner{display:none}.hero-reasons{margin-top:25px}.hero-reasons b{font-size:17px}.hero-reasons small{font-size:11px;line-height:1.4}
+.proofline{display:none!important}.conversation{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:20px;padding:40px;background:#f6f7f9;min-width:0}
+.quote-journey{width:100%;max-width:620px;margin:auto;background:white;border:1px solid #e4e7eb;border-radius:24px;padding:30px;box-shadow:0 14px 50px rgba(19,31,51,.07);color:#171719}
+.journey-kicker{font-size:12px;font-weight:750;letter-spacing:.08em;color:#46515f;margin:0 0 12px}.quote-journey h2{font-size:34px;line-height:1.1;letter-spacing:-.045em;margin:0 0 10px}.journey-intro{font-size:16px;line-height:1.45;color:#606771;margin:0 0 25px}
+.journey-label{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:750;margin-bottom:10px}.journey-label span{display:inline-grid;place-items:center;width:23px;height:23px;border-radius:50%;background:#edf1f6;font-size:12px;color:#415168}
+#journey-model{width:100%;min-height:50px;border:1px solid #c5cbd4;border-radius:11px;padding:12px;font:inherit;font-size:16px;background:#fff;color:#171719;box-sizing:border-box}
+.journey-model-help{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;margin:8px 0 23px;font-size:12px;color:#69717b}.journey-model-help button{border:0;padding:0;background:none;font:inherit;color:#344d71;text-decoration:underline;cursor:pointer}
+.journey-issues{border:0;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-width:0}.journey-issues legend{float:none;width:100%;margin-bottom:12px}
+.journey-issues button{min-height:47px;border:1px solid #dde1e7;border-radius:10px;background:#fff;padding:9px 10px;font-family:inherit;font-size:14px;font-weight:650;line-height:1.2;color:#303845;text-align:left;cursor:pointer;transition:background .15s,border-color .15s}
+.journey-issues button:hover{background:#f4f6f9}.journey-issues button[aria-pressed=true]{background:#eaf1fc;color:#124d96;border-color:#3871b7;box-shadow:inset 0 0 0 1px #3871b7}
+.quote-journey :focus-visible{outline:3px solid #3774b9;outline-offset:3px}
+.journey-result{margin-top:22px;padding-top:18px;border-top:1px solid #e3e6eb}.journey-result[hidden],.journey-result [hidden]{display:none!important}
+#journey-summary{font-size:14px;color:#515e6e;margin:0 0 8px;overflow-wrap:anywhere}.journey-price{font-size:18px;font-weight:740;line-height:1.3}.journey-price strong{font-size:32px;letter-spacing:-.04em}.journey-price small{display:block;font-size:13px;line-height:1.45;font-weight:400;color:#596575;margin-top:7px}
+#journey-qualities{margin-top:13px;font-size:14px}#journey-qualities summary{cursor:pointer;font-weight:650;color:#344d71}#journey-quality-list{display:grid;gap:7px;margin:12px 0}#journey-quality-list p{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:10px 0;border-top:1px solid #e7e9ed;margin:0}#journey-quality-list small{grid-column:1/-1;color:#616977;font-size:13px}
+.journey-channel-label{font-size:14px;font-weight:650;margin:20px 0 10px}.journey-channels{display:grid;grid-template-columns:1fr 1fr;gap:8px}.journey-channels a,.journey-channels button{min-height:48px;padding:10px;border:0;border-radius:11px;font-family:inherit;font-size:14px;font-weight:700;line-height:1.25;text-decoration:none;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer}.journey-channels a{background:#168a48;color:white}.journey-channels button{background:#171719;color:white}
+.journey-handoff{font-size:12px;line-height:1.45;color:#68717b;margin:11px 0 0}.journey-reassurance{font-size:13px;line-height:1.5;color:#485666;margin:22px 0 0;padding-top:15px;border-top:1px solid #e3e6eb}.journey-safety{background:#fff3e3;color:#774715;font-size:14px;line-height:1.4;padding:12px;border-radius:9px}
+.advanced-help{width:100%;max-width:620px;margin:0 auto;border-top:1px solid #d9dfe7;padding-top:15px}.advanced-help>summary{font-size:14px;font-weight:650;color:#424e5c;cursor:pointer;padding:5px}.advanced-help .panel{width:100%;padding-top:20px}.advanced-help .dialogue{font-size:28px}
+.evan-embed .quote-journey,.evan-embed .advanced-help>summary{display:none}.evan-embed .advanced-help{border:0;padding:0}.evan-embed .advanced-help .panel{padding:0}
+@media(max-width:1050px){.stage{grid-template-columns:1fr}.visual{min-height:0;padding:28px 24px}.hero-copy{margin:12px 0}.hero-copy h1{font-size:42px}.hero-copy p{font-size:16px;margin-top:12px}.hero-conversion-actions,.hero-trust,.edition{display:none}.conversation{padding:24px;min-height:0}.workshop-photo img{object-position:58% 42%}}
+@media(max-width:720px){.stage{min-height:0!important}.visual{padding:22px 20px}.hero-copy{width:100%;margin:0}.hero-answer{font-size:11px;margin-bottom:8px}.hero-copy h1{font-size:32px;max-width:320px}.hero-copy h1 em{margin-top:3px}.hero-copy p{max-width:100%;font-size:14px;line-height:1.4;margin-top:10px}.conversation{padding:16px 12px 24px;gap:16px}.quote-journey{padding:22px 18px;border-radius:18px}.quote-journey h2{font-size:29px}.journey-kicker{font-size:11px;margin-bottom:9px}.journey-intro{font-size:14px;margin-bottom:20px}.journey-channels{grid-template-columns:1fr}.journey-model-help{margin-bottom:18px}.journey-issues button{font-size:13px;min-height:45px}.topbar .site-nav{display:none}}
+@media(prefers-reduced-motion:reduce){.journey-issues button{transition:none}}

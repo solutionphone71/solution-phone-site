@@ -286,6 +286,8 @@
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
   </style>
   <link rel="stylesheet" href="signature-home.css?v=conversion-simple-2">
+  <link rel="stylesheet" href="quote-journey.css?v=1">
+  <script src="quote-journey.js?v=1" defer></script>
   <link rel="stylesheet" href="qualirepar-top.css?v=2">
   <script src="qualirepar-top.js?v=2" defer></script>
 </head>
@@ -299,6 +301,7 @@
       <nav class="site-nav" aria-label="Navigation principale">
         <a href="reparation-iphone.html">Réparation iPhone</a>
         <a href="reparation-samsung.html">Android</a>
+        <a href="hydrogel.html">Hydrogel</a>
         <a href="atelier.html#expertise">L’atelier</a>
         <a href="atelier.html#qualirepar">QualiRépar</a>
         <a href="atelier.html#equipe">L’équipe</a>
@@ -314,6 +317,7 @@
           <nav class="mobile-links" aria-label="Navigation mobile">
             <a href="reparation-iphone.html">Réparation iPhone</a>
             <a href="reparation-samsung.html">Réparation Android</a>
+            <a href="hydrogel.html">Protection hydrogel</a>
             <a href="atelier.html#expertise">L’atelier</a>
             <a href="atelier.html#qualirepar">QualiRépar −25 €</a>
             <a href="atelier.html#equipe">L’équipe</a>
@@ -343,11 +347,10 @@
         <div class="edition"><span aria-hidden="true"></span>Sébastien & l’équipe · Mâcon depuis 2014</div>
         <div class="hero-copy">
           <strong class="hero-answer">Vous êtes au bon endroit.</strong>
-          <h1>Réparation.<em>Smartphone.</em>À Mâcon.</h1>
-          <p>Panne urgente&nbsp;? Obtenez rapidement un tarif par WhatsApp ou par e-mail. Notre service après-vente reste disponible après l’intervention.</p>
+          <h1>Réparation smartphone.<em>À Mâcon.</em></h1>
+          <p>Un téléphone en panne, une équipe à votre écoute. Votre tarif avant intervention, votre réparation sans rendez-vous.</p>
           <div class="hero-conversion-actions" aria-label="Demander un devis">
-            <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20de%20devis%20est%20urgente.%20Mon%20t%C3%A9l%C3%A9phone%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp urgent</a>
-            <button type="button" onclick="openMail()">Devis par e-mail</button>
+            <a href="#devis">Préparer mon devis →</a>
           </div>
           <div class="hero-trust" aria-label="Garanties Solution Phone">
             <div class="hero-reasons">
@@ -386,6 +389,36 @@
       </div>
 
       <div class="conversation" id="devis">
+        <section class="quote-journey" aria-labelledby="journey-title">
+          <p class="journey-kicker">DEVIS DIRECT · SANS ENGAGEMENT</p>
+          <h2 id="journey-title">Que faut-il réparer ?</h2>
+          <p class="journey-intro">Deux informations. Puis une réponse de notre équipe.</p>
+          <label class="journey-label" for="journey-model"><span>1</span> Votre téléphone</label>
+          <input id="journey-model" list="journey-models" maxlength="100" autocomplete="off" placeholder="Ex. iPhone 13, Samsung A54…" aria-describedby="journey-model-help">
+          <datalist id="journey-models"></datalist>
+          <div class="journey-model-help" id="journey-model-help"><span>Toutes marques</span><button type="button" id="journey-unknown">Je ne connais pas le modèle</button></div>
+          <fieldset class="journey-issues"><legend class="journey-label"><span>2</span> Le problème</legend>
+            <button type="button" data-journey-issue="screen" aria-pressed="false">Écran cassé</button>
+            <button type="button" data-journey-issue="battery" aria-pressed="false">Batterie</button>
+            <button type="button" data-journey-issue="charge" aria-pressed="false">Ne charge plus</button>
+            <button type="button" data-journey-issue="camera" aria-pressed="false">Caméra / son</button>
+            <button type="button" data-journey-issue="water" aria-pressed="false">Téléphone mouillé</button>
+            <button type="button" data-journey-issue="other" aria-pressed="false">Autre / je ne sais pas</button>
+          </fieldset>
+          <div id="journey-result" class="journey-result" hidden>
+            <p id="journey-summary" aria-live="polite"></p>
+            <div id="journey-price" class="journey-price"></div>
+            <details id="journey-qualities" hidden><summary>Comparer les qualités et les prix</summary><div id="journey-quality-list"></div></details>
+            <p id="journey-safety" class="journey-safety" hidden>Éteignez le téléphone et ne le rechargez pas. Faites-le contrôler en boutique.</p>
+            <p class="journey-channel-label">Comment souhaitez-vous nous contacter ?</p>
+            <div class="journey-channels"><a id="journey-whatsapp" href="https://wa.me/33783921884" target="_blank" rel="noopener">WhatsApp urgent ↗</a><button id="journey-email" type="button">Recevoir par e-mail</button></div>
+            <p class="journey-handoff">Modèle et panne déjà renseignés. Sur WhatsApp, il vous reste à envoyer le message.</p>
+          </div>
+          <p class="journey-reassurance">25 € déduits sur votre réparation de smartphone · SAV en boutique</p>
+          <noscript><p>Contactez directement l’équipe : <a href="https://wa.me/33783921884">WhatsApp</a> ou <a href="mailto:contact@solution-phone.fr">e-mail</a>.</p></noscript>
+        </section>
+        <details class="advanced-help" id="advanced-help">
+          <summary>Besoin d’aide pour identifier la panne ?</summary>
         <div class="panel">
           <div id="start-view">
             <div class="evan">
@@ -459,6 +492,7 @@
 
           <div class="answer" id="answer-view"></div>
         </div>
+        </details>
       </div>
     </section>
   </main>
@@ -529,7 +563,7 @@
 
   <div class="home-contact-dock" aria-label="Accès directs">
     <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20est%20urgente.%20Mon%20appareil%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">WhatsApp urgent</a>
-    <button id="dock-price-button" type="button" onclick="openMail()">Devis e-mail</button>
+    <button id="dock-price-button" type="button" onclick="openMail(window.SolutionPhoneQuote?.draft?.())">Devis e-mail</button>
   </div>
 
   <div class="modal" id="mail-modal" role="dialog" aria-modal="true" aria-label="Recevoir un devis par e-mail">
@@ -718,7 +752,7 @@
     }
     function focusEvan(){
       const conversation=$('.conversation');if(conversation)conversation.scrollIntoView({behavior:'smooth',block:'start'});
-      const input=$('#chat-view')?.classList.contains('show')?$('#chat-input'):$('#diagnostic-input');
+      const input=$('#journey-model');
       setTimeout(()=>input?.focus(),420);
     }
 
@@ -958,6 +992,7 @@
       ]);
     }
     async function runDiagnostic(text){
+      $('#advanced-help').open=true;
       track('diagnostic_demarre',{intent:parseRequest(text).intent||'unknown'});
       const educational=normalize(text);
       if(/horaire|heure.*ouvert|ouvert|ouverte|ferme|fermee|fermeture|ouvre|journee continue/.test(educational)&&!/fuseau(?:x)? horaire|reglage horaire|heure du telephone|date et heure/.test(educational)){startBusinessAnswer(text,'hours');return}
@@ -1430,10 +1465,11 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       stopExpertPolling();$('#answer-view').classList.remove('show');$('#answer-view').innerHTML='';$('#chat-view').classList.remove('show');$('#chat-thread').innerHTML='';$('#chat-quick').innerHTML='';$('#loading-view').classList.remove('show');$('#start-view').style.display='block';$('#diagnostic-input').value='';$('#diagnostic-input').placeholder='Écrivez directement votre demande…';document.querySelectorAll('.brand-button').forEach(x=>x.classList.remove('active'));conversationText='';conversationParsed=null;waitingFor=null;flowData={};current=null;lastBrainWhatsApp='';updateDiagnosticProgress(null);evanConversationToken='';try{sessionStorage.removeItem('evan_conversation_token')}catch(e){}$('#device-state').textContent='En attente';syncContextCta();setTimeout(()=>$('#diagnostic-input').focus(),80);
     }
     let mailReturnFocus=null,mailDraftContext='';
-    function openMail(){
+    function openMail(requestOverride){
       mailReturnFocus=document.activeElement;
       const request=$('#mail-request');
-      if(!request.value||request.value===mailDraftContext){mailDraftContext=current?requestText():'';request.value=mailDraftContext}
+      if(typeof requestOverride==='string'){mailDraftContext=requestOverride;request.value=requestOverride}
+      else if(!request.value||request.value===mailDraftContext){mailDraftContext=current?requestText():'';request.value=mailDraftContext}
       $('#mail-modal').classList.add('open');document.body.classList.add('modal-open');
       setTimeout(()=>{if($('#mail-modal').classList.contains('open'))(request.value?$('#mail-name'):request).focus()},30);
       track('devis_email_ouvert',{intent:current?.intent||'unknown'});
@@ -1556,7 +1592,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       part.addEventListener('pointerdown',()=>focusRepairPart(part));
       part.addEventListener('focus',()=>focusRepairPart(part));
     });
-    document.querySelectorAll('.prompt,.need-card,.repair-part,.repair-device,.repair-brand').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.prompt||b.dataset.repairPrompt;$('#diagnostic-input').value=v;runDiagnostic(v);window.scrollTo({top:0,behavior:'smooth'})}));
+    document.querySelectorAll('.prompt,.need-card,.repair-part,.repair-device,.repair-brand').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.prompt||b.dataset.repairPrompt;$('#diagnostic-input').value=v;runDiagnostic(v);$('#advanced-help').scrollIntoView({block:'start',behavior:'smooth'})}));
     document.querySelectorAll('.brand-button').forEach(b=>b.addEventListener('click',()=>{
       document.querySelectorAll('.brand-button').forEach(x=>x.classList.toggle('active',x===b));
       const input=$('#diagnostic-input');input.value=b.dataset.brand+' ';input.placeholder='Indiquez le modèle et la panne';input.focus();
@@ -1619,7 +1655,23 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       visualPanel.addEventListener('pointerleave',()=>{agentStage.style.setProperty('--look-x','0px');agentStage.style.setProperty('--look-y','0px')});
     }
     updateStoreAvailability();setInterval(updateStoreAvailability,30000);
-    const evanDataReady=Promise.allSettled([loadPrices(),loadStock()]);
+    const priceDataReady=loadPrices();
+    const evanDataReady=Promise.allSettled([priceDataReady,loadStock()]);
+    window.SolutionPhoneQuote={
+      models:()=>IPHONE_MODEL_KEYS.map(iphoneLabel),
+      prices(model,issue){
+        const key=normalize(model).replace(/^iphone\s+/,'');
+        if(!/^iphone\s/i.test(model)||!IPHONE_MODEL_KEYS.includes(key)||!['screen','battery'].includes(issue))return [];
+        if(!(issue==='screen'?liveScreenModels:liveBatteryModels).has(key))return [];
+        const values=(issue==='screen'?screens:batteries)[key]||[],meta=issue==='screen'?QUALITES:QUALITES_BAT;
+        let rows=meta.map((item,i)=>({...item,price:Number(values[i])||0})).filter(item=>Number.isFinite(item.price)&&item.price>0);
+        if(issue==='screen'){const economy=rows.filter(item=>['hd','ltps'].includes(item.id)).sort((a,b)=>a.price-b.price)[0];rows=[...(economy?[{...economy,id:'eco'}]:[]),...rows.filter(item=>!['hd','ltps'].includes(item.id))]}
+        return rows;
+      },
+      email:request=>openMail(request),
+      ready:priceDataReady
+    };
+    if(document.documentElement.classList.contains('evan-embed'))$('#advanced-help').open=true;
     const sharedQuestion=new URLSearchParams(location.search).get('q');
     if(sharedQuestion){
       $('#diagnostic-input').value=sharedQuestion;
