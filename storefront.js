@@ -63,10 +63,14 @@
   function updateBasket(){var list=$('#sf-basket');list.replaceChildren();basket.forEach((p,index)=>{var li=document.createElement('li');var text=document.createElement('span');text.textContent=p.name+(p.detail?' · '+p.detail:'')+(p.model?' · '+p.model:'')+' — '+(p.price?p.price+' €':'tarif à confirmer');var remove=document.createElement('button');remove.textContent='Retirer';remove.setAttribute('aria-label','Retirer '+p.name);remove.onclick=()=>{basket.splice(index,1);updateBasket()};li.append(text,remove);list.append(li)});if(!basket.length)list.textContent='Votre sélection est encore vide.';$('#sf-bag-count').textContent=basket.length;var total=basket.reduce((s,p)=>s+(p.price||0),0);$('#sf-total').textContent=basket.length?'Total des prix renseignés : '+total+' €'+(basket.some(p=>!p.price)?' + produits à chiffrer':''):'';var message='je souhaite des informations pour '+($('#sf-device').value.trim()||'mon téléphone (modèle à préciser)')+'.\n'+basket.map(p=>'- '+p.name+(p.detail?' / '+p.detail:'')+(p.model?' / '+p.model:'')+(p.price?' / '+p.price+' €':' / tarif à confirmer')).join('\n')+'\nPouvez-vous confirmer la compatibilité et la disponibilité avant mon passage ?';$('#sf-send').href=wa(message);$('#sf-mail').href='mailto:contact@solution-phone.fr?subject=Ma%20sélection%20boutique&body='+encodeURIComponent('Bonjour, '+message);}
   $('#sf-device').addEventListener('input',updateBasket);updateBasket();
   root.querySelectorAll('[data-service]').forEach(a=>{a.href=wa(a.dataset.service);a.target='_blank';a.rel='noopener'});$('.sf-stock-help').href=wa('je cherche un smartphone reconditionné. Mon modèle souhaité et mon budget : ');
-  var stockItems=[],stockBusy=false,stockTime='';
+  var stockItems=[],stockBusy=false,stockTime='',stockBrand='all';
+  var stockFilters=document.createElement('div');stockFilters.className='sf-stock-brands';stockFilters.setAttribute('role','group');stockFilters.setAttribute('aria-label','Filtrer les appareils par marque');
+  [['all','Tous'],['apple','iPhone'],['samsung','Samsung'],['other','Autres']].forEach(([value,label])=>{var button=document.createElement('button');button.type='button';button.textContent=label;button.setAttribute('aria-pressed',String(value===stockBrand));button.addEventListener('click',()=>{stockBrand=value;stockFilters.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));if(stockTime)renderStock()});stockFilters.append(button)});
+  $('.sf-board-tools').before(stockFilters);
+  function stockFamily(p){var name=String(p.modele).toLowerCase();if(/iphone|^se\s*[23]?$|^\d+\s*pro\s*max$/.test(name))return 'apple';if(/samsung|galaxy|z\s*flip|z\s*fold/.test(name))return 'samsung';return 'other'}
   function renderStock(){
     var query=$('#sf-stock-search').value.trim().toLocaleLowerCase('fr');
-    var rows=stockItems.filter(p=>[p.modele,p.stockage,p.couleur,p.grade].join(' ').toLocaleLowerCase('fr').includes(query));
+    var rows=stockItems.filter(p=>(stockBrand==='all'||stockFamily(p)===stockBrand)&&[p.modele,p.stockage,p.couleur,p.grade].join(' ').toLocaleLowerCase('fr').includes(query));
     var body=$('#sf-stock-rows');body.replaceChildren();
     rows.forEach(p=>{
       var tr=document.createElement('tr');
