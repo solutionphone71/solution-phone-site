@@ -244,8 +244,9 @@ gtag("config", "G-3QP90K1TLM");
 </script>
 <link rel="stylesheet" href="premium-shared.css?v=expert-banners-1">
 <link rel="stylesheet" href="reconditionnes-signature.css?v=desir-1">
-<script src="premium-nav.js?v=signature-3" defer></script>
+<script src="premium-nav.js?v=boutique-20260922" defer></script>
 <link rel="stylesheet" href="contact-dock.css?v=1">
+<link rel="stylesheet" href="shop-landing.css?v=1">
 </head>
 <body>
 
@@ -275,8 +276,8 @@ gtag("config", "G-3QP90K1TLM");
 <section class="sp-page-hero sp-recon-hero sp-expert-banner sp-banner-stock">
   <div>
     <p class="sp-page-kicker">Smartphones disponibles · Mâcon</p>
-    <h1 class="sp-page-title">Votre prochain smartphone.<em>Déjà en boutique.</em></h1>
-    <p class="sp-page-lead">Le modèle, le prix, l’état et la batterie viennent du stock réel. Si la photo de l’appareil manque, un visuel officiel du modèle est affiché automatiquement.</p>
+    <h1 class="sp-page-title">iPhone & Samsung reconditionnés.<em>Choisissez le vôtre à Mâcon.</em></h1>
+    <p class="sp-page-lead">Comparez les prix, l’état et la batterie. Demandez la disponibilité sur WhatsApp, puis venez découvrir votre téléphone au 21 Rue Gambetta. Garantie commerciale 12 mois, sans préjudice des garanties légales.</p>
     <div class="sp-recon-points"><span>Garantie 12 mois</span><span>Reprise possible</span><span>Transfert sur place</span></div>
     <div class="sp-page-actions">
       <a class="sp-page-primary" href="#stock">Voir le stock réel</a>
@@ -638,14 +639,9 @@ gtag("config", "G-3QP90K1TLM");
         var recon = (catalogue.stock && catalogue.stock.used || []).map(function(p){ return normalize(p, 'reconditionne'); });
         var neufs = (catalogue.stock && catalogue.stock.new || []).map(function(p){ return normalize(p, 'neuf'); });
         var items = recon.concat(neufs).filter(function(i){ return i.price > 0 && i.model; });
-        if(!items.length){
-          console.info('[stock] aucune donnée en base, fallback démo');
-          allItems = DEMO;
-        } else {
-          allItems = items;
-        }
+        allItems = items;
         render();
-      }).catch(function(){ allItems = DEMO; render(); });
+      }).catch(function(){ allItems = []; render(); document.getElementById('featuredModel').textContent = 'Stock momentanément indisponible'; });
   }
 
   function normalize(p, cond){
@@ -761,6 +757,12 @@ gtag("config", "G-3QP90K1TLM");
     var statStock = document.getElementById('statStock');
     if(statStock) statStock.textContent = available.length;
     var featured = available.filter(function(i){ return productVisual(i).url; })[0] || available[0];
+    if(!featured){
+      document.getElementById('featuredModel').textContent = 'Disponibilité à confirmer en boutique';
+      document.getElementById('featuredPrice').textContent = 'Contactez notre équipe';
+      document.getElementById('featuredCta').textContent = 'Demander les disponibilités';
+      document.getElementById('featuredCta').href = 'https://wa.me/33783921884?text=Bonjour%2C%20quels%20smartphones%20reconditionnés%20avez-vous%20en%20boutique%20%3F';
+    }
     if(featured){
       var featuredVisual = productVisual(featured);
       var featuredModel = document.getElementById('featuredModel');
@@ -1023,5 +1025,6 @@ function openCrispFloat(){ window.$crisp.push(["do","chat:show"]); window.$crisp
 
 <script src="evan-widget.js?v=9" defer></script>
 <script src="contact-dock.js?v=1" defer></script>
+<script src="shop-landing.js?v=1" defer></script>
 </body>
 </html>

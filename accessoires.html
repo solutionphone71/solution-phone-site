@@ -143,8 +143,11 @@ gtag("config", "G-3QP90K1TLM");
 </script>
 <link rel="stylesheet" href="premium-shared.css?v=expert-banners-1">
 <link rel="stylesheet" href="accessoires-signature.css?v=signature-1">
-<script src="premium-nav.js?v=signature-3" defer></script>
+<script src="premium-nav.js?v=boutique-20260922" defer></script>
 <link rel="stylesheet" href="contact-dock.css?v=1">
+<link rel="stylesheet" href="shop-landing.css?v=1">
+<link rel="stylesheet" href="shop-boutique.css?v=1">
+<link rel="stylesheet" href="storefront.css?v=1">
 </head>
 <body class="aurora">
 
@@ -175,13 +178,34 @@ gtag("config", "G-3QP90K1TLM");
 </header>
 
 <!-- HERO COMMUN -->
+<section id="shop-journey" class="sj" hidden aria-labelledby="sj-title">
+  <div class="sj-intro"><p class="sj-kicker">Solution Accessoires appartient à Solution Phone · Mâcon</p><h1 id="sj-title">Votre téléphone.<br><em>Votre prochaine envie.</em></h1><p>Un accessoire qui vous ressemble, un nouveau smartphone ou vos données à retrouver : commençons par vous.</p><a href="./#devis" class="sj-repair">Téléphone cassé ? Accéder au devis réparation ↗</a></div>
+  <div class="sj-workspace">
+    <div class="sj-progress" aria-label="Votre parcours"><span>01 · Votre besoin</span><span>02 · Vos préférences</span><span>03 · Votre sélection</span></div>
+    <div class="sj-needs" aria-label="Que recherchez-vous ?">
+      <button type="button" data-need="accessoire" aria-pressed="false"><span aria-hidden="true">◉</span><strong>Équiper mon téléphone</strong><small>Protéger, charger, écouter.</small></button>
+      <button type="button" data-need="smartphone" aria-pressed="false"><span aria-hidden="true">▯</span><strong>Changer de smartphone</strong><small>Trouver mon prochain modèle.</small></button>
+      <button type="button" data-need="transfert" aria-pressed="false"><span aria-hidden="true">⇄</span><strong>Transférer mes données</strong><small>Passer d’un téléphone à l’autre.</small></button>
+    </div>
+    <div id="sj-detail" hidden tabindex="-1">
+      <h2 id="sj-question"></h2>
+      <div class="sj-fields" id="sj-device-fields"><label>Votre marque<select id="sj-brand"><option value="">Choisir une marque</option><option>Apple</option><option>Samsung</option><option>Xiaomi</option><option>Autre marque</option></select></label><label>Votre modèle<input id="sj-model" list="sj-models" placeholder="Ex. iPhone 13, Galaxy S23"><datalist id="sj-models"></datalist></label></div>
+      <div class="sj-fields" id="sj-transfer-fields" hidden><label>Téléphone de départ<input id="sj-from" placeholder="Ex. Samsung Galaxy S21"></label><label>Nouveau téléphone<input id="sj-to" placeholder="Ex. iPhone 15"></label></div>
+      <div id="sj-options" class="sj-options"></div>
+      <button class="sj-primary" id="sj-result-button" type="button">Composer ma sélection →</button>
+    </div>
+    <section id="sj-result" class="sj-result" hidden tabindex="-1" aria-labelledby="sj-result-title"><p class="sj-kicker">Votre sélection · À confirmer avec notre équipe</p><h2 id="sj-result-title"></h2><p id="sj-summary"></p><div id="sj-recommendations" class="sj-recommendations"></div><div class="sj-actions"><a id="sj-wa" class="sj-primary" target="_blank" rel="noopener">Envoyer ma sélection sur WhatsApp</a><a id="sj-mail">Demander par e-mail</a><a id="sj-stock" href="reconditionnes.html" hidden>Voir les smartphones disponibles →</a></div><p class="sj-note">Aucun achat ni réservation automatique. L’équipe confirme les références, la disponibilité et le tarif des services.</p><button id="sj-edit" type="button">Modifier mes choix ↑</button></section>
+  </div>
+  <div class="sj-footer">Même entreprise, même équipe · 21 Rue Gambetta à Mâcon · <a href="tel:+33385330689">03 85 33 06 89</a></div>
+</section>
 <section class="sp-page-hero sp-expert-banner sp-banner-accessories">
   <div>
-    <p class="sp-page-kicker">Accessoires · Conseil en boutique</p>
-    <h1 class="sp-page-title">Accessoires téléphone.<em>Pour votre modèle à Mâcon.</em></h1>
+    <p class="sp-page-kicker">Solution Accessoires · Une enseigne de Solution Phone</p>
+    <h1 class="sp-page-title">Protégez votre téléphone.<em>Accessoires dès 5 € à Mâcon.</em></h1>
     <p class="sp-page-lead">Coque, chargeur, câble ou protection : nous vérifions la compatibilité avec votre téléphone avant l’achat.</p>
+    <p>Solution Accessoires appartient à Solution Phone. Retrouvez notre équipe au 21 Rue Gambetta à Mâcon.</p>
     <div class="sp-page-actions">
-      <button class="sp-page-primary" type="button" data-evan-question="Je cherche un accessoire pour mon téléphone">Trouver mon accessoire avec Sébastien</button>
+      <a class="sp-page-primary" href="#prix-accessoires">Voir les accessoires et les prix</a>
       <a class="sp-page-secondary" href="https://wa.me/33783921884?text=Bonjour%2C%20je%20cherche%20un%20accessoire%20pour%20mon%20téléphone." target="_blank" rel="noopener">Demander sur WhatsApp</a>
     </div>
   </div>
@@ -192,6 +216,21 @@ gtag("config", "G-3QP90K1TLM");
 </section>
 
 <!-- STATS TILES -->
+<aside class="shop-selection" aria-label="Réparation chez Solution Phone">
+  <p><strong>Smartphone cassé ou besoin d’une réparation ?</strong> Solution Phone s’en occupe. <a href="./#devis" style="color:#a71926;font-weight:700;text-decoration:underline">C’est par ici : demander mon devis →</a></p>
+</aside>
+<section class="shop-selection" id="prix-accessoires" aria-labelledby="shop-title">
+  <p class="shop-eyebrow">Les essentiels · Prix en boutique</p>
+  <h2 id="shop-title">Un prix clair. Le bon modèle.</h2>
+  <p>Indiquez votre modèle sur WhatsApp : nous confirmons la compatibilité et la disponibilité avant votre déplacement.</p>
+  <div class="shop-products">
+    <article><span>Protection écran</span><h3>Verre trempé</h3><strong>5 €</strong><a data-shop-product="Verre trempé à 5 €" href="https://wa.me/33783921884">Vérifier pour mon téléphone →</a></article>
+    <article><span>Protection écran</span><h3>Verre trempé premium</h3><strong>10 €</strong><a data-shop-product="Verre trempé premium à 10 €" href="https://wa.me/33783921884">Vérifier pour mon téléphone →</a></article>
+    <article><span>Protection téléphone</span><h3>Coque transparente</h3><strong>5 €</strong><a data-shop-product="Coque transparente à 5 €" href="https://wa.me/33783921884">Vérifier pour mon téléphone →</a></article>
+    <article><span>Selon votre modèle</span><h3>Coque MagSafe / couleur</h3><strong>10 €</strong><a data-shop-product="Coque MagSafe ou couleur à 10 €" href="https://wa.me/33783921884">Vérifier pour mon téléphone →</a></article>
+  </div>
+  <p>Coques compatibles MagSafe selon modèle. Vous cherchez un câble, un chargeur ou un film hydrogel ? Retrouvez les catégories ci-dessous.</p>
+</section>
 <section id="categories" class="max-w-7xl mx-auto px-6 pb-10 md:pb-16">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <div class="tile p-6 md:p-8">
@@ -1146,5 +1185,9 @@ window.$crisp.push(["on", "chat:closed", function(){ window.$crisp.push(["do", "
 
 <script src="evan-widget.js?v=9" defer></script>
 <script src="contact-dock.js?v=1" defer></script>
+<link rel="stylesheet" href="storefront-unified.css?v=2">
+<script src="utopya-cases.js?v=1" defer></script>
+<script src="utopya-accessories.js?v=1" defer></script>
+<script src="storefront.js?v=3" defer></script>
 </body>
 </html>

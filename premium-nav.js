@@ -12,9 +12,7 @@
       '<nav class="sp-global-links" aria-label="Navigation principale">'+
         '<a href="'+iphoneBase+'">iPhone</a>'+
         '<a href="reparation-samsung.html">Android</a>'+
-        '<a href="reconditionnes.html">Reconditionnés</a>'+
-        '<a href="accessoires.html">Accessoires</a>'+
-        '<a href="hydrogel.html">Protection écran</a>'+
+        '<a href="accessoires.html">Boutique</a>'+
         '<a href="atelier.html">L’atelier</a>'+
       '</nav>'+
       '<a class="sp-global-wa" href="https://wa.me/33783921884?text=Bonjour%2C%20je%20viens%20du%20site%20Solution%20Phone" target="_blank" rel="noopener">WhatsApp ↗</a>'+
@@ -25,7 +23,7 @@
     var panel=document.createElement('nav');
     panel.className='sp-global-panel';
     panel.setAttribute('aria-label','Menu mobile');
-    panel.innerHTML='<a href="./">Accueil & devis</a><a href="'+iphoneBase+'">Réparation iPhone</a><a href="reparation-samsung.html">Réparation Android</a><a href="reconditionnes.html">Smartphones reconditionnés</a><a href="accessoires.html">Accessoires</a><a href="hydrogel.html">Protection écran</a><a href="faq.html">Questions fréquentes</a><a href="actualites.html">Conseils</a><a href="atelier.html">Atelier & contact</a><a href="https://wa.me/33783921884" target="_blank" rel="noopener">WhatsApp direct</a>';
+    panel.innerHTML='<a href="./">Accueil & devis</a><a href="'+iphoneBase+'">Réparation iPhone</a><a href="reparation-samsung.html">Réparation Android</a><a href="accessoires.html">Boutique · Accessoires, reconditionnés & hydrogel</a><a href="faq.html">Questions fréquentes</a><a href="actualites.html">Conseils</a><a href="atelier.html">Atelier & contact</a><a href="https://wa.me/33783921884" target="_blank" rel="noopener">WhatsApp direct</a>';
     header.insertAdjacentElement('afterend',panel);
     var button=header.querySelector('.sp-global-menu-button');
     button.addEventListener('click',function(){var open=panel.classList.toggle('open');button.setAttribute('aria-expanded',String(open));button.textContent=open?'×':'☰'});
