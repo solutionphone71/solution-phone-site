@@ -1,0 +1,18 @@
+/* Raised boutique entry, shared by desktop and mobile navigation. */
+:is(.site-nav,.mobile-links,.sp-global-links,.sp-global-panel) a[href="accessoires.html"]{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 17px;margin:0 0 4px;border:1px solid #f06870;border-bottom-color:#ae1722;
+  border-radius:10px;background:linear-gradient(155deg,#ed3847 0%,#cc1424 60%,#ae101d 100%);
+  color:#fff!important;font-weight:750;text-decoration:none;
+  box-shadow:0 4px 0 #800c17,0 7px 12px #a10d2026,inset 0 1px 0 #ffffff55;
+  text-shadow:0 1px 1px #65091355;transition:transform .16s,box-shadow .16s;
+}
+:is(.site-nav,.mobile-links,.sp-global-links,.sp-global-panel) a[href="accessoires.html"]:hover{
+  transform:translateY(-2px);box-shadow:0 6px 0 #800c17,0 10px 16px #a10d2033,inset 0 1px 0 #ffffff55;
+}
+:is(.site-nav,.mobile-links,.sp-global-links,.sp-global-panel) a[href="accessoires.html"]:active{
+  transform:translateY(3px);box-shadow:0 1px 0 #800c17,inset 0 1px 0 #ffffff33;
+}
+:is(.site-nav,.mobile-links,.sp-global-links,.sp-global-panel) a[href="accessoires.html"]:focus-visible{outline:3px solid #222;outline-offset:5px}
+:is(.mobile-links,.sp-global-panel) a[href="accessoires.html"]{margin:8px 0 13px;min-height:46px;line-height:1.45;text-align:center}
+@media(prefers-reduced-motion:reduce){:is(.site-nav,.mobile-links,.sp-global-links,.sp-global-panel) a[href="accessoires.html"]{transition:none;transform:none}}

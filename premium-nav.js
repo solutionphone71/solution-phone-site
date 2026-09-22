@@ -1,6 +1,7 @@
 (function(){
   function current(path){return location.pathname.endsWith('/'+path)||location.pathname.endsWith(path)}
   function init(){
+    var boutiqueStyle=document.createElement('link');boutiqueStyle.rel='stylesheet';boutiqueStyle.href='boutique-nav.css?v=1';document.head.appendChild(boutiqueStyle);
     var iphoneBase=location.hostname==='localhost'?'http://localhost:4174/':'https://reparation-iphone-macon.fr/';
     document.querySelectorAll('#crispFloatBtn,#waFloatBtn,.wa-float,a.wa[style*="position:fixed"]').forEach(function(el){el.hidden=true;el.style.setProperty('display','none','important')});
     document.querySelectorAll('header.nav,header.sticky,nav#nav,#sp-burger,#sp-drawer').forEach(function(el){el.classList.add('sp-legacy-nav')});
