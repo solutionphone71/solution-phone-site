@@ -1,6 +1,18 @@
 (function(){
   'use strict';
   if(document.querySelector('.sp-contact-dock'))return;
+  // Repair pages share the homepage quote. Shop/product requests stay unchanged.
+  if(/\/(?:reparation-[^/]+|ecran-iphone-casse-macon|remplacement-batterie-telephone-macon|atelier)\.html$/.test(location.pathname)){
+    const page=location.pathname,params=new URLSearchParams();
+    if(page.includes('samsung'))params.set('model','Samsung');
+    if(page.includes('batterie'))params.set('issue','battery');
+    if(page.includes('ecran-iphone'))params.set('issue','screen');
+    const url=new URL('./',location.href);url.search=params.toString();url.hash='devis';
+    const dock=document.createElement('nav');dock.className='sp-contact-dock';dock.setAttribute('aria-label','Devis réparation');
+    const quote=document.createElement('a');quote.href=url.href;quote.textContent='Prix & devis WhatsApp';
+    const mail=document.createElement('a');url.searchParams.set('email','1');mail.href=url.href;mail.textContent='Devis e-mail';dock.append(quote,mail);document.body.appendChild(dock);
+    return;
+  }
   var endpoint='https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/quote-request';
   var publicKey='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
   var pageTitle=(document.querySelector('h1')||document).textContent.trim()||document.title;

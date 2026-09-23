@@ -2,14 +2,14 @@
   function current(path){return location.pathname.endsWith('/'+path)||location.pathname.endsWith(path)}
   function init(){
     var boutiqueStyle=document.createElement('link');boutiqueStyle.rel='stylesheet';boutiqueStyle.href='boutique-nav.css?v=1';document.head.appendChild(boutiqueStyle);
-    var iphoneBase=location.hostname==='localhost'?'http://localhost:4174/':'https://reparation-iphone-macon.fr/';
+    var iphoneBase='reparation-iphone.html';
     document.querySelectorAll('#crispFloatBtn,#waFloatBtn,.wa-float,a.wa[style*="position:fixed"]').forEach(function(el){el.hidden=true;el.style.setProperty('display','none','important')});
     document.querySelectorAll('header.nav,header.sticky,nav#nav,#sp-burger,#sp-drawer').forEach(function(el){el.classList.add('sp-legacy-nav')});
     var header=document.createElement('header');
     header.className='sp-global-header';
     header.innerHTML='<div class="sp-global-inner">'+
       '<button class="sp-global-back" type="button" aria-label="Revenir à la page précédente"><span aria-hidden="true">←</span><b>Retour</b></button>'+
-      '<a class="sp-global-brand" href="./"><span class="sp-global-mark">SP</span><span><strong>Solution Phone</strong><small>Atelier indépendant · Mâcon</small></span></a>'+
+      '<a class="sp-global-brand" href="./"><img src="img/logo-ui.webp" alt="" width="48" height="48" style="object-fit:contain"><span><strong>Solution Phone</strong><small>Atelier indépendant · Mâcon</small></span></a>'+
       '<nav class="sp-global-links" aria-label="Navigation principale">'+
         '<a href="'+iphoneBase+'">iPhone</a>'+
         '<a href="reparation-samsung.html">Android</a>'+

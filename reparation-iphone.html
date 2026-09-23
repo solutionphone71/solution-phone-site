@@ -40,23 +40,30 @@
     <div class="hero">
       <div class="hero-copy">
         <div class="eyebrow">Urgence iPhone · Atelier à Mâcon</div>
-        <h1>Votre iPhone.<br /><span>Réparé.</span></h1>
+        <h1>Bénéficiez immédiatement de <span>25 €</span> sur votre réparation iPhone.</h1>
         <p class="lead">Écran cassé, batterie faible ou problème de charge : obtenez rapidement un tarif avant intervention. <strong>25 € sont déduits de votre réparation par Solution Phone.</strong></p>
         <div class="actions">
           <a class="button primary" href="https://wa.me/33783921884?text=Bonjour%2C%20ma%20demande%20de%20r%C3%A9paration%20iPhone%20est%20urgente.%20Mon%20mod%C3%A8le%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp urgent</a>
-          <a class="button" href="https://reparation-iphone-macon.fr/">Voir les tarifs iPhone</a>
+          <a class="button" href="#tarifs-iphone">Voir tous les tarifs iPhone</a>
         </div>
       </div>
       <img src="img/evan-comptoir.webp" alt="Technicien Solution Phone dans l’atelier de Mâcon" width="1200" height="819" fetchpriority="high" decoding="async" />
     </div>
     <main>
+      <section id="tarifs-iphone" class="wrap" style="scroll-margin-top:90px">
+        <h2>Votre iPhone. Toutes les qualités, tous les prix disponibles.</h2>
+        <p>Choisissez l’écran ou la batterie, votre modèle puis votre qualité. Les prix TTC affichés comprennent la pièce et la main-d’œuvre : les 25 € sont déjà déduits.</p>
+        <iframe id="iphone-quote-frame" src="./?tarifs=iphone" title="Tarifs iPhone et demande de devis Solution Phone" style="display:block;width:100%;height:900px;border:0" loading="lazy"></iframe>
+        <script>window.addEventListener('message',function(event){const frame=document.getElementById('iphone-quote-frame');if(event.origin===location.origin&&event.source===frame.contentWindow&&event.data?.type==='solution-phone-quote-height'&&Number.isFinite(event.data.height))frame.style.height=Math.min(20000,Math.max(900,event.data.height))+'px'});</script>
+        <p><a href="./#devis">Ouvrir le devis en plein écran</a></p>
+      </section>
       <section>
         <div class="wrap">
           <div class="eyebrow">Vous êtes au bon endroit</div>
           <div class="grid">
             <article class="card"><h2>−25 € immédiats</h2><p>La réduction est appliquée directement par Solution Phone, sans dossier ni remboursement à attendre.</p></article>
             <article class="card"><h2>Devis avant réparation</h2><p>Le modèle, la panne, la qualité de pièce et le prix sont confirmés avant votre accord.</p></article>
-            <article class="card"><h2>Atelier local</h2><p>Une équipe de cinq techniciens vous accueille au 21 rue Gambetta à Mâcon.</p></article>
+            <article class="card"><h2>Atelier local</h2><p>Une équipe de cinq personnes, dont trois techniciens, vous accueille au 21 rue Gambetta à Mâcon.</p></article>
           </div>
         </div>
       </section>
@@ -69,7 +76,7 @@
           <div class="service-links">
             <a href="ecran-iphone-casse-macon.html">Écran iPhone cassé</a>
             <a href="remplacement-batterie-telephone-macon.html">Batterie iPhone</a>
-            <a href="https://reparation-iphone-macon.fr/">Tarifs par modèle</a>
+            <a href="#tarifs-iphone">Tarifs par modèle</a>
             <a href="atelier.html#qualirepar">Comprendre les 25 €</a>
           </div>
         </div>
@@ -91,6 +98,8 @@
       </section>
     </main>
     <footer class="wrap">Solution Phone · Réparation iPhone à Mâcon · <a href="politique-confidentialite.html">Confidentialité</a></footer>
-    <script src="contact-dock.js?v=1" defer></script>
+    <nav class="sp-contact-dock" aria-label="Devis iPhone"><a href="#tarifs-iphone" style="grid-column:1/-1">Voir mon prix et demander mon devis</a></nav>
+    <script>new IntersectionObserver(function(entries){document.querySelector('.sp-contact-dock').hidden=entries[0].isIntersecting}).observe(document.getElementById('iphone-quote-frame'));</script>
+    <style>.sp-contact-dock[hidden]{display:none!important}</style>
   </body>
 </html>

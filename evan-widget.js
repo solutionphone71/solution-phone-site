@@ -44,6 +44,12 @@
   document.body.appendChild(root);
   var launch=root.querySelector('.evan-widget-launch'),close=root.querySelector('.evan-widget-close'),back=root.querySelector('.evan-widget-back'),input=root.querySelector('input'),conversation=root.querySelector('.evan-widget-conversation');
   launch.setAttribute('aria-label','Demandez à Sébastien');
+  root.setAttribute('aria-label','Assistant virtuel Solution Phone');
+  root.querySelector('.evan-widget-head b').textContent='Assistant virtuel Solution Phone';
+  root.querySelector('.evan-widget-head b').nextElementSibling.textContent='Aide au diagnostic · validation par l’équipe';
+  launch.setAttribute('aria-label','Ouvrir l’assistant virtuel');
+  launch.querySelector('b').textContent='Besoin d’aide ?';
+  launch.querySelector('small').textContent='Assistant virtuel';
   function toggle(force){var open=typeof force==='boolean'?force:!root.classList.contains('open');root.classList.toggle('open',open);launch.setAttribute('aria-expanded',String(open));if(open)setTimeout(function(){input.focus()},80)}
   function ask(question){
     if(!question)return;

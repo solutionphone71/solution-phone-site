@@ -287,16 +287,19 @@
   </style>
   <link rel="stylesheet" href="signature-home.css?v=conversion-simple-2">
   <link rel="stylesheet" href="quote-journey.css?v=1">
-  <script src="quote-journey.js?v=1" defer></script>
+  <script src="quote-catalog.js?v=1" defer></script>
+  <script src="quote-journey.js?v=4" defer></script>
   <link rel="stylesheet" href="qualirepar-top.css?v=2">
   <script src="qualirepar-top.js?v=2" defer></script>
 <link rel="stylesheet" href="boutique-nav.css?v=1">
+<link rel="stylesheet" href="home-simple.css?v=5">
+<script>if(new URLSearchParams(location.search).has('tarifs'))document.documentElement.classList.add('tariff-embed')</script>
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
       <a class="brand" href="./" aria-label="Accueil Solution Phone">
-        <div class="brand-mark">SP</div>
+        <img src="img/logo-ui.webp" alt="" width="48" height="48" style="object-fit:contain">
         <div><strong>Solution Phone</strong><small>Atelier indépendant · Mâcon</small></div>
       </a>
       <nav class="site-nav" aria-label="Navigation principale">
@@ -337,6 +340,14 @@
       <button type="button" id="availability-action" onclick="focusEvan()">Obtenir mon devis</button>
     </aside>
 
+    <section class="simple-offer" aria-labelledby="simple-offer-title">
+      <p class="simple-local">Réparation iPhone & Samsung · Mâcon</p>
+      <img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="120" height="80">
+      <h1 id="simple-offer-title">Bénéficiez immédiatement de <strong>25 €</strong> sur votre réparation.</h1>
+      <p class="simple-offer-note">Déduits directement de votre facture. On s’occupe de tout.</p>
+      <button class="simple-conditions" type="button" onclick="document.querySelector('.spq-bonus-bar')?.click()">L’engagement Solution Phone</button>
+      <a class="simple-primary" href="#devis">Obtenir mon devis →</a>
+    </section>
     <section class="stage">
       <div class="visual">
         <div class="future-grid" aria-hidden="true"></div>
@@ -344,7 +355,7 @@
         <div class="edition"><span aria-hidden="true"></span>Sébastien & l’équipe · Mâcon depuis 2014</div>
         <div class="hero-copy">
           <strong class="hero-answer">Vous êtes au bon endroit.</strong>
-          <h1>Réparation smartphone.<em>À Mâcon.</em></h1>
+          <h2>Réparation smartphone.<em>À Mâcon.</em></h2>
           <p>Un téléphone en panne, une équipe à votre écoute. Votre tarif avant intervention, votre réparation sans rendez-vous.</p>
           <div class="hero-conversion-actions" aria-label="Demander un devis">
             <a href="#devis">Préparer mon devis →</a>
@@ -352,8 +363,8 @@
           <div class="hero-trust" aria-label="Garanties Solution Phone">
             <div class="hero-reasons">
               <span><b>90 % &lt; 1 h</b><small>Selon la panne et la pièce disponible</small></span>
-              <span><b>400+ / mois</b><small>Téléphones pris en charge</small></span>
-              <span><b>5 techniciens</b><small>À votre écoute à Mâcon</small></span>
+              <span><b>350 / mois</b><small>Smartphones réparés en moyenne</small></span>
+              <span><b>3 techniciens</b><small>Une équipe de 5 personnes à Mâcon</small></span>
             </div>
             <a class="qualirepar-banner" href="#devis" aria-label="Obtenir 25 euros de réduction sur sa réparation de smartphone">
               <span class="qualirepar-logo"><img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar"></span>
@@ -385,27 +396,30 @@
         </div>
       </div>
 
+      <figure class="simple-team-photo">
+        <img src="img/evan-comptoir.webp" alt="Evan au comptoir de Solution Phone à Mâcon" width="1448" height="1086" decoding="async">
+        <figcaption><strong>Un visage, une équipe, une vraie boutique.</strong><span>Evan au comptoir · À Mâcon depuis 2014</span><span>3 techniciens · Réparations garanties 6 mois</span><span>90 % des réparations en moins d’une heure. Délai confirmé selon la panne et les pièces disponibles.</span></figcaption>
+      </figure>
       <div class="conversation" id="devis">
         <section class="quote-journey" aria-labelledby="journey-title">
-          <p class="journey-kicker">DEVIS DIRECT · SANS ENGAGEMENT</p>
-          <h2 id="journey-title">Que faut-il réparer ?</h2>
-          <p class="journey-intro">Deux informations. Puis une réponse de notre équipe.</p>
-          <label class="journey-label" for="journey-model"><span>1</span> Votre téléphone</label>
+          <h2 id="journey-title">Demandez votre devis immédiat.</h2>
+          <p class="journey-intro">Choisissez votre panne. Nous préparons votre demande.</p>
+          <fieldset class="journey-issues"><legend class="journey-label"><span>1</span> Quel est le problème ?</legend>
+            <button type="button" data-journey-issue="screen" aria-pressed="false">Écran cassé</button>
+            <button type="button" data-journey-issue="battery" aria-pressed="false">Batterie</button>
+            <button type="button" data-journey-issue="charge" aria-pressed="false">Connecteur de charge</button>
+            <button type="button" data-journey-issue="cleaning" aria-pressed="false">Nettoyage</button>
+            <button type="button" data-journey-issue="virus" aria-pressed="false">Virus / publicités</button>
+            <button type="button" data-journey-issue="other" aria-pressed="false">Autre / je ne sais pas</button>
+          </fieldset>
+          <label class="journey-label" for="journey-model"><span>2</span> Votre téléphone</label>
           <input id="journey-model" list="journey-models" maxlength="100" autocomplete="off" placeholder="Ex. iPhone 13, Samsung A54…" aria-describedby="journey-model-help">
           <datalist id="journey-models"></datalist>
           <div class="journey-model-help" id="journey-model-help"><span>Toutes marques</span><button type="button" id="journey-unknown">Je ne connais pas le modèle</button></div>
-          <fieldset class="journey-issues"><legend class="journey-label"><span>2</span> Le problème</legend>
-            <button type="button" data-journey-issue="screen" aria-pressed="false">Écran cassé</button>
-            <button type="button" data-journey-issue="battery" aria-pressed="false">Batterie</button>
-            <button type="button" data-journey-issue="charge" aria-pressed="false">Ne charge plus</button>
-            <button type="button" data-journey-issue="camera" aria-pressed="false">Caméra / son</button>
-            <button type="button" data-journey-issue="water" aria-pressed="false">Téléphone mouillé</button>
-            <button type="button" data-journey-issue="other" aria-pressed="false">Autre / je ne sais pas</button>
-          </fieldset>
           <div id="journey-result" class="journey-result" hidden>
             <p id="journey-summary" aria-live="polite"></p>
             <div id="journey-price" class="journey-price"></div>
-            <details id="journey-qualities" hidden><summary>Comparer les qualités et les prix</summary><div id="journey-quality-list"></div></details>
+            <div id="journey-qualities" hidden><p>Choisissez votre qualité de pièce</p><div id="journey-quality-list"></div></div>
             <p id="journey-safety" class="journey-safety" hidden>Éteignez le téléphone et ne le rechargez pas. Faites-le contrôler en boutique.</p>
             <p class="journey-channel-label">Comment souhaitez-vous nous contacter ?</p>
             <div class="journey-channels"><a id="journey-whatsapp" href="https://wa.me/33783921884" target="_blank" rel="noopener">WhatsApp urgent ↗</a><button id="journey-email" type="button">Recevoir par e-mail</button></div>
@@ -415,12 +429,12 @@
           <noscript><p>Contactez directement l’équipe : <a href="https://wa.me/33783921884">WhatsApp</a> ou <a href="mailto:contact@solution-phone.fr">e-mail</a>.</p></noscript>
         </section>
         <details class="advanced-help" id="advanced-help">
-          <summary>Besoin d’aide pour identifier la panne ?</summary>
+          <summary>Un doute sur la panne ? Ouvrir l’assistant virtuel</summary>
         <div class="panel">
           <div id="start-view">
             <div class="evan">
               <div class="avatar">SÉBASTIEN</div>
-              <div><h2>Sébastien · Solution Phone</h2><p>Diagnostic &amp; devis · équipe à Mâcon</p></div>
+              <div><h2>L’assistant virtuel Solution Phone</h2><p>Aide au diagnostic · validation par l’équipe</p></div>
             </div>
             <p class="dialogue">Obtenez votre <span>devis maintenant.</span></p>
             <form class="entry" id="diagnostic-form">
@@ -495,11 +509,7 @@
   </main>
 
   <section class="repair-atlas" id="reparations" aria-labelledby="repair-atlas-title">
-    <div class="repair-atlas-head">
-      <p>Diagnostic interactif</p>
-      <h2 id="repair-atlas-title">Touchez la panne.<br>On s’occupe du reste.</h2>
-      <span>Survolez ou touchez une pièce. L’assistant ouvre immédiatement le bon diagnostic, sans formulaire inutile.</span>
-    </div>
+    <h2 id="repair-atlas-title" class="simple-brands-title">Votre marque. Notre savoir-faire.</h2>
     <div class="repair-brand-ribbon" aria-label="Marques de téléphones prises en charge">
       <div class="repair-brand-ribbon-label"><span>Multi-marques</span><b>Diagnostic & réparation</b></div>
       <div class="repair-brand-marquee">
@@ -516,6 +526,7 @@
         </div>
       </div>
     </div>
+    <details class="simple-more"><summary>Une autre panne ou un autre appareil ?</summary>
     <div class="repair-atlas-stage">
       <figure class="repair-anatomy" aria-label="Vue intérieure interactive d’un smartphone">
         <img src="img/smartphone-anatomy-3d-v1.webp" alt="Smartphone ouvert montrant son écran, sa batterie, ses caméras et ses composants internes" width="1536" height="1024" loading="lazy" decoding="async">
@@ -546,8 +557,9 @@
         <button class="repair-device" data-repair-prompt="j'ai besoin d'une réparation de trottinette"><small>Trottinette</small><b>Pneu · frein · autonomie</b><span>Obtenir un tarif →</span></button>
       </div>
     </div>
+    </details>
     <nav class="local-seo-guides" aria-label="Guides de réparation à Mâcon">
-      <p>Guides locaux</p>
+      <p>Nos réparations à Mâcon</p>
       <div class="local-seo-grid">
         <a href="reparation-iphone.html"><small>iPhone</small><b>Réparation iPhone à Mâcon</b><span>Écran, batterie, charge, vitre arrière et tarifs par modèle.</span></a>
         <a href="remplacement-batterie-telephone-macon.html"><small>Autonomie</small><b>Remplacement de batterie</b><span>Décharge rapide, chauffe, extinction ou batterie gonflée.</span></a>
@@ -556,6 +568,10 @@
     </nav>
   </section>
 
+  <section class="simple-visit" aria-label="Venir chez Solution Phone">
+    <div><h2>Venez nous voir.</h2><p>21 rue Gambetta · Mâcon · Sans rendez-vous</p><p>Lundi : 9h15–12h15 et 14h–19h<br>Du mardi au samedi : 9h15–19h</p></div>
+    <div><a href="tel:+33385330689">Appeler le 03 85 33 06 89</a><a href="https://maps.google.com/?q=21+Rue+Gambetta+71000+M%C3%A2con" target="_blank" rel="noopener">Itinéraire →</a><a href="accessoires.html">Découvrir la boutique →</a></div>
+  </section>
   <p class="spq-legal">Réduction de 25 € appliquée par Solution Phone sur la réparation d’un smartphone. Lorsqu’elle est éligible au dispositif, cette réduction correspond au Bonus Réparation QualiRépar ; à défaut, elle est prise en charge commercialement par Solution Phone.</p>
 
   <div class="home-contact-dock" aria-label="Accès directs">
@@ -1222,6 +1238,9 @@
         renderAndroidBattery(p);answer.classList.add('show');return;
       }
       if(p.brand==='Apple'&&p.key&&(p.issue==='screen'||p.issue==='battery')){
+        if(window.SolutionPhoneQuote?.choose&&!document.documentElement.classList.contains('evan-embed')){
+          window.SolutionPhoneQuote.choose(iphoneLabel(p.key),p.issue);return;
+        }
         const source=p.issue==='screen'?screens:batteries,meta=p.issue==='screen'?QUALITES:QUALITES_BAT;
         const livePrice=(p.issue==='screen'?liveScreenModels:liveBatteryModels).has(p.key);
         const prices=source[p.key]||[];

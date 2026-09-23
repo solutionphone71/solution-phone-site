@@ -20,13 +20,16 @@ class Node {
   append(...nodes){this.children.push(...nodes);}
   replaceChildren(){this.children=[];this.textContent='';}
   setAttribute(k,v){this.attrs[k]=v;}
+  querySelectorAll(){return [];}
+  querySelector(){return null;}
   focus(){this.focused=true;}
 }
 const nodes=new Map(),get=id=>{if(!nodes.has(id))nodes.set(id,new Node());return nodes.get(id);};
 const buttons=['screen','battery','charge','camera','water','other'].map(k=>{const n=new Node();n.dataset.journeyIssue=k;return n;});
 const root=new Node();root.querySelectorAll=()=>buttons;
 const dock=new Node();dock.href='https://wa.me/33783921884';
-context.document={querySelector:selector=>selector==='.quote-journey'?root:dock,getElementById:get,createElement:()=>new Node()};
+context.document={documentElement:{classList:{contains:()=>false}},querySelector:selector=>selector==='.quote-journey'?root:dock,getElementById:get,createElement:()=>new Node()};
+context.URLSearchParams=URLSearchParams;context.location={search:''};context.window.addEventListener=()=>{};
 vm.runInNewContext(fs.readFileSync(new URL('quote-journey.js',base),'utf8'),context);
 await Promise.resolve();assert.equal(get('journey-result').hidden,true);
 buttons[0].events.click();assert.equal(get('journey-model').focused,true);assert.equal(get('journey-result').hidden,true);
@@ -35,7 +38,8 @@ assert.equal(get('journey-result').hidden,false);assert.equal(get('journey-quali
 assert.equal(get('journey-quality-list').children.length,4);
 assert.equal(get('journey-price').children[0].textContent,'À partir de 45 €');
 const message=()=>new URL(get('journey-whatsapp').href).searchParams.get('text');
-assert.match(message(),/iPhone 13.*Écran cassé/);assert.match(message(),/45 €/);
+assert.match(message(),/iPhone 13.*Écran cassé/);assert.match(message(),/Qualité à choisir/);
+get('journey-quality-list').children[0].events.click();assert.match(message(),/45 €/);assert.match(message(),/25 € déjà déduits/);
 assert.equal(dock.href,get('journey-whatsapp').href);
 get('journey-email').events.click();assert.match(context.mail,/iPhone 13.*Écran cassé/);assert.equal(api.draft(),context.mail);
 get('journey-model').value='Pixel <Pro> & 16';get('journey-model').events.input();
