@@ -286,7 +286,7 @@
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
   </style>
   <link rel="stylesheet" href="signature-home.css?v=conversion-simple-2">
-  <link rel="stylesheet" href="quote-journey.css?v=1">
+  <link rel="stylesheet" href="quote-journey.css?v=2">
   <script src="quote-catalog.js?v=1" defer></script>
   <script src="quote-journey.js?v=4" defer></script>
   <link rel="stylesheet" href="qualirepar-top.css?v=2">
@@ -343,8 +343,8 @@
     <section class="simple-offer" aria-labelledby="simple-offer-title">
       <p class="simple-local">Réparation iPhone & Samsung · Mâcon</p>
       <img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="120" height="80">
-      <h1 id="simple-offer-title">Bénéficiez immédiatement de <strong>25 €</strong> sur votre réparation.</h1>
-      <p class="simple-offer-note">Déduits directement de votre facture. On s’occupe de tout.</p>
+      <h1 id="simple-offer-title">Bénéficiez immédiatement de <strong>25 €</strong> sur votre réparation à Mâcon.</h1>
+      <p class="simple-offer-note">Déduits directement de votre facture. <b>Réparé en moins d’une heure</b> si la pièce est en stock.</p>
       <button class="simple-conditions" type="button" onclick="document.querySelector('.spq-bonus-bar')?.click()">L’engagement Solution Phone</button>
       <a class="simple-primary" href="#devis">Obtenir mon devis →</a>
     </section>
@@ -422,8 +422,8 @@
             <div id="journey-qualities" hidden><p>Choisissez votre qualité de pièce</p><div id="journey-quality-list"></div></div>
             <p id="journey-safety" class="journey-safety" hidden>Éteignez le téléphone et ne le rechargez pas. Faites-le contrôler en boutique.</p>
             <p class="journey-channel-label">Comment souhaitez-vous nous contacter ?</p>
-            <div class="journey-channels"><a id="journey-whatsapp" href="https://wa.me/33783921884" target="_blank" rel="noopener">WhatsApp urgent ↗</a><button id="journey-email" type="button">Recevoir par e-mail</button></div>
-            <p class="journey-handoff">Modèle et panne déjà renseignés. Sur WhatsApp, il vous reste à envoyer le message.</p>
+            <div class="journey-channels"><a id="journey-whatsapp" href="https://wa.me/33783921884" target="_blank" rel="noopener">Devis WhatsApp immédiat ↗</a><button id="journey-email" type="button">Devis par e-mail</button><a class="journey-call" href="tel:+33385330689">Appeler le 03 85 33 06 89</a></div>
+            <p class="journey-handoff">Modèle et panne déjà renseignés. Sur WhatsApp, il vous reste à envoyer le message. Réparé en moins d’une heure si la pièce est en stock.</p>
           </div>
           <p class="journey-reassurance">25 € déduits sur votre réparation de smartphone · SAV en boutique</p>
           <noscript><p>Contactez directement l’équipe : <a href="https://wa.me/33783921884">WhatsApp</a> ou <a href="mailto:contact@solution-phone.fr">e-mail</a>.</p></noscript>
@@ -575,8 +575,9 @@
   <p class="spq-legal">Réduction de 25 € appliquée par Solution Phone sur la réparation d’un smartphone. Lorsqu’elle est éligible au dispositif, cette réduction correspond au Bonus Réparation QualiRépar ; à défaut, elle est prise en charge commercialement par Solution Phone.</p>
 
   <div class="home-contact-dock" aria-label="Accès directs">
-    <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20est%20urgente.%20Mon%20appareil%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">WhatsApp urgent</a>
-    <button id="dock-price-button" type="button" onclick="openMail(window.SolutionPhoneQuote?.draft?.())">Devis e-mail</button>
+    <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20est%20urgente.%20Mon%20appareil%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp</a>
+    <a class="dock-call" href="tel:+33385330689" aria-label="Appeler Solution Phone au 03 85 33 06 89">03 85 33 06 89</a>
+    <button id="dock-price-button" type="button" onclick="openMail(window.SolutionPhoneQuote?.draft?.())">Devis par e-mail</button>
   </div>
 
   <div class="modal" id="mail-modal" role="dialog" aria-modal="true" aria-label="Recevoir un devis par e-mail">

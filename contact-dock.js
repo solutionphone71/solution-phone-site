@@ -10,7 +10,7 @@
     const url=new URL('./',location.href);url.search=params.toString();url.hash='devis';
     const dock=document.createElement('nav');dock.className='sp-contact-dock';dock.setAttribute('aria-label','Devis réparation');
     const quote=document.createElement('a');quote.href=url.href;quote.textContent='Prix & devis WhatsApp';
-    const mail=document.createElement('a');url.searchParams.set('email','1');mail.href=url.href;mail.textContent='Devis e-mail';dock.append(quote,mail);document.body.appendChild(dock);
+    const mail=document.createElement('a');url.searchParams.set('email','1');mail.href=url.href;mail.textContent='Devis e-mail';const call=document.createElement('a');call.className='sp-contact-call';call.href='tel:+33385330689';call.textContent='03 85 33 06 89';call.setAttribute('aria-label','Appeler Solution Phone au 03 85 33 06 89');dock.append(quote,call,mail);document.body.appendChild(dock);
     return;
   }
   var endpoint='https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/quote-request';
@@ -20,7 +20,7 @@
   function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,Object.assign({transport_type:'beacon',page_location:location.href},params||{}));}catch(error){}}
   document.querySelectorAll('#crispFloatBtn,#waFloatBtn,.wa-float,a.wa[style*="position:fixed"],.sp-global-float').forEach(function(el){el.remove()});
   var dock=document.createElement('div');dock.className='sp-contact-dock';dock.setAttribute('aria-label','Demander un devis');
-  dock.innerHTML='<a class="sp-contact-wa" href="https://wa.me/33783921884?text='+encodeURIComponent('Bonjour, ma demande est urgente. Je souhaite un devis depuis la page « '+pageTitle+' ». Mon appareil et mon problème : ')+'" target="_blank" rel="noopener" aria-label="Demander un devis urgent par WhatsApp">WhatsApp urgent</a><button class="sp-contact-email" type="button" aria-label="Demander un devis par e-mail">E-mail</button>';
+  dock.innerHTML='<a class="sp-contact-wa" href="https://wa.me/33783921884?text='+encodeURIComponent('Bonjour, ma demande est urgente. Je souhaite un devis depuis la page « '+pageTitle+' ». Mon appareil et mon problème : ')+'" target="_blank" rel="noopener" aria-label="Demander un devis par WhatsApp">Devis WhatsApp</a><a class="sp-contact-call" href="tel:+33385330689" aria-label="Appeler Solution Phone au 03 85 33 06 89">03 85 33 06 89</a><button class="sp-contact-email" type="button" aria-label="Demander un devis par e-mail">E-mail</button>';
   document.body.appendChild(dock);
   var modal=document.createElement('div');modal.className='sp-contact-modal';modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-labelledby','spContactTitle');
   modal.innerHTML='<div class="sp-contact-dialog"><button class="sp-contact-close" type="button" aria-label="Fermer">×</button><span class="sp-contact-kicker">URGENCE TÉLÉPHONE</span><h2 id="spContactTitle">Un devis express, sans perdre de temps</h2><p>Indiquez simplement votre appareil et la panne. L’équipe vous répond rapidement selon le diagnostic et la disponibilité des pièces.</p><form class="sp-contact-form"><label>1. Votre nom<input name="nom" autocomplete="name" required maxlength="80"></label><label>2. Votre e-mail<input name="email" type="email" autocomplete="email" required maxlength="160"></label><label>3. Appareil et problème<textarea name="demande" required minlength="10" maxlength="1800" placeholder="Ex. iPhone 13, écran cassé, téléphone indispensable aujourd’hui"></textarea></label><details><summary>Ajouter un numéro de téléphone</summary><label>Téléphone (facultatif)<input name="telephone" type="tel" autocomplete="tel" maxlength="40"></label></details><label class="sp-contact-hp" aria-hidden="true">Site web<input name="website" tabindex="-1" autocomplete="off"></label><button class="sp-contact-submit" type="submit">Envoyer ma demande urgente</button><p class="sp-contact-status" role="status" aria-live="polite"></p></form></div>';
@@ -29,7 +29,8 @@
   function open(){modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(function(){form.nom.focus()},30)}
   function close(){modal.classList.remove('open');document.body.style.overflow=''}
   openButton.addEventListener('click',open);closeButton.addEventListener('click',close);modal.addEventListener('click',function(e){if(e.target===modal)close()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))close()});
-  dock.querySelector('a').addEventListener('click',function(){if(!document.querySelector('script[src*="landing-tracking"]'))track('contact_whatsapp',{method:'whatsapp',page:page,source:'contact_dock'});});
+  dock.querySelector('.sp-contact-wa').addEventListener('click',function(){if(!document.querySelector('script[src*="landing-tracking"]'))track('contact_whatsapp',{method:'whatsapp',page:page,source:'contact_dock'});});
+  var callLink=dock.querySelector('.sp-contact-call');if(callLink)callLink.addEventListener('click',function(){track('contact_phone',{method:'phone',page:page,source:'contact_dock'});});
   form.addEventListener('submit',function(e){
     e.preventDefault();if(submit.disabled||form.website.value)return;
     submit.disabled=true;submit.textContent='Envoi en cours…';status.className='sp-contact-status';status.textContent='';
