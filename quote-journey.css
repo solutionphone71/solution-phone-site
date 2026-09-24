@@ -41,3 +41,9 @@ body.journey-in-view .home-contact-dock{visibility:hidden}
 .google-rating-stars{color:#f5b100;letter-spacing:1px}.google-rating b{font-weight:800}.google-rating span:last-child{color:#0066cc}
 .google-rating:hover span:last-child{text-decoration:underline}.google-rating:focus-visible{outline:3px solid #0071e3;outline-offset:3px}
 .simple-offer .google-rating{display:flex;width:max-content;margin:14px auto 0;flex-wrap:nowrap;white-space:nowrap}
+/* La barre WhatsApp · appel · e-mail reste visible dès l’arrivée (plus seulement en bas de page) */
+body.journey-in-view .home-contact-dock{visibility:visible}
+.home-contact-dock{transform:translateY(0);opacity:1;pointer-events:auto}
+.input-active .home-contact-dock,.modal-open .home-contact-dock{transform:translateY(110%);opacity:0;pointer-events:none}
+body.modal-open .home-contact-dock{visibility:hidden}
+@media(max-width:760px){body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}}
