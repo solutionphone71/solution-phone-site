@@ -1,4 +1,19 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0'
+import {
+  androidFromSetting,
+  androidFromTable,
+  type AndroidRow,
+  mapNewPhones,
+  mapUsedPhones,
+  normalizePriceRows,
+  parseStockPublication,
+  PRICE_SETTING_KEYS,
+  type PriceRow,
+  safePrice,
+  safeText,
+  splitVitrineStock,
+  STOCK_PUBLICATION_KEY,
+} from '../_shared/vitrine-catalog.ts'
 
 const ALLOWED_ORIGINS = new Set([
   'https://solution-phone.fr',
@@ -22,8 +37,6 @@ const admin = createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
   auth: { persistSession: false, autoRefreshToken: false },
 })
 
-type PriceRow = { modele: string; prix: Array<number | null> }
-
 function headers(origin: string) {
   const result: Record<string, string> = {
     'Access-Control-Allow-Headers': 'apikey, content-type, x-client-info',
@@ -41,43 +54,22 @@ function json(origin: string, body: unknown, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: headers(origin) })
 }
 
-function safePrice(value: unknown) {
-  const number = Number(value)
-  return Number.isFinite(number) && number > 0 ? number : null
-}
-
-function safeText(value: unknown, max = 140) {
-  return String(value ?? '').replace(/\s+/g, ' ').trim().slice(0, max)
-}
-
-function safePhoto(value: unknown) {
-  const url = safeText(value, 900)
-  return /^(https:\/\/|\/)/i.test(url) ? url : ''
-}
-
-function normalizePriceRows(value: unknown): PriceRow[] {
-  if (!Array.isArray(value)) return []
-  return value
-    .map((row) => {
-      const item = row as Record<string, unknown>
-      return {
-        modele: safeText(item.modele, 90),
-        prix: Array.isArray(item.prix) ? item.prix.slice(0, 5).map(safePrice) : [],
-      }
-    })
-    .filter((row) => row.modele && row.prix.some((price) => price !== null))
-}
-
 async function prices() {
   const { data: settings, error: settingsError } = await admin
     .from('settings')
     .select('key,value')
-    .in('key', ['ecrans_prix_json', 'batteries_prix_json'])
+    .in('key', [...PRICE_SETTING_KEYS])
   if (settingsError) throw settingsError
 
   let screens: PriceRow[] = []
   let batteries: PriceRow[] = []
+  let android: AndroidRow[] = []
   for (const setting of settings ?? []) {
+    if (setting.key === 'android_prix_json') {
+      // Prix Android publiés par la V2 (ou saisis dans la V1) : source principale.
+      android = androidFromSetting(setting.value)
+      continue
+    }
     try {
       const parsed = JSON.parse(setting.value)
       if (setting.key === 'ecrans_prix_json') {
@@ -102,29 +94,40 @@ async function prices() {
     })).filter((row) => row.modele && row.prix.some((price) => price !== null))
   }
 
-  const { data: androidData, error: androidError } = await admin
-    .from('prix_reparation_android')
-    .select('marque,modele,ecran_compat,ecran_original,batterie_compat,batterie_original,connecteur,vitre_arriere,remarques')
-    .order('marque')
-    .order('modele')
-  if (androidError) throw androidError
-
-  const android = (androidData ?? []).map((row) => ({
-    marque: safeText(row.marque, 60),
-    modele: safeText(row.modele, 90),
-    ecran_compatible: safeText(row.ecran_compat, 60),
-    ecran_service_pack: safeText(row.ecran_original, 60),
-    batterie_compatible: safeText(row.batterie_compat, 60),
-    batterie_originale: safeText(row.batterie_original, 60),
-    connecteur: safeText(row.connecteur, 60),
-    vitre_arriere: safeText(row.vitre_arriere, 60),
-    remarque: safeText(row.remarques, 240),
-  })).filter((row) => row.marque && row.modele)
+  if (!android.length) {
+    // Secours seulement : l'ancienne table n'est plus mise à jour.
+    const { data: androidData, error: androidError } = await admin
+      .from('prix_reparation_android')
+      .select('marque,modele,ecran_compat,ecran_original,batterie_compat,batterie_original,connecteur,vitre_arriere,remarques')
+      .order('marque')
+      .order('modele')
+    if (androidError) throw androidError
+    android = androidFromTable(androidData)
+  }
 
   return { screens, batteries, android }
 }
 
 async function stock() {
+  const { data: marker, error: markerError } = await admin
+    .from('settings')
+    .select('value')
+    .eq('key', STOCK_PUBLICATION_KEY)
+    .maybeSingle()
+  if (markerError) throw markerError
+
+  if (parseStockPublication(marker?.value)) {
+    // La V2 publie le stock : vitrine_phones fait foi, même vide.
+    const { data, error } = await admin
+      .from('vitrine_phones')
+      .select('kind,modele,stockage,grade,batterie,vente,couleur,photo_face,photo_dos')
+      .order('vente')
+      .limit(500)
+    if (error) throw error
+    return splitVitrineStock(data)
+  }
+
+  // Ancien comportement (V1 encore autorité).
   const [usedResult, newResult] = await Promise.all([
     admin.from('phones')
       .select('modele,stockage,grade,batterie,vente,couleur,photo_face,photo_dos')
@@ -142,27 +145,7 @@ async function stock() {
   if (usedResult.error) throw usedResult.error
   if (newResult.error) throw newResult.error
 
-  const used = (usedResult.data ?? []).map((row) => ({
-    modele: safeText(row.modele, 90),
-    stockage: Number.isFinite(Number(row.stockage)) ? Number(row.stockage) : safeText(row.stockage, 30),
-    grade: safeText(row.grade, 20),
-    batterie: Number.isFinite(Number(row.batterie)) ? Number(row.batterie) : null,
-    vente: safePrice(row.vente),
-    couleur: safeText(row.couleur, 50),
-    photo_face: safePhoto(row.photo_face),
-    photo_dos: safePhoto(row.photo_dos),
-  })).filter((row) => row.modele && row.vente)
-
-  const newPhones = (newResult.data ?? []).map((row) => ({
-    modele: safeText(row.modele, 90),
-    stockage: safeText(row.stockage, 30),
-    vente: safePrice(row.vente),
-    couleur: safeText(row.couleur, 50),
-    photo_face: safePhoto(row.photo_face),
-    photo_dos: safePhoto(row.photo_dos),
-  })).filter((row) => row.modele && row.vente)
-
-  return { used, new: newPhones }
+  return { used: mapUsedPhones(usedResult.data), new: mapNewPhones(newResult.data) }
 }
 
 Deno.serve(async (req: Request) => {

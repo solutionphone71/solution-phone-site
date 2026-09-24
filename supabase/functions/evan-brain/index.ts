@@ -1,6 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0'
 import { alignAIAnswerWithQuestion, estimateAIResponseCost, openAIOutputText, parseAIAnswer, type AIAnswer } from '../_shared/sebastien-ai.ts'
 import { businessFactAnswer, knowledgeMatchAllowed, networkKnowledgeSlug } from '../_shared/sebastien-routing.ts'
+import { parseStockPublication, STOCK_PUBLICATION_KEY } from '../_shared/vitrine-catalog.ts'
 
 const ALLOWED_ORIGINS = new Set([
   'https://solution-phone.fr',
@@ -260,11 +261,23 @@ async function liveIphonePriceAnswer(message: string): Promise<LiveDirectAnswer 
 async function liveStockAnswer(message: string): Promise<LiveDirectAnswer | null> {
   if (!/\b(reconditionne|reconditionnee|occasion|en stock|disponible|acheter un (?:telephone|smartphone|iphone))\b/.test(message)) return null
   const model = extractIphoneModel(message)
-  let query = admin.from('phones')
-    .select('modele, stockage, grade, batterie, couleur, vente')
-    .eq('etat', 'DISPONIBLE')
-    .order('created_at', { ascending: false })
-    .limit(12)
+  // Après la bascule, la V2 publie le stock dans vitrine_phones (repère
+  // vitrine_stock_publication) ; sinon ancien comportement sur phones.
+  const { data: marker, error: markerError } = await admin.from('settings')
+    .select('value').eq('key', STOCK_PUBLICATION_KEY).maybeSingle()
+  if (markerError) throw markerError
+  let query = parseStockPublication(marker?.value)
+    ? admin.from('vitrine_phones')
+      .select('modele, stockage, grade, batterie, couleur, vente')
+      .eq('kind', 'occasion')
+      .order('vente')
+      .limit(12)
+    : admin.from('phones')
+      .select('modele, stockage, grade, batterie, couleur, vente')
+      .eq('etat', 'DISPONIBLE')
+      .is('date_vente', null)
+      .order('created_at', { ascending: false })
+      .limit(12)
   if (model) query = query.ilike('modele', '%iphone%').ilike('modele', `%${normalizedIphoneModel(model)}%`)
   const { data, error } = await query
   if (error) throw error
