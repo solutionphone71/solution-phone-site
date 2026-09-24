@@ -10,10 +10,10 @@
     bar.setAttribute('aria-haspopup', 'dialog');
     bar.setAttribute('aria-controls', 'spq-bonus-modal');
     bar.innerHTML =
-      '<img class="spq-bonus-logo" src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar">' +
-      '<span class="spq-bonus-amount">25 €<small>garantis</small></span>' +
-      '<span class="spq-bonus-copy"><strong>déduits de votre réparation. Pour tout le monde.</strong><span>Votre avantage réparation smartphone chez Solution Phone à Mâcon</span></span>' +
-      '<span class="spq-bonus-action">Obtenir mes 25 €</span>';
+      '<img class="spq-bonus-logo" src="/img/qualirepar-label-officiel.jpg" alt="Label QualiRépar">' +
+      '<span class="spq-bonus-amount">25 €<small>déjà déduits</small></span>' +
+      '<span class="spq-bonus-copy"><strong>de nos tarifs de réparation de smartphone.</strong><span>Réparateur labellisé QualiRépar à Mâcon</span></span>' +
+      '<span class="spq-bonus-action">En savoir plus</span>';
 
     var modal = document.createElement('div');
     modal.className = 'spq-bonus-modal';
@@ -23,19 +23,19 @@
       '<section class="spq-bonus-dialog" role="dialog" aria-modal="true" aria-labelledby="spq-bonus-title">' +
         '<button class="spq-bonus-close" type="button" aria-label="Fermer">×</button>' +
         '<div class="spq-bonus-dialog-head">' +
-          '<img class="spq-bonus-dialog-logo" src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar">' +
+          '<img class="spq-bonus-dialog-logo" src="/img/qualirepar-label-officiel.jpg" alt="Label QualiRépar">' +
           '<p>Engagement Solution Phone</p>' +
-          '<h2 id="spq-bonus-title">25 € déduits. Pour tout le monde.</h2>' +
+          '<h2 id="spq-bonus-title">25 € déjà déduits de nos tarifs</h2>' +
         '</div>' +
         '<div class="spq-bonus-dialog-body">' +
-          '<p class="spq-bonus-intro">Solution Phone est labellisé QualiRépar. Avec nous, vous bénéficiez toujours de 25 € de réduction sur votre réparation de smartphone. Aucun dossier à remplir : notre équipe s’occupe de tout.</p>' +
+          '<p class="spq-bonus-intro">Réparateur labellisé QualiRépar. 25 € déjà déduits de nos tarifs de réparation de smartphone : grâce au Bonus Réparation QualiRépar quand la réparation est éligible, offerts par Solution Phone sinon. Aucun dossier à remplir : notre équipe s’occupe de tout.</p>' +
           '<ol class="spq-bonus-steps">' +
             '<li><b>1</b><span>Vous nous apportez votre smartphone à Mâcon.</span></li>' +
             '<li><b>2</b><span>Notre équipe diagnostique la panne et vous annonce le tarif.</span></li>' +
-            '<li><b>3</b><span>Les 25 € sont déduits directement de la facture.</span></li>' +
+            '<li><b>3</b><span>Le prix annoncé est le prix final : les 25 € sont déjà déduits.</span></li>' +
           '</ol>' +
-          '<p class="spq-bonus-conditions">Lorsque la réparation est éligible, la réduction correspond au Bonus Réparation QualiRépar. Dans les autres cas, Solution Phone prend les 25 € à sa charge.</p>' +
-          '<a class="spq-bonus-cta" href="./#devis">Obtenir mes 25 € et mon devis</a>' +
+          '<p class="spq-bonus-conditions">Le Bonus Réparation QualiRépar est financé par les éco-organismes agréés (ecosystem, Ecologic).</p>' +
+          '<a class="spq-bonus-cta" href="/#devis">Obtenir mon prix</a>' +
         '</div>' +
       '</section>';
 
