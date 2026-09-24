@@ -16,13 +16,13 @@ body{background:#fff;color:var(--accessory-ink)}
 .product-brand{font-size:12px;margin-top:5px}
 .product-more-wrap{text-align:center;margin-top:28px}
 .product-more{display:none;align-items:center;justify-content:center;min-height:46px;padding:0 24px;border:1px solid var(--accessory-line);border-radius:999px;background:#fff;color:var(--accessory-ink);font-weight:700;cursor:pointer}
-.product-more:hover{border-color:#e30613;color:#e30613}
+.product-more:hover{border-color:#e30613;color:#C00510}
 .applelink{appearance:none;border:0;background:transparent;padding:0;cursor:pointer;text-align:left}
 .accessory-promises{border-top:1px solid var(--accessory-line)}
 .accessory-promises>h2{max-width:720px;margin:14px 0 36px;font-size:clamp(34px,5vw,64px);line-height:.96;letter-spacing:-.055em;font-weight:780}
 .accessory-promises-grid{display:grid;grid-template-columns:1fr;gap:28px}
 .accessory-promises-grid article{padding-top:18px;border-top:1px solid var(--accessory-line)}
-.accessory-promises-grid span{display:block;margin-bottom:30px;color:#e30613;font-size:12px;font-weight:800;letter-spacing:.14em}
+.accessory-promises-grid span{display:block;margin-bottom:30px;color:#C00510;font-size:12px;font-weight:800;letter-spacing:.14em}
 .accessory-promises-grid h3{font-size:20px;letter-spacing:-.025em;font-weight:750}
 .accessory-promises-grid p{max-width:340px;margin-top:8px;color:var(--accessory-muted);line-height:1.55}
 .accessory-promises-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:38px}

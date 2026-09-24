@@ -1,0 +1,24 @@
+/* Accessibilité commune (audit de septembre 2026)
+   Chargée en dernier : focus visible, contrastes suffisants, tailles minimales.
+   Les sélecteurs :root:root l'emportent sur les variables définies dans chaque page. */
+:root:root{
+  --red:#C00510;        /* rouge lisible en petit texte (contraste ≥ 4,5 sur blanc) */
+  --accent:#C00510;
+  --green:#0f7a3d;      /* vert des boutons WhatsApp avec texte blanc */
+  --muted:#6B6B70;      /* gris de texte secondaire */
+  --gray:#6B6B70;
+}
+/* Focus clavier toujours visible, neutre (bleu) plutôt que rouge */
+:focus-visible{outline:3px solid #0b57d0!important;outline-offset:2px}
+input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #0b57d0!important;outline-offset:1px;border-color:#6B6B70!important}
+/* Champs lisibles sans zoom automatique sur mobile */
+input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select{font-size:16px!important}
+/* Classes utilitaires (Tailwind) : contrastes et tailles minimales */
+.text-muted{color:#6B6B70!important}
+.text-accent{color:#C00510!important}
+.text-\[9px\],.text-\[10px\],.text-\[11px\]{font-size:12px!important}
+/* Animations d'apparition : contenu visible sans JavaScript et si l'utilisateur réduit les animations */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
