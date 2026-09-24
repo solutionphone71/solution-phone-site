@@ -490,7 +490,8 @@ h1 .acc {
   <div class="phone-sub">1 participation par personne.<br>Votre numéro reste strictement confidentiel.</div>
 
   <div class="phone-input-wrap">
-    <input type="tel" id="phone-input" class="phone-input"
+    <label for="phone-input" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">Votre numéro de téléphone</label>
+    <input type="tel" id="phone-input" class="phone-input" aria-label="Votre numéro de téléphone"
       placeholder="06 XX XX XX XX" maxlength="14"
       inputmode="numeric" autocomplete="tel"
       oninput="formatPhoneInput(this)" onkeypress="if(event.key==='Enter') checkPhone()">
@@ -498,8 +499,8 @@ h1 .acc {
 
   <div class="phone-already" id="phone-already-msg">
     <div class="phone-already-emoji">🎡</div>
-    <div class="phone-already-title">Vous avez déjà participé !</div>
-    <div class="phone-already-sub">Une seule participation par personne.<br>Merci d'avoir joué à la roue Solution Phone !</div>
+    <div class="phone-already-title">Vous avez déjà participé !</div>
+    <div class="phone-already-sub">Une seule participation par personne.<br>Merci d'avoir joué à la roue Solution Phone !</div>
   </div>
 
   <button class="btn-main" id="btn-check-phone" onclick="checkPhone()" style="width:100%;max-width:320px;font-size:16px;padding:16px;" disabled>
@@ -515,7 +516,7 @@ h1 .acc {
     <div class="logo-text">Solution Phone — Mâcon</div>
   </div>
   <div class="intro-emoji">🎡</div>
-  <h1>Tentez votre<br><span class="acc">chance !</span></h1>
+  <h1>Tentez votre<br><span class="acc">chance !</span></h1>
   <p class="subtitle">Votre réparation est terminée 🎉<br>Laissez-nous un avis et tournez la roue pour gagner un cadeau.</p>
   <div class="prizes-preview" id="prizes-preview"></div>
   <button class="btn-main" onclick="goTo('s-review')">Jouer maintenant →</button>
@@ -534,7 +535,7 @@ h1 .acc {
       </svg>
     </div>
 
-    <h2>Suivez les étapes :</h2>
+    <h2>Suivez les étapes :</h2>
 
     <div class="steps-list">
       <div class="step-item highlight" id="step-1">
@@ -547,7 +548,7 @@ h1 .acc {
       </div>
       <div class="step-item" id="step-3">
         <div class="step-num">3</div>
-        <div class="step-text">Faites tourner la roue !</div>
+        <div class="step-text">Faites tourner la roue !</div>
       </div>
     </div>
 
@@ -560,9 +561,9 @@ h1 .acc {
     <div id="warn-before-google" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);border:2px solid #ffa726;border-radius:14px;padding:14px 16px;margin:12px 0 16px;display:flex;gap:10px;align-items:flex-start;">
       <div style="font-size:26px;line-height:1;">⚠️</div>
       <div style="font-size:13.5px;color:#5d4037;line-height:1.45;">
-        <strong style="display:block;color:#bf360c;font-size:14.5px;margin-bottom:4px;">Important — après votre avis :</strong>
+        <strong style="display:block;color:#bf360c;font-size:14.5px;margin-bottom:4px;">Important — après votre avis :</strong>
         Un nouvel onglet va s'ouvrir avec Google.
-        <strong>Une fois votre avis publié, revenez sur CETTE page</strong> pour tourner la roue 🎡
+        <strong>Une fois votre avis publié, revenez sur cette page</strong> pour tourner la roue 🎡
       </div>
     </div>
 
@@ -575,15 +576,15 @@ h1 .acc {
       <!-- Rappel BIG visible pendant le countdown -->
       <div id="return-reminder" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border:2px solid #1976d2;border-radius:14px;padding:14px 16px;margin-bottom:12px;text-align:center;">
         <div style="font-size:30px;margin-bottom:6px;">👈</div>
-        <div style="font-size:14px;font-weight:800;color:#0d47a1;line-height:1.35;">Bravo ! Une fois votre avis Google laissé,<br>vous êtes au bon endroit ici 🎯</div>
-        <div style="font-size:12px;color:#1565c0;margin-top:6px;">Le bouton "JOUER" apparaît dans quelques secondes…</div>
+        <div style="font-size:14px;font-weight:800;color:#0d47a1;line-height:1.35;">Bravo ! Une fois votre avis Google laissé,<br>vous êtes au bon endroit ici 🎯</div>
+        <div style="font-size:12px;color:#1565c0;margin-top:6px;">Le bouton « Jouer » apparaît dans quelques secondes…</div>
       </div>
       <div class="lock-info">⏳ Roue disponible dans <strong id="countdown-num">20</strong>s</div>
       <div class="countdown-bar-wrap">
         <div class="countdown-bar" id="countdown-bar" style="width:100%;"></div>
       </div>
       <button class="btn-main btn-play-now" id="btn-play-now" onclick="goTo('s-spin')" style="width:100%;font-size:16px;padding:16px;">
-        ✅ J'ai laissé mon avis → JOUER !
+        ✅ J'ai laissé mon avis → Jouer !
       </button>
     </div>
 
@@ -596,7 +597,7 @@ h1 .acc {
 
 <!-- ╔═══════════════ SCREEN 3 : SPIN ╗ -->
 <div class="screen" id="s-spin">
-  <div class="spin-title">À vous de jouer !</div>
+  <div class="spin-title">À vous de jouer !</div>
   <div class="spin-sub">Tournez la roue et découvrez votre cadeau</div>
 
   <div class="wheel-wrap">
@@ -628,25 +629,25 @@ h1 .acc {
     <div class="logo-text">Solution Phone — Mâcon</div>
   </div>
   <div class="win-emoji-big" id="win-emoji">🎁</div>
-  <div class="win-h">Félicitations !</div>
+  <div class="win-h">Félicitations !</div>
   <div class="prize-reveal">
     <div class="prize-reveal-label">🎉 Votre cadeau</div>
     <div class="prize-reveal-name" id="win-name">—</div>
   </div>
 
   <div class="email-box">
-    <p class="email-label">📧 Recevez votre cadeau par email</p>
+    <label for="win-email" class="email-label">📧 Recevez votre cadeau par e-mail</label>
     <input type="email" id="win-email" class="email-input" placeholder="votre@email.fr" autocomplete="email">
     <button class="btn-main" id="btn-send-email" onclick="sendPrizeEmail()" style="width:100%;margin-top:10px;font-size:15px;padding:14px;">
       📩 Recevoir mon cadeau
     </button>
-    <div class="email-sent-msg" id="email-sent-msg">✅ Email envoyé ! Solution Phone vous contactera bientôt.</div>
+    <div class="email-sent-msg" id="email-sent-msg">✅ E-mail envoyé ! Solution Phone vous contactera bientôt.</div>
   </div>
 
   <p class="win-instruction" style="margin-top:12px;">
     <strong>Ou montrez cet écran à notre équipe</strong><br>pour récupérer votre cadeau en boutique.
   </p>
-  <button class="btn-secondary" onclick="goTo('s-intro')" style="margin-top:8px;">✨ Merci Solution Phone !</button>
+  <button class="btn-secondary" onclick="goTo('s-intro')" style="margin-top:8px;">✨ Merci Solution Phone !</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1077,7 +1078,7 @@ function onReviewClick() {
           rem.style.borderColor = '#2e7d32';
           rem.innerHTML = '<div style="font-size:34px;margin-bottom:6px;">✅</div>'
             + '<div style="font-size:15px;font-weight:800;color:#1b5e20;line-height:1.35;">Parfait, vous êtes revenu !</div>'
-            + '<div style="font-size:12.5px;color:#2e7d32;margin-top:6px;">Cliquez sur JOUER ci-dessous pour tourner la roue 🎡</div>';
+            + '<div style="font-size:12.5px;color:#2e7d32;margin-top:6px;">Cliquez sur « Jouer » ci-dessous pour tourner la roue 🎡</div>';
         }
       }
     }
@@ -1132,18 +1133,18 @@ async function sendPrizeEmail() {
      - Envoie automatiquement une confirmation au client via _autoresponse  */
   const autoMsg = `Bonjour,
 
-Felicitations, vous avez gagne a la roue Solution Phone !
+Félicitations, vous avez gagné à la roue Solution Phone !
 
 Votre cadeau : ${winPrizeName}
 
-Pour le recuperer, passez en boutique avec cet email ou montrez l'ecran de gain.
+Pour le récupérer, passez en boutique avec cet e-mail ou montrez l’écran de gain.
 
 Solution Phone
-21 Rue Gambetta, 71000 Macon
+21 rue Gambetta, 71000 Mâcon
 03 85 33 06 89 (fixe) / 07 83 92 18 84 (mobile/WhatsApp)
 Ouvert lundi 9h15-12h15 / 14h-19h, puis mardi-samedi 9h15-19h en journée continue
 
-A bientot !`;
+À bientôt !`;
 
   try {
     const resp = await fetch('https://formsubmit.co/ajax/' + SHOP_EMAIL, {
@@ -1164,7 +1165,7 @@ A bientot !`;
     if (!resp.ok || json.success === 'false') throw new Error('formsubmit failed');
 
     document.getElementById('email-sent-msg').style.display = 'block';
-    btn.textContent = '✅ Email envoyé !';
+    btn.textContent = '✅ E-mail envoyé !';
   } catch(e) {
     console.warn('formsubmit failed, fallback mailto', e);
     const subject = encodeURIComponent('🎡 Cadeau Roue — ' + winPrizeName);
