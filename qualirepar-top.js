@@ -25,10 +25,10 @@
         '<div class="spq-bonus-dialog-head">' +
           '<img class="spq-bonus-dialog-logo" src="/img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="800" height="427">' +
           '<p>Engagement Solution Phone</p>' +
-          '<h2 id="spq-bonus-title">25 € déjà déduits de nos tarifs</h2>' +
+          '<h2 id="spq-bonus-title">25 € déjà déduits de nos tarifs</h2>' +
         '</div>' +
         '<div class="spq-bonus-dialog-body">' +
-          '<p class="spq-bonus-intro">Réparateur labellisé QualiRépar. 25 € déjà déduits de nos tarifs de réparation de smartphone : grâce au Bonus Réparation QualiRépar quand la réparation est éligible, offerts par Solution Phone sinon. Aucun dossier à remplir : notre équipe s’occupe de tout.</p>' +
+          '<p class="spq-bonus-intro">Réparateur labellisé QualiRépar. 25 € déjà déduits de nos tarifs de réparation de smartphone : grâce au Bonus Réparation QualiRépar quand la réparation est éligible, offerts par Solution Phone sinon. Aucun dossier à remplir : notre équipe s’occupe de tout.</p>' +
           '<ol class="spq-bonus-steps">' +
             '<li><b>1</b><span>Vous nous apportez votre smartphone à Mâcon.</span></li>' +
             '<li><b>2</b><span>Notre équipe diagnostique la panne et vous annonce le tarif.</span></li>' +
