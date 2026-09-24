@@ -1,7 +1,19 @@
+# robots.txt — solution-phone.fr (Solution Phone, 21 rue Gambetta, 71000 Mâcon)
 User-agent: *
 Allow: /
-Disallow: /app-index.html
-Disallow: /img/team-*
-Disallow: /tarifs.html
+
+# Robots d'intelligence artificielle : autorisés à lire les pages publiques
+# (résumé du site dans /llms.txt).
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+Allow: /
 
 Sitemap: https://solution-phone.fr/sitemap.xml
