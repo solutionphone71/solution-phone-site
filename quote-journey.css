@@ -35,3 +35,9 @@ body.journey-in-view .home-contact-dock{visibility:hidden}
 @media(max-width:760px){.home-contact-dock{grid-template-columns:1fr 1.1fr 1fr!important}.home-contact-dock a,.home-contact-dock button{padding:0 6px;font-size:12px}}
 .journey-channels a.journey-call{grid-column:1/-1;background:#fff;color:#1d1d1f;border:1px solid #d2d2d7}
 .journey-channels a.journey-call:hover{border-color:#86868b}
+
+/* Note Google mise en avant */
+.google-rating{display:inline-flex;align-items:center;flex-wrap:wrap;gap:8px;margin:14px 0 4px;min-height:44px;padding:6px 16px;border-radius:980px;background:#fff;color:#1d1d1f;border:1px solid rgba(0,0,0,.08);font-size:14px;text-decoration:none}
+.google-rating-stars{color:#f5b100;letter-spacing:1px}.google-rating b{font-weight:800}.google-rating span:last-child{color:#0066cc}
+.google-rating:hover span:last-child{text-decoration:underline}.google-rating:focus-visible{outline:3px solid #0071e3;outline-offset:3px}
+.simple-offer .google-rating{display:flex;width:max-content;margin:14px auto 0;flex-wrap:nowrap;white-space:nowrap}
