@@ -8,32 +8,32 @@
 
   var base = 'img/iphone-models/';
   var models = [
-    ['17 pro max', 'iphone-17-pro-max-colors.png'],
-    ['17 pro', 'iphone-17-pro-colors.png'],
-    ['17e', 'iphone-17e-colors.png'],
-    ['17', 'iphone-17-colors.png'],
-    ['air', 'iphone-air-colors.png'],
-    ['16 pro max', 'iphone-16-pro-max-colors.png'],
-    ['16 pro', 'iphone-16-pro-colors.png'],
-    ['16 plus', 'iphone-16-plus-colors.png'],
-    ['16e', 'iphone-16e-colors.png'],
-    ['16', 'iphone-16-colors.png'],
-    ['15 pro max', 'fall-2023-iphone-colors-iphone-15-pro-max.png'],
-    ['15 pro', 'fall-2023-iphone-colors-iphone-15-pro.png'],
-    ['15 plus', 'fall-2023-iphone-colors-iphone-15-plus.png'],
-    ['15', 'fall-2023-iphone-colors-iphone-15.png'],
-    ['14 pro max', 'iphone-14-pro-max-colors.png'],
-    ['14 pro', 'iphone-14-pro-colors.png'],
-    ['14 plus', 'iphone-14-plus-colors-spring-2023.png'],
-    ['14', 'iphone-14-colors-spring-2023.png'],
-    ['13 pro max', '2022-spring-iphone13-pro-max-colors.png'],
-    ['13 pro', '2022-spring-iphone13-pro-colors.png'],
-    ['13 mini', '2022-iphone13-mini-colors.png'],
-    ['13', '2022-spring-iphone13-colors.png'],
+    ['17 pro max', 'iphone-17-pro-max-colors.webp'],
+    ['17 pro', 'iphone-17-pro-colors.webp'],
+    ['17e', 'iphone-17e-colors.webp'],
+    ['17', 'iphone-17-colors.webp'],
+    ['air', 'iphone-air-colors.webp'],
+    ['16 pro max', 'iphone-16-pro-max-colors.webp'],
+    ['16 pro', 'iphone-16-pro-colors.webp'],
+    ['16 plus', 'iphone-16-plus-colors.webp'],
+    ['16e', 'iphone-16e-colors.webp'],
+    ['16', 'iphone-16-colors.webp'],
+    ['15 pro max', 'fall-2023-iphone-colors-iphone-15-pro-max.webp'],
+    ['15 pro', 'fall-2023-iphone-colors-iphone-15-pro.webp'],
+    ['15 plus', 'fall-2023-iphone-colors-iphone-15-plus.webp'],
+    ['15', 'fall-2023-iphone-colors-iphone-15.webp'],
+    ['14 pro max', 'iphone-14-pro-max-colors.webp'],
+    ['14 pro', 'iphone-14-pro-colors.webp'],
+    ['14 plus', 'iphone-14-plus-colors-spring-2023.webp'],
+    ['14', 'iphone-14-colors-spring-2023.webp'],
+    ['13 pro max', '2022-spring-iphone13-pro-max-colors.webp'],
+    ['13 pro', '2022-spring-iphone13-pro-colors.webp'],
+    ['13 mini', '2022-iphone13-mini-colors.webp'],
+    ['13', '2022-spring-iphone13-colors.webp'],
     ['12 pro max', 'iphone12-pro-max-colors.jpg'],
     ['12 pro', 'iphone12-pro-colors.jpg'],
-    ['12 mini', '2021-iphone12-mini-colors.png'],
-    ['12', '2021-iphone12-colors.png'],
+    ['12 mini', '2021-iphone12-mini-colors.webp'],
+    ['12', '2021-iphone12-colors.webp'],
     ['11 pro max', 'identify-iphone-11pro-max.jpg'],
     ['11 pro', 'identify-iphone-11pro.jpg'],
     ['11', 'identify-iphone-11-colors.jpg'],
@@ -76,7 +76,7 @@
 
   function seImage(name) {
     if (!/(^| )se([ 0-9]|$)/.test(name)) return null;
-    if (/\b(2022|3|3e|3eme|3 generation|se3)\b/.test(name)) return base + 'iphone-se-3rd-gen-colors.png';
+    if (/\b(2022|3|3e|3eme|3 generation|se3)\b/.test(name)) return base + 'iphone-se-3rd-gen-colors.webp';
     if (/\b(2020|2|2e|2eme|2 generation|se2)\b/.test(name)) return base + 'iphone-se-2nd-gen-colors.jpg';
     return base + 'iphone-se-colors.jpg';
   }

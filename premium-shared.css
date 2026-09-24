@@ -84,7 +84,7 @@ header.sticky .sp-drawer,header.sticky .sp-drawer *{color:inherit}
 .sp-expert-banner .sp-page-photo:after{background:linear-gradient(to top,rgba(0,0,0,.9),rgba(0,0,0,.02) 64%)}
 .sp-banner-accessories{--sp-hero-image:url('img/evan-comptoir.webp')}
 .sp-banner-hydrogel{--sp-hero-image:url('img/smartphone-anatomy-3d-v1.webp');background-position:center 44%}
-.sp-banner-android{--sp-hero-image:url('img/reparation-carte-mere-samsung.jpg')}
+.sp-banner-android{--sp-hero-image:url('img/reparation-carte-mere-samsung.webp')}
 .sp-banner-stock{--sp-hero-image:url('img/atelier.jpg')}
 .sp-banner-advice{--sp-hero-image:linear-gradient(125deg,#09090a 0%,#281013 58%,#720914 100%)}
 .sp-banner-faq{--sp-hero-image:linear-gradient(125deg,#09090a 0%,#171719 58%,#4b090f 100%)}
