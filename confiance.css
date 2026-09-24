@@ -1,0 +1,30 @@
+/* Bloc « Depuis 2014 » : arguments de confiance et petits services (style apple.fr) */
+.sp-trust{max-width:1120px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,4vw,32px);color:#1d1d1f;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:center}
+.sp-trust h2{margin:0 auto 10px;max-width:820px;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.06;letter-spacing:-.04em;font-weight:700}
+.sp-trust-lead{margin:0 auto 34px;max-width:620px;color:#6e6e73;font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.45}
+.sp-trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:left}
+.sp-trust-grid>*{display:block;padding:22px;border-radius:18px;background:#f5f5f7;color:inherit;text-decoration:none}
+.sp-trust-grid b{display:block;margin-bottom:6px;font-size:1.05rem;letter-spacing:-.015em}
+.sp-trust-grid p{margin:0;color:#515154;font-size:.92rem;line-height:1.5}
+.sp-trust-grid .sp-trust-stars{color:#f5b100;letter-spacing:1px}
+.sp-trust-grid a span{display:inline-block;margin-top:8px;color:#0066cc}
+.sp-trust-grid a:hover span{text-decoration:underline}
+.sp-trust h3{margin:48px 0 14px;font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.03em}
+.sp-services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;text-align:left}
+.sp-services a{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;min-height:44px;padding:18px 20px;border:1px solid #d2d2d7;border-radius:16px;background:#fff;color:#1d1d1f;text-decoration:none}
+.sp-services a:hover{border-color:#86868b}
+.sp-services b{font-size:1rem}.sp-services span{grid-column:1;color:#6e6e73;font-size:.85rem}
+.sp-services strong{grid-column:2;grid-row:1/span 2;font-size:1.15rem;white-space:nowrap}
+.sp-services em{grid-column:1/-1;margin-top:4px;color:#0066cc;font-style:normal;font-size:.85rem}
+.sp-trust a:focus-visible{outline:3px solid #0071e3;outline-offset:3px}
+@media(max-width:900px){.sp-trust-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.sp-trust-grid{grid-template-columns:1fr}}
+html.tariff-embed .sp-trust,html.evan-embed .sp-trust{display:none!important}
+/* Petite icône devant chaque service */
+.sp-services a{grid-template-columns:44px 1fr auto}
+.sp-svc-ico{grid-row:1/span 3;grid-column:1;align-self:start;width:44px;height:44px;border-radius:12px;background:#f5f5f7;display:grid;place-items:center}
+.sp-svc-ico svg{width:24px;height:24px;fill:none;stroke:#1d1d1f;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.sp-services b,.sp-services span{grid-column:2}
+.sp-services strong{grid-column:3}
+.sp-services em{grid-column:2/-1}
+.sp-trust-grid>*{background:#fff;border:1px solid #e5e5ea}
