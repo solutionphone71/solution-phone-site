@@ -7,12 +7,14 @@ exclude:
   - AGENTS.md
   - AUDIT-V2-CONTINU.md
   - README.md
+  - CLAUDE.md
   - SEBASTIEN-ACCEPTATION.md
   - SEBASTIEN-ARCHITECTURE.md
   - supabase
   - scripts/audit-sebastien-top-100.mjs
   - scripts/check-conversion-tracking.mjs
   - scripts/check-forbidden-visuals.sh
+  - scripts/verifier-site.py
   - scripts/test-quote-journey.mjs
   - scripts/test-quote-ui.mjs
   - scripts/test-sebastien-ai-live.mjs

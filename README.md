@@ -1,88 +1,47 @@
-# Solution Phone — Site Web
+# solution-phone.fr — site de Solution Phone (Mâcon)
 
-Site vitrine cyberpunk rouge/noir pour **Solution Phone**, réparateur de smartphones certifié QualiRépar à Mâcon (71000).
+Site public de **Solution Phone**, atelier de réparation de smartphones, tablettes et ordinateurs
+au 21 rue Gambetta, 71000 Mâcon, depuis 2014. Réparateur labellisé QualiRépar.
 
-## 📁 Structure du projet
+## Publication
 
+- Hébergement : **GitHub Pages** (Jekyll), domaine `solution-phone.fr` (fichier `CNAME`).
+- Tout fichier du dépôt est publié, **sauf** ceux listés dans `_config.yml` (documents internes,
+  outils, anciennes pages). Ne jamais exclure `scripts/consent-tracking.js` ni `scripts/landing-tracking.js`.
+- GitHub Pages ne fait pas de redirection 301 : une page supprimée est remplacée par une page
+  de redirection (`meta refresh` + `canonical` + lien visible), jamais par une 404.
+
+## Pages principales
+
+| Page | Rôle |
+| --- | --- |
+| `index.html` | Accueil, parcours devis (`quote-journey.js`, `quote-catalog.js`), assistant IA |
+| `reparation-iphone.html`, `reparation-samsung.html` | Réparation par marque |
+| `ecran-iphone-casse-macon.html`, `remplacement-batterie-telephone-macon.html`, `reparation-telephone-macon.html` | Pages de référencement local |
+| `reconditionnes.html` | Stock de smartphones reconditionnés (`reconditionnes-v2.js`) |
+| `accessoires.html`, `hydrogel.html` | Accessoires et protections d'écran |
+| `atelier.html`, `magasin/macon/` | Équipe, magasin, accès, horaires des 3 boutiques |
+| `faq.html`, `actualites.html` | Questions fréquentes, conseils |
+| `cgv.html`, `politique-confidentialite.html` | Mentions légales, CGV, données personnelles |
+| `roulette.html` | Jeu en boutique (ne pas modifier la mécanique) |
+
+## Éléments communs
+
+- `menu-commun.js` : menu commun aux 3 sites (chargé par `premium-nav.js`) — géré par un autre chantier.
+- `contact-dock.js` / `.css` : barre fixe WhatsApp · appel · e-mail en bas d'écran.
+- `scripts/consent-tracking.js` : bandeau cookies ; **rien n'est chargé avant l'accord** (Google Analytics, Crisp).
+- `qualirepar-top.js` : bandeau QualiRépar (formulation unique et prudente).
+- `accessibilite.css` : focus visible, contrastes, tailles minimales (chargée en dernier).
+- `plan-acces.js` : plan Google Maps chargé seulement au clic sur « Voir le plan ».
+- Prix : fonction Supabase `public-catalog` (prix finaux, 25 € déjà déduits).
+
+## Contrôles avant publication
+
+```sh
+sh scripts/check-forbidden-visuals.sh   # aucune photo interdite (microscope, outils, plan de travail)
+python3 scripts/verifier-site.py        # JSON-LD, liens et images locaux, sitemap, versions ?v=, faits clés
+python3 -m http.server 4191             # vérification visuelle (mobile 375 px et ordinateur)
 ```
-solution-phone-site/
-├── index.html                    ← Page principale (accueil)
-├── reparation-iphone-macon.html  ← Page dédiée réparation iPhone
-└── README.md
-```
 
-## 🖥️ Pages
-
-### `index.html` — Accueil
-- Barre promo QualiRépar -25€
-- Hero avec badge + CTA WhatsApp
-- Carrousel avis Google (5 avis)
-- Ticker défilant
-- Section "Pourquoi nous"
-- Sélecteur d'appareils (Smartphone / PC / Tablette / Carte Mère)
-- Section équipe avec **4 illustrations cyberpunk** (Sébastien, Evan, Nawfel, Rahim) embarquées en base64
-- Services détaillés
-- Compteurs animés (4000 réparations/an, 4.9/5, 30min, 10 ans)
-- Tableau de tarifs iPhone complet
-- "Comment ça marche" 3 étapes
-- Contact + carte Google Maps
-- Badge statut ouvert/fermé en temps réel
-
-### `reparation-iphone-macon.html` — Réparation iPhone Mâcon
-- SEO optimisé (title, meta, JSON-LD)
-- Configurateur de devis instantané (modèle + panne → prix)
-- Grille de pannes iPhone
-- Tableaux de tarifs dynamiques (écrans 5 qualités + batteries)
-  - Données chargées depuis Supabase si disponible
-  - Fallback local automatique sinon
-- Guide qualité des écrans
-- FAQ accordéon (6 questions)
-- Carrousel d'avis
-- Contact + horaires
-
-## ⚙️ Technologies
-
-- **HTML/CSS/JS vanilla** — zéro framework, zéro dépendance npm
-- **Google Fonts** — Orbitron, Rajdhani, Share Tech Mono (chargées en ligne)
-- **Supabase** — tarifs iPhone en temps réel (fallback local intégré)
-- **WhatsApp API** — lien direct `wa.me`
-- **Images** — toutes les illustrations d'équipe sont en base64 (pas de serveur d'images requis)
-
-## 🚀 Déploiement
-
-### Option 1 : GitHub Pages (gratuit, recommandé)
-1. Push ce repo sur GitHub
-2. Settings → Pages → Source : `main` branch, dossier `/` (root)
-3. Votre site sera dispo sur `https://votre-user.github.io/solution-phone-site/`
-
-### Option 2 : Hébergement classique (OVH, Ionos...)
-- Upload `index.html` et `reparation-iphone-macon.html` à la racine FTP
-- Vérifier que les liens internes `href="reparation-iphone-macon.html"` sont corrects
-
-### Option 3 : Vercel / Netlify (drop & deploy)
-- Drag & drop du dossier sur app.netlify.com ou vercel.com
-- Déploiement instantané
-
-## 📞 Infos boutique
-
-| | |
-|---|---|
-| **Adresse** | 21 Rue Gambetta, 71000 Mâcon |
-| **Tel** | 03 85 33 06 89 |
-| **WhatsApp** | 07 83 92 18 84 |
-| **Email** | solution.phone71@gmail.com |
-| **Horaires** | Lun–Sam 9h15–12h15 / 14h–19h |
-
-## 🛠️ Évolutions prévues
-
-- [ ] Page Samsung / Toutes marques
-- [ ] Page PC & Mac
-- [ ] Blog / actualités réparation
-- [ ] Formulaire de réservation en ligne
-- [ ] Intégration Google Reviews en temps réel
-
-## 📝 Notes développeur
-
-- Les polices Google Fonts nécessitent une connexion internet. En cas d'absence de connexion, le navigateur utilise les polices système (Arial/sans-serif) — le site reste fonctionnel.
-- Les tableaux de prix iPhone se chargent depuis Supabase (`kdvxcnjfrmvlnrymfyug.supabase.co`). Si Supabase est inaccessible, les données de fallback locales sont utilisées automatiquement.
-- Le badge "Ouvert/Fermé" fonctionne sur le fuseau `Europe/Paris` grâce à `toLocaleString`.
+Les faits métier (adresse, horaires, téléphones, garanties, prix repères, formulation QualiRépar)
+sont décrits dans `AGENTS.md`.
