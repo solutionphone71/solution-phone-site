@@ -1,0 +1,24 @@
+# Configuration GitHub Pages (Jekyll)
+# Les fichiers ci-dessous sont des documents internes, des outils ou d'anciennes
+# pages : ils ne doivent pas être publiés sur https://solution-phone.fr.
+# Attention : ne jamais exclure scripts/consent-tracking.js ni
+# scripts/landing-tracking.js, utilisés par les pages du site.
+exclude:
+  - AGENTS.md
+  - AUDIT-V2-CONTINU.md
+  - README.md
+  - SEBASTIEN-ACCEPTATION.md
+  - SEBASTIEN-ARCHITECTURE.md
+  - supabase
+  - scripts/audit-sebastien-top-100.mjs
+  - scripts/check-conversion-tracking.mjs
+  - scripts/check-forbidden-visuals.sh
+  - scripts/test-quote-journey.mjs
+  - scripts/test-quote-ui.mjs
+  - scripts/test-sebastien-ai-live.mjs
+  - scripts/test-sebastien-brain.mjs
+  - scripts/data
+  - index.old.html
+  - concept-evan.html
+  - accueil.html
+  - _config.yml
