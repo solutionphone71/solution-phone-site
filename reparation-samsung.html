@@ -32,47 +32,18 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Solution Phone — Réparation Samsung & Android Mâcon",
+  "@type": "Service",
+  "name": "Réparation Samsung et Android à Mâcon",
   "description": "Réparation Samsung Galaxy, Xiaomi, Huawei, Honor et Oppo à Mâcon. Écran, batterie, connecteur de charge et caméra. Prix et délai confirmés après identification du modèle et de la pièce.",
   "url": "https://solution-phone.fr/reparation-samsung.html",
-  "telephone": "+33385330689",
-  "email": "contact@solution-phone.fr",
-  "image": "https://solution-phone.fr/img/logo.png",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "21 Rue Gambetta",
-    "addressLocality": "Mâcon",
-    "postalCode": "71000",
-    "addressRegion": "Bourgogne-Franche-Comté",
-    "addressCountry": "FR"
+  "serviceType": "Réparation de smartphone",
+  "areaServed": {
+    "@type": "City",
+    "name": "Mâcon"
   },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 46.3065,
-    "longitude": 4.8336
+  "provider": {
+    "@id": "https://solution-phone.fr/#business"
   },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Monday",
-      "opens": "09:15",
-      "closes": "12:15"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Monday",
-      "opens": "14:00",
-      "closes": "19:00"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"],
-      "opens": "09:15",
-      "closes": "19:00"
-    }
-  ],
-  "priceRange": "€€",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Services de réparation Android",
@@ -126,11 +97,46 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"Combien coûte une réparation écran Samsung à Mâcon ?","acceptedAnswer":{"@type":"Answer","text":"Le prix dépend du modèle Galaxy et de la qualité de la pièce disponible. Solution Phone confirme le tarif exact avant intervention après identification du modèle."}},
-    {"@type":"Question","name":"Réparez-vous les Xiaomi et Huawei à Mâcon ?","acceptedAnswer":{"@type":"Answer","text":"Oui, nous réparons toutes les marques Android : Xiaomi (Redmi, POCO), Huawei, Honor, Oppo, OnePlus, Google Pixel, Motorola, Realme, Vivo, Sony, Asus. Écran sur devis selon le modèle et la qualité de pièce."}},
-    {"@type":"Question","name":"La réduction de 25 € s'applique aux Samsung et Android ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Réparateur labellisé QualiRépar. 25 € déjà déduits de nos tarifs de réparation de smartphone : grâce au Bonus Réparation QualiRépar quand la réparation est éligible, offerts par Solution Phone sinon."}},
-    {"@type":"Question","name":"Combien de temps pour réparer un Samsung Galaxy ?","acceptedAnswer":{"@type":"Answer","text":"Le délai dépend du modèle, de la pièce disponible et de l’état de l’appareil. Généralement en moins d’une heure si la pièce est en stock ; l’équipe le confirme avant l’intervention. La boutique accueille sans rendez-vous au 21 rue Gambetta à Mâcon."}},
-    {"@type":"Question","name":"Quelle garantie sur les réparations Android ?","acceptedAnswer":{"@type":"Answer","text":"Garantie 6 mois sur les réparations. Les fonctions réparées sont testées avant la restitution."}}
+    {
+      "@type": "Question",
+      "name": "Combien coûte une réparation écran Samsung à Mâcon ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le prix dépend du modèle Galaxy et de la qualité de la pièce disponible. Solution Phone confirme le tarif exact avant intervention après identification du modèle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Réparez-vous les Xiaomi et Huawei à Mâcon ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, nous réparons toutes les marques Android : Xiaomi (Redmi, POCO), Huawei, Honor, Oppo, OnePlus, Google Pixel, Motorola, Realme, Vivo, Sony, Asus. Écran sur devis selon le modèle et la qualité de pièce."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "La réduction de 25 € s'applique aux Samsung et Android ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Réparateur labellisé QualiRépar. 25 € déjà déduits de nos tarifs de réparation de smartphone : grâce au Bonus Réparation QualiRépar quand la réparation est éligible, offerts par Solution Phone sinon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien de temps pour réparer un Samsung Galaxy ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le délai dépend du modèle, de la pièce disponible et de l’état de l’appareil. Généralement en moins d’une heure si la pièce est en stock ; l’équipe le confirme avant l’intervention. La boutique accueille sans rendez-vous au 21 rue Gambetta à Mâcon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quelle garantie sur les réparations Android ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Garantie 6 mois sur les réparations. Les fonctions réparées sont testées avant la restitution."
+      }
+    }
   ]
 }
 </script>
@@ -139,8 +145,18 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {"@type":"ListItem","position":1,"name":"Accueil","item":"https://solution-phone.fr/"},
-    {"@type":"ListItem","position":2,"name":"Réparation Samsung & Android Mâcon","item":"https://solution-phone.fr/reparation-samsung.html"}
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://solution-phone.fr/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Réparation Samsung & Android Mâcon",
+      "item": "https://solution-phone.fr/reparation-samsung.html"
+    }
   ]
 }
 </script>

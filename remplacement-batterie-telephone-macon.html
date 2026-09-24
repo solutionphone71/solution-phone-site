@@ -27,35 +27,42 @@
       content="https://solution-phone.fr/remplacement-batterie-telephone-macon.html"
     />
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": ["LocalBusiness", "Store"],
-            "@id": "https://solution-phone.fr/#business",
-            "name": "Solution Phone",
-            "url": "https://solution-phone.fr/",
-            "telephone": "+33385330689",
-            "image": "https://solution-phone.fr/img/atelier.jpg",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "21 rue Gambetta",
-              "postalCode": "71000",
-              "addressLocality": "Mâcon",
-              "addressCountry": "FR"
-            }
-          },
-          {
-            "@type": "Service",
-            "name": "Remplacement de batterie téléphone à Mâcon",
-            "url": "https://solution-phone.fr/remplacement-batterie-telephone-macon.html",
-            "areaServed": { "@type": "City", "name": "Mâcon" },
-            "provider": { "@id": "https://solution-phone.fr/#business" },
-            "serviceType": "Diagnostic d’autonomie et remplacement de batterie smartphone"
-          }
-        ]
-      }
-    </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Remplacement de batterie téléphone à Mâcon",
+      "url": "https://solution-phone.fr/remplacement-batterie-telephone-macon.html",
+      "areaServed": {
+        "@type": "City",
+        "name": "Mâcon"
+      },
+      "provider": {
+        "@id": "https://solution-phone.fr/#business"
+      },
+      "serviceType": "Diagnostic d’autonomie et remplacement de batterie smartphone"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://solution-phone.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Remplacement de batterie à Mâcon",
+          "item": "https://solution-phone.fr/remplacement-batterie-telephone-macon.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
     <link rel="stylesheet" href="landing-repair.css" />
     <script src="scripts/consent-tracking.js?v=2"></script>
     <script>

@@ -14,15 +14,43 @@
     <meta property="og:url" content="https://solution-phone.fr/reparation-iphone.html" />
     <meta property="og:image" content="https://solution-phone.fr/img/evan-comptoir.webp" />
     <script type="application/ld+json">
-      {
-        "@context":"https://schema.org",
-        "@graph":[
-          {"@type":["LocalBusiness","Store"],"@id":"https://solution-phone.fr/#business","name":"Solution Phone","url":"https://solution-phone.fr/","telephone":"+33385330689","image":"https://solution-phone.fr/img/evan-comptoir.webp","address":{"@type":"PostalAddress","streetAddress":"21 rue Gambetta","postalCode":"71000","addressLocality":"Mâcon","addressCountry":"FR"}},
-          {"@type":"Service","@id":"https://solution-phone.fr/reparation-iphone.html#service","name":"Réparation iPhone à Mâcon","url":"https://solution-phone.fr/reparation-iphone.html","areaServed":{"@type":"City","name":"Mâcon"},"provider":{"@id":"https://solution-phone.fr/#business"},"serviceType":"Diagnostic et réparation d’iPhone"},
-          {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://solution-phone.fr/"},{"@type":"ListItem","position":2,"name":"Réparation iPhone","item":"https://solution-phone.fr/reparation-iphone.html"}]}
-        ]
-      }
-    </script>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://solution-phone.fr/reparation-iphone.html#service",
+      "name": "Réparation iPhone à Mâcon",
+      "url": "https://solution-phone.fr/reparation-iphone.html",
+      "areaServed": {
+        "@type": "City",
+        "name": "Mâcon"
+      },
+      "provider": {
+        "@id": "https://solution-phone.fr/#business"
+      },
+      "serviceType": "Diagnostic et réparation d’iPhone"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://solution-phone.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Réparation iPhone",
+          "item": "https://solution-phone.fr/reparation-iphone.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
     <link rel="stylesheet" href="landing-repair.css?v=2" />
     <script src="scripts/consent-tracking.js?v=2"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-3QP90K1TLM");</script>

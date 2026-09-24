@@ -23,21 +23,34 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Smartphones reconditionnés — Solution Phone Mâcon",
-  "description": "iPhone et Samsung reconditionnés, contrôlés en boutique et garantis 12 mois. Stock mis à jour en temps réel.",
-  "url": "https://solution-phone.fr/reconditionnes.html",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "Solution Phone",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "21 Rue Gambetta",
-      "addressLocality": "Mâcon",
-      "postalCode": "71000",
-      "addressCountry": "FR"
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "Smartphones reconditionnés — Solution Phone Mâcon",
+      "description": "iPhone et smartphones reconditionnés, contrôlés sur 30 points en boutique à Mâcon et garantis 12 mois. Stock mis à jour régulièrement.",
+      "url": "https://solution-phone.fr/reconditionnes.html",
+      "provider": {
+        "@id": "https://solution-phone.fr/#business"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://solution-phone.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Smartphones reconditionnés",
+          "item": "https://solution-phone.fr/reconditionnes.html"
+        }
+      ]
     }
-  }
+  ]
 }
 </script>
 <!-- Google Analytics 4 -->

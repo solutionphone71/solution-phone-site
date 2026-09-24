@@ -14,55 +14,42 @@
   <meta property="og:image" content="https://solution-phone.fr/img/evan-comptoir.webp">
   <meta name="theme-color" content="#e30613">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "https://solution-phone.fr/#business",
-    "name": "Solution Phone",
-    "url": "https://solution-phone.fr/magasin/macon/",
-    "image": "https://solution-phone.fr/img/evan-comptoir.webp",
-    "telephone": "+33385330689",
-    "email": "contact@solution-phone.fr",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "21 rue Gambetta",
-      "postalCode": "71000",
-      "addressLocality": "Mâcon",
-      "addressRegion": "Bourgogne-Franche-Comté",
-      "addressCountry": "FR"
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "https://schema.org/Monday",
-        "opens": "09:15",
-        "closes": "12:15"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://solution-phone.fr/magasin/macon/#page",
+      "url": "https://solution-phone.fr/magasin/macon/",
+      "name": "Magasin Solution Phone à Mâcon – 21 rue Gambetta",
+      "inLanguage": "fr-FR",
+      "about": {
+        "@id": "https://solution-phone.fr/#business"
       },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "https://schema.org/Monday",
-        "opens": "14:00",
-        "closes": "19:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "https://schema.org/Tuesday",
-          "https://schema.org/Wednesday",
-          "https://schema.org/Thursday",
-          "https://schema.org/Friday",
-          "https://schema.org/Saturday"
-        ],
-        "opens": "09:15",
-        "closes": "19:00"
+      "provider": {
+        "@id": "https://solution-phone.fr/#business"
       }
-    ],
-    "sameAs": [
-      "https://www.instagram.com/solutionphonemacon",
-      "https://www.facebook.com/share/1Mf9kfcFpg/"
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://solution-phone.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Magasin de Mâcon",
+          "item": "https://solution-phone.fr/magasin/macon/"
+        }
+      ]
+    }
+  ]
+}
+</script>
   <style>
     :root{--red:#e30613;--ink:#1d1d1f;--muted:#6e6e73;--bg:#f5f5f7;--green:#1fa463;--line:rgba(0,0,0,.1)}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
