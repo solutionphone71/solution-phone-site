@@ -133,7 +133,7 @@ body { font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'SF Pro 
 .product-brand{ font-size:.75rem; color:#6e6e73; margin-top:.3rem; }
 </style>
 <!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3QP90K1TLM"></script>
+<script src="/scripts/consent-tracking.js"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -792,7 +792,9 @@ gtag("config", "G-3QP90K1TLM");
           <li><a href="../actualites.html" class="hover:text-accent transition">Actualités</a></li>
           <li><a href="#" onclick="openQR(); return false;" class="hover:text-accent transition">QualiRépar</a></li>
           <li><a href="#contact" class="hover:text-accent transition">FAQ</a></li>
-          <li><a href="#" class="hover:text-accent transition">Mentions légales</a></li>
+          <li><a href="../cgv.html" class="hover:text-accent transition">Mentions légales &amp; CGV</a></li>
+          <li><a href="../politique-confidentialite.html" class="hover:text-accent transition">Confidentialité</a></li>
+          <li><a href="#" data-sp-consent-manage class="hover:text-accent transition">Gérer mes cookies</a></li>
         </ul>
       </div>
 
@@ -1443,7 +1445,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')spCloseMenu(
 <!-- Crisp Live Chat (hidden widget — opens from Evan on index) -->
 <script type="text/javascript">
 window.$crisp=[];window.CRISP_WEBSITE_ID="309b806d-57cc-4a29-b347-2c78be66e79c";
-(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+if(window.SolutionPhoneConsent)SolutionPhoneConsent.onAccept(function(){var d=document,s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);});
 window.$crisp.push(["safe", true]);
 window.$crisp.push(["do", "chat:hide"]);
 window.$crisp.push(["on", "chat:closed", function(){ window.$crisp.push(["do", "chat:hide"]); }]);
