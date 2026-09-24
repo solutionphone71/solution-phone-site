@@ -20,7 +20,6 @@
   <meta name="theme-color" content="#e30613">
   <link rel="preload" as="image" href="img/evan-comptoir.webp" fetchpriority="high">
   <script src="scripts/consent-tracking.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3QP90K1TLM"></script>
   <script>gtag('js',new Date());gtag('config','G-3QP90K1TLM',{anonymize_ip:true})</script>
   <script>if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('evan-embed')</script>
   <script type="application/ld+json">
@@ -625,6 +624,14 @@
       </form>
     </div>
   </div>
+
+  <style>html.evan-embed .sp-legal-footer,html.tariff-embed .sp-legal-footer{display:none}</style>
+  <footer class="sp-legal-footer" style="padding:22px 16px 96px;text-align:center;font-size:12px;line-height:1.7;color:#6e6e73">
+    © EURL Solution Phone · 21 rue Gambetta, 71000 Mâcon ·
+    <a href="cgv.html" style="color:inherit;white-space:nowrap">Mentions légales &amp; CGV</a> ·
+    <a href="politique-confidentialite.html" style="color:inherit;white-space:nowrap">Confidentialité</a> ·
+    <a href="#" data-sp-consent-manage style="color:inherit;white-space:nowrap">Gérer mes cookies</a>
+  </footer>
 
   <script>
     const SUPABASE_URL='https://kdvxcnjfrmvlnrymfyug.supabase.co';

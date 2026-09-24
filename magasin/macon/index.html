@@ -73,9 +73,11 @@
     .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;background:#fff;color:var(--ink);font-size:14px;font-weight:800}.btn.red{background:var(--red);color:#fff}.btn.green{background:var(--green);color:#fff}
     .section{padding:clamp(65px,8vw,105px) clamp(18px,5vw,64px)}.inner{max-width:1160px;margin:auto}.section h2{margin:12px 0 34px;font-size:clamp(38px,6vw,70px);line-height:.95;letter-spacing:-.055em}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:1px;background:var(--line)}.card{min-height:340px;padding:clamp(28px,5vw,58px);background:#fff}.card.dark{display:flex;flex-direction:column;justify-content:space-between;background:#111;color:#fff}.address{font-size:clamp(28px,4vw,46px);font-weight:850;letter-spacing:-.04em}.hours{margin:24px 0 0;color:var(--muted);font-size:17px;line-height:1.75}.card.dark p{color:rgba(255,255,255,.65);line-height:1.6}.proofs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin-top:1px}.proof{min-height:170px;padding:26px;background:#fff}.proof b{display:block;font-size:21px;letter-spacing:-.035em}.proof p{margin:10px 0 0;color:var(--muted);font-size:14px;line-height:1.5}
     footer{padding:30px 20px;text-align:center;background:#0b0b0b;color:rgba(255,255,255,.58);font-size:12px}
+    footer a{color:inherit;text-decoration:underline}
     @media(max-width:800px){.links{display:none}.grid{grid-template-columns:1fr}.proofs{grid-template-columns:1fr 1fr}.hero{min-height:520px;background-position:63% center}.actions{display:grid}.btn{width:100%}}
     @media(max-width:480px){.hero{padding:72px 18px 50px}.proofs{grid-template-columns:1fr}.proof{min-height:0}.nav{min-height:58px}}
   </style>
+  <script src="/scripts/consent-tracking.js"></script>
 </head>
 <body>
   <header class="nav">
@@ -129,6 +131,6 @@
       </div>
     </section>
   </main>
-  <footer>Solution Phone · 21 rue Gambetta, 71000 Mâcon · 03 85 33 06 89</footer>
+  <footer>Solution Phone · 21 rue Gambetta, 71000 Mâcon · 03 85 33 06 89<br><a href="/cgv.html">Mentions légales &amp; CGV</a> · <a href="/politique-confidentialite.html">Confidentialité</a> · <a href="#" data-sp-consent-manage>Gérer mes cookies</a></footer>
 </body>
 </html>
