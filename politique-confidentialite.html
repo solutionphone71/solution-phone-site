@@ -26,18 +26,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.72);text-align:center;paddi
 <main>
   <div class="eyebrow">Données personnelles</div>
   <h1>Politique de confidentialité</h1>
-  <p class="lead">Cette page explique simplement quelles données Solution Phone utilise lorsque vous consultez le site, demandez un devis ou échangez avec l’assistant numérique de Sébastien.</p>
+  <p class="lead">Cette page explique simplement quelles données Solution Phone utilise lorsque vous consultez le site, demandez un devis ou échangez avec l’assistant IA de Sébastien (réponses automatiques).</p>
 
   <div class="notice"><strong>À retenir</strong>Ne transmettez pas à l’assistant de mot de passe, donnée bancaire, document d’identité, donnée médicale ou autre information sensible. Pour un devis, le modèle de l’appareil et la panne suffisent.</div>
 
   <h2>1. Responsable du traitement</h2>
-  <p><strong>EURL Solution Phone</strong> — 21 Rue Gambetta, 71000 Mâcon — SIRET 801 044 785 00021 — RCS Mâcon B 801 044 785.<br>Contact pour toute question ou demande liée à vos données : <a href="mailto:contact@solution-phone.fr">contact@solution-phone.fr</a>.</p>
+  <p><strong>EURL Solution Phone</strong> — 21 rue Gambetta, 71000 Mâcon — SIRET 801 044 785 00021 — RCS Mâcon B 801 044 785.<br>Contact pour toute question ou demande liée à vos données : <a href="mailto:contact@solution-phone.fr">contact@solution-phone.fr</a>.</p>
 
   <h2>2. Données pouvant être utilisées</h2>
   <div class="grid">
     <div class="card"><h3>Demandes de devis</h3><p>Nom, adresse e-mail ou numéro de téléphone lorsque vous choisissez de les fournir, modèle de l’appareil et description de la panne.</p></div>
     <div class="card"><h3>Assistant de Sébastien</h3><p>Contenu de la conversation, appareil concerné, réponses au diagnostic et référence de la demande.</p></div>
-    <div class="card"><h3>WhatsApp</h3><p>Numéro, nom de profil et contenu des messages lorsque vous choisissez de contacter Solution Phone par WhatsApp.</p></div>
+    <div class="card"><h3>Jeu « roulette » en boutique</h3><p>Numéro de téléphone saisi pour participer, lot gagné et, si vous le demandez, adresse e-mail pour recevoir le lot. Ces données servent uniquement à gérer le jeu et la remise du lot.</p>
+    <h3>WhatsApp</h3><p>Numéro, nom de profil et contenu des messages lorsque vous choisissez de contacter Solution Phone par WhatsApp.</p></div>
     <div class="card"><h3>Données techniques</h3><p>Informations nécessaires à la sécurité, à la prévention des abus et à la mesure d’audience du site.</p></div>
   </div>
 
@@ -52,7 +53,18 @@ footer{background:var(--ink);color:rgba(255,255,255,.72);text-align:center;paddi
   <p>Ces traitements reposent, selon le cas, sur l’exécution de mesures précontractuelles demandées par le visiteur, l’intérêt légitime de Solution Phone à répondre et sécuriser son service, ou le consentement lorsqu’il est demandé.</p>
 
   <h2>4. Destinataires et prestataires</h2>
-  <p>Les données sont accessibles uniquement aux personnes autorisées de Solution Phone et aux prestataires nécessaires au fonctionnement du service : Supabase pour l’hébergement technique de la base et des fonctions, Meta/WhatsApp pour l’alerte interne ou lorsque ce canal est choisi, le service d’acheminement de la notification e-mail, Google Analytics pour la mesure d’audience (uniquement avec votre accord), Crisp pour le chat en direct (uniquement avec votre accord), Google Fonts pour l’affichage de certaines polices de caractères et GitHub, Inc. pour l’hébergement des pages du site. Certains de ces prestataires peuvent traiter des données hors de l’Union européenne, notamment aux États-Unis ; ces transferts sont encadrés par les garanties prévues par le RGPD (décision d’adéquation ou clauses contractuelles types). Ces prestataires traitent les données selon leurs propres engagements et les instructions applicables.</p>
+  <p>Les données sont accessibles uniquement aux personnes autorisées de Solution Phone et aux prestataires nécessaires au fonctionnement du service :</p>
+  <ul>
+    <li><strong>Supabase</strong> : hébergeur de la base de données et des fonctions techniques (demandes de devis, assistant, jeu) ;</li>
+    <li><strong>FormSubmit</strong> (formsubmit.co) : acheminement de certains e-mails envoyés depuis le site (jeu « roulette ») ;</li>
+    <li><strong>OpenAI et Anthropic</strong> : modèles d’intelligence artificielle utilisés pour rédiger les réponses automatiques de l’assistant IA ; le contenu de la conversation leur est transmis pour produire la réponse ;</li>
+    <li><strong>WhatsApp (Meta)</strong> : lorsque vous choisissez ce canal, et pour l’alerte interne de l’équipe ;</li>
+    <li><strong>Google Analytics</strong> : mesure d’audience, uniquement avec votre accord ;</li>
+    <li><strong>Crisp</strong> : chat en direct, uniquement avec votre accord ;</li>
+    <li><strong>Google Fonts</strong> : affichage de certaines polices de caractères ;</li>
+    <li><strong>GitHub, Inc.</strong> : hébergement des pages du site.</li>
+  </ul>
+  <p>Certains de ces prestataires peuvent traiter des données hors de l’Union européenne, notamment aux États-Unis ; ces transferts sont encadrés par les garanties prévues par le RGPD (décision d’adéquation ou clauses contractuelles types). Ces prestataires traitent les données selon leurs propres engagements et les instructions applicables.</p>
 
   <h2 id="cookies">5. Cookies et traceurs</h2>
   <p>Lors de votre première visite, un bandeau vous permet d’accepter ou de refuser les traceurs facultatifs, aussi simplement l’un que l’autre. Votre choix est enregistré dans votre navigateur pendant 13 mois au plus, puis vous est redemandé.</p>
@@ -65,10 +77,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.72);text-align:center;paddi
   <p>Vous pouvez modifier votre choix à tout moment : <a href="#" data-sp-consent-manage>Gérer mes cookies</a>. Ce lien figure aussi en pied de page du site.</p>
 
   <h2>6. Durées de conservation</h2>
-  <p>Les conversations avec l’assistant sans accord de conservation sont automatiquement supprimées après <strong>30 jours d’inactivité</strong>. Les demandes de devis, échanges commerciaux, factures et éléments nécessaires à une réparation sont conservés uniquement pendant la durée utile au traitement de la demande, puis pendant les durées imposées ou permises par la loi. Les réponses techniques validées peuvent être conservées dans la base de connaissances après suppression des coordonnées et autres éléments permettant d’identifier le client.</p>
+  <p>Les conversations avec l’assistant sans accord de conservation sont automatiquement supprimées après <strong>30 jours d’inactivité</strong>. Les demandes de devis et échanges commerciaux sont conservés 3 ans après le dernier contact. Les factures sont conservées 10 ans (obligation comptable). Les données du jeu « roulette » sont conservées le temps nécessaire à la remise du lot. Les réponses techniques validées peuvent être conservées dans la base de connaissances après suppression des coordonnées et autres éléments permettant d’identifier le client.</p>
 
   <h2>7. Vos droits</h2>
-  <p>Vous pouvez demander l’accès, la rectification ou l’effacement de vos données, la limitation du traitement, vous opposer à certains usages ou demander la portabilité lorsque celle-ci s’applique. Écrivez à <a href="mailto:contact@solution-phone.fr">contact@solution-phone.fr</a> en précisant votre demande. Une preuve d’identité peut être demandée uniquement en cas de doute raisonnable. Vous pouvez également saisir la <a href="https://www.cnil.fr/" target="_blank" rel="noopener">CNIL</a>.</p>
+  <p>Vous pouvez demander l’accès, la rectification ou l’effacement de vos données, la limitation du traitement, vous opposer à certains usages ou demander la portabilité lorsque celle-ci s’applique. Écrivez à <a href="mailto:contact@solution-phone.fr">contact@solution-phone.fr</a> en précisant votre demande. Une preuve d’identité peut être demandée uniquement en cas de doute raisonnable. Lorsque le traitement repose sur votre consentement (cookies de mesure d’audience, chat), vous pouvez le retirer à tout moment, aussi simplement que vous l’avez donné, avec le lien « Gérer mes cookies ». Vous pouvez aussi définir des directives relatives à la conservation, à l’effacement et à la communication de vos données après votre décès. Enfin, vous pouvez introduire une réclamation auprès de la CNIL (Commission nationale de l’informatique et des libertés, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">www.cnil.fr</a>).</p>
 
   <h2>8. Sécurité et mise à jour</h2>
   <p>Solution Phone limite l’accès aux données, protège les accès techniques et sépare le canal privé utilisé pour améliorer l’assistant des moyens de contact visibles par les clients. Cette politique peut évoluer avec les services proposés. La date de la dernière mise à jour figure ci-dessous.</p>
