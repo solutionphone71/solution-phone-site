@@ -42,12 +42,14 @@
   // Durée de vie des cookies Google Analytics limitée à 13 mois (recommandation CNIL).
   window.gtag('set', { cookie_expires: 395 * 24 * 60 * 60 });
 
+  // Seule la mesure d’audience est demandée : les finalités publicitaires
+  // (ad_storage, ad_user_data, ad_personalization) restent toujours refusées.
   var granted = storedChoice === 'accepted';
   window.gtag('consent', 'default', {
-    ad_storage: granted ? 'granted' : 'denied',
+    ad_storage: 'denied',
     analytics_storage: granted ? 'granted' : 'denied',
-    ad_user_data: granted ? 'granted' : 'denied',
-    ad_personalization: granted ? 'granted' : 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
     functionality_storage: 'granted',
     security_storage: 'granted',
     wait_for_update: 500
@@ -56,10 +58,10 @@
   function consentState(choice) {
     var allow = choice === 'accepted';
     return {
-      ad_storage: allow ? 'granted' : 'denied',
+      ad_storage: 'denied',
       analytics_storage: allow ? 'granted' : 'denied',
-      ad_user_data: allow ? 'granted' : 'denied',
-      ad_personalization: allow ? 'granted' : 'denied'
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
     };
   }
 
@@ -117,7 +119,7 @@
     }
     for (var c = 0; c < cookies.length; c++) {
       var name = cookies[c].split('=')[0].trim();
-      if (!/^(_ga|_gid|_gat|_gcl|crisp-client)/.test(name)) continue;
+      if (!/^(_ga|_gid|_gat|_gcl|crisp)/i.test(name)) continue;
       for (var d = 0; d < domains.length; d++) {
         document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/' + domains[d];
       }
@@ -142,32 +144,20 @@
         chatRequested = false;
         window.openCrispFloat();
       }
-    } else if (previous === 'accepted') {
-      // Retrait du consentement : on efface les cookies déjà déposés et on
-      // recharge la page pour décharger Google Analytics et Crisp.
-      deleteTrackingCookies();
-      location.reload();
     } else {
-      chatRequested = false;
+      // Refus : on efface aussi les cookies _ga*/crisp éventuellement déjà
+      // présents (visite précédente, autre page), puis, si l’accord avait été
+      // donné, on recharge la page pour décharger Google Analytics et Crisp.
+      deleteTrackingCookies();
+      if (previous === 'accepted') location.reload();
+      else chatRequested = false;
     }
   }
 
-  function normalizePhone(value) {
-    var digits = String(value || '').replace(/\D/g, '');
-    if (!digits) return '';
-    if (digits.indexOf('00') === 0) return '+' + digits.slice(2);
-    if (digits.indexOf('0') === 0) return '+33' + digits.slice(1);
-    return '+' + digits;
-  }
-
-  function enhancedLeadData(contact) {
-    if (storedChoice !== 'accepted' || !contact) return null;
-    var email = String(contact.email || '').trim().toLowerCase();
-    var phone = normalizePhone(contact.phone);
-    var data = {};
-    if (email) data.email = email;
-    if (phone) data.phone_number = phone;
-    return Object.keys(data).length ? data : null;
+  // Aucune donnée personnelle (e-mail, téléphone) n’est envoyée à Google :
+  // la fonction est conservée pour compatibilité mais ne renvoie plus rien.
+  function enhancedLeadData() {
+    return null;
   }
 
   function isFramedBySite() {
@@ -185,7 +175,7 @@
     if (!document.getElementById('sp-consent-style')) {
       var style = document.createElement('style');
       style.id = 'sp-consent-style';
-      style.textContent = '#sp-consent{position:fixed;z-index:2147483646;left:12px;right:12px;bottom:76px;max-width:620px;margin:auto;padding:12px 13px;background:#111;color:#fff;border:1px solid rgba(255,255,255,.18);box-shadow:0 18px 60px rgba(0,0,0,.34);font:12px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:left}#sp-consent p{margin:0 0 9px;color:#fff}#sp-consent strong{display:inline;margin-right:4px;color:#fff}#sp-consent-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}#sp-consent button{min-height:38px;padding:0 9px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;font:700 11px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}#sp-consent-accept{background:#e30613!important;border-color:#e30613!important}#sp-consent a{color:#fff;text-decoration:underline}@media(min-width:721px){#sp-consent{bottom:16px;font-size:13px}#sp-consent button{font-size:12px}}';
+      style.textContent = '#sp-consent{position:fixed;z-index:2147483646;left:12px;right:12px;bottom:84px;max-width:620px;margin:auto;padding:12px 13px;background:#111;color:#fff;border:1px solid rgba(255,255,255,.18);box-shadow:0 18px 60px rgba(0,0,0,.34);font:12px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:left}#sp-consent p{margin:0 0 9px;color:#fff}#sp-consent strong{display:inline;margin-right:4px;color:#fff}#sp-consent-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}#sp-consent button{min-height:44px;padding:0 9px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;font:700 12px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;cursor:pointer}#sp-consent-accept{background:#C00510!important;border-color:#C00510!important}#sp-consent button:focus-visible,#sp-consent a:focus-visible{outline:3px solid #fff;outline-offset:2px}#sp-consent a{color:#fff;text-decoration:underline}@media(min-width:721px){#sp-consent{bottom:88px;font-size:13px}#sp-consent button{font-size:13px}}';
       document.head.appendChild(style);
     }
     var banner = document.createElement('section');
@@ -244,6 +234,7 @@
   });
 
   function onReady() {
+    if (storedChoice === 'refused') deleteTrackingCookies();
     if (storedChoice === 'accepted') applyAccepted();
     else if (!storedChoice && !isFramedBySite()) installBanner();
   }

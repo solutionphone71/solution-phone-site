@@ -1,8 +1,8 @@
 (function(){
   'use strict';
   const api=window.SolutionPhoneQuote;if(!api)return;
-  const screen=[['hd','HD','LCD économique : le choix du budget.'],['ltps','LTPS','Écran LCD : une alternative économique à l’OLED.'],['ltpsp','LTPS Prime','Gamme LCD supérieure. Un écran LCD ne reproduit pas les noirs d’un OLED.'],['oled','Soft OLED','OLED souple : noirs profonds et contraste élevé.'],['relife','ReLife','Dalle Apple d’origine reconditionnée, avec une vitre remplacée.']];
-  const battery=[['compat','Compatible','Batterie compatible : solution économique.'],['ti','TI reconnue','Gamme compatible avec reconnaissance selon le modèle. À confirmer avec l’équipe.'],['orig','Originale','Pièce d’origine, selon disponibilité.']];
+  const screen=[['hd','HD','LCD économique : le choix du budget.'],['ltps','LTPS','Écran LCD (technologie des écrans classiques) : une alternative économique à l’OLED.'],['ltpsp','LTPS Prime','Écran LCD de gamme supérieure. Un écran LCD ne reproduit pas les noirs profonds d’un OLED.'],['oled','Soft OLED','OLED souple : noirs profonds et contraste élevé.'],['relife','ReLife','Dalle Apple d’origine reconditionnée, avec une vitre remplacée.']];
+  const battery=[['compat','Compatible','Batterie compatible : solution économique.'],['ti','Compatible reconnue','Batterie compatible reconnue par l’iPhone selon le modèle. À confirmer avec l’équipe.'],['orig','Originale','Pièce d’origine, selon disponibilité.']];
   const clean=s=>String(s).toLowerCase().replace(/iphone/g,'').replace(/\+/g,' plus ').replace(/promax/g,'pro max').replace(/\b2020\b/g,'2').replace(/\b2022\b/g,'3').replace(/\s+/g,'').trim();
   api.catalogState='loading';api.catalogRows={screen:[],battery:[]};
   api.models=()=>[...new Set(Object.values(api.catalogRows).flat().map(r=>'iPhone '+r.modele))];

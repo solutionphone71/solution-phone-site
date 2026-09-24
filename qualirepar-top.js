@@ -10,7 +10,7 @@
     bar.setAttribute('aria-haspopup', 'dialog');
     bar.setAttribute('aria-controls', 'spq-bonus-modal');
     bar.innerHTML =
-      '<img class="spq-bonus-logo" src="/img/qualirepar-label-officiel.jpg" alt="Label QualiRépar">' +
+      '<img class="spq-bonus-logo" src="/img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="800" height="427">' +
       '<span class="spq-bonus-amount">25 €<small>déjà déduits</small></span>' +
       '<span class="spq-bonus-copy"><strong>de nos tarifs de réparation de smartphone.</strong><span>Réparateur labellisé QualiRépar à Mâcon</span></span>' +
       '<span class="spq-bonus-action">En savoir plus</span>';
@@ -23,7 +23,7 @@
       '<section class="spq-bonus-dialog" role="dialog" aria-modal="true" aria-labelledby="spq-bonus-title">' +
         '<button class="spq-bonus-close" type="button" aria-label="Fermer">×</button>' +
         '<div class="spq-bonus-dialog-head">' +
-          '<img class="spq-bonus-dialog-logo" src="/img/qualirepar-label-officiel.jpg" alt="Label QualiRépar">' +
+          '<img class="spq-bonus-dialog-logo" src="/img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="800" height="427">' +
           '<p>Engagement Solution Phone</p>' +
           '<h2 id="spq-bonus-title">25 € déjà déduits de nos tarifs</h2>' +
         '</div>' +

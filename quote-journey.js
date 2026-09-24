@@ -27,7 +27,11 @@
       rows.forEach(row=>{const p=document.createElement('button'),name=document.createElement('span'),value=document.createElement('b'),description=document.createElement('small');p.type='button';p.className='journey-quality-choice';p.setAttribute('aria-pressed',String(selected===row.id));name.textContent=row.name;value.textContent=row.price+' €';description.textContent=row.desc;p.append(name,value,description);p.addEventListener('click',()=>{selected=row.id;render();list.querySelector('[aria-pressed="true"]')?.focus()});list.appendChild(p)});
     }else{price.textContent=api.catalogState==='loading'?'Chargement des tarifs…':api.catalogState==='error'?'Connexion aux tarifs indisponible':'Votre devis confirmé par l’équipe';const note=document.createElement('small');note.textContent='Aucun prix estimé : nous vérifions le modèle et la panne avant de vous répondre.';price.appendChild(note);if(api.catalogState==='error'){const retry=document.createElement('button');retry.type='button';retry.textContent='Réessayer';retry.addEventListener('click',()=>api.reloadCatalog());price.appendChild(retry)}}
     document.getElementById('journey-safety').hidden=issue!=='water';
-    wa.href='https://wa.me/33783921884?text='+encodeURIComponent('Bonjour Solution Phone, ma demande est urgente. '+request()+' Pouvez-vous me confirmer le devis ?');
+    // Modèle ou panne inconnus : on demande une photo plutôt que d’affirmer que tout est renseigné.
+    const unknown=issue==='other'||/^(Modèle à identifier|Autre modèle)$/i.test(device);
+    const handoff=root.querySelector('.journey-handoff');
+    if(handoff)handoff.textContent=unknown?'Envoyez une photo de votre téléphone et décrivez la panne : l’équipe vous répond avec le prix.':'Modèle et panne déjà renseignés. Sur WhatsApp, il vous reste à envoyer le message. Réparation généralement en moins d’une heure si la pièce est en stock.';
+    wa.href='https://wa.me/33783921884?text='+encodeURIComponent('Bonjour Solution Phone, '+request().replace(/^Demande/,'demande').replace(/[.\s]+$/,'')+'.'+(unknown?' Je vous envoie une photo de mon téléphone et je décris la panne : ':''));
     if(dockWhatsApp)dockWhatsApp.href=wa.href;
   }
   model.addEventListener('input',()=>{selected='';render()});

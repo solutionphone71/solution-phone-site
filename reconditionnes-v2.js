@@ -44,7 +44,7 @@
   'use strict';
 
   var PUBLIC_CATALOG_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog';
-  var WHATSAPP = 'https://wa.me/33783921884';
+  var WHATSAPP = 'https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20renseignement%20sur%20un%20smartphone%20reconditionn%C3%A9%20%3A%20';
 
   var state = { items: [], cat: 'iphone', family: 'all', signature: '', loaded: false };
 

@@ -19,7 +19,7 @@
   <link rel="apple-touch-icon" href="img/favicon-96.png">
   <meta name="theme-color" content="#e30613">
   <link rel="preload" as="image" href="img/evan-comptoir.webp" fetchpriority="high">
-  <script src="scripts/consent-tracking.js"></script>
+  <script src="scripts/consent-tracking.js?v=2"></script>
   <script>gtag('js',new Date());gtag('config','G-3QP90K1TLM',{anonymize_ip:true})</script>
   <script>if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('evan-embed')</script>
   <script type="application/ld+json">
@@ -41,7 +41,7 @@
       {"@type":"OpeningHoursSpecification","dayOfWeek":"Monday","opens":"14:00","closes":"19:00"},
       {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:15","closes":"19:00"}
     ],
-    "sameAs":["https://www.facebook.com/share/1Mf9kfcFpg/","https://www.instagram.com/solutionphonemacon","https://wa.me/33783921884"],
+    "sameAs":["https://www.facebook.com/share/1Mf9kfcFpg/","https://www.instagram.com/solutionphonemacon","https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20renseignement%20%3A%20"],
     "hasOfferCatalog":{"@type":"OfferCatalog","name":"Services Solution Phone","itemListElement":[
       {"@type":"OfferCatalog","name":"Réparation iPhone"},
       {"@type":"OfferCatalog","name":"Réparation Samsung et Android"},
@@ -283,13 +283,20 @@
       .local-seo-guides{padding:0 18px 50px}.local-seo-grid{grid-template-columns:1fr}.local-seo-grid a{min-height:0}
     }
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
-  </style>
+  
+    /* Accessibilité (audit 09/2026) : champs lisibles sans zoom sur mobile, focus visible et neutre */
+    input,textarea,select{font-size:16px!important}
+    .quick-other-fields label{display:grid;gap:5px;font-size:13px;font-weight:700;color:var(--ink,#1d1d1f)}
+    .rgpd-note{margin:6px 0 0;font-size:12px;line-height:1.45;color:#5f5f66;font-weight:400}.rgpd-note a{color:inherit;text-decoration:underline}
+    :focus-visible{outline:3px solid #0b57d0;outline-offset:2px}
+    .entry:focus-within{border-color:#8a8a90!important;box-shadow:0 0 0 3px rgba(11,87,208,.18)!important}
+</style>
   <link rel="stylesheet" href="signature-home.css?v=conversion-simple-2">
   <link rel="stylesheet" href="quote-journey.css?v=4">
-  <script src="quote-catalog.js?v=1" defer></script>
-  <script src="quote-journey.js?v=4" defer></script>
+  <script src="quote-catalog.js?v=2" defer></script>
+  <script src="quote-journey.js?v=5" defer></script>
   <link rel="stylesheet" href="qualirepar-top.css?v=2">
-  <script src="qualirepar-top.js?v=2" defer></script>
+  <script src="qualirepar-top.js?v=3" defer></script>
 <link rel="stylesheet" href="boutique-nav.css?v=1">
 <link rel="stylesheet" href="home-simple.css?v=5">
 <script>if(new URLSearchParams(location.search).has('tarifs'))document.documentElement.classList.add('tariff-embed')</script>
@@ -314,7 +321,7 @@
       </nav>
       <div class="top-actions">
         <div class="status"><i></i><span>Un conseiller vous répond</span></div>
-        <a class="top-wa" href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20de%20devis%20est%20urgente.%20Mon%20t%C3%A9l%C3%A9phone%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp urgent ↗</a>
+        <a class="top-wa" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix%20pour%20mon%20t%C3%A9l%C3%A9phone.%20Mon%20mod%C3%A8le%20et%20la%20panne%20%3A" target="_blank" rel="noopener">Devis WhatsApp ↗</a>
         <details class="mobile-menu">
           <summary>Menu</summary>
           <nav class="mobile-links" aria-label="Navigation mobile">
@@ -325,7 +332,7 @@
             <a href="atelier.html#qualirepar">QualiRépar −25 €</a>
             <a href="atelier.html#equipe">L’équipe</a>
             <a href="magasin/macon/">Nous trouver</a>
-            <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20de%20devis%20est%20urgente.%20Mon%20t%C3%A9l%C3%A9phone%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp urgent</a>
+            <a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix%20pour%20mon%20t%C3%A9l%C3%A9phone.%20Mon%20mod%C3%A8le%20et%20la%20panne%20%3A" target="_blank" rel="noopener">Devis WhatsApp</a>
           </nav>
         </details>
       </div>
@@ -356,20 +363,19 @@
         <div class="workshop-photo"><img src="img/evan-comptoir.webp" alt="Intérieur de la boutique Solution Phone à Mâcon" width="1448" height="1086" fetchpriority="high" decoding="async"></div>
         <div class="edition"><span aria-hidden="true"></span>Sébastien & l’équipe · Mâcon depuis 2014</div>
         <div class="hero-copy">
-          <strong class="hero-answer">Vous êtes au bon endroit.</strong>
-          <h2>Réparation smartphone.<em>À Mâcon.</em></h2>
+          <h2>Votre téléphone réparé <em>à Mâcon, sans rendez-vous.</em></h2>
           <p>Un téléphone en panne, une équipe à votre écoute. Votre tarif avant intervention, votre réparation sans rendez-vous.</p>
           <div class="hero-conversion-actions" aria-label="Demander un devis">
             <a href="#devis">Préparer mon devis →</a>
           </div>
           <div class="hero-trust" aria-label="Garanties Solution Phone">
             <div class="hero-reasons">
-              <span><b>90 % &lt; 1 h</b><small>Selon la panne et la pièce disponible</small></span>
+              <span><b>&lt; 1 h</b><small>La plupart des écrans et batteries, si la pièce est en stock</small></span>
               <span><b>350 / mois</b><small>Smartphones réparés en moyenne</small></span>
               <span><b>3 réparateurs</b><small>Une équipe de 5 personnes à Mâcon</small></span>
             </div>
             <a class="qualirepar-banner" href="#devis" aria-label="Obtenir 25 euros de réduction sur sa réparation de smartphone">
-              <span class="qualirepar-logo"><img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar"></span>
+              <span class="qualirepar-logo"><img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="800" height="427"></span>
               <span class="qualirepar-message">
                 <strong><em>−25 €</em> sur votre réparation</strong>
                 <small>Réparateur labellisé QualiRépar : 25 € déjà déduits de nos tarifs de réparation de smartphone.</small>
@@ -380,15 +386,14 @@
         </div>
         <div class="device-halo" aria-hidden="true"></div>
         <div class="connection-beam" aria-hidden="true"></div>
-        <div class="connection-label" aria-hidden="true">Liaison atelier active</div>
+        <div class="connection-label" aria-hidden="true">Nos prix à jour, pièce et main-d’œuvre comprises.</div>
         <div class="device" aria-hidden="true">
           <div class="agent-stage"><div class="agent-face"></div></div>
           <div class="agent-signal"><i></i><i></i><i></i></div>
           <div class="hud-corners"></div>
-          <div class="hud-tag sync">Tarifs synchronisés</div>
-          <div class="hud-tag live">● En direct</div>
+          <div class="hud-tag sync">Prix à jour</div>
           <div class="device-grid"></div><div class="scanline"></div>
-          <div class="device-code">Analyse active<b id="device-state">En attente</b>Tarifs atelier connectés</div>
+          <div class="device-code">Nos prix à jour<b id="device-state">Votre demande</b>Pièce et main-d’œuvre comprises</div>
         </div>
         <div class="proofline">
           <div><b>Solution Phone</b><span>Réparation</span></div>
@@ -400,7 +405,7 @@
 
       <figure class="simple-team-photo">
         <img src="img/evan-comptoir.webp" alt="Evan au comptoir de Solution Phone à Mâcon" width="1448" height="1086" decoding="async">
-        <figcaption><strong>Un visage, une équipe, une vraie boutique.</strong><span>Evan au comptoir · À Mâcon depuis 2014</span><span>3 réparateurs · Réparations garanties 6 mois</span><span>90 % des réparations en moins d’une heure. Délai confirmé selon la panne et les pièces disponibles.</span></figcaption>
+        <figcaption><strong>Un visage, une équipe, une vraie boutique.</strong><span>Evan au comptoir · À Mâcon depuis 2014</span><span>3 réparateurs · Réparations garanties 6 mois</span><span>La plupart des écrans et batteries en moins d’une heure, si la pièce est en stock.</span></figcaption>
       </figure>
       <div class="conversation" id="devis">
         <section class="quote-journey" aria-labelledby="journey-title">
@@ -424,11 +429,11 @@
             <div id="journey-qualities" hidden><p>Choisissez votre qualité de pièce</p><div id="journey-quality-list"></div></div>
             <p id="journey-safety" class="journey-safety" hidden>Éteignez le téléphone et ne le rechargez pas. Faites-le contrôler en boutique.</p>
             <p class="journey-channel-label">Comment souhaitez-vous nous contacter ?</p>
-            <div class="journey-channels"><a id="journey-whatsapp" href="https://wa.me/33783921884" target="_blank" rel="noopener">Devis WhatsApp immédiat ↗</a><button id="journey-email" type="button">Devis par e-mail</button><a class="journey-call" href="tel:+33385330689">Appeler le 03 85 33 06 89</a></div>
-            <p class="journey-handoff">Modèle et panne déjà renseignés. Sur WhatsApp, il vous reste à envoyer le message. Réparé en moins d’une heure si la pièce est en stock.</p>
+            <div class="journey-channels"><a id="journey-whatsapp" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20renseignement%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp immédiat ↗</a><button id="journey-email" type="button">Devis par e-mail</button><a class="journey-call" href="tel:+33385330689">Appeler le 03 85 33 06 89</a></div>
+            <p class="journey-handoff">Modèle et panne déjà renseignés. Sur WhatsApp, il vous reste à envoyer le message. Réparation généralement en moins d’une heure si la pièce est en stock.</p>
           </div>
           <p class="journey-reassurance">25 € déduits sur votre réparation de smartphone · SAV en boutique</p>
-          <noscript><p>Contactez directement l’équipe : <a href="https://wa.me/33783921884">WhatsApp</a> ou <a href="mailto:contact@solution-phone.fr">e-mail</a>.</p></noscript>
+          <noscript><p>Contactez directement l’équipe : <a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20renseignement%20%3A%20">WhatsApp</a> ou <a href="mailto:contact@solution-phone.fr">e-mail</a>.</p></noscript>
         </section>
         <details class="advanced-help" id="advanced-help">
           <summary>Un doute sur la panne ? Ouvrir l’assistant virtuel</summary>
@@ -436,7 +441,7 @@
           <div id="start-view">
             <div class="evan">
               <div class="avatar">SÉBASTIEN</div>
-              <div><h2>L’assistant virtuel Solution Phone</h2><p>Aide au diagnostic · validation par l’équipe</p></div>
+              <div><h2>L’assistant virtuel Solution Phone</h2><p>Assistant IA · réponses automatiques · validation par l’équipe</p></div>
             </div>
             <p class="dialogue">Obtenez votre <span>devis maintenant.</span></p>
             <form class="entry" id="diagnostic-form">
@@ -444,21 +449,21 @@
               <button class="send" type="submit" aria-label="Envoyer la demande">→</button>
             </form>
             <div class="price-paths" aria-label="Choisir un tarif de réparation">
-              <button class="express-price" type="button" onclick="openQuickPrice()"><img class="express-brand-logo" src="img/brands/apple.svg" alt="" aria-hidden="true"><span><b>Tarif réparation immédiat iPhone</b><span>Écran · batterie · autre pièce</span></span><strong>→</strong></button>
+              <button class="express-price" type="button" onclick="openQuickPrice()"><img class="express-brand-logo" src="img/brands/apple.svg" alt="" aria-hidden="true" width="25" height="25"><span><b>Tarif réparation immédiat iPhone</b><span>Écran · batterie · autre pièce</span></span><strong>→</strong></button>
               <div class="android-price">
                 <div class="android-price-head"><div><b>Tarif réparation Android</b><span>Choisissez la marque · estimation puis devis précis</span></div><strong>→</strong></div>
                 <div class="android-brand-list" aria-label="Marques Android">
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Samsung"><img src="img/brands/samsung.svg" alt="Samsung"></button>
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Xiaomi"><img src="img/brands/xiaomi.svg" alt="Xiaomi"></button>
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Honor"><img src="img/brands/honor.svg" alt="Honor"></button>
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Huawei"><img src="img/brands/huawei.svg" alt="Huawei"></button>
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Google Pixel"><img src="img/brands/google.svg" alt="Google Pixel"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Samsung"><img src="img/brands/samsung.svg" alt="Samsung" width="150" height="150"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Xiaomi"><img src="img/brands/xiaomi.svg" alt="Xiaomi" width="150" height="150"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Honor"><img src="img/brands/honor.svg" alt="Honor" width="150" height="150"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Huawei"><img src="img/brands/huawei.svg" alt="Huawei" width="150" height="150"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Google Pixel"><img src="img/brands/google.svg" alt="Google Pixel" width="150" height="150"></button>
                   <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation pour une autre marque Android"><span>ANDROID</span></button>
                 </div>
               </div>
             </div>
             <div class="fast-lane" aria-label="Accès directs">
-              <a class="fast-action wa" href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20de%20devis%20est%20urgente.%20Mon%20t%C3%A9l%C3%A9phone%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp urgent</a>
+              <a class="fast-action wa" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix%20pour%20mon%20t%C3%A9l%C3%A9phone.%20Mon%20mod%C3%A8le%20et%20la%20panne%20%3A" target="_blank" rel="noopener">Devis WhatsApp</a>
               <button class="fast-action" type="button" onclick="openMail()">Devis par e-mail</button>
             </div>
             <div class="privacy"><i></i> Réponse humaine · aucun engagement · rien n’est réparé sans votre accord</div>
@@ -480,7 +485,7 @@
 
           <div class="chat" id="chat-view">
             <div class="chat-head">
-              <div class="evan"><div class="avatar">SÉBASTIEN</div><div><h2>L’assistant de Sébastien</h2><p><span style="color:#1cab61">●</span> Tarif immédiat · validation par l’équipe</p></div></div>
+              <div class="evan"><div class="avatar">SÉBASTIEN</div><div><h2>L’assistant de Sébastien</h2><p>Assistant IA · réponses automatiques · validation par l’équipe</p></div></div>
               <button class="chat-reset" onclick="resetDiagnostic()">Recommencer</button>
             </div>
             <div class="diagnostic-meter" id="diagnostic-meter"><span id="diagnostic-progress-label">Diagnostic 1/4</span><i></i></div>
@@ -491,13 +496,13 @@
               <button type="submit" aria-label="Envoyer la réponse">→</button>
             </form>
             <div class="chat-direct" aria-label="Contacter directement l’équipe">
-              <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20de%20devis%20est%20urgente.%20Mon%20t%C3%A9l%C3%A9phone%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp urgent</a>
+              <a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix%20pour%20mon%20t%C3%A9l%C3%A9phone.%20Mon%20mod%C3%A8le%20et%20la%20panne%20%3A" target="_blank" rel="noopener">Devis WhatsApp</a>
               <button type="button" onclick="openMail()">Devis par e-mail</button>
             </div>
           </div>
 
           <div class="loading" id="loading-view">
-            <div class="evan"><div class="avatar">SÉBASTIEN</div><div><h2>Je vérifie votre demande</h2><p>Connexion aux tarifs de l’atelier</p></div></div>
+            <div class="evan"><div class="avatar">SÉBASTIEN</div><div><h2>Je vérifie votre demande</h2><p>Assistant IA · réponses automatiques</p></div></div>
             <div class="loading-label" id="loading-label">Identification du modèle</div>
             <div class="progress"><i></i></div>
             <p>Je recherche la réparation et les qualités de pièce disponibles.</p>
@@ -521,7 +526,7 @@
     <div><b>Des conseils honnêtes</b><p>Si une réparation ne vaut pas le coup, on vous le dit. On vous conseille la bonne solution, pas la plus chère.</p></div>
   </div>
   <h3 id="services" style="scroll-margin-top:84px">Les petits services qui dépannent</h3>
-  <div class="sp-services"><a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20un%20nettoyage%20virus%20/%20publicit%C3%A9s%20pour%20mon%20smartphone%20Android.%20Mon%20mod%C3%A8le%20%3A%20" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></i><b>Nettoyage virus et publicités</b><span>Smartphone Android</span><strong>10 à 20 €</strong><em>Demander sur WhatsApp ›</em></a><a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20un%20transfert%20de%20donn%C3%A9es%20entre%20deux%20smartphones.%20Mes%20mod%C3%A8les%20%3A%20" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="7" height="14" rx="1.6"/><rect x="14.5" y="6" width="7" height="14" rx="1.6"/><path d="M8 11h7.5m-2-2 2 2-2 2"/></svg></i><b>Transfert de données</b><span>De votre ancien téléphone vers le nouveau</span><strong>dès 20 €</strong><em>Demander sur WhatsApp ›</em></a><a href="https://wa.me/33783921884?text=Bonjour%2C%20mon%20t%C3%A9l%C3%A9phone%20charge%20mal%2C%20je%20souhaite%20un%20nettoyage%20du%20connecteur%20de%20charge.%20Mon%20mod%C3%A8le%20%3A%20" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v4m6-4v4"/><path d="M7 7h10v3a5 5 0 0 1-10 0V7z"/><path d="M12 15v6"/></svg></i><b>Nettoyage du connecteur de charge</b><span>Votre téléphone charge mal ?</span><strong>10 €</strong><em>Demander sur WhatsApp ›</em></a></div>
+  <div class="sp-services"><a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20nettoyage%20virus%20%2F%20publicit%C3%A9s%20pour%20mon%20smartphone%20Android.%20Mon%20mod%C3%A8le%20%3A" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></i><b>Nettoyage virus et publicités</b><span>Smartphone Android</span><strong>10 à 20 €</strong><em>Demander sur WhatsApp ›</em></a><a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20transfert%20de%20donn%C3%A9es%20entre%20deux%20smartphones.%20Mes%20mod%C3%A8les%20%3A" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="7" height="14" rx="1.6"/><rect x="14.5" y="6" width="7" height="14" rx="1.6"/><path d="M8 11h7.5m-2-2 2 2-2 2"/></svg></i><b>Transfert de données</b><span>De votre ancien téléphone vers le nouveau</span><strong>dès 20 €</strong><em>Demander sur WhatsApp ›</em></a><a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20mon%20t%C3%A9l%C3%A9phone%20charge%20mal%2C%20je%20souhaite%20un%20nettoyage%20du%20connecteur%20de%20charge.%20Mon%20mod%C3%A8le%20%3A" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v4m6-4v4"/><path d="M7 7h10v3a5 5 0 0 1-10 0V7z"/><path d="M12 15v6"/></svg></i><b>Nettoyage du connecteur de charge</b><span>Votre téléphone charge mal ?</span><strong>10 €</strong><em>Demander sur WhatsApp ›</em></a></div>
 </section>
   <section class="repair-atlas" id="reparations" aria-labelledby="repair-atlas-title">
     <h2 id="repair-atlas-title" class="simple-brands-title">Votre marque. Notre savoir-faire.</h2>
@@ -529,15 +534,15 @@
       <div class="repair-brand-ribbon-label"><span>Multi-marques</span><b>Diagnostic & réparation</b></div>
       <div class="repair-brand-marquee">
         <div class="repair-brand-track">
-          <button class="repair-brand" data-repair-prompt="réparation Apple iPhone"><img src="img/brands/apple.svg" alt=""><span>Apple</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Samsung Galaxy"><img src="img/brands/samsung.svg" alt=""><span>Samsung</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Xiaomi"><img src="img/brands/xiaomi.svg" alt=""><span>Xiaomi</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Google Pixel"><img src="img/brands/google.svg" alt=""><span>Google Pixel</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Honor"><img src="img/brands/honor.svg" alt=""><span>Honor</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Huawei"><img src="img/brands/huawei.svg" alt=""><span>Huawei</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Oppo"><img src="img/brands/oppo.svg" alt=""><span>Oppo</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation OnePlus"><img src="img/brands/oneplus.svg" alt=""><span>OnePlus</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Motorola"><img src="img/brands/motorola.svg" alt=""><span>Motorola</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Apple iPhone"><img src="img/brands/apple.svg" alt="" width="150" height="150"><span>Apple</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Samsung Galaxy"><img src="img/brands/samsung.svg" alt="" width="150" height="150"><span>Samsung</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Xiaomi"><img src="img/brands/xiaomi.svg" alt="" width="150" height="150"><span>Xiaomi</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Google Pixel"><img src="img/brands/google.svg" alt="" width="150" height="150"><span>Google Pixel</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Honor"><img src="img/brands/honor.svg" alt="" width="150" height="150"><span>Honor</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Huawei"><img src="img/brands/huawei.svg" alt="" width="150" height="150"><span>Huawei</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Oppo"><img src="img/brands/oppo.svg" alt="" width="150" height="150"><span>Oppo</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation OnePlus"><img src="img/brands/oneplus.svg" alt="" width="150" height="150"><span>OnePlus</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Motorola"><img src="img/brands/motorola.svg" alt="" width="150" height="150"><span>Motorola</span></button>
         </div>
       </div>
     </div>
@@ -590,7 +595,7 @@
   <p class="spq-legal">Réduction de 25 € appliquée par Solution Phone sur la réparation d’un smartphone. Lorsqu’elle est éligible au dispositif, cette réduction correspond au Bonus Réparation QualiRépar ; à défaut, elle est prise en charge commercialement par Solution Phone.</p>
 
   <div class="home-contact-dock" aria-label="Accès directs">
-    <a href="https://wa.me/33783921884?text=Bonjour%20S%C3%A9bastien%2C%20ma%20demande%20est%20urgente.%20Mon%20appareil%20et%20mon%20probl%C3%A8me%20%3A%20" target="_blank" rel="noopener">Devis WhatsApp</a>
+    <a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix.%20Mon%20appareil%20et%20la%20panne%20%3A" target="_blank" rel="noopener">Devis WhatsApp</a>
     <a class="dock-call" href="tel:+33385330689" aria-label="Appeler Solution Phone au 03 85 33 06 89">03 85 33 06 89</a>
     <button id="dock-price-button" type="button" onclick="openMail(window.SolutionPhoneQuote?.draft?.())">Devis par e-mail</button>
   </div>
@@ -601,12 +606,13 @@
       <h3>Recevoir mon devis</h3>
       <p>Votre modèle, votre panne, votre e-mail. L’équipe vous répond directement.</p>
       <form class="formgrid" id="mail-form">
-        <label for="mail-request">Votre appareil et le problème<textarea name="Demande" id="mail-request" required minlength="10" maxlength="1800" placeholder="Ex. iPhone 13, écran cassé, besoin de mon téléphone aujourd’hui"></textarea></label>
+        <label for="mail-request">Votre appareil et le problème<textarea name="Demande" id="mail-request" required minlength="10" maxlength="1800" placeholder="Ex. iPhone 13, écran cassé"></textarea></label>
         <label for="mail-name">Votre nom<input id="mail-name" name="Nom" required autocomplete="name" maxlength="80" placeholder="Votre nom"></label>
         <label for="mail-email">Votre e-mail<input id="mail-email" name="email" required type="email" autocomplete="email" maxlength="160" placeholder="vous@exemple.fr"></label>
         <details><summary>Ajouter un téléphone (facultatif)</summary><label for="mail-phone">Votre téléphone<input id="mail-phone" name="Telephone" type="tel" autocomplete="tel" maxlength="40" placeholder="06 12 34 56 78"></label></details>
         <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px" placeholder="Ne pas remplir">
         <button type="submit">Recevoir mon devis par e-mail</button>
+        <p class="rgpd-note">Vos données servent uniquement à répondre à votre demande de devis et sont supprimées au bout de 3 ans sans nouveau contact. Accès, rectification, effacement : contact@solution-phone.fr — <a href="https://solution-phone.fr/politique-confidentialite.html">Politique de confidentialité</a></p>
       </form>
       <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
     </div>
@@ -626,15 +632,16 @@
         </div>
         <input type="hidden" id="quick-issue" value="screen">
         <div class="quick-other-fields" id="quick-other-fields" hidden>
-          <textarea id="quick-other-detail" rows="3" placeholder="Quelle pièce ou quelle panne ? Ex. caméra, vitre arrière, haut-parleur…"></textarea>
-          <input id="quick-other-name" autocomplete="name" placeholder="Votre nom">
-          <input id="quick-other-email" type="email" autocomplete="email" placeholder="Votre e-mail pour recevoir la réponse">
-          <input id="quick-other-phone" autocomplete="tel" placeholder="Votre téléphone (facultatif)">
+          <label for="quick-other-detail">Pièce ou panne<textarea id="quick-other-detail" rows="3" placeholder="Ex. caméra, vitre arrière, haut-parleur…"></textarea></label>
+          <label for="quick-other-name">Votre nom<input id="quick-other-name" autocomplete="name" placeholder="Votre nom"></label>
+          <label for="quick-other-email">Votre e-mail<input id="quick-other-email" type="email" autocomplete="email" placeholder="vous@exemple.fr"></label>
+          <label for="quick-other-phone">Votre téléphone (facultatif)<input id="quick-other-phone" type="tel" autocomplete="tel" placeholder="06 12 34 56 78"></label>
           <input id="quick-other-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px" placeholder="Ne pas remplir">
           <div class="quick-other-actions">
             <button class="action wa" type="button" id="quick-other-wa">Envoyer sur WhatsApp</button>
             <button class="action mail" type="button" id="quick-other-mail">Envoyer par e-mail</button>
           </div>
+          <p class="rgpd-note">Vos données servent uniquement à répondre à votre demande de devis et sont supprimées au bout de 3 ans sans nouveau contact. Accès, rectification, effacement : contact@solution-phone.fr — <a href="https://solution-phone.fr/politique-confidentialite.html">Politique de confidentialité</a></p>
           <div class="quick-status" id="quick-other-status" role="status" aria-live="polite"></div>
         </div>
         <button id="quick-show-price">Afficher mon tarif</button>
@@ -662,13 +669,13 @@
     const QUALITES=[
       {id:'hd',name:'Compatible HD/LTPS',desc:'L’essentiel, au meilleur prix'},
       {id:'ltps',name:'Compatible HD/LTPS',desc:'L’essentiel, au meilleur prix'},
-      {id:'ltpsp',name:'LTPS Prime',desc:'LCD premium, lumineux'},
+      {id:'ltpsp',name:'LTPS Prime',desc:'Écran LCD de gamme supérieure, lumineux'},
       {id:'oled',name:'Soft OLED',desc:'Rendu proche de l’original'},
       {id:'relife',name:'ReLife',desc:'Dalle Apple d’origine reconditionnée'}
     ];
     const QUALITES_BAT=[
       {id:'compat',name:'Compatible',desc:'Solution économique'},
-      {id:'ti',name:'TI reconnue',desc:'Reconnue par le téléphone'},
+      {id:'ti',name:'Compatible reconnue',desc:'Batterie compatible reconnue par l’iPhone selon le modèle'},
       {id:'orig',name:'Originale',desc:'Pièce d’origine'}
     ];
     const fallbackScreens={
@@ -699,8 +706,8 @@
     };
     const SPECIALIST_GUIDANCE={
       computerScreen:{title:'Écran d’ordinateur',check:'Une photo de l’étiquette sous l’ordinateur permet d’identifier la dalle exacte. Si l’image apparaît sur un écran externe, la panne vient souvent de la dalle ou de sa connexion.',safety:'Ne forcez pas la charnière si l’écran est fissuré ou se décolle.'},
-      computerVirus:{title:'Virus ou publicités intempestives',check:'Évitez de saisir vos mots de passe et déconnectez les moyens de paiement enregistrés. Nous contrôlons le système avant de supprimer quoi que ce soit.',safety:'Ne payez aucun message d’alerte affiché à l’écran et ne donnez pas accès au PC à un inconnu.'},
-      computerDrive:{title:'Disque dur et Windows',check:'Nous vérifions d’abord l’état du disque et la possibilité de récupérer les données avant toute réinstallation.',safety:'Si le disque claque ou disparaît, éteignez le PC pour limiter les risques de perte de données.'},
+      computerVirus:{title:'Virus ou publicités intempestives',check:'Évitez de saisir vos mots de passe et déconnectez les moyens de paiement enregistrés. Nous contrôlons le système avant de supprimer quoi que ce soit.',safety:'Ne payez rien à la suite d’un message d’alerte affiché à l’écran et ne donnez pas accès au PC à un inconnu.'},
+      computerDrive:{title:'Disque dur et Windows',check:'Nous vérifions d’abord l’état du disque et la possibilité de récupérer les données avant toute réinstallation.',safety:'Si le disque fait un bruit anormal ou disparaît, éteignez le PC pour limiter les risques de perte de données.'},
       computerBattery:{title:'Batterie de PC ou Mac',check:'La référence exacte de l’appareil et l’état de la batterie sont contrôlés avant commande.',safety:'Si le clavier ou le pavé tactile se soulève, arrêtez de charger l’appareil.'},
       computerData:{title:'Récupération de données',check:'Le support est contrôlé avant toute tentative. Le devis dépend de son état et du niveau de récupération nécessaire.',safety:'Évitez les essais répétés si le disque fait du bruit ou n’est plus détecté.'},
       computerPower:{title:'Ordinateur qui ne démarre plus',check:'Apportez le chargeur avec l’appareil. Nous contrôlons d’abord l’alimentation, la batterie et le connecteur avant d’envisager la carte mère.',safety:'Débranchez l’appareil s’il chauffe anormalement ou dégage une odeur.'},
@@ -725,7 +732,7 @@
       overheating:{title:'Téléphone qui chauffe',advice:'Retirez la coque, fermez les applications lourdes et laissez l’appareil refroidir sans le mettre au froid. Une chauffe pendant la charge, au repos ou avec une batterie qui gonfle nécessite un contrôle.',safety:'Débranchez-le et cessez de l’utiliser s’il devient brûlant, se déforme ou dégage une odeur.'},
       slow:{title:'Téléphone lent ou stockage saturé',advice:'Vérifiez l’espace libre, redémarrez le téléphone et mettez le système à jour après sauvegarde. Un stockage presque plein ou une application défaillante suffit souvent à ralentir l’appareil.',safety:'Nous vérifions le logiciel et le stockage avant d’envisager une réparation matérielle.'},
       vibration:{title:'Vibreur ou retour haptique',advice:'Vérifiez le mode silencieux, les réglages de vibration et testez sans coque. Si le téléphone ne vibre jamais, le moteur ou sa connexion doit être contrôlé.',safety:'Le devis dépend du modèle et du diagnostic en atelier.'}
-      ,androidVirus:{title:'Virus ou publicités sur Android',advice:'Des publicités intempestives, des applications qui s’ouvrent seules ou un navigateur redirigé viennent souvent d’une application indésirable. Évitez de saisir vos mots de passe et ne payez aucun message d’alerte.',safety:'Nous contrôlons et nettoyons le téléphone avant d’envisager toute réinitialisation.'}
+      ,androidVirus:{title:'Virus ou publicités sur Android',advice:'Des publicités intempestives, des applications qui s’ouvrent seules ou un navigateur redirigé viennent souvent d’une application indésirable. Évitez de saisir vos mots de passe et ne payez rien à la suite d’un message d’alerte.',safety:'Nous contrôlons et nettoyons le téléphone avant d’envisager toute réinitialisation.'}
       ,board:{title:'Carte mère ou micro-soudure',advice:'Une panne de carte mère ne se confirme pas à distance. Nous contrôlons d’abord l’alimentation, la batterie, le connecteur et les traces d’oxydation afin d’éviter une intervention lourde inutile.',safety:'Le diagnostic et la faisabilité doivent être validés par l’atelier avant tout prix ou délai.'}
     };
     let evanConversationToken='';
@@ -952,7 +959,7 @@
         }else{
           setQuickReplies([{label:'Continuer sur WhatsApp',value:'whatsapp',kind:'brainWhatsApp'},{label:'Demander par e-mail',value:'mail',kind:'brainMail'}]);
         }
-        $('#device-state').textContent=data.diagnostic_complete?'Diagnostic prêt':data.diagnostic_active?'Diagnostic guidé':data.needs_expert?'Validation humaine':'Mémoire Solution Phone';
+        $('#device-state').textContent=data.diagnostic_complete?'Diagnostic prêt':data.diagnostic_active?'Diagnostic guidé':data.needs_expert?'Validation humaine':'Tarif indicatif, à confirmer';
         return true;
       }catch(error){
         $('#chat-typing')?.remove();document.body.classList.remove('evan-thinking','evan-speaking');
@@ -981,13 +988,13 @@
         ]);return;
       }
       if(type==='battery'){
-        botReply('Pour la batterie, le choix dépend du téléphone :\n\niPhone — compatible, TI reconnue ou originale selon le modèle.\nAndroid — compatible ou originale constructeur selon disponibilité.\n\nAvant la réparation, l’équipe vous explique clairement le prix, la qualité et la compatibilité. Lorsqu’il existe plusieurs versions, vous choisissez celle adaptée à votre budget.',[
+        botReply('Pour la batterie, le choix dépend du téléphone :\n\niPhone — compatible, compatible reconnue par l’iPhone ou originale selon le modèle.\nAndroid — compatible ou originale constructeur selon disponibilité.\n\nAvant la réparation, l’équipe vous explique clairement le prix, la qualité et la compatibilité. Lorsqu’il existe plusieurs versions, vous choisissez celle adaptée à votre budget.',[
           {label:'Demander le prix exact',value:'whatsapp',kind:'directWhatsApp'},
           {label:'Devis par e-mail',value:'mail',kind:'brainMail'},
           {label:'Voir un tarif iPhone',value:'price',kind:'openPrice'}
         ]);return;
       }
-      botReply('Pour un écran iPhone, nous proposons jusqu’à 4 niveaux selon le modèle :\n\nCompatible HD/LTPS — le prix le plus doux.\nLTPS Prime — LCD premium, lumineux.\nSoft OLED — OLED souple, noirs profonds, proche de l’origine.\nReLife — dalle Apple d’origine reconditionnée avec une vitre neuve.\n\nVous choisissez selon votre budget ; l’équipe confirme la qualité disponible avant l’intervention.',[
+      botReply('Pour un écran iPhone, nous proposons jusqu’à 4 niveaux selon le modèle :\n\nCompatible HD/LTPS — écran LCD compatible (technologie des écrans classiques), le prix le plus bas.\nLTPS Prime — écran LCD de gamme supérieure, plus lumineux.\nSoft OLED — écran OLED souple : noirs profonds, rendu proche de l’origine.\nReLife — dalle Apple d’origine reconditionnée avec une vitre neuve.\n\nVous choisissez selon votre budget ; l’équipe confirme la qualité disponible avant l’intervention.',[
         {label:'Voir mon tarif',value:'price',kind:'openPrice'},
         {label:'Comprendre QualiRépar',value:'qualirepar',kind:'education'},
         {label:'Me conseiller sur WhatsApp',value:'whatsapp',kind:'directWhatsApp'}
@@ -1005,9 +1012,9 @@
         address:'Nous sommes au 21 rue Gambetta, 71000 Mâcon, dans le centre-ville. Les trois espaces Solution Phone, Solution Accessoires et Solution Informatique sont réunis à cette adresse.',
         contact:'Vous pouvez appeler la boutique au 03 85 33 06 89 ou écrire directement sur WhatsApp au 07 83 92 18 84.',
         appointment:'Vous pouvez venir sans rendez-vous. Pour éviter un déplacement inutile, je vous conseille de vérifier la disponibilité de la pièce par WhatsApp si vous connaissez déjà le modèle et la panne.',
-        warranty:'Les réparations standards sont garanties 6 mois sur la pièce et la main-d’œuvre réalisées. Les smartphones reconditionnés et les accessoires électriques sont garantis 12 mois, hors casse, oxydation ou dommage volontaire. Les conditions précises figurent sur la facture.',
+        warranty:'Les réparations standard sont garanties 6 mois sur la pièce et la main-d’œuvre réalisées. Les smartphones reconditionnés et les accessoires électriques sont garantis 12 mois, hors casse, oxydation ou dommage volontaire. Les conditions précises figurent sur la facture.',
         payment:'La boutique accepte la carte bancaire (y compris sans contact), Apple Pay, le virement et les espèces (1 000 € maximum, limite légale). Pas de chèque ni de paiement en plusieurs fois. Une commande spéciale de pièce peut nécessiter un acompte de 30 % du devis avant commande.',
-        turnaround:'Nous ne promettons pas un délai avant d’avoir identifié la panne et vérifié la pièce. Les réparations standards d’iPhone sont généralement annoncées dans la journée lorsque la pièce est disponible. Les recherches de panne complexes et la micro-soudure demandent plus de temps.',
+        turnaround:'Nous ne promettons pas un délai avant d’avoir identifié la panne et vérifié la pièce. Les réparations standard d’iPhone (écran, batterie) sont généralement réalisées en moins d’une heure si la pièce est en stock. Les recherches de panne complexes et la micro-soudure demandent plus de temps.',
         dataPrivacy:'L’équipe est tenue au secret professionnel. Aucune donnée personnelle n’est collectée, copiée ou transmise, sauf si vous le demandez expressément pour une sauvegarde, un transfert ou le diagnostic.',
         backup:'Sauvegardez vos photos, contacts et documents avant de déposer l’appareil lorsque c’est possible. Une intervention peut toujours comporter un risque pour les données, surtout si l’appareil ne démarre plus ou si la carte mère est touchée.',
         quoteProcess:'Le diagnostic et le devis sont gratuits et sans engagement. Le prix est annoncé avant l’intervention et rien n’est réparé sans votre accord. L’assistant de Sébastien peut afficher les tarifs enregistrés pour les écrans et batteries iPhone ; pour les autres cas, l’équipe confirme le devis après identification du modèle et de la panne.',
@@ -1278,16 +1285,16 @@
           answer.innerHTML=`
             <div class="answer-head"><small>${livePrice?'Résultat · tarifs atelier connectés':'Estimation disponible · connexion atelier indisponible'}</small><button onclick="resetDiagnostic()">Nouvelle demande</button></div>
             <h3>${issueLabel}<br>${current.model}</h3>
-            <p class="answer-intro">J’ai trouvé ${qualities.length} qualité${qualities.length>1?'s':''} de pièce. ${livePrice?'Ces tarifs proviennent de la base atelier et sont confirmés avant l’intervention.':'La base atelier ne répond pas actuellement : ces montants sont indicatifs et doivent être confirmés par l’équipe.'}</p>
+            <p class="answer-intro">J’ai trouvé ${qualities.length} qualité${qualities.length>1?'s':''} de pièce. ${livePrice?'Nos prix à jour, pièce et main-d’œuvre comprises, confirmés avant l’intervention.':'Tarif indicatif, à confirmer par l’équipe.'}</p>
             ${p.issue==='battery'&&p.safetyAlert?`<div class="recap"><div><small>Consigne de sécurité</small><b>Batterie possiblement gonflée ou anormalement chaude : ne rechargez plus le téléphone et apportez-le en atelier.</b></div><strong>Stop</strong></div>`:''}
-            ${p.issue==='screen'?`<details class="screen-explainer"><summary>Le conseil de Sébastien · quelle qualité choisir ?</summary><p>Compatible HD/LTPS — le choix économique.
-LTPS Prime — LCD premium et lumineux.
-Soft OLED — OLED souple, noirs profonds, proche de l’origine.
+            ${p.issue==='screen'?`<details class="screen-explainer"><summary>Le conseil de Sébastien · quelle qualité choisir ?</summary><p>Compatible HD/LTPS — écran LCD compatible (technologie des écrans classiques), le choix économique.
+LTPS Prime — écran LCD de gamme supérieure, plus lumineux.
+Soft OLED — écran OLED souple : noirs profonds, rendu proche de l’origine.
 ReLife — dalle Apple d’origine reconditionnée avec une vitre neuve.
 
 Budget : Compatible · Équilibre : LTPS Prime · Confort : Soft OLED · Fidélité : ReLife.</p></details>`:''}
             ${p.issue==='battery'?`<details class="screen-explainer"><summary>Le conseil de Sébastien · quelle batterie choisir ?</summary><p>Compatible — l’option économique.
-TI reconnue — gamme compatible sélectionnée pour être reconnue par l’iPhone sur les modèles concernés.
+Compatible reconnue — batterie compatible sélectionnée pour être reconnue par l’iPhone sur les modèles concernés.
 Originale — pièce d’origine, selon disponibilité.
 
 Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. La compatibilité, le prix et l’affichage de l’état de santé sont confirmés avant l’intervention.</p></details>`:''}
@@ -1295,7 +1302,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
             <div class="recap${livePrice?' bonus-eligible':''}"><div><small>${livePrice?'Prix TTC après avantage Solution Phone':'Estimation TTC à confirmer'}</small><b>${livePrice?'25 € déjà déduits du tarif affiché':'Confirmation nécessaire par WhatsApp ou e-mail'}</b></div><strong id="recap-price">${current.selected.price} €</strong></div>
             ${p.issue==='screen'?protectionOffersHtml():''}
             <div class="actions"><a class="action wa" id="result-wa" target="_blank" rel="noopener">Confirmer sur WhatsApp</a><button class="action mail" onclick="openMail()">Recevoir par e-mail</button></div>
-            <p class="assurance">${livePrice?'Tarif issu de la base atelier':'Estimation de secours'} · Garantie 6 mois · Facture détaillée · Rien n’est effectué sans votre accord. Le tarif final reste soumis au diagnostic visuel et à la disponibilité de la pièce.</p>`;
+            <p class="assurance">${livePrice?'Prix à jour, pièce et main-d’œuvre comprises':'Tarif indicatif, à confirmer'} · Garantie 6 mois · Facture détaillée · Rien n’est effectué sans votre accord. Le tarif final reste soumis au diagnostic visuel et à la disponibilité de la pièce.</p>`;
           answer.querySelectorAll('.quality').forEach(btn=>btn.addEventListener('click',()=>selectQuality(btn.dataset.id)));
           updateActions();syncContextCta();
         }else renderUnknown(p);
@@ -1340,7 +1347,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
         <h3>Nettoyage virus<br>${escapeHtml(model)}</h3>
         <p class="answer-intro">Publicités intempestives, applications qui s’ouvrent seules ou téléphone ralenti : nous contrôlons et nettoyons votre smartphone Android pour <b>10 €</b>.</p>
         <div class="recap"><div><small>Tarif atelier</small><b>Contrôle et nettoyage des applications indésirables</b></div><strong>10 €</strong></div>
-        <p class="answer-intro">Évitez de saisir vos mots de passe et ne payez aucun message d’alerte. Nous privilégions le nettoyage avant toute réinitialisation afin de préserver vos données.</p>
+        <p class="answer-intro">Évitez de saisir vos mots de passe et ne payez rien à la suite d’un message d’alerte. Nous privilégions le nettoyage avant toute réinitialisation afin de préserver vos données.</p>
         <div class="actions"><a class="action wa" id="result-wa" href="${waLink()}" target="_blank" rel="noopener">Demander sur WhatsApp</a><button class="action mail" onclick="openMail()">Demander par e-mail</button></div>
         <p class="assurance">Tarif annoncé · Données préservées autant que possible · Aucun effacement sans votre accord</p>`;
       syncContextCta();
@@ -1383,7 +1390,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
     }
     function protectionOffersHtml(){
       return `<div class="advisor-offer"><small>Conseil de Sébastien</small><strong>Protéger le téléphone dès maintenant ?</strong><div class="offer-grid">
-        <button class="offer-add" type="button" onclick="toggleAddon('Film hydrogel Saphir · pose incluse',15,this)"><b>Hydrogel Saphir · 15 €</b><span>Transparent · anti-rayures · pose incluse</span></button>
+        <button class="offer-add" type="button" onclick="toggleAddon('Film hydrogel Saphir · pose incluse',10,this)"><b>Hydrogel Saphir · 10 €</b><span>Transparent · anti-rayures · pose incluse</span></button>
         <button class="offer-add" type="button" onclick="toggleAddon('Coque adaptée au modèle',0,this)"><b>Coque adaptée</b><span>Modèle et couleur à confirmer</span></button>
       </div></div>`;
     }
@@ -1416,7 +1423,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       if(matches.length){
         answer.innerHTML=`<div class="answer-head"><small>Stock réel · ${matches.length} sélection${matches.length>1?'s':''}</small><button onclick="resetDiagnostic()">Nouvelle demande</button></div>
           <h3>J’ai trouvé ${matches.length}<br>téléphone${matches.length>1?'s':''}.</h3><p class="answer-intro">Modèles actuellement enregistrés dans le stock Solution Phone.</p>
-          <div class="qualities">${matches.map(item=>{const displayModel=phoneDisplayName(item.modele),detail=[formatStorage(item.stockage),item.grade||'',item.couleur||''].filter(Boolean).join(' · '),message='Bonjour Sébastien, le '+displayModel+' '+formatStorage(item.stockage)+' à '+item.vente+' € est-il toujours disponible ?';return `<a class="quality" style="text-decoration:none;color:inherit" target="_blank" rel="noopener" href="https://wa.me/33783921884?text=${encodeURIComponent(message)}"><div><b>${escapeHtml(displayModel)}</b><span>${escapeHtml(detail)}</span></div><strong>${Number(item.vente)} €</strong></a>`}).join('')}</div>
+          <div class="qualities">${matches.map(item=>{const displayModel=phoneDisplayName(item.modele),detail=[formatStorage(item.stockage),item.grade||'',item.couleur||''].filter(Boolean).join(' · '),message='Bonjour Solution Phone, le '+displayModel+' '+formatStorage(item.stockage)+' à '+item.vente+' € est-il toujours disponible ?';return `<a class="quality" style="text-decoration:none;color:inherit" target="_blank" rel="noopener" href="https://wa.me/33783921884?text=${encodeURIComponent(message)}"><div><b>${escapeHtml(displayModel)}</b><span>${escapeHtml(detail)}</span></div><strong>${Number(item.vente)} €</strong></a>`}).join('')}</div>
           ${protectionOffersHtml()}
           <div class="actions"><a class="action wa" id="result-wa" href="${waLink()}" target="_blank" rel="noopener">Demander conseil sur WhatsApp</a><a class="action mail" href="reconditionnes.html">Voir tout le stock</a></div>
           <p class="assurance">Stock mis à jour depuis l’application · Téléphones testés · Garantie selon le modèle</p>`;
@@ -1444,8 +1451,8 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       }else if(p.intent==='transfer'){
         current={...p,issueLabel:'Transfert de téléphone',model:`${f.source||'?'} vers ${f.target||'?'} · ${f.transferType||'Données à préciser'}`};
         answer.innerHTML=`<div class="answer-head"><small>Transfert accompagné · estimation atelier</small><button onclick="resetDiagnostic()">Nouvelle demande</button></div>
-          <div class="unknown"><h3>${escapeHtml(f.source||'Ancien téléphone')} → ${escapeHtml(f.target||'Nouveau téléphone')}</h3><p class="answer-intro">${escapeHtml(f.transferType||'Transfert de données')} · Si l’ancien smartphone est cassé, nous contrôlons d’abord s’il reste accessible. La récupération et le transfert sont proposés <b>à partir de 30 €</b>.</p>
-          <div class="recap"><div><small>Tarif indicatif</small><b>Récupération et transfert vers le nouveau smartphone</b></div><strong>dès 30 €</strong></div>
+          <div class="unknown"><h3>${escapeHtml(f.source||'Ancien téléphone')} → ${escapeHtml(f.target||'Nouveau téléphone')}</h3><p class="answer-intro">${escapeHtml(f.transferType||'Transfert de données')} · Si l’ancien smartphone est cassé, nous contrôlons d’abord s’il reste accessible. La récupération et le transfert sont proposés <b>à partir de 20 €</b>.</p>
+          <div class="recap"><div><small>Tarif indicatif</small><b>Récupération et transfert vers le nouveau smartphone</b></div><strong>dès 20 €</strong></div>
           <p class="answer-intro">Le prix et la faisabilité dépendent de l’état de l’ancien appareil, de la quantité de données et de la compatibilité du nouveau téléphone. Tout est confirmé avant intervention.</p>
           <div class="actions"><a class="action wa" id="result-wa" href="${waLink()}" target="_blank" rel="noopener">Organiser le transfert</a><button class="action mail" onclick="openMail()">Demander par e-mail</button></div><p class="assurance">Photos, contacts et applications selon compatibilité · Aucun effacement sans votre accord</p></div>`;
       }else{
@@ -1488,21 +1495,21 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       const addons=current.addons?.length?' · À préparer : '+current.addons.map(x=>x.name+(x.price?' ('+x.price+' €)':'')).join(' + '):'';
       if(current.intent==='reconditioned')return `Recherche smartphone reconditionné · ${current.model}${brainContext}${addons}`;
       if(current.intent==='accessory')return `Accessoire · ${current.model}${current.text?' · Demande originale : '+current.text:''}${brainContext}${addons}`;
-      if(current.intent==='transfer')return `Service données · ${current.model} · Transfert standard smartphone à smartphone : 30 €${current.text?' · Demande originale : '+current.text:''}${brainContext}`;
+      if(current.intent==='transfer')return `Service données · ${current.model} · Transfert de données smartphone à smartphone : dès 20 €${current.text?' · Demande originale : '+current.text:''}${brainContext}`;
       if(['computer','scooter','console'].includes(current.intent))return `${current.issueLabel} · ${current.model}${current.text?' · Demande : '+current.text:''}${brainContext}`;
       const q=current.selected?` · ${current.selected.name} · ${current.selected.priceLabel||current.selected.price+' €'}`:'';
-      const priceStatus=current.priceSource==='estimation_secours'?' · Estimation de secours à confirmer':current.priceSource==='atelier_connecte'?' · Tarif issu de la base atelier':'';
+      const priceStatus=current.priceSource==='estimation_secours'?' · Tarif indicatif, à confirmer':current.priceSource==='atelier_connecte'?' · Prix à jour, pièce et main-d’œuvre comprises':'';
       const qualiStatus=current.brand==='Apple'&&['screen','battery'].includes(current.issue)?' · Prix affiché après réduction Solution Phone de 25 €':'';
       const symptom=current.symptom?` · ${current.symptom}`:'';
       const declared=current.text?` · ${current.intent==='repair'?'Symptôme déclaré':'Demande originale'} : ${current.text}`:'';
       return `${current.issueLabel||'Diagnostic'} · ${current.model||current.text}${symptom}${q}${priceStatus}${qualiStatus}${declared}${brainContext}${addons}`;
     }
     function waLink(){
-      return 'https://wa.me/33783921884?text='+encodeURIComponent('Bonjour Sébastien, je viens du diagnostic Solution Phone. '+requestText()+'. Pouvez-vous me confirmer le devis ?');
+      return 'https://wa.me/33783921884?text='+encodeURIComponent('Bonjour Solution Phone, '+requestText()+'.');
     }
     function updateActions(){const a=$('#result-wa');if(a)a.href=waLink()}
     function resetDiagnostic(){
-      stopExpertPolling();$('#answer-view').classList.remove('show');$('#answer-view').innerHTML='';$('#chat-view').classList.remove('show');$('#chat-thread').innerHTML='';$('#chat-quick').innerHTML='';$('#loading-view').classList.remove('show');$('#start-view').style.display='block';$('#diagnostic-input').value='';$('#diagnostic-input').placeholder='Écrivez directement votre demande…';document.querySelectorAll('.brand-button').forEach(x=>x.classList.remove('active'));conversationText='';conversationParsed=null;waitingFor=null;flowData={};current=null;lastBrainWhatsApp='';updateDiagnosticProgress(null);evanConversationToken='';try{sessionStorage.removeItem('evan_conversation_token')}catch(e){}$('#device-state').textContent='En attente';syncContextCta();setTimeout(()=>$('#diagnostic-input').focus(),80);
+      stopExpertPolling();$('#answer-view').classList.remove('show');$('#answer-view').innerHTML='';$('#chat-view').classList.remove('show');$('#chat-thread').innerHTML='';$('#chat-quick').innerHTML='';$('#loading-view').classList.remove('show');$('#start-view').style.display='block';$('#diagnostic-input').value='';$('#diagnostic-input').placeholder='Écrivez directement votre demande…';document.querySelectorAll('.brand-button').forEach(x=>x.classList.remove('active'));conversationText='';conversationParsed=null;waitingFor=null;flowData={};current=null;lastBrainWhatsApp='';updateDiagnosticProgress(null);evanConversationToken='';try{sessionStorage.removeItem('evan_conversation_token')}catch(e){}$('#device-state').textContent='Votre demande';syncContextCta();setTimeout(()=>$('#diagnostic-input').focus(),80);
     }
     let mailReturnFocus=null,mailDraftContext='';
     function openMail(requestOverride){
@@ -1526,7 +1533,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
     function syncContextCta(){
       const button=$('#dock-price-button');if(!button)return;
       if(current?.intent==='computer')button.textContent='Devis ordinateur';
-      else if(current?.intent==='transfer')button.textContent='Transfert 30 €';
+      else if(current?.intent==='transfer')button.textContent='Transfert dès 20 €';
       else if(['scooter','console','accessory'].includes(current?.intent))button.textContent='Demander un devis';
       else if(current?.brand==='Apple'&&['screen','battery'].includes(current?.issue))button.textContent='Voir ce tarif';
       else if(current?.issue==='battery')button.textContent='Devis batterie';
@@ -1594,7 +1601,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       if(!$('#quick-model').value){$('#quick-model').reportValidity();return}
       if(!request){status.textContent='Indiquez la pièce ou la panne.';status.classList.add('is-error');$('#quick-other-detail').focus();return}
       const name=$('#quick-other-name').value.trim(),phone=$('#quick-other-phone').value.trim();
-      const message=`Bonjour Sébastien, je viens du site Solution Phone. ${request}${name?' · Nom : '+name:''}${phone?' · Téléphone : '+phone:''}. Pouvez-vous me confirmer le devis ?`;
+      const message=`Bonjour Solution Phone, ${request}${name?' · Nom : '+name:''}${phone?' · Téléphone : '+phone:''}. Pouvez-vous me confirmer le devis ?`;
       openTrackedWhatsApp('https://wa.me/33783921884?text='+encodeURIComponent(message),'quick_other_part');track('devis_autre_piece_whatsapp',{model:iphoneLabel($('#quick-model').value)});
     });
     $('#quick-other-mail').addEventListener('click',async()=>{
@@ -1669,12 +1676,8 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       submit.disabled=false;
     });
     function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,{transport_type:'beacon',...(params||{})})}catch(e){}}
-    function trackLeadSuccess(name,params,contact){
-      const userData=window.SolutionPhoneConsent?.enhancedLeadData(contact);
-      if(userData)window.gtag('set','user_data',userData);
-      track(name,params);
-      if(userData)window.gtag('set','user_data',{});
-    }
+    // Aucune donnée personnelle (e-mail, téléphone) n’est transmise à Google : seul l’événement est mesuré.
+    function trackLeadSuccess(name,params){track(name,params)}
     function trackWhatsApp(source){
       track('contact_whatsapp',{method:'whatsapp',page:'assistant',source:String(source||'link'),intent:current?.intent||'unknown',brand:current?.brand||''});
       trackBrainEvent('whatsapp_clicked',{intent:current?.intent||'unknown',brand:current?.brand||'',source:String(source||'link')});
