@@ -29,6 +29,8 @@ const ALLOWED_ORIGINS = new Set([
   'http://localhost:4175',
   'http://127.0.0.1:4175',
   'http://127.0.0.1:4180',
+  'http://localhost:4193',
+  'http://127.0.0.1:4193',
 ])
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? ''
