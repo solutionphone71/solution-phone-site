@@ -294,6 +294,7 @@
 <link rel="stylesheet" href="home-simple.css?v=5">
 <script>if(new URLSearchParams(location.search).has('tarifs'))document.documentElement.classList.add('tariff-embed')</script>
 <link rel="stylesheet" href="confiance.css?v=1">
+<script src="/menu-commun.js?v=1" data-site="phone"></script>
 </head>
 <body>
   <main class="shell">
@@ -519,7 +520,7 @@
     <div><b>Un SAV qui ne vous laisse pas tomber</b><p>Un souci après la réparation&nbsp;? Vous revenez en boutique et on s’en occupe. Réparations garanties 6&nbsp;mois.</p></div>
     <div><b>Des conseils honnêtes</b><p>Si une réparation ne vaut pas le coup, on vous le dit. On vous conseille la bonne solution, pas la plus chère.</p></div>
   </div>
-  <h3>Les petits services qui dépannent</h3>
+  <h3 id="services" style="scroll-margin-top:84px">Les petits services qui dépannent</h3>
   <div class="sp-services"><a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20un%20nettoyage%20virus%20/%20publicit%C3%A9s%20pour%20mon%20smartphone%20Android.%20Mon%20mod%C3%A8le%20%3A%20" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></i><b>Nettoyage virus et publicités</b><span>Smartphone Android</span><strong>10 à 20 €</strong><em>Demander sur WhatsApp ›</em></a><a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20souhaite%20un%20transfert%20de%20donn%C3%A9es%20entre%20deux%20smartphones.%20Mes%20mod%C3%A8les%20%3A%20" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="7" height="14" rx="1.6"/><rect x="14.5" y="6" width="7" height="14" rx="1.6"/><path d="M8 11h7.5m-2-2 2 2-2 2"/></svg></i><b>Transfert de données</b><span>De votre ancien téléphone vers le nouveau</span><strong>dès 20 €</strong><em>Demander sur WhatsApp ›</em></a><a href="https://wa.me/33783921884?text=Bonjour%2C%20mon%20t%C3%A9l%C3%A9phone%20charge%20mal%2C%20je%20souhaite%20un%20nettoyage%20du%20connecteur%20de%20charge.%20Mon%20mod%C3%A8le%20%3A%20" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v4m6-4v4"/><path d="M7 7h10v3a5 5 0 0 1-10 0V7z"/><path d="M12 15v6"/></svg></i><b>Nettoyage du connecteur de charge</b><span>Votre téléphone charge mal ?</span><strong>10 €</strong><em>Demander sur WhatsApp ›</em></a></div>
 </section>
   <section class="repair-atlas" id="reparations" aria-labelledby="repair-atlas-title">
@@ -1719,5 +1720,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
     const updateContactDock=()=>document.body.classList.toggle('contact-dock-visible',window.scrollY>Math.min(520,window.innerHeight*.62));
     updateContactDock();window.addEventListener('scroll',updateContactDock,{passive:true});
   </script>
+<!-- menu-commun : liens du pied de page (HTML statique) -->
+<div id="mc-footer" role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung & Android</a></li><li><a href="https://solution-phone.fr/ecran-iphone-casse-macon.html">Écran cassé</a></li><li><a href="https://solution-phone.fr/remplacement-batterie-telephone-macon.html">Remplacement batterie</a></li><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/">Accessoires · Solution Accessoires</a></li><li><a href="https://solution-accessoires.fr/hydrogel.html">Protection d’écran hydrogel</a></li><li><a href="https://solution-phone.fr/accessoires.html">Boutique en ligne</a></li><li><a href="https://solution-phone.fr/atelier.html">L’atelier Solution Phone</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Nos boutiques · horaires & plan</a></li><li><a href="https://reparation-iphone-macon.fr/qualirepar.html">QualiRépar −25 €</a></li><li><a href="https://solution-phone.fr/faq.html">Questions fréquentes</a></li><li><a href="https://solution-phone.fr/actualites.html">Conseils & actualités</a></li></ul><p class="mc-f-title">Solution Phone à Mâcon</p><ul><li><a href="https://solution-phone.fr/reparation-telephone-macon.html">Réparation téléphone à Mâcon</a></li><li><a href="https://solution-phone.fr/reparation-iphone.html">Réparation iPhone en atelier</a></li><li><a href="https://solution-phone.fr/hydrogel.html">Hydrogel posé en atelier</a></li></ul></div></div>
 </body>
 </html>
