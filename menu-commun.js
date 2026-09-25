@@ -44,7 +44,7 @@
       { label: 'Nettoyage virus Android', meta: '10 à 20 €', href: SP + '/#services' },
       { label: 'Transfert de données', meta: 'dès 20 €', href: SP + '/#services' },
       { label: 'Nettoyage connecteur de charge', meta: '10 €', href: SP + '/#services' },
-      { label: 'Reprise de votre ancien téléphone', meta: 'Estimation sur WhatsApp', href: wa('Bonjour, je souhaite faire reprendre mon ancien téléphone. Modèle et état : '), ext: true },
+      { label: 'Rachat smartphone, tablette, PC', meta: 'Même cassé · offre rapide', href: SA + '/rachat-smartphone.html' },
       { label: '−25 € QualiRépar', meta: 'Bonus réparation', href: RI + '/qualirepar.html' }
     ] },
     { id: 'boutiques', label: 'Nos boutiques', items: [
