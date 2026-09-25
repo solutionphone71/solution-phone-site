@@ -65,13 +65,13 @@
     footer a{color:inherit;text-decoration:underline}
     @media(max-width:800px){.links{display:none}.grid{grid-template-columns:1fr}.proofs{grid-template-columns:1fr 1fr}.hero{min-height:520px;background-position:63% center}.actions{display:grid}.btn{width:100%}}
     @media(max-width:480px){.hero{padding:72px 18px 50px}.proofs{grid-template-columns:1fr}.proof{min-height:0}.nav{min-height:58px}}
-    .shop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}.shop{padding:clamp(24px,4vw,40px);background:#fff}.shop b{font-size:22px;letter-spacing:-.03em}.shop p{margin:10px 0;color:#5f5f66;line-height:1.6}.shop .shop-role{color:var(--ink);font-weight:700}.shop a{font-weight:800;text-decoration:underline}
     .access{background:#fff}.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:start}.access p{color:#5f5f66;font-size:17px;line-height:1.65}.btn.outline{border:1px solid var(--ink)}
     a:focus-visible,button:focus-visible{outline:3px solid #0b57d0;outline-offset:2px}
-    @media(max-width:800px){.shop-grid,.access-grid{grid-template-columns:1fr}}
+    @media(max-width:800px){.access-grid{grid-template-columns:1fr}}
   </style>
   <script src="/scripts/consent-tracking.js?v=2"></script>
-<script src="/menu-commun.js?v=2" data-site="phone"></script>
+<script src="/menu-commun.js?v=3" data-site="phone"></script>
+<link rel="stylesheet" href="/boutiques.css?v=1">
 <link rel="stylesheet" href="/accessibilite.css?v=1">
 </head>
 <body>
@@ -126,31 +126,48 @@
         </div>
       </div>
     </section>
-    <section class="section shops" id="boutiques">
-      <div class="inner">
-        <div class="eyebrow">Au 21 rue Gambetta</div>
-        <h2>Trois boutiques<br>côte à côte.</h2>
-        <div class="shop-grid">
-          <article class="shop">
-            <b>Solution Phone</b>
-            <p class="shop-role">Réparation de smartphones, tablettes et ordinateurs</p>
-            <p>Lundi : 9h15–12h15 et 14h–19h<br>Du mardi au samedi : 9h15–19h<br>Dimanche : fermé</p>
-            <a href="tel:+33385330689">03 85 33 06 89</a>
-          </article>
-          <article class="shop">
-            <b>Solution Accessoires</b>
-            <p class="shop-role">Coques, protections, chargeurs, smartphones reconditionnés</p>
-            <p>Du mardi au samedi : 10h–12h et 14h–19h<br>Dimanche et lundi : fermé</p>
-            <a href="tel:+33602849953">06 02 84 99 53</a> · <a href="https://solution-accessoires.fr/">solution-accessoires.fr</a>
-          </article>
-          <article class="shop">
-            <b>Solution Informatique</b>
-            <p class="shop-role">Ordinateurs, consoles et mobilité</p>
-            <p>Le matin : 9h15–12h15<br>L’après-midi : sur rendez-vous</p>
-            <a href="tel:+33748348743">07 48 34 87 43</a>
-          </article>
-        </div>
+    <section class="sp-shops" id="boutiques" aria-labelledby="boutiques-title">
+    <div class="sp-shops-in">
+      <h2 class="sp-shops-title" id="boutiques-title">Trois boutiques. Une seule adresse.</h2>
+      <p class="sp-shops-lead">Au 21 rue Gambetta, à Mâcon, votre téléphone, votre ordinateur et même votre trottinette se règlent au même endroit, en quelques pas.</p>
+      <div class="sp-shops-grid">
+        <article class="sp-shop">
+          <img class="sp-shop-photo sp-shop-photo--phone" src="/img/boutiques/facade-solution-phone-800.webp" srcset="/img/boutiques/facade-solution-phone-800.webp 800w, /img/boutiques/facade-solution-phone-1200.webp 1200w" sizes="(min-width: 1140px) 364px, (min-width: 900px) calc((100vw - 92px) / 3), calc(100vw - 32px)" width="1200" height="837" loading="lazy" decoding="async" alt="Façade de Solution Phone, 21 rue Gambetta à Mâcon : vitrine « Centre de réparation » et enseigne rouge Solution Phone">
+          <div class="sp-shop-body">
+            <p class="sp-shop-kicker">L’atelier de réparation</p>
+            <h3 class="sp-shop-name">Solution Phone</h3>
+            <p class="sp-shop-text">Écran cassé, batterie à plat, téléphone qui ne charge plus&nbsp;: smartphones et tablettes de toutes marques, réparés le plus souvent en moins d’une heure si la pièce est en stock. 25&nbsp;€ déjà déduits de nos tarifs.</p>
+            <p class="sp-shop-meta">Lundi 9h15–12h15 et 14h–19h · du mardi au samedi 9h15–19h</p>
+            <p class="sp-shop-meta sp-shop-meta--tel"><a href="tel:+33385330689" aria-label="Appeler Solution Phone au 03 85 33 06 89">03&nbsp;85&nbsp;33&nbsp;06&nbsp;89</a></p>
+            <a class="sp-shop-btn" href="/#devis">Obtenir mon prix</a>
+          </div>
+        </article>
+        <article class="sp-shop">
+          <img class="sp-shop-photo sp-shop-photo--acc" src="/img/boutiques/facade-solution-accessoires-800.webp" srcset="/img/boutiques/facade-solution-accessoires-800.webp 800w, /img/boutiques/facade-solution-accessoires-1200.webp 1200w" sizes="(min-width: 1140px) 364px, (min-width: 900px) calc((100vw - 92px) / 3), calc(100vw - 32px)" width="1200" height="492" loading="lazy" decoding="async" alt="Façade de Solution Accessoires, 21 rue Gambetta à Mâcon : enseignes « Ici smartphone accessoires » et « Solution Accessoires »">
+          <div class="sp-shop-body">
+            <p class="sp-shop-kicker">Smartphones &amp; accessoires</p>
+            <h3 class="sp-shop-name">Solution Accessoires</h3>
+            <p class="sp-shop-text">Smartphones neufs et reconditionnés garantis 12&nbsp;mois, coques, verres trempés et hydrogel posés sur place, chargeurs, écouteurs&nbsp;: vous repartez équipé, juste à côté.</p>
+            <p class="sp-shop-meta">Du mardi au samedi 10h–12h et 14h–19h</p>
+            <p class="sp-shop-meta sp-shop-meta--tel"><a href="tel:+33602849953" aria-label="Appeler Solution Accessoires au 06 02 84 99 53">06&nbsp;02&nbsp;84&nbsp;99&nbsp;53</a></p>
+            <a class="sp-shop-btn" href="https://solution-accessoires.fr/" aria-label="Voir le stock de Solution Accessoires">Voir le stock</a>
+          </div>
+        </article>
+        <article class="sp-shop">
+          <img class="sp-shop-photo sp-shop-photo--info" src="/img/boutiques/facade-solution-informatique-800.webp" srcset="/img/boutiques/facade-solution-informatique-800.webp 800w, /img/boutiques/facade-solution-informatique-1200.webp 1200w" sizes="(min-width: 1140px) 364px, (min-width: 900px) calc((100vw - 92px) / 3), calc(100vw - 32px)" width="1200" height="959" loading="lazy" decoding="async" alt="Façade de Solution Informatique, 21 rue Gambetta à Mâcon : enseigne rouge Solution Informatique au-dessus de la vitrine">
+          <div class="sp-shop-body">
+            <p class="sp-shop-kicker">PC, Mac, consoles, trottinettes</p>
+            <h3 class="sp-shop-name">Solution Informatique</h3>
+            <p class="sp-shop-text">Ordinateur lent ou en panne, Mac qui ne démarre plus, console qui surchauffe, trottinette électrique à l’arrêt&nbsp;: on diagnostique, on vous annonce le prix, puis on répare.</p>
+            <p class="sp-shop-meta">Le matin 9h15–12h15 · l’après-midi sur rendez-vous</p>
+            <p class="sp-shop-meta sp-shop-meta--tel"><a href="tel:+33748348743" aria-label="Appeler Solution Informatique au 07 48 34 87 43">07&nbsp;48&nbsp;34&nbsp;87&nbsp;43</a></p>
+            <a class="sp-shop-btn" href="/solution-informatique.html" aria-label="Découvrir Solution Informatique">Découvrir</a>
+          </div>
+        </article>
       </div>
+      <p class="sp-shops-outro">Vous déposez votre ordinateur, on remplace l’écran de votre téléphone, et vous repartez avec une coque neuve&nbsp;: tout se fait au même endroit.</p>
+      <p class="sp-shops-links"><a href="https://www.google.com/maps/dir/?api=1&amp;destination=21+Rue+Gambetta+71000+Macon" target="_blank" rel="noopener">Itinéraire&nbsp;›</a><a href="#acces">Voir le plan et les horaires&nbsp;›</a></p>
+    </div>
     </section>
     <section class="section access" id="acces">
       <div class="inner access-grid">
@@ -170,8 +187,8 @@
   </main>
   <footer>Solution Phone · 21 rue Gambetta, 71000 Mâcon · 03 85 33 06 89<br><a href="/cgv.html">Mentions légales &amp; CGV</a> · <a href="/politique-confidentialite.html">Confidentialité</a> · <a href="#" data-sp-consent-manage>Gérer mes cookies</a></footer>
 <script src="/plan-acces.js" defer></script>
-<script src="/contact-dock.js?v=4" defer></script>
+<script src="/contact-dock.js?v=5" defer></script>
 <!-- menu-commun : liens du pied de page (HTML statique) -->
-<div id="mc-footer" role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung & Android</a></li><li><a href="https://solution-phone.fr/ecran-iphone-casse-macon.html">Écran cassé</a></li><li><a href="https://solution-phone.fr/remplacement-batterie-telephone-macon.html">Remplacement batterie</a></li><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/">Accessoires · Solution Accessoires</a></li><li><a href="https://solution-accessoires.fr/hydrogel.html">Protection d’écran hydrogel</a></li><li><a href="https://solution-phone.fr/accessoires.html">Boutique en ligne</a></li><li><a href="https://solution-phone.fr/atelier.html">L’atelier Solution Phone</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Nos boutiques · horaires & plan</a></li><li><a href="https://reparation-iphone-macon.fr/qualirepar.html">QualiRépar −25 €</a></li><li><a href="https://solution-phone.fr/faq.html">Questions fréquentes</a></li><li><a href="https://solution-phone.fr/actualites.html">Conseils & actualités</a></li></ul><p class="mc-f-title">Solution Phone à Mâcon</p><ul><li><a href="https://solution-phone.fr/reparation-telephone-macon.html">Réparation téléphone à Mâcon</a></li><li><a href="https://solution-phone.fr/reparation-iphone.html">Réparation iPhone en atelier</a></li><li><a href="https://solution-phone.fr/hydrogel.html">Hydrogel posé en atelier</a></li></ul></div></div>
+<div id="mc-footer" role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung & Android</a></li><li><a href="https://solution-phone.fr/ecran-iphone-casse-macon.html">Écran cassé</a></li><li><a href="https://solution-phone.fr/remplacement-batterie-telephone-macon.html">Remplacement batterie</a></li><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/">Accessoires · Solution Accessoires</a></li><li><a href="https://solution-accessoires.fr/hydrogel.html">Protection d’écran hydrogel</a></li><li><a href="https://solution-phone.fr/accessoires.html">Boutique en ligne</a></li><li><a href="https://solution-phone.fr/atelier.html">L’atelier Solution Phone</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Nos boutiques · horaires & plan</a></li><li><a href="https://solution-phone.fr/solution-informatique.html">Solution Informatique · PC, Mac, consoles</a></li><li><a href="https://reparation-iphone-macon.fr/qualirepar.html">QualiRépar −25 €</a></li><li><a href="https://solution-phone.fr/faq.html">Questions fréquentes</a></li><li><a href="https://solution-phone.fr/actualites.html">Conseils & actualités</a></li></ul><p class="mc-f-title">Solution Phone à Mâcon</p><ul><li><a href="https://solution-phone.fr/reparation-telephone-macon.html">Réparation téléphone à Mâcon</a></li><li><a href="https://solution-phone.fr/reparation-iphone.html">Réparation iPhone en atelier</a></li><li><a href="https://solution-phone.fr/hydrogel.html">Hydrogel posé en atelier</a></li></ul></div></div>
 </body>
 </html>
