@@ -1,0 +1,35 @@
+/* Section « Trois boutiques. Une seule adresse. » (style apple.fr, même esprit que le bloc « Depuis 2014 »)
+ * Fichier IDENTIQUE sur les 3 sites : solution-phone.fr · reparation-iphone-macon.fr · solution-accessoires.fr
+ * Modifier ici puis recopier à l'identique dans les 3 dépôts et augmenter le ?v= des balises qui le chargent. */
+.sp-shops{background:#f5f5f7;color:#1d1d1f;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;text-align:center;scroll-margin-top:84px}
+.sp-shops--white{background:#fff}
+.sp-shops-in{box-sizing:border-box;max-width:1120px;margin:0 auto;padding:clamp(56px,8vw,96px) clamp(16px,4vw,32px)}
+.sp-shops h2.sp-shops-title{margin:0 auto 10px;max-width:820px;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.06;letter-spacing:-.04em;font-weight:700;color:#1d1d1f;text-transform:none}
+.sp-shops .sp-shops-lead{margin:0 auto 34px;max-width:660px;color:#6e6e73;font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.45}
+.sp-shops-grid{display:grid;grid-template-columns:1fr;gap:16px;text-align:left}
+@media(min-width:900px){.sp-shops-grid{grid-template-columns:repeat(3,1fr);gap:14px}}
+.sp-shop{position:relative;display:flex;flex-direction:column;margin:0;border-radius:18px;overflow:hidden;background:#fff;border:1px solid #e5e5ea}
+.sp-shops--white .sp-shop{background:#f5f5f7;border-color:#f5f5f7}
+/* Même cadre pour les 3 photos : format bandeau 11:5 (garde les deux enseignes de Solution Accessoires visibles) */
+.sp-shop-photo{display:block;width:100%;height:auto;aspect-ratio:11/5;object-fit:cover;object-position:50% 50%;background:#e8e8ed;margin:0;max-width:none;border-radius:0}
+.sp-shop-photo--phone{object-position:50% 20%}
+.sp-shop-photo--acc{object-position:28% 50%}
+.sp-shop-photo--info{object-position:50% 60%}
+.sp-shop-here{position:absolute;top:12px;left:12px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.94);color:#1d1d1f;font-size:.78rem;font-weight:600;line-height:1.2;letter-spacing:0;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.sp-shop-body{display:flex;flex:1;flex-direction:column;padding:22px 22px 24px}
+.sp-shops .sp-shop-kicker{margin:0 0 4px;color:#C00510;font-size:.8rem;font-weight:600;line-height:1.3;letter-spacing:.01em;text-transform:none}
+.sp-shops h3.sp-shop-name{margin:0 0 10px;font-size:1.45rem;line-height:1.15;letter-spacing:-.025em;font-weight:700;color:#1d1d1f;text-transform:none}
+.sp-shops .sp-shop-text{margin:0 0 14px;color:#515154;font-size:.95rem;line-height:1.5}
+.sp-shops .sp-shop-meta{margin:0 0 4px;color:#515154;font-size:.85rem;line-height:1.45}
+.sp-shop-meta b{color:#1d1d1f;font-weight:600}
+.sp-shops .sp-shop-meta a{display:inline-flex;align-items:center;min-height:44px;color:#0066cc;text-decoration:none;font-weight:600}
+.sp-shops .sp-shop-meta a:hover{text-decoration:underline}
+.sp-shops .sp-shop-meta--tel{margin:0 0 10px}
+.sp-shops a.sp-shop-btn{display:inline-flex;align-self:flex-start;align-items:center;justify-content:center;min-height:44px;margin-top:auto;padding:0 20px;border-radius:999px;background:#1d1d1f;color:#fff;font-size:.95rem;font-weight:600;text-decoration:none;line-height:1.2}
+.sp-shops a.sp-shop-btn:hover{background:#3a3a3c}
+.sp-shops .sp-shops-outro{margin:30px auto 0;max-width:720px;color:#515154;font-size:1.02rem;line-height:1.55}
+.sp-shops-links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 24px;margin-top:10px}
+.sp-shops .sp-shops-links a{display:inline-flex;align-items:center;min-height:44px;color:#0066cc;font-size:1rem;text-decoration:none}
+.sp-shops .sp-shops-links a:hover{text-decoration:underline}
+.sp-shops a:focus-visible{outline:3px solid #0066cc;outline-offset:3px}
+html.tariff-embed .sp-shops,html.evan-embed .sp-shops{display:none!important}

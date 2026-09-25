@@ -50,7 +50,7 @@
     { id: 'boutiques', label: 'Nos boutiques', items: [
       { label: 'Solution Phone', meta: 'Réparation · 03 85 33 06 89', href: SP + '/atelier.html' },
       { label: 'Solution Accessoires', meta: '06 02 84 99 53', href: SA + '/' },
-      { label: 'Solution Informatique', meta: '07 48 34 87 43', href: 'tel:+33748348743' },
+      { label: 'Solution Informatique', meta: 'PC, Mac, consoles, trottinettes', href: SP + '/solution-informatique.html' },
       { label: 'Horaires & plan', meta: '21 rue Gambetta, Mâcon', href: SP + '/magasin/macon/' },
       { label: 'Avis Google', meta: '★ 4,7/5', href: 'https://g.page/r/CbyQ_wiFpddjEBM', ext: true }
     ] }

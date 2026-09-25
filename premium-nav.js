@@ -10,7 +10,7 @@
   }
   function loadMenu(){
     if(document.querySelector('script[src*="menu-commun.js"]'))return;
-    var s=document.createElement('script');s.src='/menu-commun.js?v=2';s.setAttribute('data-site','phone');
+    var s=document.createElement('script');s.src='/menu-commun.js?v=3';s.setAttribute('data-site','phone');
     s.onerror=fallback;document.head.appendChild(s);
   }
   function init(){
