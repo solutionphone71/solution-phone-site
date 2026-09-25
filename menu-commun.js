@@ -52,7 +52,7 @@
       { label: 'Solution Accessoires', meta: '06 02 84 99 53', href: SA + '/' },
       { label: 'Solution Informatique', meta: '07 48 34 87 43', href: 'tel:+33748348743' },
       { label: 'Horaires & plan', meta: '21 rue Gambetta, Mâcon', href: SP + '/magasin/macon/' },
-      { label: 'Avis Google', meta: '★ 4,7/5', href: 'https://www.google.com/maps/search/?api=1&query=Solution+Phone+21+Rue+Gambetta+Macon', ext: true }
+      { label: 'Avis Google', meta: '★ 4,7/5', href: 'https://g.page/r/CbyQ_wiFpddjEBM', ext: true }
     ] }
   ];
 
