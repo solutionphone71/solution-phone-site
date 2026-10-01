@@ -357,7 +357,9 @@
     .quick-other-fields{display:grid;gap:9px;padding-top:4px}.quick-other-fields[hidden]{display:none}.quick-other-actions{display:grid;grid-template-columns:1.2fr 1fr;gap:7px}.quick-other-actions .action{min-height:52px}.quick-status{min-height:18px;font-size:11px;line-height:1.4;color:#666}.quick-status.is-error{color:#b0000c}.quick-status.is-success{color:#187443;font-weight:720}
     .formgrid{display:grid;gap:9px}.formgrid input,.formgrid textarea,.formgrid select{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px 15px;outline:none;font:inherit;color:var(--ink)}.formgrid textarea{min-height:85px;resize:vertical}.formgrid input:focus,.formgrid textarea:focus,.formgrid select:focus{border-color:var(--red)}
     .formgrid button{border:0;border-radius:999px;background:var(--red);color:#fff;padding:15px;font-weight:790;cursor:pointer}.form-status{font-size:14px;margin-top:10px}
-    #mail-form label{display:grid;gap:5px;font-size:14px;font-weight:650}#mail-form details summary{font-size:14px;cursor:pointer;color:#555}#mail-form details label{margin-top:9px}#mail-form button:disabled{opacity:.65;cursor:wait}#mail-modal .modal-card{max-height:calc(100dvh - 32px);overflow:auto}
+    #mail-form[hidden],#form-status[hidden]{display:none}#mail-form label{display:grid;gap:5px;font-size:14px;font-weight:650}#mail-form details summary{font-size:14px;cursor:pointer;color:#555}#mail-form details label{margin-top:9px}#mail-form button:disabled{opacity:.65;cursor:wait}#mail-modal .modal-card{max-height:calc(100dvh - 32px);overflow:auto}
+    .mail-success{text-align:center;padding:18px 4px 4px}.mail-success[hidden]{display:none}.mail-success-icon{width:86px;height:86px;margin:0 auto 24px;border-radius:50%;display:grid;place-items:center;background:#e9f8ef;color:#168447;font-size:46px;font-weight:850;box-shadow:0 0 0 12px rgba(22,132,71,.08)}.mail-success h3{max-width:390px;margin:0 auto 12px;font-size:34px;line-height:1.04;letter-spacing:-.045em}.mail-success-lead{max-width:420px;margin:0 auto;color:#4f565e;font-size:16px;line-height:1.55}.mail-success-email{display:block;margin-top:7px;color:#171719;font-weight:780;overflow-wrap:anywhere}.mail-success-reference{display:inline-block;margin:22px 0 0;padding:8px 11px;border-radius:8px;background:#f2f4f6;color:#515963;font:700 11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace}.mail-success button{width:100%;min-height:52px;margin-top:26px;border:0;border-radius:999px;background:#171719;color:#fff;font:790 15px/1 inherit;cursor:pointer}
+    @media(max-width:560px){.mail-success{padding:12px 0 0}.mail-success-icon{width:76px;height:76px;margin-bottom:21px;font-size:40px}.mail-success h3{font-size:30px}.mail-success-lead{font-size:15px}.mail-success button{min-height:54px}}
     body.modal-open .home-contact-dock{visibility:hidden}
     @keyframes scan{0%{top:12%;opacity:0}12%{opacity:1}85%{opacity:1}100%{top:88%;opacity:0}}
     @keyframes pulse{50%{box-shadow:0 0 0 9px rgba(36,189,104,0)}}
@@ -751,8 +753,8 @@
   <div class="modal" id="mail-modal" role="dialog" aria-modal="true" aria-label="Recevoir un devis par e-mail">
     <div class="modal-card">
       <button class="close" id="close-modal" aria-label="Fermer">×</button>
-      <h3>Recevoir mon devis</h3>
-      <p>Votre modèle, votre panne, votre e-mail. L’équipe vous répond directement.</p>
+      <h3 id="mail-modal-title">Recevoir mon devis</h3>
+      <p id="mail-modal-intro">Votre modèle, votre panne, votre e-mail. L’équipe vous répond directement.</p>
       <form class="formgrid" id="mail-form">
         <label for="mail-request">Votre appareil et le problème<textarea name="Demande" id="mail-request" required minlength="10" maxlength="1800" placeholder="Ex. iPhone 13, écran cassé"></textarea></label>
         <label for="mail-name">Votre nom<input id="mail-name" name="Nom" required autocomplete="name" maxlength="80" placeholder="Votre nom"></label>
@@ -763,6 +765,13 @@
         <p class="rgpd-note">Vos données servent uniquement à répondre à votre demande de devis et sont supprimées au bout de 3 ans sans nouveau contact. Accès, rectification, effacement : contact@solution-phone.fr — <a href="https://solution-phone.fr/politique-confidentialite.html">Politique de confidentialité</a></p>
       </form>
       <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+      <div class="mail-success" id="mail-success" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
+        <div class="mail-success-icon" aria-hidden="true">✓</div>
+        <h3>Demande de devis envoyée&nbsp;!</h3>
+        <p class="mail-success-lead">Merci, votre demande est bien arrivée chez Solution Phone. L’équipe vous répondra prochainement par e-mail.<strong class="mail-success-email" id="mail-success-email"></strong></p>
+        <p class="mail-success-reference" id="mail-success-reference"></p>
+        <button type="button" id="mail-success-close">Fermer</button>
+      </div>
     </div>
   </div>
 
@@ -1660,8 +1669,18 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       stopExpertPolling();$('#answer-view').classList.remove('show');$('#answer-view').innerHTML='';$('#chat-view').classList.remove('show');$('#chat-thread').innerHTML='';$('#chat-quick').innerHTML='';$('#loading-view').classList.remove('show');$('#start-view').style.display='block';$('#diagnostic-input').value='';$('#diagnostic-input').placeholder='Écrivez directement votre demande…';document.querySelectorAll('.brand-button').forEach(x=>x.classList.remove('active'));conversationText='';conversationParsed=null;waitingFor=null;flowData={};current=null;lastBrainWhatsApp='';updateDiagnosticProgress(null);evanConversationToken='';try{sessionStorage.removeItem('evan_conversation_token')}catch(e){}$('#device-state').textContent='Votre demande';syncContextCta();setTimeout(()=>$('#diagnostic-input').focus(),80);
     }
     let mailReturnFocus=null,mailDraftContext='';
+    function resetMailSuccess(){
+      $('#mail-modal-title').hidden=false;$('#mail-modal-intro').hidden=false;$('#mail-form').hidden=false;$('#form-status').hidden=false;$('#mail-success').hidden=true;$('#mail-success-email').textContent='';$('#mail-success-reference').textContent='';
+    }
+    function showMailSuccess(payload,email){
+      $('#mail-modal-title').hidden=true;$('#mail-modal-intro').hidden=true;$('#mail-form').hidden=true;$('#form-status').hidden=true;
+      $('#mail-success-email').textContent=email||'';
+      const reference=$('#mail-success-reference');reference.textContent=payload?.reference?'Référence : '+payload.reference:'';reference.hidden=!payload?.reference;
+      const success=$('#mail-success');success.hidden=false;success.focus();
+    }
     function openMail(requestOverride){
       mailReturnFocus=document.activeElement;
+      resetMailSuccess();
       const request=$('#mail-request');
       if(typeof requestOverride==='string'){mailDraftContext=requestOverride;request.value=requestOverride}
       else if(!request.value||request.value===mailDraftContext){mailDraftContext=current?requestText():'';request.value=mailDraftContext}
@@ -1793,6 +1812,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       const input=$('#diagnostic-input');input.value=b.dataset.brand+' ';input.placeholder='Indiquez le modèle et la panne';input.focus();
     }));
     $('#close-modal').addEventListener('click',closeMail);
+    $('#mail-success-close').addEventListener('click',closeMail);
     $('#mail-modal').addEventListener('click',e=>{if(e.target.id==='mail-modal')closeMail()});
     $('#quick-close').addEventListener('click',closeQuickPrice);
     $('#quick-modal').addEventListener('click',e=>{if(e.target.id==='quick-modal')closeQuickPrice()});
@@ -1816,12 +1836,11 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       try{
         payload=await sendQuoteRequest({name:data.Nom,email:data.email,phone:data.Telephone,request:data.Demande,form_type:'main_quote',website:data.website});
       }catch(err){status.textContent=quoteErrorMessage(err);runQuoteSideEffect(()=>track('devis_email_erreur',{status:err?.status||0}));submit.disabled=false;return}
-      status.textContent=`Demande enregistrée${payload.reference?' ('+payload.reference+')':''}. L’équipe Solution Phone vous répondra par e-mail.`;
       runQuoteSideEffect(()=>form.reset());
       runQuoteSideEffect(()=>trackLeadSuccess('devis_email_envoye',{method:'email',form_type:'main_quote',reference:payload.reference},{email:data.email,phone:data.Telephone}));
       runQuoteSideEffect(()=>track('devis_autre_piece_email',{method:'email',form_type:'main_quote',migration_bridge:true}));
       runQuoteSideEffect(()=>trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'}));
-      submit.disabled=false;
+      submit.disabled=false;showMailSuccess(payload,data.email);
     });
     function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,{transport_type:'beacon',...(params||{})})}catch(e){}}
     // Aucune donnée personnelle (e-mail, téléphone) n’est transmise à Google : seul l’événement est mesuré.
