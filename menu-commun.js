@@ -44,15 +44,15 @@
       { label: 'Nettoyage virus Android', meta: '10 à 20 €', href: SP + '/#services' },
       { label: 'Transfert de données', meta: 'dès 20 €', href: SP + '/#services' },
       { label: 'Nettoyage connecteur de charge', meta: '10 €', href: SP + '/#services' },
-      { label: 'Reprise de votre ancien téléphone', meta: 'Estimation sur WhatsApp', href: wa('Bonjour, je souhaite faire reprendre mon ancien téléphone. Modèle et état : '), ext: true },
+      { label: 'Rachat smartphone, tablette, PC', meta: 'Même cassé · offre rapide', href: SA + '/rachat-smartphone.html' },
       { label: '−25 € QualiRépar', meta: 'Bonus réparation', href: RI + '/qualirepar.html' }
     ] },
     { id: 'boutiques', label: 'Nos boutiques', items: [
       { label: 'Solution Phone', meta: 'Réparation · 03 85 33 06 89', href: SP + '/atelier.html' },
       { label: 'Solution Accessoires', meta: '06 02 84 99 53', href: SA + '/' },
-      { label: 'Solution Informatique', meta: '07 48 34 87 43', href: 'tel:+33748348743' },
+      { label: 'Solution Informatique', meta: 'PC, Mac, consoles, trottinettes', href: SP + '/solution-informatique.html' },
       { label: 'Horaires & plan', meta: '21 rue Gambetta, Mâcon', href: SP + '/magasin/macon/' },
-      { label: 'Avis Google', meta: '★ 4,7/5', href: 'https://www.google.com/maps/search/?api=1&query=Solution+Phone+21+Rue+Gambetta+Macon', ext: true }
+      { label: 'Avis Google', meta: '★ 4,7/5', href: 'https://g.page/r/CbyQ_wiFpddjEBM', ext: true }
     ] }
   ];
 

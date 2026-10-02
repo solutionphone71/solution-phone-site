@@ -55,7 +55,7 @@
     "latitude": 46.3025,
     "longitude": 4.8297
   },
-  "hasMap": "https://www.google.com/maps/search/?api=1&query=Solution+Phone+21+rue+Gambetta+71000+M%C3%A2con",
+  "hasMap": "https://g.page/r/CbyQ_wiFpddjEBM",
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
@@ -124,10 +124,7 @@
       "name": "Saône-et-Loire"
     }
   ],
-  "sameAs": [
-    "https://www.facebook.com/share/1Mf9kfcFpg/",
-    "https://www.instagram.com/solutionphonemacon"
-  ],
+  "sameAs": ["https://g.page/r/CbyQ_wiFpddjEBM", "https://www.facebook.com/share/1Mf9kfcFpg/", "https://www.instagram.com/solutionphonemacon"],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Services Solution Phone",
@@ -360,7 +357,9 @@
     .quick-other-fields{display:grid;gap:9px;padding-top:4px}.quick-other-fields[hidden]{display:none}.quick-other-actions{display:grid;grid-template-columns:1.2fr 1fr;gap:7px}.quick-other-actions .action{min-height:52px}.quick-status{min-height:18px;font-size:11px;line-height:1.4;color:#666}.quick-status.is-error{color:#b0000c}.quick-status.is-success{color:#187443;font-weight:720}
     .formgrid{display:grid;gap:9px}.formgrid input,.formgrid textarea,.formgrid select{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px 15px;outline:none;font:inherit;color:var(--ink)}.formgrid textarea{min-height:85px;resize:vertical}.formgrid input:focus,.formgrid textarea:focus,.formgrid select:focus{border-color:var(--red)}
     .formgrid button{border:0;border-radius:999px;background:var(--red);color:#fff;padding:15px;font-weight:790;cursor:pointer}.form-status{font-size:14px;margin-top:10px}
-    #mail-form label{display:grid;gap:5px;font-size:14px;font-weight:650}#mail-form details summary{font-size:14px;cursor:pointer;color:#555}#mail-form details label{margin-top:9px}#mail-form button:disabled{opacity:.65;cursor:wait}#mail-modal .modal-card{max-height:calc(100dvh - 32px);overflow:auto}
+    #mail-form[hidden],#form-status[hidden]{display:none}#mail-form label{display:grid;gap:5px;font-size:14px;font-weight:650}#mail-form details summary{font-size:14px;cursor:pointer;color:#555}#mail-form details label{margin-top:9px}#mail-form button:disabled{opacity:.65;cursor:wait}#mail-modal .modal-card{max-height:calc(100dvh - 32px);overflow:auto}
+    .mail-success{text-align:center;padding:18px 4px 4px}.mail-success[hidden]{display:none}.mail-success-icon{width:86px;height:86px;margin:0 auto 24px;border-radius:50%;display:grid;place-items:center;background:#e9f8ef;color:#168447;font-size:46px;font-weight:850;box-shadow:0 0 0 12px rgba(22,132,71,.08)}.mail-success h3{max-width:390px;margin:0 auto 12px;font-size:34px;line-height:1.04;letter-spacing:-.045em}.mail-success-lead{max-width:420px;margin:0 auto;color:#4f565e;font-size:16px;line-height:1.55}.mail-success-email{display:block;margin-top:7px;color:#171719;font-weight:780;overflow-wrap:anywhere}.mail-success-reference{display:inline-block;margin:22px 0 0;padding:8px 11px;border-radius:8px;background:#f2f4f6;color:#515963;font:700 11px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace}.mail-success button{width:100%;min-height:52px;margin-top:26px;border:0;border-radius:999px;background:#171719;color:#fff;font:790 15px/1 inherit;cursor:pointer}
+    @media(max-width:560px){.mail-success{padding:12px 0 0}.mail-success-icon{width:76px;height:76px;margin-bottom:21px;font-size:40px}.mail-success h3{font-size:30px}.mail-success-lead{font-size:15px}.mail-success button{min-height:54px}}
     body.modal-open .home-contact-dock{visibility:hidden}
     @keyframes scan{0%{top:12%;opacity:0}12%{opacity:1}85%{opacity:1}100%{top:88%;opacity:0}}
     @keyframes pulse{50%{box-shadow:0 0 0 9px rgba(36,189,104,0)}}
@@ -397,16 +396,17 @@
     .entry:focus-within{border-color:#8a8a90!important;box-shadow:0 0 0 3px rgba(11,87,208,.18)!important}
 </style>
   <link rel="stylesheet" href="signature-home.css?v=conversion-simple-2">
-  <link rel="stylesheet" href="quote-journey.css?v=4">
+  <link rel="stylesheet" href="quote-journey.css?v=5">
   <script src="quote-catalog.js?v=2" defer></script>
   <script src="quote-journey.js?v=6" defer></script>
   <link rel="stylesheet" href="qualirepar-top.css?v=2">
   <script src="qualirepar-top.js?v=4" defer></script>
 <link rel="stylesheet" href="boutique-nav.css?v=1">
-<link rel="stylesheet" href="home-simple.css?v=5">
+<link rel="stylesheet" href="home-simple.css?v=6">
 <script>if(new URLSearchParams(location.search).has('tarifs'))document.documentElement.classList.add('tariff-embed')</script>
 <link rel="stylesheet" href="confiance.css?v=1">
-<script src="/menu-commun.js?v=1" data-site="phone"></script>
+<link rel="stylesheet" href="boutiques.css?v=1">
+<script src="/menu-commun.js?v=4" data-site="phone"></script>
 <link rel="stylesheet" href="/accessibilite.css?v=1">
 </head>
 <body>
@@ -461,7 +461,7 @@
       <p class="simple-offer-note">Déjà déduits de nos tarifs de réparation de smartphone. <b>Réparé généralement en moins d’une heure</b> si la pièce est en stock.</p>
       <button class="simple-conditions" type="button" onclick="document.querySelector('.spq-bonus-bar')?.click()">L’engagement Solution Phone</button>
       <a class="simple-primary" href="#devis">Obtenir mon prix →</a>
-      <a class="google-rating" href="https://www.google.com/maps/search/?api=1&amp;query=Solution+Phone+21+Rue+Gambetta+Macon" target="_blank" rel="noopener" aria-label="Note Google 4,7 sur 5, plus de 700 avis — voir les avis"><span class="google-rating-stars" aria-hidden="true">★★★★★</span><b>4,7/5</b><span>plus de 700 avis ›</span></a>
+      <a class="google-rating" href="https://g.page/r/CbyQ_wiFpddjEBM" target="_blank" rel="noopener" aria-label="Note Google 4,7 sur 5, plus de 700 avis — voir les avis"><span class="google-rating-stars" aria-hidden="true">★★★★★</span><b>4,7/5</b><span>plus de 700 avis ›</span></a>
     </section>
     <section class="stage">
       <div class="visual">
@@ -515,6 +515,7 @@
       </figure>
       <div class="conversation" id="devis">
         <section class="quote-journey" aria-labelledby="journey-title">
+          <p class="journey-kicker">Devis gratuit · en quelques étapes</p>
           <h2 id="journey-title">Demandez votre devis immédiat.</h2>
           <p class="journey-intro">Choisissez votre panne. Nous préparons votre demande.</p>
           <fieldset class="journey-issues"><legend class="journey-label"><span>1</span> Quel est le problème ?</legend>
@@ -627,12 +628,55 @@
   <p class="sp-trust-lead">Une boutique de quartier, rue Gambetta, qui s’est fait connaître par le bouche-à-oreille.</p>
   <div class="sp-trust-grid">
     <div><b>Plus de 10 ans à Mâcon</b><p>La plupart de nos clients viennent parce qu’un proche nous a recommandés.</p></div>
-    <a href="https://www.google.com/maps/search/?api=1&amp;query=Solution+Phone+21+Rue+Gambetta+Macon" target="_blank" rel="noopener"><b><span class="sp-trust-stars" aria-hidden="true">★★★★★</span> 4,7/5 sur Google</b><p>Plus de 700 avis de clients de Mâcon et des alentours.</p><span>Lire les avis ›</span></a>
+    <a href="https://g.page/r/CbyQ_wiFpddjEBM" target="_blank" rel="noopener"><b><span class="sp-trust-stars" aria-hidden="true">★★★★★</span> 4,7/5 sur Google</b><p>Plus de 700 avis de clients de Mâcon et des alentours.</p><span>Lire les avis ›</span></a>
     <div><b>Un SAV qui ne vous laisse pas tomber</b><p>Un souci après la réparation&nbsp;? Vous revenez en boutique et on s’en occupe. Réparations garanties 6&nbsp;mois.</p></div>
     <div><b>Des conseils honnêtes</b><p>Si une réparation ne vaut pas le coup, on vous le dit. On vous conseille la bonne solution, pas la plus chère.</p></div>
   </div>
   <h3 id="services" style="scroll-margin-top:84px">Les petits services qui dépannent</h3>
   <div class="sp-services"><a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20nettoyage%20virus%20%2F%20publicit%C3%A9s%20pour%20mon%20smartphone%20Android.%20Mon%20mod%C3%A8le%20%3A" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></i><b>Nettoyage virus et publicités</b><span>Smartphone Android</span><strong>10 à 20 €</strong><em>Demander sur WhatsApp ›</em></a><a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20transfert%20de%20donn%C3%A9es%20entre%20deux%20smartphones.%20Mes%20mod%C3%A8les%20%3A" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="7" height="14" rx="1.6"/><rect x="14.5" y="6" width="7" height="14" rx="1.6"/><path d="M8 11h7.5m-2-2 2 2-2 2"/></svg></i><b>Transfert de données</b><span>De votre ancien téléphone vers le nouveau</span><strong>dès 20 €</strong><em>Demander sur WhatsApp ›</em></a><a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20mon%20t%C3%A9l%C3%A9phone%20charge%20mal%2C%20je%20souhaite%20un%20nettoyage%20du%20connecteur%20de%20charge.%20Mon%20mod%C3%A8le%20%3A" target="_blank" rel="noopener"><i class="sp-svc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v4m6-4v4"/><path d="M7 7h10v3a5 5 0 0 1-10 0V7z"/><path d="M12 15v6"/></svg></i><b>Nettoyage du connecteur de charge</b><span>Votre téléphone charge mal ?</span><strong>10 €</strong><em>Demander sur WhatsApp ›</em></a></div>
+</section>
+<section class="sp-shops" id="boutiques" aria-labelledby="boutiques-title">
+<div class="sp-shops-in">
+  <h2 class="sp-shops-title" id="boutiques-title">Trois boutiques. Une seule adresse.</h2>
+  <p class="sp-shops-lead">Au 21 rue Gambetta, à Mâcon, votre téléphone, votre ordinateur et même votre trottinette se règlent au même endroit, en quelques pas.</p>
+  <div class="sp-shops-grid">
+    <article class="sp-shop">
+      <img class="sp-shop-photo sp-shop-photo--phone" src="/img/boutiques/facade-solution-phone-800.webp" srcset="/img/boutiques/facade-solution-phone-800.webp 800w, /img/boutiques/facade-solution-phone-1200.webp 1200w" sizes="(min-width: 1140px) 364px, (min-width: 900px) calc((100vw - 92px) / 3), calc(100vw - 32px)" width="1200" height="837" loading="lazy" decoding="async" alt="Façade de Solution Phone, 21 rue Gambetta à Mâcon : vitrine « Centre de réparation » et enseigne rouge Solution Phone">
+      <div class="sp-shop-body">
+        <p class="sp-shop-kicker">L’atelier de réparation</p>
+        <h3 class="sp-shop-name">Solution Phone</h3>
+        <p class="sp-shop-text">Écran cassé, batterie à plat, téléphone qui ne charge plus&nbsp;: smartphones et tablettes de toutes marques, réparés le plus souvent en moins d’une heure si la pièce est en stock. 25&nbsp;€ déjà déduits de nos tarifs.</p>
+        <p class="sp-shop-meta">Lundi 9h15–12h15 et 14h–19h · du mardi au samedi 9h15–19h</p>
+        <p class="sp-shop-meta sp-shop-meta--tel"><a href="tel:+33385330689" aria-label="Appeler Solution Phone au 03 85 33 06 89">03&nbsp;85&nbsp;33&nbsp;06&nbsp;89</a></p>
+        <a class="sp-shop-btn" href="#devis">Obtenir mon prix</a>
+      </div>
+    </article>
+    <article class="sp-shop">
+      <img class="sp-shop-photo sp-shop-photo--acc" src="/img/boutiques/facade-solution-accessoires-800.webp" srcset="/img/boutiques/facade-solution-accessoires-800.webp 800w, /img/boutiques/facade-solution-accessoires-1200.webp 1200w" sizes="(min-width: 1140px) 364px, (min-width: 900px) calc((100vw - 92px) / 3), calc(100vw - 32px)" width="1200" height="492" loading="lazy" decoding="async" alt="Façade de Solution Accessoires, 21 rue Gambetta à Mâcon : enseignes « Ici smartphone accessoires » et « Solution Accessoires »">
+      <div class="sp-shop-body">
+        <p class="sp-shop-kicker">Smartphones &amp; accessoires</p>
+        <h3 class="sp-shop-name">Solution Accessoires</h3>
+        <p class="sp-shop-text">Smartphones neufs et reconditionnés garantis 12&nbsp;mois, coques, verres trempés et hydrogel posés sur place, chargeurs, écouteurs&nbsp;: vous repartez équipé, juste à côté.</p>
+        <p class="sp-shop-meta">Du mardi au samedi 10h–12h et 14h–19h</p>
+        <p class="sp-shop-meta sp-shop-meta--tel"><a href="tel:+33602849953" aria-label="Appeler Solution Accessoires au 06 02 84 99 53">06&nbsp;02&nbsp;84&nbsp;99&nbsp;53</a></p>
+        <a class="sp-shop-btn" href="https://solution-accessoires.fr/" aria-label="Voir le stock de Solution Accessoires">Voir le stock</a>
+      </div>
+    </article>
+    <article class="sp-shop">
+      <img class="sp-shop-photo sp-shop-photo--info" src="/img/boutiques/facade-solution-informatique-800.webp" srcset="/img/boutiques/facade-solution-informatique-800.webp 800w, /img/boutiques/facade-solution-informatique-1200.webp 1200w" sizes="(min-width: 1140px) 364px, (min-width: 900px) calc((100vw - 92px) / 3), calc(100vw - 32px)" width="1200" height="959" loading="lazy" decoding="async" alt="Façade de Solution Informatique, 21 rue Gambetta à Mâcon : enseigne rouge Solution Informatique au-dessus de la vitrine">
+      <div class="sp-shop-body">
+        <p class="sp-shop-kicker">PC, Mac, consoles, trottinettes</p>
+        <h3 class="sp-shop-name">Solution Informatique</h3>
+        <p class="sp-shop-text">Ordinateur lent ou en panne, Mac qui ne démarre plus, console qui surchauffe, trottinette électrique à l’arrêt&nbsp;: on diagnostique, on vous annonce le prix, puis on répare.</p>
+        <p class="sp-shop-meta">Le matin 9h15–12h15 · l’après-midi sur rendez-vous</p>
+        <p class="sp-shop-meta sp-shop-meta--tel"><a href="tel:+33748348743" aria-label="Appeler Solution Informatique au 07 48 34 87 43">07&nbsp;48&nbsp;34&nbsp;87&nbsp;43</a></p>
+        <a class="sp-shop-btn" href="solution-informatique.html" aria-label="Découvrir Solution Informatique">Découvrir</a>
+      </div>
+    </article>
+  </div>
+  <p class="sp-shops-outro">Vous déposez votre ordinateur, on remplace l’écran de votre téléphone, et vous repartez avec une coque neuve&nbsp;: tout se fait au même endroit.</p>
+  <p class="sp-shops-links"><a href="https://www.google.com/maps/dir/?api=1&amp;destination=21+Rue+Gambetta+71000+Macon" target="_blank" rel="noopener">Itinéraire&nbsp;›</a><a href="magasin/macon/">Voir le plan et les horaires&nbsp;›</a></p>
+</div>
 </section>
   <section class="repair-atlas" id="reparations" aria-labelledby="repair-atlas-title">
     <h2 id="repair-atlas-title" class="simple-brands-title">Votre marque. Notre savoir-faire.</h2>
@@ -709,8 +753,8 @@
   <div class="modal" id="mail-modal" role="dialog" aria-modal="true" aria-label="Recevoir un devis par e-mail">
     <div class="modal-card">
       <button class="close" id="close-modal" aria-label="Fermer">×</button>
-      <h3>Recevoir mon devis</h3>
-      <p>Votre modèle, votre panne, votre e-mail. L’équipe vous répond directement.</p>
+      <h3 id="mail-modal-title">Recevoir mon devis</h3>
+      <p id="mail-modal-intro">Votre modèle, votre panne, votre e-mail. L’équipe vous répond directement.</p>
       <form class="formgrid" id="mail-form">
         <label for="mail-request">Votre appareil et le problème<textarea name="Demande" id="mail-request" required minlength="10" maxlength="1800" placeholder="Ex. iPhone 13, écran cassé"></textarea></label>
         <label for="mail-name">Votre nom<input id="mail-name" name="Nom" required autocomplete="name" maxlength="80" placeholder="Votre nom"></label>
@@ -721,6 +765,13 @@
         <p class="rgpd-note">Vos données servent uniquement à répondre à votre demande de devis et sont supprimées au bout de 3 ans sans nouveau contact. Accès, rectification, effacement : contact@solution-phone.fr — <a href="https://solution-phone.fr/politique-confidentialite.html">Politique de confidentialité</a></p>
       </form>
       <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+      <div class="mail-success" id="mail-success" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
+        <div class="mail-success-icon" aria-hidden="true">✓</div>
+        <h3>Demande de devis envoyée&nbsp;!</h3>
+        <p class="mail-success-lead">Merci, votre demande est bien arrivée chez Solution Phone. L’équipe vous répondra prochainement par e-mail.<strong class="mail-success-email" id="mail-success-email"></strong></p>
+        <p class="mail-success-reference" id="mail-success-reference"></p>
+        <button type="button" id="mail-success-close">Fermer</button>
+      </div>
     </div>
   </div>
 
@@ -1618,8 +1669,18 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       stopExpertPolling();$('#answer-view').classList.remove('show');$('#answer-view').innerHTML='';$('#chat-view').classList.remove('show');$('#chat-thread').innerHTML='';$('#chat-quick').innerHTML='';$('#loading-view').classList.remove('show');$('#start-view').style.display='block';$('#diagnostic-input').value='';$('#diagnostic-input').placeholder='Écrivez directement votre demande…';document.querySelectorAll('.brand-button').forEach(x=>x.classList.remove('active'));conversationText='';conversationParsed=null;waitingFor=null;flowData={};current=null;lastBrainWhatsApp='';updateDiagnosticProgress(null);evanConversationToken='';try{sessionStorage.removeItem('evan_conversation_token')}catch(e){}$('#device-state').textContent='Votre demande';syncContextCta();setTimeout(()=>$('#diagnostic-input').focus(),80);
     }
     let mailReturnFocus=null,mailDraftContext='';
+    function resetMailSuccess(){
+      $('#mail-modal-title').hidden=false;$('#mail-modal-intro').hidden=false;$('#mail-form').hidden=false;$('#form-status').hidden=false;$('#mail-success').hidden=true;$('#mail-success-email').textContent='';$('#mail-success-reference').textContent='';
+    }
+    function showMailSuccess(payload,email){
+      $('#mail-modal-title').hidden=true;$('#mail-modal-intro').hidden=true;$('#mail-form').hidden=true;$('#form-status').hidden=true;
+      $('#mail-success-email').textContent=email||'';
+      const reference=$('#mail-success-reference');reference.textContent=payload?.reference?'Référence : '+payload.reference:'';reference.hidden=!payload?.reference;
+      const success=$('#mail-success');success.hidden=false;success.focus();
+    }
     function openMail(requestOverride){
       mailReturnFocus=document.activeElement;
+      resetMailSuccess();
       const request=$('#mail-request');
       if(typeof requestOverride==='string'){mailDraftContext=requestOverride;request.value=requestOverride}
       else if(!request.value||request.value===mailDraftContext){mailDraftContext=current?requestText():'';request.value=mailDraftContext}
@@ -1751,6 +1812,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       const input=$('#diagnostic-input');input.value=b.dataset.brand+' ';input.placeholder='Indiquez le modèle et la panne';input.focus();
     }));
     $('#close-modal').addEventListener('click',closeMail);
+    $('#mail-success-close').addEventListener('click',closeMail);
     $('#mail-modal').addEventListener('click',e=>{if(e.target.id==='mail-modal')closeMail()});
     $('#quick-close').addEventListener('click',closeQuickPrice);
     $('#quick-modal').addEventListener('click',e=>{if(e.target.id==='quick-modal')closeQuickPrice()});
@@ -1774,12 +1836,11 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       try{
         payload=await sendQuoteRequest({name:data.Nom,email:data.email,phone:data.Telephone,request:data.Demande,form_type:'main_quote',website:data.website});
       }catch(err){status.textContent=quoteErrorMessage(err);runQuoteSideEffect(()=>track('devis_email_erreur',{status:err?.status||0}));submit.disabled=false;return}
-      status.textContent=`Demande enregistrée${payload.reference?' ('+payload.reference+')':''}. L’équipe Solution Phone vous répondra par e-mail.`;
       runQuoteSideEffect(()=>form.reset());
       runQuoteSideEffect(()=>trackLeadSuccess('devis_email_envoye',{method:'email',form_type:'main_quote',reference:payload.reference},{email:data.email,phone:data.Telephone}));
       runQuoteSideEffect(()=>track('devis_autre_piece_email',{method:'email',form_type:'main_quote',migration_bridge:true}));
       runQuoteSideEffect(()=>trackBrainEvent('email_clicked',{intent:current?.intent||'unknown',source:'form_submit_success'}));
-      submit.disabled=false;
+      submit.disabled=false;showMailSuccess(payload,data.email);
     });
     function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,{transport_type:'beacon',...(params||{})})}catch(e){}}
     // Aucune donnée personnelle (e-mail, téléphone) n’est transmise à Google : seul l’événement est mesuré.
@@ -1830,6 +1891,6 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
     updateContactDock();window.addEventListener('scroll',updateContactDock,{passive:true});
   </script>
 <!-- menu-commun : liens du pied de page (HTML statique) -->
-<div id="mc-footer" role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung & Android</a></li><li><a href="https://solution-phone.fr/ecran-iphone-casse-macon.html">Écran cassé</a></li><li><a href="https://solution-phone.fr/remplacement-batterie-telephone-macon.html">Remplacement batterie</a></li><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/">Accessoires · Solution Accessoires</a></li><li><a href="https://solution-accessoires.fr/hydrogel.html">Protection d’écran hydrogel</a></li><li><a href="https://solution-phone.fr/accessoires.html">Boutique en ligne</a></li><li><a href="https://solution-phone.fr/atelier.html">L’atelier Solution Phone</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Nos boutiques · horaires & plan</a></li><li><a href="https://reparation-iphone-macon.fr/qualirepar.html">QualiRépar −25 €</a></li><li><a href="https://solution-phone.fr/faq.html">Questions fréquentes</a></li><li><a href="https://solution-phone.fr/actualites.html">Conseils & actualités</a></li></ul><p class="mc-f-title">Solution Phone à Mâcon</p><ul><li><a href="https://solution-phone.fr/reparation-telephone-macon.html">Réparation téléphone à Mâcon</a></li><li><a href="https://solution-phone.fr/reparation-iphone.html">Réparation iPhone en atelier</a></li><li><a href="https://solution-phone.fr/hydrogel.html">Hydrogel posé en atelier</a></li></ul></div></div>
+<div id="mc-footer" role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung & Android</a></li><li><a href="https://solution-phone.fr/ecran-iphone-casse-macon.html">Écran cassé</a></li><li><a href="https://solution-phone.fr/remplacement-batterie-telephone-macon.html">Remplacement batterie</a></li><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/rachat-smartphone.html">Rachat smartphone, tablette, PC</a></li><li><a href="https://solution-accessoires.fr/">Accessoires · Solution Accessoires</a></li><li><a href="https://solution-accessoires.fr/hydrogel.html">Protection d’écran hydrogel</a></li><li><a href="https://solution-phone.fr/accessoires.html">Boutique en ligne</a></li><li><a href="https://solution-phone.fr/atelier.html">L’atelier Solution Phone</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Nos boutiques · horaires & plan</a></li><li><a href="https://solution-phone.fr/solution-informatique.html">Solution Informatique · PC, Mac, consoles</a></li><li><a href="https://reparation-iphone-macon.fr/qualirepar.html">QualiRépar −25 €</a></li><li><a href="https://solution-phone.fr/faq.html">Questions fréquentes</a></li><li><a href="https://solution-phone.fr/actualites.html">Conseils & actualités</a></li></ul><p class="mc-f-title">Solution Phone à Mâcon</p><ul><li><a href="https://solution-phone.fr/reparation-telephone-macon.html">Réparation téléphone à Mâcon</a></li><li><a href="https://solution-phone.fr/reparation-iphone.html">Réparation iPhone en atelier</a></li><li><a href="https://solution-phone.fr/hydrogel.html">Hydrogel posé en atelier</a></li></ul></div></div>
 </body>
 </html>
