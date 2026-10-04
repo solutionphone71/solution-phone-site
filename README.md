@@ -17,7 +17,7 @@ au 21 rue Gambetta, 71000 Mâcon, depuis 2014. Réparateur labellisé QualiRépa
 | --- | --- |
 | `index.html` | Accueil, parcours devis (`quote-journey.js`, `quote-catalog.js`), assistant IA |
 | `reparation-iphone.html`, `reparation-samsung.html` | Réparation par marque |
-| `ecran-iphone-casse-macon.html`, `remplacement-batterie-telephone-macon.html`, `reparation-telephone-macon.html` | Pages de référencement local |
+| `ecran-iphone-casse-macon.html`, `remplacement-ecran-samsung-macon.html`, `remplacement-batterie-telephone-macon.html`, `reparation-telephone-macon.html` | Pages de référencement local |
 | `reconditionnes.html` | Stock de smartphones reconditionnés (`reconditionnes-v2.js`) |
 | `accessoires.html`, `hydrogel.html` | Accessoires et protections d'écran |
 | `atelier.html`, `magasin/macon/` | Équipe, magasin, accès, horaires des 3 boutiques |
