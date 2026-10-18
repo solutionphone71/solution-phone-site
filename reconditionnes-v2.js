@@ -44,7 +44,7 @@
   'use strict';
 
   var PUBLIC_CATALOG_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog';
-  var WHATSAPP = 'https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20renseignement%20sur%20un%20smartphone%20reconditionn%C3%A9%20%3A%20';
+  var WHATSAPP = 'https://wa.me/33783921884';
 
   var state = { items: [], cat: 'iphone', family: 'all', signature: '', loaded: false };
 
@@ -65,6 +65,9 @@
     return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
       return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
     });
+  }
+  function whatsappLink(message){
+    return WHATSAPP + '?text=' + encodeURIComponent(message);
   }
 
   /* ---------- Normalisation des modèles ---------- */
@@ -262,7 +265,7 @@
       .catch(function(){
         if (state.loaded && state.items.length) return; // on garde l'affichage précédent
         document.getElementById('rcSummary').textContent = 'Stock momentanément indisponible.';
-        document.getElementById('rcList').innerHTML = '<p class="rc-status">Le stock ne peut pas s’afficher pour le moment. Demandez les disponibilités sur <a href="' + WHATSAPP + '?text=' + encodeURIComponent('Bonjour, quels smartphones reconditionnés avez-vous en boutique ?') + '" target="_blank" rel="noopener">WhatsApp</a> ou au <a href="tel:+33385330689">03 85 33 06 89</a>.</p>';
+        document.getElementById('rcList').innerHTML = '<p class="rc-status">Le stock ne peut pas s’afficher pour le moment. Demandez les disponibilités sur <a href="' + whatsappLink('Bonjour Solution Phone, quels smartphones reconditionnés avez-vous en boutique ?') + '" target="_blank" rel="noopener">WhatsApp</a> ou au <a href="tel:+33385330689">03 85 33 06 89</a>.</p>';
       });
   }
 
@@ -279,7 +282,7 @@
     var now = new Date();
     var time = ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2);
     document.getElementById('rcSummary').textContent = n
-      ? n + ' téléphone' + (n > 1 ? 's' : '') + ' disponible' + (n > 1 ? 's' : '') + ' à l’atelier · mis à jour à ' + time
+      ? n + ' téléphone' + (n > 1 ? 's' : '') + ' disponible' + (n > 1 ? 's' : '') + ' à l’atelier · catalogue consulté à ' + time
       : 'Aucun téléphone en ligne pour le moment.';
   }
 
@@ -313,7 +316,7 @@
     var shown = state.family === 'all' ? items : families[state.family];
     var list = document.getElementById('rcList');
     if (!shown.length) {
-      list.innerHTML = '<p class="rc-status">Aucun téléphone dans cette catégorie pour le moment. <a href="' + WHATSAPP + '?text=' + encodeURIComponent('Bonjour, je cherche un smartphone. Avez-vous des arrivages prévus ?') + '" target="_blank" rel="noopener">Demandez-nous sur WhatsApp</a>.</p>';
+      list.innerHTML = '<p class="rc-status">Aucun téléphone dans cette catégorie pour le moment. <a href="' + whatsappLink('Bonjour Solution Phone, je cherche un smartphone. Avez-vous des arrivages prévus ?') + '" target="_blank" rel="noopener">Demandez-nous sur WhatsApp</a>.</p>';
       return;
     }
     var models = groupBy(shown, 'model');
@@ -407,8 +410,8 @@
   }
 
   function reserveLink(r){
-    var msg = 'Bonjour, je souhaite réserver ce téléphone vu sur le site : ' + describe(r) + '. Est-il toujours disponible ?';
-    return WHATSAPP + '?text=' + encodeURIComponent(msg);
+    var msg = 'Bonjour Solution Phone, je souhaite réserver ce téléphone vu sur le site : ' + describe(r) + '. Est-il toujours disponible ?';
+    return whatsappLink(msg);
   }
 
   /* ---------- Interactions ---------- */
@@ -429,7 +432,7 @@
   });
 
   // Exposé pour vérification manuelle dans la console (lecture seule).
-  window.SolutionPhoneRecond = { normalizeModel: normalizeModel, normalizeColor: normalizeColor };
+  window.SolutionPhoneRecond = { normalizeModel: normalizeModel, normalizeColor: normalizeColor, whatsappLink: whatsappLink };
 
   loadStock();
   setInterval(loadStock, 60000); // actualisation toutes les 60 s (comme avant)
