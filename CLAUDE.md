@@ -15,13 +15,13 @@ Tout en français (commits, textes, rapports). Parler simplement au dirigeant.
 - Équipe : cinq personnes, dont trois réparateurs.
 - Délai : « généralement en moins d'une heure si la pièce est en stock ».
 - Garanties : réparations 6 mois ; reconditionnés 12 mois (30 points de contrôle) ; hydrogel : défaut du produit 6 mois seulement.
-- Paiements : carte, espèces (1 000 € maximum), Apple Pay, virement. Pas de chèque, pas de paiement en plusieurs fois.
+- Paiements : carte, espèces (1 000 € maximum), Apple Pay, virement. Chèques acceptés ; pas de paiement en plusieurs fois.
 - Avis : « 4,7/5 · plus de 700 avis Google » (Solution Accessoires : « 5,0/5 · 20 avis »).
-- QualiRépar (formulation unique) : « Réparateur labellisé QualiRépar. 25 € déjà déduits de nos tarifs de réparation de smartphone : grâce au Bonus Réparation QualiRépar quand la réparation est éligible, offerts par Solution Phone sinon. » Jamais « certifié », « l'État finance », « agréé par l'État ».
+- QualiRépar (formulation unique) : « Réparateur labellisé QualiRépar. 25 € déjà déduits de nos tarifs de réparation de smartphone : grâce au Bonus Réparation QualiRépar quand la réparation est éligible, sans remise équivalente hors éligibilité. » Jamais « certifié », « l'État finance », « agréé par l'État ».
 - Toujours afficher le prix final ; message WhatsApp « Bonjour Solution Phone, … » sans « urgente ».
 
 ## À ne pas casser
 - Parcours devis de l'accueil, page reconditionnés, consentement cookies (rien avant accord), barre de contact, plan « Voir le plan », bloc « Depuis 2014 », menu commun.
 - Ne changer aucune URL ; une page supprimée devient une redirection (meta refresh + canonical + lien).
 - Supprimer un fichier seulement après un `grep -r` sur tout le dépôt prouvant qu'il n'est référencé nulle part.
-- CGV : les clauses juridiques sont revues par un avocat, ne pas les réécrire.
+- CGV : version du 6 novembre 2026 mise à jour sur instruction du dirigeant. Maintenir le même texte contractuel sur cgv.html et son PDF lié. Ne pas présenter cette version comme validée par un avocat. L’adhésion au médiateur reste à régulariser.
