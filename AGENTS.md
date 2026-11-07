@@ -12,7 +12,7 @@ Tout en français (commits, textes, rapports). Parler simplement au dirigeant.
 - GPS : 46.3025, 4.8297.
 - Téléphones : Solution Phone 03 85 33 06 89 ; Solution Accessoires 06 02 84 99 53 ; Solution Informatique 07 48 34 87 43 ; WhatsApp 07 83 92 18 84 ; contact@solution-phone.fr.
 - Horaires Solution Phone : lundi 9h15–12h15 / 14h–19h ; mardi–samedi 9h15–19h ; dimanche fermé. Solution Accessoires : mardi–samedi 10h–12h / 14h–19h.
-- Équipe : cinq personnes, dont trois réparateurs.
+- Équipe : Sébastien (gérant), Rahim, Nawfel, Raphaël et Lenny (apprenti) ; cinq personnes, dont trois réparateurs.
 - Délai : « généralement en moins d'une heure si la pièce est en stock ».
 - Garanties : réparations 6 mois ; reconditionnés 12 mois (30 points de contrôle) ; hydrogel : défaut du produit 6 mois seulement.
 - Paiements : carte, espèces (1 000 € maximum), Apple Pay, virement. Chèques acceptés ; pas de paiement en plusieurs fois.
