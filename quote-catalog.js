@@ -18,7 +18,7 @@
     return rows;
   }
   api.catalogState='loading';api.catalogRows={screen:[],battery:[]};
-  api.models=()=>[...new Set(Object.values(api.catalogRows).flat().map(r=>'iPhone '+r.modele))];
+  api.models=()=>[...new Set([...api.catalogRows.screen.flatMap(r=>{const group=/^(14|15|16)\/\1 Plus$/.exec(r.modele);return group?['iPhone '+group[1],'iPhone '+group[1]+' Plus']:['iPhone '+r.modele]}),...api.catalogRows.battery.map(r=>'iPhone '+r.modele)])];
   api.prices=(model,issue)=>{
     const row=(api.catalogRows[issue]||[]).find(r=>clean(r.modele)===clean(model)||r.modele.split('/').some(part=>clean(part)===clean(model)));
     return row?(issue==='screen'?screen:battery).map((q,i)=>({id:q[0],name:q[1],desc:q[2],price:Number(row.prix[i])})).filter(q=>Number.isFinite(q.price)&&q.price>0):[];
