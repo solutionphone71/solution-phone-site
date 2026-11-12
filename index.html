@@ -397,7 +397,7 @@
 </style>
   <link rel="stylesheet" href="signature-home.css?v=conversion-simple-2">
   <link rel="stylesheet" href="quote-journey.css?v=7">
-  <script src="quote-catalog.js?v=2" defer></script>
+  <script src="quote-catalog.js?v=3" defer></script>
   <script src="quote-journey.js?v=6" defer></script>
   <link rel="stylesheet" href="qualirepar-top.css?v=2">
   <script src="qualirepar-top.js?v=4" defer></script>
@@ -815,6 +815,7 @@
     <a href="#" data-sp-consent-manage style="color:inherit;white-space:nowrap">Gérer mes cookies</a>
   </footer>
 
+  <script src="apple-screens-20261112-v2.js"></script>
   <script>
     const SUPABASE_URL='https://kdvxcnjfrmvlnrymfyug.supabase.co';
     const SUPABASE_KEY='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
@@ -836,17 +837,6 @@
       {id:'ti',name:'Compatible reconnue',desc:'Batterie compatible reconnue par l’iPhone selon le modèle'},
       {id:'orig',name:'Originale',desc:'Pièce d’origine'}
     ];
-    const fallbackScreens={
-      '16 pro max':[null,70,null,165,215],'16 pro':[null,70,null,165,215],'16':[null,70,null,165,215],
-      '15 pro max':[null,70,null,165,215],'15 pro':[50,60,null,155,185],'15':[50,60,null,140,185],
-      '14 pro max':[45,50,65,90,115],'14 pro':[45,50,65,90,115],'14':[45,50,65,90,115],
-      '13 pro max':[45,50,65,90,115],'13 pro':[45,50,65,90,115],'13':[45,50,65,90,115],
-      '13 mini':[null,40,null,50,60],'12 pro max':[40,50,65,90,115],'12 pro':[40,50,65,90,115],
-      '12':[40,50,65,90,115],'12 mini':[null,40,null,null,60],'11 pro max':[30,40,55,70,85],
-      '11 pro':[30,40,55,70,85],'11':[30,40,55,null,70],'xr':[30,40,55,null,70],
-      'xs max':[30,40,55,70,85],'xs':[30,40,55,70,85],'x':[30,40,55,70,85],
-      'se':[null,40,null,50,60],'8':[null,40,null,50,60],'7':[null,40,null,50,60]
-    };
     const fallbackBatteries={
       '16 pro max':[65,75,null],'16 pro':[65,75,null],'16':[65,75,null],
       '15 pro max':[65,75,null],'15 pro':[65,75,null],'15':[65,75,null],
@@ -855,7 +845,7 @@
       '12 pro':[45,55,null],'12':[45,55,null],'12 mini':[45,55,null],
       '11':[35,45,null],'xr':[35,45,null],'xs':[35,45,null],'x':[35,45,null]
     };
-    let screens={...fallbackScreens},batteries={...fallbackBatteries},liveScreenModels=new Set(),liveBatteryModels=new Set(),recondStock=[],current=null,conversationText='',conversationParsed=null,waitingFor=null,flowData={},lastBrainWhatsApp='',expertPollTimer=null,expertPollCount=0;
+    let screens={},batteries={...fallbackBatteries},liveScreenModels=new Set(),liveBatteryModels=new Set(),recondStock=[],current=null,conversationText='',conversationParsed=null,waitingFor=null,flowData={},lastBrainWhatsApp='',expertPollTimer=null,expertPollCount=0;
     const SERVICE_ESTIMATES={
       computerScreen:{range:'100 à 170 €',text:'Pour un remplacement d’écran d’ordinateur, comptez généralement',note:'Cette estimation dépend de la marque, du modèle et de la dalle disponible.'},
       computerVirus:{range:'40 à 60 €',text:'Pour un nettoyage de virus sur PC, comptez généralement',note:'Le tarif précis dépend de l’état du système et du temps nécessaire.'},
@@ -959,11 +949,25 @@
     }
 
     async function loadPrices(){
+      // Écrans approuvés dans V2 : aucune réponse tardive de V1 ne peut les écraser.
+      // Si l'asset manque ou est invalide, ne jamais afficher un vieux prix écran.
+      const approved=window.SolutionPhoneApprovedIphoneScreens;
+      if(Array.isArray(approved)&&approved.length===25){
+        const next={},keys=new Set();let valid=true;
+        approved.forEach(r=>{
+          if(!r||typeof r.modele!=='string'||!Array.isArray(r.prix)||r.prix.length!==5
+            ||!r.prix.some(x=>typeof x==='number'&&Number.isFinite(x)&&x>0)
+            ||!r.prix.every(x=>x===null||(typeof x==='number'&&Number.isFinite(x)&&x>0&&x<=100000&&x===Math.round(x*100)/100))){valid=false;return;}
+          const matches=modelKeys(r.modele);if(!matches.length){valid=false;return;}
+          matches.forEach(k=>{if(keys.has(k))valid=false;keys.add(k);next[k]=r.prix});
+        });
+        if(valid){screens=next;liveScreenModels=new Set(keys)}
+      }
+      syncQuickModels();
       try{
         const response=await fetch(PUBLIC_CATALOG_URL+'?resource=prices');
         if(!response.ok)throw new Error('catalogue prices unavailable');
         const catalogue=await response.json();
-        (catalogue.prices?.screens||[]).forEach(r=>{if(!Array.isArray(r.prix))return;modelKeys(r.modele).forEach(k=>{screens[k]=r.prix;if(r.prix.some(Number))liveScreenModels.add(k)})});
         (catalogue.prices?.batteries||[]).forEach(r=>{if(!Array.isArray(r.prix))return;modelKeys(r.modele).forEach(k=>{batteries[k]=r.prix;if(r.prix.some(Number))liveBatteryModels.add(k)})});
       }catch(e){}finally{syncQuickModels()}
     }
