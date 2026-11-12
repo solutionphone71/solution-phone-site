@@ -578,7 +578,7 @@
             <details class="secondary-needs">
               <summary>Conseils, achat et autres services</summary>
               <div class="quality-guides" aria-label="Conseils sur les pièces">
-                <button class="quality-guide prompt" type="button" data-prompt="Quelles sont les 4 qualités d’écran iPhone ?"><small>Écrans iPhone</small><b>4 niveaux de qualité</b><span>Compatible · LTPS Prime · Soft OLED · ReLife</span></button>
+                <button class="quality-guide prompt" type="button" data-prompt="Quelle différence entre Hard OLED et Soft OLED ?"><small>Écrans iPhone</small><b>Choisir la qualité d’écran</b><span>Compatible · LTPS Prime · Hard OLED · Soft OLED · ReLife</span></button>
                 <button class="quality-guide prompt" type="button" data-prompt="Écran Android compatible ou Service Pack ?"><small>Écrans Android</small><b>2 choix selon le modèle</b><span>Compatible ou Service Pack constructeur</span></button>
                 <button class="quality-guide prompt" type="button" data-prompt="Batterie compatible ou originale ?"><small>Batteries</small><b>Budget ou origine</b><span>Choix expliqué avant réparation</span></button>
               </div>
@@ -1156,7 +1156,7 @@
           {label:'Voir un tarif iPhone',value:'price',kind:'openPrice'}
         ]);return;
       }
-      botReply('Pour un écran iPhone, nous proposons jusqu’à 4 niveaux selon le modèle :\n\nCompatible HD/LTPS — écran LCD compatible (technologie des écrans classiques), le prix le plus bas.\nLTPS Prime — écran LCD de gamme supérieure, plus lumineux.\nSoft OLED — écran OLED souple : noirs profonds, rendu proche de l’origine.\nReLife — dalle Apple d’origine reconditionnée avec une vitre neuve.\n\nVous choisissez selon votre budget ; l’équipe confirme la qualité disponible avant l’intervention.',[
+      botReply('Pour votre écran iPhone, voici les qualités à comparer selon le modèle :\n\nCompatible HD/LTPS — écran LCD compatible (technologie des écrans classiques), le prix le plus bas.\nLTPS Prime — écran LCD de gamme supérieure, plus lumineux.\nHard OLED — écran OLED rigide : noirs profonds, généralement moins cher que le Soft OLED, mais moins tolérant à la flexion et aux chocs. Prix et disponibilité à confirmer selon le modèle.\nSoft OLED — écran OLED souple : noirs profonds, rendu proche de l’origine.\nReLife — dalle Apple d’origine reconditionnée avec une vitre neuve.\n\nVous choisissez selon votre budget ; l’équipe confirme la qualité disponible avant l’intervention.',[
         {label:'Voir mon tarif',value:'price',kind:'openPrice'},
         {label:'Comprendre QualiRépar',value:'qualirepar',kind:'education'},
         {label:'Me conseiller sur WhatsApp',value:'whatsapp',kind:'directWhatsApp'}
@@ -1220,7 +1220,7 @@
       if(/carte mere|micro.?soudure|microsoudure/.test(educational)){startBusinessAnswer(text,'boardRepair');return}
       if(/qualirepar|bonus reparation/.test(educational)){startEducation(text,'qualirepar');return}
       if(/(?:qualite.*ecran|ecran.*(?:compatible|service pack)|service pack.*ecran)/.test(educational)&&/(?:android|samsung|xiaomi|redmi|honor|huawei|pixel|oppo|realme|motorola|service pack)/.test(educational)){startEducation(text,'androidScreen');return}
-      if(/qualite.*ecran|ltps|soft oled|relife|4 qualite.*ecran/.test(educational)){startEducation(text,'iphoneScreen');return}
+      if(/qualite.*ecran|ltps|hard oled|soft oled|relife|4 qualite.*ecran/.test(educational)){startEducation(text,'iphoneScreen');return}
       if(/(?:qualite.*batterie|batterie.*(?:compatible|originale|origine)|(?:compatible|originale|origine).*batterie)/.test(educational)&&!/(?:prix|tarif|combien|coute|euros?)/.test(educational)){startEducation(text,'battery');return}
       conversationText=text;conversationParsed=parseRequest(text);flowData={};
       if(conversationParsed.intent==='reconditioned'){
@@ -1451,6 +1451,7 @@
             ${p.issue==='battery'&&p.safetyAlert?`<div class="recap"><div><small>Consigne de sécurité</small><b>Batterie possiblement gonflée ou anormalement chaude : ne rechargez plus le téléphone et apportez-le en atelier.</b></div><strong>Stop</strong></div>`:''}
             ${p.issue==='screen'?`<details class="screen-explainer"><summary>Le conseil de Sébastien · quelle qualité choisir ?</summary><p>Compatible HD/LTPS — écran LCD compatible (technologie des écrans classiques), le choix économique.
 LTPS Prime — écran LCD de gamme supérieure, plus lumineux.
+Hard OLED — écran OLED rigide : noirs profonds, généralement moins cher que le Soft OLED, mais moins tolérant à la flexion et aux chocs. Prix et disponibilité à confirmer selon le modèle.
 Soft OLED — écran OLED souple : noirs profonds, rendu proche de l’origine.
 ReLife — dalle Apple d’origine reconditionnée avec une vitre neuve.
 
