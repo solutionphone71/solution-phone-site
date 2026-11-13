@@ -821,6 +821,8 @@
     const SUPABASE_KEY='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
     const EVAN_BRAIN_URL=SUPABASE_URL+'/functions/v1/evan-brain';
     const QUOTE_REQUEST_URL=SUPABASE_URL+'/functions/v1/quote-request';
+    const PUBLIC_QUOTE_SOURCE='v1'; // Bascule explicite, indépendante des autres flux publics.
+    const V2_QUOTE_REQUEST_URL='https://vps-8066c206.vps.ovh.net/api/public/quote-request';
     const PUBLIC_CATALOG_URL=SUPABASE_URL+'/functions/v1/public-catalog';
     const EVAN_CONTEXT_PAGE=new URLSearchParams(location.search).get('from')||location.pathname;
     const EVAN_SOURCE_PAGE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?'/audit-local/'+EVAN_CONTEXT_PAGE.replace(/^\/+/, ''):EVAN_CONTEXT_PAGE;
@@ -1743,30 +1745,52 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
       const key=$('#quick-model').value,detail=$('#quick-other-detail').value.trim();
       return key&&detail?`Devis autre pièce iPhone · ${iphoneLabel(key)} · ${detail}`:'';
     }
-    const quoteRequestTokens={main_quote:null,quick_other_part:null};
+    let quoteHelperLoading;
+    function loadQuoteAttemptHelper(){
+      if(window.SolutionPhoneQuoteAttempts)return Promise.resolve(window.SolutionPhoneQuoteAttempts);
+      if(!quoteHelperLoading)quoteHelperLoading=new Promise((resolve,reject)=>{
+        const script=document.createElement('script');script.src='/quote-attempt.fcade1faf080.js';script.async=true;
+        script.onload=()=>window.SolutionPhoneQuoteAttempts?resolve(window.SolutionPhoneQuoteAttempts):reject(new Error('quote_helper_unavailable'));
+        script.onerror=()=>reject(new Error('quote_helper_unavailable'));
+        document.head.appendChild(script);
+      });
+      return quoteHelperLoading;
+    }
     function quoteErrorMessage(error){
+      if(error?.code==='quote_payload_changed'||error?.code==='quote_attempt_needs_review')return 'Cette demande a peut-être déjà été envoyée. Vérifiez avec l’équipe avant de modifier ou renvoyer le devis.';
+      if(error?.code==='quote_receipt_unconfirmed')return 'Réception non confirmée. Ne renvoyez pas une nouvelle demande avant de vérifier avec l’équipe ; vous pouvez réessayer la même demande.';
+      if(error?.code==='quote_storage_unavailable'||error?.code==='invalid_quote_form'||error?.code==='invalid_quote_payload'||error?.message==='quote_helper_unavailable')return 'Envoi sécurisé indisponible sur ce navigateur. Utilisez WhatsApp ou appelez la boutique.';
       if(error?.status===429)return 'Plusieurs demandes ont déjà été envoyées récemment. Votre devis est peut-être déjà arrivé ; sinon, réessayez dans 15 minutes ou utilisez WhatsApp.';
-      if(error?.status>=400&&error?.status<500)return 'La demande contient une information invalide. Vérifiez les champs puis réessayez.';
-      return 'L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';
+      if(error?.status>=400&&error?.status<500)return 'La demande contient une information invalide. Contactez la boutique avant de modifier ou renvoyer cette demande.';
+      return 'Réception non confirmée. Réessayez cette même demande ou contactez la boutique avant d’en créer une autre.';
     }
     async function sendQuoteRequest(data){
-      const formType=data.form_type,clientToken=quoteRequestTokens[formType]||(quoteRequestTokens[formType]=crypto.randomUUID());
-      let lastError=new Error('quote_failed');
-      for(let attempt=0;attempt<2;attempt++){
-        if(attempt)await new Promise(resolve=>setTimeout(resolve,650));
-        try{
-          const response=await fetch(QUOTE_REQUEST_URL,{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({...data,page:location.pathname,client_token:clientToken})});
-          const payload=await response.json().catch(()=>null);
-          if(response.ok&&payload?.received){quoteRequestTokens[formType]=null;return payload}
-          const error=new Error(payload?.error||'quote_failed');error.status=response.status;
-          if(response.status>=400&&response.status<500)throw error;
-          lastError=error;
-        }catch(error){
-          if(error?.status>=400&&error?.status<500)throw error;
-          lastError=error instanceof Error?error:lastError;
+      const helper=await loadQuoteAttemptHelper();
+      const page=location.pathname||'/';
+      return helper.open().submit({
+        slot:'page'+page.toLowerCase().replace(/[^a-z0-9_/-]/g,'_')+'-'+data.form_type,
+        defaultReceiver:PUBLIC_QUOTE_SOURCE,
+        payload:{...data,page},
+        send:async({receiver,clientToken,payload:request})=>{
+          if(receiver!=='v1'&&receiver!=='v2')throw new Error('quote_receiver_invalid');
+          let lastError=new Error('quote_failed');
+          for(let attempt=0;attempt<2;attempt++){
+            if(attempt)await new Promise(resolve=>setTimeout(resolve,650));
+            try{
+              const response=await fetch(receiver==='v2'?V2_QUOTE_REQUEST_URL:QUOTE_REQUEST_URL,{method:'POST',headers:receiver==='v2'?{'Content-Type':'application/json'}:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({...request,client_token:clientToken})});
+              const receipt=await response.json().catch(()=>null);
+              if(response.ok&&receipt?.received)return receipt;
+              const error=new Error(receipt?.error||'quote_failed');error.status=response.status;
+              if(response.status>=400&&response.status<500)throw error;
+              lastError=error;
+            }catch(error){
+              if(error?.status>=400&&error?.status<500)throw error;
+              lastError=error instanceof Error?error:lastError;
+            }
+          }
+          throw lastError;
         }
-      }
-      throw lastError;
+      });
     }
     document.querySelectorAll('[data-quick-issue]').forEach(tab=>tab.addEventListener('click',()=>setQuickIssue(tab.dataset.quickIssue)));
     $('#quick-other-wa').addEventListener('click',()=>{
