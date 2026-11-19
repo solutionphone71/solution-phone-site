@@ -554,10 +554,9 @@
   </div>
 
   <script>
-    const SUPABASE_URL='https://kdvxcnjfrmvlnrymfyug.supabase.co';
-    const SUPABASE_KEY='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
-    const EVAN_BRAIN_URL=SUPABASE_URL+'/functions/v1/evan-brain';
-    const PUBLIC_CATALOG_URL=SUPABASE_URL+'/functions/v1/public-catalog';
+    const SUPABASE_KEY='';
+    const EVAN_BRAIN_URL='https://vps-8066c206.vps.ovh.net/api/public/evan-brain';
+    const PUBLIC_CATALOG_URL='https://vps-8066c206.vps.ovh.net/api/public/catalog';
     const EVAN_CONTEXT_PAGE=new URLSearchParams(location.search).get('from')||location.pathname;
     const EVAN_SOURCE_PAGE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?'/audit-local/'+EVAN_CONTEXT_PAGE.replace(/^\/+/, ''):EVAN_CONTEXT_PAGE;
     document.querySelectorAll('[data-iphone-site]').forEach(link=>{link.href=location.hostname==='localhost'?'http://localhost:4174/':'https://reparation-iphone-macon.fr/'});
@@ -756,7 +755,7 @@
       feedback.querySelectorAll('button').forEach(button=>button.addEventListener('click',async()=>{
         feedback.querySelectorAll('button').forEach(item=>item.disabled=true);
         try{
-          const response=await fetch(EVAN_BRAIN_URL,{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({conversation_token:evanConversationToken,knowledge_id:knowledgeId,feedback:button.dataset.value})});
+          const response=await fetch(EVAN_BRAIN_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({conversation_token:evanConversationToken,knowledge_id:knowledgeId,feedback:button.dataset.value})});
           if(!response.ok)throw new Error('feedback_failed');
           feedback.classList.add('is-sent');feedback.textContent=button.dataset.value==='helpful'?'Merci, votre avis est enregistré.':'Merci, l’équipe pourra revoir cette réponse.';
         }catch(error){feedback.querySelectorAll('button').forEach(item=>item.disabled=false)}
@@ -787,7 +786,7 @@
       try{
         const response=await fetch(EVAN_BRAIN_URL,{
           method:'POST',
-          headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},
+          headers:{'Content-Type':'application/json'},
           body:JSON.stringify({event,conversation_token:evanConversationToken||undefined,event_metadata:metadata,context:{page:EVAN_SOURCE_PAGE,consent_to_store:false}})
         });
         if(!response.ok)return;
@@ -801,7 +800,7 @@
       const poll=async()=>{
         expertPollCount++;
         try{
-          const response=await fetch(EVAN_BRAIN_URL,{method:'POST',headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({poll:true,conversation_token:evanConversationToken})});
+          const response=await fetch(EVAN_BRAIN_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({poll:true,conversation_token:evanConversationToken})});
           if(response.ok){
             const data=await response.json();
             if(data.status==='answered'&&data.answer){
@@ -826,7 +825,7 @@
       try{
         const response=await fetch(EVAN_BRAIN_URL,{
           method:'POST',
-          headers:{apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},
+          headers:{'Content-Type':'application/json'},
           body:JSON.stringify({message,conversation_token:evanConversationToken||undefined,context:{brand:parsed?.brand||'',model:parsed?.detectedModel||'',page:EVAN_SOURCE_PAGE,consent_to_store:false}})
         });
         if(!response.ok)throw new Error('brain_unavailable');

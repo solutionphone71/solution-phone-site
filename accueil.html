@@ -648,7 +648,7 @@ const BATTERIES = [
 ];
 
 /* Catalogue public filtré : source de vérité sans accès aux tables internes. */
-const PUBLIC_CATALOG_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog';
+const PUBLIC_CATALOG_URL = 'https://vps-8066c206.vps.ovh.net/api/public/catalog';
 function publicCatalog(resource){
   return fetch(PUBLIC_CATALOG_URL + '?resource=' + resource)
     .then(r => r.ok ? r.json() : {})

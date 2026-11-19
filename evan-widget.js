@@ -20,15 +20,14 @@
   var css=document.createElement('link');css.rel='stylesheet';css.href='evan-widget.css?v=8';document.head.appendChild(css);
   var directMailSubject='Demande depuis '+ctx.label+' — Solution Phone';
   var directMailBody='Bonjour,\n\nJe viens de la page « '+ctx.label+' » du site Solution Phone.\n\nMa demande : \n\nMon appareil et son modèle : \n\nVous pouvez me répondre à cette adresse e-mail.\n\nMerci.';
-  var brainUrl='https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/evan-brain';
-  var publicKey='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+  var brainUrl='https://vps-8066c206.vps.ovh.net/api/public/evan-brain';
   var metricToken='';
   try{metricToken=sessionStorage.getItem('evan_conversation_token')||''}catch(e){}
   var metricQueue=Promise.resolve(),metricOpened=false;
   var metricPage=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?'/audit-local/'+location.pathname.replace(/^\/+/, ''):location.pathname;
   function trackMetric(event,metadata){
     metricQueue=metricQueue.then(function(){
-      return fetch(brainUrl,{method:'POST',keepalive:true,headers:{apikey:publicKey,Authorization:'Bearer '+publicKey,'Content-Type':'application/json'},body:JSON.stringify({event:event,conversation_token:metricToken||undefined,event_metadata:metadata||{},context:{page:metricPage,consent_to_store:false}})})
+      return fetch(brainUrl,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({event:event,conversation_token:metricToken||undefined,event_metadata:metadata||{},context:{page:metricPage,consent_to_store:false}})})
         .then(function(response){return response.ok?response.json():null})
         .then(function(data){if(data&&data.conversation_token){metricToken=data.conversation_token;try{sessionStorage.setItem('evan_conversation_token',metricToken)}catch(e){}}})
         .catch(function(){});

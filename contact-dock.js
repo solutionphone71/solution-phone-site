@@ -13,8 +13,7 @@
     const mail=document.createElement('a');url.searchParams.set('email','1');mail.href=url.href;mail.textContent='Devis e-mail';const call=document.createElement('a');call.className='sp-contact-call';call.href='tel:+33385330689';call.textContent='03 85 33 06 89';call.setAttribute('aria-label','Appeler Solution Phone au 03 85 33 06 89');dock.append(quote,call,mail);document.body.appendChild(dock);
     return;
   }
-  var endpoint='https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/quote-request';
-  var publicKey='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+  var endpoint='https://vps-8066c206.vps.ovh.net/api/public/quote-request';
   var pageTitle=(document.querySelector('h1')||document).textContent.trim()||document.title;
   var page=location.pathname||'/';
   function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,Object.assign({transport_type:'beacon',page_location:location.href},params||{}));}catch(error){}}
@@ -39,7 +38,7 @@
     e.preventDefault();if(submit.disabled||form.website.value)return;
     submit.disabled=true;submit.textContent='Envoi en cours…';status.className='sp-contact-status';status.textContent='';
     var token=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)});
-    fetch(endpoint,{method:'POST',headers:{apikey:publicKey,Authorization:'Bearer '+publicKey,'Content-Type':'application/json'},body:JSON.stringify({name:form.nom.value.trim(),email:form.email.value.trim(),phone:form.telephone.value.trim(),request:form.demande.value.trim(),form_type:'main_quote',page:page,client_token:token,website:''})})
+    fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:form.nom.value.trim(),email:form.email.value.trim(),phone:form.telephone.value.trim(),request:form.demande.value.trim(),form_type:'main_quote',page:page,client_token:token,website:''})})
       .then(function(response){return response.json().catch(function(){return{}}).then(function(payload){if(!response.ok||!payload.received)throw new Error(payload.error||'Envoi impossible');return payload})})
       .then(function(payload){status.className='sp-contact-status ok';status.textContent='Votre demande est bien enregistrée'+(payload.reference?' — référence '+payload.reference:'')+'.';try{form.reset()}catch(error){}track('devis_email_envoye',{method:'email',page:page,source:'contact_dock'});},function(){status.className='sp-contact-status err';status.textContent='La demande n’a pas pu être envoyée. Utilisez WhatsApp ou appelez le 03 85 33 06 89.';})
       .finally(function(){submit.disabled=false;submit.textContent='Envoyer ma demande'});

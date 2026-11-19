@@ -28,7 +28,7 @@
     api.catalogRows={screen:approved,battery:[]};
     api.catalogState='loading';window.dispatchEvent(new Event('quote-catalog-update'));
     try{
-      const response=await fetch('https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog?resource=prices',{signal:AbortSignal.timeout(12000)});
+      const response=await fetch('https://vps-8066c206.vps.ovh.net/api/public/catalog?resource=prices',{signal:AbortSignal.timeout(12000)});
       if(!response.ok)throw new Error('catalogue');const data=await response.json();
       if(!Array.isArray(data.prices?.batteries))throw new Error('format');
       api.catalogRows={screen:approved,battery:data.prices.batteries};api.catalogState='ready';

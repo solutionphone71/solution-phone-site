@@ -13,10 +13,10 @@
     const mail=document.createElement('a');url.searchParams.set('email','1');mail.href=url.href;mail.textContent='Devis e-mail';const call=document.createElement('a');call.className='sp-contact-call';call.href='tel:+33385330689';call.textContent='03 85 33 06 89';call.setAttribute('aria-label','Appeler Solution Phone au 03 85 33 06 89');dock.append(quote,call,mail);document.body.appendChild(dock);
     return;
   }
-  var endpoint='https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/quote-request';
-  var PUBLIC_QUOTE_SOURCE='v1'; // Bascule explicite, indépendante des devis de l'accueil.
+  var endpoint='https://vps-8066c206.vps.ovh.net/api/public/quote-request';
+  var PUBLIC_QUOTE_SOURCE='v2'; // Bascule souveraine vers Solution Phone V2 OVH.
   var v2Endpoint='https://vps-8066c206.vps.ovh.net/api/public/quote-request';
-  var publicKey='sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+  var publicKey='';
   var pageTitle=(document.querySelector('h1')||document).textContent.trim()||document.title;
   var page=location.pathname||'/';
   function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,Object.assign({transport_type:'beacon',page_location:location.href},params||{}));}catch(error){}}

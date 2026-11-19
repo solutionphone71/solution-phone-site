@@ -92,7 +92,7 @@
   async function loadStock(){
     if(stockBusy)return;stockBusy=true;$('#sf-stock-refresh').disabled=true;
     try{
-      var response=await fetch('https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog?resource=stock',{signal:AbortSignal.timeout(12000),cache:'no-store'});
+      var response=await fetch('https://vps-8066c206.vps.ovh.net/api/public/catalog?resource=stock',{signal:AbortSignal.timeout(12000),cache:'no-store'});
       if(!response.ok)throw Error();var data=await response.json();if(!Array.isArray(data.stock&&data.stock.used))throw Error();
       stockItems=data.stock.used.filter(p=>p.modele&&Number(p.vente)>0);stockTime=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});renderStock();
     }catch(error){stockItems=[];$('#sf-stock-rows').replaceChildren();$('#sf-stock-status').textContent='Stock indisponible pour le moment. Contactez-nous pour connaître les appareils disponibles.'}

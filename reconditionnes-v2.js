@@ -2,7 +2,7 @@
  * Page Reconditionnés — stock en direct (version 2).
  *
  * Source des données : INCHANGÉE. Même appel que l'ancienne page :
- *   GET https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog?resource=stock
+ *   GET https://vps-8066c206.vps.ovh.net/api/public/catalog?resource=stock
  *   → { stock: { used: [...], new: [...] } }
  *   Champs lus : modele, stockage, couleur, grade, batterie, vente.
  * Rien n'est jamais écrit en base : la normalisation ci-dessous sert UNIQUEMENT à l'affichage.
@@ -43,7 +43,7 @@
 (function(){
   'use strict';
 
-  var PUBLIC_CATALOG_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/public-catalog';
+  var PUBLIC_CATALOG_URL = 'https://vps-8066c206.vps.ovh.net/api/public/catalog';
   var WHATSAPP = 'https://wa.me/33783921884';
 
   var state = { items: [], cat: 'iphone', family: 'all', signature: '', loaded: false };
