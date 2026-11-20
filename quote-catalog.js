@@ -31,7 +31,8 @@
       const response=await fetch('https://vps-8066c206.vps.ovh.net/api/public/catalog?resource=prices',{signal:AbortSignal.timeout(12000)});
       if(!response.ok)throw new Error('catalogue');const data=await response.json();
       if(!Array.isArray(data.prices?.batteries))throw new Error('format');
-      api.catalogRows={screen:approved,battery:data.prices.batteries};api.catalogState='ready';
+      const liveScreens=Array.isArray(data.prices?.screens)&&data.prices.screens.length?data.prices.screens:approved;
+      api.catalogRows={screen:liveScreens,battery:data.prices.batteries};api.catalogState='ready';
     }catch(error){api.catalogRows={screen:approved,battery:[]};api.catalogState='error'}
     window.dispatchEvent(new Event('quote-catalog-update'));
   };

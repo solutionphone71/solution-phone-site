@@ -969,6 +969,7 @@
         const response=await fetch(PUBLIC_CATALOG_URL+'?resource=prices');
         if(!response.ok)throw new Error('catalogue prices unavailable');
         const catalogue=await response.json();
+        if(Array.isArray(catalogue.prices?.screens)&&catalogue.prices.screens.length){const nextScreens={};liveScreenModels=new Set();catalogue.prices.screens.forEach(r=>{if(!Array.isArray(r.prix))return;modelKeys(r.modele).forEach(k=>{nextScreens[k]=r.prix;if(r.prix.some(Number))liveScreenModels.add(k)})});if(liveScreenModels.size)screens=nextScreens;}
         (catalogue.prices?.batteries||[]).forEach(r=>{if(!Array.isArray(r.prix))return;modelKeys(r.modele).forEach(k=>{batteries[k]=r.prix;if(r.prix.some(Number))liveBatteryModels.add(k)})});
       }catch(e){}finally{syncQuickModels()}
     }
