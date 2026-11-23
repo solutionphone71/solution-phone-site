@@ -1,5 +1,5 @@
 (function(){
-  if(document.querySelector('.evan-widget')||/concept-evan\.html$/.test(location.pathname))return;
+  if(document.querySelector('.evan-widget')||/(?:assistant-jason|concept-evan)\.html$/.test(location.pathname))return;
   var page=location.pathname.split('/').pop()||'';
   var contexts={
     'reconditionnes.html':{label:'Reconditionnés',title:'Quel téléphone recherchez-vous ?',items:['Je cherche un iPhone reconditionné à moins de 500 €','Quels smartphones reconditionnés sont disponibles ?','Je veux faire reprendre mon téléphone']},
@@ -17,19 +17,19 @@
   var ctx=contexts[page]||{label:'Solution Phone',title:'Que puis-je faire pour vous ?',items:['Obtenir un tarif de réparation','Diagnostiquer mon appareil','Parler directement à l’équipe']};
   var oldCrispButton=document.getElementById('crispFloatBtn');if(oldCrispButton)oldCrispButton.remove();
   if(window.$crisp&&Array.isArray(window.$crisp))window.$crisp.push(['do','chat:hide']);
-  var css=document.createElement('link');css.rel='stylesheet';css.href='evan-widget.css?v=8';document.head.appendChild(css);
+  var css=document.createElement('link');css.rel='stylesheet';css.href='jason-widget.css?v=1';document.head.appendChild(css);
   var directMailSubject='Demande depuis '+ctx.label+' — Solution Phone';
   var directMailBody='Bonjour,\n\nJe viens de la page « '+ctx.label+' » du site Solution Phone.\n\nMa demande : \n\nMon appareil et son modèle : \n\nVous pouvez me répondre à cette adresse e-mail.\n\nMerci.';
-  var brainUrl='https://vps-8066c206.vps.ovh.net/api/public/evan-brain';
+  var brainUrl='https://vps-8066c206.vps.ovh.net/api/public/jason-brain';
   var metricToken='';
-  try{metricToken=sessionStorage.getItem('evan_conversation_token')||''}catch(e){}
+  try{metricToken=sessionStorage.getItem('jason_conversation_token')||''}catch(e){}
   var metricQueue=Promise.resolve(),metricOpened=false;
   var metricPage=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?'/audit-local/'+location.pathname.replace(/^\/+/, ''):location.pathname;
   function trackMetric(event,metadata){
     metricQueue=metricQueue.then(function(){
       return fetch(brainUrl,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({event:event,conversation_token:metricToken||undefined,event_metadata:metadata||{},context:{page:metricPage,consent_to_store:false}})})
         .then(function(response){return response.ok?response.json():null})
-        .then(function(data){if(data&&data.conversation_token){metricToken=data.conversation_token;try{sessionStorage.setItem('evan_conversation_token',metricToken)}catch(e){}}})
+        .then(function(data){if(data&&data.conversation_token){metricToken=data.conversation_token;try{sessionStorage.setItem('jason_conversation_token',metricToken)}catch(e){}}})
         .catch(function(){});
     });
     return metricQueue;
@@ -44,11 +44,11 @@
   var launch=root.querySelector('.evan-widget-launch'),close=root.querySelector('.evan-widget-close'),back=root.querySelector('.evan-widget-back'),input=root.querySelector('input'),conversation=root.querySelector('.evan-widget-conversation');
   launch.setAttribute('aria-label','Demandez à Sébastien');
   root.setAttribute('aria-label','Assistant virtuel Solution Phone');
-  root.querySelector('.evan-widget-head b').textContent='Assistant virtuel Solution Phone';
+  root.querySelector('.evan-widget-head b').textContent='L’assistant de Sébastien';
   root.querySelector('.evan-widget-head b').nextElementSibling.textContent='Assistant IA · réponses automatiques · validation par l’équipe';
   launch.setAttribute('aria-label','Ouvrir l’assistant virtuel');
   launch.querySelector('b').textContent='Besoin d’aide ?';
-  launch.querySelector('small').textContent='Assistant virtuel';
+  launch.querySelector('small').textContent='L’assistant de Sébastien';
   function toggle(force){var open=typeof force==='boolean'?force:!root.classList.contains('open');root.classList.toggle('open',open);launch.setAttribute('aria-expanded',String(open));if(open)setTimeout(function(){input.focus()},80)}
   function ask(question){
     if(!question)return;

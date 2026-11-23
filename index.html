@@ -451,7 +451,7 @@
         <span id="availability-detail">L’assistant reste disponible pour votre devis.</span>
       </div>
       <span class="live-availability-meta" id="availability-meta">Mâcon · heure locale</span>
-      <button type="button" id="availability-action" onclick="focusEvan()">Obtenir mon devis</button>
+      <button type="button" id="availability-action" onclick="focusJason()">Obtenir mon devis</button>
     </aside>
 
     <section class="simple-offer" aria-labelledby="simple-offer-title">
@@ -818,13 +818,13 @@
   <script src="apple-screens-20261112-v3.js"></script>
   <script>
     const SUPABASE_KEY='';
-    const EVAN_BRAIN_URL='https://vps-8066c206.vps.ovh.net/api/public/evan-brain';
+    const JASON_BRAIN_URL='https://vps-8066c206.vps.ovh.net/api/public/jason-brain';
     const QUOTE_REQUEST_URL='https://vps-8066c206.vps.ovh.net/api/public/quote-request';
     const PUBLIC_QUOTE_SOURCE='v2'; // Bascule souveraine vers Solution Phone V2 OVH.
     const V2_QUOTE_REQUEST_URL='https://vps-8066c206.vps.ovh.net/api/public/quote-request';
     const PUBLIC_CATALOG_URL='https://vps-8066c206.vps.ovh.net/api/public/catalog';
-    const EVAN_CONTEXT_PAGE=new URLSearchParams(location.search).get('from')||location.pathname;
-    const EVAN_SOURCE_PAGE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?'/audit-local/'+EVAN_CONTEXT_PAGE.replace(/^\/+/, ''):EVAN_CONTEXT_PAGE;
+    const JASON_CONTEXT_PAGE=new URLSearchParams(location.search).get('from')||location.pathname;
+    const JASON_SOURCE_PAGE=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?'/audit-local/'+JASON_CONTEXT_PAGE.replace(/^\/+/, ''):JASON_CONTEXT_PAGE;
     document.querySelectorAll('[data-iphone-site]').forEach(link=>{link.href=location.hostname==='localhost'?'http://localhost:4174/':'https://reparation-iphone-macon.fr/'});
     const QUALITES=[
       {id:'hd',name:'Compatible HD/LTPS',desc:'L’essentiel, au meilleur prix'},
@@ -884,8 +884,8 @@
       ,androidVirus:{title:'Virus ou publicités sur Android',advice:'Des publicités intempestives, des applications qui s’ouvrent seules ou un navigateur redirigé viennent souvent d’une application indésirable. Évitez de saisir vos mots de passe et ne payez rien à la suite d’un message d’alerte.',safety:'Nous contrôlons et nettoyons le téléphone avant d’envisager toute réinitialisation.'}
       ,board:{title:'Carte mère ou micro-soudure',advice:'Une panne de carte mère ne se confirme pas à distance. Nous contrôlons d’abord l’alimentation, la batterie, le connecteur et les traces d’oxydation afin d’éviter une intervention lourde inutile.',safety:'Le diagnostic et la faisabilité doivent être validés par l’atelier avant tout prix ou délai.'}
     };
-    let evanConversationToken='';
-    try{evanConversationToken=sessionStorage.getItem('evan_conversation_token')||''}catch(e){}
+    let jasonConversationToken='';
+    try{jasonConversationToken=sessionStorage.getItem('jason_conversation_token')||''}catch(e){}
     const $=s=>document.querySelector(s);
     const normalize=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
     function handoffDevice(message,parsed){
@@ -943,7 +943,7 @@
         action.textContent='Obtenir mon devis';
       }
     }
-    function focusEvan(){
+    window.focusEvan=focusJason;function focusJason(){
       const conversation=$('.conversation');if(conversation)conversation.scrollIntoView({behavior:'smooth',block:'start'});
       const input=$('#journey-model');
       setTimeout(()=>input?.focus(),420);
@@ -1020,12 +1020,12 @@
       return node;
     }
     function addKnowledgeFeedback(node,knowledgeId){
-      if(!node||!knowledgeId||!evanConversationToken)return;
+      if(!node||!knowledgeId||!jasonConversationToken)return;
       const feedback=document.createElement('div');feedback.className='message-feedback';feedback.innerHTML='<span>Cette réponse vous aide ?</span><button type="button" data-value="helpful">Oui</button><button type="button" data-value="not_helpful">Pas vraiment</button>';
       feedback.querySelectorAll('button').forEach(button=>button.addEventListener('click',async()=>{
         feedback.querySelectorAll('button').forEach(item=>item.disabled=true);
         try{
-          const response=await fetch(EVAN_BRAIN_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({conversation_token:evanConversationToken,knowledge_id:knowledgeId,feedback:button.dataset.value})});
+          const response=await fetch(JASON_BRAIN_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({conversation_token:jasonConversationToken,knowledge_id:knowledgeId,feedback:button.dataset.value})});
           if(!response.ok)throw new Error('feedback_failed');
           feedback.classList.add('is-sent');feedback.textContent=button.dataset.value==='helpful'?'Merci, cette réponse est maintenant validée.':'Merci, cette réponse sera revue par l’équipe.';
         }catch(error){feedback.querySelectorAll('button').forEach(item=>item.disabled=false)}
@@ -1054,23 +1054,23 @@
     }
     async function trackBrainEvent(event,metadata={}){
       try{
-        const response=await fetch(EVAN_BRAIN_URL,{
+        const response=await fetch(JASON_BRAIN_URL,{
           method:'POST',
           headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({event,conversation_token:evanConversationToken||undefined,event_metadata:metadata,context:{page:EVAN_SOURCE_PAGE,consent_to_store:false}})
+          body:JSON.stringify({event,conversation_token:jasonConversationToken||undefined,event_metadata:metadata,context:{page:JASON_SOURCE_PAGE,consent_to_store:false}})
         });
         if(!response.ok)return;
         const data=await response.json();
-        if(data.conversation_token){evanConversationToken=data.conversation_token;try{sessionStorage.setItem('evan_conversation_token',evanConversationToken)}catch(e){}}
+        if(data.conversation_token){jasonConversationToken=data.conversation_token;try{sessionStorage.setItem('jason_conversation_token',jasonConversationToken)}catch(e){}}
       }catch(e){}
     }
     function stopExpertPolling(){if(expertPollTimer){clearTimeout(expertPollTimer);expertPollTimer=null}expertPollCount=0}
     function startExpertPolling(){
-      stopExpertPolling();if(!evanConversationToken)return;
+      stopExpertPolling();if(!jasonConversationToken)return;
       const poll=async()=>{
         expertPollCount++;
         try{
-          const response=await fetch(EVAN_BRAIN_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({poll:true,conversation_token:evanConversationToken})});
+          const response=await fetch(JASON_BRAIN_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({poll:true,conversation_token:jasonConversationToken})});
           if(response.ok){
             const data=await response.json();
             if(data.status==='answered'&&data.answer){
@@ -1090,17 +1090,17 @@
       };
       expertPollTimer=setTimeout(poll,8000);
     }
-    async function consultEvanMemory(message,parsed){
+    async function consultJasonMemory(message,parsed){
       showTyping();$('#chat-quick').innerHTML='';
       try{
-        const response=await fetch(EVAN_BRAIN_URL,{
+        const response=await fetch(JASON_BRAIN_URL,{
           method:'POST',
           headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({message,conversation_token:evanConversationToken||undefined,context:{brand:parsed?.brand||'',model:parsed?.detectedModel||'',page:EVAN_SOURCE_PAGE,consent_to_store:false}})
+          body:JSON.stringify({message,conversation_token:jasonConversationToken||undefined,context:{brand:parsed?.brand||'',model:parsed?.detectedModel||'',page:JASON_SOURCE_PAGE,consent_to_store:false}})
         });
         if(!response.ok)throw new Error('brain_unavailable');
         const data=await response.json();
-        if(data.conversation_token){evanConversationToken=data.conversation_token;try{sessionStorage.setItem('evan_conversation_token',evanConversationToken)}catch(e){}}
+        if(data.conversation_token){jasonConversationToken=data.conversation_token;try{sessionStorage.setItem('jason_conversation_token',jasonConversationToken)}catch(e){}}
         $('#chat-typing')?.remove();document.body.classList.remove('evan-thinking');document.body.classList.add('evan-speaking');setTimeout(()=>document.body.classList.remove('evan-speaking'),1100);
         const warning=Array.isArray(data.warnings)&&data.warnings.length?'\n\nÀ savoir : '+data.warnings[0]:'';
         const botMessage=addMessage('bot',(data.answer||'Je vérifie votre demande.')+warning);
@@ -1291,7 +1291,7 @@
         || (/\b(ps[345]|playstation|xbox|switch|console)\b/.test(educational)&&/\b(chauffe|surchauffe|ventilateur|s eteint)\b/.test(educational));
       const shouldUseBrain=knowledgeFirst||validatedServicePrice||validatedAndroidBatteryPrice||!conversationParsed.intent||(conversationParsed.intent==='repair'&&!localIssues.includes(conversationParsed.issue));
       if(shouldUseBrain){
-        const handled=await consultEvanMemory(text,conversationParsed);if(handled)return;
+        const handled=await consultJasonMemory(text,conversationParsed);if(handled)return;
       }
       advanceConversation();
     }
@@ -1383,8 +1383,8 @@
       if(kind==='education'){replyEducation(value);return}
       if(['brand','model','issue','symptom'].includes(kind))flowData.localQuestions=(flowData.localQuestions||0)+1;
       if(kind==='brainPrecision'){waitingFor='brainFreeText';$('#chat-input').placeholder='Ajoutez un détail utile…';botReply('Dites-moi ce qui peut aider : modèle, choc, liquide, message affiché ou réparation récente.');return}
-      if(kind==='brainDiagnostic'){conversationText+=' '+value;conversationParsed=parseRequest(conversationText);current=conversationParsed;consultEvanMemory(value,conversationParsed);return}
-      if(kind==='brainQuestion'){conversationText+=' '+value;consultEvanMemory(conversationText,parseRequest(conversationText));return}
+      if(kind==='brainDiagnostic'){conversationText+=' '+value;conversationParsed=parseRequest(conversationText);current=conversationParsed;consultJasonMemory(value,conversationParsed);return}
+      if(kind==='brainQuestion'){conversationText+=' '+value;consultJasonMemory(conversationText,parseRequest(conversationText));return}
       if(kind==='intent'){conversationText+=' '+value;conversationParsed=parseRequest(conversationText);current=conversationParsed}
       else if(kind==='budget'){
         const parts=String(value).split('-').map(Number);flowData.budget={min:parts[0]||0,max:parts[1]||99999,label:label||value};
@@ -1398,7 +1398,7 @@
       else if(kind==='specialistDetail'){flowData.specialistDetail=value}
       else if(kind==='computerType'){flowData.computerType=value}
       else if(kind==='symptom'){conversationParsed={...conversationParsed,symptom:value};current=conversationParsed}
-      else if(kind==='brainFreeText'){conversationText+=' '+value;conversationParsed=parseRequest(conversationText);current=conversationParsed;consultEvanMemory(conversationText,conversationParsed);return}
+      else if(kind==='brainFreeText'){conversationText+=' '+value;conversationParsed=parseRequest(conversationText);current=conversationParsed;consultJasonMemory(conversationText,conversationParsed);return}
       else{conversationText+=' '+value;conversationParsed=parseRequest(conversationText);current=conversationParsed}
       $('#chat-input').placeholder='Écrivez votre réponse…';
       const directPriceReady=conversationParsed?.brand==='Apple'&&conversationParsed?.key&&['screen','battery'].includes(conversationParsed?.issue);
@@ -1674,7 +1674,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
     }
     function updateActions(){const a=$('#result-wa');if(a)a.href=waLink()}
     function resetDiagnostic(){
-      stopExpertPolling();$('#answer-view').classList.remove('show');$('#answer-view').innerHTML='';$('#chat-view').classList.remove('show');$('#chat-thread').innerHTML='';$('#chat-quick').innerHTML='';$('#loading-view').classList.remove('show');$('#start-view').style.display='block';$('#diagnostic-input').value='';$('#diagnostic-input').placeholder='Écrivez directement votre demande…';document.querySelectorAll('.brand-button').forEach(x=>x.classList.remove('active'));conversationText='';conversationParsed=null;waitingFor=null;flowData={};current=null;lastBrainWhatsApp='';updateDiagnosticProgress(null);evanConversationToken='';try{sessionStorage.removeItem('evan_conversation_token')}catch(e){}$('#device-state').textContent='Votre demande';syncContextCta();setTimeout(()=>$('#diagnostic-input').focus(),80);
+      stopExpertPolling();$('#answer-view').classList.remove('show');$('#answer-view').innerHTML='';$('#chat-view').classList.remove('show');$('#chat-thread').innerHTML='';$('#chat-quick').innerHTML='';$('#loading-view').classList.remove('show');$('#start-view').style.display='block';$('#diagnostic-input').value='';$('#diagnostic-input').placeholder='Écrivez directement votre demande…';document.querySelectorAll('.brand-button').forEach(x=>x.classList.remove('active'));conversationText='';conversationParsed=null;waitingFor=null;flowData={};current=null;lastBrainWhatsApp='';updateDiagnosticProgress(null);jasonConversationToken='';try{sessionStorage.removeItem('jason_conversation_token')}catch(e){}$('#device-state').textContent='Votre demande';syncContextCta();setTimeout(()=>$('#diagnostic-input').focus(),80);
     }
     let mailReturnFocus=null,mailDraftContext='';
     function resetMailSuccess(){
@@ -1915,7 +1915,7 @@ Lorsqu’il existe plusieurs versions pour votre modèle, vous gardez le choix. 
     const sharedQuestion=new URLSearchParams(location.search).get('q');
     if(sharedQuestion){
       $('#diagnostic-input').value=sharedQuestion;
-      Promise.race([evanDataReady,new Promise(resolve=>setTimeout(resolve,900))]).then(async()=>{await trackBrainEvent('assistant_opened',{source:'page_context',from:EVAN_SOURCE_PAGE});runDiagnostic(sharedQuestion)});
+      Promise.race([evanDataReady,new Promise(resolve=>setTimeout(resolve,900))]).then(async()=>{await trackBrainEvent('assistant_opened',{source:'page_context',from:JASON_SOURCE_PAGE});runDiagnostic(sharedQuestion)});
     }
     const updateContactDock=()=>document.body.classList.toggle('contact-dock-visible',window.scrollY>Math.min(520,window.innerHeight*.62));
     updateContactDock();window.addEventListener('scroll',updateContactDock,{passive:true});
