@@ -1018,7 +1018,8 @@
       const knowledgeFirst=/\b(baseband|micro[ -]?soudure|carte mere|tablette|ipad|galaxy tab|hdmi|haut parleur|son.{0,45}faible|vaut.*coup|rentable|reparer ou (?:changer|remplacer)|quelles reparations|quelles pieces.*changez)\b/.test(educational)
         || (/\bbatterie\b/.test(educational)&&/\b(ti reconnue|qualite|compatible.*originale|originale.*compatible|trois prix|3 prix)\b/.test(educational)&&/\b(iphone|apple)\b/.test(educational))
         || (/\b(ps[345]|playstation|xbox|switch|console)\b/.test(educational)&&/\b(chauffe|surchauffe|ventilateur|s eteint)\b/.test(educational));
-      const shouldUseBrain=knowledgeFirst||validatedServicePrice||validatedAndroidBatteryPrice||!conversationParsed.intent||(conversationParsed.intent==='repair'&&!localIssues.includes(conversationParsed.issue));
+      const isDirectAppleCard=conversationParsed.intent==='repair'&&conversationParsed.brand==='Apple'&&Boolean(conversationParsed.key)&&(conversationParsed.issue==='screen'||conversationParsed.issue==='battery');
+      const shouldUseBrain=!isDirectAppleCard||knowledgeFirst;
       if(shouldUseBrain){
         const handled=await consultJasonMemory(text,conversationParsed);if(handled)return;
       }

@@ -1,73 +1,602 @@
-(function(){
-  if(document.querySelector('.evan-widget')||/(?:assistant-jason|concept-evan)\.html$/.test(location.pathname))return;
-  var page=location.pathname.split('/').pop()||'';
-  var contexts={
-    'reconditionnes.html':{label:'Reconditionnés',title:'Quel téléphone recherchez-vous ?',items:['Je cherche un iPhone reconditionné à moins de 500 €','Quels smartphones reconditionnés sont disponibles ?','Je veux faire reprendre mon téléphone']},
-    'accessoires.html':{label:'Accessoires',title:'Quel accessoire vous faut-il ?',items:['Je cherche une coque pour mon téléphone','Je cherche un chargeur compatible','Je veux une protection d’écran']},
-    'hydrogel.html':{label:'Protection écran',title:'Quelle protection choisir ?',items:['Hydrogel ou verre trempé pour mon téléphone ?','Je veux protéger un écran incurvé','Quel est le prix d’une protection hydrogel posée ?']},
-    'reparation-samsung.html':{label:'Réparation Samsung',title:'Quel est le problème du Samsung ?',items:['Batterie Samsung à remplacer','Écran Samsung cassé','Le téléphone charge mal']},
-    'atelier.html':{label:'Atelier de Mâcon',title:'Une question sur l’atelier ?',items:['Quels sont vos horaires ?','Puis-je venir sans rendez-vous ?','Comment fonctionne QualiRépar ?']},
-    'faq.html':{label:'Questions fréquentes',title:'Je vous réponds directement.',items:['Le tarif d’une réparation','Comment fonctionne la garantie ?','Quels sont vos horaires ?']},
-    'actualites.html':{label:'Conseils',title:'Un doute sur votre appareil ?',items:['Mon téléphone chauffe','Ma batterie se vide vite','Mon téléphone ne charge plus']},
-    'cgv.html':{label:'Informations',title:'Besoin d’une réponse claire ?',items:['Comment fonctionne la garantie ?','Comment demander un devis ?','Parler directement à l’équipe']},
-    'politique-confidentialite.html':{label:'Confidentialité',title:'Une question sur vos données ?',items:['Que conserve l’assistant ?','Comment supprimer mes données ?','Parler directement à l’équipe']},
-    'roulette.html':{label:'Jeu Solution Phone',title:'Sébastien peut aussi vous conseiller.',items:['Voir les conditions du jeu','Trouver une protection d’écran','Demander un tarif de réparation']},
-    '404.html':{label:'Page introuvable',title:'Je vous remets sur la bonne voie.',items:['Demander un tarif','Voir les réparations','Trouver la boutique']}
+(function () {
+  if (
+    document.querySelector(".evan-widget") ||
+    /(?:assistant-jason|concept-evan)\.html$/.test(location.pathname)
+  ) {
+    return;
+  }
+
+  var path = location.pathname;
+  var page = path.split("/").filter(Boolean).pop() || "";
+  if (path.indexOf("/magasin/macon") !== -1) page = "magasin-macon";
+  if (path.indexOf("/services/laptop-repair") !== -1) page = "solution-informatique.html";
+
+  var contexts = {
+    "reconditionnes.html": {
+      label: "Smartphones reconditionnés",
+      title: "Quel téléphone recherchez-vous ?",
+      items: [
+        "Quels iPhone ou Samsung reconditionnés avez-vous en vitrine ?",
+        "Je cherche un smartphone reconditionné à moins de 400 €",
+        "Combien pouvez-vous reprendre mon ancien téléphone ?",
+      ],
+    },
+    "accessoires.html": {
+      label: "Solution Accessoires",
+      title: "Quel accessoire ou service vous faut-il ?",
+      items: [
+        "Posez-vous une protection Hydrogel sur mesure en boutique ?",
+        "Avez-vous des chargeurs rapides certifiés et coques MagSafe ?",
+        "Comment fonctionne le rachat cash de mon téléphone ?",
+      ],
+    },
+    "hydrogel.html": {
+      label: "Protection Hydrogel",
+      title: "Quelle protection pour votre écran ?",
+      items: [
+        "Hydrogel sur mesure ou verre trempé : que conseillez-vous ?",
+        "Protégez-vous aussi les écrans incurvés et les tablettes ?",
+        "Combien de temps prend la pose en magasin ?",
+      ],
+    },
+    "reparation-samsung.html": {
+      label: "Réparation Samsung & Android",
+      title: "Quel est le problème sur votre appareil ?",
+      items: [
+        "Quel est le prix d’un écran ou d’une batterie Samsung ?",
+        "Mon téléphone charge mal : que faites-vous en premier ?",
+        "Le Bonus QualiRépar de 25 € s’applique-t-il sur Samsung ?",
+      ],
+    },
+    "remplacement-ecran-samsung-macon.html": {
+      label: "Écran Samsung Mâcon",
+      title: "Quel modèle Samsung souhaitez-vous réparer ?",
+      items: [
+        "Combien coûte le remplacement d’écran sur mon Samsung ?",
+        "Utilisez-vous des écrans Service Pack d’origine ?",
+        "En combien de temps la réparation est-elle faite ?",
+      ],
+    },
+    "ecran-iphone-casse-macon.html": {
+      label: "Écran iPhone Mâcon",
+      title: "Quel modèle d’iPhone a l’écran cassé ?",
+      items: [
+        "Quel est le tarif écran pour mon modèle d’iPhone ?",
+        "Quelle différence entre LCD/LTPS, Soft OLED et ReLife ?",
+        "Puis-je passer sans rendez-vous aujourd’hui ?",
+      ],
+    },
+    "remplacement-batterie-telephone-macon.html": {
+      label: "Batterie téléphone Mâcon",
+      title: "Une batterie à remplacer rapidement ?",
+      items: [
+        "Combien coûte le changement de batterie sur mon téléphone ?",
+        "Est-ce éligible au Bonus QualiRépar de 25 € ?",
+        "Combien de temps dure le remplacement sur place ?",
+      ],
+    },
+    "reparation-telephone-macon.html": {
+      label: "Atelier Mâcon",
+      title: "Dites-moi votre modèle et la panne.",
+      items: [
+        "Obtenir le tarif exact pour mon téléphone",
+        "Mon téléphone ne charge plus ou s’éteint tout seul",
+        "Comment fonctionne la garantie de 6 mois ?",
+      ],
+    },
+    "reparation-iphone.html": {
+      label: "Réparation iPhone",
+      title: "Une question sur votre iPhone ?",
+      items: [
+        "Tarif écran ou batterie selon mon modèle d’iPhone",
+        "Mon iPhone redémarre tout seul (diagnostic Panic-Full)",
+        "Remplacement de vitre arrière ou connecteur de charge",
+      ],
+    },
+    "solution-informatique.html": {
+      label: "Solution Informatique & Consoles",
+      title: "PC, Mac ou console à dépanner ?",
+      items: [
+        "Mon PC est lent ou bloqué par des virus : quel tarif ?",
+        "Remplacement d’écran ou de batterie sur PC portable / MacBook",
+        "Réparez-vous les ports HDMI et la surchauffe sur PS5 / Switch ?",
+      ],
+    },
+    "atelier.html": {
+      label: "Atelier Solution Phone",
+      title: "Une question pour Sébastien et l’équipe ?",
+      items: [
+        "Quels sont vos horaires au 21 rue Gambetta à Mâcon ?",
+        "Comment fonctionne le Bonus QualiRépar de 25 € ?",
+        "Faites-vous les attestations d’irréparabilité assurance ?",
+      ],
+    },
+    "magasin-macon": {
+      label: "Nos 3 boutiques à Mâcon",
+      title: "Infos pratiques, tarifs ou stock en direct ?",
+      items: [
+        "Quels sont vos horaires d’ouverture aujourd’hui ?",
+        "Puis-je venir sans rendez-vous au 21 rue Gambetta ?",
+        "Quels sont les 3 espaces Solution Phone, Accessoires et Informatique ?",
+      ],
+    },
+    "faq.html": {
+      label: "Questions fréquentes",
+      title: "Je vous réponds immédiatement sur tout.",
+      items: [
+        "Obtenir le tarif d’une réparation",
+        "Conditions du Bonus QualiRépar -25 € et garantie 6 mois",
+        "Vérifier les téléphones reconditionnés disponibles",
+      ],
+    },
+    "actualites.html": {
+      label: "Conseils & diagnostic",
+      title: "Un doute sur votre appareil ?",
+      items: [
+        "Mon téléphone chauffe ou perd vite sa batterie",
+        "Mon téléphone est tombé dans l’eau : que faire tout de suite ?",
+        "Vaut-il mieux réparer ou passer sur un reconditionné ?",
+      ],
+    },
+    "cgv.html": {
+      label: "Garanties & conditions",
+      title: "Besoin d’une précision claire ?",
+      items: [
+        "Quelle est la garantie sur vos réparations et vos reconditionnés ?",
+        "Le devis est-il gratuit en boutique ?",
+        "Parler directement à Sébastien",
+      ],
+    },
+    "politique-confidentialite.html": {
+      label: "Confidentialité",
+      title: "Une question sur vos données ?",
+      items: [
+        "Comment sont protégées mes données lors d’une réparation ?",
+        "Comment exercer mes droits RGPD ?",
+        "Contacter directement Sébastien",
+      ],
+    },
+    "roulette.html": {
+      label: "Roue Cadeaux Solution Phone",
+      title: "Une question sur le jeu ou la boutique ?",
+      items: [
+        "Comment récupérer mon cadeau au 21 rue Gambetta ?",
+        "Voir les téléphones reconditionnés disponibles",
+        "Demander un tarif de réparation",
+      ],
+    },
   };
-  var ctx=contexts[page]||{label:'Solution Phone',title:'Que puis-je faire pour vous ?',items:['Obtenir un tarif de réparation','Diagnostiquer mon appareil','Parler directement à l’équipe']};
-  var oldCrispButton=document.getElementById('crispFloatBtn');if(oldCrispButton)oldCrispButton.remove();
-  if(window.$crisp&&Array.isArray(window.$crisp))window.$crisp.push(['do','chat:hide']);
-  var css=document.createElement('link');css.rel='stylesheet';css.href='jason-widget.css?v=1';document.head.appendChild(css);
-  var directMailSubject='Demande depuis '+ctx.label+' — Solution Phone';
-  var directMailBody='Bonjour,\n\nJe viens de la page « '+ctx.label+' » du site Solution Phone.\n\nMa demande : \n\nMon appareil et son modèle : \n\nVous pouvez me répondre à cette adresse e-mail.\n\nMerci.';
-  var brainUrl='https://vps-8066c206.vps.ovh.net/api/public/jason-brain';
-  var metricToken='';
-  try{metricToken=sessionStorage.getItem('jason_conversation_token')||''}catch(e){}
-  var metricQueue=Promise.resolve(),metricOpened=false;
-  var metricPage=/^(localhost|127\.0\.0\.1)$/.test(location.hostname)?'/audit-local/'+location.pathname.replace(/^\/+/, ''):location.pathname;
-  function trackMetric(event,metadata){
-    metricQueue=metricQueue.then(function(){
-      return fetch(brainUrl,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({event:event,conversation_token:metricToken||undefined,event_metadata:metadata||{},context:{page:metricPage,consent_to_store:false}})})
-        .then(function(response){return response.ok?response.json():null})
-        .then(function(data){if(data&&data.conversation_token){metricToken=data.conversation_token;try{sessionStorage.setItem('jason_conversation_token',metricToken)}catch(e){}}})
-        .catch(function(){});
+
+  var ctx = contexts[page] || {
+    label: "Solution Phone Mâcon",
+    title: "Posez votre question à l’assistant de Sébastien",
+    items: [
+      "Obtenir un tarif de réparation téléphone, PC ou console",
+      "Voir les smartphones reconditionnés disponibles en vitrine",
+      "Rachat cash, Hydrogel, QualiRépar -25 € ou horaires",
+    ],
+  };
+
+  var oldCrispButton = document.getElementById("crispFloatBtn");
+  if (oldCrispButton) oldCrispButton.remove();
+  if (window.$crisp && Array.isArray(window.$crisp)) window.$crisp.push(["do", "chat:hide"]);
+
+  var css = document.createElement("link");
+  css.rel = "stylesheet";
+  css.href = "/jason-widget.css?v=2";
+  document.head.appendChild(css);
+
+  var brainUrl = "https://vps-8066c206.vps.ovh.net/api/public/jason-brain";
+  var tokenKey = "jason_conversation_token";
+  var historyKey = "jason_conversation_history_v2";
+  var metricToken = "";
+  var history = [];
+  try {
+    metricToken = sessionStorage.getItem(tokenKey) || "";
+    var rawHist = sessionStorage.getItem(historyKey);
+    if (rawHist) {
+      var parsedHist = JSON.parse(rawHist);
+      if (Array.isArray(parsedHist)) history = parsedHist.slice(-8);
+    }
+  } catch (e) {}
+
+  var metricOpened = false;
+  var pollTimer = null;
+  var pollCount = 0;
+  var metricPage = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+    ? "/audit-local/" + path.replace(/^\/+/, "")
+    : path;
+
+  function saveState() {
+    try {
+      if (metricToken) sessionStorage.setItem(tokenKey, metricToken);
+      sessionStorage.setItem(historyKey, JSON.stringify(history.slice(-8)));
+    } catch (e) {}
+  }
+
+  function trackMetric(event, metadata) {
+    return fetch(brainUrl, {
+      method: "POST",
+      keepalive: true,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        event: event,
+        conversation_token: metricToken || undefined,
+        event_metadata: metadata || {},
+        context: { page: metricPage, consent_to_store: false },
+      }),
+    })
+      .then(function (r) {
+        return r.ok ? r.json() : null;
+      })
+      .then(function (data) {
+        if (data && data.conversation_token) {
+          metricToken = data.conversation_token;
+          saveState();
+        }
+      })
+      .catch(function () {});
+  }
+
+  function ensureMetricOpened() {
+    if (!metricOpened) {
+      metricOpened = true;
+      trackMetric("assistant_opened", { source: "page_widget", page: page || "home" });
+    }
+  }
+
+  function escapeHtml(str) {
+    return String(str || "").replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[c];
     });
-    return metricQueue;
   }
-  function ensureMetricOpened(){
-    if(!metricOpened){metricOpened=true;trackMetric('assistant_opened',{source:'page_widget',page:page||'home'});}
-    return metricQueue;
+
+  function formatRichHtml(text) {
+    var safe = escapeHtml(text);
+    safe = safe.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    var paragraphs = safe.split(/\n{2,}/);
+    return paragraphs
+      .map(function (block) {
+        return "<p>" + block.replace(/\n/g, "<br>") + "</p>";
+      })
+      .join("");
   }
-  var root=document.createElement('aside');root.className='evan-widget';root.setAttribute('aria-label','Assistant de Sébastien');
-  root.innerHTML='<div class="evan-widget-panel"><div class="evan-widget-head"><span class="evan-widget-avatar" aria-hidden="true"></span><div><b>Sébastien · Solution Phone</b><span>Diagnostic &amp; devis · équipe à Mâcon</span></div><button class="evan-widget-back" type="button" aria-label="Poser une autre question">←</button><button class="evan-widget-close" type="button" aria-label="Fermer">×</button></div><div class="evan-widget-body"><small class="evan-widget-context">Vous consultez · '+ctx.label+'</small><p>'+ctx.title+'</p><div class="evan-widget-suggestions">'+ctx.items.map(function(item){return '<button type="button" data-question="'+item.replace(/"/g,'&quot;')+'">'+item+'<span>→</span></button>'}).join('')+'</div><form class="evan-widget-form"><input aria-label="Votre question" placeholder="Écrivez votre demande…"><button aria-label="Envoyer">→</button></form><div class="evan-widget-direct"><a href="https://wa.me/33783921884?text='+encodeURIComponent('Bonjour Solution Phone, je viens de la page « '+ctx.label+' ». Ma demande : ')+'" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:contact@solution-phone.fr?subject='+encodeURIComponent(directMailSubject)+'&body='+encodeURIComponent(directMailBody)+'">E-mail</a><span>Contexte prérempli</span></div></div><div class="evan-widget-conversation" aria-live="polite"></div></div><button class="evan-widget-launch" type="button" aria-expanded="false"><span class="evan-widget-avatar" aria-hidden="true"></span><i></i><span><b>Demandez à Sébastien</b><small>Tarif · diagnostic · devis</small></span></button>';
+
+  var directWaUrl =
+    "https://wa.me/33783921884?text=" +
+    encodeURIComponent("Bonjour Sébastien, je viens de la page « " + ctx.label + " » sur solution-phone.fr : ");
+  var directMailSubject = "Demande depuis " + ctx.label + " — Solution Phone";
+  var directMailBody =
+    "Bonjour Sébastien,\n\nJe viens de la page « " +
+    ctx.label +
+    " » du site Solution Phone.\n\nMa demande : \nMon appareil : \n\nMerci.";
+  var directMailUrl =
+    "mailto:contact@solution-phone.fr?subject=" +
+    encodeURIComponent(directMailSubject) +
+    "&body=" +
+    encodeURIComponent(directMailBody);
+
+  var root = document.createElement("aside");
+  root.className = "evan-widget";
+  root.setAttribute("aria-label", "L’assistant de Sébastien — Solution Phone");
+  root.innerHTML =
+    '<div class="evan-widget-panel">' +
+    '<div class="evan-widget-head">' +
+    '<span class="evan-widget-avatar" aria-hidden="true"></span>' +
+    "<div><b>Sébastien · Solution Phone</b><span>Assistant IA en direct · Relais atelier Mâcon</span></div>" +
+    '<button class="evan-widget-back" type="button" title="Revenir aux suggestions" aria-label="Revenir aux suggestions">↺</button>' +
+    '<button class="evan-widget-close" type="button" aria-label="Fermer">×</button>' +
+    "</div>" +
+    '<div class="evan-widget-body">' +
+    '<small class="evan-widget-context">' +
+    escapeHtml(ctx.label) +
+    "</small>" +
+    "<p>" +
+    escapeHtml(ctx.title) +
+    "</p>" +
+    '<div class="evan-widget-suggestions">' +
+    ctx.items
+      .map(function (item) {
+        return (
+          '<button type="button" data-question="' +
+          escapeHtml(item) +
+          '">' +
+          escapeHtml(item) +
+          "<span>→</span></button>"
+        );
+      })
+      .join("") +
+    "</div>" +
+    '<form class="evan-widget-form" data-form="starter">' +
+    '<input aria-label="Votre question" placeholder="Posez toute question (prix, stock, reprise, PC…)">' +
+    '<button type="submit" aria-label="Envoyer">→</button>' +
+    "</form>" +
+    '<div class="evan-widget-direct">' +
+    '<a href="' +
+    directWaUrl +
+    '" target="_blank" rel="noopener">WhatsApp direct</a>' +
+    '<a href="' +
+    directMailUrl +
+    '">E-mail</a>' +
+    "<span>21 rue Gambetta · Mâcon</span>" +
+    "</div>" +
+    "</div>" +
+    '<div class="evan-widget-conversation">' +
+    '<div class="sp-jason-thread" aria-live="polite"></div>' +
+    '<div class="sp-jason-chips"></div>' +
+    '<div class="sp-jason-composer">' +
+    '<form class="evan-widget-form" data-form="followup">' +
+    '<input aria-label="Continuer la discussion" placeholder="Répondre ou poser une autre question…">' +
+    '<button type="submit" aria-label="Envoyer">→</button>' +
+    "</form>" +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    '<button class="evan-widget-launch" type="button" aria-expanded="false" aria-label="Demandez à Sébastien">' +
+    '<span class="evan-widget-avatar" aria-hidden="true"></span><i></i>' +
+    "<span><b>Demandez à Sébastien</b><small>Tous sujets · Réponse immédiate</small></span>" +
+    "</button>";
+
   document.body.appendChild(root);
-  var launch=root.querySelector('.evan-widget-launch'),close=root.querySelector('.evan-widget-close'),back=root.querySelector('.evan-widget-back'),input=root.querySelector('input'),conversation=root.querySelector('.evan-widget-conversation');
-  launch.setAttribute('aria-label','Demandez à Sébastien');
-  root.setAttribute('aria-label','Assistant virtuel Solution Phone');
-  root.querySelector('.evan-widget-head b').textContent='L’assistant de Sébastien';
-  root.querySelector('.evan-widget-head b').nextElementSibling.textContent='Assistant IA · réponses automatiques · validation par l’équipe';
-  launch.setAttribute('aria-label','Ouvrir l’assistant virtuel');
-  launch.querySelector('b').textContent='Besoin d’aide ?';
-  launch.querySelector('small').textContent='L’assistant de Sébastien';
-  function toggle(force){var open=typeof force==='boolean'?force:!root.classList.contains('open');root.classList.toggle('open',open);launch.setAttribute('aria-expanded',String(open));if(open)setTimeout(function(){input.focus()},80)}
-  function ask(question){
-    if(!question)return;
-    root.classList.add('conversation-open');
-    conversation.innerHTML='';
-    toggle(true);
-    ensureMetricOpened().finally(function(){
-      var frame=document.createElement('iframe');
-      frame.title='Assistant de Sébastien';
-      frame.src='./?embed=1&q='+encodeURIComponent(question)+'&from='+encodeURIComponent(page);
-      conversation.appendChild(frame);
+
+  var launch = root.querySelector(".evan-widget-launch");
+  var closeBtn = root.querySelector(".evan-widget-close");
+  var backBtn = root.querySelector(".evan-widget-back");
+  var starterForm = root.querySelector('form[data-form="starter"]');
+  var starterInput = starterForm.querySelector("input");
+  var followupForm = root.querySelector('form[data-form="followup"]');
+  var followupInput = followupForm.querySelector("input");
+  var followupBtn = followupForm.querySelector("button");
+  var threadEl = root.querySelector(".sp-jason-thread");
+  var chipsEl = root.querySelector(".sp-jason-chips");
+  var currentWaUrl = directWaUrl;
+
+  function scrollThread() {
+    threadEl.scrollTop = threadEl.scrollHeight;
+  }
+
+  function appendBubble(cls, htmlContent) {
+    var div = document.createElement("div");
+    div.className = "sp-jason-msg " + cls;
+    div.innerHTML = htmlContent;
+    threadEl.appendChild(div);
+    scrollThread();
+    return div;
+  }
+
+  function renderChips(quickReplies, waUrl) {
+    if (waUrl) currentWaUrl = waUrl;
+    chipsEl.innerHTML = "";
+    var list = Array.isArray(quickReplies) && quickReplies.length
+      ? quickReplies
+      : [
+          { label: "Continuer sur WhatsApp avec Sébastien", action: "whatsapp" },
+          { label: "Envoyer par e-mail", action: "mail" },
+        ];
+    list.slice(0, 3).forEach(function (item) {
+      if (item.action === "whatsapp") {
+        var a = document.createElement("a");
+        a.className = "sp-jason-chip sp-jason-chip--wa";
+        a.href = currentWaUrl;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = "💬 " + item.label;
+        a.addEventListener("click", function () {
+          trackMetric("whatsapp_clicked", { source: "assistant_chip", page: page || "home" });
+        });
+        chipsEl.appendChild(a);
+      } else if (item.action === "mail") {
+        var m = document.createElement("a");
+        m.className = "sp-jason-chip";
+        m.href = directMailUrl;
+        m.textContent = "✉️ " + item.label;
+        m.addEventListener("click", function () {
+          trackMetric("email_clicked", { source: "assistant_chip", page: page || "home" });
+        });
+        chipsEl.appendChild(m);
+      } else if (item.value) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "sp-jason-chip";
+        b.textContent = item.label;
+        b.addEventListener("click", function () {
+          ask(item.value);
+        });
+        chipsEl.appendChild(b);
+      }
     });
   }
-  function showStart(){root.classList.remove('conversation-open');conversation.innerHTML='';setTimeout(function(){input.focus()},80)}
-  launch.addEventListener('click',function(){var opening=!root.classList.contains('open');toggle();if(opening)ensureMetricOpened()});close.addEventListener('click',function(){toggle(false)});back.addEventListener('click',showStart);
-  root.querySelectorAll('[data-question]').forEach(function(button){button.addEventListener('click',function(){ask(button.dataset.question)})});
-  document.querySelectorAll('[data-evan-question]').forEach(function(button){button.addEventListener('click',function(){ask(button.dataset.evanQuestion)})});
-  root.querySelector('form').addEventListener('submit',function(event){event.preventDefault();ask(input.value.trim())});
-  root.querySelector('a[href*="wa.me"]').addEventListener('click',function(){ensureMetricOpened().then(function(){trackMetric('whatsapp_clicked',{source:'page_widget_direct',page:page||'home'})})});
-  root.querySelector('a[href^="mailto:"]').addEventListener('click',function(){ensureMetricOpened().then(function(){trackMetric('email_clicked',{source:'page_widget_direct',page:page||'home'})})});
-  document.addEventListener('keydown',function(event){if(event.key==='Escape')toggle(false)});
+
+  function stopPolling() {
+    if (pollTimer) {
+      clearTimeout(pollTimer);
+      pollTimer = null;
+    }
+    pollCount = 0;
+  }
+
+  function startSebastienPolling() {
+    stopPolling();
+    if (!metricToken) return;
+    var note = document.createElement("div");
+    note.className = "sp-jason-relay-note";
+    note.textContent = "📡 Notification envoyée à Sébastien à l’atelier — s’il est disponible, sa réponse s’affichera ici en direct.";
+    threadEl.appendChild(note);
+    scrollThread();
+
+    function pollOnce() {
+      pollCount += 1;
+      fetch(brainUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ poll: true, conversation_token: metricToken }),
+      })
+        .then(function (r) {
+          return r.ok ? r.json() : null;
+        })
+        .then(function (data) {
+          if (data && data.status === "answered" && data.answer) {
+            stopPolling();
+            if (note.parentNode) note.remove();
+            appendBubble(
+              "sp-jason-msg--live",
+              "<strong>👨‍🔧 Sébastien (en direct de l’atelier) :</strong><br>" + formatRichHtml(data.answer),
+            );
+            history.push({ role: "assistant", content: data.answer });
+            saveState();
+            return;
+          }
+          if (pollCount < 12) {
+            pollTimer = setTimeout(pollOnce, 8000);
+          }
+        })
+        .catch(function () {
+          if (pollCount < 12) pollTimer = setTimeout(pollOnce, 10000);
+        });
+    }
+    pollTimer = setTimeout(pollOnce, 6000);
+  }
+
+  function hydrateExistingHistory() {
+    threadEl.innerHTML = "";
+    history.forEach(function (turn) {
+      appendBubble(
+        turn.role === "user" ? "sp-jason-msg--user" : "sp-jason-msg--bot",
+        turn.role === "user" ? escapeHtml(turn.content) : formatRichHtml(turn.content),
+      );
+    });
+  }
+
+  function toggle(force) {
+    var open = typeof force === "boolean" ? force : !root.classList.contains("open");
+    root.classList.toggle("open", open);
+    launch.setAttribute("aria-expanded", String(open));
+    if (open) {
+      ensureMetricOpened();
+      if (history.length > 0 && !root.classList.contains("conversation-open")) {
+        root.classList.add("conversation-open");
+        hydrateExistingHistory();
+        renderChips(null, currentWaUrl);
+      }
+      setTimeout(function () {
+        (root.classList.contains("conversation-open") ? followupInput : starterInput).focus();
+      }, 80);
+    }
+  }
+
+  function ask(question) {
+    var clean = String(question || "").trim();
+    if (!clean) return;
+    ensureMetricOpened();
+    if (!root.classList.contains("conversation-open")) {
+      root.classList.add("conversation-open");
+      hydrateExistingHistory();
+    }
+    toggle(true);
+    starterInput.value = "";
+    followupInput.value = "";
+    followupBtn.disabled = true;
+    chipsEl.innerHTML = "";
+
+    appendBubble("sp-jason-msg--user", escapeHtml(clean));
+    var typingEl = appendBubble("sp-jason-msg--bot sp-jason-msg--typing", "L’assistant de Sébastien vérifie en direct…");
+
+    var priorHistory = history.slice(-8);
+    history.push({ role: "user", content: clean });
+    saveState();
+
+    fetch(brainUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: clean,
+        conversation_token: metricToken || undefined,
+        history: priorHistory,
+        context: { page: metricPage, consent_to_store: false },
+      }),
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error("unavailable");
+        return r.json();
+      })
+      .then(function (data) {
+        if (typingEl.parentNode) typingEl.remove();
+        if (data.conversation_token) metricToken = data.conversation_token;
+        var reply = data.answer || "Vous pouvez nous joindre directement sur WhatsApp au 07 83 92 18 84.";
+        appendBubble("sp-jason-msg--bot", formatRichHtml(reply));
+        history.push({ role: "assistant", content: reply });
+        saveState();
+        renderChips(data.quick_replies, data.whatsapp_url);
+        if (data.needs_expert) {
+          startSebastienPolling();
+        }
+      })
+      .catch(function () {
+        if (typingEl.parentNode) typingEl.remove();
+        appendBubble(
+          "sp-jason-msg--bot",
+          formatRichHtml(
+            "Le service de réponse instantanée est momentanément occupé. Vous pouvez poser votre question directement à **Sébastien sur WhatsApp (07 83 92 18 84)** ou passer sans rendez-vous au **21 rue Gambetta à Mâcon**.",
+          ),
+        );
+        renderChips(null, directWaUrl);
+      })
+      .finally(function () {
+        followupBtn.disabled = false;
+        followupInput.focus();
+      });
+  }
+
+  function resetToSuggestions() {
+    stopPolling();
+    history = [];
+    saveState();
+    threadEl.innerHTML = "";
+    chipsEl.innerHTML = "";
+    root.classList.remove("conversation-open");
+    setTimeout(function () {
+      starterInput.focus();
+    }, 80);
+  }
+
+  launch.addEventListener("click", function () {
+    toggle();
+  });
+  closeBtn.addEventListener("click", function () {
+    toggle(false);
+  });
+  backBtn.addEventListener("click", resetToSuggestions);
+
+  root.querySelectorAll("[data-question]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      ask(button.getAttribute("data-question"));
+    });
+  });
+  document.querySelectorAll("[data-evan-question]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      ask(button.getAttribute("data-evan-question"));
+    });
+  });
+
+  starterForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    ask(starterInput.value);
+  });
+  followupForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    ask(followupInput.value);
+  });
+
+  root.querySelector('a[href*="wa.me"]').addEventListener("click", function () {
+    ensureMetricOpened();
+    trackMetric("whatsapp_clicked", { source: "page_widget_direct", page: page || "home" });
+  });
+  root.querySelector('a[href^="mailto:"]').addEventListener("click", function () {
+    ensureMetricOpened();
+    trackMetric("email_clicked", { source: "page_widget_direct", page: page || "home" });
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") toggle(false);
+  });
 })();

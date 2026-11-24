@@ -22,5 +22,6 @@ exclude:
   - scripts/data
   - index.old.html
   - concept-evan.html
+  - assistant-jason.html
   - accueil.html
   - _config.yml
