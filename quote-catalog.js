@@ -94,14 +94,18 @@
         if(aRow){
           const out=[];
           if(issue==='screen'){
-            if(Number(aRow.ecran_compatible)>0)out.push({id:'acomp',name:'Écran Compatible',desc:'Solution économique testée en atelier.',price:Number(aRow.ecran_compatible)});
-            if(Number(aRow.ecran_service_pack)>0)out.push({id:'asp',name:'Service Pack Origine',desc:'Bloc écran constructeur d’origine.',price:Number(aRow.ecran_service_pack)});
+            const incell=Number(aRow.ecran_compatible_incell||aRow.ecran_compatible);
+            if(incell>0)out.push({id:'acomp_incell',name:'Écran Compatible Incell',desc:'Solution économique Incell testée en atelier.',price:incell});
+            if(Number(aRow.ecran_compatible_oled)>0)out.push({id:'acomp_oled',name:'Écran Compatible OLED',desc:'Écran OLED : noirs profonds et rendu proche de l’origine.',price:Number(aRow.ecran_compatible_oled)});
+            if(Number(aRow.ecran_service_pack)>0)out.push({id:'asp',name:'Écran Original (Service Pack)',desc:'Bloc écran constructeur d’origine.',price:Number(aRow.ecran_service_pack)});
           }else if(issue==='battery'){
             if(Number(aRow.batterie_compatible)>0)out.push({id:'bcomp',name:'Batterie Compatible',desc:'Solution économique garantie 6 mois.',price:Number(aRow.batterie_compatible)});
             if(Number(aRow.batterie_originale)>0)out.push({id:'borig',name:'Batterie Originale',desc:'Pièce constructeur d’origine.',price:Number(aRow.batterie_originale)});
           }else if(issue==='charge'&&Number(aRow.connecteur)>0){
             out.push({id:'clean10',name:'Nettoyage port USB-C',desc:'Suffit dans 9 cas sur 10.',price:10});
             out.push({id:'conn',name:'Remplacement connecteur',desc:'Pièce neuve + main-d’œuvre.',price:Number(aRow.connecteur)});
+          }else if(issue==='back'&&Number(aRow.vitre_arriere)>0){
+            out.push({id:'vback',name:'Vitre arrière',desc:'Pièce neuve + pose comprise.',price:Number(aRow.vitre_arriere)});
           }
           if(out.length)return out;
         }
