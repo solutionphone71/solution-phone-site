@@ -17,7 +17,7 @@
       title: "Quel téléphone recherchez-vous ?",
       items: [
         "Quels iPhone ou Samsung reconditionnés avez-vous en vitrine ?",
-        "Je cherche un smartphone reconditionné à moins de 400 €",
+        "Je veux réserver un smartphone reconditionné 24h en boutique",
         "Combien pouvez-vous reprendre mon ancien téléphone ?",
       ],
     },
@@ -44,7 +44,7 @@
       title: "Quel est le problème sur votre appareil ?",
       items: [
         "Quel est le prix d’un écran ou d’une batterie Samsung ?",
-        "Mon téléphone charge mal : que faites-vous en premier ?",
+        "Où en est ma réparation en cours à l’atelier ?",
         "Le Bonus QualiRépar de 25 € s’applique-t-il sur Samsung ?",
       ],
     },
@@ -54,7 +54,7 @@
       items: [
         "Combien coûte le remplacement d’écran sur mon Samsung ?",
         "Utilisez-vous des écrans Service Pack d’origine ?",
-        "En combien de temps la réparation est-elle faite ?",
+        "Où en est ma réparation déposée à l’atelier ?",
       ],
     },
     "ecran-iphone-casse-macon.html": {
@@ -63,7 +63,7 @@
       items: [
         "Quel est le tarif écran pour mon modèle d’iPhone ?",
         "Quelle différence entre LCD/LTPS, Soft OLED et ReLife ?",
-        "Puis-je passer sans rendez-vous aujourd’hui ?",
+        "Où en est mon iPhone déposé en réparation ?",
       ],
     },
     "remplacement-batterie-telephone-macon.html": {
@@ -77,11 +77,11 @@
     },
     "reparation-telephone-macon.html": {
       label: "Atelier Mâcon",
-      title: "Dites-moi votre modèle et la panne.",
+      title: "Dites-moi votre modèle, la panne ou suivez votre dossier.",
       items: [
         "Obtenir le tarif exact pour mon téléphone",
+        "Où en est ma réparation en cours à l’atelier ?",
         "Mon téléphone ne charge plus ou s’éteint tout seul",
-        "Comment fonctionne la garantie de 6 mois ?",
       ],
     },
     "reparation-iphone.html": {
@@ -90,7 +90,7 @@
       items: [
         "Tarif écran ou batterie selon mon modèle d’iPhone",
         "Mon iPhone redémarre tout seul (diagnostic Panic-Full)",
-        "Remplacement de vitre arrière ou connecteur de charge",
+        "Où en est mon iPhone déposé à l’atelier ?",
       ],
     },
     "solution-informatique.html": {
@@ -106,25 +106,25 @@
       label: "Atelier Solution Phone",
       title: "Une question pour Sébastien et l’équipe ?",
       items: [
-        "Quels sont vos horaires au 21 rue Gambetta à Mâcon ?",
+        "Où en est ma réparation en cours à l’atelier ?",
         "Comment fonctionne le Bonus QualiRépar de 25 € ?",
         "Faites-vous les attestations d’irréparabilité assurance ?",
       ],
     },
     "magasin-macon": {
       label: "Nos 3 boutiques à Mâcon",
-      title: "Infos pratiques, tarifs ou stock en direct ?",
+      title: "Infos pratiques, tarifs ou suivi en direct ?",
       items: [
         "Quels sont vos horaires d’ouverture aujourd’hui ?",
-        "Puis-je venir sans rendez-vous au 21 rue Gambetta ?",
-        "Quels sont les 3 espaces Solution Phone, Accessoires et Informatique ?",
+        "Où en est ma réparation au 21 rue Gambetta ?",
+        "Voir les smartphones reconditionnés disponibles en vitrine",
       ],
     },
     "faq.html": {
       label: "Questions fréquentes",
       title: "Je vous réponds immédiatement sur tout.",
       items: [
-        "Obtenir le tarif d’une réparation",
+        "Où en est ma réparation en cours ?",
         "Conditions du Bonus QualiRépar -25 € et garantie 6 mois",
         "Vérifier les téléphones reconditionnés disponibles",
       ],
@@ -169,11 +169,11 @@
 
   var ctx = contexts[page] || {
     label: "Solution Phone Mâcon",
-    title: "Posez votre question à l’assistant de Sébastien",
+    title: "Posez votre question ou suivez votre réparation",
     items: [
       "Obtenir un tarif de réparation téléphone, PC ou console",
-      "Voir les smartphones reconditionnés disponibles en vitrine",
-      "Rachat cash, Hydrogel, QualiRépar -25 € ou horaires",
+      "Où en est ma réparation en cours à l’atelier ?",
+      "Voir ou réserver un smartphone reconditionné en vitrine",
     ],
   };
 
@@ -183,7 +183,7 @@
 
   var css = document.createElement("link");
   css.rel = "stylesheet";
-  css.href = "/jason-widget.css?v=2";
+  css.href = "/jason-widget.css?v=3";
   document.head.appendChild(css);
 
   var brainUrl = "https://vps-8066c206.vps.ovh.net/api/public/jason-brain";
@@ -191,6 +191,8 @@
   var historyKey = "jason_conversation_history_v2";
   var metricToken = "";
   var history = [];
+  var pendingImageDataUrl = null;
+
   try {
     metricToken = sessionStorage.getItem(tokenKey) || "";
     var rawHist = sessionStorage.getItem(historyKey);
@@ -262,6 +264,40 @@
       .join("");
   }
 
+  function compressImageFile(file, callback) {
+    if (!file || !/^image\//i.test(file.type)) return;
+    var reader = new FileReader();
+    reader.onload = function (ev) {
+      var img = new Image();
+      img.onload = function () {
+        var maxSide = 1080;
+        var w = img.width;
+        var h = img.height;
+        if (w > maxSide || h > maxSide) {
+          if (w >= h) {
+            h = Math.round((h * maxSide) / w);
+            w = maxSide;
+          } else {
+            w = Math.round((w * maxSide) / h);
+            h = maxSide;
+          }
+        }
+        var canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        var ctx2d = canvas.getContext("2d");
+        ctx2d.drawImage(img, 0, 0, w, h);
+        var dataUrl = canvas.toDataURL("image/jpeg", 0.76);
+        if (dataUrl.length > 540000) {
+          dataUrl = canvas.toDataURL("image/jpeg", 0.58);
+        }
+        callback(dataUrl);
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   var directWaUrl =
     "https://wa.me/33783921884?text=" +
     encodeURIComponent("Bonjour Sébastien, je viens de la page « " + ctx.label + " » sur solution-phone.fr : ");
@@ -280,10 +316,11 @@
   root.className = "evan-widget";
   root.setAttribute("aria-label", "L’assistant de Sébastien — Solution Phone");
   root.innerHTML =
+    '<input type="file" class="sp-jason-file-input" accept="image/*" hidden>' +
     '<div class="evan-widget-panel">' +
     '<div class="evan-widget-head">' +
     '<span class="evan-widget-avatar" aria-hidden="true"></span>' +
-    "<div><b>Sébastien · Solution Phone</b><span>Assistant IA en direct · Relais atelier Mâcon</span></div>" +
+    "<div><b>Sébastien · Solution Phone</b><span>Comptoir IA 24h/24 · Suivi, Photo & Relais Mâcon</span></div>" +
     '<button class="evan-widget-back" type="button" title="Revenir aux suggestions" aria-label="Revenir aux suggestions">↺</button>' +
     '<button class="evan-widget-close" type="button" aria-label="Fermer">×</button>' +
     "</div>" +
@@ -307,8 +344,10 @@
       })
       .join("") +
     "</div>" +
+    '<div class="sp-jason-photo-bar" data-photo-bar="starter"><img alt="Photo jointe"><span>Photo prête à envoyer</span><button type="button" aria-label="Retirer la photo">×</button></div>' +
     '<form class="evan-widget-form" data-form="starter">' +
-    '<input aria-label="Votre question" placeholder="Posez toute question (prix, stock, reprise, PC…)">' +
+    '<button type="button" class="sp-jason-cam-btn" title="Envoyer la photo de votre appareil" aria-label="Joindre une photo">📷</button>' +
+    '<input type="text" aria-label="Votre question" placeholder="Tarif, suivi REP-..., photo 📷 ou réservation…">' +
     '<button type="submit" aria-label="Envoyer">→</button>' +
     "</form>" +
     '<div class="evan-widget-direct">' +
@@ -325,8 +364,10 @@
     '<div class="sp-jason-thread" aria-live="polite"></div>' +
     '<div class="sp-jason-chips"></div>' +
     '<div class="sp-jason-composer">' +
+    '<div class="sp-jason-photo-bar" data-photo-bar="followup"><img alt="Photo jointe"><span>Photo prête à envoyer</span><button type="button" aria-label="Retirer la photo">×</button></div>' +
     '<form class="evan-widget-form" data-form="followup">' +
-    '<input aria-label="Continuer la discussion" placeholder="Répondre ou poser une autre question…">' +
+    '<button type="button" class="sp-jason-cam-btn" title="Envoyer une photo à Sébastien" aria-label="Joindre une photo">📷</button>' +
+    '<input type="text" aria-label="Continuer la discussion" placeholder="Répondre, joindre une photo 📷 ou réserver…">' +
     '<button type="submit" aria-label="Envoyer">→</button>' +
     "</form>" +
     "</div>" +
@@ -334,22 +375,65 @@
     "</div>" +
     '<button class="evan-widget-launch" type="button" aria-expanded="false" aria-label="Demandez à Sébastien">' +
     '<span class="evan-widget-avatar" aria-hidden="true"></span><i></i>' +
-    "<span><b>Demandez à Sébastien</b><small>Tous sujets · Réponse immédiate</small></span>" +
+    "<span><b>Demandez à Sébastien</b><small>Tarifs · Suivi · Photo · Stock</small></span>" +
     "</button>";
 
   document.body.appendChild(root);
 
+  var fileInput = root.querySelector(".sp-jason-file-input");
   var launch = root.querySelector(".evan-widget-launch");
   var closeBtn = root.querySelector(".evan-widget-close");
   var backBtn = root.querySelector(".evan-widget-back");
   var starterForm = root.querySelector('form[data-form="starter"]');
-  var starterInput = starterForm.querySelector("input");
+  var starterInput = starterForm.querySelector('input[type="text"]');
   var followupForm = root.querySelector('form[data-form="followup"]');
-  var followupInput = followupForm.querySelector("input");
-  var followupBtn = followupForm.querySelector("button");
+  var followupInput = followupForm.querySelector('input[type="text"]');
+  var followupBtn = followupForm.querySelector('button[type="submit"]');
+  var camBtns = root.querySelectorAll(".sp-jason-cam-btn");
+  var photoBars = root.querySelectorAll(".sp-jason-photo-bar");
   var threadEl = root.querySelector(".sp-jason-thread");
   var chipsEl = root.querySelector(".sp-jason-chips");
   var currentWaUrl = directWaUrl;
+
+  function syncPhotoPreview() {
+    camBtns.forEach(function (b) {
+      b.classList.toggle("has-photo", Boolean(pendingImageDataUrl));
+    });
+    photoBars.forEach(function (bar) {
+      bar.classList.toggle("visible", Boolean(pendingImageDataUrl));
+      var img = bar.querySelector("img");
+      if (img && pendingImageDataUrl) img.src = pendingImageDataUrl;
+    });
+  }
+
+  camBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      ensureMetricOpened();
+      fileInput.click();
+    });
+  });
+
+  photoBars.forEach(function (bar) {
+    var clearBtn = bar.querySelector("button");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function () {
+        pendingImageDataUrl = null;
+        fileInput.value = "";
+        syncPhotoPreview();
+      });
+    }
+  });
+
+  fileInput.addEventListener("change", function () {
+    var f = fileInput.files && fileInput.files[0];
+    if (!f) return;
+    compressImageFile(f, function (dataUrl) {
+      pendingImageDataUrl = dataUrl;
+      syncPhotoPreview();
+      var activeInput = root.classList.contains("conversation-open") ? followupInput : starterInput;
+      activeInput.focus();
+    });
+  });
 
   function scrollThread() {
     threadEl.scrollTop = threadEl.scrollHeight;
@@ -371,7 +455,7 @@
       ? quickReplies
       : [
           { label: "Continuer sur WhatsApp avec Sébastien", action: "whatsapp" },
-          { label: "Envoyer par e-mail", action: "mail" },
+          { label: "Où en est ma réparation ?", value: "Où en est ma réparation en cours à l’atelier ?" },
         ];
     list.slice(0, 3).forEach(function (item) {
       if (item.action === "whatsapp") {
@@ -420,7 +504,7 @@
     if (!metricToken) return;
     var note = document.createElement("div");
     note.className = "sp-jason-relay-note";
-    note.textContent = "📡 Notification envoyée à Sébastien à l’atelier — s’il est disponible, sa réponse s’affichera ici en direct.";
+    note.textContent = "📡 Transmis en direct à Sébastien à l’atelier — s’il est disponible, sa réponse s’affichera ici automatiquement.";
     threadEl.appendChild(note);
     scrollThread();
 
@@ -446,12 +530,12 @@
             saveState();
             return;
           }
-          if (pollCount < 12) {
+          if (pollCount < 15) {
             pollTimer = setTimeout(pollOnce, 8000);
           }
         })
         .catch(function () {
-          if (pollCount < 12) pollTimer = setTimeout(pollOnce, 10000);
+          if (pollCount < 15) pollTimer = setTimeout(pollOnce, 10000);
         });
     }
     pollTimer = setTimeout(pollOnce, 6000);
@@ -485,8 +569,17 @@
   }
 
   function ask(question) {
+    var attachedImg = pendingImageDataUrl;
     var clean = String(question || "").trim();
+    if (!clean && attachedImg) {
+      clean = "Voici la photo de mon appareil : quel est votre diagnostic et le tarif ?";
+    }
     if (!clean) return;
+
+    pendingImageDataUrl = null;
+    fileInput.value = "";
+    syncPhotoPreview();
+
     ensureMetricOpened();
     if (!root.classList.contains("conversation-open")) {
       root.classList.add("conversation-open");
@@ -498,11 +591,20 @@
     followupBtn.disabled = true;
     chipsEl.innerHTML = "";
 
-    appendBubble("sp-jason-msg--user", escapeHtml(clean));
-    var typingEl = appendBubble("sp-jason-msg--bot sp-jason-msg--typing", "L’assistant de Sébastien vérifie en direct…");
+    var userBubbleHtml =
+      (attachedImg ? '<img class="sp-jason-user-thumb" src="' + attachedImg + '" alt="Photo envoyée">' : "") +
+      escapeHtml(clean);
+    appendBubble("sp-jason-msg--user", userBubbleHtml);
+
+    var typingEl = appendBubble(
+      "sp-jason-msg--bot sp-jason-msg--typing",
+      attachedImg
+        ? "Analyse visuelle de votre photo et vérification des stocks en cours…"
+        : "L’assistant de Sébastien vérifie en direct…",
+    );
 
     var priorHistory = history.slice(-8);
-    history.push({ role: "user", content: clean });
+    history.push({ role: "user", content: attachedImg ? "[Photo envoyée] " + clean : clean });
     saveState();
 
     fetch(brainUrl, {
@@ -510,6 +612,7 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         message: clean,
+        image_data_url: attachedImg || undefined,
         conversation_token: metricToken || undefined,
         history: priorHistory,
         context: { page: metricPage, consent_to_store: false },
@@ -524,6 +627,13 @@
         if (data.conversation_token) metricToken = data.conversation_token;
         var reply = data.answer || "Vous pouvez nous joindre directement sur WhatsApp au 07 83 92 18 84.";
         appendBubble("sp-jason-msg--bot", formatRichHtml(reply));
+        if (data.quote_reference) {
+          var badge = document.createElement("div");
+          badge.className = "sp-jason-quote-badge";
+          badge.textContent = "✅ Enregistré au comptoir Solution Phone : réf. " + data.quote_reference;
+          threadEl.appendChild(badge);
+          scrollThread();
+        }
         history.push({ role: "assistant", content: reply });
         saveState();
         renderChips(data.quick_replies, data.whatsapp_url);
@@ -550,6 +660,8 @@
   function resetToSuggestions() {
     stopPolling();
     history = [];
+    pendingImageDataUrl = null;
+    syncPhotoPreview();
     saveState();
     threadEl.innerHTML = "";
     chipsEl.innerHTML = "";
