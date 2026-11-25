@@ -192,6 +192,69 @@
         "Demander un tarif de réparation",
       ],
     },
+    "suivi-reparation.html": {
+      label: "Suivi Atelier en direct",
+      title: "Un numéro REP-... ou une pièce à réserver ?",
+      items: [
+        "Où en est ma réparation déposée à l’atelier ?",
+        "Bloquer ma pièce 24h avant mon passage en boutique",
+        "Ajouter une pose Hydrogel avant de récupérer mon téléphone",
+      ],
+    },
+    "reparation-ordinateur-pc-mac-macon.html": {
+      label: "Atelier PC & Mac Mâcon",
+      title: "Quel souci rencontrez-vous sur votre PC ou Mac ?",
+      items: [
+        "Mon ordinateur est très lent : quel tarif pour un SSD ?",
+        "Remplacement d’écran ou de batterie sur PC portable / MacBook",
+        "Nettoyage virus, blocage ou réinstallation Windows / macOS",
+      ],
+    },
+    "recuperation-donnees-macon.html": {
+      label: "Récupération de données",
+      title: "Sur quel support se trouvent vos photos ou fichiers ?",
+      items: [
+        "Récupérer les photos d’un téléphone avec écran noir ou cassé",
+        "Mon disque dur externe ou ma clé USB n’est plus reconnu",
+        "Mon téléphone est tombé dans l’eau : mes données sont-elles récupérables ?",
+      ],
+    },
+    "reparation-ipad-tablette-macon.html": {
+      label: "iPad & Tablettes Mâcon",
+      title: "Quel modèle d’iPad ou de Galaxy Tab est concerné ?",
+      items: [
+        "Quel tarif pour remplacer la vitre ou l’écran de mon iPad ?",
+        "Changement de batterie ou port de charge sur tablette",
+        "Le Bonus QualiRépar s’applique-t-il sur ma tablette ?",
+      ],
+    },
+    "micro-soudure-carte-mere-macon.html": {
+      label: "Micro-soudure & Panic-Full",
+      title: "Panne carte mère, oxydation ou redémarrages ?",
+      items: [
+        "Mon iPhone redémarre toutes les 3 minutes (log panic-full)",
+        "Mon téléphone a pris l’eau : que faire avant de venir ?",
+        "Réparation port HDMI PS5 ou connecteur arraché sur carte mère",
+      ],
+    },
+    "pro-entreprises-macon.html": {
+      label: "Espace Pro & Flottes",
+      title: "Combien d’appareils pros souhaitez-vous confier ?",
+      items: [
+        "Mettre en place un suivi de flotte mobile / PC avec facture TVA",
+        "Réparation prioritaire pour téléphone ou PC professionnel",
+        "Équiper mon équipe en iPhone / Samsung reconditionnés garantis 12 mois",
+      ],
+    },
+    "devis-assurance-telephone-macon.html": {
+      label: "Devis Sinistre & Assurance",
+      title: "Quel document votre assurance vous demande-t-elle ?",
+      items: [
+        "Obtenir un devis chiffré normalisé pour mon assurance",
+        "Demander une attestation officielle d’irréparabilité",
+        "Quelles informations dois-je apporter au comptoir ?",
+      ],
+    },
   };
 
   var ctx = contexts[page] || {

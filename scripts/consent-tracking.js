@@ -39,8 +39,12 @@
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
 
-  // Durée de vie des cookies Google Analytics limitée à 13 mois (recommandation CNIL).
+  // Durée de vie des cookies Google Analytics limitée à 13 mois (recommandation CNIL)
+  // et liaison inter-domaines entre les 3 sites officiels Solution Phone.
   window.gtag('set', { cookie_expires: 395 * 24 * 60 * 60 });
+  window.gtag('set', 'linker', {
+    domains: ['solution-phone.fr', 'reparation-iphone-macon.fr', 'solution-accessoires.fr']
+  });
 
   // Seule la mesure d’audience est demandée : les finalités publicitaires
   // (ad_storage, ad_user_data, ad_personalization) restent toujours refusées.
@@ -184,9 +188,9 @@
     banner.setAttribute('aria-label', 'Choix des cookies');
     var intro = options.chat
       ? '<p><strong>Le chat en direct nécessite votre accord.</strong>Il utilise le service Crisp, qui dépose des cookies. Vous pouvez aussi nous appeler ou nous écrire sur WhatsApp. '
-      : '<p><strong>Mesure d’audience et chat en direct facultatifs.</strong>Google Analytics et le chat Crisp ne sont activés qu’avec votre accord ; sans accord, aucun de leurs cookies n’est déposé. ';
+      : '<p><strong>Mesure d’audience facultative.</strong>Google Analytics n’est activé qu’avec votre accord pour mesurer la fréquentation de nos boutiques en ligne ; sans accord, aucun cookie de suivi n’est déposé. ';
     var current = storedChoice === 'accepted' ? 'Choix actuel : accepté. ' : storedChoice === 'refused' ? 'Choix actuel : refusé. ' : '';
-    banner.innerHTML = intro + current + '<a href="/politique-confidentialite.html#cookies">En savoir plus</a>.</p><div id="sp-consent-actions"><button id="sp-consent-refuse" type="button">Continuer sans accepter</button><button id="sp-consent-accept" type="button">Accepter</button></div>';
+    banner.innerHTML = intro + current + '<a href="https://solution-phone.fr/politique-confidentialite.html#cookies">En savoir plus</a>.</p><div id="sp-consent-actions"><button id="sp-consent-refuse" type="button">Continuer sans accepter</button><button id="sp-consent-accept" type="button">Accepter</button></div>';
     document.body.appendChild(banner);
     banner.querySelector('#sp-consent-refuse').addEventListener('click', function () { saveChoice('refused'); });
     banner.querySelector('#sp-consent-accept').addEventListener('click', function () { saveChoice('accepted'); });

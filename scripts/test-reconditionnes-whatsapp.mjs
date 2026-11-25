@@ -14,7 +14,7 @@ assert.equal(
 assert.match(source, /return whatsappLink\(msg\);/);
 assert.match(source, /catalogue consulté à/);
 assert.doesNotMatch(source, /à l’atelier · mis à jour à/);
-assert.match(page, /reconditionnes-v2\.js\?v=2/);
+assert.match(page, /reconditionnes-v2\.js\?v=3/);
 
 const whatsappLink = (message) =>
   'https://wa.me/33783921884?text=' + encodeURIComponent(message);

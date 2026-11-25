@@ -31,28 +31,37 @@
   - Protection écran Hydrogel découpée sur mesure (pose incluse en 5 min) : de 10 € à 30 € (5 formules). Verre trempé posé : 5 € à 10 €.
   - Consoles de jeux : remplacement port HDMI PS5 / Xbox Series en micro-soudure, nettoyage surchauffe + métal liquide, port USB-C et lecteur Nintendo Switch.
   - Trottinettes électriques (Xiaomi, Ninebot Segway, Dualtron…) : pneus crevés / pneus pleins, chambres à air, freins, batteries et électronique.
+  - Ordinateurs PC & Mac (Solution Informatique) : remplacement SSD / RAM, écrans, batteries MacBook & PC portables, nettoyage virus / réinstallation Windows & macOS, récupération de données (iPhone, Android, disque dur, SSD, clé USB).
+  - Micro-soudure & carte mère : désoxydation téléphone tombé dans l’eau, diagnostic gratuit des logs Apple `panic-full`, réparation circuit de charge / rétroéclairage / audio.
+  - Professionnels, collectivités & assurances : maintenance flotte mobile & PC avec facturation TVA dédiée, devis sinistre normalisé et attestation officielle d’irréparabilité.
 - **Smartphones reconditionnés en stock réel (~85 à 90 appareils en vitrine)** :
   - Contrôlés sur 30 points en atelier, débloqués tout opérateur, **garantis 12 mois** (contre 6 mois sur les réparations).
-  - Consultables en temps réel avec filtres budget et **réservables gratuitement 24h à 48h en 1 clic** sur https://solution-phone.fr/reconditionnes.html (sans paiement en ligne).
+  - Consultables en temps réel avec filtres budget, simulateur de reprise en déduction et **réservables gratuitement 24h à 48h en 1 clic** sur https://solution-phone.fr/reconditionnes.html (sans paiement en ligne).
 - **Rachat cash & reprise immédiate** :
   - Estimation en 10 minutes au comptoir pour smartphones, tablettes et PC (même avec écran cassé), paiement immédiat en espèces (jusqu’à 1 000 € max légal), virement ou déduction sur un appareil reconditionné (pièce d’identité obligatoire).
-- **Services en ligne 24h/24 (« Demandez à Sébastien »)** :
-  - Devis instantané, envoi de photo d’appareil cassé pour pré-diagnostic, réservation vitrine et suivi en direct d’une réparation déposée à l’atelier via le numéro de bon `REP-...`.
+- **Services en ligne 24h/24 (« Demandez à Sébastien » & Suivi `REP-...`)** :
+  - Devis instantané multi-marques, blocage gratuit de pièce 24h avant passage, envoi de photo d’appareil cassé pour pré-diagnostic, réservation vitrine et suivi en direct d’une réparation déposée à l’atelier sur https://solution-phone.fr/suivi-reparation.html via le numéro de bon `REP-...`.
 - **Moyens de paiement** : carte bancaire, espèces (1 000 € maximum), Apple Pay, virement (pas de chèque, pas de paiement en plusieurs fois).
 - **Réputation vérifiée** : note Google 4,7/5 sur plus de 700 avis clients à Mâcon (équipe de 5 personnes dont 3 techniciens).
 
 ## Pages officielles de référence
-- [Accueil & simulateur de devis immédiat](https://solution-phone.fr/)
-- [Vitrine en direct : Smartphones reconditionnés garantis 12 mois (Réservation 24h)](https://solution-phone.fr/reconditionnes.html)
+- [Accueil & simulateur de devis multi-marques immédiat](https://solution-phone.fr/)
+- [Suivre ma réparation en direct (bon REP-... & blocage pièce 24h)](https://solution-phone.fr/suivi-reparation.html)
+- [Vitrine en direct : Smartphones reconditionnés garantis 12 mois (Simulateur reprise & Réservation 24h)](https://solution-phone.fr/reconditionnes.html)
 - [Réparation téléphone toutes marques à Mâcon](https://solution-phone.fr/reparation-telephone-macon.html)
 - [Réparation iPhone en atelier](https://solution-phone.fr/reparation-iphone.html) · [Site spécialisé iPhone (tarifs par modèle)](https://reparation-iphone-macon.fr/)
 - [Écran iPhone cassé à Mâcon](https://solution-phone.fr/ecran-iphone-casse-macon.html)
 - [Réparation Samsung & Android à Mâcon](https://solution-phone.fr/reparation-samsung.html) · [Remplacement écran Samsung](https://solution-phone.fr/remplacement-ecran-samsung-macon.html)
 - [Remplacement de batterie téléphone à Mâcon](https://solution-phone.fr/remplacement-batterie-telephone-macon.html)
+- [Réparation iPad & Tablettes Samsung Galaxy Tab à Mâcon](https://solution-phone.fr/reparation-ipad-tablette-macon.html)
+- [Micro-soudure, Carte mère, Oxydation & Diagnostic Panic-Full à Mâcon](https://solution-phone.fr/micro-soudure-carte-mere-macon.html)
+- [Réparation Ordinateur PC Portable, Fixe & MacBook à Mâcon](https://solution-phone.fr/reparation-ordinateur-pc-mac-macon.html) · [Solution Informatique](https://solution-phone.fr/solution-informatique.html)
+- [Récupération de données Téléphone, Disque dur, SSD & Mac à Mâcon](https://solution-phone.fr/recuperation-donnees-macon.html)
 - [Réparation Console PS5 (Port HDMI, Surchauffe), Nintendo Switch & Xbox à Mâcon](https://solution-phone.fr/reparation-console-ps5-switch-macon.html)
 - [Réparation Trottinette Électrique à Mâcon (Pneu crevé, Freins, Batterie)](https://solution-phone.fr/reparation-trottinette-electrique-macon.html)
+- [Offre Pro, Entreprises, Artisans & Collectivités Mâcon (Flotte mobile & PC)](https://solution-phone.fr/pro-entreprises-macon.html)
+- [Devis Assurance Sinistre & Attestation d’Irréparabilité à Mâcon](https://solution-phone.fr/devis-assurance-telephone-macon.html)
 - [Rachat Cash & Reprise Téléphone, Tablette et PC à Mâcon](https://solution-phone.fr/rachat-reprise-telephone-macon.html) · [Formulaire d’estimation rachat](https://solution-accessoires.fr/rachat-smartphone.html)
-- [Solution Informatique : dépannage PC & Mac à Mâcon](https://solution-phone.fr/solution-informatique.html)
 - [Pose protection écran Hydrogel sur mesure](https://solution-phone.fr/hydrogel.html) · [Catalogue Solution Accessoires](https://solution-accessoires.fr/)
 - [Magasin de Mâcon : horaires, parkings & accès régional](https://solution-phone.fr/magasin/macon/)
 - [L’équipe & l’atelier Solution Phone](https://solution-phone.fr/atelier.html)

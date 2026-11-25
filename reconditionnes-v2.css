@@ -50,6 +50,19 @@ body{background:#fff;color:var(--rc-ink);margin:0}
 .rc-budgets{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .rc-budget{min-height:38px;padding:0 14px;border:1px solid var(--rc-line);border-radius:980px;background:#fff;color:var(--rc-ink);font:inherit;font-size:13.5px;cursor:pointer}
 .rc-budget[aria-pressed="true"]{background:#0d0d0d;border-color:#0d0d0d;color:#fff;font-weight:600}
+.rc-trade{background:var(--rc-soft);border:1px solid var(--rc-line);border-radius:16px;padding:14px 16px;margin-top:4px;text-align:left}
+.rc-trade-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.rc-trade-label{font-size:13.5px;font-weight:600;color:var(--rc-ink)}
+.rc-trade-controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.rc-trade-select{min-height:40px;padding:0 12px;border:1px solid var(--rc-line);border-radius:10px;background:#fff;color:var(--rc-ink);font:inherit;font-size:14px;font-weight:500;max-width:100%}
+.rc-trade-cond{display:inline-flex;padding:3px;background:#e8e8ed;border-radius:980px;gap:2px}
+.rc-cond-btn{min-height:34px;padding:0 11px;border:0;border-radius:980px;background:transparent;color:var(--rc-ink);font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap}
+.rc-cond-btn[aria-pressed="true"]{background:#fff;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.rc-trade-note{margin:8px 0 0;font-size:12px;line-height:1.45;color:var(--rc-muted)}
+.rc-trade-note a{color:var(--rc-link);font-weight:600;text-decoration:none}
+.rc-trade-note a:hover{text-decoration:underline}
+.rc-trade-note strong{color:#147a40;font-weight:700}
+.rc-net{display:block;margin-top:2px;font-size:11.5px;font-weight:700;color:#147a40;white-space:nowrap}
 .rc-act-group{display:inline-flex;align-items:center;gap:6px;justify-content:flex-end}
 .rc-reserve-mail{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 13px;border:0;border-radius:980px;background:#e10600;color:#fff!important;font:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
 .rc-reserve-mail:hover{background:#b80500}

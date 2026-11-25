@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+  <script>if(location.host&&location.host.indexOf("www.")===0){location.replace(location.protocol+"//"+location.host.substring(4)+location.pathname+location.search+location.hash);}</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>iPhone & Samsung Reconditionnés Mâcon | Stock Réel Vitrine</title>
 <meta name="description" content="Plus de 80 iPhone et Samsung reconditionnés visibles en direct au 21 rue Gambetta à Mâcon. Testés 30 points, garantie 12 mois, reprise cash et réserve 24h.">
@@ -54,7 +55,7 @@
 }
 </script>
 <!-- Google Analytics 4 -->
-<script src="scripts/consent-tracking.js?v=2"></script>
+<script src="scripts/consent-tracking.js?v=3"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -62,8 +63,8 @@ gtag("js", new Date());
 gtag("config", "G-3QP90K1TLM");
 </script>
 <link rel="stylesheet" href="premium-shared.css?v=4">
-<link rel="stylesheet" href="reconditionnes-v2.css?v=2">
-<script src="premium-nav.js?v=menu-commun-4" defer></script>
+<link rel="stylesheet" href="reconditionnes-v2.css?v=3">
+<script src="premium-nav.js?v=menu-commun-5" defer></script>
 <link rel="stylesheet" href="contact-dock.css?v=3">
 <link rel="stylesheet" href="/accessibilite.css?v=1">
 </head>
@@ -103,6 +104,34 @@ gtag("config", "G-3QP90K1TLM");
       <button type="button" class="rc-budget" data-budget="u250" aria-pressed="false">Moins de 250&nbsp;€</button>
       <button type="button" class="rc-budget" data-budget="250-450" aria-pressed="false">250 à 450&nbsp;€</button>
       <button type="button" class="rc-budget" data-budget="o450" aria-pressed="false">450&nbsp;€ et +</button>
+    </div>
+    <div class="rc-trade" id="rcTradeBox" aria-label="Simulateur de reprise en déduction">
+      <div class="rc-trade-top">
+        <label class="rc-trade-label" for="rcTradeModel">🔄 Simuler le prix en déduisant mon ancien téléphone :</label>
+        <div class="rc-trade-controls">
+          <select id="rcTradeModel" class="rc-trade-select">
+            <option value="">Aucune reprise sélectionnée</option>
+            <option value="ip11">iPhone 11 (~85 €)</option>
+            <option value="ip12">iPhone 12 (~125 €)</option>
+            <option value="ip12p">iPhone 12 Pro (~165 €)</option>
+            <option value="ip13">iPhone 13 (~180 €)</option>
+            <option value="ip13p">iPhone 13 Pro (~235 €)</option>
+            <option value="ip14">iPhone 14 (~230 €)</option>
+            <option value="ip14p">iPhone 14 Pro (~320 €)</option>
+            <option value="ip15">iPhone 15 (~330 €)</option>
+            <option value="ip15p">iPhone 15 Pro (~430 €)</option>
+            <option value="s22">Samsung Galaxy S22 (~130 €)</option>
+            <option value="s23">Samsung Galaxy S23 (~200 €)</option>
+            <option value="s24">Samsung Galaxy S24 (~290 €)</option>
+            <option value="a54">Samsung Galaxy A54 / A55 (~90 €)</option>
+          </select>
+          <div class="rc-trade-cond" id="rcTradeCond" role="group" aria-label="État du téléphone repris">
+            <button type="button" class="rc-cond-btn" data-cond="bon" aria-pressed="true">Bon état</button>
+            <button type="button" class="rc-cond-btn" data-cond="fissure" aria-pressed="false">Écran fissuré</button>
+          </div>
+        </div>
+      </div>
+      <p class="rc-trade-note" id="rcTradeSummary">Estimation indicative déduite à l’affichage, confirmée en 10&nbsp;min au comptoir (pièce d’identité requise). <a href="rachat-reprise-telephone-macon.html">Autre modèle à faire estimer ›</a></p>
     </div>
   </div>
 
@@ -187,7 +216,7 @@ gtag("config", "G-3QP90K1TLM");
 </footer>
 
 <script src="iphone-image-library.js?v=2"></script>
-<script src="reconditionnes-v2.js?v=2"></script>
+<script src="reconditionnes-v2.js?v=3"></script>
 
 
 

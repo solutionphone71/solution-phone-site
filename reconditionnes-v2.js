@@ -46,7 +46,35 @@
   var PUBLIC_CATALOG_URL = 'https://vps-8066c206.vps.ovh.net/api/public/catalog';
   var WHATSAPP = 'https://wa.me/33783921884';
 
-  var state = { items: [], cat: 'iphone', family: 'all', budget: 'all', query: '', signature: '', loaded: false };
+  var state = { items: [], cat: 'iphone', family: 'all', budget: 'all', query: '', tradeKey: '', tradeCond: 'bon', signature: '', loaded: false };
+
+  var TRADE_MODELS = {
+    ip11:  { label: 'iPhone 11', val: 85 },
+    ip12:  { label: 'iPhone 12', val: 125 },
+    ip12p: { label: 'iPhone 12 Pro', val: 165 },
+    ip13:  { label: 'iPhone 13', val: 180 },
+    ip13p: { label: 'iPhone 13 Pro', val: 235 },
+    ip14:  { label: 'iPhone 14', val: 230 },
+    ip14p: { label: 'iPhone 14 Pro', val: 320 },
+    ip15:  { label: 'iPhone 15', val: 330 },
+    ip15p: { label: 'iPhone 15 Pro', val: 430 },
+    s22:   { label: 'Samsung Galaxy S22', val: 130 },
+    s23:   { label: 'Samsung Galaxy S23', val: 200 },
+    s24:   { label: 'Samsung Galaxy S24', val: 290 },
+    a54:   { label: 'Samsung Galaxy A54 / A55', val: 90 }
+  };
+
+  function currentTrade(){
+    var entry = state.tradeKey && TRADE_MODELS[state.tradeKey];
+    if (!entry) return null;
+    var factor = state.tradeCond === 'fissure' ? 0.5 : 1;
+    var amount = Math.round((entry.val * factor) / 5) * 5;
+    return {
+      label: entry.label,
+      condLabel: state.tradeCond === 'fissure' ? 'écran fissuré' : 'bon état',
+      amount: amount
+    };
+  }
 
   /* ---------- Outils texte ---------- */
   function deaccent(s){ return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
@@ -377,35 +405,40 @@
   function modelHtml(name, rows){
     rows = rows.slice().sort(function(a, b){ return a.price - b.price || a.storageNum - b.storageNum; });
     var min = rows[0].price;
+    var trade = currentTrade();
+    var netLead = trade ? ' · soit dès ~' + formatPrice(Math.max(0, min - trade.amount)) + ' avec reprise' : '';
     var img = modelImage(rows[0]);
     var isNeuf = rows[0].condition === 'neuf';
     var html = '<article class="rc-model">'
       + '<header class="rc-model-head">'
       + (img ? '<div class="rc-model-img"><img data-model-img src="' + escapeHtml(img) + '" alt="" loading="lazy" decoding="async"></div>' : '')
-      + '<div><h3>' + escapeHtml(name) + '</h3><p>' + rows.length + ' en stock · dès ' + formatPrice(min) + '</p></div>'
+      + '<div><h3>' + escapeHtml(name) + '</h3><p>' + rows.length + ' en stock · dès ' + formatPrice(min) + netLead + '</p></div>'
       + '</header>'
       + '<table class="rc-table"><caption class="rc-sr">' + escapeHtml(name) + ' : exemplaires en stock</caption>'
       + '<colgroup><col class="c-sto"><col class="c-col"><col class="c-eta"><col class="c-bat"><col class="c-pri"><col class="c-act"></colgroup>'
       + '<thead><tr><th scope="col">Stockage</th><th scope="col">Couleur</th><th scope="col">État</th><th scope="col">Batterie</th>'
       + '<th scope="col" class="rc-num">Prix</th><th scope="col" class="rc-act"><span class="rc-sr">Réservation</span></th></tr></thead><tbody>';
-    rows.forEach(function(r){ html += rowHtml(r, isNeuf); });
+    rows.forEach(function(r){ html += rowHtml(r, isNeuf, trade); });
     return html + '</tbody></table></article>';
   }
 
   function na(label){ return '<span class="rc-na" aria-hidden="true">—</span><span class="rc-sr">' + label + '</span>'; }
 
-  function rowHtml(r, isNeuf){
+  function rowHtml(r, isNeuf, trade){
     var color = r.color
       ? (r.colorHex ? '<span class="rc-dot" style="background:' + r.colorHex + '" aria-hidden="true"></span>' : '') + escapeHtml(r.color)
       : na('non précisée');
     var grade = isNeuf ? 'Neuf' : (r.grade ? escapeHtml(r.grade) : na('non précisé'));
     var battery = r.battery ? r.battery + '&nbsp;%' : na(isNeuf ? 'neuf' : 'non indiquée');
+    var netHtml = trade
+      ? '<span class="rc-net">~' + formatPrice(Math.max(0, r.price - trade.amount)) + ' reprise déduite</span>'
+      : '';
     return '<tr>'
       + '<td>' + (r.storage ? escapeHtml(r.storage).replace(' ', '&nbsp;') : na('non précisé')) + '</td>'
       + '<td>' + color + '</td>'
       + '<td>' + grade + '</td>'
       + '<td>' + battery + '</td>'
-      + '<td class="rc-num rc-price">' + formatPrice(r.price) + '</td>'
+      + '<td class="rc-num rc-price">' + formatPrice(r.price) + netHtml + '</td>'
       + '<td class="rc-act"><span class="rc-act-group">'
       + '<button type="button" class="rc-reserve-mail" data-reserve-item="' + escapeHtml(describe(r)) + '" aria-label="Réserver 24h en boutique : ' + escapeHtml(describe(r)) + '">Réserver 24h</button>'
       + '<a class="rc-reserve-wa" href="' + reserveLink(r) + '" target="_blank" rel="noopener" aria-label="Demander sur WhatsApp : ' + escapeHtml(describe(r)) + '">WhatsApp</a>'
@@ -424,6 +457,10 @@
     else if (r.grade) parts.push('grade ' + r.grade);
     if (r.battery) parts.push('batterie ' + r.battery + ' %');
     parts.push(plainPrice(r.price));
+    var trade = currentTrade();
+    if (trade) {
+      parts.push('reprise à estimer : ' + trade.label + ' (' + trade.condLabel + ', ~' + plainPrice(trade.amount) + ' indicatif)');
+    }
     return parts.join(' · ');
   }
 
@@ -467,6 +504,37 @@
       budgetsEl.querySelectorAll('.rc-budget').forEach(function(el){
         el.setAttribute('aria-pressed', String(el === b));
       });
+      render();
+    });
+  }
+  function updateTradeSummary(){
+    var sumEl = document.getElementById('rcTradeSummary');
+    if (!sumEl) return;
+    var t = currentTrade();
+    if (!t) {
+      sumEl.innerHTML = 'Estimation indicative déduite à l’affichage, confirmée en 10&nbsp;min au comptoir (pièce d’identité requise). <a href="rachat-reprise-telephone-macon.html">Autre modèle à faire estimer ›</a>';
+    } else {
+      sumEl.innerHTML = '<strong>−' + formatPrice(t.amount) + ' estimés</strong> pour votre ' + escapeHtml(t.label) + ' (' + escapeHtml(t.condLabel) + ') déduits à titre indicatif ci-dessous · estimation définitive en 10&nbsp;min au 21 rue Gambetta. <a href="rachat-reprise-telephone-macon.html">Autre modèle ›</a>';
+    }
+  }
+  var tradeModelEl = document.getElementById('rcTradeModel');
+  if (tradeModelEl) {
+    tradeModelEl.addEventListener('change', function(){
+      state.tradeKey = tradeModelEl.value || '';
+      updateTradeSummary();
+      render();
+    });
+  }
+  var tradeCondEl = document.getElementById('rcTradeCond');
+  if (tradeCondEl) {
+    tradeCondEl.addEventListener('click', function(e){
+      var b = e.target.closest('.rc-cond-btn');
+      if (!b) return;
+      state.tradeCond = b.getAttribute('data-cond') || 'bon';
+      tradeCondEl.querySelectorAll('.rc-cond-btn').forEach(function(el){
+        el.setAttribute('aria-pressed', String(el === b));
+      });
+      updateTradeSummary();
       render();
     });
   }
