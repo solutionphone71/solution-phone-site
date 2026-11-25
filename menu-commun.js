@@ -35,6 +35,7 @@
       { label: 'PC, Mac & Données', meta: 'Ordinateurs, SSD, récupération', href: SP + '/reparation-ordinateur-pc-mac-macon.html' },
       { label: 'PS5, Switch & Trottinettes', href: SP + '/reparation-console-ps5-switch-macon.html' },
       { label: 'Micro-soudure & Panic-Full', meta: 'Eau, carte mère, redémarrages', href: SP + '/micro-soudure-carte-mere-macon.html' },
+      { label: 'Réparer ou remplacer ? (Comparateur)', meta: 'Réparation −25 € vs Reprise', href: SP + '/reparer-ou-remplacer-telephone-macon.html' },
       { label: 'Tous les tarifs & devis', href: SP + '/#devis' }
     ] },
     { id: 'acheter', label: 'Acheter', accent: true, items: [
