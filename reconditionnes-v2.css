@@ -44,6 +44,18 @@ body{background:#fff;color:var(--rc-ink);margin:0}
 .rc-stock-head h2{margin:0;font-size:clamp(32px,4.4vw,48px);line-height:1.08;font-weight:600;letter-spacing:-.015em}
 .rc-summary{margin:12px 0 0;font-size:17px;color:var(--rc-muted)}
 
+.rc-filters{max-width:720px;margin:24px auto 0;display:grid;gap:12px}
+.rc-search{width:100%;min-height:46px;padding:0 16px;border:1px solid var(--rc-line);border-radius:12px;font:inherit;font-size:15px;color:var(--rc-ink);background:#fff}
+.rc-search:focus{outline:2px solid var(--rc-ink);border-color:var(--rc-ink)}
+.rc-budgets{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.rc-budget{min-height:38px;padding:0 14px;border:1px solid var(--rc-line);border-radius:980px;background:#fff;color:var(--rc-ink);font:inherit;font-size:13.5px;cursor:pointer}
+.rc-budget[aria-pressed="true"]{background:#0d0d0d;border-color:#0d0d0d;color:#fff;font-weight:600}
+.rc-act-group{display:inline-flex;align-items:center;gap:6px;justify-content:flex-end}
+.rc-reserve-mail{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 13px;border:0;border-radius:980px;background:#e10600;color:#fff!important;font:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.rc-reserve-mail:hover{background:#b80500}
+.rc-reserve-wa{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 11px;border:1px solid var(--rc-line);border-radius:980px;background:#fff;color:#147a40!important;font-size:12.5px;font-weight:600;text-decoration:none;white-space:nowrap}
+.rc-reserve-wa:hover{border-color:#147a40}
+
 .rc-tabs{display:flex;justify-content:center;gap:4px;margin:32px auto 0;padding:4px;background:var(--rc-soft);border-radius:980px;width:max-content;max-width:100%}
 .rc-tab{min-height:44px;padding:0 18px;border:0;border-radius:980px;background:transparent;color:var(--rc-ink);font:inherit;font-size:15px;cursor:pointer;white-space:nowrap}
 .rc-tab .rc-n{color:var(--rc-muted);margin-left:6px;font-size:13px}
@@ -74,7 +86,7 @@ body{background:#fff;color:var(--rc-ink);margin:0}
 .rc-table col.c-eta{width:90px}
 .rc-table col.c-bat{width:100px}
 .rc-table col.c-pri{width:110px}
-.rc-table col.c-act{width:130px}
+.rc-table col.c-act{width:190px}
 .rc-table th{padding:10px 8px;font-size:13px;font-weight:400;color:var(--rc-muted);text-align:left;border-bottom:1px solid var(--rc-line)}
 .rc-table td{padding:8px;border-bottom:1px solid #e8e8ed;vertical-align:middle;overflow-wrap:anywhere}
 .rc-table tbody tr:last-child td{border-bottom:0}

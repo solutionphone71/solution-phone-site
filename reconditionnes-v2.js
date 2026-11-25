@@ -46,7 +46,7 @@
   var PUBLIC_CATALOG_URL = 'https://vps-8066c206.vps.ovh.net/api/public/catalog';
   var WHATSAPP = 'https://wa.me/33783921884';
 
-  var state = { items: [], cat: 'iphone', family: 'all', signature: '', loaded: false };
+  var state = { items: [], cat: 'iphone', family: 'all', budget: 'all', query: '', signature: '', loaded: false };
 
   /* ---------- Outils texte ---------- */
   function deaccent(s){ return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
@@ -270,8 +270,23 @@
   }
 
   /* ---------- Rendu ---------- */
+  function matchesFilters(i){
+    if (state.budget === 'u250' && i.price >= 250) return false;
+    if (state.budget === '250-450' && (i.price < 250 || i.price > 450)) return false;
+    if (state.budget === 'o450' && i.price <= 450) return false;
+    if (state.query) {
+      var hay = deaccent([i.model, i.storage, i.color, i.grade, i.price].join(' ')).toLowerCase();
+      var qTokens = deaccent(state.query).toLowerCase().trim().split(/\s+/);
+      for (var k = 0; k < qTokens.length; k++) {
+        if (qTokens[k] && hay.indexOf(qTokens[k]) === -1) return false;
+      }
+    }
+    return true;
+  }
+
   function inCat(cat){
     return state.items.filter(function(i){
+      if (!matchesFilters(i)) return false;
       if (cat === 'neuf') return i.condition === 'neuf';
       return i.condition !== 'neuf' && i.brand === cat;
     });
@@ -391,7 +406,10 @@
       + '<td>' + grade + '</td>'
       + '<td>' + battery + '</td>'
       + '<td class="rc-num rc-price">' + formatPrice(r.price) + '</td>'
-      + '<td class="rc-act"><a class="rc-reserve" href="' + reserveLink(r) + '" target="_blank" rel="noopener" aria-label="Réserver : ' + escapeHtml(describe(r)) + ' (WhatsApp)">Réserver</a></td>'
+      + '<td class="rc-act"><span class="rc-act-group">'
+      + '<button type="button" class="rc-reserve-mail" data-reserve-item="' + escapeHtml(describe(r)) + '" aria-label="Réserver 24h en boutique : ' + escapeHtml(describe(r)) + '">Réserver 24h</button>'
+      + '<a class="rc-reserve-wa" href="' + reserveLink(r) + '" target="_blank" rel="noopener" aria-label="Demander sur WhatsApp : ' + escapeHtml(describe(r)) + '">WhatsApp</a>'
+      + '</span></td>'
       + '</tr>';
   }
 
@@ -429,6 +447,41 @@
     render();
     var again = document.querySelector('#rcChips .rc-chip[data-family="' + CSS.escape(state.family) + '"]');
     if (again) again.focus();
+  });
+
+  var searchEl = document.getElementById('rcSearch');
+  if (searchEl) {
+    searchEl.addEventListener('input', function(){
+      state.query = searchEl.value || '';
+      state.family = 'all';
+      render();
+    });
+  }
+  var budgetsEl = document.getElementById('rcBudgets');
+  if (budgetsEl) {
+    budgetsEl.addEventListener('click', function(e){
+      var b = e.target.closest('.rc-budget');
+      if (!b) return;
+      state.budget = b.getAttribute('data-budget') || 'all';
+      state.family = 'all';
+      budgetsEl.querySelectorAll('.rc-budget').forEach(function(el){
+        el.setAttribute('aria-pressed', String(el === b));
+      });
+      render();
+    });
+  }
+  document.getElementById('rcList').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-reserve-item]');
+    if (!btn) return;
+    var desc = btn.getAttribute('data-reserve-item') || '';
+    if (typeof window.SolutionPhoneOpenQuoteModal === 'function') {
+      window.SolutionPhoneOpenQuoteModal(
+        'Pré-réservation vitrine 24h (sans engagement) : ' + desc + ' — Je souhaite passer le voir au 21 rue Gambetta.',
+        'Réserver ce smartphone 24h en boutique'
+      );
+    } else {
+      window.open(whatsappLink('Bonjour Solution Phone, je souhaite réserver ce téléphone vu sur le site : ' + desc), '_blank');
+    }
   });
 
   // Exposé pour vérification manuelle dans la console (lecture seule).

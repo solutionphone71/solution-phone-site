@@ -95,11 +95,38 @@
     },
     "solution-informatique.html": {
       label: "Solution Informatique & Consoles",
-      title: "PC, Mac ou console à dépanner ?",
+      title: "PC, Mac, console ou trottinette à dépanner ?",
       items: [
         "Mon PC est lent ou bloqué par des virus : quel tarif ?",
         "Remplacement d’écran ou de batterie sur PC portable / MacBook",
-        "Réparez-vous les ports HDMI et la surchauffe sur PS5 / Switch ?",
+        "Réparez-vous les ports HDMI PS5, Switch et trottinettes ?",
+      ],
+    },
+    "reparation-console-ps5-switch-macon.html": {
+      label: "Atelier Consoles Mâcon",
+      title: "PS5, Switch ou Xbox à réparer ?",
+      items: [
+        "Quel tarif pour remplacer un port HDMI cassé sur PS5 ?",
+        "Ma console surchauffe et s’éteint : faites-vous le nettoyage ?",
+        "Réparez-vous le port USB-C Switch et le drift manette ?",
+      ],
+    },
+    "reparation-trottinette-electrique-macon.html": {
+      label: "Atelier Trottinettes Mâcon",
+      title: "Quel problème sur votre trottinette ?",
+      items: [
+        "Changement de pneu crevé ou pneu plein sur Xiaomi / Ninebot",
+        "Réglage ou remplacement des freins de trottinette",
+        "Ma trottinette ne charge plus ou affiche un code erreur",
+      ],
+    },
+    "rachat-reprise-telephone-macon.html": {
+      label: "Rachat Cash & Reprise",
+      title: "Quel appareil souhaitez-vous revendre ?",
+      items: [
+        "Combien pouvez-vous racheter mon iPhone ou Samsung ?",
+        "Reprenez-vous aussi un téléphone avec l’écran fissuré ?",
+        "Quels documents faut-il apporter en boutique ?",
       ],
     },
     "atelier.html": {
