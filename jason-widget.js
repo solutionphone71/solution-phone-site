@@ -585,7 +585,95 @@
     }
   }
 
-  function ask(question) {
+  function getFaqAnswer(question){ return fetch('/faq-fallback?question='+encodeURIComponent(question)).then(r=>r.json()); }
+function ask(question) {
+  // First try local FAQ fallback
+  getFaqAnswer(question).then(function(resp){
+    if (resp && resp.status === 'known' && resp.answer) {
+      // Show the stored answer directly
+      appendBotMessage(resp.answer, true);
+      if (voiceAutoEnabled) speakFrench(resp.answer);
+      history.push({ role: "assistant", content: resp.answer });
+      saveState();
+      return; // stop further processing
+    }
+    // Otherwise continue with normal flow (send to brain)
+    proceedWithAsk(question);
+  }).catch(function(){
+    // On error just continue with normal flow
+    proceedWithAsk(question);
+  });
+}
+
+function proceedWithAsk(question) {
+  var attachedImg = pendingImageDataUrl;
+  var clean = String(question || "").trim();
+  if (!clean && attachedImg) {
+    clean = "Regarde la photo de mon appareil : qu’en penses-tu et quel serait le tarif ?";
+  }
+  if (!clean) return;
+
+  pendingImageDataUrl = null;
+  fileInput.value = "";
+  syncPhotoPreview();
+
+  if (!initializedThread) {
+    initializedThread = true;
+    hydrateThread();
+  }
+  toggle(true);
+  input.value = "";
+  submitBtn.disabled = true;
+  chipsEl.innerHTML = "";
+
+  var userBubbleHtml =
+    (attachedImg ? '<img class="sp-jason-user-thumb" src="' + attachedImg + '" alt="Photo envoyée">' : "") +
+    escapeHtml(clean);
+  appendUserMessage(userBubbleHtml);
+
+  var typingRow = appendTypingRow(
+    attachedImg ? "Sébastien examine votre photo…" : "Sébastien regarde les tarifs et le stock…"
+  );
+
+  var priorHistory = history.slice(-16);
+  history.push({ role: "user", content: attachedImg ? "[Photo envoyée] " + clean : clean });
+  saveState();
+
+  // Send to brain (existing logic)
+  fetch(brainUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      messages: priorHistory.concat({ role: "user", content: clean }),
+      conversation_token: metricToken,
+    }),
+  })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      if (data && data.status === "answered" && data.answer) {
+        stopPolling();
+        if (typingRow.parentNode) typingRow.remove();
+        appendBotMessage(data.answer, true);
+        if (voiceAutoEnabled) speakFrench(data.answer);
+        history.push({ role: "assistant", content: data.answer });
+        saveState();
+      } else {
+        // start polling for answer (fallback will send Telegram, etc.)
+        startPolling();
+      }
+    })
+    .catch(function () {
+      // on error, start polling as fallback
+      startPolling();
+    });
+}
+
+function getFaqAnswer(question){
+  return fetch('/faq-fallback?question=' + encodeURIComponent(question))
+    .then(r=>r.json())
+    .catch(()=>({status:'error'}));
+}
+
     var attachedImg = pendingImageDataUrl;
     var clean = String(question || "").trim();
     if (!clean && attachedImg) {
