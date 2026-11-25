@@ -29,7 +29,8 @@
   var GROUPS = [
     { id: 'reparer', label: 'Réparer', items: [
       { label: 'Réparation iPhone', href: RI + '/' },
-      { label: 'Samsung & Android', href: SP + '/reparation-samsung.html' },
+      { label: 'Samsung Galaxy', meta: 'Incell, OLED ou Service Pack', href: SP + '/reparation-samsung.html' },
+      { label: 'Xiaomi, Pixel & Honor/Oppo', meta: 'Toutes marques Android −25 €', href: SP + '/reparation-xiaomi-redmi-macon.html' },
       { label: 'iPad & Tablettes', href: SP + '/reparation-ipad-tablette-macon.html' },
       { label: 'PC, Mac & Données', meta: 'Ordinateurs, SSD, récupération', href: SP + '/reparation-ordinateur-pc-mac-macon.html' },
       { label: 'PS5, Switch & Trottinettes', href: SP + '/reparation-console-ps5-switch-macon.html' },
@@ -38,9 +39,11 @@
     ] },
     { id: 'acheter', label: 'Acheter', accent: true, items: [
       { label: 'Smartphones reconditionnés', meta: 'Garantis 12 mois · simulateur reprise', href: SP + '/reconditionnes.html' },
-      { label: 'Accessoires', href: SA + '/' },
-      { label: 'Protection d’écran', meta: 'Verre trempé, hydrogel dès 10 €', href: SA + '/#hydrogel' },
-      { label: 'Boutique en ligne', href: SP + '/accessoires.html' }
+      { label: 'iPhone reconditionnés', meta: 'Stock en direct à Mâcon', href: SA + '/iphone-reconditionne-macon.html' },
+      { label: 'Samsung & Android reconditionnés', href: SA + '/samsung-reconditionne-macon.html' },
+      { label: 'PC portables & Mac reconditionnés', meta: 'Garantis 12 mois en boutique', href: SP + '/pc-mac-reconditionnes-macon.html' },
+      { label: 'Coques, MagSafe & Chargeurs', href: SA + '/coques-chargeurs-accessoires-macon.html' },
+      { label: 'Film Hydrogel sur mesure', meta: '10 € à 30 € · pose incluse', href: SA + '/hydrogel.html' }
     ] },
     { id: 'services', label: 'Services', items: [
       { label: 'Suivre ma réparation (REP-...)', meta: 'Statut atelier en direct', href: SP + '/suivi-reparation.html' },
@@ -54,7 +57,7 @@
       { label: 'Solution Accessoires', meta: '06 02 84 99 53', href: SA + '/' },
       { label: 'Solution Informatique', meta: 'PC, Mac, consoles, trottinettes', href: SP + '/solution-informatique.html' },
       { label: 'Horaires, parkings & plan', meta: '21 rue Gambetta, Mâcon', href: SP + '/magasin/macon/' },
-      { label: 'Avis Google', meta: '★ 4,7/5 · +700 avis', href: 'https://g.page/r/CbyQ_wiFpddjEBM', ext: true }
+      { label: 'Avis clients (4,7/5 · +700)', meta: 'Transparence & retours Google', href: SP + '/avis-clients-solution-phone-macon.html' }
     ] }
   ];
 

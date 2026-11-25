@@ -25,9 +25,9 @@
 
   api.brandPresets={
     iphone:['iPhone 13','iPhone 14','iPhone 15','iPhone 11','iPhone 12','iPhone 16','iPhone 15 Pro Max','iPhone 14 Pro'],
-    samsung:['Samsung Galaxy A14','Samsung Galaxy A15','Samsung Galaxy A54','Samsung Galaxy A55','Samsung Galaxy S23','Samsung Galaxy S24','Samsung Galaxy S22','Samsung Galaxy Z Flip5'],
-    android:['Xiaomi Redmi Note 13','Xiaomi Redmi Note 12','Google Pixel 8','Google Pixel 7a','Honor Magic6 Lite','Xiaomi Redmi 13C','Oppo / OnePlus'],
-    ipad:['iPad 9e génération','iPad 10e génération','iPad Air','iPad Pro','Samsung Galaxy Tab A8','Tablette Lenovo'],
+    samsung:['Samsung Galaxy A15','Samsung Galaxy A16','Samsung Galaxy A14','Samsung Galaxy A55','Samsung Galaxy A56','Samsung Galaxy A35','Samsung Galaxy A36','Samsung Galaxy S24','Samsung Galaxy S25','Samsung Galaxy S23','Samsung Galaxy A17','Samsung Galaxy Z Flip6'],
+    android:['Xiaomi Redmi Note 13','Xiaomi Redmi Note 14','Google Pixel 8a','Google Pixel 8','Google Pixel 9','Honor Magic6 Lite','Xiaomi Redmi 14C','Oppo / OnePlus / Motorola'],
+    ipad:['iPad 9e génération','iPad 10e génération','iPad Air','iPad Pro','Samsung Galaxy Tab A8 / A9','Tablette Lenovo'],
     pc:['PC portable (toutes marques)','MacBook Air','MacBook Pro','PC fixe / Tour','Disque dur / SSD (récupération données)'],
     console:['PS5 (Port HDMI / Surchauffe)','Nintendo Switch (USB-C / Écran / Lecteur)','Xbox Series X / S','Manette PS5 / Switch'],
     scooter:['Trottinette Xiaomi (Pneu / Frein / Batterie)','Trottinette Ninebot Segway','Autre trottinette électrique']
@@ -38,8 +38,13 @@
       ...api.catalogRows.screen.flatMap(r=>{const group=/^(14|15|16)\/\1 Plus$/.exec(r.modele);return group?['iPhone '+group[1],'iPhone '+group[1]+' Plus']:['iPhone '+r.modele]}),
       ...api.catalogRows.battery.map(r=>'iPhone '+r.modele)
     ])];
+    const liveAndroidModels=(api.catalogRows.android||[]).map(r=>{
+      const b=String(r.marque||'').trim(),m=String(r.modele||'').trim();
+      if(!m)return '';
+      return b&&!m.toLowerCase().startsWith(b.toLowerCase())?b+' '+m:m;
+    }).filter(Boolean);
     const extras=Object.values(api.brandPresets).flat().filter(x=>!/^iPhone /i.test(x));
-    return [...new Set([...iphones,...extras,'Autre modèle'])];
+    return [...new Set([...iphones,...extras,...liveAndroidModels,'Autre modèle'])];
   };
 
   api.estimateRange=(model,issue)=>{
