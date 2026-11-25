@@ -1,39 +1,60 @@
-# Solution Phone
+# Solution Phone (Mâcon — 3 boutiques au 21 rue Gambetta)
 
-> Atelier de réparation de smartphones (iPhone, Samsung et Android), tablettes et ordinateurs au 21 rue Gambetta, 71000 Mâcon (Saône-et-Loire), depuis 2014. Réparateur labellisé QualiRépar. Sans rendez-vous.
+> Atelier indépendant de réparation de smartphones (iPhone, Samsung Galaxy, Xiaomi, Google Pixel et Android), tablettes, ordinateurs PC/Mac, consoles de jeux (PS5, Nintendo Switch, Xbox) et trottinettes électriques, vitrine de smartphones reconditionnés garantis 12 mois et rachat cash au 21 rue Gambetta, 71000 Mâcon (Saône-et-Loire), depuis 2014. Réparateur labellisé QualiRépar. Accueil sans rendez-vous.
 
-## Contacts
-- Solution Phone (réparation) : 03 85 33 06 89 — contact@solution-phone.fr
-- WhatsApp : 07 83 92 18 84 (https://wa.me/33783921884)
-- Solution Accessoires (même adresse, boutique voisine) : 06 02 84 99 53 — https://solution-accessoires.fr/
-- Solution Informatique (même adresse, boutique voisine) : 07 48 34 87 43 — ouvert le matin de 9h15 à 12h15, l’après-midi sur rendez-vous — réparation de PC, Mac, consoles et trottinettes électriques : https://solution-phone.fr/solution-informatique.html
-- Adresse : 21 rue Gambetta, 71000 Mâcon — GPS 46.3025, 4.8297
+## Les 3 espaces côte à côte au 21 rue Gambetta, 71000 Mâcon (GPS 46.3025, 4.8297)
+1. **Solution Phone (Atelier Réparation Smartphones & Tablettes)**
+   - Téléphone : 03 85 33 06 89 · WhatsApp direct : 07 83 92 18 84 (https://wa.me/33783921884) · E-mail : contact@solution-phone.fr
+   - Horaires : lundi 9h15–12h15 et 14h–19h ; du mardi au samedi en journée continue 9h15–19h ; fermé le dimanche
+2. **Solution Accessoires (Smartphones Reconditionnés, Coques, Hydrogel & Rachat Cash)**
+   - Téléphone : 06 02 84 99 53 · Site dédié : https://solution-accessoires.fr/
+   - Horaires : du mardi au samedi 10h–12h et 14h–19h ; fermé dimanche et lundi
+3. **Solution Informatique (PC, Mac, Consoles PS5/Switch & Trottinettes Électriques)**
+   - Téléphone : 07 48 34 87 43 · Page dédiée : https://solution-phone.fr/solution-informatique.html
+   - Horaires : du mardi au samedi le matin 9h15–12h15 sans rendez-vous, l’après-midi sur rendez-vous
 
-## Horaires
-- Solution Phone : lundi 9h15–12h15 et 14h–19h ; du mardi au samedi 9h15–19h ; dimanche fermé
-- Solution Accessoires : du mardi au samedi 10h–12h et 14h–19h ; fermé dimanche et lundi
+## Accès régional (15–25 min) & Stationnement à 2 min à pied
+- **Parkings immédiats en centre-ville de Mâcon** : Parking Lamartine, Parking Saint-Pierre / Hôtel de Ville, Quais de Saône et stationnement rue Gambetta (accès plain-pied).
+- **Communes desservies** :
+  - *Saône-et-Loire (71)* : Mâcon, Charnay-lès-Mâcon, Sancé, Hurigny, Prissé, Crêches-sur-Saône, La Roche-Vineuse, Cluny, Tournus.
+  - *Ain (01 — rive gauche à 3–18 min)* : Saint-Laurent-sur-Saône, Replonges, Feillens, Bâgé-Dommartin, Crottet, Pont-de-Veyle.
+  - *Rhône / Nord Beaujolais (69 — 15–22 min)* : Romanèche-Thorins, Belleville-en-Beaujolais.
 
-## Faits clés
-- Réparation généralement en moins d'une heure si la pièce est en stock
-- Garantie : 6 mois sur les réparations ; 12 mois sur les smartphones reconditionnés (garantie commerciale, en plus des garanties légales)
-- Réparateur labellisé QualiRépar : 25 € déjà déduits de nos tarifs de réparation de smartphone, grâce au Bonus Réparation QualiRépar quand la réparation est éligible, offerts par Solution Phone sinon
-- Prix affichés = prix finaux, pièce et main-d'œuvre comprises
-- Reconditionnés contrôlés sur 30 points, mis de côté 48 h sur réservation
-- Paiements : carte, espèces (1 000 € maximum), Apple Pay, virement (pas de chèque, pas de paiement en plusieurs fois)
-- Avis Google : 4,7/5, plus de 700 avis
-- Équipe de cinq personnes, dont trois réparateurs
+## Engagements, Garanties & Tarifs Repères (Novembre 2026)
+- **Délai** : réparation généralement réalisée en moins d’une heure (souvent 30 à 45 minutes sur iPhone/Samsung) lorsque la pièce est en stock, sans rendez-vous.
+- **Label QualiRépar (−25 € déduits immédiatement)** : Réparateur labellisé QualiRépar. 25 € sont déjà déduits de nos tarifs affichés de réparation de smartphone : grâce au Bonus Réparation QualiRépar (financé par les éco-organismes agréés) quand la réparation est éligible, offerts par Solution Phone sinon. Zéro démarche administrative pour le client.
+- **Tarifs finaux TTC (pièce + main-d’œuvre comprises, 25 € déjà déduits)** :
+  - Écran iPhone : dès 30 € (iPhone 11 / XR), dès 40 € (iPhone 12 / 12 Pro), dès 45 € (iPhone 13 / 14 — Soft OLED 90 €, ReLife origine reconditionné 115 €), dès 50 € (iPhone 15), dès 65 € (iPhone 16 & 17). Quatre qualités expliquées avant intervention : Compatible, LTPS Prime, Soft OLED, ReLife.
+  - Batterie iPhone : dès 25 € à 65 € selon modèle et qualité (Compatible, Reconnue par l’iPhone, Originale Apple).
+  - Réparation Samsung Galaxy (S, Z Flip/Fold, A) : écrans Service Pack d’origine Samsung, batteries et connecteurs USB-C.
+  - Nettoyage connecteur de charge encrassé : 10 €.
+  - Protection écran Hydrogel découpée sur mesure (pose incluse en 5 min) : de 10 € à 30 € (5 formules). Verre trempé posé : 5 € à 10 €.
+  - Consoles de jeux : remplacement port HDMI PS5 / Xbox Series en micro-soudure, nettoyage surchauffe + métal liquide, port USB-C et lecteur Nintendo Switch.
+  - Trottinettes électriques (Xiaomi, Ninebot Segway, Dualtron…) : pneus crevés / pneus pleins, chambres à air, freins, batteries et électronique.
+- **Smartphones reconditionnés en stock réel (~85 à 90 appareils en vitrine)** :
+  - Contrôlés sur 30 points en atelier, débloqués tout opérateur, **garantis 12 mois** (contre 6 mois sur les réparations).
+  - Consultables en temps réel avec filtres budget et **réservables gratuitement 24h à 48h en 1 clic** sur https://solution-phone.fr/reconditionnes.html (sans paiement en ligne).
+- **Rachat cash & reprise immédiate** :
+  - Estimation en 10 minutes au comptoir pour smartphones, tablettes et PC (même avec écran cassé), paiement immédiat en espèces (jusqu’à 1 000 € max légal), virement ou déduction sur un appareil reconditionné (pièce d’identité obligatoire).
+- **Services en ligne 24h/24 (« Demandez à Sébastien »)** :
+  - Devis instantané, envoi de photo d’appareil cassé pour pré-diagnostic, réservation vitrine et suivi en direct d’une réparation déposée à l’atelier via le numéro de bon `REP-...`.
+- **Moyens de paiement** : carte bancaire, espèces (1 000 € maximum), Apple Pay, virement (pas de chèque, pas de paiement en plusieurs fois).
+- **Réputation vérifiée** : note Google 4,7/5 sur plus de 700 avis clients à Mâcon (équipe de 5 personnes dont 3 techniciens).
 
-## Pages clés
-- [Accueil et devis en ligne](https://solution-phone.fr/)
-- [Réparation iPhone](https://solution-phone.fr/reparation-iphone.html)
-- [Réparation Samsung et Android](https://solution-phone.fr/reparation-samsung.html)
+## Pages officielles de référence
+- [Accueil & simulateur de devis immédiat](https://solution-phone.fr/)
+- [Vitrine en direct : Smartphones reconditionnés garantis 12 mois (Réservation 24h)](https://solution-phone.fr/reconditionnes.html)
+- [Réparation téléphone toutes marques à Mâcon](https://solution-phone.fr/reparation-telephone-macon.html)
+- [Réparation iPhone en atelier](https://solution-phone.fr/reparation-iphone.html) · [Site spécialisé iPhone (tarifs par modèle)](https://reparation-iphone-macon.fr/)
 - [Écran iPhone cassé à Mâcon](https://solution-phone.fr/ecran-iphone-casse-macon.html)
-- [Remplacement de batterie à Mâcon](https://solution-phone.fr/remplacement-batterie-telephone-macon.html)
-- [Réparation de téléphone à Mâcon](https://solution-phone.fr/reparation-telephone-macon.html)
-- [Smartphones reconditionnés](https://solution-phone.fr/reconditionnes.html)
-- [Rachat de smartphone, tablette et ordinateur, même cassé (Solution Accessoires) : offre de rachat, paiement en espèces (1 000 € maximum), par virement ou en bon d’achat](https://solution-accessoires.fr/rachat-smartphone.html)
-- [Magasin de Mâcon : accès et horaires](https://solution-phone.fr/magasin/macon/)
-- [Solution Informatique : réparation PC, Mac, console et trottinette](https://solution-phone.fr/solution-informatique.html)
-- [Questions fréquentes](https://solution-phone.fr/faq.html)
-- [Mentions légales et CGV](https://solution-phone.fr/cgv.html)
-- [Politique de confidentialité](https://solution-phone.fr/politique-confidentialite.html)
+- [Réparation Samsung & Android à Mâcon](https://solution-phone.fr/reparation-samsung.html) · [Remplacement écran Samsung](https://solution-phone.fr/remplacement-ecran-samsung-macon.html)
+- [Remplacement de batterie téléphone à Mâcon](https://solution-phone.fr/remplacement-batterie-telephone-macon.html)
+- [Réparation Console PS5 (Port HDMI, Surchauffe), Nintendo Switch & Xbox à Mâcon](https://solution-phone.fr/reparation-console-ps5-switch-macon.html)
+- [Réparation Trottinette Électrique à Mâcon (Pneu crevé, Freins, Batterie)](https://solution-phone.fr/reparation-trottinette-electrique-macon.html)
+- [Rachat Cash & Reprise Téléphone, Tablette et PC à Mâcon](https://solution-phone.fr/rachat-reprise-telephone-macon.html) · [Formulaire d’estimation rachat](https://solution-accessoires.fr/rachat-smartphone.html)
+- [Solution Informatique : dépannage PC & Mac à Mâcon](https://solution-phone.fr/solution-informatique.html)
+- [Pose protection écran Hydrogel sur mesure](https://solution-phone.fr/hydrogel.html) · [Catalogue Solution Accessoires](https://solution-accessoires.fr/)
+- [Magasin de Mâcon : horaires, parkings & accès régional](https://solution-phone.fr/magasin/macon/)
+- [L’équipe & l’atelier Solution Phone](https://solution-phone.fr/atelier.html)
+- [Questions fréquentes (FAQ)](https://solution-phone.fr/faq.html)
+- [Mentions légales & CGV](https://solution-phone.fr/cgv.html) · [Politique de confidentialité](https://solution-phone.fr/politique-confidentialite.html)
