@@ -19,7 +19,20 @@ exclude:
   - scripts/test-quote-ui.mjs
   - scripts/test-sebastien-ai-live.mjs
   - scripts/test-sebastien-brain.mjs
+  - scripts/generate_sitemap.js
+  - scripts/seo_update.js
+  - scripts/faq_fallback.py
   - scripts/data
+  - seo
+  - docs
+  - design
+  - tests
+  - data
+  - package.json
+  - package-lock.json
+  - bun.lock
+  - node_modules
+  - faq_fallback_server.js
   - index.old.html
   - concept-evan.html
   - assistant-jason.html

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Demander un devis ou un conseil reconditionné | Solution Phone</title>
+  <meta name="description" content="Demandez un devis de réparation smartphone ou un conseil sur nos iPhone et Samsung reconditionnés garantis 12 mois à Mâcon (21 rue Gambetta).">
+  <link rel="canonical" href="https://solution-phone.fr/forms/lead.html">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="/conversion-boost.css?v=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 24px 16px;
+      background: #0D0D0D;
+      color: #FFFFFF;
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .sp-lead-page-head {
+      max-width: 960px;
+      margin: 0 auto 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .sp-lead-page-head a {
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .sp-lead-page-foot {
+      max-width: 960px;
+      margin: 24px auto 0;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.78);
+      text-align: center;
+    }
+    .sp-lead-page-foot a {
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+  <header class="sp-lead-page-head">
+    <a href="/">← Retour à Solution Phone Mâcon</a>
+    <a href="tel:+33385330689">03 85 33 06 89</a>
+  </header>
+
+  <main>
+    <section class="sp-lead-capture" data-sp-lead-widget aria-labelledby="lead-page-title">
+      <div class="sp-lead-capture-head">
+        <span class="sp-boost-kicker">Devis gratuit · Reconditionnés garantis 12 mois</span>
+        <h1 id="lead-page-title" style="font-size:clamp(22px,3vw,30px);font-weight:800;margin:0 0 8px;color:#0D0D0D">Demander un devis ou un conseil smartphone reconditionné</h1>
+        <p>Réparation généralement en moins d’une heure si la pièce est en stock (25 € déjà déduits sur les réparations éligibles) ou choix d’un iPhone / Samsung reconditionné contrôlé sur 30 points.</p>
+      </div>
+
+      <form id="leadForm" class="sp-lead-form" method="POST" action="/api/lead" data-sp-lead-form novalidate>
+        <div class="sp-lead-field">
+          <label for="besoin">Votre demande</label>
+          <select id="besoin" name="besoin">
+            <option value="devis">Demander un devis de réparation</option>
+            <option value="reconditionne">Acheter un smartphone reconditionné</option>
+          </select>
+        </div>
+        <div class="sp-lead-field">
+          <label for="budget">Budget estimé (si achat reconditionné)</label>
+          <select id="budget" name="budget">
+            <option value="">Non précisé</option>
+            <option value="u250">Moins de 250 €</option>
+            <option value="250-450">250 à 450 €</option>
+            <option value="o450">450 € et +</option>
+          </select>
+        </div>
+        <div class="sp-lead-field">
+          <label for="modele">Modèle concerné</label>
+          <input type="text" id="modele" name="modele" maxlength="80" placeholder="Ex. iPhone 13, Samsung Galaxy S23…">
+        </div>
+        <div class="sp-lead-field">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" name="prenom" required maxlength="60" autocomplete="given-name" placeholder="Votre prénom">
+        </div>
+        <div class="sp-lead-field sp-lead-field--full">
+          <label for="email">Adresse e-mail</label>
+          <input type="email" id="email" name="email" required maxlength="160" autocomplete="email" placeholder="vous@exemple.fr">
+        </div>
+        <div class="sp-lead-field sp-lead-field--full">
+          <label for="details">Panne constatée ou critères souhaités</label>
+          <textarea id="details" name="details" rows="3" maxlength="500" placeholder="Ex. écran fissuré, batterie faible, ou recherche iPhone 13 128 Go avec reprise"></textarea>
+        </div>
+        <label class="sp-lead-consent">
+          <input type="checkbox" name="consent" required>
+          <span>J’accepte que mes données soient utilisées par Solution Phone uniquement pour répondre à ma demande. <a href="/politique-confidentialite.html">Politique de confidentialité</a></span>
+        </label>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <p class="sp-lead-error" data-sp-lead-error role="alert" hidden></p>
+        <div class="sp-lead-submit-row">
+          <button type="submit" class="sp-btn-red">Demander un devis</button>
+          <a class="sp-btn-outline-dark" href="/reconditionnes.html">Voir le stock reconditionné</a>
+        </div>
+      </form>
+
+      <div class="sp-lead-confirm" data-sp-lead-confirm role="status" aria-live="polite" hidden>
+        <h2>Demande confirmée</h2>
+        <p data-sp-lead-summary></p>
+        <div class="sp-lead-suggestions" data-sp-lead-suggestions></div>
+        <div class="sp-boost-actions">
+          <a class="sp-btn-red" data-sp-lead-wa href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20devis." target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
+          <a class="sp-btn-outline-white" href="tel:+33385330689">Appeler le 03 85 33 06 89</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sp-lead-page-foot">
+    Solution Phone · 21 rue Gambetta, 71000 Mâcon ·
+    <a href="/cgv.html">CGV &amp; Mentions légales</a> ·
+    <a href="/politique-confidentialite.html">Politique de confidentialité</a>
+  </footer>
+
+  <script src="/conversion-boost.js?v=1" defer></script>
+</body>
+</html>

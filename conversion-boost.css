@@ -1,0 +1,424 @@
+/* Charte stricte Solution Phone : #0D0D0D / #FFFFFF / #E10600 · Montserrat */
+.sp-boost-band,
+.sp-boost-strip,
+.sp-lead-capture,
+.sp-mail-recond-upsell {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+}
+
+.sp-boost-band *,
+.sp-boost-strip *,
+.sp-lead-capture *,
+.sp-mail-recond-upsell * {
+  box-sizing: border-box;
+}
+
+/* Bandeau conversion sombre (#0D0D0D) : Devis + Reconditionnés */
+.sp-boost-band {
+  background: #0D0D0D;
+  color: #FFFFFF;
+  padding: 44px 20px;
+  margin: 32px auto;
+}
+
+.sp-boost-band-in {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.sp-boost-kicker {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background: #E10600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin: 0 0 14px;
+}
+
+.sp-boost-title {
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 800;
+  line-height: 1.18;
+  margin: 0 0 10px;
+  color: #FFFFFF;
+}
+
+.sp-boost-lead {
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 720px;
+  margin: 0 0 24px;
+}
+
+.sp-boost-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sp-boost-card {
+  background: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sp-boost-card-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #E10600;
+}
+
+.sp-boost-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.sp-boost-card p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.sp-boost-card-link {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.sp-boost-card-link:hover {
+  color: #E10600;
+}
+
+.sp-boost-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.sp-btn-red,
+.sp-btn-outline-white,
+.sp-btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.15s ease;
+}
+
+.sp-btn-red {
+  background: #E10600;
+  color: #FFFFFF;
+  border: 2px solid #E10600;
+}
+
+.sp-btn-red:hover,
+.sp-btn-red:focus-visible {
+  background: #b80500;
+  border-color: #b80500;
+  color: #FFFFFF;
+}
+
+.sp-btn-outline-white {
+  background: transparent;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.sp-btn-outline-white:hover,
+.sp-btn-outline-white:focus-visible {
+  background: #FFFFFF;
+  color: #0D0D0D;
+}
+
+.sp-btn-outline-dark {
+  background: #FFFFFF;
+  color: #0D0D0D;
+  border: 2px solid #0D0D0D;
+}
+
+.sp-btn-outline-dark:hover,
+.sp-btn-outline-dark:focus-visible {
+  background: #0D0D0D;
+  color: #FFFFFF;
+}
+
+.sp-boost-meta {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Encart clair sur pages réparation */
+.sp-boost-strip {
+  max-width: 1040px;
+  margin: 28px auto;
+  padding: 28px 24px;
+  background: #FFFFFF;
+  color: #0D0D0D;
+  border: 2px solid #0D0D0D;
+  border-left: 6px solid #E10600;
+  border-radius: 14px;
+}
+
+.sp-boost-strip h2 {
+  font-size: clamp(20px, 2.6vw, 26px);
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: #0D0D0D;
+}
+
+.sp-boost-strip p {
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0 0 18px;
+  color: #262626;
+}
+
+/* Bloc captation de devis / conseil reconditionné */
+.sp-lead-capture {
+  max-width: 960px;
+  margin: 36px auto;
+  padding: 28px 24px;
+  background: #FFFFFF;
+  color: #0D0D0D;
+  border: 2px solid #E10600;
+  border-radius: 16px;
+}
+
+.sp-lead-capture-head {
+  margin-bottom: 18px;
+}
+
+.sp-lead-capture-head h2 {
+  font-size: clamp(21px, 2.8vw, 28px);
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: #0D0D0D;
+}
+
+.sp-lead-capture-head p {
+  margin: 0;
+  font-size: 15px;
+  color: #333333;
+}
+
+.sp-lead-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sp-lead-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sp-lead-field--full {
+  grid-column: 1 / -1;
+}
+
+.sp-lead-field label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0D0D0D;
+}
+
+.sp-lead-field input,
+.sp-lead-field select,
+.sp-lead-field textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1.5px solid #0D0D0D;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #0D0D0D;
+  background: #FFFFFF;
+}
+
+.sp-lead-field input:focus,
+.sp-lead-field select:focus,
+.sp-lead-field textarea:focus {
+  outline: 2px solid #E10600;
+  outline-offset: 1px;
+  border-color: #E10600;
+}
+
+.sp-lead-consent {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #333333;
+}
+
+.sp-lead-consent input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: #E10600;
+  flex-shrink: 0;
+}
+
+.sp-lead-submit-row {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.sp-lead-error {
+  grid-column: 1 / -1;
+  color: #E10600;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.sp-lead-confirm {
+  margin-top: 20px;
+  padding: 20px;
+  background: #0D0D0D;
+  color: #FFFFFF;
+  border-radius: 12px;
+}
+
+.sp-lead-confirm h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.sp-lead-confirm p {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.sp-lead-suggestions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0 16px;
+}
+
+.sp-lead-sug-item {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  padding: 12px;
+  color: #FFFFFF;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sp-lead-sug-item strong {
+  font-size: 14px;
+  color: #FFFFFF;
+}
+
+.sp-lead-sug-item span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.sp-lead-sug-item em {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 700;
+  color: #E10600;
+  margin-top: 4px;
+}
+
+/* Upsell reconditionné dans la confirmation devis e-mail (index.html) */
+.sp-mail-recond-upsell {
+  margin: 16px 0;
+  padding: 14px;
+  background: #0D0D0D;
+  color: #FFFFFF;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.sp-mail-recond-upsell strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #FFFFFF;
+}
+
+.sp-mail-recond-upsell p {
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.sp-mail-recond-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sp-mail-recond-links a {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sp-mail-recond-links a.sp-upsell-primary {
+  background: #E10600;
+  color: #FFFFFF;
+}
+
+.sp-mail-recond-links a.sp-upsell-secondary {
+  background: #FFFFFF;
+  color: #0D0D0D;
+}
+
+@media (max-width: 820px) {
+  .sp-boost-grid,
+  .sp-lead-form,
+  .sp-lead-suggestions {
+    grid-template-columns: 1fr;
+  }
+}
