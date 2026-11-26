@@ -166,6 +166,8 @@
 <script>if(new URLSearchParams(location.search).has('tarifs'))document.documentElement.classList.add('tariff-embed')</script>
 <link rel="stylesheet" href="confiance.css?v=1">
 <link rel="stylesheet" href="boutiques.css?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="conversion-boost.css?v=1">
 <script src="/menu-commun.js?v=7" data-site="phone"></script>
@@ -175,7 +177,7 @@
   <main class="shell">
     <header class="topbar">
       <a class="brand" href="./" aria-label="Accueil Solution Phone">
-        <img src="img/logo-ui.webp" alt="" width="48" height="48" style="object-fit:contain">
+        <img src="img/logo-ui.webp" alt="" width="48" height="48" decoding="async" style="object-fit:contain">
         <div><strong>Solution Phone</strong><small>Atelier indépendant · Mâcon</small></div>
       </a>
       <nav class="site-nav" aria-label="Navigation principale">
@@ -218,11 +220,11 @@
 
     <section class="simple-offer" aria-labelledby="simple-offer-title">
       <p class="simple-local">Réparation iPhone & Samsung · Mâcon</p>
-      <img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="120" height="80">
+      <picture><source srcset="img/qualirepar-label-officiel.webp" type="image/webp"><img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="120" height="80" decoding="async"></picture>
       <h1 id="simple-offer-title">Bénéficiez immédiatement de <strong>25 €</strong> sur votre réparation à Mâcon.</h1>
       <p class="simple-offer-note">Déjà déduits de nos tarifs de réparation de smartphone. <b>Réparé généralement en moins d’une heure</b> si la pièce est en stock.</p>
       <button class="simple-conditions" type="button" onclick="document.querySelector('.spq-bonus-bar')?.click()">L’engagement Solution Phone</button>
-      <a class="simple-primary" href="#devis">Obtenir mon prix →</a>
+      <a class="simple-primary" href="#devis" data-sp-track="devis" data-sp-cta-location="hero_offer">Obtenir mon prix →</a>
       <a class="google-rating" href="https://g.page/r/CbyQ_wiFpddjEBM" target="_blank" rel="noopener" aria-label="Note Google 4,7 sur 5, plus de 700 avis — voir les avis"><span class="google-rating-stars" aria-hidden="true">★★★★★</span><b>4,7/5</b><span>plus de 700 avis ›</span></a>
     </section>
     <section class="stage">
@@ -234,7 +236,7 @@
           <h2>Votre téléphone réparé <em>à Mâcon, sans rendez-vous.</em></h2>
           <p>Un téléphone en panne, une équipe à votre écoute. Votre tarif avant intervention, votre réparation sans rendez-vous.</p>
           <div class="hero-conversion-actions" aria-label="Demander un devis">
-            <a href="#devis">Préparer mon devis →</a>
+            <a href="#devis" data-sp-track="devis" data-sp-cta-location="hero_stage">Préparer mon devis →</a>
           </div>
           <div class="hero-trust" aria-label="Garanties Solution Phone">
             <div class="hero-reasons">
@@ -242,8 +244,8 @@
               <span><b>350 / mois</b><small>Smartphones réparés en moyenne</small></span>
               <span><b>3 réparateurs</b><small>Une équipe de 5 personnes à Mâcon</small></span>
             </div>
-            <a class="qualirepar-banner" href="#devis" aria-label="Obtenir 25 euros de réduction sur sa réparation de smartphone">
-              <span class="qualirepar-logo"><img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="800" height="427" loading="lazy" decoding="async"></span>
+            <a class="qualirepar-banner" href="#devis" data-sp-track="devis" data-sp-cta-location="hero_qualirepar" aria-label="Obtenir 25 euros de réduction sur sa réparation de smartphone">
+              <span class="qualirepar-logo"><picture><source srcset="img/qualirepar-label-officiel.webp" type="image/webp"><img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="800" height="427" loading="lazy" decoding="async"></picture></span>
               <span class="qualirepar-message">
                 <strong><em>−25 €</em> sur votre réparation</strong>
                 <small>Réparateur labellisé QualiRépar : 25 € déjà déduits de nos tarifs de réparation de smartphone.</small>
@@ -272,7 +274,7 @@
       </div>
 
       <figure class="simple-team-photo">
-        <img src="img/equipe-solution-phone-macon-2026.jpg" alt="L’équipe Solution Phone dans la boutique à Mâcon : Sébastien, Rahim, Nawfel, Raphaël et Lenny" width="1280" height="720" loading="lazy" decoding="async">
+        <picture><source srcset="img/equipe-solution-phone-macon-2026.webp" type="image/webp"><img src="img/equipe-solution-phone-macon-2026.jpg" alt="L’équipe Solution Phone dans la boutique à Mâcon : Sébastien, Rahim, Nawfel, Raphaël et Lenny" width="1280" height="720" loading="lazy" decoding="async"></picture>
         <figcaption><strong>Toute l’équipe Solution Phone, à Mâcon.</strong><span>Sébastien, Rahim, Nawfel, Raphaël et Lenny</span><span>3 réparateurs · Réparations garanties 6 mois</span><span>La plupart des écrans et batteries en moins d’une heure, si la pièce est en stock.</span></figcaption>
       </figure>
       <div class="conversation" id="devis">
@@ -329,22 +331,22 @@
               <button class="send" type="submit" aria-label="Envoyer la demande">→</button>
             </form>
             <div class="price-paths" aria-label="Choisir un tarif de réparation">
-              <button class="express-price" type="button" onclick="openQuickPrice()"><img class="express-brand-logo" src="img/brands/apple.svg" alt="" aria-hidden="true" width="25" height="25"><span><b>Tarif réparation immédiat iPhone</b><span>Écran · batterie · autre pièce</span></span><strong>→</strong></button>
+              <button class="express-price" type="button" onclick="openQuickPrice()" data-sp-track="devis" data-sp-cta-location="price_paths"><img class="express-brand-logo" src="img/brands/apple.svg" alt="" aria-hidden="true" width="25" height="25" loading="lazy" decoding="async"><span><b>Tarif réparation immédiat iPhone</b><span>Écran · batterie · autre pièce</span></span><strong>→</strong></button>
               <div class="android-price">
                 <div class="android-price-head"><div><b>Tarif réparation Android</b><span>Choisissez la marque · estimation puis devis précis</span></div><strong>→</strong></div>
                 <div class="android-brand-list" aria-label="Marques Android">
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Samsung"><img src="img/brands/samsung.svg" alt="Samsung" width="150" height="150" loading="lazy"></button>
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Xiaomi"><img src="img/brands/xiaomi.svg" alt="Xiaomi" width="150" height="150" loading="lazy"></button>
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Honor"><img src="img/brands/honor.svg" alt="Honor" width="150" height="150" loading="lazy"></button>
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Huawei"><img src="img/brands/huawei.svg" alt="Huawei" width="150" height="150" loading="lazy"></button>
-                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Google Pixel"><img src="img/brands/google.svg" alt="Google Pixel" width="150" height="150" loading="lazy"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Samsung"><img src="img/brands/samsung.svg" alt="Samsung" width="150" height="150" loading="lazy" decoding="async"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Xiaomi"><img src="img/brands/xiaomi.svg" alt="Xiaomi" width="150" height="150" loading="lazy" decoding="async"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Honor"><img src="img/brands/honor.svg" alt="Honor" width="150" height="150" loading="lazy" decoding="async"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Huawei"><img src="img/brands/huawei.svg" alt="Huawei" width="150" height="150" loading="lazy" decoding="async"></button>
+                  <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation Google Pixel"><img src="img/brands/google.svg" alt="Google Pixel" width="150" height="150" loading="lazy" decoding="async"></button>
                   <button class="android-brand prompt" type="button" data-prompt="Je veux un tarif réparation pour une autre marque Android"><span>ANDROID</span></button>
                 </div>
               </div>
             </div>
             <div class="fast-lane" aria-label="Accès directs">
-              <a class="fast-action wa" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix%20pour%20mon%20t%C3%A9l%C3%A9phone.%20Mon%20mod%C3%A8le%20et%20la%20panne%20%3A" target="_blank" rel="noopener">Devis WhatsApp</a>
-              <button class="fast-action" type="button" onclick="openMail()">Devis par e-mail</button>
+              <a class="fast-action wa" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix%20pour%20mon%20t%C3%A9l%C3%A9phone.%20Mon%20mod%C3%A8le%20et%20la%20panne%20%3A" target="_blank" rel="noopener" data-sp-track="whatsapp" data-sp-cta-location="fast_lane">Devis WhatsApp</a>
+              <button class="fast-action" type="button" onclick="openMail()" data-sp-track="devis" data-sp-cta-location="fast_lane">Devis par e-mail</button>
             </div>
             <div class="privacy"><i></i> Réponse humaine · aucun engagement · rien n’est réparé sans votre accord</div>
             <details class="secondary-needs">
@@ -396,7 +398,7 @@
   </main>
 
 
-<section class="sp-boost-band" aria-labelledby="sp-boost-recond-title">
+<section class="sp-boost-band" aria-labelledby="sp-boost-recond-title" data-sp-cta-location="home_recond_band">
   <div class="sp-boost-band-in">
     <span class="sp-boost-kicker">Stock réel en boutique · Mâcon</span>
     <h2 class="sp-boost-title" id="sp-boost-recond-title">Réparer votre smartphone ou passer au reconditionné garanti 12 mois ?</h2>
@@ -406,25 +408,25 @@
         <span class="sp-boost-card-tag">Apple · Contrôlé 30 points</span>
         <h3>iPhone reconditionnés</h3>
         <p>iPhone 11, 12, 13, 14 et 15 visibles en vitrine à Mâcon. Batterie contrôlée, garantie 12 mois.</p>
-        <a class="sp-boost-card-link" href="reconditionnes.html#stock">Voir les iPhone en stock →</a>
+        <a class="sp-boost-card-link" href="reconditionnes.html#stock" data-sp-track="reconditionnes" data-sp-cta-location="home_recond_band">Voir les iPhone en stock →</a>
       </article>
       <article class="sp-boost-card">
         <span class="sp-boost-card-tag">Android · Stock réel</span>
         <h3>Samsung Galaxy reconditionnés</h3>
         <p>Séries Galaxy S et Galaxy A testées en atelier, prêtes à l’emploi et garanties 12 mois.</p>
-        <a class="sp-boost-card-link" href="reconditionnes.html#stock">Voir les Samsung en stock →</a>
+        <a class="sp-boost-card-link" href="reconditionnes.html#stock" data-sp-track="reconditionnes" data-sp-cta-location="home_recond_band">Voir les Samsung en stock →</a>
       </article>
       <article class="sp-boost-card">
         <span class="sp-boost-card-tag">Reprise immédiate</span>
         <h3>Déduisez votre ancien téléphone</h3>
         <p>Estimation rapide au comptoir : nous déduisons directement sa valeur sur votre achat reconditionné.</p>
-        <a class="sp-boost-card-link" href="rachat-reprise-telephone-macon.html">Estimer ma reprise →</a>
+        <a class="sp-boost-card-link" href="rachat-reprise-telephone-macon.html" data-sp-track="reprise" data-sp-cta-location="home_recond_band">Estimer ma reprise →</a>
       </article>
     </div>
     <div class="sp-boost-actions">
-      <a class="sp-btn-red" href="reconditionnes.html">Voir le stock reconditionné en direct</a>
-      <a class="sp-btn-outline-white" href="#devis">Demander un devis de réparation</a>
-      <a class="sp-btn-outline-white" href="reparer-ou-remplacer-telephone-macon.html">Comparer : réparer ou remplacer ?</a>
+      <a class="sp-btn-red" href="reconditionnes.html" data-sp-track="reconditionnes" data-sp-cta-location="home_recond_band">Voir le stock reconditionné en direct</a>
+      <a class="sp-btn-outline-white" href="#devis" data-sp-track="devis" data-sp-cta-location="home_recond_band">Demander un devis de réparation</a>
+      <a class="sp-btn-outline-white" href="reparer-ou-remplacer-telephone-macon.html" data-sp-track="reconditionnes" data-sp-cta-location="home_recond_band">Comparer : réparer ou remplacer ?</a>
     </div>
     <p class="sp-boost-meta">21 rue Gambetta, 71000 Mâcon · Garantie commerciale 12 mois sur les reconditionnés · 6 mois sur les réparations · 4,7/5 (+700 avis Google)</p>
   </div>
@@ -491,15 +493,15 @@
       <div class="repair-brand-ribbon-label"><span>Multi-marques</span><b>Diagnostic & réparation</b></div>
       <div class="repair-brand-marquee">
         <div class="repair-brand-track">
-          <button class="repair-brand" data-repair-prompt="réparation Apple iPhone"><img src="img/brands/apple.svg" alt="" width="150" height="150" loading="lazy"><span>Apple</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Samsung Galaxy"><img src="img/brands/samsung.svg" alt="" width="150" height="150" loading="lazy"><span>Samsung</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Xiaomi"><img src="img/brands/xiaomi.svg" alt="" width="150" height="150" loading="lazy"><span>Xiaomi</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Google Pixel"><img src="img/brands/google.svg" alt="" width="150" height="150" loading="lazy"><span>Google Pixel</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Honor"><img src="img/brands/honor.svg" alt="" width="150" height="150" loading="lazy"><span>Honor</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Huawei"><img src="img/brands/huawei.svg" alt="" width="150" height="150" loading="lazy"><span>Huawei</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Oppo"><img src="img/brands/oppo.svg" alt="" width="150" height="150" loading="lazy"><span>Oppo</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation OnePlus"><img src="img/brands/oneplus.svg" alt="" width="150" height="150" loading="lazy"><span>OnePlus</span></button>
-          <button class="repair-brand" data-repair-prompt="réparation Motorola"><img src="img/brands/motorola.svg" alt="" width="150" height="150" loading="lazy"><span>Motorola</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Apple iPhone"><img src="img/brands/apple.svg" alt="" width="150" height="150" loading="lazy" decoding="async"><span>Apple</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Samsung Galaxy"><img src="img/brands/samsung.svg" alt="" width="150" height="150" loading="lazy" decoding="async"><span>Samsung</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Xiaomi"><img src="img/brands/xiaomi.svg" alt="" width="150" height="150" loading="lazy" decoding="async"><span>Xiaomi</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Google Pixel"><img src="img/brands/google.svg" alt="" width="150" height="150" loading="lazy" decoding="async"><span>Google Pixel</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Honor"><img src="img/brands/honor.svg" alt="" width="150" height="150" loading="lazy" decoding="async"><span>Honor</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Huawei"><img src="img/brands/huawei.svg" alt="" width="150" height="150" loading="lazy" decoding="async"><span>Huawei</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Oppo"><img src="img/brands/oppo.svg" alt="" width="150" height="150" loading="lazy" decoding="async"><span>Oppo</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation OnePlus"><img src="img/brands/oneplus.svg" alt="" width="150" height="150" loading="lazy" decoding="async"><span>OnePlus</span></button>
+          <button class="repair-brand" data-repair-prompt="réparation Motorola"><img src="img/brands/motorola.svg" alt="" width="150" height="150" loading="lazy" decoding="async"><span>Motorola</span></button>
         </div>
       </div>
     </div>
@@ -551,10 +553,10 @@
   </section>
   <p class="spq-legal">Réduction de 25 € appliquée par Solution Phone sur la réparation d’un smartphone. Lorsqu’elle est éligible au dispositif, cette réduction correspond au Bonus Réparation QualiRépar ; à défaut, elle est prise en charge commercialement par Solution Phone.</p>
 
-  <div class="home-contact-dock" aria-label="Accès directs">
-    <a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix.%20Mon%20appareil%20et%20la%20panne%20%3A" target="_blank" rel="noopener">Devis WhatsApp</a>
-    <a class="dock-call" href="tel:+33385330689" aria-label="Appeler Solution Phone au 03 85 33 06 89">03 85 33 06 89</a>
-    <button id="dock-price-button" type="button" onclick="openMail(window.SolutionPhoneQuote?.draft?.())">Devis par e-mail</button>
+  <div class="home-contact-dock" aria-label="Accès directs" data-sp-cta-location="home_contact_dock">
+    <a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix.%20Mon%20appareil%20et%20la%20panne%20%3A" target="_blank" rel="noopener" data-sp-track="whatsapp">Devis WhatsApp</a>
+    <a class="dock-call" href="tel:+33385330689" aria-label="Appeler Solution Phone au 03 85 33 06 89" data-sp-track="appel">03 85 33 06 89</a>
+    <button id="dock-price-button" type="button" onclick="openMail(window.SolutionPhoneQuote?.draft?.())" data-sp-track="devis">Devis par e-mail</button>
   </div>
 
   <div class="modal" id="mail-modal" role="dialog" aria-modal="true" aria-label="Recevoir un devis par e-mail">
@@ -577,12 +579,12 @@
         <h3>Demande de devis envoyée&nbsp;!</h3>
         <p class="mail-success-lead">Merci, votre demande est bien arrivée chez Solution Phone. L’équipe vous répondra prochainement par e-mail.<strong class="mail-success-email" id="mail-success-email"></strong></p>
         <p class="mail-success-reference" id="mail-success-reference"></p>
-        <div class="sp-mail-recond-upsell">
+        <div class="sp-mail-recond-upsell" data-sp-cta-location="mail_success_upsell">
           <strong>En attendant notre réponse : découvrez nos reconditionnés à Mâcon</strong>
           <p>iPhone et Samsung contrôlés 30 points, garantis 12 mois, avec reprise possible de votre ancien appareil.</p>
           <div class="sp-mail-recond-links">
-            <a class="sp-upsell-primary" href="reconditionnes.html">Voir le stock reconditionné</a>
-            <a class="sp-upsell-secondary" href="reparer-ou-remplacer-telephone-macon.html">Réparer ou remplacer ?</a>
+            <a class="sp-upsell-primary" href="reconditionnes.html" data-sp-track="reconditionnes">Voir le stock reconditionné</a>
+            <a class="sp-upsell-secondary" href="reparer-ou-remplacer-telephone-macon.html" data-sp-track="reconditionnes">Réparer ou remplacer ?</a>
           </div>
         </div>
         <button type="button" id="mail-success-close">Fermer</button>
@@ -629,8 +631,9 @@
     <a href="#" data-sp-consent-manage style="color:inherit;white-space:nowrap">Gérer mes cookies</a>
   </footer>
 
-  <script src="apple-screens-20261112-v3.js"></script>
-  <script src="/accueil-core.js?v=1"></script>
+  <script src="apple-screens-20261112-v3.js" defer></script>
+  <script src="/accueil-core.js?v=1" defer></script>
+  <script src="conversion-boost.js?v=1" defer></script>
 <!-- menu-commun : liens du pied de page (HTML statique) -->
 <div id="mc-footer"role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, 71000 Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://solution-phone.fr/suivi-reparation.html">Suivre ma réparation (REP-...)</a></li><li><a href="https://solution-phone.fr/reparer-ou-remplacer-telephone-macon.html">Réparer ou remplacer ?</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung Galaxy</a></li><li><a href="https://solution-phone.fr/reparation-xiaomi-redmi-macon.html">Réparation Xiaomi &amp; Redmi</a></li><li><a href="https://solution-phone.fr/reparation-google-pixel-macon.html">Réparation Google Pixel</a></li><li><a href="https://solution-phone.fr/reparation-honor-oppo-motorola-macon.html">Honor, Oppo &amp; Motorola</a></li><li><a href="https://solution-phone.fr/reparation-ipad-tablette-macon.html">Réparation iPad &amp; tablette</a></li><li><a href="https://solution-phone.fr/reparation-ordinateur-pc-mac-macon.html">Réparation PC &amp; Mac</a></li><li><a href="https://solution-phone.fr/recuperation-donnees-macon.html">Récupération de données</a></li><li><a href="https://solution-phone.fr/micro-soudure-carte-mere-macon.html">Micro-soudure &amp; carte mère</a></li><li><a href="https://solution-phone.fr/reparation-console-ps5-switch-macon.html">Réparation PS5 &amp; Switch</a></li><li><a href="https://solution-phone.fr/reparation-trottinette-electrique-macon.html">Trottinettes électriques</a></li></ul><p class="mc-f-title">Acheter, revendre &amp; accès rapide autour de Mâcon</p><ul><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/iphone-reconditionne-macon.html">iPhone reconditionnés</a></li><li><a href="https://solution-accessoires.fr/samsung-reconditionne-macon.html">Samsung reconditionnés</a></li><li><a href="https://solution-phone.fr/pc-mac-reconditionnes-macon.html">PC &amp; Mac reconditionnés</a></li><li><a href="https://solution-phone.fr/rachat-reprise-telephone-macon.html">Rachat cash &amp; reprise</a></li><li><a href="https://solution-accessoires.fr/coques-chargeurs-accessoires-macon.html">Coques, MagSafe &amp; chargeurs</a></li><li><a href="https://solution-phone.fr/hydrogel.html">Film Hydrogel (10 € à 30 €)</a></li><li><a href="https://solution-phone.fr/pro-entreprises-macon.html">Offre Pro &amp; Entreprises</a></li><li><a href="https://solution-phone.fr/devis-assurance-telephone-macon.html">Devis assurance</a></li><li><a href="https://solution-phone.fr/avis-clients-solution-phone-macon.html">Avis clients (4,7/5)</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Horaires &amp; parkings Mâcon</a></li><li><a href="https://solution-phone.fr/reparation-telephone-bourg-en-bresse-ain-01.html">Accès Ain (01)</a></li><li><a href="https://solution-phone.fr/reparation-telephone-belleville-beaujolais-69.html">Accès Beaujolais (69)</a></li><li><a href="https://solution-phone.fr/reparation-telephone-charnay-cluny-tournus-71.html">Charnay, Cluny &amp; Tournus</a></li></ul></div></div>
   <script src="/jason-widget.js?v=5" defer></script>

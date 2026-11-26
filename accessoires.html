@@ -199,7 +199,7 @@ gtag("config", "G-3QP90K1TLM");
 <header class="sticky top-0 z-40" style="background:linear-gradient(90deg,#e30613 0%,#b8050f 100%);box-shadow:0 2px 12px -4px rgba(227,6,19,.35)">
   <div class="max-w-7xl mx-auto px-5 h-14 flex items-center gap-6 text-[13px] text-white">
     <a href="./" class="flex items-center gap-3 shrink-0 text-white">
-      <img src="img/logo-ui.webp" alt="Solution Phone" class="w-10 h-10 rounded-lg bg-white p-0.5 object-contain" style="box-shadow:0 2px 8px -2px rgba(0,0,0,.25)"/>
+      <img src="img/logo-ui.webp" alt="Solution Phone" width="40" height="40" decoding="async" class="w-10 h-10 rounded-lg bg-white p-0.5 object-contain" style="box-shadow:0 2px 8px -2px rgba(0,0,0,.25)"/>
       <span class="hidden sm:inline font-black tracking-tight text-[15px] leading-none">SOLUTION&nbsp;PHONE</span>
     </a>
     <nav class="hidden lg:flex items-center gap-6 font-medium flex-1 justify-center leading-none">
@@ -223,7 +223,7 @@ gtag("config", "G-3QP90K1TLM");
 
 <!-- HERO COMMUN -->
 <section id="shop-journey" class="sj" hidden aria-labelledby="sj-title">
-  <div class="sj-intro"><p class="sj-kicker">Solution Accessoires appartient à Solution Phone · Mâcon</p><h2 id="sj-title" class="sj-h1">Votre téléphone.<br><em>Votre prochaine envie.</em></h2><p>Un accessoire qui vous ressemble, un nouveau smartphone ou vos données à retrouver : commençons par vous.</p><a href="./#devis" class="sj-repair">Téléphone cassé ? Accéder au devis réparation ↗</a></div>
+  <div class="sj-intro"><p class="sj-kicker">Solution Accessoires appartient à Solution Phone · Mâcon</p><h2 id="sj-title" class="sj-h1">Votre téléphone.<br><em>Votre prochaine envie.</em></h2><p>Un accessoire qui vous ressemble, un nouveau smartphone ou vos données à retrouver : commençons par vous.</p><a href="./#devis" class="sj-repair" data-sp-track="devis" data-sp-cta-location="accessoires_hero">Téléphone cassé ? Accéder au devis réparation ↗</a></div>
   <div class="sj-workspace">
     <div class="sj-progress" aria-label="Votre parcours"><span>01 · Votre besoin</span><span>02 · Vos préférences</span><span>03 · Votre sélection</span></div>
     <div class="sj-needs" aria-label="Que recherchez-vous ?">
@@ -251,7 +251,7 @@ gtag("config", "G-3QP90K1TLM");
     <p>Solution Accessoires appartient à Solution Phone. Retrouvez notre équipe au 21 rue Gambetta à Mâcon.</p>
     <div class="sp-page-actions">
       <a class="sp-page-primary" href="#prix-accessoires">Voir les accessoires et les prix</a>
-      <a class="sp-page-secondary" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20cherche%20un%20accessoire%20pour%20mon%20t%C3%A9l%C3%A9phone." target="_blank" rel="noopener">Demander sur WhatsApp</a>
+      <a class="sp-page-secondary" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20cherche%20un%20accessoire%20pour%20mon%20t%C3%A9l%C3%A9phone." target="_blank" rel="noopener" data-sp-track="whatsapp" data-sp-cta-location="accessoires_hero">Demander sur WhatsApp</a>
     </div>
   </div>
   <aside class="sp-page-aside sp-page-photo">
@@ -1036,7 +1036,7 @@ function renderProducts(category){
   moreButton.style.display=products.length>productLimit ? 'inline-flex' : 'none';
   visibleProducts.forEach(function(p){
     var fb = categoryPlaceholder(category, p.name, p.brand);
-    var html='<div class="product-card"><div class="product-img"><img src="'+p.img+'" alt="'+p.name+'" onerror="this.onerror=null;this.src=&quot;'+fb+'&quot;" loading="lazy" class="w-full h-full object-cover"></div><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-brand">'+p.brand+'</div></div></div>';
+    var html='<div class="product-card"><div class="product-img"><img src="'+p.img+'" alt="'+p.name+'" onerror="this.onerror=null;this.src=&quot;'+fb+'&quot;" width="400" height="400" loading="lazy" decoding="async" class="w-full h-full object-cover"></div><div class="product-info"><div class="product-name">'+p.name+'</div><div class="product-brand">'+p.brand+'</div></div></div>';
     grid.innerHTML+=html;
   });
 }
@@ -1174,7 +1174,7 @@ document.addEventListener('keydown', function(e){if(e.key==='Escape'){closeWizar
   <div class="sp-drawer-inner">
     <button class="sp-drawer-close" onclick="spCloseMenu()" aria-label="Fermer">✕</button>
     <div class="sp-drawer-head">
-      <img src="img/logo-ui.webp" alt="" style="width:34px;height:34px;border-radius:8px;object-fit:contain;background:#fff;padding:3px;border:1px solid #eee">
+      <img src="img/logo-ui.webp" alt="" width="34" height="34" loading="lazy" decoding="async" style="width:34px;height:34px;border-radius:8px;object-fit:contain;background:#fff;padding:3px;border:1px solid #eee">
       <strong style="font-size:14px;letter-spacing:.03em">SOLUTION PHONE</strong>
     </div>
     <nav class="sp-drawer-nav">
@@ -1223,6 +1223,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')spCloseMenu(
 </script>
 <!-- === FIN MENU MOBILE === -->
 
+<script src="conversion-boost.js?v=1" defer></script>
 <script src="/jason-widget.js?v=5" defer></script>
 <script src="/contact-dock.quote-bddc47e33423.js" defer></script>
 <link rel="stylesheet" href="storefront-unified.css?v=4">

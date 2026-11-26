@@ -272,6 +272,11 @@ describe('Logique conversion-boost.js', () => {
     expect(ok.resetCount).toBe(1);
     expect(ok.submitBtn.disabled).toBe(false);
     expect(ok.dataLayer.length).toBe(1);
+    expect(ok.dataLayer[0].event).toBe('sp_lead_submitted');
+    expect(ok.dataLayer[0].sp_need).toBe('reconditionne');
+    expect(ok.dataLayer[0].cta_type).toBe('formulaire');
+    expect(JSON.stringify(ok.dataLayer[0])).not.toContain('Alex');
+    expect(JSON.stringify(ok.dataLayer[0])).not.toContain('@');
 
     // 2. Client-side validation: 1-char prenom & 1-char TLD email
     const shortName = await runSubmit({ prenom: 'A', email: 'alex@example.fr', consent: 'on', website: '' });
@@ -310,6 +315,154 @@ describe('Logique conversion-boost.js', () => {
       expect(fail.resetCount).toBe(0);
       expect(fail.submitBtn.disabled).toBe(false);
     }
+  });
+
+  test('trackEvent() prefers gtag with beacon (no double-push), strips PII, enforces opt-in consent, and isolates errors', () => {
+    const dl = [];
+    const gtagCalls = [];
+    const win = {
+      location: { pathname: '/reconditionnes.html?email=client@test.fr#stock' },
+      dataLayer: dl,
+      gtag: (cmd, name, params) => gtagCalls.push({ cmd, name, params }),
+      SolutionPhoneConsent: { choice: () => 'accepted', accepted: () => true }
+    };
+
+    const ok = boost.trackEvent(
+      'sp_cta_click',
+      {
+        cta_type: 'reconditionnes',
+        cta_location: 'home_recond_band',
+        email: 'client@example.fr',
+        prenom: 'Jean',
+        telephone: '0612345678',
+        imei: '356938035643809'
+      },
+      win
+    );
+    expect(ok).toBe(true);
+    // Must dispatch once via gtag (beacon) without double-pushing into dataLayer
+    expect(dl.length).toBe(0);
+    expect(gtagCalls.length).toBe(1);
+    expect(gtagCalls[0].cmd).toBe('event');
+    expect(gtagCalls[0].name).toBe('sp_cta_click');
+    expect(gtagCalls[0].params).toEqual({
+      transport_type: 'beacon',
+      cta_type: 'reconditionnes',
+      cta_location: 'home_recond_band',
+      page_path: '/reconditionnes.html'
+    });
+    expect(JSON.stringify(gtagCalls[0].params)).not.toContain('client@');
+    expect(JSON.stringify(gtagCalls[0].params)).not.toContain('0612345678');
+    expect(JSON.stringify(gtagCalls[0].params)).not.toContain('356938035643809');
+
+    // Falls back to dataLayer.push when gtag is absent or throws
+    const fallbackDl = [];
+    const okFallback = boost.trackEvent(
+      'sp_cta_click',
+      { cta_type: 'devis', cta_location: 'hero' },
+      {
+        location: { pathname: '/' },
+        dataLayer: fallbackDl,
+        gtag: () => { throw new Error('gtag blocked'); },
+        SolutionPhoneConsent: { choice: () => 'accepted', accepted: () => true }
+      }
+    );
+    expect(okFallback).toBe(true);
+    expect(fallbackDl).toEqual([
+      { event: 'sp_cta_click', cta_type: 'devis', cta_location: 'hero', page_path: '/' }
+    ]);
+
+    // Values that look like PII inside an allowed key are dropped
+    const sanitized = boost.sanitizeAnalyticsParams({
+      cta_type: 'client@example.fr',
+      cta_location: '06 12 34 56 78',
+      sp_need: 'devis'
+    }, '/index.html');
+    expect(sanitized.cta_type).toBeUndefined();
+    expect(sanitized.cta_location).toBeUndefined();
+    expect(sanitized.sp_need).toBe('devis');
+
+    // Explicit consent refusal AND pending (null) consent both block dispatch (CNIL opt-in)
+    for (const consentMock of [
+      { choice: () => 'refused', accepted: () => false },
+      { choice: () => null, accepted: () => false }
+    ]) {
+      const blockedDl = [];
+      const blockedGtag = [];
+      const res = boost.trackEvent('sp_cta_click', { cta_type: 'devis' }, {
+        location: { pathname: '/' },
+        dataLayer: blockedDl,
+        gtag: (...args) => blockedGtag.push(args),
+        SolutionPhoneConsent: consentMock
+      });
+      expect(res).toBe(false);
+      expect(blockedDl.length).toBe(0);
+      expect(blockedGtag.length).toBe(0);
+    }
+
+    // Throwing dataLayer/gtag never crashes caller
+    const brokenWin = {
+      location: { pathname: '/' },
+      dataLayer: Object.assign([], { push: () => { throw new Error('blocked'); } }),
+      gtag: () => { throw new Error('blocked'); }
+    };
+    expect(() => boost.trackEvent('sp_cta_click', { cta_type: 'appel' }, brokenWin)).not.toThrow();
+  });
+
+  test('classifyCta() and initCtaTracking() track all key CTA types without double-binding', () => {
+    const makeEl = (attrs, closestMap = {}) => ({
+      getAttribute: (k) => (Object.prototype.hasOwnProperty.call(attrs, k) ? attrs[k] : null),
+      closest: (sel) => closestMap[sel] || null
+    });
+
+    expect(boost.classifyCta(makeEl({ 'data-sp-track': 'devis', 'data-sp-cta-location': 'hero' }))).toEqual({
+      cta_type: 'devis',
+      cta_location: 'hero'
+    });
+    expect(boost.classifyCta(makeEl({ href: 'https://wa.me/33783921884?text=Bonjour' }))).toEqual({
+      cta_type: 'whatsapp',
+      cta_location: 'page'
+    });
+    expect(boost.classifyCta(makeEl({ href: 'tel:+33385330689' }))).toEqual({
+      cta_type: 'appel',
+      cta_location: 'page'
+    });
+    expect(boost.classifyCta(makeEl({ href: 'reconditionnes.html#stock' }))).toEqual({
+      cta_type: 'reconditionnes',
+      cta_location: 'page'
+    });
+    expect(boost.classifyCta(makeEl({ href: 'rachat-reprise-telephone-macon.html' }))).toEqual({
+      cta_type: 'reprise',
+      cta_location: 'page'
+    });
+    expect(boost.classifyCta(makeEl({ href: '#demande-conseil' }))).toEqual({
+      cta_type: 'devis',
+      cta_location: 'page'
+    });
+    expect(boost.classifyCta(makeEl({ href: 'cgv.html' }))).toBeNull();
+
+    // Delegated listener + idempotency + text node target handling
+    const listeners = [];
+    const doc = {
+      addEventListener(ev, fn) {
+        if (ev === 'click') listeners.push(fn);
+      }
+    };
+    const dl = [];
+    const win = { location: { pathname: '/reparation-iphone.html' }, dataLayer: dl };
+    boost.initCtaTracking(doc, win);
+    boost.initCtaTracking(doc, win); // second call must be a no-op
+    expect(listeners.length).toBe(1);
+
+    const ctaEl = makeEl({ 'data-sp-track': 'reconditionnes', 'data-sp-cta-location': 'reparation_iphone_strip' });
+    listeners[0]({ target: { nodeType: 3, parentElement: { closest: () => ctaEl } } });
+    expect(dl.length).toBe(1);
+    expect(dl[0]).toEqual({
+      event: 'sp_cta_click',
+      cta_type: 'reconditionnes',
+      cta_location: 'reparation_iphone_strip',
+      page_path: '/reparation-iphone.html'
+    });
   });
 });
 

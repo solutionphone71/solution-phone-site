@@ -163,6 +163,7 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="conversion-boost.css?v=1">
 
@@ -1118,8 +1119,8 @@ gtag("config", "G-3QP90K1TLM");
     <h1 class="sp-page-title">Bénéficiez immédiatement de 25 €<em>sur votre réparation Samsung ou Android à Mâcon.</em></h1>
     <p class="sp-page-lead">Galaxy, Xiaomi, Huawei, Honor ou Oppo : décrivez la panne et le modèle. L’équipe confirme la solution, le délai et le tarif avant intervention.</p>
     <div class="sp-page-actions">
-      <a class="sp-page-primary" href="./?model=Samsung#devis">Obtenir mon prix</a>
-      <button class="sp-page-secondary" type="button" data-evan-question="je veux un devis pour réparer mon téléphone Android">M’aider à identifier la panne</button>
+      <a class="sp-page-primary" href="./?model=Samsung#devis" data-sp-track="devis" data-sp-cta-location="samsung_hero">Obtenir mon prix</a>
+      <button class="sp-page-secondary" type="button" data-evan-question="je veux un devis pour réparer mon téléphone Android" data-sp-track="devis" data-sp-cta-location="samsung_hero">M’aider à identifier la panne</button>
     </div>
   </div>
   <aside class="sp-page-aside" aria-label="Déroulement du diagnostic Android">
@@ -1304,7 +1305,7 @@ gtag("config", "G-3QP90K1TLM");
         <label for="sam-quick-model" style="display:block;font-weight:800;font-size:.92rem;margin-bottom:8px;color:#1d1d1f">Vérifier le tarif &amp; bloquer la pièce 24h pour mon modèle Android :</label>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
           <input id="sam-quick-model" type="text" placeholder="Ex. Galaxy A54, Galaxy S23, Redmi Note 13, Pixel 8…" style="flex:1 1 240px;min-height:46px;padding:10px 14px;border:1px solid #ccc;border-radius:10px;font:inherit;font-size:.95rem">
-          <button type="button" class="btn-p" onclick="(function(){var m=(document.getElementById('sam-quick-model').value||'Samsung / Android').trim();if(window.SolutionPhoneOpenQuoteModal){window.SolutionPhoneOpenQuoteModal('Vérification stock & blocage pièce 24h · '+m+' · Écran / Batterie (merci de m’indiquer le tarif exact et la disponibilité).');}else{window.open('https://wa.me/33783921884?text='+encodeURIComponent('Bonjour Solution Phone, quel est le tarif et la disponibilité pièce pour : '+m+' ?'),'_blank');}})()" style="border:0;cursor:pointer">Vérifier prix &amp; stock 24h</button>
+          <button type="button" class="btn-p" data-sp-track="devis" data-sp-cta-location="samsung_quick_quote" onclick="(function(){var m=(document.getElementById('sam-quick-model').value||'Samsung / Android').trim();if(window.SolutionPhoneOpenQuoteModal){window.SolutionPhoneOpenQuoteModal('Vérification stock & blocage pièce 24h · '+m+' · Écran / Batterie (merci de m’indiquer le tarif exact et la disponibilité).');}else{window.open('https://wa.me/33783921884?text='+encodeURIComponent('Bonjour Solution Phone, quel est le tarif et la disponibilité pièce pour : '+m+' ?'),'_blank');}})()" style="border:0;cursor:pointer">Vérifier prix &amp; stock 24h</button>
         </div>
       </div>
 
@@ -1437,13 +1438,13 @@ gtag("config", "G-3QP90K1TLM");
 </section>
 
 <!-- CONVERSION DEVIS & RECONDITIONNES -->
-<section class="sp-boost-strip" aria-labelledby="rs-boost-title">
+<section class="sp-boost-strip" aria-labelledby="rs-boost-title" data-sp-cta-location="reparation_samsung_strip">
   <h2 id="rs-boost-title">Réparer votre Samsung ou passer sur un Galaxy reconditionné garanti 12 mois ?</h2>
   <p>Demandez un devis précis en ligne (25 € déjà déduits sur les réparations éligibles, garantie 6 mois) ou découvrez nos Samsung Galaxy et iPhone reconditionnés en stock réel au 21 rue Gambetta à Mâcon.</p>
   <div class="sp-boost-actions">
-    <a class="sp-btn-red" href="/?model=Samsung#devis">Demander un devis Samsung</a>
-    <a class="sp-btn-outline-dark" href="reconditionnes.html#stock">Voir les Samsung reconditionnés</a>
-    <a class="sp-btn-outline-dark" href="rachat-reprise-telephone-macon.html">Faire reprendre mon téléphone</a>
+    <a class="sp-btn-red" href="/?model=Samsung#devis" data-sp-track="devis">Demander un devis Samsung</a>
+    <a class="sp-btn-outline-dark" href="reconditionnes.html#stock" data-sp-track="reconditionnes">Voir les Samsung reconditionnés</a>
+    <a class="sp-btn-outline-dark" href="rachat-reprise-telephone-macon.html" data-sp-track="reprise">Faire reprendre mon téléphone</a>
   </div>
 </section>
 
@@ -1481,7 +1482,7 @@ gtag("config", "G-3QP90K1TLM");
   <div class="sp-drawer-inner">
     <button class="sp-drawer-close" onclick="spCloseMenu()" aria-label="Fermer">✕</button>
     <div class="sp-drawer-head">
-      <img src="img/logo-ui.webp" alt="" style="width:34px;height:34px;border-radius:8px;object-fit:contain;background:#fff;padding:3px;border:1px solid #eee">
+      <img src="img/logo-ui.webp" alt="" width="34" height="34" loading="lazy" decoding="async" style="width:34px;height:34px;border-radius:8px;object-fit:contain;background:#fff;padding:3px;border:1px solid #eee">
       <strong style="font-size:14px;letter-spacing:.03em">SOLUTION PHONE</strong>
     </div>
     <nav class="sp-drawer-nav">
@@ -1535,6 +1536,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')spCloseMenu(
 <style>@media(max-width:768px){#waFloatBtn{display:flex!important}}</style>
 
 
+<script src="conversion-boost.js?v=1" defer></script>
 <script src="/jason-widget.js?v=5" defer></script>
 <script src="/contact-dock.quote-bddc47e33423.js" defer></script>
 <!-- menu-commun : liens du pied de page (HTML statique) -->

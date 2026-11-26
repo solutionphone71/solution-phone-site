@@ -163,6 +163,181 @@
     };
   }
 
+  var ALLOWED_ANALYTICS_KEYS = [
+    'cta_type',
+    'cta_location',
+    'page_path',
+    'sp_need',
+    'form_status'
+  ];
+
+  function sanitizePath(rawPath) {
+    if (typeof rawPath !== 'string') return '/';
+    var noQuery = rawPath.split('?')[0].split('#')[0];
+    var cleaned = cleanText(noQuery, 200);
+    if (!cleaned) return '/';
+    return cleaned.charAt(0) === '/' ? cleaned : '/' + cleaned;
+  }
+
+  function looksLikePii(value) {
+    if (typeof value !== 'string' || !value) return false;
+    if (value.indexOf('@') !== -1) return true;
+    var digits = value.replace(/\D/g, '');
+    if (digits.length >= 8) return true;
+    return false;
+  }
+
+  function sanitizeAnalyticsParams(raw, pagePath) {
+    var safe = {};
+    var src = raw && typeof raw === 'object' ? raw : {};
+    for (var i = 0; i < ALLOWED_ANALYTICS_KEYS.length; i++) {
+      var key = ALLOWED_ANALYTICS_KEYS[i];
+      if (!Object.prototype.hasOwnProperty.call(src, key)) continue;
+      var val = src[key];
+      if (val === undefined || val === null) continue;
+      var str = key === 'page_path' ? sanitizePath(String(val)) : cleanText(String(val), 80);
+      if (!str || looksLikePii(str)) continue;
+      safe[key] = str;
+    }
+    if (!safe.page_path) {
+      safe.page_path = sanitizePath(pagePath || '/');
+    }
+    return safe;
+  }
+
+  function hasAnalyticsConsent(win) {
+    try {
+      if (!win || !win.SolutionPhoneConsent) return true;
+      if (typeof win.SolutionPhoneConsent.accepted === 'function') {
+        return !!win.SolutionPhoneConsent.accepted();
+      }
+      if (typeof win.SolutionPhoneConsent.choice === 'function') {
+        return win.SolutionPhoneConsent.choice() === 'accepted';
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function trackEvent(eventName, params, targetWin) {
+    var win = targetWin || (typeof window !== 'undefined' ? window : null);
+    var cleanEvent = cleanText(String(eventName || ''), 64);
+    if (!win || !cleanEvent || !hasAnalyticsConsent(win)) return false;
+
+    var locPath = win.location && win.location.pathname ? String(win.location.pathname) : '/';
+    var safeParams = sanitizeAnalyticsParams(params, locPath);
+    var dispatched = false;
+
+    if (typeof win.gtag === 'function') {
+      try {
+        var gtagParams = { transport_type: 'beacon' };
+        for (var gk in safeParams) {
+          if (Object.prototype.hasOwnProperty.call(safeParams, gk)) {
+            gtagParams[gk] = safeParams[gk];
+          }
+        }
+        win.gtag('event', cleanEvent, gtagParams);
+        dispatched = true;
+      } catch (e) {}
+    }
+
+    if (!dispatched) {
+      try {
+        if (Array.isArray(win.dataLayer)) {
+          var dlEntry = { event: cleanEvent };
+          for (var k in safeParams) {
+            if (Object.prototype.hasOwnProperty.call(safeParams, k)) {
+              dlEntry[k] = safeParams[k];
+            }
+          }
+          win.dataLayer.push(dlEntry);
+          dispatched = true;
+        }
+      } catch (e) {}
+    }
+
+    return dispatched;
+  }
+
+  function inferCtaLocation(el) {
+    if (!el) return 'page';
+    if (typeof el.getAttribute === 'function') {
+      var direct = cleanText(el.getAttribute('data-sp-cta-location') || '', 60);
+      if (direct) return direct;
+    }
+    if (typeof el.closest === 'function') {
+      var locHost = el.closest('[data-sp-cta-location]');
+      if (locHost && typeof locHost.getAttribute === 'function') {
+        var inherited = cleanText(locHost.getAttribute('data-sp-cta-location') || '', 60);
+        if (inherited) return inherited;
+      }
+      if (el.closest('[data-sp-lead-confirm]')) return 'lead_confirm';
+      if (el.closest('[data-sp-lead-widget]')) return 'lead_widget';
+      if (el.closest('.sp-boost-band')) return 'boost_band';
+      if (el.closest('.sp-boost-strip')) return 'boost_strip';
+      if (el.closest('.sp-mail-recond-upsell')) return 'mail_upsell';
+      if (el.closest('header, nav')) return 'header';
+      if (el.closest('footer, #mc-footer')) return 'footer';
+    }
+    return 'page';
+  }
+
+  function classifyCta(el) {
+    if (!el || typeof el.getAttribute !== 'function') return null;
+    var explicitType = cleanText(el.getAttribute('data-sp-track') || '', 40).toLowerCase();
+    var href = String(el.getAttribute('href') || '').trim();
+    var ctaType = explicitType;
+
+    if (!ctaType && href) {
+      var low = href.toLowerCase();
+      if (low.indexOf('wa.me/') !== -1) {
+        ctaType = 'whatsapp';
+      } else if (low.indexOf('tel:') === 0) {
+        ctaType = 'appel';
+      } else if (low.indexOf('reconditionnes.html') !== -1) {
+        ctaType = 'reconditionnes';
+      } else if (low.indexOf('rachat-reprise-telephone-macon.html') !== -1) {
+        ctaType = 'reprise';
+      } else if (
+        low.indexOf('forms/lead.html') !== -1 ||
+        low.indexOf('#devis') !== -1 ||
+        low.indexOf('#demande-conseil') !== -1 ||
+        low.indexOf('#mail-form') !== -1 ||
+        low.indexOf('#tarifs') !== -1
+      ) {
+        ctaType = 'devis';
+      }
+    }
+
+    if (!ctaType) return null;
+    return {
+      cta_type: ctaType,
+      cta_location: inferCtaLocation(el)
+    };
+  }
+
+  function initCtaTracking(targetDoc, targetWin) {
+    var doc = targetDoc || (typeof document !== 'undefined' ? document : null);
+    var win = targetWin || (typeof window !== 'undefined' ? window : null);
+    if (!doc || typeof doc.addEventListener !== 'function') return;
+    if (doc.__spCtaTrackBound) return;
+    doc.__spCtaTrackBound = true;
+
+    doc.addEventListener('click', function (event) {
+      try {
+        var rawTarget = event && event.target;
+        var target = rawTarget && rawTarget.nodeType === 3 ? rawTarget.parentElement : rawTarget;
+        if (!target || typeof target.closest !== 'function') return;
+        var el = target.closest('[data-sp-track], a[href]');
+        if (!el) return;
+        var info = classifyCta(el);
+        if (!info) return;
+        trackEvent('sp_cta_click', info, win);
+      } catch (e) {}
+    });
+  }
+
   function renderSuggestions(sugEl, list) {
     if (!sugEl) return;
     sugEl.innerHTML = '';
@@ -170,6 +345,11 @@
       var a = document.createElement('a');
       a.className = 'sp-lead-sug-item';
       a.href = item.href;
+      if (typeof a.setAttribute === 'function') {
+        var sugType = String(item.href || '').indexOf('rachat-reprise') !== -1 ? 'reprise' : 'reconditionnes';
+        a.setAttribute('data-sp-track', sugType);
+        a.setAttribute('data-sp-cta-location', 'lead_suggestions');
+      }
 
       var strong = document.createElement('strong');
       strong.textContent = item.name;
@@ -335,17 +515,27 @@
             try {
               form.reset();
             } catch (e) {}
-            try {
-              if (Array.isArray(window.dataLayer)) {
-                window.dataLayer.push({
-                  event: 'sp_lead_submitted',
-                  sp_need: besoin
-                });
-              }
-            } catch (e) {}
+            var formLoc =
+              (form.getAttribute && cleanText(form.getAttribute('data-sp-cta-location') || '', 60)) ||
+              'lead_form';
+            trackEvent('sp_lead_submitted', {
+              sp_need: besoin === 'reconditionne' ? 'reconditionne' : 'devis',
+              cta_type: 'formulaire',
+              cta_location: formLoc,
+              form_status: 'ok'
+            });
             showResult(true, resPayload && resPayload.reference ? String(resPayload.reference) : '');
           })
           .catch(function () {
+            var formLoc =
+              (form.getAttribute && cleanText(form.getAttribute('data-sp-cta-location') || '', 60)) ||
+              'lead_form';
+            trackEvent('sp_lead_fallback', {
+              sp_need: besoin === 'reconditionne' ? 'reconditionne' : 'devis',
+              cta_type: 'formulaire',
+              cta_location: formLoc,
+              form_status: 'fallback'
+            });
             showResult(false, '');
           })
           .finally(function () {
@@ -370,6 +560,7 @@
     for (var i = 0; i < forms.length; i++) {
       initForm(forms[i]);
     }
+    initCtaTracking(document, root);
   }
 
   var api = {
@@ -381,6 +572,11 @@
     buildWhatsAppUrl: buildWhatsAppUrl,
     resolveEndpoint: resolveEndpoint,
     buildQuoteRequestBody: buildQuoteRequestBody,
+    sanitizePath: sanitizePath,
+    sanitizeAnalyticsParams: sanitizeAnalyticsParams,
+    trackEvent: trackEvent,
+    classifyCta: classifyCta,
+    initCtaTracking: initCtaTracking,
     initForm: initForm
   };
 

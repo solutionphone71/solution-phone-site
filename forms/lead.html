@@ -6,8 +6,12 @@
   <title>Demander un devis ou un conseil reconditionné | Solution Phone</title>
   <meta name="description" content="Demandez un devis de réparation smartphone ou un conseil sur nos iPhone et Samsung reconditionnés garantis 12 mois à Mâcon (21 rue Gambetta).">
   <link rel="canonical" href="https://solution-phone.fr/forms/lead.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap">
   <link rel="stylesheet" href="/conversion-boost.css?v=1">
+  <script src="/scripts/consent-tracking.js?v=3"></script>
+  <script>gtag('js', new Date()); gtag('config', 'G-3QP90K1TLM', { anonymize_ip: true });</script>
   <style>
     body {
       margin: 0;
@@ -45,7 +49,7 @@
 <body>
   <header class="sp-lead-page-head">
     <a href="/">← Retour à Solution Phone Mâcon</a>
-    <a href="tel:+33385330689">03 85 33 06 89</a>
+    <a href="tel:+33385330689" data-sp-track="appel" data-sp-cta-location="lead_page_header">03 85 33 06 89</a>
   </header>
 
   <main>
@@ -97,7 +101,7 @@
         <p class="sp-lead-error" data-sp-lead-error role="alert" hidden></p>
         <div class="sp-lead-submit-row">
           <button type="submit" class="sp-btn-red">Demander un devis</button>
-          <a class="sp-btn-outline-dark" href="/reconditionnes.html">Voir le stock reconditionné</a>
+          <a class="sp-btn-outline-dark" href="/reconditionnes.html" data-sp-track="reconditionnes" data-sp-cta-location="lead_page_form">Voir le stock reconditionné</a>
         </div>
       </form>
 
@@ -106,8 +110,8 @@
         <p data-sp-lead-summary></p>
         <div class="sp-lead-suggestions" data-sp-lead-suggestions></div>
         <div class="sp-boost-actions">
-          <a class="sp-btn-red" data-sp-lead-wa href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20devis." target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
-          <a class="sp-btn-outline-white" href="tel:+33385330689">Appeler le 03 85 33 06 89</a>
+          <a class="sp-btn-red" data-sp-lead-wa data-sp-track="whatsapp" data-sp-cta-location="lead_page_confirm" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20devis." target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
+          <a class="sp-btn-outline-white" data-sp-track="appel" data-sp-cta-location="lead_page_confirm" href="tel:+33385330689">Appeler le 03 85 33 06 89</a>
         </div>
       </div>
     </section>
@@ -116,7 +120,8 @@
   <footer class="sp-lead-page-foot">
     Solution Phone · 21 rue Gambetta, 71000 Mâcon ·
     <a href="/cgv.html">CGV &amp; Mentions légales</a> ·
-    <a href="/politique-confidentialite.html">Politique de confidentialité</a>
+    <a href="/politique-confidentialite.html">Politique de confidentialité</a> ·
+    <a href="#" data-sp-consent-manage>Gérer mes cookies</a>
   </footer>
 
   <script src="/conversion-boost.js?v=1" defer></script>

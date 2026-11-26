@@ -116,6 +116,134 @@ class TestSiteSEOAndConversion(unittest.TestCase):
         self.assertIn("seo", pkg["scripts"])
         self.assertIn("test", pkg["scripts"])
 
+    def test_core_web_vitals_images_and_picture_webp(self):
+        # 1. Les versions WebP générées existent et sont plus légères que les JPEG conservés
+        for jpg_rel in (
+            "img/equipe-solution-phone-macon-2026.jpg",
+            "img/atelier.jpg",
+            "img/qualirepar-label-officiel.jpg",
+        ):
+            webp_rel = os.path.splitext(jpg_rel)[0] + ".webp"
+            jpg_path = os.path.join(ROOT, jpg_rel)
+            webp_path = os.path.join(ROOT, webp_rel)
+            self.assertTrue(os.path.exists(jpg_path), f"Fallback JPEG supprimé : {jpg_rel}")
+            self.assertTrue(os.path.exists(webp_path), f"WebP absent : {webp_rel}")
+            self.assertLess(
+                os.path.getsize(webp_path),
+                os.path.getsize(jpg_path),
+                f"{webp_rel} n'est pas plus léger que {jpg_rel}",
+            )
+
+        # 2. Balises <picture> + WebP sur les pages clés utilisant ces JPEG
+        self.assertIn('srcset="img/equipe-solution-phone-macon-2026.webp"', read_text("index.html"))
+        self.assertIn('srcset="img/qualirepar-label-officiel.webp"', read_text("index.html"))
+        self.assertIn('srcset="img/atelier.webp"', read_text("reparation-telephone-macon.html"))
+        self.assertIn('srcset="img/equipe-solution-phone-macon-2026.webp"', read_text("atelier.html"))
+        self.assertIn('srcset="img/qualirepar-label-officiel.webp"', read_text("atelier.html"))
+
+        # 3. Toutes les balises <img> statiques des 8 pages clés ont width, height et decoding="async"
+        key_pages = (
+            "index.html",
+            "reconditionnes.html",
+            "reparation-iphone.html",
+            "reparation-samsung.html",
+            "reparation-telephone-macon.html",
+            "accessoires.html",
+            "atelier.html",
+            "faq.html",
+        )
+        for page in key_pages:
+            html_no_js = re.sub(r"<script\b[^>]*>.*?</script>", "", read_text(page), flags=re.S | re.I)
+            for img_tag in re.findall(r"<img\b[^>]*>", html_no_js, flags=re.S | re.I):
+                self.assertRegex(img_tag, r'\bwidth=', f"width manquant sur {page}: {img_tag[:120]}")
+                self.assertRegex(img_tag, r'\bheight=', f"height manquant sur {page}: {img_tag[:120]}")
+                self.assertRegex(img_tag, r'\bdecoding="async"', f"decoding=async manquant sur {page}: {img_tag[:120]}")
+                # Les images LCP hero avec fetchpriority="high" ne doivent pas être lazy
+                if 'fetchpriority="high"' in img_tag:
+                    self.assertNotIn('loading="lazy"', img_tag, f"LCP ne doit pas être lazy sur {page}")
+
+    def test_fonts_preconnect_and_defer_scripts(self):
+        pages_with_fonts = (
+            "index.html",
+            "reconditionnes.html",
+            "reparation-iphone.html",
+            "reparation-samsung.html",
+            "reparation-telephone-macon.html",
+            "accessoires.html",
+            "faq.html",
+            "forms/lead.html",
+        )
+        for page in pages_with_fonts:
+            html = read_text(page)
+            self.assertIn('href="https://fonts.googleapis.com"', html, f"preconnect googleapis absent sur {page}")
+            self.assertIn('href="https://fonts.gstatic.com"', html, f"preconnect gstatic absent sur {page}")
+            self.assertIn("display=swap", html, f"display=swap absent sur {page}")
+
+        # Scripts non bloquants en defer + conversion-boost.js?v=1 chargé sur toutes les pages clés
+        for page in (
+            "index.html",
+            "reconditionnes.html",
+            "reparation-iphone.html",
+            "reparation-samsung.html",
+            "reparation-telephone-macon.html",
+            "accessoires.html",
+            "atelier.html",
+            "faq.html",
+            "forms/lead.html",
+        ):
+            html = read_text(page)
+            self.assertRegex(
+                html,
+                r'<script\s+src="/?conversion-boost\.js\?v=1"\s+defer></script>',
+                f"conversion-boost.js?v=1 defer manquant sur {page}",
+            )
+
+        index_html = read_text("index.html")
+        self.assertIn('<script src="apple-screens-20261112-v3.js" defer></script>', index_html)
+        self.assertIn('<script src="/accueil-core.js?v=1" defer></script>', index_html)
+        recond_html = read_text("reconditionnes.html")
+        self.assertIn('<script src="iphone-image-library.js?v=2" defer></script>', recond_html)
+        self.assertIn('<script src="reconditionnes-v2.js?v=3" defer></script>', recond_html)
+
+    def test_cta_tracking_attributes_and_pii_guards(self):
+        js = read_text("conversion-boost.js")
+        self.assertIn("ALLOWED_ANALYTICS_KEYS", js)
+        self.assertIn("looksLikePii", js)
+        self.assertIn("hasAnalyticsConsent", js)
+        self.assertIn("transport_type: 'beacon'", js)
+        self.assertIn("sp_cta_click", js)
+
+        index_html = read_text("index.html")
+        for cta_type in ("devis", "reconditionnes", "reprise", "whatsapp", "appel"):
+            self.assertIn(f'data-sp-track="{cta_type}"', index_html, f"data-sp-track={cta_type} absent de index.html")
+
+        for page in (
+            "reconditionnes.html",
+            "reparation-iphone.html",
+            "reparation-samsung.html",
+            "reparation-telephone-macon.html",
+        ):
+            html = read_text(page)
+            self.assertIn('data-sp-track="devis"', html, f"data-sp-track=devis absent de {page}")
+            self.assertIn('data-sp-track="reconditionnes"', html, f"data-sp-track=reconditionnes absent de {page}")
+
+        for page in ("accessoires.html", "atelier.html", "faq.html", "forms/lead.html"):
+            html = read_text(page)
+            self.assertIn("data-sp-track=", html, f"data-sp-track absent de {page}")
+
+        # forms/lead.html doit charger consent-tracking.js et GA4 pour que le tracking soit actif
+        lead_html = read_text("forms/lead.html")
+        self.assertIn('/scripts/consent-tracking.js?v=3', lead_html)
+        self.assertIn("G-3QP90K1TLM", lead_html)
+        self.assertIn("data-sp-consent-manage", lead_html)
+
+        # Images dynamiques et CTA stock de reconditionnes-v2.js & accessoires.html
+        recond_js = read_text("reconditionnes-v2.js")
+        self.assertIn('width="96" height="72" loading="lazy" decoding="async"', recond_js)
+        self.assertIn('data-sp-track="reconditionnes" data-sp-cta-location="reconditionnes_stock_row"', recond_js)
+        acc_html = read_text("accessoires.html")
+        self.assertIn('width="400" height="400" loading="lazy" decoding="async"', acc_html)
+
 
 class TestFaqFallbackScript(unittest.TestCase):
     def test_missing_argument_exits_with_error_json(self):

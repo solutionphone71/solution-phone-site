@@ -128,6 +128,8 @@ gtag("config", "G-3QP90K1TLM");
 <link rel="stylesheet" href="reconditionnes-v2.css?v=3">
 <script src="premium-nav.js?v=menu-commun-5" defer></script>
 <link rel="stylesheet" href="contact-dock.css?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="conversion-boost.css?v=1">
 <link rel="stylesheet" href="/accessibilite.css?v=1">
@@ -139,10 +141,10 @@ gtag("config", "G-3QP90K1TLM");
     <div class="rc-hero-inner">
       <h1 class="rc-title" id="rc-title">Achetez votre smartphone d’occasion<br><span>Garanti 12 mois.</span></h1>
       <p class="rc-lead">iPhone, Samsung et autres smartphones testés 30 points, stock réel affiché en boutique à Mâcon.</p>
-      <div class="rc-actions">
-        <a class="rc-btn rc-btn-fill" href="#stock">Voir le stock</a>
-        <a class="sp-btn-red" href="#demande-conseil">Demander un devis / conseil</a>
-        <a class="rc-btn rc-btn-line" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20acheter%20un%20smartphone%20reconditionn%C3%A9." target="_blank" rel="noopener">Demander sur WhatsApp</a>
+      <div class="rc-actions" data-sp-cta-location="reconditionnes_hero">
+        <a class="rc-btn rc-btn-fill" href="#stock" data-sp-track="reconditionnes">Voir le stock</a>
+        <a class="sp-btn-red" href="#demande-conseil" data-sp-track="devis">Demander un devis / conseil</a>
+        <a class="rc-btn rc-btn-line" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20acheter%20un%20smartphone%20reconditionn%C3%A9." target="_blank" rel="noopener" data-sp-track="whatsapp">Demander sur WhatsApp</a>
       </div>
       <p class="rc-trust"><span>Garantie 12 mois</span> <span>Batterie indiquée</span> <a href="https://g.page/r/CbyQ_wiFpddjEBM" target="_blank" rel="noopener">★ 4,7/5 · +700 avis Google</a></p>
     </div>
@@ -188,7 +190,7 @@ gtag("config", "G-3QP90K1TLM");
             </div>
           </div>
         </div>
-        <p class="rc-trade-note" id="rcTradeSummary">Estimation indicative déduite à l’affichage, confirmée en 10 min au comptoir (pièce d’identité requise). <a href="rachat-reprise-telephone-macon.html">Autre modèle à faire estimer ›</a></p>
+        <p class="rc-trade-note" id="rcTradeSummary">Estimation indicative déduite à l’affichage, confirmée en 10 min au comptoir (pièce d’identité requise). <a href="rachat-reprise-telephone-macon.html" data-sp-track="reprise" data-sp-cta-location="reconditionnes_trade">Autre modèle à faire estimer ›</a></p>
       </div>
     </div>
     <div class="rc-tabs" id="rcTabs" role="group" aria-label="Catégories">
@@ -249,7 +251,7 @@ gtag("config", "G-3QP90K1TLM");
       <p class="sp-lead-error" data-sp-lead-error role="alert" hidden></p>
       <div class="sp-lead-submit-row">
         <button type="submit" class="sp-btn-red">Demander un devis / conseil</button>
-        <a class="sp-btn-outline-dark" href="/#devis">Calculer un devis réparation</a>
+        <a class="sp-btn-outline-dark" href="/#devis" data-sp-track="devis" data-sp-cta-location="recond_lead_widget">Calculer un devis réparation</a>
       </div>
     </form>
     <div class="sp-lead-confirm" data-sp-lead-confirm role="status" aria-live="polite" hidden>
@@ -257,8 +259,8 @@ gtag("config", "G-3QP90K1TLM");
       <p data-sp-lead-summary></p>
       <div class="sp-lead-suggestions" data-sp-lead-suggestions></div>
       <div class="sp-boost-actions">
-        <a class="sp-btn-red" data-sp-lead-wa href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20conseil%20sur%20vos%20smartphones%20reconditionn%C3%A9s." target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
-        <a class="sp-btn-outline-white" href="tel:+33385330689">Appeler le 03 85 33 06 89</a>
+        <a class="sp-btn-red" data-sp-lead-wa data-sp-track="whatsapp" data-sp-cta-location="recond_lead_confirm" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20conseil%20sur%20vos%20smartphones%20reconditionn%C3%A9s." target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
+        <a class="sp-btn-outline-white" data-sp-track="appel" data-sp-cta-location="recond_lead_confirm" href="tel:+33385330689">Appeler le 03 85 33 06 89</a>
       </div>
     </div>
   </section>
@@ -277,7 +279,7 @@ gtag("config", "G-3QP90K1TLM");
       </li>
       <li>
         <h3>Reprise de votre ancien téléphone</h3>
-        <p>Sa valeur est déduite directement du prix du nouveau. <a href="rachat-reprise-telephone-macon.html">Demandez une estimation ›</a></p>
+        <p>Sa valeur est déduite directement du prix du nouveau. <a href="rachat-reprise-telephone-macon.html" data-sp-track="reprise" data-sp-cta-location="recond_why">Demandez une estimation ›</a></p>
       </li>
       <li>
         <h3>Transfert de données sur place</h3>
@@ -324,8 +326,8 @@ gtag("config", "G-3QP90K1TLM");
   </div>
 </footer>
 
-<script src="iphone-image-library.js?v=2"></script>
-<script src="reconditionnes-v2.js?v=3"></script>
+<script src="iphone-image-library.js?v=2" defer></script>
+<script src="reconditionnes-v2.js?v=3" defer></script>
 <script src="conversion-boost.js?v=1" defer></script>
 <script src="/jason-widget.js?v=5" defer></script>
 <script src="/contact-dock.quote-bddc47e33423.js" defer></script>

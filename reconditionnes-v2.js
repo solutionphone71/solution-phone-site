@@ -411,7 +411,7 @@
     var isNeuf = rows[0].condition === 'neuf';
     var html = '<article class="rc-model">'
       + '<header class="rc-model-head">'
-      + (img ? '<div class="rc-model-img"><img data-model-img src="' + escapeHtml(img) + '" alt="" loading="lazy" decoding="async"></div>' : '')
+      + (img ? '<div class="rc-model-img"><img data-model-img src="' + escapeHtml(img) + '" alt="" width="96" height="72" loading="lazy" decoding="async"></div>' : '')
       + '<div><h3>' + escapeHtml(name) + '</h3><p>' + rows.length + ' en stock · dès ' + formatPrice(min) + netLead + '</p></div>'
       + '</header>'
       + '<table class="rc-table"><caption class="rc-sr">' + escapeHtml(name) + ' : exemplaires en stock</caption>'
@@ -440,8 +440,8 @@
       + '<td>' + battery + '</td>'
       + '<td class="rc-num rc-price">' + formatPrice(r.price) + netHtml + '</td>'
       + '<td class="rc-act"><span class="rc-act-group">'
-      + '<button type="button" class="rc-reserve-mail" data-reserve-item="' + escapeHtml(describe(r)) + '" aria-label="Réserver 24h en boutique : ' + escapeHtml(describe(r)) + '">Réserver 24h</button>'
-      + '<a class="rc-reserve-wa" href="' + reserveLink(r) + '" target="_blank" rel="noopener" aria-label="Demander sur WhatsApp : ' + escapeHtml(describe(r)) + '">WhatsApp</a>'
+      + '<button type="button" class="rc-reserve-mail" data-sp-track="reconditionnes" data-sp-cta-location="reconditionnes_stock_row" data-reserve-item="' + escapeHtml(describe(r)) + '" aria-label="Réserver 24h en boutique : ' + escapeHtml(describe(r)) + '">Réserver 24h</button>'
+      + '<a class="rc-reserve-wa" data-sp-track="whatsapp" data-sp-cta-location="reconditionnes_stock_row" href="' + reserveLink(r) + '" target="_blank" rel="noopener" aria-label="Demander sur WhatsApp : ' + escapeHtml(describe(r)) + '">WhatsApp</a>'
       + '</span></td>'
       + '</tr>';
   }

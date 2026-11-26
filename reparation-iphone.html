@@ -86,6 +86,8 @@
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-3QP90K1TLM");</script>
     <script defer src="scripts/landing-tracking.js"></script>
     <link rel="stylesheet" href="contact-dock.css?v=3" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" />
     <link rel="stylesheet" href="conversion-boost.css?v=1" />
     <link rel="stylesheet" href="qualirepar-top.css?v=2" />
@@ -95,8 +97,8 @@
 </head>
   <body>
     <header class="wrap">
-      <a href="/"><img src="img/logo-ui.webp" alt="Solution Phone" width="150" height="80" /></a>
-      <a class="phone" href="tel:+33385330689">03 85 33 06 89</a>
+      <a href="/"><img src="img/logo-ui.webp" alt="Solution Phone" width="150" height="80" decoding="async" /></a>
+      <a class="phone" href="tel:+33385330689" data-sp-track="appel" data-sp-cta-location="header">03 85 33 06 89</a>
     </header>
     <div class="hero">
       <div class="hero-copy">
@@ -111,9 +113,9 @@
         </ul>
         <p class="facts-note">Prix finaux, pièce et main-d’œuvre comprises, 25 € déjà déduits (tarifs de septembre 2026, selon le modèle).</p>
         <div class="actions">
-          <a class="button primary" href="/?model=iPhone#devis">Obtenir mon prix</a>
-          <a class="button" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix%20pour%20r%C3%A9parer%20mon%20iPhone.%20Mon%20mod%C3%A8le%20et%20la%20panne%20%3A" target="_blank" rel="noopener">Demander sur WhatsApp</a>
-          <a class="button" href="#tarifs-iphone">Voir tous les tarifs iPhone</a>
+          <a class="button primary" href="/?model=iPhone#devis" data-sp-track="devis" data-sp-cta-location="hero">Obtenir mon prix</a>
+          <a class="button" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20un%20prix%20pour%20r%C3%A9parer%20mon%20iPhone.%20Mon%20mod%C3%A8le%20et%20la%20panne%20%3A" target="_blank" rel="noopener" data-sp-track="whatsapp" data-sp-cta-location="hero">Demander sur WhatsApp</a>
+          <a class="button" href="#tarifs-iphone" data-sp-track="devis" data-sp-cta-location="hero">Voir tous les tarifs iPhone</a>
         </div>
       </div>
       <img src="img/evan-comptoir.webp" alt="Technicien Solution Phone dans l’atelier de Mâcon" width="1200" height="819" fetchpriority="high" decoding="async" />
@@ -165,22 +167,23 @@
           <details><summary>Puis-je venir sans rendez-vous ?</summary><p>Oui. Un message avant votre venue permet toutefois de vérifier la disponibilité de la pièce correspondant à votre modèle.</p></details>
         </div>
       </section>
-      <section class="sp-boost-strip" aria-labelledby="ri-boost-title">
+      <section class="sp-boost-strip" aria-labelledby="ri-boost-title" data-sp-cta-location="reparation_iphone_strip">
         <h2 id="ri-boost-title">Réparer votre iPhone ou passer sur un iPhone reconditionné garanti 12 mois ?</h2>
         <p>Demandez un devis précis en quelques secondes ou consultez notre vitrine d’iPhone reconditionnés en stock réel à Mâcon (contrôlés 30 points, reprise de votre ancien iPhone au comptoir).</p>
         <div class="sp-boost-actions">
-          <a class="sp-btn-red" href="/?model=iPhone#devis">Demander un devis iPhone</a>
-          <a class="sp-btn-outline-dark" href="reconditionnes.html#stock">Voir les iPhone reconditionnés</a>
-          <a class="sp-btn-outline-dark" href="rachat-reprise-telephone-macon.html">Faire reprendre mon iPhone</a>
+          <a class="sp-btn-red" href="/?model=iPhone#devis" data-sp-track="devis">Demander un devis iPhone</a>
+          <a class="sp-btn-outline-dark" href="reconditionnes.html#stock" data-sp-track="reconditionnes">Voir les iPhone reconditionnés</a>
+          <a class="sp-btn-outline-dark" href="rachat-reprise-telephone-macon.html" data-sp-track="reprise">Faire reprendre mon iPhone</a>
         </div>
       </section>
     </main>
     <footer class="wrap">Solution Phone · Réparation iPhone à Mâcon · <a href="cgv.html">Mentions légales &amp; CGV</a> · <a href="politique-confidentialite.html">Confidentialité</a> · <a href="#" data-sp-consent-manage>Gérer mes cookies</a></footer>
-    <nav class="sp-contact-dock" aria-label="Devis iPhone"><a href="#tarifs-iphone" style="grid-column:1/-1">Voir mon prix et demander mon devis</a></nav>
+    <nav class="sp-contact-dock" aria-label="Devis iPhone"><a href="#tarifs-iphone" style="grid-column:1/-1" data-sp-track="devis" data-sp-cta-location="contact_dock">Voir mon prix et demander mon devis</a></nav>
     <script>new IntersectionObserver(function(entries){document.querySelector('.sp-contact-dock').hidden=entries[0].isIntersecting}).observe(document.getElementById('iphone-quote-frame'));</script>
     <style>.sp-contact-dock[hidden]{display:none!important}</style>
   <!-- menu-commun : liens du pied de page (HTML statique) -->
 <div id="mc-footer"role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, 71000 Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://solution-phone.fr/suivi-reparation.html">Suivre ma réparation (REP-...)</a></li><li><a href="https://solution-phone.fr/reparer-ou-remplacer-telephone-macon.html">Réparer ou remplacer ?</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung Galaxy</a></li><li><a href="https://solution-phone.fr/reparation-xiaomi-redmi-macon.html">Réparation Xiaomi &amp; Redmi</a></li><li><a href="https://solution-phone.fr/reparation-google-pixel-macon.html">Réparation Google Pixel</a></li><li><a href="https://solution-phone.fr/reparation-honor-oppo-motorola-macon.html">Honor, Oppo &amp; Motorola</a></li><li><a href="https://solution-phone.fr/reparation-ipad-tablette-macon.html">Réparation iPad &amp; tablette</a></li><li><a href="https://solution-phone.fr/reparation-ordinateur-pc-mac-macon.html">Réparation PC &amp; Mac</a></li><li><a href="https://solution-phone.fr/recuperation-donnees-macon.html">Récupération de données</a></li><li><a href="https://solution-phone.fr/micro-soudure-carte-mere-macon.html">Micro-soudure &amp; carte mère</a></li><li><a href="https://solution-phone.fr/reparation-console-ps5-switch-macon.html">Réparation PS5 &amp; Switch</a></li><li><a href="https://solution-phone.fr/reparation-trottinette-electrique-macon.html">Trottinettes électriques</a></li></ul><p class="mc-f-title">Acheter, revendre &amp; accès rapide autour de Mâcon</p><ul><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/iphone-reconditionne-macon.html">iPhone reconditionnés</a></li><li><a href="https://solution-accessoires.fr/samsung-reconditionne-macon.html">Samsung reconditionnés</a></li><li><a href="https://solution-phone.fr/pc-mac-reconditionnes-macon.html">PC &amp; Mac reconditionnés</a></li><li><a href="https://solution-phone.fr/rachat-reprise-telephone-macon.html">Rachat cash &amp; reprise</a></li><li><a href="https://solution-accessoires.fr/coques-chargeurs-accessoires-macon.html">Coques, MagSafe &amp; chargeurs</a></li><li><a href="https://solution-phone.fr/hydrogel.html">Film Hydrogel (10 € à 30 €)</a></li><li><a href="https://solution-phone.fr/pro-entreprises-macon.html">Offre Pro &amp; Entreprises</a></li><li><a href="https://solution-phone.fr/devis-assurance-telephone-macon.html">Devis assurance</a></li><li><a href="https://solution-phone.fr/avis-clients-solution-phone-macon.html">Avis clients (4,7/5)</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Horaires &amp; parkings Mâcon</a></li><li><a href="https://solution-phone.fr/reparation-telephone-bourg-en-bresse-ain-01.html">Accès Ain (01)</a></li><li><a href="https://solution-phone.fr/reparation-telephone-belleville-beaujolais-69.html">Accès Beaujolais (69)</a></li><li><a href="https://solution-phone.fr/reparation-telephone-charnay-cluny-tournus-71.html">Charnay, Cluny &amp; Tournus</a></li></ul></div></div>
+  <script src="conversion-boost.js?v=1" defer></script>
   <script src="/jason-widget.js?v=5" defer></script>
 </body>
 </html>
