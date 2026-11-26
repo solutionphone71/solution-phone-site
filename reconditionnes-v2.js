@@ -46,34 +46,101 @@
   var PUBLIC_CATALOG_URL = 'https://vps-8066c206.vps.ovh.net/api/public/catalog';
   var WHATSAPP = 'https://wa.me/33783921884';
 
-  var state = { items: [], cat: 'iphone', family: 'all', budget: 'all', query: '', tradeKey: '', tradeCond: 'bon', signature: '', loaded: false };
+  var state = { items: [], cat: 'iphone', family: 'all', budget: 'all', query: '', tradeKey: '', tradeCond: 'tres_bon', tradeOther: '', signature: '', loaded: false };
 
-  var TRADE_MODELS = {
-    ip11:  { label: 'iPhone 11', val: 85 },
-    ip12:  { label: 'iPhone 12', val: 125 },
-    ip12p: { label: 'iPhone 12 Pro', val: 165 },
-    ip13:  { label: 'iPhone 13', val: 180 },
-    ip13p: { label: 'iPhone 13 Pro', val: 235 },
-    ip14:  { label: 'iPhone 14', val: 230 },
-    ip14p: { label: 'iPhone 14 Pro', val: 320 },
-    ip15:  { label: 'iPhone 15', val: 330 },
-    ip15p: { label: 'iPhone 15 Pro', val: 430 },
-    s22:   { label: 'Samsung Galaxy S22', val: 130 },
-    s23:   { label: 'Samsung Galaxy S23', val: 200 },
-    s24:   { label: 'Samsung Galaxy S24', val: 290 },
-    a54:   { label: 'Samsung Galaxy A54 / A55', val: 90 }
+  var TRADE_CONDITIONS = {
+    tres_bon: { label: 'Très bon état', factor: 1.0 },
+    correct:  { label: 'État correct', factor: 0.78 },
+    fissure:  { label: 'Écran fissuré ou batterie faible', factor: 0.48 }
   };
 
-  function currentTrade(){
-    var entry = state.tradeKey && TRADE_MODELS[state.tradeKey];
+  var TRADE_MODELS = {
+    ip11:  { label: 'iPhone 11', brand: 'iphone', val: 85 },
+    ip11p: { label: 'iPhone 11 Pro / Pro Max', brand: 'iphone', val: 115 },
+    ip12:  { label: 'iPhone 12', brand: 'iphone', val: 125 },
+    ip12p: { label: 'iPhone 12 Pro / Pro Max', brand: 'iphone', val: 175 },
+    ip13:  { label: 'iPhone 13', brand: 'iphone', val: 185 },
+    ip13p: { label: 'iPhone 13 Pro / Pro Max', brand: 'iphone', val: 250 },
+    ip14:  { label: 'iPhone 14', brand: 'iphone', val: 235 },
+    ip14p: { label: 'iPhone 14 Pro / Pro Max', brand: 'iphone', val: 340 },
+    ip15:  { label: 'iPhone 15', brand: 'iphone', val: 330 },
+    ip15p: { label: 'iPhone 15 Pro / Pro Max', brand: 'iphone', val: 460 },
+    ip16:  { label: 'iPhone 16', brand: 'iphone', val: 440 },
+    ip16p: { label: 'iPhone 16 Pro / Pro Max', brand: 'iphone', val: 600 },
+    s21:   { label: 'Samsung Galaxy S21 / S21+', brand: 'samsung', val: 90 },
+    s21u:  { label: 'Samsung Galaxy S21 Ultra', brand: 'samsung', val: 145 },
+    s22:   { label: 'Samsung Galaxy S22 / S22+', brand: 'samsung', val: 135 },
+    s22u:  { label: 'Samsung Galaxy S22 Ultra', brand: 'samsung', val: 210 },
+    s23:   { label: 'Samsung Galaxy S23 / S23+', brand: 'samsung', val: 210 },
+    s23u:  { label: 'Samsung Galaxy S23 Ultra', brand: 'samsung', val: 290 },
+    s24:   { label: 'Samsung Galaxy S24 / S24+', brand: 'samsung', val: 300 },
+    s24u:  { label: 'Samsung Galaxy S24 Ultra', brand: 'samsung', val: 440 },
+    a54:   { label: 'Samsung Galaxy A54 / A55', brand: 'samsung', val: 95 },
+    autre: { label: 'Autre modèle', brand: 'autre', val: 0, custom: true }
+  };
+
+  function round5(n){
+    return Math.max(0, Math.round(n / 5) * 5);
+  }
+
+  function estimateTradeIn(modelKey, condKey, otherName){
+    var entry = modelKey && TRADE_MODELS[modelKey];
     if (!entry) return null;
-    var factor = state.tradeCond === 'fissure' ? 0.5 : 1;
-    var amount = Math.round((entry.val * factor) / 5) * 5;
+    var condCode = TRADE_CONDITIONS[condKey] ? condKey : 'tres_bon';
+    var cond = TRADE_CONDITIONS[condCode];
+    if (entry.custom) {
+      var customLabel = String(otherName || '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 60);
+      return {
+        key: modelKey,
+        brand: entry.brand,
+        label: customLabel || entry.label,
+        custom: true,
+        condKey: condCode,
+        condLabel: cond.label,
+        min: null,
+        max: null,
+        amount: 0
+      };
+    }
+    var mid = round5(entry.val * cond.factor);
+    var min = Math.max(15, round5(mid * 0.88));
+    var max = Math.max(min + 10, round5(mid * 1.12));
     return {
+      key: modelKey,
+      brand: entry.brand,
       label: entry.label,
-      condLabel: state.tradeCond === 'fissure' ? 'écran fissuré' : 'bon état',
-      amount: amount
+      custom: false,
+      condKey: condCode,
+      condLabel: cond.label,
+      min: min,
+      max: max,
+      amount: mid
     };
+  }
+
+  function currentTrade(){
+    return estimateTradeIn(state.tradeKey, state.tradeCond, state.tradeOther);
+  }
+
+  function formatNetRange(price, trade){
+    var p = Number(price) || 0;
+    if (!trade || trade.custom || p <= 0) return null;
+    var netMin = Math.max(0, p - trade.max);
+    var netMax = Math.max(0, p - trade.min);
+    var shortLabel = netMin === netMax
+      ? '~' + plainPrice(netMin)
+      : '~' + String(netMin) + ' à ' + plainPrice(netMax);
+    var htmlLabel = netMin === netMax
+      ? '~' + formatPrice(netMin)
+      : '~' + String(netMin) + '–' + formatPrice(netMax);
+    return { netMin: netMin, netMax: netMax, shortLabel: shortLabel, htmlLabel: htmlLabel };
+  }
+
+  function budgetFromPrice(price){
+    var p = Number(price) || 0;
+    if (p > 0 && p < 250) return 'u250';
+    if (p > 450) return 'o450';
+    return '250-450';
   }
 
   /* ---------- Outils texte ---------- */
@@ -359,7 +426,12 @@
     var shown = state.family === 'all' ? items : families[state.family];
     var list = document.getElementById('rcList');
     if (!shown.length) {
-      list.innerHTML = '<p class="rc-status">Aucun téléphone dans cette catégorie pour le moment. <a href="' + whatsappLink('Bonjour Solution Phone, je cherche un smartphone. Avez-vous des arrivages prévus ?') + '" target="_blank" rel="noopener">Demandez-nous sur WhatsApp</a>.</p>';
+      var qNote = state.query ? ' pour « ' + escapeHtml(state.query) + ' »' : ' dans cette catégorie';
+      list.innerHTML = '<div class="rc-status"><p>Aucun téléphone en stock' + qNote + ' pour le moment.</p>'
+        + '<div class="sp-empty-actions">'
+        + '<button type="button" class="rc-empty-alert-btn sp-btn-red" data-sp-track="alerte_arrivage" data-sp-cta-location="reconditionnes_empty_search">Être prévenu du prochain arrivage</button>'
+        + '<a class="sp-btn-outline-dark" data-sp-track="whatsapp" data-sp-cta-location="reconditionnes_empty_search" href="' + whatsappLink('Bonjour Solution Phone, je cherche un smartphone' + (state.query ? ' (' + state.query + ')' : '') + '. Avez-vous des arrivages prévus ?') + '" target="_blank" rel="noopener">Demander sur WhatsApp</a>'
+        + '</div></div>';
       return;
     }
     var models = groupBy(shown, 'model');
@@ -398,7 +470,7 @@
 
   function modelImage(item){
     if (!item.isIphone || item.uncertainSE) return '';
-    var resolver = window.SolutionPhoneIphoneImages;
+    var resolver = typeof window !== 'undefined' && window.SolutionPhoneIphoneImages;
     return resolver ? (resolver.resolve(item.model) || '') : '';
   }
 
@@ -406,7 +478,8 @@
     rows = rows.slice().sort(function(a, b){ return a.price - b.price || a.storageNum - b.storageNum; });
     var min = rows[0].price;
     var trade = currentTrade();
-    var netLead = trade ? ' · soit dès ~' + formatPrice(Math.max(0, min - trade.amount)) + ' avec reprise' : '';
+    var netHead = formatNetRange(min, trade);
+    var netLead = netHead ? ' · soit dès ~' + formatPrice(netHead.netMin) + ' avec reprise' : '';
     var img = modelImage(rows[0]);
     var isNeuf = rows[0].condition === 'neuf';
     var html = '<article class="rc-model">'
@@ -430,9 +503,12 @@
       : na('non précisée');
     var grade = isNeuf ? 'Neuf' : (r.grade ? escapeHtml(r.grade) : na('non précisé'));
     var battery = r.battery ? r.battery + '&nbsp;%' : na(isNeuf ? 'neuf' : 'non indiquée');
-    var netHtml = trade
-      ? '<span class="rc-net">~' + formatPrice(Math.max(0, r.price - trade.amount)) + ' reprise déduite</span>'
+    var net = formatNetRange(r.price, trade);
+    var netHtml = net
+      ? '<span class="rc-net">' + net.htmlLabel + ' <span class="rc-net-sub">reprise déduite</span></span>'
       : '';
+    var desc = describe(r, trade);
+    var shortModel = r.model + (r.storage ? ' ' + r.storage : '');
     return '<tr>'
       + '<td>' + (r.storage ? escapeHtml(r.storage).replace(' ', '&nbsp;') : na('non précisé')) + '</td>'
       + '<td>' + color + '</td>'
@@ -440,8 +516,8 @@
       + '<td>' + battery + '</td>'
       + '<td class="rc-num rc-price">' + formatPrice(r.price) + netHtml + '</td>'
       + '<td class="rc-act"><span class="rc-act-group">'
-      + '<button type="button" class="rc-reserve-mail" data-sp-track="reconditionnes" data-sp-cta-location="reconditionnes_stock_row" data-reserve-item="' + escapeHtml(describe(r)) + '" aria-label="Réserver 24h en boutique : ' + escapeHtml(describe(r)) + '">Réserver 24h</button>'
-      + '<a class="rc-reserve-wa" data-sp-track="whatsapp" data-sp-cta-location="reconditionnes_stock_row" href="' + reserveLink(r) + '" target="_blank" rel="noopener" aria-label="Demander sur WhatsApp : ' + escapeHtml(describe(r)) + '">WhatsApp</a>'
+      + '<button type="button" class="rc-reserve-mail" data-sp-track="reconditionnes" data-sp-cta-location="reconditionnes_stock_row" data-reserve-item="' + escapeHtml(desc) + '" data-reserve-model="' + escapeHtml(shortModel) + '" data-reserve-price="' + escapeHtml(String(r.price)) + '" aria-label="Réserver 24h en boutique : ' + escapeHtml(desc) + '">Réserver 24h</button>'
+      + '<a class="rc-reserve-wa" data-sp-track="whatsapp" data-sp-cta-location="reconditionnes_stock_row" href="' + reserveLink(r, trade) + '" target="_blank" rel="noopener" aria-label="Demander sur WhatsApp : ' + escapeHtml(desc) + '">WhatsApp</a>'
       + '</span></td>'
       + '</tr>';
   }
@@ -449,7 +525,15 @@
   function formatPrice(p){ return String(p).replace('.', ',') + '&nbsp;€'; }
   function plainPrice(p){ return String(p).replace('.', ',') + ' €'; }
 
-  function describe(r){
+  function describeTrade(trade){
+    if (!trade) return '';
+    if (trade.custom) {
+      return 'Reprise à estimer : ' + trade.label + ' (' + trade.condLabel + ')';
+    }
+    return 'Reprise simulée : ' + trade.label + ' (' + trade.condLabel + ', fourchette indicative ' + trade.min + ' à ' + plainPrice(trade.max) + ')';
+  }
+
+  function describe(r, explicitTrade){
     var parts = [r.model];
     if (r.storage) parts.push(r.storage);
     if (r.color) parts.push(r.color);
@@ -457,104 +541,318 @@
     else if (r.grade) parts.push('grade ' + r.grade);
     if (r.battery) parts.push('batterie ' + r.battery + ' %');
     parts.push(plainPrice(r.price));
-    var trade = currentTrade();
+    var trade = explicitTrade !== undefined ? explicitTrade : currentTrade();
     if (trade) {
-      parts.push('reprise à estimer : ' + trade.label + ' (' + trade.condLabel + ', ~' + plainPrice(trade.amount) + ' indicatif)');
+      if (trade.custom) {
+        parts.push('reprise à estimer : ' + trade.label + ' (' + trade.condLabel + ')');
+      } else {
+        var net = formatNetRange(r.price, trade);
+        parts.push('reprise simulée : ' + trade.label + ' (' + trade.condLabel + ', ' + trade.min + ' à ' + plainPrice(trade.max) + ' indicatif)');
+        if (net) parts.push('net estimé : ' + net.shortLabel);
+      }
     }
     return parts.join(' · ');
   }
 
-  function reserveLink(r){
-    var msg = 'Bonjour Solution Phone, je souhaite réserver ce téléphone vu sur le site : ' + describe(r) + '. Est-il toujours disponible ?';
+  function reserveLink(r, explicitTrade){
+    var msg = 'Bonjour Solution Phone, je souhaite réserver ce téléphone vu sur le site : ' + describe(r, explicitTrade) + '. Est-il toujours disponible ?';
     return whatsappLink(msg);
   }
 
-  /* ---------- Interactions ---------- */
-  document.getElementById('rcTabs').addEventListener('click', function(e){
-    var b = e.target.closest('.rc-tab');
-    if (!b) return;
-    state.cat = b.getAttribute('data-cat');
-    state.family = 'all';
-    render();
-  });
-  document.getElementById('rcChips').addEventListener('click', function(e){
-    var b = e.target.closest('.rc-chip');
-    if (!b) return;
-    state.family = b.getAttribute('data-family');
-    render();
-    var again = document.querySelector('#rcChips .rc-chip[data-family="' + CSS.escape(state.family) + '"]');
-    if (again) again.focus();
-  });
+  function buildTradeWhatsAppMessage(trade){
+    if (!trade) {
+      return 'Bonjour Solution Phone, je souhaite faire estimer la reprise de mon téléphone pour l\'achat d\'un reconditionné.';
+    }
+    if (trade.custom) {
+      return 'Bonjour Solution Phone, je souhaite faire estimer la reprise de mon téléphone (' + trade.label + ' — ' + trade.condLabel + ') pour un paiement cash ou en déduction sur un reconditionné.';
+    }
+    return 'Bonjour Solution Phone, j\'ai simulé la reprise de mon ' + trade.label + ' (' + trade.condLabel + ', estimation indicative ' + trade.min + ' à ' + plainPrice(trade.max) + ') et je souhaite confirmer la reprise au 21 rue Gambetta.';
+  }
 
-  var searchEl = document.getElementById('rcSearch');
-  if (searchEl) {
-    searchEl.addEventListener('input', function(){
-      state.query = searchEl.value || '';
-      state.family = 'all';
-      render();
-    });
-  }
-  var budgetsEl = document.getElementById('rcBudgets');
-  if (budgetsEl) {
-    budgetsEl.addEventListener('click', function(e){
-      var b = e.target.closest('.rc-budget');
-      if (!b) return;
-      state.budget = b.getAttribute('data-budget') || 'all';
-      state.family = 'all';
-      budgetsEl.querySelectorAll('.rc-budget').forEach(function(el){
-        el.setAttribute('aria-pressed', String(el === b));
+  function trackTradeSimulation(trade){
+    if (!trade || typeof window === 'undefined') return;
+    if (window.SolutionPhoneBoost && typeof window.SolutionPhoneBoost.trackEvent === 'function') {
+      window.SolutionPhoneBoost.trackEvent('sp_trade_simulate', {
+        cta_type: 'reprise',
+        cta_location: 'reconditionnes_trade_sim',
+        trade_brand: trade.brand,
+        trade_condition: trade.condKey
       });
-      render();
-    });
+    }
   }
+
+  function prefillLeadSection(options){
+    if (typeof window !== 'undefined' && window.SolutionPhoneBoost && typeof window.SolutionPhoneBoost.prefillLeadForm === 'function') {
+      return window.SolutionPhoneBoost.prefillLeadForm(options);
+    }
+    if (typeof document === 'undefined') return false;
+    var section = document.getElementById('demande-conseil');
+    if (!section) return false;
+    var form = section.querySelector('form[data-sp-lead-form]');
+    if (!form) return false;
+    var besoinEl = form.querySelector('select[name="besoin"]');
+    var budgetEl = form.querySelector('select[name="budget"]');
+    var modeleEl = form.querySelector('input[name="modele"]');
+    var detailsEl = form.querySelector('textarea[name="details"]');
+    var prenomEl = form.querySelector('input[name="prenom"]');
+    var ctxEl = document.getElementById('rcLeadContext');
+    var confirmEl = section.querySelector('[data-sp-lead-confirm]');
+    if (besoinEl && options.besoin) {
+      var curNeed = String(besoinEl.value || '').trim();
+      if (!(options.preserveNeed && (curNeed === 'reservation_24h' || curNeed === 'alerte_arrivage'))) {
+        besoinEl.value = options.besoin;
+      }
+    }
+    if (budgetEl && options.budget) budgetEl.value = options.budget;
+    if (modeleEl && typeof options.modele === 'string') modeleEl.value = String(options.modele).slice(0, 80);
+    if (detailsEl && options.details) {
+      if ((options.replaceTradeDetails || options.appendDetails) && detailsEl.value && detailsEl.value.trim()) {
+        if (detailsEl.value.indexOf(options.details) === -1) {
+          detailsEl.value = (detailsEl.value.trim() + ' · ' + options.details).slice(0, 500);
+        }
+      } else {
+        detailsEl.value = String(options.details).slice(0, 500);
+      }
+    }
+    if (ctxEl && options.contextMessage) {
+      ctxEl.textContent = options.contextMessage;
+      ctxEl.hidden = false;
+    }
+    if (confirmEl) confirmEl.hidden = true;
+    if (typeof section.scrollIntoView === 'function') {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    var target = (!modeleEl || (modeleEl.value && modeleEl.value.trim())) ? prenomEl : modeleEl;
+    if (target && typeof target.focus === 'function') target.focus();
+    return true;
+  }
+
   function updateTradeSummary(){
     var sumEl = document.getElementById('rcTradeSummary');
-    if (!sumEl) return;
+    var rangeEl = document.getElementById('rcTradeRange');
+    var otherWrap = document.getElementById('rcTradeOtherWrap');
+    var waBtn = document.getElementById('rcTradeWaBtn');
     var t = currentTrade();
+
+    if (otherWrap) {
+      otherWrap.hidden = state.tradeKey !== 'autre';
+    }
+    if (waBtn) {
+      waBtn.href = whatsappLink(buildTradeWhatsAppMessage(t));
+    }
+    if (rangeEl) {
+      if (!t) {
+        rangeEl.innerHTML = 'Sélectionnez votre modèle pour afficher la fourchette indicative';
+        rangeEl.classList.remove('is-active');
+      } else if (t.custom) {
+        rangeEl.innerHTML = 'Estimation personnalisée en 5&nbsp;min en boutique ou sur WhatsApp';
+        rangeEl.classList.add('is-active');
+      } else {
+        rangeEl.innerHTML = 'Fourchette indicative : <strong>' + formatPrice(t.min) + ' – ' + formatPrice(t.max) + '</strong>';
+        rangeEl.classList.add('is-active');
+      }
+    }
+    if (!sumEl) return;
     if (!t) {
-      sumEl.innerHTML = 'Estimation indicative déduite à l’affichage, confirmée en 10&nbsp;min au comptoir (pièce d’identité requise). <a href="rachat-reprise-telephone-macon.html">Autre modèle à faire estimer ›</a>';
+      sumEl.innerHTML = 'Estimation indicative, confirmation en 5&nbsp;min au 21&nbsp;rue&nbsp;Gambetta — paiement cash ou déduction immédiate sur un reconditionné (pièce d’identité requise).';
+    } else if (t.custom) {
+      sumEl.innerHTML = 'Reprise de votre <strong>' + escapeHtml(t.label) + '</strong> (' + escapeHtml(t.condLabel) + ') : estimation indicative personnalisée, confirmation en 5&nbsp;min au 21&nbsp;rue&nbsp;Gambetta — paiement cash ou déduction immédiate sur un reconditionné.';
     } else {
-      sumEl.innerHTML = '<strong>−' + formatPrice(t.amount) + ' estimés</strong> pour votre ' + escapeHtml(t.label) + ' (' + escapeHtml(t.condLabel) + ') déduits à titre indicatif ci-dessous · estimation définitive en 10&nbsp;min au 21 rue Gambetta. <a href="rachat-reprise-telephone-macon.html">Autre modèle ›</a>';
+      sumEl.innerHTML = '<strong>−' + formatPrice(t.min) + ' à −' + formatPrice(t.max) + '</strong> déduits à titre indicatif ci-dessous pour votre ' + escapeHtml(t.label) + ' (' + escapeHtml(t.condLabel) + '). Estimation indicative, confirmation en 5&nbsp;min au 21&nbsp;rue&nbsp;Gambetta — paiement cash ou déduction immédiate sur un reconditionné.';
     }
   }
-  var tradeModelEl = document.getElementById('rcTradeModel');
-  if (tradeModelEl) {
-    tradeModelEl.addEventListener('change', function(){
-      state.tradeKey = tradeModelEl.value || '';
-      updateTradeSummary();
-      render();
+
+  function openArrivalAlert(){
+    var trade = currentTrade();
+    var tradeText = describeTrade(trade);
+    var searched = String(state.query || '').trim();
+    var details = 'Merci de me prévenir dès le prochain arrivage en boutique à Mâcon.'
+      + (tradeText ? ' · ' + tradeText : '');
+    prefillLeadSection({
+      besoin: 'alerte_arrivage',
+      modele: searched,
+      details: details,
+      contextMessage: 'Alerte arrivage Mâcon activée' + (searched ? ' pour « ' + searched + ' »' : '') + ' — indiquez vos coordonnées ci-dessous.'
     });
   }
-  var tradeCondEl = document.getElementById('rcTradeCond');
-  if (tradeCondEl) {
-    tradeCondEl.addEventListener('click', function(e){
-      var b = e.target.closest('.rc-cond-btn');
+
+  function bindDom(){
+    var tabsEl = document.getElementById('rcTabs');
+    var chipsEl = document.getElementById('rcChips');
+    var listEl = document.getElementById('rcList');
+    if (!tabsEl || !listEl) return;
+
+    tabsEl.addEventListener('click', function(e){
+      var b = e.target.closest('.rc-tab');
       if (!b) return;
-      state.tradeCond = b.getAttribute('data-cond') || 'bon';
-      tradeCondEl.querySelectorAll('.rc-cond-btn').forEach(function(el){
-        el.setAttribute('aria-pressed', String(el === b));
-      });
-      updateTradeSummary();
+      state.cat = b.getAttribute('data-cat');
+      state.family = 'all';
       render();
     });
-  }
-  document.getElementById('rcList').addEventListener('click', function(e){
-    var btn = e.target.closest('[data-reserve-item]');
-    if (!btn) return;
-    var desc = btn.getAttribute('data-reserve-item') || '';
-    if (typeof window.SolutionPhoneOpenQuoteModal === 'function') {
-      window.SolutionPhoneOpenQuoteModal(
-        'Pré-réservation vitrine 24h (sans engagement) : ' + desc + ' — Je souhaite passer le voir au 21 rue Gambetta.',
-        'Réserver ce smartphone 24h en boutique'
-      );
-    } else {
-      window.open(whatsappLink('Bonjour Solution Phone, je souhaite réserver ce téléphone vu sur le site : ' + desc), '_blank');
+    if (chipsEl) {
+      chipsEl.addEventListener('click', function(e){
+        var b = e.target.closest('.rc-chip');
+        if (!b) return;
+        state.family = b.getAttribute('data-family');
+        render();
+        var again = document.querySelector('#rcChips .rc-chip[data-family="' + CSS.escape(state.family) + '"]');
+        if (again) again.focus();
+      });
     }
-  });
 
-  // Exposé pour vérification manuelle dans la console (lecture seule).
-  window.SolutionPhoneRecond = { normalizeModel: normalizeModel, normalizeColor: normalizeColor, whatsappLink: whatsappLink };
+    var searchEl = document.getElementById('rcSearch');
+    if (searchEl) {
+      searchEl.addEventListener('input', function(){
+        state.query = searchEl.value || '';
+        state.family = 'all';
+        render();
+      });
+    }
+    var budgetsEl = document.getElementById('rcBudgets');
+    if (budgetsEl) {
+      budgetsEl.addEventListener('click', function(e){
+        var b = e.target.closest('.rc-budget');
+        if (!b) return;
+        state.budget = b.getAttribute('data-budget') || 'all';
+        state.family = 'all';
+        budgetsEl.querySelectorAll('.rc-budget').forEach(function(el){
+          el.setAttribute('aria-pressed', String(el === b));
+        });
+        render();
+      });
+    }
+    var tradeModelEl = document.getElementById('rcTradeModel');
+    if (tradeModelEl) {
+      tradeModelEl.addEventListener('change', function(){
+        state.tradeKey = tradeModelEl.value || '';
+        updateTradeSummary();
+        trackTradeSimulation(currentTrade());
+        if (state.loaded) render();
+      });
+    }
+    var tradeOtherEl = document.getElementById('rcTradeOther');
+    var tradeOtherTimer = null;
+    if (tradeOtherEl) {
+      tradeOtherEl.addEventListener('input', function(){
+        state.tradeOther = tradeOtherEl.value || '';
+        updateTradeSummary();
+        if (tradeOtherTimer) clearTimeout(tradeOtherTimer);
+        tradeOtherTimer = setTimeout(function(){
+          tradeOtherTimer = null;
+          if (state.loaded) render();
+        }, 200);
+      });
+      tradeOtherEl.addEventListener('change', function(){
+        if (tradeOtherTimer) { clearTimeout(tradeOtherTimer); tradeOtherTimer = null; }
+        state.tradeOther = tradeOtherEl.value || '';
+        updateTradeSummary();
+        if (state.loaded) render();
+      });
+    }
+    var tradeCondEl = document.getElementById('rcTradeCond');
+    if (tradeCondEl) {
+      tradeCondEl.addEventListener('click', function(e){
+        var b = e.target.closest('.rc-cond-btn');
+        if (!b) return;
+        var nextCond = b.getAttribute('data-cond') || 'tres_bon';
+        state.tradeCond = TRADE_CONDITIONS[nextCond] ? nextCond : 'tres_bon';
+        tradeCondEl.querySelectorAll('.rc-cond-btn').forEach(function(el){
+          el.setAttribute('aria-pressed', String(el === b));
+        });
+        updateTradeSummary();
+        trackTradeSimulation(currentTrade());
+        if (state.loaded) render();
+      });
+    }
+    var tradeApplyBtn = document.getElementById('rcTradeApplyBtn');
+    if (tradeApplyBtn) {
+      tradeApplyBtn.addEventListener('click', function(){
+        var t = currentTrade();
+        var details = t
+          ? describeTrade(t) + ' — souhait : déduction sur un smartphone reconditionné ou rachat cash au 21 rue Gambetta.'
+          : 'Je souhaite faire estimer la reprise de mon ancien téléphone en déduction sur un reconditionné.';
+        var ctx = t
+          ? (t.custom
+              ? 'Reprise à estimer ajoutée à votre demande : ' + t.label + ' (' + t.condLabel + ').'
+              : 'Reprise simulée appliquée : ' + t.label + ' (' + t.min + ' à ' + plainPrice(t.max) + ' indicatif).')
+          : 'Demande de reprise pré-remplie — précisez le modèle souhaité ci-dessous.';
+        prefillLeadSection({
+          besoin: 'reconditionne',
+          preserveNeed: true,
+          details: details,
+          replaceTradeDetails: true,
+          contextMessage: ctx
+        });
+      });
+    }
+    var arrivalBtn = document.getElementById('rcArrivalAlertBtn');
+    if (arrivalBtn) {
+      arrivalBtn.addEventListener('click', openArrivalAlert);
+    }
 
-  loadStock();
-  setInterval(loadStock, 60000); // actualisation toutes les 60 s (comme avant)
+    listEl.addEventListener('click', function(e){
+      var alertBtn = e.target.closest('.rc-empty-alert-btn');
+      if (alertBtn) {
+        openArrivalAlert();
+        return;
+      }
+      var btn = e.target.closest('[data-reserve-item]');
+      if (!btn) return;
+      var desc = btn.getAttribute('data-reserve-item') || '';
+      var modelLabel = btn.getAttribute('data-reserve-model') || '';
+      var price = Number(btn.getAttribute('data-reserve-price') || 0);
+      var trade = currentTrade();
+      var net = formatNetRange(price, trade);
+      var ctx = 'Réservation 24h (sans engagement) pré-remplie : '
+        + (modelLabel || desc)
+        + (price > 0 ? ' · ' + plainPrice(price) : '')
+        + (net ? ' (net estimé après reprise : ' + net.shortLabel + ')' : '')
+        + '.';
+      var handled = prefillLeadSection({
+        besoin: 'reservation_24h',
+        budget: budgetFromPrice(price),
+        modele: modelLabel,
+        details: 'Réservation 24h (sans engagement) : ' + desc + ' — Je souhaite passer le voir au 21 rue Gambetta.',
+        contextMessage: ctx
+      });
+      if (!handled) {
+        if (typeof window !== 'undefined' && typeof window.SolutionPhoneOpenQuoteModal === 'function') {
+          window.SolutionPhoneOpenQuoteModal(
+            'Pré-réservation vitrine 24h (sans engagement) : ' + desc + ' — Je souhaite passer le voir au 21 rue Gambetta.',
+            'Réserver ce smartphone 24h en boutique'
+          );
+        } else if (typeof window !== 'undefined') {
+          window.open(whatsappLink('Bonjour Solution Phone, je souhaite réserver ce téléphone vu sur le site : ' + desc), '_blank');
+        }
+      }
+    });
+
+    updateTradeSummary();
+    loadStock();
+    setInterval(loadStock, 60000); // actualisation toutes les 60 s (comme avant)
+  }
+
+  var publicApi = {
+    normalizeModel: normalizeModel,
+    normalizeColor: normalizeColor,
+    whatsappLink: whatsappLink,
+    TRADE_MODELS: TRADE_MODELS,
+    TRADE_CONDITIONS: TRADE_CONDITIONS,
+    estimateTradeIn: estimateTradeIn,
+    formatNetRange: formatNetRange,
+    budgetFromPrice: budgetFromPrice,
+    describeTrade: describeTrade,
+    describe: describe,
+    buildTradeWhatsAppMessage: buildTradeWhatsAppMessage
+  };
+
+  if (typeof window !== 'undefined') {
+    window.SolutionPhoneRecond = publicApi;
+  }
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = publicApi;
+  }
+  if (typeof document !== 'undefined') {
+    bindDom();
+  }
 })();

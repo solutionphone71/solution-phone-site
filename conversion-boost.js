@@ -93,21 +93,48 @@
     return SUGGESTIONS.budget;
   }
 
+  function normalizeNeed(raw) {
+    var v = String(raw || '').trim();
+    if (v === 'reconditionne' || v === 'reservation_24h' || v === 'alerte_arrivage') {
+      return v;
+    }
+    return 'devis';
+  }
+
+  var NEED_TAGS = {
+    reconditionne: '[Conseil reconditionné]',
+    reservation_24h: '[Réservation 24h]',
+    alerte_arrivage: '[Alerte arrivage]',
+    devis: '[Devis réparation]'
+  };
+
+  var NEED_SUBMIT_LABELS = {
+    reconditionne: 'Demander un devis / conseil',
+    reservation_24h: 'Confirmer ma réservation 24h',
+    alerte_arrivage: 'Activer mon alerte arrivage',
+    devis: 'Demander un devis réparation'
+  };
+
   function buildWhatsAppUrl(payload) {
+    var need = normalizeNeed(payload && payload.besoin);
     var parts = ['Bonjour Solution Phone,'];
-    if (payload.besoin === 'reconditionne') {
+    if (need === 'reservation_24h') {
+      parts.push('je souhaite réserver ce smartphone 24h en boutique');
+    } else if (need === 'alerte_arrivage') {
+      parts.push('je souhaite être prévenu du prochain arrivage');
+    } else if (need === 'reconditionne') {
       parts.push('je souhaite des conseils pour acheter un smartphone reconditionné');
     } else {
       parts.push('je souhaite un devis de réparation');
     }
-    if (payload.modele) {
+    if (payload && payload.modele) {
       parts.push('(' + payload.modele + ')');
     }
-    var budgetLabel = formatBudget(payload.budget);
+    var budgetLabel = formatBudget(payload && payload.budget);
     if (budgetLabel) {
       parts.push('— budget : ' + budgetLabel);
     }
-    if (payload.details) {
+    if (payload && payload.details) {
       parts.push('— précisions : ' + payload.details);
     }
     return 'https://wa.me/33783921884?text=' + encodeURIComponent(parts.join(' '));
@@ -137,10 +164,8 @@
     if (isLocalEndpoint) {
       return payload;
     }
-    var besoin = payload && payload.besoin === 'reconditionne' ? 'reconditionne' : 'devis';
-    var pieces = [
-      besoin === 'reconditionne' ? '[Conseil reconditionné]' : '[Devis réparation]'
-    ];
+    var besoin = normalizeNeed(payload && payload.besoin);
+    var pieces = [NEED_TAGS[besoin] || '[Devis réparation]'];
     var modele = cleanText(payload && payload.modele, 80);
     if (modele) pieces.push('Modèle : ' + modele);
     var budgetLabel = formatBudget(payload && payload.budget);
@@ -168,7 +193,9 @@
     'cta_location',
     'page_path',
     'sp_need',
-    'form_status'
+    'form_status',
+    'trade_brand',
+    'trade_condition'
   ];
 
   function sanitizePath(rawPath) {
@@ -365,6 +392,112 @@
     });
   }
 
+  function syncDynamicCta(form, submitBtn, defaultBtnLabel) {
+    if (!form || !submitBtn) return;
+    if (!form.getAttribute || form.getAttribute('data-sp-dynamic-cta') !== '1') return;
+    var besoinEl = form.querySelector ? form.querySelector('select[name="besoin"]') : null;
+    if (!besoinEl || besoinEl === submitBtn) return;
+    var need = normalizeNeed(besoinEl.value);
+    submitBtn.textContent = NEED_SUBMIT_LABELS[need] || defaultBtnLabel;
+  }
+
+  function stripTradeClauses(text) {
+    var parts = String(text || '').split(/\s+·\s+/);
+    var kept = [];
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i].trim();
+      if (!p) continue;
+      if (/^(?:reprise\s+(?:simulée|à estimer)\s*:|je souhaite faire estimer la reprise\b|net estimé\s*:)/i.test(p)) {
+        var suffixMatch = p.match(/\s+—\s+(Je souhaite passer.*)$/);
+        if (suffixMatch && suffixMatch[1]) {
+          kept.push(suffixMatch[1].trim());
+        }
+        continue;
+      }
+      kept.push(p);
+    }
+    return cleanText(kept.join(' · '), 500);
+  }
+
+  function prefillLeadForm(options, targetDoc) {
+    var doc = targetDoc || (typeof document !== 'undefined' ? document : null);
+    if (!doc) return false;
+    var opts = options && typeof options === 'object' ? options : {};
+    var section =
+      (opts.sectionId && doc.getElementById && doc.getElementById(opts.sectionId)) ||
+      (doc.getElementById && doc.getElementById('demande-conseil')) ||
+      (doc.querySelector && doc.querySelector('[data-sp-lead-widget]'));
+    var form =
+      (section && section.querySelector && section.querySelector('form[data-sp-lead-form]')) ||
+      (doc.querySelector && doc.querySelector('form[data-sp-lead-form]'));
+    if (!form) return false;
+
+    var besoinEl = form.querySelector && form.querySelector('select[name="besoin"]');
+    var budgetEl = form.querySelector && form.querySelector('select[name="budget"]');
+    var modeleEl = form.querySelector && form.querySelector('input[name="modele"]');
+    var detailsEl = form.querySelector && form.querySelector('textarea[name="details"]');
+    var prenomEl = form.querySelector && form.querySelector('input[name="prenom"]');
+    var submitBtn = form.querySelector && form.querySelector('button[type="submit"]');
+
+    if (besoinEl && opts.besoin) {
+      var currentNeed = String(besoinEl.value || '').trim();
+      var keepCurrent =
+        opts.preserveNeed &&
+        (currentNeed === 'reservation_24h' || currentNeed === 'alerte_arrivage');
+      if (!keepCurrent) {
+        besoinEl.value = normalizeNeed(opts.besoin);
+      }
+      syncDynamicCta(form, submitBtn, submitBtn ? submitBtn.textContent : 'Envoyer');
+    }
+    if (budgetEl && opts.budget) {
+      budgetEl.value = String(opts.budget);
+    }
+    if (modeleEl && typeof opts.modele === 'string') {
+      modeleEl.value = cleanText(opts.modele, 80);
+    }
+    if (detailsEl && typeof opts.details === 'string') {
+      var incoming = cleanText(opts.details, 500);
+      if (opts.replaceTradeDetails && detailsEl.value && detailsEl.value.trim()) {
+        var baseDetails = stripTradeClauses(detailsEl.value);
+        detailsEl.value = baseDetails
+          ? (incoming ? cleanText(baseDetails + ' · ' + incoming, 500) : baseDetails)
+          : incoming;
+      } else if (opts.appendDetails && detailsEl.value && detailsEl.value.trim()) {
+        var existing = cleanText(detailsEl.value, 500);
+        if (incoming && existing.indexOf(incoming) === -1) {
+          detailsEl.value = cleanText(existing + ' · ' + incoming, 500);
+        }
+      } else if (incoming) {
+        detailsEl.value = incoming;
+      }
+    }
+
+    var ctxEl = (section && section.querySelector && section.querySelector('[data-sp-lead-context]')) ||
+      (doc.getElementById && doc.getElementById('rcLeadContext'));
+    if (ctxEl && opts.contextMessage) {
+      ctxEl.textContent = cleanText(opts.contextMessage, 240);
+      ctxEl.hidden = false;
+    }
+
+    var confirmEl = section && section.querySelector && section.querySelector('[data-sp-lead-confirm]');
+    if (confirmEl) confirmEl.hidden = true;
+
+    if (opts.scroll !== false && section && typeof section.scrollIntoView === 'function') {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    if (opts.focus !== false) {
+      var focusTarget = (!modeleEl || (modeleEl.value && modeleEl.value.trim())) ? prenomEl : modeleEl;
+      if (focusTarget && typeof focusTarget.focus === 'function') {
+        try {
+          focusTarget.focus({ preventScroll: true });
+        } catch (e) {
+          focusTarget.focus();
+        }
+      }
+    }
+    return true;
+  }
+
   function initForm(form) {
     if (!form || form.dataset.spBoostBound === '1') return;
     form.dataset.spBoostBound = '1';
@@ -378,6 +511,13 @@
     var waEl = container ? container.querySelector('[data-sp-lead-wa]') : null;
     var submitBtn = form.querySelector('button[type="submit"]');
     var defaultBtnLabel = submitBtn ? submitBtn.textContent : 'Envoyer';
+
+    var besoinEl = form.querySelector ? form.querySelector('select[name="besoin"]') : null;
+    if (besoinEl && besoinEl !== submitBtn && typeof besoinEl.addEventListener === 'function') {
+      besoinEl.addEventListener('change', function () {
+        syncDynamicCta(form, submitBtn, defaultBtnLabel);
+      });
+    }
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -515,11 +655,13 @@
             try {
               form.reset();
             } catch (e) {}
+            var ctxBanner = container && container.querySelector && container.querySelector('[data-sp-lead-context]');
+            if (ctxBanner) ctxBanner.hidden = true;
             var formLoc =
               (form.getAttribute && cleanText(form.getAttribute('data-sp-cta-location') || '', 60)) ||
               'lead_form';
             trackEvent('sp_lead_submitted', {
-              sp_need: besoin === 'reconditionne' ? 'reconditionne' : 'devis',
+              sp_need: normalizeNeed(besoin),
               cta_type: 'formulaire',
               cta_location: formLoc,
               form_status: 'ok'
@@ -531,7 +673,7 @@
               (form.getAttribute && cleanText(form.getAttribute('data-sp-cta-location') || '', 60)) ||
               'lead_form';
             trackEvent('sp_lead_fallback', {
-              sp_need: besoin === 'reconditionne' ? 'reconditionne' : 'devis',
+              sp_need: normalizeNeed(besoin),
               cta_type: 'formulaire',
               cta_location: formLoc,
               form_status: 'fallback'
@@ -542,6 +684,7 @@
             if (submitBtn) {
               submitBtn.disabled = false;
               submitBtn.textContent = defaultBtnLabel;
+              syncDynamicCta(form, submitBtn, defaultBtnLabel);
             }
           });
       } else {
@@ -549,6 +692,7 @@
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = defaultBtnLabel;
+          syncDynamicCta(form, submitBtn, defaultBtnLabel);
         }
       }
     });
@@ -568,6 +712,7 @@
     LOCAL_ENDPOINT: LOCAL_ENDPOINT,
     cleanText: cleanText,
     formatBudget: formatBudget,
+    normalizeNeed: normalizeNeed,
     pickSuggestions: pickSuggestions,
     buildWhatsAppUrl: buildWhatsAppUrl,
     resolveEndpoint: resolveEndpoint,
@@ -577,6 +722,7 @@
     trackEvent: trackEvent,
     classifyCta: classifyCta,
     initCtaTracking: initCtaTracking,
+    prefillLeadForm: prefillLeadForm,
     initForm: initForm
   };
 

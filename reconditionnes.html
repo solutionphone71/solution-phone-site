@@ -164,33 +164,66 @@ gtag("config", "G-3QP90K1TLM");
         <button type="button" class="rc-budget" data-budget="250-450" aria-pressed="false">250 à 450 €</button>
         <button type="button" class="rc-budget" data-budget="o450" aria-pressed="false">450 € et +</button>
       </div>
-      <div class="rc-trade" id="rcTradeBox" aria-label="Simulateur de reprise en déduction">
-        <div class="rc-trade-top">
-          <label class="rc-trade-label" for="rcTradeModel">🔄 Simuler le prix en déduisant mon ancien téléphone :</label>
-          <div class="rc-trade-controls">
-            <select id="rcTradeModel" class="rc-trade-select">
+      <div class="rc-trade sp-trade-sim" id="rcTradeBox" aria-labelledby="rc-trade-title">
+        <div class="sp-trade-head">
+          <span class="sp-boost-kicker">Reprise immédiate · Déduction directe</span>
+          <h3 id="rc-trade-title">Simulez la reprise de votre ancien téléphone</h3>
+          <p class="sp-trade-sub">Sélectionnez votre modèle et son état : les prix nets estimés s’affichent directement dans le stock ci-dessous.</p>
+        </div>
+        <div class="sp-trade-controls">
+          <div class="sp-trade-field">
+            <label for="rcTradeModel">Modèle à faire reprendre</label>
+            <select id="rcTradeModel" class="rc-trade-select sp-trade-select">
               <option value="">Aucune reprise sélectionnée</option>
-              <option value="ip11">iPhone 11 (~85 €)</option>
-              <option value="ip12">iPhone 12 (~125 €)</option>
-              <option value="ip12p">iPhone 12 Pro (~165 €)</option>
-              <option value="ip13">iPhone 13 (~180 €)</option>
-              <option value="ip13p">iPhone 13 Pro (~235 €)</option>
-              <option value="ip14">iPhone 14 (~230 €)</option>
-              <option value="ip14p">iPhone 14 Pro (~320 €)</option>
-              <option value="ip15">iPhone 15 (~330 €)</option>
-              <option value="ip15p">iPhone 15 Pro (~430 €)</option>
-              <option value="s22">Samsung Galaxy S22 (~130 €)</option>
-              <option value="s23">Samsung Galaxy S23 (~200 €)</option>
-              <option value="s24">Samsung Galaxy S24 (~290 €)</option>
-              <option value="a54">Samsung Galaxy A54 / A55 (~90 €)</option>
+              <optgroup label="Apple iPhone">
+                <option value="ip11">iPhone 11</option>
+                <option value="ip11p">iPhone 11 Pro / Pro Max</option>
+                <option value="ip12">iPhone 12</option>
+                <option value="ip12p">iPhone 12 Pro / Pro Max</option>
+                <option value="ip13">iPhone 13</option>
+                <option value="ip13p">iPhone 13 Pro / Pro Max</option>
+                <option value="ip14">iPhone 14</option>
+                <option value="ip14p">iPhone 14 Pro / Pro Max</option>
+                <option value="ip15">iPhone 15</option>
+                <option value="ip15p">iPhone 15 Pro / Pro Max</option>
+                <option value="ip16">iPhone 16</option>
+                <option value="ip16p">iPhone 16 Pro / Pro Max</option>
+              </optgroup>
+              <optgroup label="Samsung Galaxy">
+                <option value="s21">Samsung Galaxy S21 / S21+</option>
+                <option value="s21u">Samsung Galaxy S21 Ultra</option>
+                <option value="s22">Samsung Galaxy S22 / S22+</option>
+                <option value="s22u">Samsung Galaxy S22 Ultra</option>
+                <option value="s23">Samsung Galaxy S23 / S23+</option>
+                <option value="s23u">Samsung Galaxy S23 Ultra</option>
+                <option value="s24">Samsung Galaxy S24 / S24+</option>
+                <option value="s24u">Samsung Galaxy S24 Ultra</option>
+                <option value="a54">Samsung Galaxy A54 / A55</option>
+              </optgroup>
+              <option value="autre">Autre modèle (Xiaomi, Google Pixel, Honor…)</option>
             </select>
-            <div class="rc-trade-cond" id="rcTradeCond" role="group" aria-label="État du téléphone repris">
-              <button type="button" class="rc-cond-btn" data-cond="bon" aria-pressed="true">Bon état</button>
-              <button type="button" class="rc-cond-btn" data-cond="fissure" aria-pressed="false">Écran fissuré</button>
+          </div>
+          <div class="sp-trade-field" id="rcTradeOtherWrap" hidden>
+            <label for="rcTradeOther">Précisez votre modèle</label>
+            <input type="text" id="rcTradeOther" class="sp-trade-input" maxlength="60" placeholder="Ex. Xiaomi Redmi Note 13, Google Pixel 8…">
+          </div>
+          <div class="sp-trade-field">
+            <span class="sp-trade-field-label">État général</span>
+            <div class="rc-trade-cond sp-trade-cond" id="rcTradeCond" role="group" aria-label="État du téléphone repris">
+              <button type="button" class="rc-cond-btn sp-cond-btn" data-cond="tres_bon" aria-pressed="true">Très bon état</button>
+              <button type="button" class="rc-cond-btn sp-cond-btn" data-cond="correct" aria-pressed="false">État correct</button>
+              <button type="button" class="rc-cond-btn sp-cond-btn" data-cond="fissure" aria-pressed="false">Écran fissuré ou batterie faible</button>
             </div>
           </div>
         </div>
-        <p class="rc-trade-note" id="rcTradeSummary">Estimation indicative déduite à l’affichage, confirmée en 10 min au comptoir (pièce d’identité requise). <a href="rachat-reprise-telephone-macon.html" data-sp-track="reprise" data-sp-cta-location="reconditionnes_trade">Autre modèle à faire estimer ›</a></p>
+        <div class="sp-trade-result" id="rcTradeResult" aria-live="polite">
+          <div class="sp-trade-range" id="rcTradeRange">Sélectionnez votre modèle pour afficher la fourchette indicative</div>
+          <p class="rc-trade-note sp-trade-note" id="rcTradeSummary">Estimation indicative, confirmation en 5 min au 21 rue Gambetta — paiement cash ou déduction immédiate sur un reconditionné (pièce d’identité requise).</p>
+          <div class="sp-trade-actions">
+            <button type="button" id="rcTradeApplyBtn" class="sp-btn-red" data-sp-track="reprise" data-sp-cta-location="reconditionnes_trade_sim">Déduire sur ma demande / réserver</button>
+            <a id="rcTradeWaBtn" class="sp-btn-outline-white" data-sp-track="whatsapp" data-sp-cta-location="reconditionnes_trade_sim" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20faire%20estimer%20la%20reprise%20de%20mon%20t%C3%A9l%C3%A9phone%20pour%20l%27achat%20d%27un%20reconditionn%C3%A9." target="_blank" rel="noopener">Estimer sur WhatsApp</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="rc-tabs" id="rcTabs" role="group" aria-label="Catégories">
@@ -201,21 +234,34 @@ gtag("config", "G-3QP90K1TLM");
     </div>
     <div class="rc-chips" id="rcChips" role="group" aria-label="Séries"></div>
     <div class="rc-list" id="rcList"><p class="rc-status">Chargement du stock…</p></div>
-    <p class="rc-note">Réservation sur WhatsApp : l’équipe confirme la disponibilité et met le téléphone de côté 48 h, sans engagement. Venez le voir et le tester au 21 rue Gambetta.</p>
+    <div class="sp-arrival-bar" id="rcArrivalBar" aria-labelledby="rc-arrival-title">
+      <div class="sp-arrival-copy">
+        <span class="sp-boost-kicker">Alerte arrivage Mâcon</span>
+        <h3 id="rc-arrival-title">Modèle pas encore en stock ?</h3>
+        <p>Indiquez le smartphone recherché : nous vous prévenons dès le prochain arrivage au 21 rue Gambetta, sans engagement.</p>
+      </div>
+      <div class="sp-arrival-actions">
+        <button type="button" id="rcArrivalAlertBtn" class="sp-btn-red" data-sp-track="alerte_arrivage" data-sp-cta-location="reconditionnes_stock_arrival">Être prévenu du prochain arrivage</button>
+      </div>
+    </div>
+    <p class="rc-note">Réservation 24 h en boutique ou sur WhatsApp : l’équipe confirme la disponibilité et met le téléphone de côté sans engagement. Venez le voir et le tester au 21 rue Gambetta.</p>
   </section>
 
   <!-- CAPTATION DEVIS & CONSEIL RECONDITIONNÉ -->
   <section class="sp-lead-capture" id="demande-conseil" data-sp-lead-widget aria-labelledby="rc-lead-title">
     <div class="sp-lead-capture-head">
       <span class="sp-boost-kicker">Réponse rapide · Sans engagement</span>
-      <h2 id="rc-lead-title">Vous hésitez sur un modèle ou souhaitez un devis ?</h2>
-      <p>Indiquez le smartphone recherché (ou à réparer) : l’équipe au 21 rue Gambetta vérifie le stock réel et vous conseille.</p>
+      <h2 id="rc-lead-title">Réserver 24 h, activer une alerte arrivage ou demander conseil</h2>
+      <p>Indiquez le smartphone recherché (ou à réparer) : l’équipe au 21 rue Gambetta vérifie le stock réel, bloque l’appareil 24 h ou vous prévient dès l’arrivage.</p>
     </div>
-    <form class="sp-lead-form" data-sp-lead-form novalidate>
+    <div id="rcLeadContext" class="sp-lead-context" data-sp-lead-context role="status" aria-live="polite" hidden></div>
+    <form class="sp-lead-form" data-sp-lead-form data-sp-dynamic-cta="1" data-sp-cta-location="reconditionnes_lead_form" novalidate>
       <div class="sp-lead-field">
         <label for="rc-lead-besoin">Votre besoin</label>
         <select id="rc-lead-besoin" name="besoin">
           <option value="reconditionne">Acheter un smartphone reconditionné</option>
+          <option value="reservation_24h">Réserver 24 h un téléphone en stock</option>
+          <option value="alerte_arrivage">Être prévenu du prochain arrivage (alerte stock)</option>
           <option value="devis">Demander un devis de réparation</option>
         </select>
       </div>
@@ -235,13 +281,17 @@ gtag("config", "G-3QP90K1TLM");
         <label for="rc-lead-prenom">Votre prénom</label>
         <input type="text" id="rc-lead-prenom" name="prenom" required maxlength="60" autocomplete="given-name" placeholder="Votre prénom">
       </div>
-      <div class="sp-lead-field sp-lead-field--full">
+      <div class="sp-lead-field">
         <label for="rc-lead-email">Votre e-mail</label>
         <input type="email" id="rc-lead-email" name="email" required maxlength="160" autocomplete="email" placeholder="vous@exemple.fr">
       </div>
+      <div class="sp-lead-field">
+        <label for="rc-lead-tel">Votre téléphone (optionnel)</label>
+        <input type="tel" id="rc-lead-tel" name="telephone" maxlength="40" autocomplete="tel" placeholder="Ex. 06 12 34 56 78">
+      </div>
       <div class="sp-lead-field sp-lead-field--full">
         <label for="rc-lead-details">Précisions (capacité, reprise d’un ancien téléphone, panne…)</label>
-        <textarea id="rc-lead-details" name="details" rows="2" maxlength="500" placeholder="Ex. 128 Go, reprise possible de mon ancien iPhone 11"></textarea>
+        <textarea id="rc-lead-details" name="details" rows="3" maxlength="500" placeholder="Ex. 128 Go, reprise possible de mon ancien iPhone 11"></textarea>
       </div>
       <label class="sp-lead-consent">
         <input type="checkbox" name="consent" required>

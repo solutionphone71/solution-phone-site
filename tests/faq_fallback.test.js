@@ -2,6 +2,7 @@
 const request = require('supertest');
 const app = require('../faq_fallback_server');
 const boost = require('../conversion-boost');
+const recond = require('../reconditionnes-v2');
 const { toUrlPath, loadExclusions } = require('../scripts/generate_sitemap');
 const { mergeFaqQuestions } = require('../scripts/seo_update');
 const { validateQuotePayload } = require('../supabase/functions/quote-request/validation.ts');
@@ -463,6 +464,257 @@ describe('Logique conversion-boost.js', () => {
       cta_location: 'reparation_iphone_strip',
       page_path: '/reparation-iphone.html'
     });
+  });
+
+  test('supports reservation_24h and alerte_arrivage in quote-request payload, WhatsApp URL, and CNIL tracking', () => {
+    const resBody = boost.buildQuoteRequestBody(
+      {
+        besoin: 'reservation_24h',
+        modele: 'iPhone 14 Pro 128 Go',
+        budget: 'o450',
+        details: 'Réservation 24h : iPhone 14 Pro · 128 Go · Noir · 649 € · reprise simulée : iPhone 12 (110 à 140 €)',
+        prenom: 'Claire',
+        email: 'claire@example.fr',
+        telephone: '06 11 22 33 44'
+      },
+      '/reconditionnes.html',
+      false
+    );
+    expect(resBody.form_type).toBe('main_quote');
+    expect(resBody.request).toContain('[Réservation 24h]');
+    expect(resBody.request).toContain('iPhone 14 Pro 128 Go');
+    expect(validateQuotePayload(resBody).error).toBeUndefined();
+
+    const alertBody = boost.buildQuoteRequestBody(
+      {
+        besoin: 'alerte_arrivage',
+        modele: 'iPhone 15 Pro 256 Go',
+        budget: 'o450',
+        details: 'Merci de me prévenir dès le prochain arrivage.',
+        prenom: 'Lucas',
+        email: 'lucas@example.fr'
+      },
+      '/reconditionnes.html',
+      false
+    );
+    expect(alertBody.form_type).toBe('main_quote');
+    expect(alertBody.request).toContain('[Alerte arrivage]');
+    expect(alertBody.request).toContain('iPhone 15 Pro 256 Go');
+    expect(validateQuotePayload(alertBody).error).toBeUndefined();
+
+    const waAlert = decodeURIComponent(boost.buildWhatsAppUrl({
+      besoin: 'alerte_arrivage',
+      modele: 'Galaxy S24 Ultra',
+      budget: 'o450',
+      details: '256 Go'
+    }));
+    expect(waAlert).toContain('prochain arrivage');
+    expect(waAlert).toContain('Galaxy S24 Ultra');
+    expect(waAlert).toContain('450 € et +');
+    expect(waAlert).not.toContain('o450');
+
+    const waRes = decodeURIComponent(boost.buildWhatsAppUrl({
+      besoin: 'reservation_24h',
+      modele: 'iPhone 13 128 Go',
+      budget: '250-450',
+      details: 'Noir'
+    }));
+    expect(waRes).toContain('réserver ce smartphone 24h');
+    expect(waRes).toContain('iPhone 13 128 Go');
+
+    // CNIL opt-in trade-in event keeps allowed brand/condition keys and strips PII
+    const gtagCalls = [];
+    const tracked = boost.trackEvent(
+      'sp_trade_simulate',
+      {
+        cta_type: 'reprise',
+        cta_location: 'reconditionnes_trade_sim',
+        trade_brand: 'iphone',
+        trade_condition: 'correct',
+        email: 'secret@example.fr'
+      },
+      {
+        location: { pathname: '/reconditionnes.html' },
+        gtag: (cmd, name, params) => gtagCalls.push({ cmd, name, params }),
+        SolutionPhoneConsent: { choice: () => 'accepted', accepted: () => true }
+      }
+    );
+    expect(tracked).toBe(true);
+    expect(gtagCalls[0].name).toBe('sp_trade_simulate');
+    expect(gtagCalls[0].params.trade_brand).toBe('iphone');
+    expect(gtagCalls[0].params.trade_condition).toBe('correct');
+    expect(JSON.stringify(gtagCalls[0].params)).not.toContain('secret@');
+  });
+
+  test('prefillLeadForm() fills fields, appends trade-in without duplication, updates CTA, and focuses properly', () => {
+    let scrolled = false;
+    let focused = '';
+    const besoinEl = { value: 'reconditionne' };
+    const budgetEl = { value: '250-450' };
+    const modeleEl = { value: '', focus() { focused = 'modele'; } };
+    const detailsEl = { value: '' };
+    const prenomEl = { value: '', focus() { focused = 'prenom'; } };
+    const submitBtn = { textContent: 'Demander un devis / conseil' };
+    const ctxEl = { textContent: '', hidden: true };
+    const confirmEl = { hidden: false };
+    const form = {
+      getAttribute: (k) => (k === 'data-sp-dynamic-cta' ? '1' : null),
+      querySelector(sel) {
+        if (sel === 'select[name="besoin"]') return besoinEl;
+        if (sel === 'select[name="budget"]') return budgetEl;
+        if (sel === 'input[name="modele"]') return modeleEl;
+        if (sel === 'textarea[name="details"]') return detailsEl;
+        if (sel === 'input[name="prenom"]') return prenomEl;
+        if (sel === 'button[type="submit"]') return submitBtn;
+        return null;
+      }
+    };
+    const section = {
+      scrollIntoView() { scrolled = true; },
+      querySelector(sel) {
+        if (sel === 'form[data-sp-lead-form]') return form;
+        if (sel === '[data-sp-lead-context]') return ctxEl;
+        if (sel === '[data-sp-lead-confirm]') return confirmEl;
+        return null;
+      }
+    };
+    const doc = {
+      getElementById: (id) => (id === 'demande-conseil' ? section : id === 'rcLeadContext' ? ctxEl : null),
+      querySelector: () => null
+    };
+
+    const okRes = boost.prefillLeadForm({
+      besoin: 'reservation_24h',
+      budget: 'o450',
+      modele: 'iPhone 14 Pro 128 Go',
+      details: 'Réservation 24h : iPhone 14 Pro 128 Go · 599 €',
+      contextMessage: 'Réservation 24h pré-remplie'
+    }, doc);
+    expect(okRes).toBe(true);
+    expect(besoinEl.value).toBe('reservation_24h');
+    expect(budgetEl.value).toBe('o450');
+    expect(modeleEl.value).toBe('iPhone 14 Pro 128 Go');
+    expect(submitBtn.textContent).toBe('Confirmer ma réservation 24h');
+    expect(ctxEl.hidden).toBe(false);
+    expect(confirmEl.hidden).toBe(true);
+    expect(scrolled).toBe(true);
+    expect(focused).toBe('prenom');
+
+    // Applying a trade-in with preserveNeed keeps reservation_24h + CTA and replaces any outdated trade-in cleanly
+    boost.prefillLeadForm({
+      besoin: 'reconditionne',
+      preserveNeed: true,
+      details: 'Reprise simulée : iPhone 12 (Très bon état, fourchette indicative 110 à 140 €) — souhait : déduction sur un smartphone reconditionné ou rachat cash au 21 rue Gambetta.',
+      replaceTradeDetails: true
+    }, doc);
+    expect(besoinEl.value).toBe('reservation_24h');
+    expect(submitBtn.textContent).toBe('Confirmer ma réservation 24h');
+    expect(modeleEl.value).toBe('iPhone 14 Pro 128 Go');
+    expect(detailsEl.value).toContain('Réservation 24h');
+    expect(detailsEl.value).toContain('Reprise simulée : iPhone 12');
+
+    // Switching trade-in model replaces the old trade-in clause instead of concatenating two phones
+    boost.prefillLeadForm({
+      besoin: 'reconditionne',
+      preserveNeed: true,
+      details: 'Reprise simulée : iPhone 13 (Très bon état, fourchette indicative 165 à 205 €) — souhait : déduction sur un smartphone reconditionné ou rachat cash au 21 rue Gambetta.',
+      replaceTradeDetails: true
+    }, doc);
+    expect(besoinEl.value).toBe('reservation_24h');
+    expect(detailsEl.value).toContain('Réservation 24h');
+    expect(detailsEl.value).toContain('Reprise simulée : iPhone 13');
+    expect(detailsEl.value).not.toContain('iPhone 12');
+
+    // Reservation that already embedded lowercase "reprise simulée" + "net estimé" gets cleanly replaced without duplication
+    detailsEl.value = 'Réservation 24h (sans engagement) : iPhone 14 · 128 Go · 499 € · reprise simulée : iPhone 12 (Très bon état, 110 à 140 € indicatif) · net estimé : ~359 à 389 € — Je souhaite passer le voir au 21 rue Gambetta.';
+    boost.prefillLeadForm({
+      besoin: 'reconditionne',
+      preserveNeed: true,
+      details: 'Reprise simulée : iPhone 13 (État correct, fourchette indicative 125 à 160 €) — souhait : déduction sur un smartphone reconditionné ou rachat cash au 21 rue Gambetta.',
+      replaceTradeDetails: true
+    }, doc);
+    expect(detailsEl.value).toContain('iPhone 14');
+    expect(detailsEl.value).toContain('Je souhaite passer le voir au 21 rue Gambetta.');
+    expect(detailsEl.value).toContain('Reprise simulée : iPhone 13');
+    expect(detailsEl.value).not.toContain('iPhone 12');
+    expect(detailsEl.value).not.toContain('net estimé');
+
+    // Arrival alert with empty model explicitly clears stale model from prior reservation, focuses modele, and updates CTA
+    boost.prefillLeadForm({
+      besoin: 'alerte_arrivage',
+      modele: '',
+      details: 'Alerte arrivage Mâcon',
+      contextMessage: 'Alerte activée'
+    }, doc);
+    expect(besoinEl.value).toBe('alerte_arrivage');
+    expect(modeleEl.value).toBe('');
+    expect(submitBtn.textContent).toBe('Activer mon alerte arrivage');
+    expect(focused).toBe('modele');
+  });
+});
+
+describe('Simulateur de reprise & stock reconditionnés (reconditionnes-v2.js)', () => {
+  test('estimates realistic indicative ranges across iPhone 11-16 Pro Max, Samsung S21-S24 Ultra, and custom models', () => {
+    for (const key of ['ip11', 'ip12', 'ip13', 'ip14', 'ip15', 'ip16', 'ip16p', 's21', 's21u', 's22', 's22u', 's23', 's23u', 's24', 's24u', 'a54']) {
+      const tb = recond.estimateTradeIn(key, 'tres_bon');
+      const co = recond.estimateTradeIn(key, 'correct');
+      const fi = recond.estimateTradeIn(key, 'fissure');
+      expect(tb).not.toBeNull();
+      expect(tb.custom).toBe(false);
+      expect(tb.min).toBeGreaterThanOrEqual(15);
+      expect(tb.max).toBeGreaterThan(tb.min);
+      expect(tb.min % 5).toBe(0);
+      expect(tb.max % 5).toBe(0);
+      expect(tb.amount).toBeGreaterThan(co.amount);
+      expect(co.amount).toBeGreaterThan(fi.amount);
+    }
+
+    const custom = recond.estimateTradeIn('autre', 'correct', '  Google Pixel 8\nPro ');
+    expect(custom.custom).toBe(true);
+    expect(custom.label).toBe('Google Pixel 8 Pro');
+    expect(custom.min).toBeNull();
+    expect(custom.max).toBeNull();
+
+    const customDefault = recond.estimateTradeIn('autre', 'unknown_cond', '');
+    expect(customDefault.label).toBe('Autre modèle');
+    expect(customDefault.condKey).toBe('tres_bon');
+
+    expect(recond.estimateTradeIn('', 'tres_bon')).toBeNull();
+    expect(recond.estimateTradeIn('inexistant', 'tres_bon')).toBeNull();
+  });
+
+  test('computes net ranges, floors at 0 €, and enriches item description + WhatsApp message', () => {
+    const trade = recond.estimateTradeIn('ip13', 'tres_bon');
+    const net = recond.formatNetRange(499, trade);
+    expect(net).not.toBeNull();
+    expect(net.netMin).toBe(499 - trade.max);
+    expect(net.netMax).toBe(499 - trade.min);
+    expect(net.shortLabel).toContain('€');
+
+    // Floor at 0 € when trade-in exceeds device price
+    const floored = recond.formatNetRange(100, recond.estimateTradeIn('ip16p', 'tres_bon'));
+    expect(floored.netMin).toBe(0);
+    expect(floored.netMax).toBe(0);
+    expect(floored.shortLabel).toBe('~0 €');
+
+    // Custom trade-in produces no numeric net range
+    expect(recond.formatNetRange(499, recond.estimateTradeIn('autre', 'tres_bon'))).toBeNull();
+
+    const item = { model: 'iPhone 14 Pro', storage: '128 Go', color: 'Noir', condition: 'reconditionne', grade: 'A', battery: 91, price: 599 };
+    const desc = recond.describe(item, trade);
+    expect(desc).toContain('iPhone 14 Pro');
+    expect(desc).toContain('599 €');
+    expect(desc).toContain('reprise simulée : iPhone 13');
+    expect(desc).toContain('net estimé :');
+
+    const waUrl = recond.whatsappLink(recond.buildTradeWhatsAppMessage(trade));
+    expect(waUrl.startsWith('https://wa.me/33783921884?text=')).toBe(true);
+    expect(decodeURIComponent(waUrl)).toContain('iPhone 13');
+    expect(decodeURIComponent(waUrl)).toContain('21 rue Gambetta');
+
+    expect(recond.budgetFromPrice(199)).toBe('u250');
+    expect(recond.budgetFromPrice(350)).toBe('250-450');
+    expect(recond.budgetFromPrice(599)).toBe('o450');
   });
 });
 

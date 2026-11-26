@@ -244,6 +244,59 @@ class TestSiteSEOAndConversion(unittest.TestCase):
         acc_html = read_text("accessoires.html")
         self.assertIn('width="400" height="400" loading="lazy" decoding="async"', acc_html)
 
+    def test_reconditionnes_trade_in_simulator_reservation_and_arrival_alert(self):
+        html = read_text("reconditionnes.html")
+        css = read_text("conversion-boost.css")
+        recond_js = read_text("reconditionnes-v2.js")
+        boost_js = read_text("conversion-boost.js")
+
+        # 1. Simulateur de reprise instantanée sur reconditionnes.html
+        for token in (
+            'id="rcTradeBox"',
+            "sp-trade-sim",
+            'id="rcTradeModel"',
+            'value="ip11"',
+            'value="ip16p"',
+            'value="s21"',
+            'value="s24u"',
+            'value="autre"',
+            'id="rcTradeOther"',
+            'data-cond="tres_bon"',
+            'data-cond="correct"',
+            'data-cond="fissure"',
+            'id="rcTradeRange"',
+            'id="rcTradeSummary"',
+            'id="rcTradeApplyBtn"',
+            'id="rcTradeWaBtn"',
+            'data-sp-track="reprise"',
+            "21\u202frue\u202fGambetta",
+        ):
+            self.assertIn(token, html, f"Élément simulateur reprise absent : {token}")
+
+        # 2. Alerte arrivage & Réservation 24h dans #demande-conseil
+        for token in (
+            'id="rcArrivalBar"',
+            'id="rcArrivalAlertBtn"',
+            'data-sp-track="alerte_arrivage"',
+            'id="rcLeadContext"',
+            'data-sp-dynamic-cta="1"',
+            'value="reservation_24h"',
+            'value="alerte_arrivage"',
+            'name="telephone"',
+        ):
+            self.assertIn(token, html, f"Élément réservation/alerte absent : {token}")
+
+        # 3. Charte stricte et styles dédiés dans conversion-boost.css
+        for selector in (".sp-trade-sim", ".sp-arrival-bar", ".sp-lead-context", ".rc-table td.rc-price .rc-net"):
+            self.assertIn(selector, css, f"Style manquant dans conversion-boost.css : {selector}")
+
+        # 4. Logique JS & tracking CNIL
+        for token in ("estimateTradeIn", "formatNetRange", "sp_trade_simulate", "reservation_24h", "alerte_arrivage", "preserveNeed", "replaceTradeDetails"):
+            self.assertIn(token, recond_js, f"Symbole manquant dans reconditionnes-v2.js : {token}")
+
+        for token in ("[Réservation 24h]", "[Alerte arrivage]", "trade_brand", "trade_condition", "prefillLeadForm", "stripTradeClauses"):
+            self.assertIn(token, boost_js, f"Symbole manquant dans conversion-boost.js : {token}")
+
 
 class TestFaqFallbackScript(unittest.TestCase):
     def test_missing_argument_exits_with_error_json(self):
