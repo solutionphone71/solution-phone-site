@@ -297,6 +297,143 @@ class TestSiteSEOAndConversion(unittest.TestCase):
         for token in ("[Réservation 24h]", "[Alerte arrivage]", "trade_brand", "trade_condition", "prefillLeadForm", "stripTradeClauses"):
             self.assertIn(token, boost_js, f"Symbole manquant dans conversion-boost.js : {token}")
 
+    def test_local_seo_radius_25km_pages_and_internal_mesh(self):
+        import html as html_mod
+        import urllib.parse
+
+        local_pages = (
+            "reparation-telephone-charnay-les-macon.html",
+            "reparation-telephone-creches-sur-saone.html",
+            "reparation-telephone-replonges-feillens.html",
+            "reparation-telephone-tournus.html",
+            "reparation-telephone-cluny.html",
+            "reparation-telephone-belleville-beaujolais-69.html",
+            "reparation-telephone-bourg-en-bresse-ain-01.html",
+            "reparation-telephone-charnay-cluny-tournus-71.html",
+        )
+        sitemap = read_text("sitemap.xml")
+        macon_html = read_text("reparation-telephone-macon.html")
+        self.assertIn("sp-local-mesh", macon_html)
+
+        seen_titles = set()
+        forbidden_patterns = (
+            r"certifi[ée]+s? (par l|QualiR)",
+            r"comme neuf",
+            r"Apple Expert",
+            r"est urgente|demande urgente",
+            r"46\.3065|4\.8336",
+            r"4,6 ?/ ?5|550 ?avis|550\+",
+        )
+
+        for page in local_pages:
+            self.assertTrue(os.path.exists(os.path.join(ROOT, page)), f"Page locale absente : {page}")
+            self.assertIn(f"https://solution-phone.fr/{page}", sitemap, f"Absente du sitemap : {page}")
+            self.assertIn(page, macon_html, f"Lien vers {page} absent de reparation-telephone-macon.html")
+
+            content = read_text(page)
+
+            # Title <= 60 chars et unique
+            m_title = re.search(r"<title>(.*?)</title>", content, re.S)
+            self.assertIsNotNone(m_title, f"<title> manquant sur {page}")
+            title_text = html_mod.unescape(m_title.group(1).strip())
+            self.assertLessEqual(len(title_text), 60, f"<title> trop long ({len(title_text)}) sur {page}: {title_text}")
+            self.assertNotIn(title_text, seen_titles, f"<title> dupliqué : {title_text}")
+            seen_titles.add(title_text)
+
+            # Meta description 70..160 chars & canonical
+            m_desc = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', content)
+            self.assertIsNotNone(m_desc, f"meta description manquante sur {page}")
+            desc_text = html_mod.unescape(m_desc.group(1).strip())
+            self.assertTrue(70 <= len(desc_text) <= 160, f"meta description hors plage ({len(desc_text)}) sur {page}")
+            self.assertIn(f'href="https://solution-phone.fr/{page}"', content, f"canonical invalide sur {page}")
+
+            # JSON-LD complet sans aggregateRating
+            blocks = extract_jsonld(content)
+            self.assertEqual(len(blocks), 1, f"1 bloc JSON-LD attendu sur {page}")
+            graph = blocks[0].get("@graph", [])
+            self.assertNotIn("aggregateRating", json.dumps(blocks[0]), f"aggregateRating interdit sur {page}")
+            types = set()
+            for node in graph:
+                t = node.get("@type")
+                if isinstance(t, list):
+                    types.update(t)
+                elif t:
+                    types.add(t)
+            for req_type in ("MobilePhoneStore", "LocalBusiness", "Service", "FAQPage", "BreadcrumbList"):
+                self.assertIn(req_type, types, f"{req_type} manquant dans JSON-LD de {page}")
+            self.assertTrue(
+                any("openingHoursSpecification" in node for node in graph),
+                f"openingHoursSpecification manquant dans JSON-LD de {page}",
+            )
+
+            # OpenGraph complet + og:image existant sur disque
+            for og_prop in ("og:type", "og:title", "og:description", "og:url", "og:image"):
+                self.assertIn(f'property="{og_prop}"', content, f"{og_prop} manquant sur {page}")
+            m_og_img = re.search(r'property="og:image"\s+content="https://solution-phone\.fr/([^"]+)"', content)
+            self.assertIsNotNone(m_og_img, f"og:image invalide sur {page}")
+            self.assertTrue(
+                os.path.exists(os.path.join(ROOT, m_og_img.group(1))),
+                f"og:image introuvable sur disque ({m_og_img.group(1)}) pour {page}",
+            )
+
+            # Pas d'auto-lien dans le bloc maillage interne + pas d'attribut HTML collé
+            m_mesh = re.search(r'<nav class="sp-local-mesh".*?</nav>', content, re.S)
+            self.assertIsNotNone(m_mesh, f"bloc .sp-local-mesh manquant sur {page}")
+            self.assertNotIn(page, m_mesh.group(0), f"auto-lien dans .sp-local-mesh sur {page}")
+            self.assertNotIn('id="mc-footer"role=', content, f"attribut HTML mal formé sur {page}")
+            self.assertNotIn("Zone Bouchard", content, f"coquille Zone Bouchard sur {page}")
+
+            # Stack technique, charte & tracking
+            for token in (
+                'href="landing-repair.css?v=3"',
+                'src="scripts/consent-tracking.js?v=3"',
+                "G-3QP90K1TLM",
+                "family=Montserrat",
+                'href="conversion-boost.css?v=1"',
+                '<script src="conversion-boost.js?v=1" defer></script>',
+                'src="/menu-commun.js?v=7"',
+                'src="/contact-dock.quote-bddc47e33423.js"',
+                'src="/jason-widget.js?v=5"',
+                "sp-boost-strip",
+                "sp-local-mesh-section",
+                "sp-local-mesh",
+                "reparation-telephone-macon.html",
+                "cgv.html",
+                "politique-confidentialite.html",
+                "data-sp-consent-manage",
+                "data-sp-cta-location=",
+            ):
+                self.assertIn(token, content, f"{token} absent de {page}")
+
+            for cta_type in ("devis", "reconditionnes", "reprise", "whatsapp", "appel"):
+                self.assertIn(f'data-sp-track="{cta_type}"', content, f"data-sp-track={cta_type} absent de {page}")
+
+            # Aucun lien WhatsApp sans texte prérempli ni formulation interdite
+            self.assertIsNone(re.search(r'wa\.me/33783921884"', content), f"WhatsApp sans ?text= sur {page}")
+            decoded = urllib.parse.unquote(content)
+            for pat in forbidden_patterns:
+                self.assertIsNone(re.search(pat, decoded, re.I), f"Formulation interdite ({pat}) sur {page}")
+
+            # Images avec width, height, decoding="async" + liens locaux existants
+            html_no_js = re.sub(r"<script\b[^>]*>.*?</script>", "", content, flags=re.S | re.I)
+            for img_tag in re.findall(r"<img\b[^>]*>", html_no_js, flags=re.S | re.I):
+                self.assertRegex(img_tag, r'\bwidth=', f"width manquant sur {page}: {img_tag[:120]}")
+                self.assertRegex(img_tag, r'\bheight=', f"height manquant sur {page}: {img_tag[:120]}")
+                self.assertRegex(img_tag, r'\bdecoding="async"', f"decoding=async manquant sur {page}: {img_tag[:120]}")
+
+            for target in re.findall(r'(?:href|src)="([^"]+)"', html_no_js):
+                if target.startswith(("http://", "https://", "mailto:", "tel:", "#", "javascript:", "data:", "//")):
+                    continue
+                rel = urllib.parse.unquote(target.split("#")[0].split("?")[0]).lstrip("/") or "index.html"
+                full = os.path.join(ROOT, rel)
+                if os.path.isdir(full):
+                    full = os.path.join(full, "index.html")
+                self.assertTrue(os.path.exists(full), f"Lien local cassé sur {page} -> {target}")
+
+        # Styles de maillage interne présents dans conversion-boost.css
+        css = read_text("conversion-boost.css")
+        self.assertIn(".sp-local-mesh", css)
+
 
 class TestFaqFallbackScript(unittest.TestCase):
     def test_missing_argument_exits_with_error_json(self):

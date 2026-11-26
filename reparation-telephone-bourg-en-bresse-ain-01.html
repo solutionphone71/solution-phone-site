@@ -18,6 +18,33 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": ["MobilePhoneStore", "LocalBusiness"],
+      "@id": "https://solution-phone.fr/#business",
+      "name": "Solution Phone",
+      "url": "https://solution-phone.fr/",
+      "image": "https://solution-phone.fr/img/boutiques/facade-solution-phone-reparation-1200.webp",
+      "telephone": "+33385330689",
+      "priceRange": "€€",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "21 rue Gambetta",
+        "postalCode": "71000",
+        "addressLocality": "Mâcon",
+        "addressRegion": "Bourgogne-Franche-Comté",
+        "addressCountry": "FR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 46.3025,
+        "longitude": 4.8297
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "09:15", "closes": "12:15" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "14:00", "closes": "19:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "09:15", "closes": "19:00" }
+      ]
+    },
+    {
       "@type": "Service",
       "name": "Réparation téléphone et ordinateur pour les habitants de l’Ain (01) à Mâcon",
       "url": "https://solution-phone.fr/reparation-telephone-bourg-en-bresse-ain-01.html",
@@ -100,6 +127,10 @@
     </script>
     <script defer src="scripts/landing-tracking.js"></script>
     <link rel="stylesheet" href="contact-dock.css?v=3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap">
+    <link rel="stylesheet" href="conversion-boost.css?v=1">
     <link rel="stylesheet" href="qualirepar-top.css?v=2">
     <script src="qualirepar-top.js?v=4" defer></script>
     <script src="/menu-commun.js?v=7" data-site="phone"></script>
@@ -107,8 +138,8 @@
   </head>
   <body>
     <header class="wrap">
-      <a href="/"><img src="img/logo-ui.webp" alt="Solution Phone Mâcon" width="80" height="80" /></a>
-      <a class="phone" href="tel:+33385330689">03 85 33 06 89</a>
+      <a href="/"><img src="img/logo-ui.webp" alt="Solution Phone Mâcon" width="80" height="80" decoding="async" /></a>
+      <a class="phone" href="tel:+33385330689" data-sp-track="appel" data-sp-cta-location="header_ain">03 85 33 06 89</a>
     </header>
     <div class="hero">
       <div class="hero-copy">
@@ -122,11 +153,11 @@
           <li><strong>Réservation pièce gratuite 24h</strong> pour repartir avec votre téléphone réparé en moins d’1h</li>
         </ul>
         <div class="actions">
-          <a class="button primary" href="/#devis">Vérifier mon tarif &amp; bloquer la pièce</a>
-          <a class="button" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20viens%20de%20l%E2%80%99Ain%20%2801%29%20et%20je%20souhaite%20v%C3%A9rifier%20la%20disponibilit%C3%A9%20d%E2%80%99une%20pi%C3%A8ce%20pour%20%3A%20">Réserver par WhatsApp avant de venir</a>
+          <a class="button primary" href="/#devis" data-sp-track="devis" data-sp-cta-location="hero_ain">Demander un devis gratuit</a>
+          <a class="button" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20viens%20de%20l%E2%80%99Ain%20%2801%29%20et%20je%20souhaite%20v%C3%A9rifier%20la%20disponibilit%C3%A9%20d%E2%80%99une%20pi%C3%A8ce%20pour%20%3A%20" data-sp-track="whatsapp" data-sp-cta-location="hero_ain">Réserver par WhatsApp avant de venir</a>
         </div>
       </div>
-      <img src="/img/boutiques/facade-solution-phone-reparation-1200.webp" alt="Façade Solution Phone au 21 rue Gambetta à Mâcon, à 300 m du pont Saint-Laurent" width="1200" height="837" fetchpriority="high" decoding="async" />
+      <img src="/img/boutiques/facade-solution-phone-reparation-1200.webp" alt="Façade Solution Phone au 21 rue Gambetta à Mâcon, à 300 m du pont Saint-Laurent" width="1200" height="774" fetchpriority="high" decoding="async" />
     </div>
     <main>
       <section>
@@ -153,8 +184,8 @@
           <div>
             <h3>Contact direct</h3>
             <p>
-              <a href="tel:+33385330689">03 85 33 06 89</a><br />
-              <a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20venir%20depuis%20l%E2%80%99Ain%20pour%20r%C3%A9parer%20%3A%20">WhatsApp · 07 83 92 18 84</a>
+              <a href="tel:+33385330689" data-sp-track="appel" data-sp-cta-location="local_ain">03 85 33 06 89</a><br />
+              <a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20venir%20depuis%20l%E2%80%99Ain%20pour%20r%C3%A9parer%20%3A%20" data-sp-track="whatsapp" data-sp-cta-location="local_ain">WhatsApp · 07 83 92 18 84</a>
             </p>
           </div>
         </div>
@@ -167,6 +198,33 @@
           <details><summary>Les habitants de l’Ain (code postal 01) bénéficient-ils des -25 € QualiRépar à Mâcon ?</summary><p>Oui, le Bonus Réparation QualiRépar est national : quel que soit votre code postal dans l’Ain (01), les 25 € sont déduits immédiatement sur votre facture éligible.</p></details>
         </div>
       </section>
+      <section class="sp-local-mesh-section">
+        <div class="wrap">
+          <nav class="sp-local-mesh" aria-label="Autour de Mâcon (rayon 25 km)">
+            <div class="sp-local-mesh-kicker">Autour de Mâcon · Rayon 25 km</div>
+            <h2>Autres communes desservies par notre atelier</h2>
+            <p>Pages locales dédiées pour préparer votre venue au 21 rue Gambetta à Mâcon depuis l’Ain (01), le 71 et le 69.</p>
+            <ul class="sp-local-mesh-links">
+              <li><a href="reparation-telephone-macon.html">Mâcon centre</a></li>
+              <li><a href="reparation-telephone-replonges-feillens.html">Replonges &amp; Feillens <span class="sp-mesh-time">5–10 min</span></a></li>
+              <li><a href="reparation-telephone-charnay-les-macon.html">Charnay-lès-Mâcon <span class="sp-mesh-time">6 min</span></a></li>
+              <li><a href="reparation-telephone-creches-sur-saone.html">Crêches-sur-Saône <span class="sp-mesh-time">10 min</span></a></li>
+              <li><a href="reparation-telephone-cluny.html">Cluny <span class="sp-mesh-time">20 min</span></a></li>
+              <li><a href="reparation-telephone-tournus.html">Tournus <span class="sp-mesh-time">22 min</span></a></li>
+              <li><a href="reparation-telephone-belleville-beaujolais-69.html">Belleville-en-Beaujolais <span class="sp-mesh-time">20 min</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </section>
+      <section class="sp-boost-strip" aria-labelledby="ain-boost-title" data-sp-cta-location="ain_strip">
+        <h2 id="ain-boost-title">Réparation express ou smartphone reconditionné juste après le pont Saint-Laurent</h2>
+        <p>Demandez votre devis gratuit (Bonus QualiRépar -25 € valable pour les habitants de l’Ain 01), consultez nos reconditionnés garantis 12 mois ou estimez la reprise de votre ancien téléphone.</p>
+        <div class="sp-boost-actions">
+          <a class="sp-btn-red" href="/#devis" data-sp-track="devis">Demander un devis gratuit</a>
+          <a class="sp-btn-outline-dark" href="reconditionnes.html" data-sp-track="reconditionnes">Voir les reconditionnés en stock</a>
+          <a class="sp-btn-outline-dark" href="reconditionnes.html#rcTradeBox" data-sp-track="reprise">Estimer ma reprise</a>
+        </div>
+      </section>
     </main>
     <footer class="wrap">
       Solution Phone · 21 rue Gambetta, 71000 Mâcon ·
@@ -174,8 +232,9 @@
       <a href="politique-confidentialite.html">Confidentialité</a> ·
       <a href="#" data-sp-consent-manage>Gérer mes cookies</a>
     </footer>
+    <script src="conversion-boost.js?v=1" defer></script>
     <script src="/contact-dock.quote-bddc47e33423.js" defer></script>
-    <div id="mc-footer"role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, 71000 Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://solution-phone.fr/suivi-reparation.html">Suivre ma réparation (REP-...)</a></li><li><a href="https://solution-phone.fr/reparer-ou-remplacer-telephone-macon.html">Réparer ou remplacer ?</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung Galaxy</a></li><li><a href="https://solution-phone.fr/reparation-xiaomi-redmi-macon.html">Réparation Xiaomi &amp; Redmi</a></li><li><a href="https://solution-phone.fr/reparation-google-pixel-macon.html">Réparation Google Pixel</a></li><li><a href="https://solution-phone.fr/reparation-honor-oppo-motorola-macon.html">Honor, Oppo &amp; Motorola</a></li><li><a href="https://solution-phone.fr/reparation-ipad-tablette-macon.html">Réparation iPad &amp; tablette</a></li><li><a href="https://solution-phone.fr/reparation-ordinateur-pc-mac-macon.html">Réparation PC &amp; Mac</a></li><li><a href="https://solution-phone.fr/recuperation-donnees-macon.html">Récupération de données</a></li><li><a href="https://solution-phone.fr/micro-soudure-carte-mere-macon.html">Micro-soudure &amp; carte mère</a></li><li><a href="https://solution-phone.fr/reparation-console-ps5-switch-macon.html">Réparation PS5 &amp; Switch</a></li><li><a href="https://solution-phone.fr/reparation-trottinette-electrique-macon.html">Trottinettes électriques</a></li></ul><p class="mc-f-title">Acheter, revendre &amp; accès rapide autour de Mâcon</p><ul><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/iphone-reconditionne-macon.html">iPhone reconditionnés</a></li><li><a href="https://solution-accessoires.fr/samsung-reconditionne-macon.html">Samsung reconditionnés</a></li><li><a href="https://solution-phone.fr/pc-mac-reconditionnes-macon.html">PC &amp; Mac reconditionnés</a></li><li><a href="https://solution-phone.fr/rachat-reprise-telephone-macon.html">Rachat cash &amp; reprise</a></li><li><a href="https://solution-accessoires.fr/coques-chargeurs-accessoires-macon.html">Coques, MagSafe &amp; chargeurs</a></li><li><a href="https://solution-phone.fr/hydrogel.html">Film Hydrogel (10 € à 30 €)</a></li><li><a href="https://solution-phone.fr/pro-entreprises-macon.html">Offre Pro &amp; Entreprises</a></li><li><a href="https://solution-phone.fr/devis-assurance-telephone-macon.html">Devis assurance</a></li><li><a href="https://solution-phone.fr/avis-clients-solution-phone-macon.html">Avis clients (4,7/5)</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Horaires &amp; parkings Mâcon</a></li><li><a href="https://solution-phone.fr/reparation-telephone-bourg-en-bresse-ain-01.html">Accès Ain (01)</a></li><li><a href="https://solution-phone.fr/reparation-telephone-belleville-beaujolais-69.html">Accès Beaujolais (69)</a></li><li><a href="https://solution-phone.fr/reparation-telephone-charnay-cluny-tournus-71.html">Charnay, Cluny &amp; Tournus</a></li></ul></div></div>
+    <div id="mc-footer" role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, 71000 Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://solution-phone.fr/suivi-reparation.html">Suivre ma réparation (REP-...)</a></li><li><a href="https://solution-phone.fr/reparer-ou-remplacer-telephone-macon.html">Réparer ou remplacer ?</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung Galaxy</a></li><li><a href="https://solution-phone.fr/reparation-xiaomi-redmi-macon.html">Réparation Xiaomi &amp; Redmi</a></li><li><a href="https://solution-phone.fr/reparation-google-pixel-macon.html">Réparation Google Pixel</a></li><li><a href="https://solution-phone.fr/reparation-honor-oppo-motorola-macon.html">Honor, Oppo &amp; Motorola</a></li><li><a href="https://solution-phone.fr/reparation-ipad-tablette-macon.html">Réparation iPad &amp; tablette</a></li><li><a href="https://solution-phone.fr/reparation-ordinateur-pc-mac-macon.html">Réparation PC &amp; Mac</a></li><li><a href="https://solution-phone.fr/recuperation-donnees-macon.html">Récupération de données</a></li><li><a href="https://solution-phone.fr/micro-soudure-carte-mere-macon.html">Micro-soudure &amp; carte mère</a></li><li><a href="https://solution-phone.fr/reparation-console-ps5-switch-macon.html">Réparation PS5 &amp; Switch</a></li><li><a href="https://solution-phone.fr/reparation-trottinette-electrique-macon.html">Trottinettes électriques</a></li></ul><p class="mc-f-title">Acheter, revendre &amp; accès rapide autour de Mâcon</p><ul><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/iphone-reconditionne-macon.html">iPhone reconditionnés</a></li><li><a href="https://solution-accessoires.fr/samsung-reconditionne-macon.html">Samsung reconditionnés</a></li><li><a href="https://solution-phone.fr/pc-mac-reconditionnes-macon.html">PC &amp; Mac reconditionnés</a></li><li><a href="https://solution-phone.fr/rachat-reprise-telephone-macon.html">Rachat cash &amp; reprise</a></li><li><a href="https://solution-accessoires.fr/coques-chargeurs-accessoires-macon.html">Coques, MagSafe &amp; chargeurs</a></li><li><a href="https://solution-phone.fr/hydrogel.html">Film Hydrogel (10 € à 30 €)</a></li><li><a href="https://solution-phone.fr/pro-entreprises-macon.html">Offre Pro &amp; Entreprises</a></li><li><a href="https://solution-phone.fr/devis-assurance-telephone-macon.html">Devis assurance</a></li><li><a href="https://solution-phone.fr/avis-clients-solution-phone-macon.html">Avis clients (4,7/5)</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Horaires &amp; parkings Mâcon</a></li><li><a href="https://solution-phone.fr/reparation-telephone-bourg-en-bresse-ain-01.html">Accès Ain (01)</a></li><li><a href="https://solution-phone.fr/reparation-telephone-belleville-beaujolais-69.html">Accès Beaujolais (69)</a></li><li><a href="https://solution-phone.fr/reparation-telephone-charnay-cluny-tournus-71.html">Charnay, Cluny &amp; Tournus</a></li></ul></div></div>
     <script src="/jason-widget.js?v=5" defer></script>
   </body>
 </html>
