@@ -407,7 +407,7 @@
     for (var i = 0; i < parts.length; i++) {
       var p = parts[i].trim();
       if (!p) continue;
-      if (/^(?:reprise\s+(?:simulée|à estimer)\s*:|je souhaite faire estimer la reprise\b|net estimé\s*:)/i.test(p)) {
+      if (/^(?:reprise\s+à\s+estimer\s*:|reprise\s+de\s+mon\s+ancien\s+téléphone\b|je souhaite faire estimer la reprise\b)/i.test(p)) {
         var suffixMatch = p.match(/\s+—\s+(Je souhaite passer.*)$/);
         if (suffixMatch && suffixMatch[1]) {
           kept.push(suffixMatch[1].trim());

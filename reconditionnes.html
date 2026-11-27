@@ -98,7 +98,7 @@
         {
           "@type": "Question",
           "name": "Comment fonctionne la reprise de mon ancien téléphone ?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Vous choisissez votre modèle dans le simulateur, nous déduisons sa valeur du prix du nouveau téléphone après vérification au comptoir."}
+          "acceptedAnswer": {"@type": "Answer", "text": "Reprise de votre ancien téléphone : estimation gratuite en 2 min sur WhatsApp ou au 21 rue Gambetta, avec paiement cash ou déduction immédiate sur votre reconditionné."}
         },
         {
           "@type": "Question",
@@ -125,7 +125,7 @@ gtag("js", new Date());
 gtag("config", "G-3QP90K1TLM");
 </script>
 <link rel="stylesheet" href="premium-shared.css?v=4">
-<link rel="stylesheet" href="reconditionnes-v2.css?v=3">
+<link rel="stylesheet" href="reconditionnes-v2.css?v=4">
 <script src="premium-nav.js?v=menu-commun-5" defer></script>
 <link rel="stylesheet" href="contact-dock.css?v=3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -167,8 +167,8 @@ gtag("config", "G-3QP90K1TLM");
       <div class="rc-trade sp-trade-sim" id="rcTradeBox" aria-labelledby="rc-trade-title">
         <div class="sp-trade-head">
           <span class="sp-boost-kicker">Reprise immédiate · Déduction directe</span>
-          <h3 id="rc-trade-title">Simulez la reprise de votre ancien téléphone</h3>
-          <p class="sp-trade-sub">Sélectionnez votre modèle et son état : les prix nets estimés s’affichent directement dans le stock ci-dessous.</p>
+          <h3 id="rc-trade-title">Reprise de votre ancien téléphone</h3>
+          <p class="sp-trade-sub">Estimation en 2 min sur WhatsApp ou au 21 rue Gambetta : choisissez votre modèle et son état pour demander votre offre de reprise sans engagement.</p>
         </div>
         <div class="sp-trade-controls">
           <div class="sp-trade-field">
@@ -217,20 +217,40 @@ gtag("config", "G-3QP90K1TLM");
           </div>
         </div>
         <div class="sp-trade-result" id="rcTradeResult" aria-live="polite">
-          <div class="sp-trade-range" id="rcTradeRange">Sélectionnez votre modèle pour afficher la fourchette indicative</div>
-          <p class="rc-trade-note sp-trade-note" id="rcTradeSummary">Estimation indicative, confirmation en 5 min au 21 rue Gambetta — paiement cash ou déduction immédiate sur un reconditionné (pièce d’identité requise).</p>
+          <div class="sp-trade-range" id="rcTradeRange">Estimation gratuite en 2 min sur WhatsApp ou au 21 rue Gambetta (paiement cash ou déduction immédiate sur votre reconditionné)</div>
+          <p class="rc-trade-note sp-trade-note" id="rcTradeSummary">Sélectionnez votre modèle et son état : votre demande de reprise est jointe automatiquement à votre message WhatsApp ou à votre réservation 24 h (pièce d’identité requise en boutique).</p>
           <div class="sp-trade-actions">
-            <button type="button" id="rcTradeApplyBtn" class="sp-btn-red" data-sp-track="reprise" data-sp-cta-location="reconditionnes_trade_sim">Déduire sur ma demande / réserver</button>
-            <a id="rcTradeWaBtn" class="sp-btn-outline-white" data-sp-track="whatsapp" data-sp-cta-location="reconditionnes_trade_sim" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20faire%20estimer%20la%20reprise%20de%20mon%20t%C3%A9l%C3%A9phone%20pour%20l%27achat%20d%27un%20reconditionn%C3%A9." target="_blank" rel="noopener">Estimer sur WhatsApp</a>
+            <a id="rcTradeWaBtn" class="sp-btn-red" data-sp-track="whatsapp" data-sp-cta-location="reconditionnes_trade_sim" href="https://wa.me/33783921884?text=Bonjour%20Solution%20Phone%2C%20je%20souhaite%20faire%20estimer%20la%20reprise%20de%20mon%20ancien%20t%C3%A9l%C3%A9phone%20%28paiement%20cash%20ou%20d%C3%A9duction%20sur%20un%20reconditionn%C3%A9%29." target="_blank" rel="noopener">Demander mon estimation sur WhatsApp</a>
+            <button type="button" id="rcTradeApplyBtn" class="sp-btn-outline-white" data-sp-track="reprise" data-sp-cta-location="reconditionnes_trade_sim">Joindre cette reprise à ma demande / réservation</button>
           </div>
         </div>
       </div>
     </div>
     <div class="rc-tabs" id="rcTabs" role="group" aria-label="Catégories">
-      <button type="button" class="rc-tab" data-cat="iphone" aria-pressed="true">iPhone<span class="rc-n">—</span></button>
+      <button type="button" class="rc-tab" data-cat="all" aria-pressed="true">Tous<span class="rc-n">—</span></button>
+      <button type="button" class="rc-tab" data-cat="iphone" aria-pressed="false">iPhone<span class="rc-n">—</span></button>
       <button type="button" class="rc-tab" data-cat="samsung" aria-pressed="false">Samsung<span class="rc-n">—</span></button>
       <button type="button" class="rc-tab" data-cat="autre" aria-pressed="false">Autres<span class="rc-n">—</span></button>
       <button type="button" class="rc-tab" data-cat="neuf" aria-pressed="false">Neufs<span class="rc-n">—</span></button>
+    </div>
+    <div class="rc-toolbar" aria-label="Filtres rapides et tri">
+      <div class="rc-quick-filters" id="rcQuickFilters" role="group" aria-label="Filtres rapides">
+        <button type="button" class="rc-pill" data-quick="all" aria-pressed="true">Tous</button>
+        <button type="button" class="rc-pill" data-quick="iphone" aria-pressed="false">iPhone</button>
+        <button type="button" class="rc-pill" data-quick="samsung" aria-pressed="false">Samsung</button>
+        <button type="button" class="rc-pill" data-quick="u300" aria-pressed="false">Moins de 300&nbsp;€</button>
+        <button type="button" class="rc-pill" data-quick="u500" aria-pressed="false">Moins de 500&nbsp;€</button>
+        <button type="button" class="rc-pill" data-quick="bat95" aria-pressed="false">Batterie 95&nbsp;%+</button>
+      </div>
+      <div class="rc-sort-wrap">
+        <span class="rc-count" id="rcCount" aria-live="polite"></span>
+        <label class="rc-sr" for="rcSort">Trier les smartphones</label>
+        <select id="rcSort" class="rc-sort-select" aria-label="Trier les smartphones">
+          <option value="recent" selected>Modèles récents</option>
+          <option value="price_asc">Prix croissant</option>
+          <option value="price_desc">Prix décroissant</option>
+        </select>
+      </div>
     </div>
     <div class="rc-chips" id="rcChips" role="group" aria-label="Séries"></div>
     <div class="rc-list" id="rcList"><p class="rc-status">Chargement du stock…</p></div>
@@ -329,7 +349,7 @@ gtag("config", "G-3QP90K1TLM");
       </li>
       <li>
         <h3>Reprise de votre ancien téléphone</h3>
-        <p>Sa valeur est déduite directement du prix du nouveau. <a href="rachat-reprise-telephone-macon.html" data-sp-track="reprise" data-sp-cta-location="recond_why">Demandez une estimation ›</a></p>
+        <p>Estimation en 2 min sur WhatsApp ou au 21 rue Gambetta, paiement cash ou déduction immédiate. <a href="rachat-reprise-telephone-macon.html" data-sp-track="reprise" data-sp-cta-location="recond_why">Demandez une estimation ›</a></p>
       </li>
       <li>
         <h3>Transfert de données sur place</h3>
@@ -377,7 +397,7 @@ gtag("config", "G-3QP90K1TLM");
 </footer>
 
 <script src="iphone-image-library.js?v=2" defer></script>
-<script src="reconditionnes-v2.js?v=3" defer></script>
+<script src="reconditionnes-v2.js?v=4" defer></script>
 <script src="conversion-boost.js?v=1" defer></script>
 <script src="/jason-widget.js?v=5" defer></script>
 <script src="/contact-dock.quote-bddc47e33423.js" defer></script>

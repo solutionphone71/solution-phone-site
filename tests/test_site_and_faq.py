@@ -45,7 +45,7 @@ class TestSiteSEOAndConversion(unittest.TestCase):
         self.assertIn("RefurbishedCondition", first_product["offers"]["itemCondition"])
         # Scripts live stock restaurés
         self.assertIn("iphone-image-library.js?v=2", html)
-        self.assertIn("reconditionnes-v2.js?v=3", html)
+        self.assertIn("reconditionnes-v2.js?v=4", html)
         self.assertIn("conversion-boost.js?v=1", html)
         self.assertIn("data-sp-lead-form", html)
 
@@ -203,7 +203,7 @@ class TestSiteSEOAndConversion(unittest.TestCase):
         self.assertIn('<script src="/accueil-core.js?v=1" defer></script>', index_html)
         recond_html = read_text("reconditionnes.html")
         self.assertIn('<script src="iphone-image-library.js?v=2" defer></script>', recond_html)
-        self.assertIn('<script src="reconditionnes-v2.js?v=3" defer></script>', recond_html)
+        self.assertIn('<script src="reconditionnes-v2.js?v=4" defer></script>', recond_html)
 
     def test_cta_tracking_attributes_and_pii_guards(self):
         js = read_text("conversion-boost.js")
@@ -239,8 +239,9 @@ class TestSiteSEOAndConversion(unittest.TestCase):
 
         # Images dynamiques et CTA stock de reconditionnes-v2.js & accessoires.html
         recond_js = read_text("reconditionnes-v2.js")
-        self.assertIn('width="96" height="72" loading="lazy" decoding="async"', recond_js)
-        self.assertIn('data-sp-track="reconditionnes" data-sp-cta-location="reconditionnes_stock_row"', recond_js)
+        self.assertIn('width="240" height="180" loading="lazy" decoding="async"', recond_js)
+        self.assertIn('data-sp-track="reservation_24h" data-sp-cta-location="reconditionnes_stock_card"', recond_js)
+        self.assertIn('data-sp-track="whatsapp" data-sp-cta-location="reconditionnes_stock_card"', recond_js)
         acc_html = read_text("accessoires.html")
         self.assertIn('width="400" height="400" loading="lazy" decoding="async"', acc_html)
 
@@ -250,7 +251,7 @@ class TestSiteSEOAndConversion(unittest.TestCase):
         recond_js = read_text("reconditionnes-v2.js")
         boost_js = read_text("conversion-boost.js")
 
-        # 1. Simulateur de reprise instantanée sur reconditionnes.html
+        # 1. Bloc reprise sans montant chiffré sur reconditionnes.html
         for token in (
             'id="rcTradeBox"',
             "sp-trade-sim",
@@ -270,8 +271,15 @@ class TestSiteSEOAndConversion(unittest.TestCase):
             'id="rcTradeWaBtn"',
             'data-sp-track="reprise"',
             "21\u202frue\u202fGambetta",
+            "Estimation gratuite en 2\u202fmin sur WhatsApp ou au 21\u202frue\u202fGambetta",
+            "Demander mon estimation sur WhatsApp",
+            "Joindre cette reprise à ma demande / réservation",
         ):
-            self.assertIn(token, html, f"Élément simulateur reprise absent : {token}")
+            self.assertIn(token, html, f"Élément bloc reprise absent : {token}")
+
+        # Aucune fourchette / montant chiffré de reprise
+        for forbidden in ("fourchette indicative", "prix nets estimés", "reprise déduite", "reprise simulée"):
+            self.assertNotIn(forbidden, html.lower(), f"Mention chiffrée de reprise interdite dans reconditionnes.html : {forbidden}")
 
         # 2. Alerte arrivage & Réservation 24h dans #demande-conseil
         for token in (
@@ -287,15 +295,79 @@ class TestSiteSEOAndConversion(unittest.TestCase):
             self.assertIn(token, html, f"Élément réservation/alerte absent : {token}")
 
         # 3. Charte stricte et styles dédiés dans conversion-boost.css
-        for selector in (".sp-trade-sim", ".sp-arrival-bar", ".sp-lead-context", ".rc-table td.rc-price .rc-net"):
+        for selector in (".sp-trade-sim", ".sp-arrival-bar", ".sp-lead-context"):
             self.assertIn(selector, css, f"Style manquant dans conversion-boost.css : {selector}")
 
-        # 4. Logique JS & tracking CNIL
-        for token in ("estimateTradeIn", "formatNetRange", "sp_trade_simulate", "reservation_24h", "alerte_arrivage", "preserveNeed", "replaceTradeDetails"):
+        # 4. Logique JS & tracking CNIL (sans aucun montant / fourchette de reprise)
+        for token in ("getTradeSelection", "sp_trade_simulate", "reservation_24h", "alerte_arrivage", "preserveNeed", "replaceTradeDetails"):
             self.assertIn(token, recond_js, f"Symbole manquant dans reconditionnes-v2.js : {token}")
+        for forbidden in ("formatNetRange", "estimateTradeIn", "netMin", "netMax", "rc-net-pill", "reprise déduite", "reprise simulée", "fourchette indicative"):
+            self.assertNotIn(forbidden, recond_js, f"Symbole chiffré interdit dans reconditionnes-v2.js : {forbidden}")
+        self.assertIsNone(re.search(r"\bval\s*:\s*\d+", recond_js), "Montant chiffré val: interdit dans TRADE_MODELS")
 
         for token in ("[Réservation 24h]", "[Alerte arrivage]", "trade_brand", "trade_condition", "prefillLeadForm", "stripTradeClauses"):
             self.assertIn(token, boost_js, f"Symbole manquant dans conversion-boost.js : {token}")
+        for forbidden in ("net estimé", "reprise simulée"):
+            self.assertNotIn(forbidden, boost_js.lower(), f"Mention chiffrée interdite dans conversion-boost.js : {forbidden}")
+
+    def test_reconditionnes_ecommerce_grid_and_quick_filters(self):
+        html = read_text("reconditionnes.html")
+        css = read_text("reconditionnes-v2.css")
+        recond_js = read_text("reconditionnes-v2.js")
+
+        # 1. Barre filtres rapides & tri 1 clic dans reconditionnes.html
+        for token in (
+            'reconditionnes-v2.css?v=4',
+            'reconditionnes-v2.js?v=4',
+            'id="rcQuickFilters"',
+            'data-quick="all"',
+            'data-quick="iphone"',
+            'data-quick="samsung"',
+            'data-quick="u300"',
+            'data-quick="u500"',
+            'data-quick="bat95"',
+            'id="rcSort"',
+            'value="recent"',
+            'value="price_asc"',
+            'value="price_desc"',
+            'id="rcCount"',
+        ):
+            self.assertIn(token, html, f"Élément vitrine/filtre manquant dans reconditionnes.html : {token}")
+
+        # 2. Grille responsive 3/2/1 colonnes & charte stricte dans reconditionnes-v2.css
+        for token in (
+            "#0D0D0D",
+            "#FFFFFF",
+            "#E10600",
+            "Montserrat",
+            ".rc-grid",
+            "repeat(3,minmax(0,1fr))",
+            "repeat(2,minmax(0,1fr))",
+            "grid-template-columns:1fr",
+            ".rc-card",
+            ".rc-badge--stock",
+            ".rc-badge--bat-high",
+            ".rc-reserve-mail",
+            ".rc-reserve-wa",
+            "mix-blend-mode:multiply",
+        ):
+            self.assertIn(token, css, f"Style vitrine manquant dans reconditionnes-v2.css : {token}")
+        self.assertNotIn(".rc-net-pill", css, "Pill prix net chiffré interdit dans reconditionnes-v2.css")
+
+        # 3. Cartes produit e-commerce dans reconditionnes-v2.js
+        for token in (
+            'class="rc-grid"',
+            'class="rc-card"',
+            "En stock à Mâcon",
+            "Garantie 12&nbsp;mois",
+            "Réserver 24h (gratuit)",
+            "Reprise à estimer :",
+            "filterItems",
+            "sortItems",
+            "cardHtml",
+        ):
+            self.assertIn(token, recond_js, f"Élément carte produit manquant dans reconditionnes-v2.js : {token}")
+        self.assertNotIn("comme neuf", recond_js.lower())
 
     def test_local_seo_radius_25km_pages_and_internal_mesh(self):
         import html as html_mod

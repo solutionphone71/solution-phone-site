@@ -472,7 +472,7 @@ describe('Logique conversion-boost.js', () => {
         besoin: 'reservation_24h',
         modele: 'iPhone 14 Pro 128 Go',
         budget: 'o450',
-        details: 'Réservation 24h : iPhone 14 Pro · 128 Go · Noir · 649 € · reprise simulée : iPhone 12 (110 à 140 €)',
+        details: 'Réservation 24h : iPhone 14 Pro · 128 Go · Noir · 649 € · Reprise à estimer : iPhone 12 (Très bon état)',
         prenom: 'Claire',
         email: 'claire@example.fr',
         telephone: '06 11 22 33 44'
@@ -604,40 +604,40 @@ describe('Logique conversion-boost.js', () => {
     boost.prefillLeadForm({
       besoin: 'reconditionne',
       preserveNeed: true,
-      details: 'Reprise simulée : iPhone 12 (Très bon état, fourchette indicative 110 à 140 €) — souhait : déduction sur un smartphone reconditionné ou rachat cash au 21 rue Gambetta.',
+      details: 'Reprise à estimer : iPhone 12 (Très bon état) — estimation gratuite en 2 min sur WhatsApp ou au 21 rue Gambetta (paiement cash ou déduction immédiate sur un reconditionné).',
       replaceTradeDetails: true
     }, doc);
     expect(besoinEl.value).toBe('reservation_24h');
     expect(submitBtn.textContent).toBe('Confirmer ma réservation 24h');
     expect(modeleEl.value).toBe('iPhone 14 Pro 128 Go');
     expect(detailsEl.value).toContain('Réservation 24h');
-    expect(detailsEl.value).toContain('Reprise simulée : iPhone 12');
+    expect(detailsEl.value).toContain('Reprise à estimer : iPhone 12 (Très bon état)');
 
     // Switching trade-in model replaces the old trade-in clause instead of concatenating two phones
     boost.prefillLeadForm({
       besoin: 'reconditionne',
       preserveNeed: true,
-      details: 'Reprise simulée : iPhone 13 (Très bon état, fourchette indicative 165 à 205 €) — souhait : déduction sur un smartphone reconditionné ou rachat cash au 21 rue Gambetta.',
+      details: 'Reprise à estimer : iPhone 13 (Très bon état) — estimation gratuite en 2 min sur WhatsApp ou au 21 rue Gambetta (paiement cash ou déduction immédiate sur un reconditionné).',
       replaceTradeDetails: true
     }, doc);
     expect(besoinEl.value).toBe('reservation_24h');
     expect(detailsEl.value).toContain('Réservation 24h');
-    expect(detailsEl.value).toContain('Reprise simulée : iPhone 13');
+    expect(detailsEl.value).toContain('Reprise à estimer : iPhone 13 (Très bon état)');
     expect(detailsEl.value).not.toContain('iPhone 12');
 
-    // Reservation that already embedded lowercase "reprise simulée" + "net estimé" gets cleanly replaced without duplication
-    detailsEl.value = 'Réservation 24h (sans engagement) : iPhone 14 · 128 Go · 499 € · reprise simulée : iPhone 12 (Très bon état, 110 à 140 € indicatif) · net estimé : ~359 à 389 € — Je souhaite passer le voir au 21 rue Gambetta.';
+    // Reservation that already embedded a trade-in clause gets cleanly replaced without duplication and keeps the visit suffix
+    detailsEl.value = 'Réservation 24h (sans engagement) : iPhone 14 · 128 Go · 499 € · Reprise à estimer : iPhone 12 (Très bon état) — Je souhaite passer le voir au 21 rue Gambetta.';
     boost.prefillLeadForm({
       besoin: 'reconditionne',
       preserveNeed: true,
-      details: 'Reprise simulée : iPhone 13 (État correct, fourchette indicative 125 à 160 €) — souhait : déduction sur un smartphone reconditionné ou rachat cash au 21 rue Gambetta.',
+      details: 'Reprise à estimer : iPhone 13 (État correct) — estimation gratuite en 2 min sur WhatsApp ou au 21 rue Gambetta (paiement cash ou déduction immédiate sur un reconditionné).',
       replaceTradeDetails: true
     }, doc);
     expect(detailsEl.value).toContain('iPhone 14');
     expect(detailsEl.value).toContain('Je souhaite passer le voir au 21 rue Gambetta.');
-    expect(detailsEl.value).toContain('Reprise simulée : iPhone 13');
+    expect(detailsEl.value).toContain('Reprise à estimer : iPhone 13 (État correct)');
     expect(detailsEl.value).not.toContain('iPhone 12');
-    expect(detailsEl.value).not.toContain('net estimé');
+    expect(detailsEl.value).not.toContain('fourchette');
 
     // Arrival alert with empty model explicitly clears stale model from prior reservation, focuses modele, and updates CTA
     boost.prefillLeadForm({
@@ -653,68 +653,371 @@ describe('Logique conversion-boost.js', () => {
   });
 });
 
-describe('Simulateur de reprise & stock reconditionnés (reconditionnes-v2.js)', () => {
-  test('estimates realistic indicative ranges across iPhone 11-16 Pro Max, Samsung S21-S24 Ultra, and custom models', () => {
-    for (const key of ['ip11', 'ip12', 'ip13', 'ip14', 'ip15', 'ip16', 'ip16p', 's21', 's21u', 's22', 's22u', 's23', 's23u', 's24', 's24u', 'a54']) {
-      const tb = recond.estimateTradeIn(key, 'tres_bon');
-      const co = recond.estimateTradeIn(key, 'correct');
-      const fi = recond.estimateTradeIn(key, 'fissure');
-      expect(tb).not.toBeNull();
-      expect(tb.custom).toBe(false);
-      expect(tb.min).toBeGreaterThanOrEqual(15);
-      expect(tb.max).toBeGreaterThan(tb.min);
-      expect(tb.min % 5).toBe(0);
-      expect(tb.max % 5).toBe(0);
-      expect(tb.amount).toBeGreaterThan(co.amount);
-      expect(co.amount).toBeGreaterThan(fi.amount);
+describe('Reprise sans montant chiffré & vitrine reconditionnés (reconditionnes-v2.js)', () => {
+  test('selects trade-in models and conditions without any numeric amounts or euro ranges', () => {
+    expect(recond.formatNetRange).toBeUndefined();
+    expect(recond.estimateTradeIn).toBeUndefined();
+
+    for (const key of Object.keys(recond.TRADE_MODELS)) {
+      expect(recond.TRADE_MODELS[key].val).toBeUndefined();
+    }
+    for (const condKey of Object.keys(recond.TRADE_CONDITIONS)) {
+      expect(recond.TRADE_CONDITIONS[condKey].factor).toBeUndefined();
     }
 
-    const custom = recond.estimateTradeIn('autre', 'correct', '  Google Pixel 8\nPro ');
+    for (const key of ['ip11', 'ip12', 'ip13', 'ip14', 'ip15', 'ip16', 'ip16p', 's21', 's21u', 's22', 's22u', 's23', 's23u', 's24', 's24u', 'a54']) {
+      const tb = recond.getTradeSelection(key, 'tres_bon');
+      const co = recond.getTradeSelection(key, 'correct');
+      const fi = recond.getTradeSelection(key, 'fissure');
+      expect(tb).not.toBeNull();
+      expect(tb.custom).toBe(false);
+      expect(tb.condLabel).toBe('Très bon état');
+      expect(co.condLabel).toBe('État correct');
+      expect(fi.condLabel).toBe('Écran fissuré ou batterie faible');
+      expect(tb.min).toBeUndefined();
+      expect(tb.max).toBeUndefined();
+      expect(tb.amount).toBeUndefined();
+    }
+
+    const custom = recond.getTradeSelection('autre', 'correct', '  Google Pixel 8\nPro ');
     expect(custom.custom).toBe(true);
     expect(custom.label).toBe('Google Pixel 8 Pro');
-    expect(custom.min).toBeNull();
-    expect(custom.max).toBeNull();
+    expect(custom.condLabel).toBe('État correct');
 
-    const customDefault = recond.estimateTradeIn('autre', 'unknown_cond', '');
+    const customDefault = recond.getTradeSelection('autre', 'unknown_cond', '');
     expect(customDefault.label).toBe('Autre modèle');
     expect(customDefault.condKey).toBe('tres_bon');
 
-    expect(recond.estimateTradeIn('', 'tres_bon')).toBeNull();
-    expect(recond.estimateTradeIn('inexistant', 'tres_bon')).toBeNull();
+    expect(recond.getTradeSelection('', 'tres_bon')).toBeNull();
+    expect(recond.getTradeSelection('inexistant', 'tres_bon')).toBeNull();
   });
 
-  test('computes net ranges, floors at 0 €, and enriches item description + WhatsApp message', () => {
-    const trade = recond.estimateTradeIn('ip13', 'tres_bon');
-    const net = recond.formatNetRange(499, trade);
-    expect(net).not.toBeNull();
-    expect(net.netMin).toBe(499 - trade.max);
-    expect(net.netMax).toBe(499 - trade.min);
-    expect(net.shortLabel).toContain('€');
-
-    // Floor at 0 € when trade-in exceeds device price
-    const floored = recond.formatNetRange(100, recond.estimateTradeIn('ip16p', 'tres_bon'));
-    expect(floored.netMin).toBe(0);
-    expect(floored.netMax).toBe(0);
-    expect(floored.shortLabel).toBe('~0 €');
-
-    // Custom trade-in produces no numeric net range
-    expect(recond.formatNetRange(499, recond.estimateTradeIn('autre', 'tres_bon'))).toBeNull();
+  test('attaches clean trade-in mention (model + condition, zero euro estimate) to item description and WhatsApp message', () => {
+    const trade = recond.getTradeSelection('ip13', 'tres_bon');
+    const tradeDesc = recond.describeTrade(trade);
+    expect(tradeDesc).toBe('Reprise à estimer : iPhone 13 (Très bon état)');
+    expect(tradeDesc).not.toContain('€');
 
     const item = { model: 'iPhone 14 Pro', storage: '128 Go', color: 'Noir', condition: 'reconditionne', grade: 'A', battery: 91, price: 599 };
     const desc = recond.describe(item, trade);
     expect(desc).toContain('iPhone 14 Pro');
     expect(desc).toContain('599 €');
-    expect(desc).toContain('reprise simulée : iPhone 13');
-    expect(desc).toContain('net estimé :');
+    expect(desc).toContain('Reprise à estimer : iPhone 13 (Très bon état)');
+    expect(desc).not.toContain('net estimé');
+    expect(desc).not.toContain('indicatif');
 
-    const waUrl = recond.whatsappLink(recond.buildTradeWhatsAppMessage(trade));
+    const waMsg = recond.buildTradeWhatsAppMessage(trade);
+    expect(waMsg).toContain('iPhone 13');
+    expect(waMsg).toContain('Très bon état');
+    expect(waMsg).toContain('21 rue Gambetta');
+    expect(waMsg).not.toContain('€');
+    expect(waMsg).not.toContain('indicative');
+
+    const waUrl = recond.whatsappLink(waMsg);
     expect(waUrl.startsWith('https://wa.me/33783921884?text=')).toBe(true);
-    expect(decodeURIComponent(waUrl)).toContain('iPhone 13');
-    expect(decodeURIComponent(waUrl)).toContain('21 rue Gambetta');
+
+    const waDefault = recond.buildTradeWhatsAppMessage(null);
+    expect(waDefault).toContain('reprise');
+    expect(waDefault).not.toContain('€');
 
     expect(recond.budgetFromPrice(199)).toBe('u250');
     expect(recond.budgetFromPrice(350)).toBe('250-450');
     expect(recond.budgetFromPrice(599)).toBe('o450');
+  });
+
+  test('filters stock by brand, budget (<300 €, <500 €), battery 95%+, and sorts cleanly', () => {
+    const sample = [
+      recond.toItem({ modele: 'iPhone 13', stockage: 128, couleur: 'Noir', grade: 'A', batterie: 95, vente: 399 }, 'reconditionne'),
+      recond.toItem({ modele: 'iPhone 15 Pro', stockage: 256, couleur: 'Titane naturel', grade: 'A+', batterie: 98, vente: 799 }, 'reconditionne'),
+      recond.toItem({ modele: 'iPhone 11', stockage: 64, couleur: 'Blanc', grade: 'B', batterie: 86, vente: 219 }, 'reconditionne'),
+      recond.toItem({ modele: 'Samsung Galaxy S24', stockage: 128, couleur: 'Gris', grade: 'A', batterie: 94, vente: 489 }, 'reconditionne'),
+      recond.toItem({ modele: 'Samsung Galaxy A54', stockage: 128, couleur: 'Noir', grade: 'A', batterie: 100, vente: 249 }, 'reconditionne'),
+      recond.toItem({ modele: 'iPhone 16', stockage: 128, couleur: 'Bleu', grade: '', batterie: 0, vente: 869 }, 'neuf')
+    ];
+
+    // Budget quick filters (<300 € and <500 €)
+    const u300 = recond.filterItems(sample, { cat: 'all', budget: 'u300' });
+    expect(u300.map((i) => i.model)).toEqual(['iPhone 11', 'Samsung Galaxy A54']);
+
+    const u500 = recond.filterItems(sample, { cat: 'all', budget: 'u500' });
+    expect(u500.length).toBe(4);
+    expect(u500.every((i) => i.price < 500)).toBe(true);
+
+    // Battery 95%+ boundary: 94 excluded, 95 & 98 & 100 & neuf included
+    const bat95 = recond.filterItems(sample, { cat: 'all', batteryMin: 95 });
+    expect(bat95.map((i) => i.model)).toEqual(['iPhone 13', 'iPhone 15 Pro', 'Samsung Galaxy A54', 'iPhone 16']);
+
+    // Combined filters: iPhone + <500 € + battery 95%+
+    const combo = recond.filterItems(sample, { cat: 'iphone', budget: 'u500', batteryMin: 95 });
+    expect(combo.map((i) => i.model)).toEqual(['iPhone 13']);
+
+    // Samsung filter excludes iPhone and neuf
+    const samsungOnly = recond.filterItems(sample, { cat: 'samsung' });
+    expect(samsungOnly.map((i) => i.model)).toEqual(['Samsung Galaxy S24', 'Samsung Galaxy A54']);
+
+    // Accent-insensitive multi-token search
+    const searched = recond.filterItems(sample, { cat: 'all', query: 'titane 256' });
+    expect(searched.map((i) => i.model)).toEqual(['iPhone 15 Pro']);
+
+    // Sorting: price_asc, price_desc, recent
+    const asc = recond.sortItems(sample, 'price_asc');
+    expect(asc[0].price).toBe(219);
+    expect(asc[asc.length - 1].price).toBe(869);
+
+    const desc = recond.sortItems(sample, 'price_desc');
+    expect(desc[0].price).toBe(869);
+    expect(desc[desc.length - 1].price).toBe(219);
+
+    const recent = recond.sortItems(sample, 'recent');
+    expect(recent[0].model).toBe('iPhone 16');
+    expect(recent[1].model).toBe('Samsung Galaxy S24');
+  });
+
+  test('renders e-commerce product card with badges, battery highlights, TTC price only (no numeric trade-in deduction), CTAs, and XSS escaping', () => {
+    const itemHighBat = recond.toItem(
+      { modele: 'iPhone 14 Pro', stockage: 128, couleur: 'Noir', grade: 'A+', batterie: 96, vente: 599 },
+      'reconditionne'
+    );
+    const trade = recond.getTradeSelection('ip13', 'tres_bon');
+    const htmlWithTrade = recond.cardHtml(itemHighBat, trade);
+
+    expect(htmlWithTrade).toContain('class="rc-card"');
+    expect(htmlWithTrade).toContain('En stock à Mâcon');
+    expect(htmlWithTrade).toContain('Grade A+');
+    expect(htmlWithTrade).toContain('rc-badge--bat-high');
+    expect(htmlWithTrade).toContain('Batterie 96&nbsp;%');
+    expect(htmlWithTrade).toContain('Garantie 12&nbsp;mois');
+    expect(htmlWithTrade).toContain('599&nbsp;€');
+    expect(htmlWithTrade).not.toContain('rc-net-pill');
+    expect(htmlWithTrade).not.toContain('reprise déduite');
+    expect(htmlWithTrade).toContain('Reprise à estimer : iPhone 13 (Très bon état)');
+    expect(htmlWithTrade).toContain('Réserver 24h (gratuit)');
+    expect(htmlWithTrade).toContain('data-sp-track="reservation_24h"');
+    expect(htmlWithTrade).toContain('data-sp-track="whatsapp"');
+    expect(htmlWithTrade).toContain('https://wa.me/33783921884?text=');
+
+    // Without trade-in: no trade-in mention; battery < 90%: no bat-high badge
+    const itemStdBat = recond.toItem(
+      { modele: 'Samsung Galaxy S23', stockage: 128, couleur: 'Vert', grade: 'B', batterie: 86, vente: 349 },
+      'reconditionne'
+    );
+    const htmlNoTrade = recond.cardHtml(itemStdBat, null);
+    expect(htmlNoTrade).not.toContain('rc-net-pill');
+    expect(htmlNoTrade).not.toContain('Reprise à estimer');
+    expect(htmlNoTrade).not.toContain('rc-badge--bat-high');
+    expect(htmlNoTrade).toContain('Batterie 86&nbsp;%');
+    expect(htmlNoTrade).toContain('rc-card-media--placeholder');
+
+    // Battery 100% gets dedicated highlight class
+    const item100 = recond.toItem(
+      { modele: 'iPhone 13', stockage: 128, couleur: 'Noir', grade: 'A', batterie: 100, vente: 399 },
+      'reconditionne'
+    );
+    expect(recond.cardHtml(item100, null)).toContain('rc-badge--bat-100');
+
+    // XSS escaping in model / color / grade
+    const xssItem = {
+      condition: 'reconditionne',
+      model: '<script>alert(1)</script>',
+      brand: 'autre',
+      family: 'Autres',
+      rank: 0,
+      variant: 0,
+      isIphone: false,
+      uncertainSE: false,
+      storage: '128 Go',
+      storageNum: 128,
+      color: '"><img src=x>',
+      colorHex: '',
+      grade: 'A',
+      battery: 92,
+      price: 299
+    };
+    const safeHtml = recond.cardHtml(xssItem, null);
+    expect(safeHtml).not.toContain('<script>');
+    expect(safeHtml).toContain('&lt;script&gt;alert(1)&lt;/script&gt;');
+    expect(safeHtml).not.toContain('<img src=x>');
+  });
+
+  test('exercises #rcTradeBox DOM end-to-end with conversion-boost.js (model, custom label with ·, condition, WhatsApp, apply & card reservation)', async () => {
+    const fs = require('fs');
+    const pathMod = require('path');
+    const vm = require('vm');
+    const recondSource = fs.readFileSync(pathMod.resolve(__dirname, '..', 'reconditionnes-v2.js'), 'utf8');
+
+    const makeEl = (extra = {}) => {
+      const listeners = {};
+      const attrs = { ...(extra.attrs || {}) };
+      const classes = new Set();
+      return {
+        value: '',
+        href: '',
+        hidden: false,
+        innerHTML: '',
+        textContent: '',
+        classList: {
+          add: (c) => classes.add(c),
+          remove: (c) => classes.delete(c),
+          contains: (c) => classes.has(c)
+        },
+        getAttribute: (k) => (Object.prototype.hasOwnProperty.call(attrs, k) ? attrs[k] : null),
+        setAttribute: (k, v) => { attrs[k] = String(v); },
+        addEventListener: (ev, fn) => { (listeners[ev] = listeners[ev] || []).push(fn); },
+        dispatch: (ev, payload = {}) => (listeners[ev] || []).forEach((fn) => fn(payload)),
+        querySelector: () => null,
+        querySelectorAll: () => [],
+        scrollIntoView: () => {},
+        focus: () => {},
+        ...extra
+      };
+    };
+
+    const condBtnTb = makeEl({ attrs: { 'data-cond': 'tres_bon', 'aria-pressed': 'true' } });
+    const condBtnCo = makeEl({ attrs: { 'data-cond': 'correct', 'aria-pressed': 'false' } });
+    const rcTabs = makeEl();
+    const rcList = makeEl();
+    const rcSummary = makeEl();
+    const rcCount = makeEl();
+    const rcTradeModel = makeEl();
+    const rcTradeOtherWrap = makeEl({ hidden: true });
+    const rcTradeOther = makeEl();
+    const rcTradeCond = makeEl({ querySelectorAll: () => [condBtnTb, condBtnCo] });
+    const rcTradeRange = makeEl();
+    const rcTradeSummary = makeEl();
+    const rcTradeWaBtn = makeEl();
+    const rcTradeApplyBtn = makeEl();
+
+    // #demande-conseil form elements wired to real boost.prefillLeadForm
+    const besoinEl = makeEl({ value: 'reconditionne' });
+    const budgetEl = makeEl({ value: '250-450' });
+    const modeleEl = makeEl({ value: '' });
+    const detailsEl = makeEl({ value: '' });
+    const prenomEl = makeEl({ value: '' });
+    const submitBtn = makeEl({ textContent: 'Demander un devis / conseil' });
+    const rcLeadContext = makeEl({ hidden: true });
+    const confirmEl = makeEl({ hidden: true });
+    const leadForm = makeEl({
+      attrs: { 'data-sp-dynamic-cta': '1' },
+      querySelector: (sel) => ({
+        'select[name="besoin"]': besoinEl,
+        'select[name="budget"]': budgetEl,
+        'input[name="modele"]': modeleEl,
+        'textarea[name="details"]': detailsEl,
+        'input[name="prenom"]': prenomEl,
+        'button[type="submit"]': submitBtn
+      }[sel] || null)
+    });
+    const leadSection = makeEl({
+      querySelector: (sel) => ({
+        'form[data-sp-lead-form]': leadForm,
+        '[data-sp-lead-context]': rcLeadContext,
+        '[data-sp-lead-confirm]': confirmEl
+      }[sel] || null)
+    });
+
+    const elementsById = {
+      rcTabs, rcList, rcSummary, rcCount, rcTradeModel, rcTradeOtherWrap, rcTradeOther,
+      rcTradeCond, rcTradeRange, rcTradeSummary, rcTradeWaBtn, rcTradeApplyBtn,
+      'demande-conseil': leadSection, rcLeadContext
+    };
+    const fakeDoc = {
+      getElementById: (id) => elementsById[id] || null,
+      querySelector: () => null,
+      querySelectorAll: () => []
+    };
+
+    const trackedEvents = [];
+    const fakeWin = {
+      SolutionPhoneBoost: {
+        prefillLeadForm: (opts) => boost.prefillLeadForm(opts, fakeDoc),
+        trackEvent: (name, params) => { trackedEvents.push({ name, params }); return true; }
+      }
+    };
+
+    const sampleStock = {
+      stock: {
+        used: [{ modele: 'iPhone 14 Pro', stockage: 128, couleur: 'Noir', grade: 'A+', batterie: 96, vente: 599 }],
+        new: []
+      }
+    };
+
+    const ctx = {
+      window: fakeWin,
+      document: fakeDoc,
+      fetch: async () => ({ ok: true, json: async () => sampleStock }),
+      setTimeout,
+      clearTimeout,
+      setInterval: () => 0,
+      encodeURIComponent,
+      Date,
+      console
+    };
+
+    vm.runInNewContext(recondSource, ctx);
+    await new Promise((r) => setTimeout(r, 20));
+
+    // 1. Initial state: no euro amounts, exact message, card rendered with TTC price only
+    expect(rcTradeRange.innerHTML).toContain('Estimation gratuite en 2&nbsp;min sur WhatsApp ou au 21&nbsp;rue&nbsp;Gambetta');
+    expect(rcTradeRange.innerHTML).not.toContain('€');
+    expect(decodeURIComponent(rcTradeWaBtn.href)).not.toContain('€');
+    expect(rcList.innerHTML).toContain('class="rc-card"');
+    expect(rcList.innerHTML).toContain('599&nbsp;€');
+    expect(rcList.innerHTML).not.toContain('rc-net-pill');
+    expect(rcList.innerHTML).not.toContain('reprise déduite');
+
+    // 2. Select Autre modèle + type custom model containing "·" separator + switch to État correct
+    rcTradeModel.value = 'autre';
+    rcTradeModel.dispatch('change');
+    expect(rcTradeOtherWrap.hidden).toBe(false);
+    rcTradeOther.value = 'Google Pixel 8 · 128 Go';
+    rcTradeOther.dispatch('change');
+    rcTradeCond.dispatch('click', { target: { closest: () => condBtnCo } });
+
+    expect(rcTradeRange.classList.contains('is-active')).toBe(true);
+    expect(rcTradeRange.innerHTML).toContain('Google Pixel 8 - 128 Go');
+    expect(rcTradeRange.innerHTML).toContain('État correct');
+    expect(rcTradeRange.innerHTML).not.toContain('€');
+    expect(decodeURIComponent(rcTradeWaBtn.href)).toContain('Google Pixel 8 - 128 Go (État correct)');
+    expect(decodeURIComponent(rcTradeWaBtn.href)).not.toContain('€');
+    expect(rcList.innerHTML).toContain('Reprise à estimer : Google Pixel 8 - 128 Go (État correct)');
+    expect(rcList.innerHTML).not.toContain('rc-net-pill');
+
+    // 3. Apply trade-in to #demande-conseil, then switch to iPhone 15 and re-apply: old custom model cleanly replaced
+    rcTradeApplyBtn.dispatch('click');
+    expect(detailsEl.value).toContain('Reprise à estimer : Google Pixel 8 - 128 Go (État correct)');
+    expect(detailsEl.value).not.toContain('€');
+
+    rcTradeModel.value = 'ip15';
+    rcTradeModel.dispatch('change');
+    expect(rcTradeOtherWrap.hidden).toBe(true);
+    rcTradeApplyBtn.dispatch('click');
+    expect(detailsEl.value).toContain('Reprise à estimer : iPhone 15 (État correct)');
+    expect(detailsEl.value).not.toContain('Pixel 8');
+    expect(detailsEl.value).not.toContain('128 Go');
+    expect(trackedEvents.some((e) => e.name === 'sp_trade_simulate' && e.params.trade_brand === 'iphone')).toBe(true);
+
+    // 4. Click "Réserver 24h (gratuit)" on rendered product card -> attaches clean trade-in without euro deduction
+    const cardBtn = makeEl({
+      attrs: {
+        'data-reserve-item': 'iPhone 14 Pro · 128 Go · Noir · grade A+ · batterie 96 % · 599 € · Reprise à estimer : iPhone 15 (État correct)',
+        'data-reserve-model': 'iPhone 14 Pro 128 Go',
+        'data-reserve-price': '599'
+      }
+    });
+    rcList.dispatch('click', {
+      target: {
+        closest: (sel) => (sel === '[data-reserve-item]' ? cardBtn : null)
+      }
+    });
+    expect(besoinEl.value).toBe('reservation_24h');
+    expect(budgetEl.value).toBe('o450');
+    expect(modeleEl.value).toBe('iPhone 14 Pro 128 Go');
+    expect(detailsEl.value).toContain('599 €');
+    expect(detailsEl.value).toContain('Reprise à estimer : iPhone 15 (État correct)');
+    expect(detailsEl.value).not.toContain('reprise déduite');
+    expect(detailsEl.value).not.toContain('fourchette');
+    expect(rcLeadContext.hidden).toBe(false);
+    expect(rcLeadContext.textContent).toContain('Reprise à estimer : iPhone 15 (État correct)');
   });
 });
 
